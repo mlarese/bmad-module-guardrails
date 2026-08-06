@@ -221,6 +221,43 @@ MANIFEST_GENERICI = {
 }
 
 
+PROFONDITA_MANIFEST = 3
+MAX_MANIFEST = 12
+
+
+def _percorsi_manifest(radice: Path):
+    """I manifest del progetto, alla radice e nelle sottocartelle vicine.
+
+    Restituisce coppie (percorso, etichetta), dove l'etichetta e' il percorso
+    relativo alla radice — `psicare/backend/pom.xml`, non `pom.xml` — cosi' che
+    su un monorepo si veda a quale parte del progetto appartiene ciascun
+    manifest. Le directory di DIR_IGNORATE non si aprono: dentro node_modules
+    ci sono migliaia di package.json che non dicono nulla su questo progetto.
+    """
+    nomi = set(LETTORI_MANIFEST) | set(MANIFEST_GENERICI)
+    trovati: list[tuple[Path, str]] = []
+
+    def visita(cartella: Path, livello: int) -> None:
+        if len(trovati) >= MAX_MANIFEST:
+            return
+        try:
+            voci = sorted(cartella.iterdir(), key=lambda p: (p.is_dir(), p.name))
+        except OSError:
+            return
+        for voce in voci:
+            if len(trovati) >= MAX_MANIFEST:
+                return
+            if voce.is_file() and voce.name in nomi:
+                trovati.append((voce, str(voce.relative_to(radice))))
+            elif voce.is_dir() and livello < PROFONDITA_MANIFEST:
+                if voce.name in DIR_IGNORATE or voce.name.startswith("."):
+                    continue
+                visita(voce, livello + 1)
+
+    visita(radice, 0)
+    return trovati
+
+
 def scansiona(radice: Path, verbose: bool = False) -> dict:
     esito: dict = {"ok": True, "radice": str(radice)}
 
@@ -235,21 +272,21 @@ def scansiona(radice: Path, verbose: bool = False) -> dict:
         esito["profilo_esistente"] = None
     _log(verbose, f"profilo esistente: {bool(esito['profilo_esistente'])}")
 
-    # Manifest e dipendenze.
+    # Manifest e dipendenze. Si cerca alla radice e nelle sottocartelle fino a
+    # PROFONDITA_MANIFEST livelli: i monorepo tengono i manifest sotto
+    # frontend/, backend/, apps/<nome>/, packages/<nome>/, e cercarli solo alla
+    # radice significa non pre-compilare nulla proprio dove servirebbe di piu'.
     manifest: list[dict] = []
     tutte_dipendenze: list[str] = []
-    for nome, lettore in LETTORI_MANIFEST.items():
-        percorso = radice / nome
-        if percorso.is_file():
-            info, dipendenze = lettore(percorso)
-            manifest.append(info)
-            tutte_dipendenze.extend(dipendenze)
-    for nome, regex in MANIFEST_GENERICI.items():
-        percorso = radice / nome
-        if percorso.is_file():
-            info, dipendenze = _manifest_generico(percorso, nome, regex)
-            manifest.append(info)
-            tutte_dipendenze.extend(dipendenze)
+    for percorso, etichetta in _percorsi_manifest(radice):
+        nome = percorso.name
+        if nome in LETTORI_MANIFEST:
+            info, dipendenze = LETTORI_MANIFEST[nome](percorso)
+            info["file"] = etichetta
+        else:
+            info, dipendenze = _manifest_generico(percorso, etichetta, MANIFEST_GENERICI[nome])
+        manifest.append(info)
+        tutte_dipendenze.extend(dipendenze)
     esito["manifest"] = manifest
     esito["dipendenze_segnale"] = _bucket_dipendenze(tutte_dipendenze)
     _log(verbose, f"manifest trovati: {len(manifest)}, dipendenze: {len(tutte_dipendenze)}")

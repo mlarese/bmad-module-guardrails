@@ -7,7 +7,7 @@
       "name": "grl",
       "source": "./src",
       "description": "Guardrails — privacy e GDPR, sicurezza applicativa, legale e licenze, compliance normativa, qualità visiva della UI, disciplina architetturale del codice, infrastruttura e operatività: sette figure che affiancano il team dentro il ciclo di sviluppo, quando cambiare costa ancora poco.",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "author": "mlarese",
       "homepage": "https://github.com/mlarese/bmad-module-guardrails",
       "repository": "https://github.com/mlarese/bmad-module-guardrails",

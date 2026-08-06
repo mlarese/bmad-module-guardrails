@@ -8,7 +8,7 @@
 code: grl
 name: Guardrails
 description: "Sette figure di presidio — privacy e GDPR, sicurezza applicativa, legale e licenze, compliance normativa, qualità visiva della UI, disciplina architetturale del codice, infrastruttura e operatività — che affiancano il team dentro il ciclo di sviluppo, quando cambiare costa ancora poco."
-module_version: 1.0.0
+module_version: 1.1.0
 default_selected: false
 
 module_greeting: >
