@@ -33,6 +33,22 @@ Identità del modulo, variabili e roster stanno in `./assets/module.yaml`: leggi
    - non esiste né l'uno né l'altro → il progetto non ha un'installazione BMad. Dillo e fermati.
 3. Se il config contiene già una sezione `grl`, avvisa che questa è una riconfigurazione, non
    una prima installazione.
+4. **Recupero da un'installazione fatta con l'installer BMad 6.10.0.** Quella versione scrive la
+   configurazione del modulo in `{project-root}/_bmad/grl/config.yaml`, che il resolver a quattro
+   layer non legge: il valore c'è ma nessuna figura lo vede. Dalla 6.10.1 finisce anche in
+   `[modules.grl]` del TOML e il problema non si pone. Quindi:
+
+   ```bash
+   uv run {project-root}/_bmad/scripts/resolve_config.py -p "{project-root}" -k modules.grl
+   ```
+
+   Se il risultato è vuoto **e** `{project-root}/_bmad/grl/config.yaml` esiste e contiene un
+   `strictness_override` valorizzato, prendi quel valore come risposta e **non fare la domanda**:
+   l'utente l'aveva già data all'installer, richiederla sarebbe solo fastidio. Dichiaralo nel
+   riepilogo finale — «recuperato il livello *{valore}* scelto durante l'installazione, che
+   l'installer aveva scritto in un file non letto dalle figure».
+
+   Se `strictness_override` è vuoto o assente, non c'è niente da recuperare: prosegui normalmente.
 
 Se l'utente passa argomenti (`--headless`, `accetta i default`, o direttamente un valore),
 usa quelli e salta le domande. Mostra comunque il riepilogo finale.
