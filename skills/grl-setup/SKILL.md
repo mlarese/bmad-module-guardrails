@@ -83,13 +83,36 @@ Cosa fa, e perché così:
 - Le scritture sono anti-zombie e idempotente: le tabelle `grl` precedenti vengono rimosse prima
   di riscrivere, e il risultato viene riparsato prima di toccare il disco.
 
-Poi registra le voci di help:
+Poi registra le voci di help **nel catalogo che BMad legge davvero**:
 
 ```bash
-python3 ./scripts/merge-help-csv.py --target "{project-root}/_bmad/module-help.csv" --source ./assets/module-help.csv --legacy-dir "{project-root}/_bmad" --module-code grl
+python3 ./scripts/merge-help-csv.py \
+  --target "{project-root}/_bmad/_config/bmad-help.csv" \
+  --source ./assets/module-help.csv \
+  --module-code Guardrails
 ```
 
-Se uno dei due comandi esce con codice diverso da zero, mostra l'errore e fermati.
+Tre cose da sapere, tutte verificate sul campo:
+
+- **Il catalogo è `_bmad/_config/bmad-help.csv`**, non `_bmad/module-help.csv`. È il file che
+  `bmad-help` dichiara di leggere («assembled manifest of all installed module skills»), ed è
+  quello in cui compaiono le voci di Core, BMad Method e BMad Builder. Scrivere solo in
+  `_bmad/module-help.csv` — come fa il comando del template generico — lascia le voci in un file
+  che nessuno consulta.
+- **La colonna `module` porta il nome leggibile del modulo**, `Guardrails`, non il codice `grl`:
+  è la convenzione del catalogo, dove gli altri moduli compaiono come `Core`, `BMad Method`,
+  `BMad Builder`. Da qui `--module-code Guardrails`, che è anche la chiave con cui le righe
+  vecchie vengono rimosse prima di riscrivere.
+- **Niente `--legacy-dir`.** Quel flag non migra nulla: cancella `{project-root}/_bmad/core/module-help.csv`
+  e `{project-root}/_bmad/{codice}/module-help.csv`. Sul CSV del core significa **perdere le voci
+  di help del core** senza averle prima copiate altrove. Se il tuo progetto ha già subìto questa
+  cancellazione, il file si recupera da un'altra installazione BMad o reinstallando.
+
+Limite dichiarato, non nascosto: `_bmad/_config/` è gestito dall'installer e viene rigenerato a
+ogni installazione o aggiornamento di BMad. Le voci di Guardrails vanno quindi riscritte dopo un
+reinstall — basta rieseguire questo setup.
+
+Se il comando esce con codice diverso da zero, mostra l'errore e fermati.
 
 **Non eseguire `./scripts/merge-config.py` su un'installazione TOML**: scrive `config.yaml`, che
 il resolver a quattro layer non legge — la configurazione finirebbe in un file che nessuno guarda.
