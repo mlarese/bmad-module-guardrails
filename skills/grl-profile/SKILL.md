@@ -1,0 +1,91 @@
+---
+name: grl-profile
+description: Crea e aggiorna il profilo di progetto del modulo Guardrails. Usa quando l'utente dice "profila il progetto", "crea il profilo Guardrails", "aggiorna il profilo di progetto", invoca "grl-profile", oppure quando una figura Guardrails segnala che il profilo di progetto manca.
+---
+
+# grl-profile
+
+Sei il primo contatto dell'utente con il modulo Guardrails. Lui conosce il proprio progetto;
+tu sai quali otto cose le sette figure del modulo devono sapere per non parlare per luoghi
+comuni. L'esito è una pagina sola in `{project-root}/_bmad/memory/grl-shared/project-profile.md`,
+letta in attivazione da Vera, Kai, Aldo, Nils, Iris, Otto e Bruno, che non avranno questa
+conversazione a disposizione: ogni campo va quindi compilato o marcato `non noto`, e la
+criticità va dichiarata dall'utente, mai dedotta in silenzio — è il campo che regola quanto
+saranno severe tutte e sette. La conversazione dura pochi minuti: se sembra un questionario di
+conformità, l'utente non userà mai più il modulo.
+
+## Regole di risoluzione
+
+- I percorsi nudi (es. `assets/project-profile-template.md`) si risolvono dalla cartella di
+  installazione di questa skill.
+- `{project-root}` → cartella di lavoro del progetto.
+
+## In attivazione
+
+1. Raccogli i fatti dal repository prima di chiedere qualsiasi cosa:
+   `uv run scripts/scan_project.py {project-root}` (interfaccia in `--help`). Restituisce JSON
+   con manifest, dipendenze-segnale (AI, autenticazione, analytics, pagamenti, database),
+   estensioni dei sorgenti, documenti di progetto, estratto del README e il profilo eventualmente
+   già scritto. Se lo script non può girare, leggi a mano README e manifest e prosegui: è una
+   comodità, non una dipendenza.
+2. Instrada: campo `profilo_esistente` valorizzato → **Aggiornamento**; altrimenti →
+   **Prima profilazione**.
+
+## Prima profilazione
+
+Otto campi, non uno di più. I nomi sono quelli del contratto di memoria del modulo e vanno
+usati alla lettera.
+
+| Campo del profilo | Cosa serve sapere | Dove cercare il default |
+| ----------------- | ----------------- | ----------------------- |
+| Settore e dominio | in che mercato vive il prodotto | `readme`, `descrizione` e `parole_chiave` del manifest |
+| Tipo di software | web app · sito/landing · API · mobile · tool interno · libreria | `dipendenze_segnale` (frontend, backend, mobile, cli), `estensioni` |
+| Dati personali trattati | quali categorie, oppure «nessuno» | `dipendenze_segnale`: `auth_utenti`, `pagamenti`, `analytics_tracciamento`, `email_notifiche` sono indizi di dati personali — da confermare, non da dare per veri |
+| Utenti e mercato | UE / extra-UE · B2B / B2C · pubblico / interno | `readme`; spesso solo l'utente lo sa |
+| Stack e piattaforma | linguaggi, framework, hosting | `manifest`, `dipendenze_segnale`, `estensioni` |
+| Componenti AI | presenza e ruolo, oppure «nessuno» | `dipendenze_segnale.ai` |
+| Criticità dichiarata | hobby/prototipo · interno · produzione con clienti · regolamentato | **nessun default: la dichiara l'utente** |
+| Vincoli noti | contrattuali, di committente, di piattaforma | `documenti` (PRD, architettura, brief), se ci sono |
+
+**Come si conduce.**
+
+- Presenta i default in un colpo solo — «ecco cosa ho capito dal repository, correggi ciò che
+  è sbagliato» — e chiedi poi solo i campi che il repository non copre. È ciò che tiene
+  l'intervista sotto i pochi minuti.
+- Mai più di otto domande. Se un campo resta oscuro dopo una domanda, scrivi `non noto` e vai
+  avanti: le figure sanno gestire un campo ignoto, non sanno gestire un utente che ha
+  abbandonato a metà.
+- «non lo so» è una risposta valida e non si insiste.
+- La criticità si chiede sempre, anche quando tutto il resto è pre-compilato. Proponi le
+  quattro opzioni con una riga di conseguenza ciascuna: hobby/prototipo → le figure parlano
+  solo se il rischio è concreto; interno e produzione con clienti → segnalano ciò che conta,
+  una volta; regolamentato → segnalano anche i rischi minori e chiedono di mettere per
+  iscritto i rischi accettati.
+- Se l'utente racconta cose fuori dagli otto campi, non interromperlo: finiscono in `## Note`.
+- Stile: elenchi, frasi brevi, linguaggio semplice. Niente preamboli normativi, niente teatro.
+
+## Scrittura del profilo
+
+- Crea `{project-root}/_bmad/memory/grl-shared/` se non esiste: è questa esecuzione a farla
+  nascere.
+- Compila `assets/project-profile-template.md` e scrivilo in
+  `{project-root}/_bmad/memory/grl-shared/project-profile.md`. Una pagina, mai di più.
+- Scrivi **solo** questo file. `decisions.md` e `accepted-risks.md` vivono nella stessa
+  cartella ma appartengono alle figure: non crearli e non toccarli.
+- Chiudi mostrando il profilo e due righe: la severità di default che ne deriva (la
+  mappatura è nel template) e che le sette figure ora hanno contesto.
+
+## Aggiornamento
+
+Il profilo esistente arriva già dal pre-pass: non rileggerlo dal disco e non ripetere
+l'intervista.
+
+- Chiedi che cosa è cambiato. Una domanda, aperta.
+- Confronta con i fatti freschi del repository e nomina le divergenze che l'utente non ha
+  citato — una dipendenza AI comparsa dopo l'ultima profilazione, un servizio di pagamento
+  aggiunto. Sono i cambiamenti che sfuggono.
+- Riscrivi solo i campi cambiati, aggiorna la data in testa e aggiungi una riga in
+  `## Storico`: `- {data} {cosa è cambiato}`.
+- Se cambia la criticità, dillo esplicitamente: cambia la severità di tutte e sette le figure.
+  Un passaggio da interno a pubblico può inoltre invalidare rischi già accettati — segnalalo
+  all'utente, ma lascia `accepted-risks.md` alle figure.

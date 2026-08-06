@@ -1,0 +1,16 @@
+# Installazione BMad locale e skill di terze parti — non appartengono a questo modulo
+_bmad/
+_bmad-output/
+.claude/
+.agents/
+.opencode/
+
+# Log di build del builder
+**/.memlog.md
+
+# Python
+__pycache__/
+*.py[cod]
+
+# macOS
+.DS_Store
