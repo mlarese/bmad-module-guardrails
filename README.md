@@ -85,28 +85,46 @@ Tutte e sette entrano nel roster principale di `bmad-party-mode`, accanto ai cin
 
 ## Installazione
 
-Il modulo si installa con l'installer BMad. `grl-setup` registra le sette figure come agenti
-installati (`[agents.grl-agent-*]` nella configurazione centrale) e raccoglie l'unica variabile di
-configurazione, `strictness_override`.
+Con l'installer BMad, indicando questo repository come sorgente custom:
 
-Primo passo dopo l'installazione: **esegui `grl-profile`**.
+```bash
+npx bmad-method install --custom-source https://github.com/mlarese/bmad-module-guardrails
+```
+
+L'installer copia le dieci skill, registra le sette figure come agenti
+(`[agents.grl-agent-*]` nella configurazione) — che è ciò che le fa comparire nel roster di
+`bmad-party-mode` — e aggiunge le voci di help al catalogo `_bmad/_config/bmad-help.csv`.
+
+In alternativa, per un'installazione manuale o per riconfigurare un'installazione esistente,
+si esegue la skill **`grl-setup`**.
+
+**Primo passo dopo l'installazione: `grl-profile`.** Senza profilo le figure partono cieche.
+
+Nota sulla configurazione: con BMad 6.10.0 la variabile `strictness_override` viene scritta in
+`_bmad/grl/config.yaml`, che il resolver a quattro layer non legge; dalla 6.10.1 finisce anche in
+`[modules.grl]` del config TOML, dove le figure la cercano. Su una 6.10.0, eseguire `grl-setup`
+dopo l'installer sistema la cosa.
 
 ## Struttura
 
 ```
-skills/
-├── grl-agent-privacy/       🛡️ Vera
-├── grl-agent-security/      🔐 Kai
-├── grl-agent-legal/         ⚖️ Aldo
-├── grl-agent-compliance/    📐 Nils
-├── grl-agent-ui-critic/     👁️ Iris
-├── grl-agent-architecture/  🧱 Otto
-├── grl-agent-ops/           🖥️ Bruno
-├── grl-profile/             workflow — profilo di progetto
-├── grl-board/               workflow — revisione collegiale
-├── grl-setup/               installazione e registrazione degli agenti
-└── reports/                 il documento di piano del modulo
+.claude-plugin/marketplace.json   indice letto dall'installer BMad
+src/
+├── module.yaml                   manifesto del modulo: config e roster delle figure
+├── module-help.csv               voci di help
+└── skills/
+    ├── grl-agent-privacy/        🛡️ Vera
+    ├── grl-agent-security/       🔐 Kai
+    ├── grl-agent-legal/          ⚖️ Aldo
+    ├── grl-agent-compliance/     📐 Nils
+    ├── grl-agent-ui-critic/      👁️ Iris
+    ├── grl-agent-architecture/   🧱 Otto
+    ├── grl-agent-ops/            🖥️ Bruno
+    ├── grl-profile/              workflow — profilo di progetto
+    ├── grl-board/                workflow — revisione collegiale
+    └── grl-setup/                installazione manuale e registrazione degli agenti
+docs/module-plan.md               il documento di piano del modulo
 ```
 
-Il piano in `skills/reports/` documenta le decisioni di progetto e il loro razionale: architettura,
-contratto di memoria, confini fra le figure, e i brief da cui ciascuna skill è stata costruita.
+Il piano in `docs/` documenta le decisioni di progetto e il loro razionale: architettura,
+contratto di memoria, confini fra le figure e i brief da cui ogni skill è stata costruita.
