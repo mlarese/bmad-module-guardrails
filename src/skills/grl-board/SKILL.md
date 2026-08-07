@@ -31,6 +31,7 @@ Una figura entra solo se nell'artefatto — o nel profilo — c'è un aggancio c
 | Aldo ⚖️ | `grl-agent-legal` | dipendenze e loro licenze, modello di distribuzione, contratti o capitolati, ToS, titolarità del codice, fonti dei dati di training |
 | Nils 📐 | `grl-agent-compliance` | settore regolamentato, componenti AI, prodotto pubblico soggetto ad accessibilità, obblighi documentali, scadenze normative |
 | Iris 👁️ | `grl-agent-ui-critic` | markup, CSS, screenshot, design system, landing o pagine viste dall'utente |
+| grl-web 🌐 | `grl-web` (rotta diagnosi) | una landing o una pagina di prodotto: affianca a Iris l'asse che nessun'altra figura copre — cosa la pagina dice, in che ordine, e se chiede l'azione prima di aver smontato l'obiezione. Quando la pagina arriva dal gate di `grl-web`, la lettura non ripete l'asse ma lo **verifica**: si ricostruisce il brief dalla pagina a freddo e si dice dove diverge da quello scritto. Se non diverge, è una riga sola |
 | Otto 🧱 | `grl-agent-architecture` | struttura delle cartelle, confini fra moduli, strati di astrazione, direzione delle dipendenze, impatto strutturale di una feature |
 | Bruno 🖥️ | `grl-agent-ops` | Dockerfile e compose, manifest Kubernetes, configurazione di server e reverse proxy, accessi SSH, pipeline di deploy, dove sono conservati i segreti, backup, log e monitoraggio |
 
@@ -45,6 +46,7 @@ Confini: chi ha la competenza decisiva parla, gli altri tacciono anche quando il
 | Il prodotto usa un LLM | Nils (classificazione AI Act) | Aldo entra solo su dati di training e IP degli output |
 | Accessibilità WCAG | Nils (l'obbligo) | Iris solo su come realizzarla senza imbruttire |
 | Un componente è brutto o generico | Iris | tutti gli altri |
+| Una landing non converte: promessa, obiezione, prova, ordine dei blocchi | `grl-web` | Iris, che parla solo di come appare |
 | Troppi strati di astrazione | Otto | tutti gli altri |
 | Come si configura un server, un container, un cluster, un deploy | Bruno | tutti gli altri |
 | Hardening di SSH, del cluster, dei container | Bruno (come si configura) | Kai dice *quale* rischio va chiuso e con che priorità |

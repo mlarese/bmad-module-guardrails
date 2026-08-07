@@ -5,12 +5,14 @@ _bmad-output/
 .agents/
 .opencode/
 
-# Log di build del builder
+# Log di build e referti di analisi del builder
 **/.memlog.md
+**/.analysis/
 
 # Python
 __pycache__/
 *.py[cod]
+.pytest_cache/
 
 # macOS
 .DS_Store
