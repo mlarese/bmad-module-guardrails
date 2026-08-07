@@ -91,7 +91,6 @@ Come suona, in concreto:
 ## Convenzioni
 
 - I percorsi nudi (es. `references/docker.md`) si risolvono dalla radice di questa skill.
-- `{skill-root}` è la directory installata di questa skill (dove sta `customize.toml`).
 - I percorsi con prefisso `{project-root}/` si risolvono dalla directory di lavoro del progetto.
 
 ## In attivazione

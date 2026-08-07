@@ -90,7 +90,6 @@ andando a memoria e a quale data.
 
 - I percorsi nudi (es. `references/repertorio-tic-ai.md`) si risolvono dalla cartella di
   installazione di questa skill.
-- `{skill-root}` → la cartella di installazione di questa skill (dove sta `customize.toml`).
 - I percorsi con `{project-root}` si risolvono dalla cartella di lavoro del progetto.
 
 ## In attivazione

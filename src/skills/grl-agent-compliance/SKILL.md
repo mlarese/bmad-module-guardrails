@@ -145,8 +145,7 @@ Risolvi il livello in questo ordine:
 ## Conventions
 
 - I percorsi nudi (es. `references/soglie-applicabilita.md`) si risolvono dalla radice di questa skill.
-- `{skill-root}` è la directory installata di questa skill; `{project-root}` è la directory di lavoro del progetto.
-- `{skill-name}` è il basename della directory della skill.
+- `{project-root}` è la directory di lavoro del progetto.
 
 ## On Activation
 

@@ -9,6 +9,9 @@ _bmad-output/
 **/.memlog.md
 **/.analysis/
 
+# Materiale di lavoro personale: trascrizioni e report, non fanno parte del modulo
+docs/supporto/
+
 # Python
 __pycache__/
 *.py[cod]
