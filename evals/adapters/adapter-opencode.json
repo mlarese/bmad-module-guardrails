@@ -1,0 +1,15 @@
+{
+  "name": "opencode",
+  "invocation": [
+    "python3",
+    "/Users/maurolarese/Dropbox/vibecode/_PERSONALE_/bmad-module-support-agents-workflows/evals/adapters/opencode-shim.py",
+    "--model",
+    "opencode/deepseek-v4-flash-free",
+    "--",
+    "{prompt}"
+  ],
+  "transcript": { "format": "stdout-jsonl" },
+  "skill_dir": ".opencode/skills",
+  "load_signal": { "skill_tool": "Skill", "read_tool": "Read" },
+  "env_passthrough": ["XDG_DATA_HOME"]
+}

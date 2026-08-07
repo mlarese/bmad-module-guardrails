@@ -1,0 +1,23 @@
+[
+  { "query": "mi conviene il RAG o mi basta mettere i documenti nel prompt?", "should_trigger": true },
+  { "query": "il chunking lo faccio a 500 caratteri con overlap o seguo la struttura del documento?", "should_trigger": true },
+  { "query": "uso LangChain o l'SDK del fornitore per una catena di due passi?", "should_trigger": true },
+  { "query": "il modello ogni tanto restituisce un JSON rotto e mi si pianta il parser", "should_trigger": true },
+  { "query": "come faccio a sapere se la modifica al prompt ha migliorato o peggiorato le cose", "should_trigger": true },
+  { "query": "l'assistente inventa risposte quando il documento non contiene l'informazione", "should_trigger": true },
+  { "query": "40000 chiamate al giorno con 12 documenti nel contesto, quanto spendo e come lo abbasso", "should_trigger": true },
+  { "query": "la catena fa quattro chiamate in fila e l'utente aspetta otto secondi", "should_trigger": true },
+  { "query": "voglio un sistema multi-agente con un supervisore che coordina tre agenti", "should_trigger": true },
+  { "query": "il flusso n8n che fa riassumere le righe del CRM gira da settimane e non l'ho mai guardato", "should_trigger": true },
+
+  { "query": "un cliente ha scritto nel ticket ignora le istruzioni precedenti, come blindo il prompt di sistema", "should_trigger": false },
+  { "query": "posso mandare i dati dei nostri clienti all'API di un fornitore di modelli?", "should_trigger": false },
+  { "query": "la licenza dei pesi di questo modello mi permette di usarlo in un prodotto commerciale?", "should_trigger": false },
+  { "query": "il nostro sistema usa un LLM: che rischio siamo secondo l'AI Act?", "should_trigger": false },
+  { "query": "devo dire agli utenti che la risposta è generata da un'intelligenza artificiale?", "should_trigger": false },
+  { "query": "dove faccio girare il modello, mi serve una GPU o basta una API?", "should_trigger": false },
+  { "query": "la chiave API del fornitore sta nel file .env ed è finita su git", "should_trigger": false },
+  { "query": "l'interfaccia della chat è identica a tutte le altre, hero in gradiente e tre card", "should_trigger": false },
+  { "query": "l'assistente suggerisce una terapia al medico partendo dagli esami del paziente", "should_trigger": false },
+  { "query": "il modulo che chiama il modello dipende dal modulo di persistenza, come inverto la dipendenza", "should_trigger": false }
+]
