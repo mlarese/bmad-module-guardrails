@@ -1,0 +1,23 @@
+[
+  { "query": "ci serve Kubernetes? oggi giriamo su una VM da 4 giga", "should_trigger": true },
+  { "query": "dove metto le chiavi API in produzione, Vault o i secret del cluster?", "should_trigger": true },
+  { "query": "il disco della produzione è pieno al 98% per colpa dei log", "should_trigger": true },
+  { "query": "facciamo pg_dump ogni notte su S3, siamo coperti?", "should_trigger": true },
+  { "query": "ho la porta 22 aperta a internet con accesso via password", "should_trigger": true },
+  { "query": "il deploy come lo faccio se devo poter tornare indietro in due minuti", "should_trigger": true },
+  { "query": "il certificato TLS è scaduto e nginx non risponde più in https", "should_trigger": true },
+  { "query": "che monitoraggio metto su due VM con due sviluppatori?", "should_trigger": true },
+  { "query": "il container riparte in loop e non capisco perché, come lo diagnostico", "should_trigger": true },
+  { "query": "quanta RAM e quanti core mi servono per 300 utenti al giorno?", "should_trigger": true },
+
+  { "query": "la chiave di Stripe è finita su GitHub, quanto è grave il rischio?", "should_trigger": false },
+  { "query": "i dati degli utenti europei possono stare su un server americano?", "should_trigger": false },
+  { "query": "passiamo a microservizi o teniamo il monolite con confini netti?", "should_trigger": false },
+  { "query": "npm audit segnala vulnerabilità nelle dipendenze di build", "should_trigger": false },
+  { "query": "la licenza di questo software di monitoraggio ci permette l'uso commerciale?", "should_trigger": false },
+  { "query": "NIS2 ci impone requisiti di continuità operativa?", "should_trigger": false },
+  { "query": "quale modello LLM scelgo per il carico che abbiamo e quanto costa", "should_trigger": false },
+  { "query": "la dashboard di monitoraggio è illeggibile, troppi grafici tutti uguali", "should_trigger": false },
+  { "query": "per quanto tempo devo conservare i log applicativi?", "should_trigger": false },
+  { "query": "il referto firmato dove va conservato per essere a norma?", "should_trigger": false }
+]

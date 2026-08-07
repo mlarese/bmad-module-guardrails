@@ -1,0 +1,23 @@
+[
+  { "query": "al signup chiedo la spunta per il trattamento dei dati o no?", "should_trigger": true },
+  { "query": "per quanto tempo posso tenere gli ordini dei clienti dopo che l'account è chiuso", "should_trigger": true },
+  { "query": "logghiamo tutto il body delle richieste, dentro ci finiscono anche email e indirizzi", "should_trigger": true },
+  { "query": "un utente ha chiesto la cancellazione ma i dati stanno anche nei backup", "should_trigger": true },
+  { "query": "mi serve davvero una DPIA per un gestionale interno da quaranta dipendenti?", "should_trigger": true },
+  { "query": "mandiamo il testo delle conversazioni a un LLM, dentro ci sono i nomi dei clienti", "should_trigger": true },
+  { "query": "usiamo il dump della produzione per popolare l'ambiente di test", "should_trigger": true },
+  { "query": "che base giuridica ho per profilare gli utenti e consigliargli i prodotti", "should_trigger": true },
+  { "query": "il database degli utenti europei sta su un'istanza in Virginia", "should_trigger": true },
+  { "query": "cosa devo fare nelle prime ore se ci rubano il database degli utenti", "should_trigger": true },
+
+  { "query": "come cifro il database a riposo, uso la cifratura gestita del provider o a livello applicativo?", "should_trigger": false },
+  { "query": "il DPA che ci ha mandato il fornitore cloud lo posso firmare così com'è?", "should_trigger": false },
+  { "query": "quali obblighi documentali mi impone l'AI Act se il sistema è ad alto rischio", "should_trigger": false },
+  { "query": "sposto il database dalla regione americana a quella di Francoforte, come lo migro senza fermare il servizio", "should_trigger": false },
+  { "query": "il pannello di amministrazione è raggiungibile senza autenticazione dalla rete interna", "should_trigger": false },
+  { "query": "questa libreria è AGPL, posso usarla nel nostro SaaS?", "should_trigger": false },
+  { "query": "il cookie banner è brutto e copre metà pagina su mobile", "should_trigger": false },
+  { "query": "come struttura il modello dati clinico se devo registrare le allergie del paziente", "should_trigger": false },
+  { "query": "il modulo utenti dipende dal modulo fatturazione, come inverto la dipendenza", "should_trigger": false },
+  { "query": "il RAG recupera documenti che l'utente che fa la domanda non dovrebbe poter vedere, come filtro il retrieval", "should_trigger": false }
+]

@@ -1,0 +1,23 @@
+[
+  { "query": "questa home sembra generata: hero in gradiente, tre card con icona, Inter 600", "should_trigger": true },
+  { "query": "il prodotto non ha un'identità visiva, dammi due o tre direzioni fra cui scegliere", "should_trigger": true },
+  { "query": "il giallo del brand sui bottoni non passa il contrasto, cambio il colore?", "should_trigger": true },
+  { "query": "la dashboard è illeggibile, troppe cose e tutte con lo stesso peso", "should_trigger": true },
+  { "query": "usiamo shadcn con il tema di default e si vede, come lo personalizzo", "should_trigger": true },
+  { "query": "questo componente card mi sembra uguale a quello di mille altri siti", "should_trigger": true },
+  { "query": "che scala tipografica uso e quanti pesi tengo nel design system?", "should_trigger": true },
+  { "query": "il focus ring è l'anello blu di default, posso cambiarlo senza rompere l'accessibilità?", "should_trigger": true },
+  { "query": "le schermate sono coerenti fra loro o sembrano fatte da persone diverse?", "should_trigger": true },
+  { "query": "la tabella è densissima e la gente si perde nelle righe, che spaziatura metto", "should_trigger": true },
+
+  { "query": "la landing non converte, il titolo è la piattaforma all-in-one per il tuo business", "should_trigger": false },
+  { "query": "l'accessibilità è obbligatoria per il nostro e-commerce o siamo esclusi come microimpresa?", "should_trigger": false },
+  { "query": "il componente Button dipende dal modulo di autenticazione, come lo separo", "should_trigger": false },
+  { "query": "il form di registrazione raccoglie la data di nascita, mi serve una base giuridica?", "should_trigger": false },
+  { "query": "quale schermata vede l'infermiere durante il giro e quanti secondi ha per compilarla", "should_trigger": false },
+  { "query": "la chat mostra il testo mentre arriva, come gestisco lo streaming lato modello", "should_trigger": false },
+  { "query": "il logo del cliente lo possiamo usare nel nostro sito come referenza?", "should_trigger": false },
+  { "query": "il CSS compilato pesa 400kb, come lo riduco in build", "should_trigger": false },
+  { "query": "l'upload dell'avatar accetta qualsiasi file, è un rischio?", "should_trigger": false },
+  { "query": "il sito è lento su mobile, il punteggio Lighthouse è 40", "should_trigger": false }
+]

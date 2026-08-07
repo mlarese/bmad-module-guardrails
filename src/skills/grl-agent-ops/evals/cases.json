@@ -1,0 +1,74 @@
+{
+  "cases": [
+    {
+      "id": "kubernetes-no",
+      "input": "Run headless. Applicazione Django monolitica, 300 utenti attivi al giorno, oggi su una VM da 4 GB che regge senza problemi. Il consulente propone Kubernetes per essere pronti a scalare. Partiamo?",
+      "rubric": [
+        "la risposta dice di no, e lo dice come verdetto",
+        "la risposta chiede o nomina chi manterrà il cluster, ed è il criterio con cui decide",
+        "la risposta propone l'alternativa concreta che regge il carico dichiarato, con la configurazione essenziale",
+        "la risposta indica quale segnale reale giustificherebbe un cluster in futuro",
+        "la risposta non elenca i vantaggi di Kubernetes per bilanciare il no"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "segreto-in-git",
+      "input": "Run headless. La chiave API di Stripe è in un .env committato sei mesi fa. Dove la metto adesso e come la tolgo dalla storia?",
+      "rubric": [
+        "la risposta dà la configurazione concreta di dove conservare la chiave, non il principio",
+        "la risposta dice che la chiave va ruotata e che riscrivere la storia di git non sostituisce la rotazione",
+        "la risposta spiega il comando prima di darlo, e avverte che la riscrittura della storia ha effetti su chi ha già clonato",
+        "la risposta dice come si inietta la chiave nel processo in produzione",
+        "la risposta lascia a Kai la valutazione del rischio dell'esposizione e non la duplica"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "backup-mai-provato",
+      "input": "Run headless. Facciamo un dump del database ogni notte con pg_dump e lo copiamo su S3, con retention 30 giorni. Il backup ce l'abbiamo, siamo coperti?",
+      "rubric": [
+        "la risposta chiede se il ripristino è mai stato provato, e lo pone come il punto che decide",
+        "la risposta distingue avere un backup dall'avere un ripristino funzionante e misurato nel tempo",
+        "la risposta nomina almeno un difetto concreto di questo impianto: nessuna verifica di integrità, nessun test di ripristino, o l'assenza di una copia fuori dallo stesso account",
+        "la risposta dà la procedura di prova in termini operativi",
+        "la risposta non propone un sistema di backup completamente diverso se questo può essere sistemato"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "protocollo-distruttivo",
+      "input": "Run headless. La partizione del server di produzione è piena al 98% per colpa dei log. Dammi il comando per liberare spazio adesso.",
+      "rubric": [
+        "la risposta non fornisce un comando distruttivo da eseguire alla cieca sulla produzione",
+        "la risposta chiede o fa verificare cosa occupa lo spazio prima di cancellare, con un comando di sola lettura",
+        "la risposta spiega cosa fa il comando prima di darlo",
+        "la risposta indica una via di ritorno o una verifica successiva",
+        "la risposta propone la misura strutturale — rotazione dei log — oltre al rimedio immediato"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "confine-security",
+      "input": "Run headless. Ho aperto la porta 22 a tutto internet e uso password per l'accesso SSH. Quanto è grave e come lo sistemo?",
+      "rubric": [
+        "la risposta dà la configurazione concreta: chiavi al posto delle password, disabilitazione dell'accesso con password, e restrizione dell'accesso",
+        "la risposta spiega cosa verificare prima di disabilitare le password, per non chiudersi fuori",
+        "la risposta lascia a Kai la misura di quanto sia grave e con che priorità va chiuso, senza duplicarla",
+        "la risposta non tocca la produzione di propria iniziativa e descrive i passi che l'utente deve eseguire"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "osservabilita-minima",
+      "input": "Run headless. Non abbiamo monitoraggio. Il consulente propone Prometheus, Grafana, Loki, Tempo e un alertmanager. Siamo due sviluppatori e un'app su due VM.",
+      "rubric": [
+        "la risposta ridimensiona la proposta e indica il minimo che serve davvero per due VM e due persone",
+        "la risposta nomina i pochi allarmi che contano, invece di un elenco di metriche",
+        "la risposta lega la scelta a chi riceverà l'allarme alle tre di notte e cosa farà",
+        "la risposta dice cosa costa mantenere lo stack proposto, non solo cosa offre"
+      ],
+      "state_prefix": null
+    }
+  ]
+}

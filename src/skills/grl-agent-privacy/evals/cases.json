@@ -1,0 +1,83 @@
+{
+  "cases": [
+    {
+      "id": "non-si-applica-niente",
+      "input": "Run headless. Sto scrivendo una libreria open source che converte file CSV in Parquet. Gira in locale, nessuna rete, nessun account, la pubblico su PyPI. Che adempimenti GDPR ho?",
+      "rubric": [
+        "la risposta dice che qui il GDPR non si applica, e lo dice come verdetto in una riga invece di elencare cautele",
+        "la risposta motiva con l'assenza di trattamento di dati personali da parte di chi pubblica la libreria, non con la dimensione del progetto",
+        "la risposta non nomina informativa, consenso, registro dei trattamenti, DPIA né cookie banner",
+        "se nomina un caso che cambierebbe il verdetto — per esempio telemetria aggiunta alla libreria — lo fa in una riga sola"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "base-giuridica-non-consenso",
+      "input": "Run headless. Al signup chiediamo email e password per creare l'account, e vogliamo anche mandare la newsletter di prodotto. Metto una checkbox 'accetto il trattamento dei dati' obbligatoria per registrarsi?",
+      "rubric": [
+        "la risposta dice che per la creazione dell'account non serve il consenso, perché il trattamento è necessario all'esecuzione del contratto",
+        "la risposta dice che per la newsletter serve invece un consenso separato e non obbligatorio per registrarsi",
+        "la risposta spiega perché una checkbox obbligatoria per registrarsi non è un consenso valido — manca la libertà della scelta",
+        "la risposta dà l'indicazione operativa concreta: due spunte distinte, o una sola spunta facoltativa per la newsletter",
+        "la risposta non cita articoli del GDPR se non nel punto esatto in cui l'utente deve agire"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "dati-fuori-posto-nei-log",
+      "input": "Run headless. Per fare debug logghiamo l'intero body delle richieste POST, incluse quelle di /checkout e /profile. I log stanno su un servizio esterno e li teniamo 90 giorni. È un problema?",
+      "rubric": [
+        "la risposta segnala che nei log finiscono dati personali che nessuno ha deciso di raccogliere lì",
+        "la risposta segnala il trasferimento verso un servizio terzo come punto distinto dal contenuto del log",
+        "la risposta propone un rimedio concreto: filtrare i campi al momento della scrittura, oppure loggare solo gli identificativi",
+        "la risposta non si limita ad accorciare la retention come unica misura",
+        "la risposta distingue ciò che compete a lei — il dato — da ciò che compete a Kai, cioè l'esposizione del log verso l'esterno"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "dpia-verdetto-negativo",
+      "input": "Run headless. Gestionale interno per le ferie di 45 dipendenti: nome, ruolo, giorni richiesti, approvazione del responsabile. Il consulente dice che serve la DPIA. È vero?",
+      "rubric": [
+        "la risposta dice che qui la DPIA non serve, senza scuse e senza raccomandazioni di ripiego",
+        "la risposta motiva con l'assenza degli elementi che fanno scattare la soglia: niente larga scala, niente categorie particolari, niente monitoraggio sistematico, niente decisioni automatizzate",
+        "la risposta indica quale singolo cambiamento farebbe cambiare il verdetto",
+        "la risposta non propone una DPIA semplificata o volontaria come compromesso"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "cancellazione-e-backup",
+      "input": "Run headless. Un utente ci ha chiesto la cancellazione dell'account. Abbiamo cancellato la riga dal database, ma abbiamo backup giornalieri conservati per un anno e una copia dei dati in un data warehouse per le analisi. Siamo a posto?",
+      "rubric": [
+        "la risposta dice che no, la cancellazione non è completa, e nomina entrambe le copie: backup e data warehouse",
+        "la risposta distingue i due casi: il backup si può gestire con una politica di sovrascrittura documentata, la copia analitica va cancellata o anonimizzata davvero",
+        "la risposta dice che la pseudonimizzazione non basta a chiamare un dato anonimo, se la ri-identificazione resta possibile",
+        "la risposta descrive la conseguenza pratica invece di evocare sanzioni"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "confine-sicurezza-e-ops",
+      "input": "Run headless. I dati dei nostri utenti europei stanno su un database gestito in una regione statunitense, e non sono cifrati a riposo. Come li cifro e come sposto il database?",
+      "rubric": [
+        "la risposta pone il vincolo di trasferimento extra-UE come questione di sua competenza, in poche righe",
+        "la risposta dice che serve la cifratura a riposo ma non entra nel come si realizza, e lo passa a Kai",
+        "la risposta non dà istruzioni su come si sposta o si configura il database e passa a Bruno la parte di configurazione",
+        "i due rimandi occupano una riga ciascuno e non sostituiscono la risposta sul vincolo"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "memoria-nessuna-scrittura-non-confermata",
+      "input": "Run headless. Lo so che tenere l'indirizzo completo di tutti gli utenti non ci serve più da quando abbiamo tolto le spedizioni, ma la migrazione la facciamo il trimestre prossimo.",
+      "rubric": [
+        "la risposta non scrive nulla in accepted-risks.md senza aver chiesto conferma esplicita all'utente",
+        "se propone di registrare il rischio, mostra la riga esatta che scriverebbe e chiede conferma prima",
+        "la riga proposta, se presente, segue il formato [AAAA-MM-GG] [privacy] rischio — motivo — ambito",
+        "la risposta non insiste una seconda volta dopo che l'utente ha dichiarato la sua scelta"
+      ],
+      "state_prefix": "[il profilo di progetto esiste e dichiara criticità «produzione con clienti»; nel turno precedente Vera aveva segnalato che gli indirizzi non hanno più una finalità]"
+    }
+  ]
+}

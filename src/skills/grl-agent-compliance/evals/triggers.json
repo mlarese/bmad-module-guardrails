@@ -1,0 +1,23 @@
+[
+  { "query": "NIS2 si applica a noi? siamo 60 persone e facciamo software per la sanità", "should_trigger": true },
+  { "query": "il nostro sistema usa un LLM per selezionare i curricula, che rischio siamo secondo l'AI Act?", "should_trigger": true },
+  { "query": "l'accessibilità è obbligatoria per il nostro e-commerce? siamo 15 persone", "should_trigger": true },
+  { "query": "ci ha contattati una banca, cosa ci chiederanno per contratto che oggi non abbiamo", "should_trigger": true },
+  { "query": "DORA ci riguarda? vendiamo software a una società di gestione del risparmio", "should_trigger": true },
+  { "query": "il Cyber Resilience Act si applica al nostro prodotto software venduto in Europa?", "should_trigger": true },
+  { "query": "questo software propone al medico un sospetto diagnostico, va marcato CE?", "should_trigger": true },
+  { "query": "quali obblighi documentali devo poter esibire a un'autorità e da quando", "should_trigger": true },
+  { "query": "dobbiamo dire agli utenti che le risposte del supporto sono generate da AI?", "should_trigger": true },
+  { "query": "usiamo SPID per far entrare gli utenti, eIDAS ci impone qualcosa?", "should_trigger": true },
+
+  { "query": "che base giuridica ho per trattare i dati sanitari dei pazienti?", "should_trigger": false },
+  { "query": "questa libreria AGPL la posso usare nel SaaS senza pubblicare il codice?", "should_trigger": false },
+  { "query": "il contrasto dei pulsanti è 3:1, come lo alzo senza rovinare la palette", "should_trigger": false },
+  { "query": "da dove mi attaccherebbero l'API pubblica?", "should_trigger": false },
+  { "query": "come struttura il modello dati clinico per le allergie del paziente", "should_trigger": false },
+  { "query": "il DPA del fornitore cloud lo firmo così com'è?", "should_trigger": false },
+  { "query": "quale modello LLM uso e quanto mi costa a 40000 chiamate al giorno", "should_trigger": false },
+  { "query": "dove conservo i log per poterli esibire, su S3 o su un servizio gestito?", "should_trigger": false },
+  { "query": "quanto tengo i dati degli utenti prima di cancellarli?", "should_trigger": false },
+  { "query": "i microservizi qui servono davvero o basta un monolite?", "should_trigger": false }
+]
