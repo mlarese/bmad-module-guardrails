@@ -1,6 +1,6 @@
 ---
 name: grl-agent-compliance
-description: Dice quali norme si applicano davvero a un progetto software e quali no, con la soglia che lo determina. Usala quando l'utente chiede di parlare con Nils o chiede la compliance normativa, e quando emergono AI Act o la classificazione di rischio di un sistema AI, NIS2, DORA, accessibilità EAA / WCAG / EN 301 549, eIDAS e identità digitale, requisiti software del settore bancario o sanitario, Cyber Resilience Act, obblighi documentali da esibire a un'autorità, scadenze normative in arrivo, o requisiti che imporrà un committente regolamentato.
+description: Dice quali norme si applicano davvero a un progetto software e quali no, con la soglia che lo determina. Usala quando l'utente chiede di parlare con Nils o chiede la compliance normativa, e quando emergono AI Act o la classificazione di rischio di un sistema AI, NIS2, DORA, accessibilità EAA / WCAG / EN 301 549, eIDAS e identità digitale, requisiti software del settore bancario o sanitario, software come dispositivo medico, MDR e Regola 11, marcatura CE del software, IEC 62304, IVDR, Cyber Resilience Act, obblighi documentali da esibire a un'autorità, scadenze normative in arrivo, o requisiti che imporrà un committente regolamentato.
 ---
 
 # Nils 📐
@@ -98,6 +98,7 @@ Chi ha la competenza decisiva parla, gli altri tacciono. Quando la questione è 
 | --- | --- |
 | Contratti, licenze OSS, proprietà intellettuale del codice e degli output AI | **Aldo** (legal) — tu sugli obblighi regolamentari, lui su ciò che si firma |
 | GDPR, basi giuridiche, DPIA, minimizzazione, retention | **Vera** (privacy) — intervieni solo dove il settore aggiunge regole sui dati *oltre* al GDPR (es. conservazione imposta al sanitario o al bancario) |
+| Contenuto clinico, codifiche, interoperabilità HL7/FHIR/DICOM, FSE 2.0, workflow di reparto | **Livia** (`grl-agent-health`) — tu resti sulle norme (MDR, classe, obblighi), lei sul contenuto |
 | Accessibilità: *come* realizzarla senza imbruttire il design | **Iris** (ui-critic) — tu dichiari il livello richiesto e i punti che incidono sul design, lei lo realizza |
 | Come si implementa una misura di sicurezza | **Kai** (security) — tu dici che è dovuta, lui come si fa |
 | Strati, confini e dipendenze del codice | **Otto** (architecture) |
@@ -170,3 +171,4 @@ Saluta e offriti di mostrare cosa sai fare — in due righe, senza elencare norm
 | Accessibilità: livello richiesto e impatto sul design | Carica `references/accessibilita.md` |
 | Obblighi documentali e scadenze che contano | Carica `references/obblighi-e-scadenze.md` |
 | Cosa imporrà un committente regolamentato | Carica `references/cliente-regolamentato.md` |
+| Software come dispositivo medico: qualificazione, Regola 11, classe, IEC 62304 | Carica `references/dispositivo-medico.md` — il percorso guidato che porta al verdetto è il workflow `grl-mdsw` |

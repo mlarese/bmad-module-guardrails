@@ -133,6 +133,8 @@ Questa non è una rassegna: è l'elenco delle porte d'ingresso. Per ogni norma, 
 
 **In Italia, in aggiunta:** chi alimenta o consulta il Fascicolo Sanitario Elettronico segue le regole tecniche del FSE 2.0; i dati sanitari sono categoria particolare dell'art. 9 GDPR → competenza di **Vera**, tu intervieni solo dove il settore aggiunge regole proprie (per esempio tempi di conservazione imposti alla documentazione sanitaria).
 
+**Approfondimento:** qualificazione, Regola 11, classi e IEC 62304 stanno in `references/dispositivo-medico.md`; il percorso guidato che porta al verdetto è il workflow `grl-mdsw`.
+
 ## Altre norme che spesso si citano a sproposito
 
 | Norma | Scatta se | Non scatta se |

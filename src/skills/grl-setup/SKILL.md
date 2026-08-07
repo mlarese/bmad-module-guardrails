@@ -5,7 +5,7 @@ description: Installa il modulo Guardrails in un progetto. Usa quando l'utente c
 
 # Setup del modulo Guardrails
 
-Installi Guardrails in un progetto: una domanda all'utente, la registrazione delle sette
+Installi Guardrails in un progetto: una domanda all'utente, la registrazione delle nove
 figure nel roster degli agenti, e l'avvio della profilazione. L'esito che conta non è il file
 di config — è che l'utente esca da qui con `grl-profile` già eseguito, perché senza profilo
 di progetto le figure parlano per luoghi comuni.
@@ -86,7 +86,7 @@ python3 ./scripts/register-agents.py \
 Cosa fa, e perché così:
 
 - **Roster** → `{project-root}/_bmad/custom/config.toml`, una tabella `[agents.grl-agent-*]`
-  per figura. È il passo che porta le sette figure nel party mode: `resolve_party.py` costruisce
+  per figura. È il passo che porta le otto figure nel party mode: `resolve_party.py` costruisce
   la stanza di default dagli agenti registrati nel config, senza filtrare per modulo o per team.
   Si scrive nel layer `custom/` perché `_bmad/config.toml` e `_bmad/config.user.toml` sono
   rigenerati dall'installer a ogni installazione, mentre `custom/` non viene toccato mai.
@@ -139,7 +139,7 @@ il resolver a quattro layer non legge — la configurazione finirebbe in un file
 python3 {project-root}/_bmad/scripts/resolve_config.py -p "{project-root}" -k agents
 ```
 
-Devono comparire tutte e sette le chiavi `grl-agent-*` accanto agli agenti già installati. Se
+Devono comparire tutte e otto le chiavi `grl-agent-*` accanto agli agenti già installati. Se
 mancano, il party mode non le vedrà: mostra l'output e fermati, invece di chiudere il setup.
 
 Stessa verifica per la severità, con `-k modules.grl`. Nota per chi legge questa configurazione
@@ -161,7 +161,7 @@ una chiave `core` se i valori di base non sono ancora stati raccolti), e i valor
 token `{project-root}` letterale.
 
 Avverti però l'utente di un limite reale: `merge-config.py` scrive la sezione del modulo ma
-**non** la tabella degli agenti. Su un'installazione YAML le sette figure vanno quindi registrate
+**non** la tabella degli agenti. Su un'installazione YAML le otto figure vanno quindi registrate
 con il meccanismo di quella versione di BMad, altrimenti non compaiono nel party mode.
 `register-agents.py` non copre questo caso e lo dichiara invece di fingere.
 
@@ -169,19 +169,19 @@ con il meccanismo di quella versione di BMad, altrimenti non compaiono nel party
 
 - **Non crea `{project-root}/_bmad/memory/grl-shared/`.** La crea `grl-profile` alla prima
   esecuzione, quando ha qualcosa da scriverci. Una cartella vuota in `_bmad/memory/` è rumore.
-- **Non crea gruppi di party mode.** Le sette figure stanno nella stanza principale insieme ai
-  cinque agenti BMM: una sola stanza, dodici partecipanti, per scelta esplicita.
+- **Non crea gruppi di party mode.** Le otto figure stanno nella stanza principale insieme ai
+  cinque agenti BMM: una sola stanza, tredici partecipanti, per scelta esplicita.
 - **Non tocca le skill BMM.** Vedi il passo facoltativo qui sotto.
 
 ## Chiusura
 
-1. Mostra cosa è stato scritto: le sette figure registrate (nome, icona, titolo), il valore di
+1. Mostra cosa è stato scritto: le otto figure registrate (nome, icona, titolo), il valore di
    `strictness_override`, le voci di help aggiunte, e i file toccati.
 2. Mostra il `module_greeting` di `module.yaml`.
 3. **Proponi `grl-profile` e, se l'utente accetta, eseguilo subito.** È il passo che rende utile
    tutto il resto: otto campi, pochi minuti, quasi tutti pre-compilati leggendo il repository.
    L'unico che deve dichiarare l'utente è la criticità del progetto, perché è quella che regola
-   quanto saranno severe tutte e sette le figure. Se rifiuta, va bene: digli che ogni figura
+   quanto saranno severe tutte e otto le figure. Se rifiuta, va bene: digli che ogni figura
    proporrà la profilazione da sé quando troverà il profilo mancante.
 4. Nomina il passo **facoltativo e reversibile**, senza eseguirlo: le figure possono essere
    consultate automaticamente dentro i flussi BMM (`bmad-prd`, `bmad-architecture`, `bmad-ux`,

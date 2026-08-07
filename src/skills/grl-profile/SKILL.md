@@ -6,13 +6,13 @@ description: Crea e aggiorna il profilo di progetto del modulo Guardrails. Usa q
 # grl-profile
 
 Sei il primo contatto dell'utente con il modulo Guardrails. Lui conosce il proprio progetto;
-tu sai quali otto cose le sette figure del modulo devono sapere per non parlare per luoghi
+tu sai quali otto cose le otto figure del modulo devono sapere per non parlare per luoghi
 comuni. L'esito è una pagina sola in `{project-root}/_bmad/memory/grl-shared/project-profile.md`,
-letta in attivazione da Vera, Kai, Aldo, Nils, Iris, Otto e Bruno, che non avranno questa
-conversazione a disposizione: ogni campo va quindi compilato o marcato `non noto`, e la
-criticità va dichiarata dall'utente, mai dedotta in silenzio — è il campo che regola quanto
-saranno severe tutte e sette. La conversazione dura pochi minuti: se sembra un questionario di
-conformità, l'utente non userà mai più il modulo.
+letta in attivazione da Vera, Kai, Aldo, Nils, Iris, Otto, Bruno e Livia, che non
+avranno questa conversazione a disposizione: ogni campo va quindi compilato o marcato
+`non noto`, e la criticità va dichiarata dall'utente, mai dedotta in silenzio — è il campo che
+regola quanto saranno severe tutte e otto. La conversazione dura pochi minuti: se sembra un
+questionario di conformità, l'utente non userà mai più il modulo.
 
 ## Regole di risoluzione
 
@@ -64,6 +64,24 @@ usati alla lettera.
 - Se l'utente racconta cose fuori dagli otto campi, non interromperlo: finiscono in `## Note`.
 - Stile: elenchi, frasi brevi, linguaggio semplice. Niente preamboli normativi, niente teatro.
 
+### Blocco sanità (condizionale)
+
+Si attiva **solo** se il settore dichiarato è sanitario, o se il repository ne dà segnale
+evidente (FSE, HL7, FHIR, DICOM, cartella clinica, referto, LIS/RIS/PACS nei manifest, nel
+README o nei nomi delle cartelle). Se il settore non è sanitario, il blocco **non si nomina
+nemmeno**: il vincolo dei pochi minuti resta.
+
+Quando si attiva:
+
+- Massimo cinque domande in più, tutte saltabili con `non noto`.
+- La **finalità del software** si chiede sempre: è quella che decide se serve `grl-mdsw`.
+  Le altre quattro si chiedono solo se il repository non le copre già.
+- Le risposte vanno nella sezione `## Sanità` del template, non nella tabella principale:
+  gli otto campi base restano otto.
+- Se la finalità risulta **di supporto alla decisione clinica** o **di monitoraggio**, chiudi
+  la profilazione proponendo `grl-mdsw` come passo successivo: è il percorso che stabilisce se
+  il software è dispositivo medico e in che classe.
+
 ## Scrittura del profilo
 
 - Crea `{project-root}/_bmad/memory/grl-shared/` se non esiste: è questa esecuzione a farla
@@ -73,7 +91,7 @@ usati alla lettera.
 - Scrivi **solo** questo file. `decisions.md` e `accepted-risks.md` vivono nella stessa
   cartella ma appartengono alle figure: non crearli e non toccarli.
 - Chiudi mostrando il profilo e due righe: la severità di default che ne deriva (la
-  mappatura è nel template) e che le sette figure ora hanno contesto.
+  mappatura è nel template) e che le otto figure ora hanno contesto.
 
 ## Aggiornamento
 
@@ -86,6 +104,6 @@ l'intervista.
   aggiunto. Sono i cambiamenti che sfuggono.
 - Riscrivi solo i campi cambiati, aggiorna la data in testa e aggiungi una riga in
   `## Storico`: `- {data} {cosa è cambiato}`.
-- Se cambia la criticità, dillo esplicitamente: cambia la severità di tutte e sette le figure.
+- Se cambia la criticità, dillo esplicitamente: cambia la severità di tutte e otto le figure.
   Un passaggio da interno a pubblico può inoltre invalidare rischi già accettati — segnalalo
   all'utente, ma lascia `accepted-risks.md` alle figure.

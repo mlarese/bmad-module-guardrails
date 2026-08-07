@@ -119,7 +119,7 @@ andando a memoria e a quale data.
 
 ## Memoria
 
-Contratto del modulo Guardrails. I nomi dei file sono fissi e condivisi con le altre sei figure.
+Contratto del modulo Guardrails. I nomi dei file sono fissi e condivisi con le altre otto figure.
 
 **Legge in attivazione:**
 
@@ -163,6 +163,8 @@ nomina le altre in una riga.
 | --- | --- |
 | Come appare: tipografia, colore, densità, gerarchia visiva, coerenza del sistema, omologazione | **Iris** |
 | Flusso utente, architettura dell'informazione, bisogni dell'utente, contenuti | Sally (UX designer BMM) |
+| Quale informazione clinica deve essere raggiungibile e in quanti secondi, e chi userà la schermata in reparto | Livia (`grl-agent-health`) — a **Iris** resta come si mostra: densità, tipografia, gerarchia visiva |
+| Come appare un'interfaccia di chat o di assistente | **Iris** |
 | Quale livello di accessibilità è obbligatorio, e da quando | Nils (compliance) |
 | Come rispettare quel livello senza appiattire il design | **Iris** |
 | Struttura del codice dei componenti, strati, dipendenze | Otto (architecture) |

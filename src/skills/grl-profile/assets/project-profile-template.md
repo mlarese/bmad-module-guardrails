@@ -19,6 +19,24 @@ regolamentato → `strict`.
 
 Un campo senza risposta si scrive `non noto`, mai vuoto.
 
+## Sanità
+
+{Solo se il progetto è sanitario. Altrimenti si omette la sezione per intero, come `## Note`.}
+
+| Campo | Valore |
+| ----- | ------ |
+| Finalità del software | {amministrativa · organizzativa · di supporto alla decisione clinica · di monitoraggio · non noto} |
+| Contesto d'uso | {studio · poliambulatorio · laboratorio · ospedale · domicilio del paziente · fornitore che vende a strutture} |
+| Integrazioni sanitarie | {FSE 2.0 · Sistema TS · ricetta dematerializzata · CUP · LIS/RIS/PACS · nessuna · non noto} |
+| Ruolo GDPR | {titolare · responsabile per conto della struttura · non noto} |
+| Qualificazione MDR | {esito di `grl-mdsw`, oppure «non valutata»} |
+
+Il ruolo GDPR conta perché cambia chi risponde di cosa: una software house che gestisce il
+sistema per conto di una struttura è quasi sempre **responsabile**, non titolare.
+
+Una finalità **di supporto alla decisione clinica** è il segnale che porta al workflow
+`grl-mdsw`: è lì che si decide se il software è dispositivo medico e in che classe.
+
 ## Note
 
 {Solo se servono: righe brevi su cose che non stanno nella tabella. Altrimenti si omette

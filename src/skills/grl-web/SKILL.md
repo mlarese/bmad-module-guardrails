@@ -74,7 +74,7 @@ Contratto del modulo Guardrails, `{project-root}/_bmad/memory/grl-shared/`.
 **Scrive in append**, righe brevi, data `AAAA-MM-GG`, mostrandole prima e facendosi dire sì:
 
 - `decisions.md` — `[data] [web] decisione — vincolo che l'ha imposta`, quando una scelta vincola il resto: direzione visiva, font, dove arrivano i contatti, dominio.
-- `accepted-risks.md` — `[data] [web] rischio — motivo — ambito`, **solo dopo conferma esplicita**. Una riga qui zittisce le segnalazioni future di tutte e sette le figure.
+- `accepted-risks.md` — `[data] [web] rischio — motivo — ambito`, **solo dopo conferma esplicita**. Una riga qui zittisce le segnalazioni future di tutte e otto le figure.
 
 ## Confini
 

@@ -18,7 +18,7 @@ Agisci come segretario del collegio Guardrails. L'esito è **un solo riepilogo s
 
 ## Selezione dei convocati
 
-È la parte che dà valore al workflow. Convocarle tutte e sette produce rumore e fa abbandonare lo strumento: punta a **due-quattro figure**, e se le convochi tutte devi poter dire cosa ciascuna ha di decisivo da dire su *questo* artefatto.
+È la parte che dà valore al workflow. Convocarle tutte e otto produce rumore e fa abbandonare lo strumento: punta a **due-quattro figure**, e se le convochi tutte devi poter dire cosa ciascuna ha di decisivo da dire su *questo* artefatto.
 
 Serve un artefatto concreto: un file (PRD, architettura, story, pagina, componente), una cartella, un repository, o la sua descrizione se un file non c'è. Leggilo **prima** di scegliere: la selezione si fa sui segnali che ci sono davvero dentro, non sul tipo di documento.
 
@@ -34,6 +34,7 @@ Una figura entra solo se nell'artefatto — o nel profilo — c'è un aggancio c
 | grl-web 🌐 | `grl-web` (rotta diagnosi) | una landing o una pagina di prodotto: affianca a Iris l'asse che nessun'altra figura copre — cosa la pagina dice, in che ordine, e se chiede l'azione prima di aver smontato l'obiezione. Quando la pagina arriva dal gate di `grl-web`, la lettura non ripete l'asse ma lo **verifica**: si ricostruisce il brief dalla pagina a freddo e si dice dove diverge da quello scritto. Se non diverge, è una riga sola |
 | Otto 🧱 | `grl-agent-architecture` | struttura delle cartelle, confini fra moduli, strati di astrazione, direzione delle dipendenze, impatto strutturale di una feature |
 | Bruno 🖥️ | `grl-agent-ops` | Dockerfile e compose, manifest Kubernetes, configurazione di server e reverse proxy, accessi SSH, pipeline di deploy, dove sono conservati i segreti, backup, log e monitoraggio |
+| Livia 🩺 | `grl-agent-health` | cartella clinica, referto, prescrizione o terapia, anagrafica paziente, codifiche cliniche, integrazioni HL7/FHIR/DICOM, FSE o Sistema TS, prenotazioni sanitarie, telemedicina, portale del paziente, o comunque software usato dentro una struttura sanitaria |
 
 Confini: chi ha la competenza decisiva parla, gli altri tacciono anche quando il tema li sfiora.
 
@@ -53,6 +54,8 @@ Confini: chi ha la competenza decisiva parla, gli altri tacciono anche quando il
 | Segreti in produzione | Bruno (dove si conservano e come si iniettano) | Kai sul rischio dell'esposizione |
 | Dove vivono fisicamente i dati (regione, provider, backup) | Bruno (configurazione) | Vera sul vincolo di trasferimento, Nils se il settore lo impone |
 | «Ci serve Kubernetes?» | Bruno | Otto solo se la scelta cambia i confini del codice |
+| Dato clinico e sua struttura | Livia | Vera resta sulla sorte di quel dato: base giuridica, retention, oscuramento |
+| «È un dispositivo medico?» | Nils, con il percorso guidato nel workflow `grl-mdsw` | Livia si limita a riconoscere il segnale |
 
 Presenta la selezione **prima** di produrre il riepilogo: convocate con la riga di aggancio, escluse con il motivo dell'esclusione. L'utente può aggiungere o togliere una figura, poi si procede.
 

@@ -1,9 +1,9 @@
 # Guardrails (`grl`)
 
-Modulo [BMad](https://github.com/bmad-code-org/BMAD-METHOD) con **sette figure di presidio** che
+Modulo [BMad](https://github.com/bmad-code-org/BMAD-METHOD) con **otto figure di presidio** che
 affiancano il team dentro il ciclo di sviluppo software: privacy e GDPR, sicurezza applicativa,
 legale e licenze, compliance normativa, qualità visiva della UI, disciplina architetturale del
-codice, infrastruttura e operatività.
+codice, infrastruttura e operatività, dominio clinico del software sanitario.
 
 Guardrail, non autista: il modulo tiene il progetto in carreggiata, le decisioni restano al team.
 
@@ -17,7 +17,7 @@ Il modulo **parla, non produce documenti**: niente DPIA formali, niente registro
 niente report di audit. L'unica traccia che lascia sono righe brevi nella memoria condivisa del
 progetto.
 
-## Le sette figure
+## Le otto figure
 
 | | Nome | Ruolo | Presidia |
 | --- | ---- | ----- | -------- |
@@ -28,20 +28,30 @@ progetto.
 | 👁️ | **Iris** | Design Critic | l'omologazione delle pagine generate — hero in gradiente, tre card, blu-viola. Non stronca mai senza dare la deviazione concreta |
 | 🧱 | **Otto** | Code Architect | confini, dipendenze, over-engineering. SOLID, KISS, DRY, vertical slice ed esagonale come attrezzi, mai come dogmi |
 | 🖥️ | **Bruno** | Infrastructure & Ops Engineer | server, SSH, Docker, Kubernetes, deploy, conservazione dei segreti, backup. Il suo mestiere è togliere infrastruttura, non aggiungerne |
+| 🩺 | **Livia** | Clinical Informatics | il contenuto clinico del software sanitario: dato clinico e codifiche, HL7/FHIR/DICOM, FSE 2.0 e Sistema TS, sicurezza del paziente, il reparto vero. Chiede sempre chi userà la schermata e in quanti secondi |
 
-E due workflow di servizio:
+E tre workflow di servizio:
 
 | Skill | Cosa fa |
 | ----- | ------- |
-| `grl-profile` | raccoglie il profilo del progetto (otto campi, quasi tutti pre-compilati leggendo il repository). Da eseguire per primo: senza, le figure parlano per luoghi comuni |
+| `grl-profile` | raccoglie il profilo del progetto (otto campi, quasi tutti pre-compilati leggendo il repository; cinque in più se il settore è sanitario). Da eseguire per primo: senza, le figure parlano per luoghi comuni |
 | `grl-board` | convoca sul singolo artefatto **solo le figure pertinenti**, dice perché ha escluso le altre, e lascia aperti i disaccordi invece di appianarli |
+| `grl-mdsw` | dalla finalità del software alla classe MDR: dice se è un dispositivo medico, cosa comporta e — parte che sgonfia più allarmi — cosa non comporta |
 
 ## Come funziona
 
 **Profilo di progetto.** `grl-profile` scrive `_bmad/memory/grl-shared/project-profile.md`: settore,
 tipo di software, dati personali trattati, mercato, stack, componenti AI, vincoli noti e — campo
 decisivo — la **criticità dichiarata** (hobby/prototipo · interno · produzione con clienti ·
-regolamentato). È la criticità a decidere quanto sono severe tutte e sette le figure.
+regolamentato). È la criticità a decidere quanto sono severe tutte e otto le figure. Se il
+settore dichiarato è sanitario, il profilo raccoglie in più finalità del software, contesto d'uso,
+integrazioni sanitarie, ruolo GDPR ed eventuale qualificazione MDR; altrimenti quei campi non
+vengono nemmeno nominati.
+
+**Un'eccezione alla severità.** Livia segnala a qualsiasi livello, anche `light` e anche su un
+prototipo, i difetti che possono portare a somministrare, prescrivere o refertare alla persona
+sbagliata. Il motivo è che i prototipi sanitari finiscono in reparto più spesso di quanto chi li
+scrive immagini.
 
 **Severità.** `strictness_override` in `[modules.grl]` vince se valorizzato; altrimenti si deriva
 dalla criticità; in mancanza di entrambi, `normal`.
@@ -81,7 +91,7 @@ Le figure che si sovrappongono a ruoli BMM esistenti non li sostituiscono. Winst
 progettano; Otto e Iris fanno da **revisori critici** su un asse specifico — disciplina strutturale
 del codice, originalità visiva. L'attrito è voluto.
 
-Tutte e sette entrano nel roster principale di `bmad-party-mode`, accanto ai cinque agenti BMM.
+Tutte e otto entrano nel roster principale di `bmad-party-mode`, accanto ai cinque agenti BMM.
 
 ## Installazione
 
@@ -91,7 +101,7 @@ Con l'installer BMad, indicando questo repository come sorgente custom:
 npx bmad-method install --custom-source https://github.com/mlarese/bmad-module-guardrails
 ```
 
-L'installer copia le dieci skill, registra le sette figure come agenti
+L'installer copia le dodici skill, registra le otto figure come agenti
 (`[agents.grl-agent-*]` nella configurazione) — che è ciò che le fa comparire nel roster di
 `bmad-party-mode` — e aggiunge le voci di help al catalogo `_bmad/_config/bmad-help.csv`.
 
@@ -120,8 +130,11 @@ src/
     ├── grl-agent-ui-critic/      👁️ Iris
     ├── grl-agent-architecture/   🧱 Otto
     ├── grl-agent-ops/            🖥️ Bruno
+    ├── grl-agent-health/         🩺 Livia
     ├── grl-profile/              workflow — profilo di progetto
     ├── grl-board/                workflow — revisione collegiale
+    ├── grl-mdsw/                 workflow — qualificazione dispositivo medico
+    ├── grl-web/                  l'unica skill che produce: landing page e siti
     └── grl-setup/                installazione manuale e registrazione degli agenti
 docs/module-plan.md               il documento di piano del modulo
 ```

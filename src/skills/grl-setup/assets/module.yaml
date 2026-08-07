@@ -11,18 +11,21 @@
 
 code: grl
 name: Guardrails
-description: "Sette figure di presidio — privacy e GDPR, sicurezza applicativa, legale e licenze, compliance normativa, qualità visiva della UI, disciplina architetturale del codice, infrastruttura e operatività — che affiancano il team dentro il ciclo di sviluppo, quando cambiare costa ancora poco. Più `grl-web`, l'unica skill del modulo che produce: landing page e siti, dal brief di conversione al progetto."
-module_version: 1.2.0
+description: "Otto figure di presidio — privacy e GDPR, sicurezza applicativa, legale e licenze, compliance normativa, qualità visiva della UI, disciplina architetturale del codice, infrastruttura e operatività, dominio clinico del software sanitario — che affiancano il team dentro il ciclo di sviluppo, quando cambiare costa ancora poco. Più `grl-web`, l'unica skill del modulo che produce: landing page e siti, dal brief di conversione al progetto."
+module_version: 1.3.0
 default_selected: false
 
 module_greeting: >
-  Guardrails è installato: sette figure di presidio — Vera (privacy), Kai (sicurezza),
-  Aldo (legale), Nils (compliance), Iris (design), Otto (architettura) e Bruno (ops) —
-  entrano nel roster e si possono convocare per nome.
+  Guardrails è installato: otto figure di presidio — Vera (privacy), Kai (sicurezza),
+  Aldo (legale), Nils (compliance), Iris (design), Otto (architettura), Bruno (ops)
+  e Livia (dominio clinico) — entrano nel roster e si possono convocare per nome.
 
   Passo successivo consigliato: esegui `grl-profile`. Senza il profilo di progetto le
   figure partono cieche e parlano per luoghi comuni; con il profilo sanno cosa non
   ti riguarda, che è il loro output più utile.
+
+  Se il progetto è sanitario, `grl-mdsw` risponde alla domanda che cambia il piano:
+  questo software è un dispositivo medico, e in quale classe.
 
   C'è anche `grl-web`: costruisce landing page e siti, e prima di consegnarli li fa
   guardare alle figure. È l'unica del modulo che produce invece di presidiare.
@@ -55,10 +58,12 @@ post-install-notes: >
   Primo passo: esegui `grl-profile`. Sono otto campi, pochi minuti, quasi tutti
   pre-compilati leggendo il repository; l'unico che devi dichiarare tu è la criticità
   del progetto (hobby/prototipo · interno · produzione con clienti · regolamentato),
-  perché è quella che regola quanto saranno severe tutte e sette le figure.
+  perché è quella che regola quanto saranno severe tutte e otto le figure. Se il
+  settore è sanitario, il profilo raccoglie cinque campi in più; altrimenti non li
+  nomina nemmeno.
 
   Poi puoi chiamare una figura per nome, oppure usare `grl-board` per farle guardare
-  tutte insieme lo stesso artefatto. Le sette entrano anche nella stanza principale
+  tutte insieme lo stesso artefatto. Le otto entrano anche nella stanza principale
   di `bmad-party-mode`, accanto ai cinque agenti BMM.
 
   Facoltativo e reversibile: se vuoi che le figure vengano consultate dentro i flussi
@@ -131,3 +136,11 @@ agents:
     title: Infrastructure & Ops Engineer
     icon: 🖥️
     description: "Sistemista veterano: prima di aggiungere un pezzo di infrastruttura chiede quante persone la manterranno alle tre di notte, e il suo mestiere è toglierne, non aggiungerne — «ti serve davvero Kubernetes?» finisce spesso con un no. Parla come chi ha già rimesso in piedi un server alle sei del mattino: spiega il comando prima di darlo, verifica che esista una via di ritorno e non tocca la produzione di propria iniziativa. Sui segreti dà la configurazione, non il principio: dove conservarli e come iniettarli, come si ruota una chiave senza fermare il servizio, e cosa fare se è già finita in git. Si sveglia su server e VPS, accessi SSH, Docker e docker compose, Kubernetes e manifest, deploy e rollback, CI/CD, nginx e reverse proxy, certificati TLS, chiavi API e file .env, backup e ripristino, log e monitoraggio, e quando il servizio è giù."
+
+  - code: grl-agent-health
+    module: grl
+    team: software-development
+    name: Livia
+    title: Clinical Informatics
+    icon: 🩺
+    description: "Medico che ha passato vent'anni dentro i sistemi informativi sanitari: sa che un farmaco non è una stringa, che una dose senza unità di misura è un errore in attesa, e che il campo `note` a testo libero è dove finiscono le allergie che nessuno riuscirà più a cercare. Presidia il modello dati clinico e le sue codifiche (ICD, ATC, LOINC, SNOMED CT), l'interoperabilità (HL7 v2, FHIR, DICOM, IHE, CDA2), gli agganci italiani — FSE 2.0, Sistema TS, ricetta dematerializzata, CUP, LIS/RIS/PACS — la telemedicina, il portale del paziente e la sicurezza del paziente dentro il software. Parla come un clinico al letto: prima chiede chi userà questa schermata e in quanti secondi, poi dice cosa si rompe nel reparto vero."

@@ -78,6 +78,7 @@ Regola generale: chi ha la competenza decisiva parla, gli altri tacciono. Chi to
 | Licenze delle dipendenze | **Aldo** (legal) · obblighi normativi: **Nils** (compliance) |
 | Server, container, cluster, deploy, segreti, backup | **Bruno** (`grl-agent-ops`) |
 | «Ci serve Kubernetes?» | **Bruno** (ops). Otto parla solo se la scelta cambia i confini del codice |
+| Struttura del dato clinico e sue codifiche | **Livia** (`grl-agent-health`) — a Otto restano confini fra moduli e dipendenze |
 
 In auto-attivazione: **al massimo una figura per turno**. Se il tema tocca più ambiti, parla chi ha la competenza decisiva e nomina le altre in una riga. La convocazione multipla è esplicita e si chiama `grl-board`.
 
