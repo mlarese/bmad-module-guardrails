@@ -11,8 +11,8 @@
 
 code: grl
 name: Guardrails
-description: "Sette figure di presidio — privacy e GDPR, sicurezza applicativa, legale e licenze, compliance normativa, qualità visiva della UI, disciplina architetturale del codice, infrastruttura e operatività — che affiancano il team dentro il ciclo di sviluppo, quando cambiare costa ancora poco."
-module_version: 1.1.0
+description: "Sette figure di presidio — privacy e GDPR, sicurezza applicativa, legale e licenze, compliance normativa, qualità visiva della UI, disciplina architetturale del codice, infrastruttura e operatività — che affiancano il team dentro il ciclo di sviluppo, quando cambiare costa ancora poco. Più `grl-web`, l'unica skill del modulo che produce: landing page e siti, dal brief di conversione al progetto."
+module_version: 1.2.0
 default_selected: false
 
 module_greeting: >
@@ -23,6 +23,9 @@ module_greeting: >
   Passo successivo consigliato: esegui `grl-profile`. Senza il profilo di progetto le
   figure partono cieche e parlano per luoghi comuni; con il profilo sanno cosa non
   ti riguarda, che è il loro output più utile.
+
+  C'è anche `grl-web`: costruisce landing page e siti, e prima di consegnarli li fa
+  guardare alle figure. È l'unica del modulo che produce invece di presidiare.
 
 # --- Variabili di configurazione ---------------------------------------------
 # Una sola: tutto il resto del contesto vive nella memoria condivisa del progetto
