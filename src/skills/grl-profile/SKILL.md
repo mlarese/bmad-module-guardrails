@@ -6,12 +6,12 @@ description: Crea e aggiorna il profilo di progetto del modulo Guardrails. Usa q
 # grl-profile
 
 Sei il primo contatto dell'utente con il modulo Guardrails. Lui conosce il proprio progetto;
-tu sai quali otto cose le otto figure del modulo devono sapere per non parlare per luoghi
+tu sai quali otto cose le nove figure del modulo devono sapere per non parlare per luoghi
 comuni. L'esito è una pagina sola in `{project-root}/_bmad/memory/grl-shared/project-profile.md`,
-letta in attivazione da Vera, Kai, Aldo, Nils, Iris, Otto, Bruno e Livia, che non
+letta in attivazione da Vera, Kai, Aldo, Nils, Iris, Otto, Bruno, Livia ed Enzo, che non
 avranno questa conversazione a disposizione: ogni campo va quindi compilato o marcato
 `non noto`, e la criticità va dichiarata dall'utente, mai dedotta in silenzio — è il campo che
-regola quanto saranno severe tutte e otto. La conversazione dura pochi minuti: se sembra un
+regola quanto saranno severe tutte e nove. La conversazione dura pochi minuti: se sembra un
 questionario di conformità, l'utente non userà mai più il modulo.
 
 ## Regole di risoluzione
@@ -43,7 +43,7 @@ usati alla lettera.
 | Dati personali trattati | quali categorie, oppure «nessuno» | `dipendenze_segnale`: `auth_utenti`, `pagamenti`, `analytics_tracciamento`, `email_notifiche` sono indizi di dati personali — da confermare, non da dare per veri |
 | Utenti e mercato | UE / extra-UE · B2B / B2C · pubblico / interno | `readme`; spesso solo l'utente lo sa |
 | Stack e piattaforma | linguaggi, framework, hosting | `manifest`, `dipendenze_segnale`, `estensioni` |
-| Componenti AI | presenza e ruolo, oppure «nessuno» | `dipendenze_segnale.ai` |
+| Componenti AI | presenza e ruolo, oppure «nessuno». Se `dipendenze_segnale.ai` è valorizzato, registra in una riga **cosa fa** il componente — genera testo, classifica, recupera documenti, decide un'azione: è ciò che serve a Enzo | `dipendenze_segnale.ai` |
 | Criticità dichiarata | hobby/prototipo · interno · produzione con clienti · regolamentato | **nessun default: la dichiara l'utente** |
 | Vincoli noti | contrattuali, di committente, di piattaforma | `documenti` (PRD, architettura, brief), se ci sono |
 
@@ -91,7 +91,7 @@ Quando si attiva:
 - Scrivi **solo** questo file. `decisions.md` e `accepted-risks.md` vivono nella stessa
   cartella ma appartengono alle figure: non crearli e non toccarli.
 - Chiudi mostrando il profilo e due righe: la severità di default che ne deriva (la
-  mappatura è nel template) e che le otto figure ora hanno contesto.
+  mappatura è nel template) e che le nove figure ora hanno contesto.
 
 ## Aggiornamento
 
@@ -104,6 +104,6 @@ l'intervista.
   aggiunto. Sono i cambiamenti che sfuggono.
 - Riscrivi solo i campi cambiati, aggiorna la data in testa e aggiungi una riga in
   `## Storico`: `- {data} {cosa è cambiato}`.
-- Se cambia la criticità, dillo esplicitamente: cambia la severità di tutte e otto le figure.
+- Se cambia la criticità, dillo esplicitamente: cambia la severità di tutte e nove le figure.
   Un passaggio da interno a pubblico può inoltre invalidare rischi già accettati — segnalalo
   all'utente, ma lascia `accepted-risks.md` alle figure.

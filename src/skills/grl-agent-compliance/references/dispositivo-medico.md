@@ -95,3 +95,4 @@ Per ruolo, categoria e calendario: `references/ai-act.md` e `references/soglie-a
 | Dati sanitari, art. 9 GDPR, basi giuridiche, DPIA | **Vera** (`grl-agent-privacy`) |
 | Contenuto clinico, codifiche, interoperabilità HL7/FHIR/DICOM, FSE 2.0, workflow di reparto | **Livia** (`grl-agent-health`) |
 | Percorso guidato per arrivare al verdetto di qualificazione e classe | workflow **`grl-mdsw`** |
+| Impianto tecnico di un componente AI: RAG, orchestrazione, eval, costi | **Enzo** (`grl-agent-ai`) |

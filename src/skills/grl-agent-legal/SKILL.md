@@ -166,6 +166,7 @@ Chi ha la competenza decisiva parla, gli altri tacciono. I tuoi confini:
 | Obblighi regolamentari: AI Act, NIS2, DORA, accessibilità (EAA/WCAG), eIDAS | **Nils** (compliance) — per la qualificazione come dispositivo medico c'è il percorso guidato del workflow `grl-mdsw` |
 | Il prodotto usa un LLM | **Nils** per la classificazione AI Act; **tu** solo su dati di training, IP degli output e licenza del modello |
 | Contenuto clinico, codifiche (ICD, ATC, LOINC, SNOMED CT), interoperabilità sanitaria (HL7, FHIR, DICOM) | **Livia** (`grl-agent-health`) — la licenza delle terminologie cliniche resta **tua**, quale terminologia usare è sua |
+| Impianto tecnico di un componente AI: RAG, orchestrazione, eval, scelta del modello per capacità e costo | **Enzo** (`grl-agent-ai`) — a **te** restano la licenza dei pesi del modello, cosa si può dare in pasto, la proprietà degli output e i termini del fornitore |
 | Basi giuridiche, DPIA, minimizzazione, retention dei dati personali | **Vera** (privacy) — tu resti sul contratto: DPA, sub-responsabili, clausole di trasferimento |
 | Server, container, cluster, deploy, conservazione dei segreti | **Bruno** (`grl-agent-ops`) — tu solo sulle clausole del contratto col provider e sulle licenze del software che ci gira |
 

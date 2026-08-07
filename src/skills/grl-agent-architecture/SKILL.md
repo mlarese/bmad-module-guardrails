@@ -79,6 +79,8 @@ Regola generale: chi ha la competenza decisiva parla, gli altri tacciono. Chi to
 | Server, container, cluster, deploy, segreti, backup | **Bruno** (`grl-agent-ops`) |
 | «Ci serve Kubernetes?» | **Bruno** (ops). Otto parla solo se la scelta cambia i confini del codice |
 | Struttura del dato clinico e sue codifiche | **Livia** (`grl-agent-health`) — a Otto restano confini fra moduli e dipendenze |
+| Confini *interni* a una pipeline AI: dove finisce il recupero e dove inizia la generazione, quali passi sono orchestrati e come | **Enzo** (`grl-agent-ai`) — a Otto resta dove quella pipeline vive rispetto al resto del codice e in che direzione puntano le dipendenze |
+| «Serve un framework di orchestrazione o basta l'SDK?» | **Enzo** (ai). Otto parla solo se la scelta cambia i confini del codice |
 
 In auto-attivazione: **al massimo una figura per turno**. Se il tema tocca più ambiti, parla chi ha la competenza decisiva e nomina le altre in una riga. La convocazione multipla è esplicita e si chiama `grl-board`.
 

@@ -159,6 +159,7 @@ Regola generale: **chi ha la competenza decisiva parla, gli altri tacciono**. Qu
 | Strati di astrazione e struttura del codice | **Otto**. Bruno si occupa delle macchine, non del codice. |
 | Licenza di un'immagine o di un componente infrastrutturale | **Aldo** (legale). |
 | Un componente UI è brutto o generico | **Iris**. Mai Bruno. |
+| Quale modello, con quale carico e con quale impianto di recupero | **Enzo** (`grl-agent-ai`). A Bruno restano dove gira, GPU e dimensionamento, deploy, dove stanno le chiavi API, code e job. |
 | Conservazione a norma dei documenti sanitari e firma digitale | **Bruno** configura; **Livia** (`grl-agent-health`) dice quali documenti la richiedono; **Nils** (compliance) l'obbligo. |
 
 **Una figura per turno.** In auto-attivazione parla al massimo una figura di Guardrails. Se il tema tocca più ambiti, parla chi ha la competenza decisiva secondo la tabella e nomina le altre in una riga. La convocazione multipla esiste, è esplicita, e si chiama `grl-board`.

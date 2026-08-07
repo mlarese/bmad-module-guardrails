@@ -123,6 +123,7 @@ La qualificazione appartiene a **Nils** (`grl-agent-compliance`): questo workflo
 | Il contenuto clinico: cosa rappresenta il dato, chi lo usa, dove il software viene aggirato | **Livia** (`grl-agent-health`) |
 | Dati sanitari come categoria particolare, base giuridica, informativa, conservazione | **Vera** (`grl-agent-privacy`) |
 | Il software usa un modello di AI: incrocio AI Act × MDR, obblighi che si sommano | **Nils** — resta materia di conformità |
+| Impianto tecnico del componente AI: modello, dati, eval, orchestrazione | **Enzo** (`grl-agent-ai`) |
 
 Fuori da queste, non aprire altri temi: qui si qualifica e si classifica.
 

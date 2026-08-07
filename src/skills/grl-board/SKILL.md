@@ -18,7 +18,7 @@ Agisci come segretario del collegio Guardrails. L'esito è **un solo riepilogo s
 
 ## Selezione dei convocati
 
-È la parte che dà valore al workflow. Convocarle tutte e otto produce rumore e fa abbandonare lo strumento: punta a **due-quattro figure**, e se le convochi tutte devi poter dire cosa ciascuna ha di decisivo da dire su *questo* artefatto.
+È la parte che dà valore al workflow. Convocarle tutte e nove produce rumore e fa abbandonare lo strumento: punta a **due-quattro figure**, e se le convochi tutte devi poter dire cosa ciascuna ha di decisivo da dire su *questo* artefatto.
 
 Serve un artefatto concreto: un file (PRD, architettura, story, pagina, componente), una cartella, un repository, o la sua descrizione se un file non c'è. Leggilo **prima** di scegliere: la selezione si fa sui segnali che ci sono davvero dentro, non sul tipo di documento.
 
@@ -35,6 +35,7 @@ Una figura entra solo se nell'artefatto — o nel profilo — c'è un aggancio c
 | Otto 🧱 | `grl-agent-architecture` | struttura delle cartelle, confini fra moduli, strati di astrazione, direzione delle dipendenze, impatto strutturale di una feature |
 | Bruno 🖥️ | `grl-agent-ops` | Dockerfile e compose, manifest Kubernetes, configurazione di server e reverse proxy, accessi SSH, pipeline di deploy, dove sono conservati i segreti, backup, log e monitoraggio |
 | Livia 🩺 | `grl-agent-health` | cartella clinica, referto, prescrizione o terapia, anagrafica paziente, codifiche cliniche, integrazioni HL7/FHIR/DICOM, FSE o Sistema TS, prenotazioni sanitarie, telemedicina, portale del paziente, o comunque software usato dentro una struttura sanitaria |
+| Enzo 🧠 | `grl-agent-ai` | chiamate a un modello linguistico, prompt, RAG o ricerca su documenti, embedding e vector store, catene o agenti, tool calling, automazioni che passano da un modello, valutazione della qualità di un output generato |
 
 Confini: chi ha la competenza decisiva parla, gli altri tacciono anche quando il tema li sfiora.
 
@@ -44,7 +45,7 @@ Confini: chi ha la competenza decisiva parla, gli altri tacciono anche quando il
 | Cifratura dei dati a riposo | Kai (come si fa) | Vera dice solo *che* serve |
 | Libreria con licenza AGPL | Aldo | Nils |
 | Vulnerabilità nota in una dipendenza | Kai | Aldo, anche se la licenza è nello stesso manifest |
-| Il prodotto usa un LLM | Nils (classificazione AI Act) | Aldo entra solo su dati di training e IP degli output |
+| Il prodotto usa un LLM | tre assi distinti: Enzo sull'impianto (RAG, orchestrazione, eval, costi), Nils sulla classificazione AI Act, Kai sui rischi dell'integrazione | Aldo entra solo su dati di training e IP degli output |
 | Accessibilità WCAG | Nils (l'obbligo) | Iris solo su come realizzarla senza imbruttire |
 | Un componente è brutto o generico | Iris | tutti gli altri |
 | Una landing non converte: promessa, obiezione, prova, ordine dei blocchi | `grl-web` | Iris, che parla solo di come appare |

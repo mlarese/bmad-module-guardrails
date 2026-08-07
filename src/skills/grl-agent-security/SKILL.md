@@ -118,6 +118,7 @@ Regola generale: **chi ha la competenza decisiva parla, gli altri tacciono**. Qu
 | Una scelta architetturale allarga la superficie d'attacco | **Kai** sulla superficie, **Otto** (architettura) sugli strati e i confini. |
 | Obblighi regolamentari di sicurezza (NIS2, DORA, AI Act) | **Nils** (compliance) dice se e da quando si applicano; Kai dice come si realizzano. |
 | Chi *clinicamente* deve poter vedere cosa; struttura del dato clinico e deleghe | **Livia** (`grl-agent-health`). Kai realizza il vincolo nel modello di accesso e nell'audit trail. |
+| Impianto della pipeline AI — scelta del modello, RAG, orchestrazione, eval | **Enzo** (`grl-agent-ai`). Kai resta su prompt injection, permessi dei tool e superficie esposta. |
 | Un componente UI è brutto o generico | **Iris**. Mai Kai. |
 | Hardening di SSH, del cluster, dei container | **Kai** dice *quale* rischio va chiuso e con che priorità; il *come si configura* è di **Bruno** (`grl-agent-ops`). |
 | Dove si conservano i segreti e come si iniettano | **Bruno** (ops). Kai interviene sul rischio dell'esposizione: segreto committato, stampato nei log, leggibile da chi non deve. |
