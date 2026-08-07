@@ -9,6 +9,10 @@
   { "query": "che base giuridica ho per profilare gli utenti e consigliargli i prodotti", "should_trigger": true },
   { "query": "il database degli utenti europei sta su un'istanza in Virginia", "should_trigger": true },
   { "query": "cosa devo fare nelle prime ore se ci rubano il database degli utenti", "should_trigger": true },
+  { "query": "dobbiamo fare la FRIA oltre alla DPIA o è la stessa cosa?", "should_trigger": true },
+  { "query": "posso raccogliere l'etnia degli utenti per misurare il bias del modello?", "should_trigger": true },
+  { "query": "la segnalazione di incidente grave dell'AI Act sostituisce la notifica di data breach al Garante?", "should_trigger": true },
+  { "query": "l'utente può chiedermi di spiegargli come il modello ha deciso il suo punteggio?", "should_trigger": true },
 
   { "query": "come cifro il database a riposo, uso la cifratura gestita del provider o a livello applicativo?", "should_trigger": false },
   { "query": "il DPA che ci ha mandato il fornitore cloud lo posso firmare così com'è?", "should_trigger": false },
@@ -19,5 +23,7 @@
   { "query": "il cookie banner è brutto e copre metà pagina su mobile", "should_trigger": false },
   { "query": "come struttura il modello dati clinico se devo registrare le allergie del paziente", "should_trigger": false },
   { "query": "il modulo utenti dipende dal modulo fatturazione, come inverto la dipendenza", "should_trigger": false },
-  { "query": "il RAG recupera documenti che l'utente che fa la domanda non dovrebbe poter vedere, come filtro il retrieval", "should_trigger": false }
+  { "query": "il RAG recupera documenti che l'utente che fa la domanda non dovrebbe poter vedere, come filtro il retrieval", "should_trigger": false },
+  { "query": "chi paga la sanzione dell'AI Act se il fornitore del modello non è conforme?", "should_trigger": false },
+  { "query": "il cliente rivende il nostro sistema AI col suo marchio, che clausola metto nel contratto", "should_trigger": false }
 ]

@@ -9,6 +9,10 @@
   { "query": "posso scaricare le pagine di quel sito per addestrare il nostro modello?", "should_trigger": true },
   { "query": "devo scrivere i termini di servizio del nostro SaaS, cosa non può mancare", "should_trigger": true },
   { "query": "il dataset che vogliamo usare dice research only, cosa significa per noi", "should_trigger": true },
+  { "query": "il cliente vuole rivendere il nostro sistema AI con il suo marchio, chi risponde davanti all'AI Act?", "should_trigger": true },
+  { "query": "che tetto di responsabilità metto nel contratto rispetto alle sanzioni dell'AI Act?", "should_trigger": true },
+  { "query": "il fornitore del modello non ci vuole manlevare sulla conformità del suo componente, firmiamo lo stesso?", "should_trigger": true },
+  { "query": "se il sistema AI danneggia un utente risponde il fornitore o noi che lo usiamo?", "should_trigger": true },
 
   { "query": "il nostro sistema usa un LLM, che rischio siamo secondo l'AI Act?", "should_trigger": false },
   { "query": "devo dire agli utenti che la risposta è generata da un'intelligenza artificiale?", "should_trigger": false },
@@ -19,5 +23,7 @@
   { "query": "dove faccio girare il modello, mi serve una GPU?", "should_trigger": false },
   { "query": "il modulo di licensing dipende dal modulo utenti, come inverto la dipendenza", "should_trigger": false },
   { "query": "quanto tengo i contratti firmati dei clienti prima di cancellarli?", "should_trigger": false },
-  { "query": "questo software calcola un punteggio di rischio clinico, va marcato CE?", "should_trigger": false }
+  { "query": "questo software calcola un punteggio di rischio clinico, va marcato CE?", "should_trigger": false },
+  { "query": "dobbiamo fare la FRIA oltre alla valutazione d'impatto privacy?", "should_trigger": false },
+  { "query": "posso raccogliere l'etnia degli utenti per misurare il bias del modello?", "should_trigger": false }
 ]

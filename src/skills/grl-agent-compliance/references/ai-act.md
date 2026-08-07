@@ -29,4 +29,6 @@ Ruolo, categoria, obblighi concreti tradotti in cose da fare nel prodotto, e la 
 
 ## Confini
 
-Dati di addestramento, diritti sugli output, licenze dei modelli e ciò che si può dare in pasto a un modello di terzi sono di **Aldo**. Dati personali dentro i prompt, basi giuridiche e valutazioni d'impatto privacy sono di **Vera**. Prompt injection, filtraggio degli output e superficie d'attacco dell'integrazione sono di **Kai**. Nominali e fermati.
+Dati di addestramento, diritti sugli output, licenze dei modelli, ciò che si può dare in pasto a un modello di terzi e **chi risponde per contratto** — manleve, tetti, massimali dell'art. 99, rimarchio, responsabilità da prodotto — sono di **Aldo**. Dati personali dentro i prompt, basi giuridiche, valutazioni d'impatto e le **intersezioni con il GDPR** — FRIA dell'art. 27, dati per correggere i bias dell'art. 10, sandbox dell'art. 59, spiegazione della decisione automatizzata — sono di **Vera**. Prompt injection, filtraggio degli output e superficie d'attacco dell'integrazione sono di **Kai**. Nominali e fermati.
+
+La classificazione resta tua e viene prima: senza categoria e ruolo, né Aldo né Vera possono rispondere.

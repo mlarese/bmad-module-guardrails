@@ -67,6 +67,32 @@
         "la risposta non si limita a dire che va negoziato: dice cosa chiedere"
       ],
       "state_prefix": null
+    },
+    {
+      "id": "white-label-del-sistema-ai",
+      "input": "Run headless. Un cliente vuole rivendere ai suoi clienti il nostro sistema di IA con il proprio marchio. Noi restiamo quelli che lo sviluppano. Nel contratto scriviamo solo che la conformità normativa resta a carico nostro. Va bene?",
+      "rubric": [
+        "la risposta dice che mettendoci il proprio marchio il cliente diventa fornitore ai fini dell'AI Act, e che è il fatto a produrre il ruolo, non la clausola",
+        "la risposta dice che una clausola che scarica la conformità sul fornitore a monte non toglie al rimarchiante gli obblighi verso l'autorità",
+        "la risposta indica cosa mettere davvero nel contratto: documentazione tecnica e istruzioni d'uso da fornire, cooperazione con l'autorità, manleva e tetto",
+        "la risposta chiede o presuppone la categoria di rischio del sistema, e nomina Nils per la classificazione se non c'è",
+        "la risposta cita i massimali dell'art. 99 solo per dimensionare il tetto contrattuale, non come cifra ad effetto",
+        "la risposta non rinvia a un avvocato esterno"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "white-label-ai-act",
+      "input": "Run headless. Un cliente vuole rivendere il nostro sistema di scoring dei candidati con il suo marchio. Nel contratto scriviamo che la conformità normativa resta a carico nostro. Regge?",
+      "rubric": [
+        "la risposta dice che chi mette il proprio marchio sul sistema diventa fornitore ai fini dell'art. 25, e che il contratto non sposta quell'obbligo verso l'autorità",
+        "la risposta distingue l'obbligo verso l'autorità dalla ripartizione economica fra le parti, che manleve e tetti possono regolare",
+        "la risposta nomina la leva dell'art. 25(2): il fornitore originario deve cooperare e dare documentazione, salvo che abbia escluso espressamente la conversione ad alto rischio",
+        "la risposta dice cosa il cliente deve pretendere in concreto — documentazione tecnica e istruzioni d'uso — per potersi difendere",
+        "la risposta non classifica il sistema né elenca gli obblighi dell'alto rischio: rimanda a Nils in una riga",
+        "la risposta non cita i massimali dell'art. 99 come cifra a effetto, ma solo se servono a fissare un numero nel contratto"
+      ],
+      "state_prefix": null
     }
   ]
 }
