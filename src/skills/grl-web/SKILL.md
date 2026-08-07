@@ -30,10 +30,11 @@ Non c'è modalità headless: il brief si scrive con l'utente, le scritture in me
 | Serve | Rotta |
 | --- | --- |
 | Una landing: mockup a file singolo | `references/brief-di-conversione.md`, poi `references/mockup-html.md` |
-| Un sito su più pagine | `references/sito-multipagina.md`, poi brief e mockup per ogni pagina |
-| Promuovere un mockup approvato a progetto vero | `references/progetto-reale.md` |
+| Un sito su più pagine, come mockup da validare | `references/sito-multipagina.md`, poi brief e mockup per ogni pagina |
+| Un sito vero: parti condivise, contenuti che cambiano, forse un backend | `references/brief-di-conversione.md`, poi `references/sito-multipagina.md` per decidere le pagine, poi `references/configura.md`. Non costruisce: prepara la scheda che `bmad-spec` trasforma in fette per `bmad-build` |
+| Promuovere un mockup approvato a progetto vero | pagine indipendenti, nessuna parte condivisa → `references/progetto-reale.md`; header, footer o hero condivisi, contenuti che cambiano, o un backend → `references/configura.md` |
 | Capire perché una pagina che esiste non converte | `references/diagnosi-pagina.md` |
-| Riprendere un lavoro | trova la cartella (sotto), rileggi il suo brief, poi la rotta che serve; se il cambiamento contraddice qualcosa che è già in `decisions.md`, o **riprende qualcosa che il brief ha in *Scartato***, dillo prima di applicarlo — nel secondo caso il perché è già scritto lì, e l'utente può confermarlo o ribaltarlo. Se la pagina esiste ma non ha un brief, è nata fuori da qui: ricostruiscilo all'indietro con `references/diagnosi-pagina.md`, fallo correggere dall'utente, salvalo nella cartella di lavoro, poi prosegui |
+| Riprendere un lavoro | trova la cartella (sotto), rileggi il suo brief, poi la rotta che serve; se il cambiamento contraddice qualcosa che è già in `decisions.md`, o **riprende qualcosa che il brief ha in *Scartato***, dillo prima di applicarlo — nel secondo caso il perché è già scritto lì, e l'utente può confermarlo o ribaltarlo. Se nella cartella c'è `sito.md`, lo stato del lavoro è quello e non il brief: vedi `references/configura.md`. Se la pagina esiste ma non ha un brief, è nata fuori da qui: ricostruiscilo all'indietro con `references/diagnosi-pagina.md`, fallo correggere dall'utente, salvalo nella cartella di lavoro, poi prosegui |
 
 Ogni lavoro vive in `{workflow.output_path}/{workflow.run_folder_pattern}/`, dove `{slug}` è il nome in kebab-case della pagina o del sito **come lo chiama l'utente**. Lo stesso slug si riusa al rientro: prima di aprire una cartella nuova, elenca quelle esistenti sotto `{workflow.output_path}` e cerca la sua — uno slug coniato due volte perde il brief e con esso tutto il lavoro fatto.
 
@@ -51,7 +52,7 @@ In corso d'opera le figure entrano quando compare l'aggancio:
 | Il form raccoglie dati | Vera `grl-agent-privacy` | quali campi sono legittimi, base giuridica, informativa |
 | Prodotto pubblico, o settore regolato | Nils `grl-agent-compliance` | quale livello di accessibilità è **obbligatorio**, e da quando |
 | Font a pagamento, immagini o loghi «trusted by» di terzi | Aldo `grl-agent-legal` | licenze e diritti d'uso |
-| Messa online | Bruno `{workflow.external_handoffs}` | hosting, dominio, TLS, rilascio |
+| Messa online | `{workflow.external_handoffs}` | hosting, dominio, TLS, rilascio — il modulo manda a Bruno |
 
 Invoca la skill vera, così persona e taratura arrivano da lì. Se una figura non è installata, applica il suo mandato da questa tabella e dillo in una riga.
 

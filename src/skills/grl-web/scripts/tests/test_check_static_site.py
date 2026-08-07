@@ -162,11 +162,31 @@ class TestSito:
         assert r["ok"] is True
         assert r["pagine_scansionate"] == 1
 
+    @pytest.mark.parametrize(
+        "nomi",
+        [
+            ["sitemap.xml"],
+            ["sitemap-index.xml", "sitemap-0.xml"],   # quello che emette Astro
+            ["sitemap_index.xml"],
+        ],
+    )
+    def test_la_sitemap_si_riconosce_in_tutte_le_sue_forme(
+        self, tmp_path: Path, nomi: list[str]
+    ) -> None:
+        # Regressione: il nome letterale dichiarava mancante una sitemap
+        # completa su ogni build Astro fatta bene.
+        scrivi(tmp_path, "index.html", COMPLETA)
+        (tmp_path / "og.png").write_bytes(png(1200, 630))
+        (tmp_path / "robots.txt").write_text("User-agent: *", encoding="utf-8")
+        for n in nomi:
+            (tmp_path / n).write_text("<urlset/>", encoding="utf-8")
+        assert check_site(tmp_path)["mancanti_a_livello_di_sito"] == []
+
     def test_sitemap_e_robots_mancanti(self, tmp_path: Path) -> None:
         scrivi(tmp_path, "index.html", COMPLETA)
         (tmp_path / "og.png").write_bytes(png(1200, 630))
         r = check_site(tmp_path)
-        assert set(r["mancanti_a_livello_di_sito"]) == {"sitemap.xml", "robots.txt"}
+        assert set(r["mancanti_a_livello_di_sito"]) == {"sitemap*.xml", "robots.txt"}
 
     def test_og_image_di_rapporto_sbagliato(self, tmp_path: Path) -> None:
         r = check_site(self._sito(tmp_path, og=(800, 600)))
@@ -185,7 +205,7 @@ class TestSito:
 
     def test_og_image_assente_dal_disco(self, tmp_path: Path) -> None:
         r = check_site(self._sito(tmp_path, og=None))
-        assert r["og_image"][0]["problema"] == "non trovata o illeggibile"
+        assert r["og_image"][0]["problema"] == "non trovata"
 
     def test_og_image_remota_non_viene_verificata(self, tmp_path: Path) -> None:
         html = COMPLETA.replace('content="/og.png"', 'content="https://cdn.esempio.it/og.png"')
@@ -266,6 +286,46 @@ class TestSito:
         (tmp_path / "robots.txt").write_text("User-agent: *", encoding="utf-8")
         assert check_site(tmp_path)["og_image"][0]["problema"] == "og:image senza percorso"
 
+    def test_og_image_webp_viene_letta(self, tmp_path: Path) -> None:
+        # Regressione: webp e' il formato che emette la pipeline di Astro, e
+        # veniva dichiarato «non trovata».
+        vp8x = b"VP8X" + struct.pack("<I", 10) + bytes(4) \
+            + (1199).to_bytes(3, "little") + (629).to_bytes(3, "little")
+        body = b"WEBP" + vp8x
+        (tmp_path / "og.webp").write_bytes(b"RIFF" + struct.pack("<I", len(body)) + body)
+        (tmp_path / "index.html").write_text(
+            COMPLETA.replace('content="/og.png"', 'content="/og.webp"'), encoding="utf-8"
+        )
+        (tmp_path / "sitemap.xml").write_text("<urlset/>", encoding="utf-8")
+        (tmp_path / "robots.txt").write_text("User-agent: *", encoding="utf-8")
+        r = check_site(tmp_path)
+        assert r["og_image"] == [] and r["og_image_non_letta"] == []
+        assert r["ok"] is True
+
+    def test_formato_non_riconosciuto_non_e_una_mancanza(self, tmp_path: Path) -> None:
+        (tmp_path / "og.avif").write_bytes(b"\x00\x00\x00\x20ftypavif")
+        (tmp_path / "index.html").write_text(
+            COMPLETA.replace('content="/og.png"', 'content="/og.avif"'), encoding="utf-8"
+        )
+        (tmp_path / "sitemap.xml").write_text("<urlset/>", encoding="utf-8")
+        (tmp_path / "robots.txt").write_text("User-agent: *", encoding="utf-8")
+        r = check_site(tmp_path)
+        assert r["og_image"] == []
+        assert "formato non riconosciuto" in r["og_image_non_letta"][0]["nota"]
+        assert r["ok"] is True
+
+    def test_il_referto_nomina_i_file_che_hanno_soddisfatto_il_controllo(
+        self, tmp_path: Path
+    ) -> None:
+        scrivi(tmp_path, "index.html", COMPLETA)
+        (tmp_path / "og.png").write_bytes(png(1200, 630))
+        (tmp_path / "robots.txt").write_text("User-agent: *", encoding="utf-8")
+        for n in ("sitemap-index.xml", "sitemap-0.xml"):
+            (tmp_path / n).write_text("<urlset/>", encoding="utf-8")
+        r = check_site(tmp_path)
+        assert r["sitemap"] == ["sitemap-0.xml", "sitemap-index.xml"]
+        assert r["robots"] == ["robots.txt"]
+
     def test_riferimento_che_esce_dall_albero_non_si_legge(self, tmp_path: Path) -> None:
         sito = tmp_path / "sito"
         sito.mkdir()
@@ -275,7 +335,7 @@ class TestSito:
         )
         (sito / "sitemap.xml").write_text("<urlset/>", encoding="utf-8")
         (sito / "robots.txt").write_text("User-agent: *", encoding="utf-8")
-        assert check_site(sito)["og_image"][0]["problema"] == "non trovata o illeggibile"
+        assert check_site(sito)["og_image"][0]["problema"] == "non trovata"
 
     def test_cartella_senza_pagine(self, tmp_path: Path) -> None:
         r = check_site(tmp_path)

@@ -131,6 +131,23 @@ class TestCompare:
         assert r["ok"] is False
         assert r["profili_vuoti"] == ["a.html", "b.html"]
 
+    def test_pagine_omonime_in_cartelle_diverse_non_collidono(self, tmp_path: Path) -> None:
+        # Regressione: due `index.html` collassavano su una chiave sola e la
+        # divergenza di valore — il dato piu' utile — non scattava mai.
+        for cartella, raggio in (("prezzi", "4px"), ("contatti", "16px")):
+            (tmp_path / cartella).mkdir()
+            (tmp_path / cartella / "index.html").write_text(
+                f"<html><head><style>:root{{--raggio:{raggio}}}</style></head><body>x</body></html>",
+                encoding="utf-8",
+            )
+        pagine = sorted(tmp_path.rglob("*.html"))
+        r = compare(pagine, tmp_path)
+        assert sorted(p["file"] for p in r["profili"]) == [
+            "contatti/index.html", "prezzi/index.html"
+        ]
+        conflitto = next(d for d in r["divergenze"] if d["campo"] == "valore_custom_property")
+        assert conflitto["valori"] == {"prezzi/index.html": "4px", "contatti/index.html": "16px"}
+
     def test_un_commento_non_inventa_una_divergenza(self, tmp_path: Path) -> None:
         # Regressione: un commento di palette su una pagina sola faceva
         # divergere due pagine con lo stesso identico stile.

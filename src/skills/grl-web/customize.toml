@@ -27,13 +27,26 @@ output_path = "{project-root}/_bmad-output/web"
 # cartella contiene brief-sito.md e una sottocartella per pagina.
 run_folder_pattern = "{slug}"
 
-# Struttura del brief di conversione: i campi, lo stato del gate, gli agganci
-# per il collegio, ciò che è stato scartato. È lo stato del lavoro fra un turno
-# e l'altro, quindi cambiarlo cambia cosa sopravvive a una ripresa.
-# Il file contiene DUE schemi: il brief di pagina in testa e quello di sito in
-# coda, dopo il separatore. Un override li sostituisce entrambi — chi vuole
-# cambiarne uno solo deve comunque riportare l'altro nel proprio file.
+# Il brief di UNA PAGINA (`brief.md`): destinatario, promessa, obiezione, prova,
+# azione, più lo stato del gate. È lo stato del lavoro fra un turno e l'altro,
+# quindi cambiarlo cambia cosa sopravvive a una ripresa.
 brief_template = "assets/brief-template.md"
+
+# Il brief di SITO del modo mockup (`brief-sito.md`, alla radice della cartella
+# di lavoro): elenco delle pagine, navigazione, direzione visiva, gate di sito.
+# Da non confondere con site_template qui sotto, che è un altro artefatto.
+site_brief_template = "assets/brief-sito-template.md"
+
+# La scheda del modo `configura` (`sito.md`): il progetto vero, non il mockup —
+# pagine con il loro gate, direzione visiva, sezioni con la forma dei contenuti,
+# animazioni. bmad-spec la adotta come companion e non la riscrive, quindi
+# cambiarne la struttura cambia cosa arriva a chi implementa le fette.
+site_template = "assets/sito-template.md"
+
+# Stack e convenzioni di sviluppo. È il posto dove vive il «come», che nel
+# kernel della spec non può stare. Un'organizzazione che standardizza su un
+# altro framework sovrascrive questo file e non tocca il resto.
+stack_template = "assets/stack-template.md"
 
 # Chi guarda la pagina prima che venga consegnata. Iris è la base e non si può
 # togliere: il modulo Guardrails non consegna pagine che non ha guardato.

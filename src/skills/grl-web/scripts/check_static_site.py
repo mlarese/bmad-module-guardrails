@@ -118,6 +118,22 @@ def image_size(path: Path) -> tuple[int, int] | None:
                 continue
             (seg,) = struct.unpack(">H", data[i + 2:i + 4])
             i += 2 + seg
+        return None
+    # WebP: e' il formato che la pipeline immagini di Astro emette per default,
+    # quindi ignorarlo significava dichiarare assente l'anteprima di ogni sito
+    # costruito con lo stack di questa rotta.
+    if data[:4] == b"RIFF" and data[8:12] == b"WEBP" and len(data) >= 30:
+        chunk = data[12:16]
+        if chunk == b"VP8X":
+            w = int.from_bytes(data[24:27], "little") + 1
+            h = int.from_bytes(data[27:30], "little") + 1
+            return w, h
+        if chunk == b"VP8 ":
+            (w, h) = struct.unpack("<HH", data[26:30])
+            return w & 0x3FFF, h & 0x3FFF
+        if chunk == b"VP8L" and len(data) >= 25:
+            b = int.from_bytes(data[21:25], "little")
+            return (b & 0x3FFF) + 1, ((b >> 14) & 0x3FFF) + 1
     return None
 
 
@@ -194,12 +210,20 @@ def check_site(root: Path) -> dict:
     reports = [check_page(p, root) for p in pages]
 
     site_missing = []
-    for name in ("sitemap.xml", "robots.txt"):
-        if not any(root.rglob(name)):
-            site_missing.append(name)
+    # La sitemap ha piu' nomi convenzionali: il generatore di Astro emette
+    # sitemap-index.xml piu' sitemap-0.xml, non sitemap.xml. Cercare il nome
+    # letterale dichiarava mancante una sitemap completa.
+    rel = lambda p: str(p.relative_to(root)).replace("\\", "/")  # noqa: E731
+    sitemap = sorted(rel(p) for p in root.rglob("sitemap*.xml"))
+    robots = sorted(rel(p) for p in root.rglob("robots.txt"))
+    if not sitemap:
+        site_missing.append("sitemap*.xml")
+    if not robots:
+        site_missing.append("robots.txt")
 
     # L'immagine Open Graph ha un rapporto d'aspetto atteso: verificabile.
     og_problemi = []
+    og_non_letti = []
     for page, r in zip(pages, reports):
         ref = r["og_image"]
         if not ref:
@@ -224,9 +248,16 @@ def check_site(root: Path) -> dict:
             candidate = (page.parent / percorso).resolve()
         # Un `../` di troppo puo' uscire dall'albero: fuori non si legge.
         dentro = candidate == root or root in candidate.parents
-        size = image_size(candidate) if dentro and candidate.is_file() else None
+        esiste = dentro and candidate.is_file()
+        if not esiste:
+            og_problemi.append({"file": r["file"], "og_image": ref, "problema": "non trovata"})
+            continue
+        size = image_size(candidate)
         if size is None:
-            og_problemi.append({"file": r["file"], "og_image": ref, "problema": "non trovata o illeggibile"})
+            # Il file c'e': non e' una mancanza, e' una constatazione. Non deve
+            # far cadere l'esito come lo fa un rapporto d'aspetto sbagliato.
+            og_non_letti.append({"file": r["file"], "og_image": ref,
+                                 "nota": "formato non riconosciuto: dimensioni non verificate"})
             continue
         # Il fatto verificabile e' il rapporto d'aspetto e la larghezza minima,
         # non l'uguaglianza esatta: 2400×1260 e' il taglio 2x della stessa
@@ -252,7 +283,13 @@ def check_site(root: Path) -> dict:
         "ok": ok,
         "pagine_scansionate": len(reports),
         "mancanti_a_livello_di_sito": site_missing,
+        # I file trovati, non solo quelli mancanti: nel referto la presenza
+        # dev'essere un fatto visibile, se no un file di appunti col nome giusto
+        # passa il controllo e nessuno puo' accorgersene.
+        "sitemap": sitemap,
+        "robots": robots,
         "og_image": og_problemi,
+        "og_image_non_letta": og_non_letti,
         "pagine": reports,
     }
 

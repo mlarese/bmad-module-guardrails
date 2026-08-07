@@ -2,7 +2,19 @@
 
 La rotta di `grl-web` quando un mockup approvato deve diventare un sito vero, che sta online e che si mantiene.
 
-**Prima di tutto, leggi lo stato del gate.** Su una pagina singola sta nel `brief.md` del lavoro; su un sito i campi sono due — il gate di sito in `brief-sito.md` e quello di ogni pagina nel proprio `brief.md`. Se un campo dice `non ancora`, quella cosa non è mai stata guardata dalle figure: proponi il gate **per quel livello soltanto** — l'intero sito se manca il gate di sito, la singola pagina se manca il suo — e fallo prima di promuovere, con le meccaniche descritte in `references/mockup-html.md`: a `grl-board` vanno il percorso della pagina e quello del suo brief, la pagina si legge a freddo prima del brief, e senza `grl-board` si convoca `{workflow.finalize_reviewers}`. Non assumere che sia stato fatto perché l'utente lo dà per scontato: l'approvazione vive nel brief proprio perché la conversazione in cui è avvenuta può non esserci più.
+**Prima di tutto, leggi lo stato del gate.** Su una pagina singola sta nel `brief.md` del lavoro; su un sito i campi sono due — il gate di sito in `brief-sito.md`, quello di ogni pagina nel proprio `brief.md`.
+
+Se un campo dice `non ancora`, quella cosa non è mai stata guardata: tieni il gate **per quel livello soltanto** prima di promuovere, passando a `grl-board` la pagina e il suo brief, la pagina per prima.
+
+L'approvazione vive nel brief proprio perché la conversazione in cui è avvenuta può non esserci più: non darla per fatta perché l'utente la dà per scontata.
+
+## Prima: è la rotta giusta?
+
+Questa promozione produce **pagine indipendenti**: HTML statico, nessuno strato di componenti, quindi header, footer e hero restano duplicati su ogni file. Va bene per una pagina sola o per poche pagine che non condividono niente.
+
+Se il sito ha parti condivise, contenuti che cambiano o un backend, la duplicazione è il problema da risolvere e non da portarsi dietro: la rotta è `references/configura.md`. Dillo e cambia strada.
+
+**Salvo che tu venga proprio da lì**, perché `bmad-spec` o `bmad-build` mancano. Allora prosegui qui, con tre avvertenze: lo stato del lavoro è `sito.md`, non i brief — il gate si legge e si scrive nel suo *Gate collegio* e nella sua colonna *Gate*; se non esiste HTML di mockup le pagine si costruiscono dalle righe della scheda invece di convertire; e di `stack.md` restano validi i **vincoli permanenti**, mentre la scelta dello stack e delle fette è sostituita da quella di questa rotta. Scrivi la sostituzione dentro `stack.md`, così la prossima sessione non legge Astro come ancora scelto.
 
 ## Lo stack
 

@@ -26,7 +26,12 @@ Quando l'attrito produce qualcosa — un campo riformulato, una CTA tolta, una p
 
 ## Dove vive
 
-In `{workflow.output_path}/{workflow.run_folder_pattern}/brief.md`, seguendo la struttura di `{workflow.brief_template}`; in un sito, `brief-sito.md` alla radice della cartella di lavoro e `brief.md` dentro la cartella di ciascuna pagina. Si scrive appena i primi campi reggono, non alla fine.
+In `{workflow.output_path}/{workflow.run_folder_pattern}/brief.md`, seguendo la struttura di `{workflow.brief_template}`. Si scrive appena i primi campi reggono, non alla fine.
+
+Due varianti, a seconda di dove sta andando il lavoro:
+
+- **Sito come mockup:** `brief-sito.md` alla radice della cartella (forma in `{workflow.site_brief_template}`) e un `brief.md` dentro la cartella di ciascuna pagina.
+- **Sito come progetto** (`references/configura.md`): un solo `brief.md` alla radice. Le pagine non sono file separati, quindi non hanno cartelle proprie: destinatario, promessa e azione alimentano la prima sezione della scheda del sito.
 
 Da lì in poi **è lui lo stato del lavoro**: tiene i campi, il percorso della pagina, lo stato del gate dei revisori e ciò che è stato scartato. Rientrando in una sessione qualsiasi si riparte leggendolo, ed è il motivo per cui va aggiornato insieme alla pagina a ogni modifica: un brief che non descrive più la pagina rende inutile il rientro.
 

@@ -1,10 +1,16 @@
 # Sito su più pagine
 
-La rotta di `grl-web` quando l'esito non è una pagina sola. Qui si decide **quali pagine esistono e cosa fa ciascuna**; poi ogni pagina si costruisce con `references/brief-di-conversione.md` e `references/mockup-html.md`, perché ognuna ha un proprio destinatario e una propria azione.
+La rotta di `grl-web` quando l'esito non è una pagina sola. Qui si decide **quali pagine esistono e cosa fa ciascuna**; nel modo mockup ogni pagina si costruisce poi con `references/brief-di-conversione.md` e `references/mockup-html.md`, perché ognuna ha un proprio destinatario e una propria azione.
+
+## Cosa vale in quale modo
+
+Questo file serve due modi. **Il test di esistenza di una pagina**, **Una pagina un compito**, **Navigazione** e la regola del sistema visivo deciso una volta sola valgono in entrambi.
+
+**Come sta in cartella**, **I due livelli del gate** e il confronto della coerenza valgono solo per il **modo mockup**, dove ogni pagina è un file autosufficiente da far validare. Se il sito nasce già come progetto — o ci viene promosso — struttura, gate e stato del lavoro stanno in `references/configura.md`.
 
 ## Come sta in cartella
 
-Un sito ha un brief suo e N brief di pagina, quindi la cartella del lavoro si annida:
+Nel modo mockup un sito ha un brief suo e N brief di pagina, quindi la cartella del lavoro si annida:
 
 ```
 {workflow.output_path}/{workflow.run_folder_pattern}/
@@ -17,7 +23,7 @@ Un sito ha un brief suo e N brief di pagina, quindi la cartella del lavoro si an
     └── contatti.html
 ```
 
-`brief-sito.md` tiene ciò che vale per tutte: l'elenco delle pagine con il motivo per cui esistono, il menu, la direzione visiva decisa una volta sola, e lo stato del gate di sito. La sua forma sta in `{workflow.brief_template}`, nel **blocco finale** del file, sotto il separatore che dice «solo per brief-sito.md» — quello in testa è il brief di pagina. Riprendendo un lavoro si legge prima quello, poi il brief della pagina che si tocca.
+`brief-sito.md` tiene ciò che vale per tutte: l'elenco delle pagine con il motivo per cui esistono, il menu, la direzione visiva decisa una volta sola, e lo stato del gate di sito. La sua forma sta in `{workflow.site_brief_template}`. Riprendendo un lavoro si legge prima quello, poi il brief della pagina che si tocca.
 
 ## I due livelli del gate
 
@@ -62,7 +68,7 @@ Ogni pagina risponde in alto a «dove sono» e in basso a «dove vado adesso»: 
 
 Il sistema visivo si decide **una volta sola**, con `grl-agent-ui-critic`, prima della prima pagina: tipografia, palette, spaziature, componenti ricorrenti. Deciderlo pagina per pagina produce un sito che sembra fatto da tre persone che non si parlano — ed è il difetto che si nota per primo e si corregge per ultimo.
 
-Nel modo mockup ogni pagina resta un file `.html` autosufficiente — CSS inline, nessun asset esterno, nessuna chiamata di rete — quindi il CSS condiviso è duplicato in ciascuno: è accettabile per validare la forma, ed è esattamente il motivo per cui un sito di più pagine finisce in un progetto vero (`references/progetto-reale.md`) invece di restare mockup.
+Nel modo mockup ogni pagina resta un file `.html` autosufficiente — CSS inline, nessun asset esterno, nessuna chiamata di rete — quindi il CSS condiviso è duplicato in ciascuno: è accettabile per validare la forma, ed è esattamente il motivo per cui un sito di più pagine finisce in un progetto vero invece di restare mockup — e con parti condivise quel progetto è `references/configura.md`, non la promozione statica.
 
 Finché resta duplicato, la deriva fra le copie si verifica invece di cercarla a occhio su N file: `uv run scripts/check_coerenza.py <cartella-del-lavoro>` dice quale pagina non ha quale token — custom property, font, esadecimali — e se lo stile è ancora identico ovunque. Se una divergenza è voluta, come una pagina legale senza il CSS dell'hero, si tiene: lo script constata, il giudizio è tuo.
 

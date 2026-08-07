@@ -22,6 +22,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import re
 import sys
 from html.parser import HTMLParser
@@ -137,7 +138,7 @@ def find_colors(css: str) -> list[str]:
     return out
 
 
-def profile(path: Path) -> dict:
+def profile(path: Path, root: Path | None = None) -> dict:
     parser = StyleCollector()
     parser.feed(path.read_text(encoding="utf-8", errors="replace"))
     parser.close()
@@ -145,8 +146,17 @@ def profile(path: Path) -> dict:
     props = {name: clean(value) for name, value in CUSTOM_PROP.findall(css)}
     colors = sorted({clean(c) for c in find_colors(css)})
     fonts = sorted({clean(f) for f in FONT_FAMILY.findall(css)})
+    # Identita' = percorso relativo alla radice comune: due `index.html` in
+    # cartelle diverse sono il layout standard degli URL puliti, e col solo nome
+    # del file i due profili collassano su una chiave sola — la divergenza di
+    # valore, che e' il dato piu' utile di questo script, non scatterebbe mai.
+    try:
+        nome = str(path.relative_to(root)).replace("\\", "/") if root else path.name
+    except ValueError:
+        nome = path.name
+
     return {
-        "file": path.name,
+        "file": nome,
         "style_hash": hashlib.sha256(css.encode("utf-8")).hexdigest()[:12],
         "custom_properties": props,
         "font_families": fonts,
@@ -157,8 +167,8 @@ def profile(path: Path) -> dict:
     }
 
 
-def compare(paths: list[Path]) -> dict:
-    profiles = [profile(p) for p in paths]
+def compare(paths: list[Path], root: Path | None = None) -> dict:
+    profiles = [profile(p, root) for p in paths]
 
     divergenze = []
 
@@ -206,8 +216,10 @@ def main(argv: list[str] | None = None) -> int:
     args = ap.parse_args(argv)
 
     files: list[Path] = []
+    cartelle: list[Path] = []
     for p in args.paths:
         if p.is_dir():
+            cartelle.append(p.resolve())
             files.extend(sorted(p.rglob("*.html")))
         elif p.is_file():
             files.append(p)
@@ -219,7 +231,15 @@ def main(argv: list[str] | None = None) -> int:
         print("servono almeno due pagine da confrontare", file=sys.stderr)
         return 2
 
-    report = compare(files)
+    # La radice su cui si calcola l'identita' delle pagine: la cartella passata
+    # se ce n'e' una sola, altrimenti l'antenato comune dei file raccolti.
+    risolti = [f.resolve() for f in files]
+    if len(cartelle) == 1 and not any(f.is_file() for f in args.paths):
+        radice = cartelle[0]
+    else:
+        radice = Path(os.path.commonpath([str(f.parent) for f in risolti]))
+
+    report = compare(risolti, radice)
     payload = json.dumps(report, ensure_ascii=False, indent=2)
     if args.output:
         args.output.write_text(payload, encoding="utf-8")
