@@ -73,6 +73,8 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--model", required=True, help="provider/modello per opencode run")
     ap.add_argument("--opencode", default="opencode", help="eseguibile di opencode")
+    ap.add_argument("--variant", default=None,
+                    help="variante del modello (sforzo di ragionamento: high, max, minimal)")
     ap.add_argument("--passthrough", action="store_true",
                     help="riemetti anche gli eventi non tradotti, per ispezione")
     ap.add_argument("prompt", nargs="+", help="il messaggio da mandare")
@@ -81,7 +83,10 @@ def main() -> int:
     # `--pure` tiene fuori i plugin esterni: la misura riguarda la description
     # della skill, non l'ambiente personale di chi lancia il runner.
     argv = [args.opencode, "run", "--format", "json", "--pure", "--auto",
-            "-m", args.model, " ".join(args.prompt)]
+            "-m", args.model]
+    if args.variant:
+        argv += ["--variant", args.variant]
+    argv.append(" ".join(args.prompt))
 
     try:
         proc = subprocess.run(argv, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
