@@ -9,8 +9,10 @@ _bmad-output/
 **/.memlog.md
 **/.analysis/
 
-# Materiale di lavoro personale: trascrizioni e report, non fanno parte del modulo
-docs/supporto/
+# Materiale di lavoro personale: documenti, trascrizioni e report, non fanno parte del modulo
+docs/
+# Eccezione: il piano del modulo è parte del repository, ed è citato dal README
+!docs/module-plan.md
 
 # Python
 __pycache__/
