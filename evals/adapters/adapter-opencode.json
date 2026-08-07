@@ -4,7 +4,7 @@
     "python3",
     "/Users/maurolarese/Dropbox/vibecode/_PERSONALE_/bmad-module-support-agents-workflows/evals/adapters/opencode-shim.py",
     "--model",
-    "opencode/deepseek-v4-flash-free",
+    "opencode/ling-3.0-tiny-free",
     "--",
     "{prompt}"
   ],
