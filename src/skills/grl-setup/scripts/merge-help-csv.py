@@ -64,46 +64,11 @@ def parse_args():
         help="Module code (required with --legacy-dir for scoping cleanup).",
     )
     parser.add_argument(
-        "--only-skills",
-        help=(
-            "Comma-separated skill names to keep from the source CSV. Rows for any other "
-            "skill are dropped, so help never lists a capability the project has disabled. "
-            "Omit to merge every source row."
-        ),
-    )
-    parser.add_argument(
         "--verbose",
         action="store_true",
         help="Print detailed progress to stderr",
     )
     return parser.parse_args()
-
-
-def filter_by_skill(
-    rows: list[list[str]], header: list[str], wanted: set[str]
-) -> tuple[list[list[str]], list[str]]:
-    """Keep only rows whose `skill` column is in `wanted`.
-
-    Returns (kept_rows, dropped_skill_names). A row too short to have a skill
-    column is kept: dropping a malformed row would hide it instead of surfacing it.
-    """
-    try:
-        index = header.index("skill")
-    except ValueError:
-        index = 1  # documented column order: module,skill,...
-
-    kept: list[list[str]] = []
-    dropped: set[str] = set()
-    for row in rows:
-        if len(row) <= index:
-            kept.append(row)
-            continue
-        name = row[index].strip()
-        if not name or name in wanted:
-            kept.append(row)
-        else:
-            dropped.add(name)
-    return kept, sorted(dropped)
 
 
 def read_csv_rows(path: str) -> tuple[list[str], list[list[str]]]:
@@ -211,24 +176,6 @@ def main():
         print(f"Error: No data rows found in source {args.source}", file=sys.stderr)
         sys.exit(1)
 
-    # Drop rows for skills the project chose not to install
-    skills_dropped: list[str] = []
-    if args.only_skills:
-        wanted = {
-            name.strip()
-            for name in args.only_skills.replace(";", ",").split(",")
-            if name.strip()
-        }
-        source_rows, skills_dropped = filter_by_skill(source_rows, source_header, wanted)
-        if not source_rows:
-            print(
-                f"Error: --only-skills left no rows from source {args.source}",
-                file=sys.stderr,
-            )
-            sys.exit(1)
-        if args.verbose and skills_dropped:
-            print(f"Dropped help rows for: {', '.join(skills_dropped)}", file=sys.stderr)
-
     # Determine module codes being merged
     source_codes = extract_module_codes(source_rows)
     if not source_codes:
@@ -289,7 +236,6 @@ def main():
         "module_codes": sorted(source_codes),
         "rows_removed": removed_count,
         "rows_added": len(source_rows),
-        "skills_dropped": skills_dropped,
         "total_rows": len(merged_rows),
         "legacy_csvs_deleted": legacy_deleted,
     }

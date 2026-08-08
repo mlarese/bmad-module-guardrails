@@ -68,40 +68,7 @@ def load_groups(source: Path) -> list[dict]:
             raise ValueError(f"members non valido per {group['id']}")
         if "memory" in group and not isinstance(group["memory"], bool):
             raise ValueError(f"memory non booleano per {group['id']}")
-        if "requires" in group and (
-            not isinstance(group["requires"], list)
-            or not all(isinstance(item, str) and item for item in group["requires"])
-        ):
-            raise ValueError(f"requires non valido per {group['id']}")
     return groups
-
-
-def filter_groups(groups: list[dict], wanted: set[str]) -> tuple[list[dict], list[str]]:
-    """Tiene solo i membri Guardrails attivi, lasciando intatti quelli di altri moduli.
-
-    Un membro `grl-*` che non è fra gli attivi viene tolto: convocarlo aprirebbe una
-    stanza con un posto vuoto. Un gruppo che resta senza alcun membro Guardrails viene
-    saltato del tutto — sarebbe una stanza tematica del modulo senza il modulo dentro.
-    I membri di altri moduli (es. `bmad-agent-ux-designer`) non si toccano: la loro
-    presenza dipende da quel modulo, non da questa selezione.
-    """
-    kept: list[dict] = []
-    skipped: list[str] = []
-    for group in groups:
-        required = group.get("requires") or []
-        if required and not any(member in wanted for member in required):
-            skipped.append(group["id"])
-            continue
-        members = [
-            member
-            for member in group["members"]
-            if not member.startswith("grl-") or member in wanted
-        ]
-        if not any(member.startswith("grl-") for member in members):
-            skipped.append(group["id"])
-            continue
-        kept.append({**group, "members": members})
-    return kept, skipped
 
 
 def render(groups: list[dict]) -> str:
@@ -126,14 +93,6 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--project-root", required=True)
     parser.add_argument("--source", required=True)
-    parser.add_argument(
-        "--only-agents",
-        help=(
-            "Figure Guardrails attive, separate da virgola. I membri grl-* fuori da questo "
-            "elenco escono dai gruppi, e un gruppo che resta senza figure Guardrails non "
-            "viene installato. Ometti per installare i gruppi come sono."
-        ),
-    )
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
 
@@ -147,21 +106,8 @@ def main() -> int:
         print(json.dumps({"status": "error", "error": f"sorgente non trovata: {source}"}, ensure_ascii=False))
         return 2
 
-    skipped: list[str] = []
     try:
         groups = load_groups(source)
-        if args.only_agents:
-            wanted = {
-                name.strip()
-                for name in args.only_agents.replace(";", ",").split(",")
-                if name.strip()
-            }
-            groups, skipped = filter_groups(groups, wanted)
-            if not groups:
-                raise ValueError(
-                    "--only-agents non lascia alcun gruppo installabile: nessuna figura "
-                    "Guardrails compare nei gruppi tematici."
-                )
         target = bmad_dir / "custom" / "bmad-party-mode.toml"
         existing = target.read_text(encoding="utf-8") if target.is_file() else ""
         updated = strip_block(existing)
@@ -185,7 +131,6 @@ def main() -> int:
                 "status": "success",
                 "dry_run": args.dry_run,
                 "groups": [group["id"] for group in groups],
-                "groups_skipped": skipped,
                 "target": str(target),
             },
             ensure_ascii=False,
