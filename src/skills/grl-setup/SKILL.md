@@ -5,9 +5,10 @@ description: Installa il modulo Guardrails in un progetto. Usa quando l'utente c
 
 # Setup del modulo Guardrails
 
-Installi Guardrails in un progetto: due domande all'utente, l'applicazione della selezione dei
-gruppi, la registrazione nel roster delle sole figure installate, le stanze tematiche di party
-mode e l'avvio della profilazione. L'esito che conta non è il file di config — è che l'utente
+Installi Guardrails in un progetto: due domande all'utente, l'applicazione della selezione delle
+figure, la registrazione nel roster delle sole figure installate, le stanze tematiche di party
+mode e l'avvio della profilazione. I sette workflow si installano sempre, qualunque cosa venga
+spuntato. L'esito che conta non è il file di config — è che l'utente
 esca da qui con `grl-profile` già eseguito, perché senza profilo di progetto le figure parlano
 per luoghi comuni.
 
@@ -63,17 +64,21 @@ usa quelli e salta le domande. Mostra comunque il riepilogo finale.
 
 ## Le domande da fare
 
-### 1. Quali gruppi installare
+### 1. Quali figure installare
 
 È la multi-select `enabled_groups` di `module.yaml`: cinque caselle, tutte spuntate per default.
 Presentala come spunte, non come scelta singola — se ne possono tenere quante se ne vuole.
 
-> Quali gruppi Guardrails vuoi installare? Spunta quelli che ti servono; gli altri restano fuori
+> Quali figure Guardrails vuoi installare? Spunta i gruppi che ti servono; gli altri restano fuori
 > dal progetto e si possono aggiungere dopo rieseguendo `grl-setup`.
 
 Le etichette e la composizione di ogni gruppo stanno in `./assets/groups.toml`: leggile da lì e
-mostrale, così l'utente sa quali figure sta spuntando. `grl-setup`, `grl-profile` e `grl-board`
-non compaiono fra le opzioni — sono in `always` e restano sempre installate.
+mostrale, così l'utente sa quali figure sta spuntando.
+
+**I sette workflow non compaiono fra le opzioni**: sono in `always` e si installano sempre. Se
+l'utente chiede di escluderne uno, digli che la selezione governa le figure, non i lavori — un
+workflow si invoca per nome quando serve e non si attiva da solo, quindi toglierlo produrrebbe
+solo un comando mancante.
 
 **Se l'installer ha già raccolto la risposta**, non ripetere la domanda: leggila da
 `enabled_groups` di `modules.grl` nel config risolto e dichiara nel riepilogo che stai usando la
@@ -107,7 +112,7 @@ config è unica per installazione, il profilo cambia da progetto a progetto.
 
 ## Percorso TOML
 
-**L'ordine conta.** `apply-selection.py` va per primo: toglie dal disco le skill dei gruppi
+**L'ordine conta.** `apply-selection.py` va per primo: toglie dal disco le figure dei gruppi
 esclusi, così tutto quello che viene dopo lavora su ciò che resta davvero installato. Risolvi
 `{project-root}` prima di eseguire.
 
@@ -144,7 +149,7 @@ python3 ./scripts/merge-party-groups.py \
 
 Cosa fa, e perché così:
 
-- **Selezione** → le skill dei gruppi esclusi finiscono in `{project-root}/_bmad/grl/.disabled/`,
+- **Selezione** → le figure dei gruppi esclusi finiscono in `{project-root}/_bmad/grl/.disabled/`,
   fuori da `.claude/skills/` e da ogni altra cartella che gli agenti leggono. Niente viene
   cancellato: sono spostamenti, e rispuntare un gruppo le riporta da dove erano venute — lo
   script ripristina prima e disattiva dopo, nella stessa passata. La selezione applicata viene
@@ -183,8 +188,9 @@ python3 ./scripts/merge-help-csv.py \
   --module-code Guardrails
 ```
 
-`--only-skills` scarta le righe delle skill non installate: senza, `bmad-help` elencherebbe
-capacità che il progetto non ha, e l'utente le chiederebbe invano.
+`--only-skills` scarta le righe delle figure non installate: senza, `bmad-help` elencherebbe
+capacità che il progetto non ha, e l'utente le chiederebbe invano. Le voci dei sette workflow
+restano sempre, perché i workflow ci sono sempre.
 
 Tre cose da sapere, tutte verificate sul campo:
 
@@ -259,7 +265,8 @@ con il meccanismo di quella versione di BMad, altrimenti non compaiono nel party
   insieme agli agenti BMM; in più `grl-setup` installa le stanze tematiche dei gruppi scelti,
   richiamabili con `bmad-party-mode --party <id>`. Il default resta quello deciso dal progetto
   o dal team.
-- **Non cancella le skill escluse.** Le sposta in `_bmad/grl/.disabled/`, da dove tornano
+- **Non tocca i workflow.** Tutti e sette si installano sempre: la selezione governa le figure.
+- **Non cancella le figure escluse.** Le sposta in `_bmad/grl/.disabled/`, da dove tornano
   rieseguendo il setup e rispuntando il gruppo. Se l'utente vuole liberare spazio, può
   cancellare quella cartella a mano — ma allora per riaverle dovrà reinstallare il modulo.
 - **Non tocca le skill BMM.** Vedi il passo facoltativo qui sotto.

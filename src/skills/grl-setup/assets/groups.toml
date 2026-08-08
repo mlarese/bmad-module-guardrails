@@ -2,28 +2,40 @@
 #
 # È la mappa che traduce le spunte raccolte durante l'installazione — la variabile
 # `enabled_groups` di module.yaml — nell'elenco delle skill da tenere attive.
-# Le skill dei gruppi non spuntati vengono spostate da apply-selection.py in
+# Le figure dei gruppi non spuntati vengono spostate da apply-selection.py in
 # _bmad/grl/.disabled/, quindi non si attivano, non entrano nel roster e non
 # compaiono in bmad-help. Rispuntare un gruppo le riporta al loro posto.
+# I sette workflow stanno tutti in `always`: le spunte scelgono chi ti parla, non
+# quali lavori puoi fare.
 #
 # Vincolo di coerenza: gli `id` qui sotto devono coincidere con i `value` della
 # multi-select `enabled_groups` in module.yaml, e ogni skill del modulo deve
 # comparire una volta sola fra `always` e i `skills` dei gruppi.
 
-# Skill senza le quali il modulo non funziona: non sono disattivabili.
-# grl-setup rifà la scelta, grl-profile dà il contesto a tutte le figure,
-# grl-board convoca solo quelle attive.
-always = ["grl-setup", "grl-profile", "grl-board"]
+# Le spunte governano le figure, non i workflow: i workflow si installano sempre.
+# Il motivo è che si invocano per nome quando servono e non parlano da soli, quindi
+# tenerne fuori uno produce solo un comando mancante il giorno in cui serve.
+# I tre di servizio reggono il modulo — grl-setup rifà la scelta, grl-profile dà il
+# contesto alle figure, grl-board convoca quelle attive — e gli altri quattro sono
+# lavori a sé: qualificazione MDR, ricerca legale, ricerca fiscale, landing e siti.
+always = [
+  "grl-setup",
+  "grl-profile",
+  "grl-board",
+  "grl-mdsw",
+  "grl-legal-updates",
+  "grl-fiscal-updates",
+  "grl-web",
+]
 
 [[groups]]
 id = "governance"
 label = "Governance — privacy, legale, compliance"
-detail = "Vera (privacy e GDPR), Aldo (legale, licenze e AI Act), Nils (compliance normativa) e il workflow di ricerca legale."
+detail = "Vera (privacy e GDPR), Aldo (legale, licenze e AI Act), Nils (compliance normativa)."
 skills = [
   "grl-agent-privacy",
   "grl-agent-legal",
   "grl-agent-compliance",
-  "grl-legal-updates",
 ]
 
 [[groups]]
@@ -39,18 +51,18 @@ skills = [
 
 [[groups]]
 id = "health"
-label = "Health — dominio clinico e dispositivi medici"
-detail = "Livia (informatica clinica) e grl-mdsw, che dice se il software è un dispositivo medico e in quale classe."
-skills = ["grl-agent-health", "grl-mdsw"]
+label = "Health — dominio clinico"
+detail = "Livia (informatica clinica). La qualificazione come dispositivo medico, grl-mdsw, è installata comunque."
+skills = ["grl-agent-health"]
 
 [[groups]]
 id = "web"
-label = "Web — design, WordPress, landing e siti"
-detail = "Iris (critica di design), Milo (WordPress a componenti) e grl-web, che costruisce landing page e siti."
-skills = ["grl-agent-ui-critic", "grl-agent-wordpress", "grl-web"]
+label = "Web — design e WordPress"
+detail = "Iris (critica di design) e Milo (WordPress a componenti). La costruzione di landing e siti, grl-web, è installata comunque."
+skills = ["grl-agent-ui-critic", "grl-agent-wordpress"]
 
 [[groups]]
 id = "fiscal"
 label = "Fiscale — fisco e finanza agevolata"
-detail = "Marta (fisco, contabilità, bandi e incentivi) e il workflow di ricerca fiscale."
-skills = ["grl-agent-fiscal", "grl-fiscal-updates"]
+detail = "Marta (fisco, contabilità, bandi e incentivi). La ricerca fiscale, grl-fiscal-updates, è installata comunque."
+skills = ["grl-agent-fiscal"]

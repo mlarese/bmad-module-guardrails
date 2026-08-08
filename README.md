@@ -156,25 +156,26 @@ Con l'installer BMad, indicando questo repository come sorgente custom:
 npx bmad-method install --custom-source https://github.com/mlarese/bmad-module-guardrails
 ```
 
-L'installer chiede **quali gruppi installare** — sono spunte, se ne tengono quante si vuole —
-copia le skill, registra le figure come agenti (`[agents.grl-agent-*]` nella configurazione),
-che è ciò che le fa comparire nel roster di `bmad-party-mode`, aggiunge le voci di help al
-catalogo `_bmad/_config/bmad-help.csv` e installa le stanze tematiche dei gruppi scelti.
+L'installer chiede **quali figure installare** — spunte per gruppo, se ne tengono quante si
+vuole — copia le skill, registra le figure come agenti (`[agents.grl-agent-*]` nella
+configurazione), che è ciò che le fa comparire nel roster di `bmad-party-mode`, aggiunge le voci
+di help al catalogo `_bmad/_config/bmad-help.csv` e installa le stanze tematiche dei gruppi scelti.
 
-| Gruppo | Cosa porta |
-| ------ | ---------- |
-| Governance | Vera, Aldo, Nils e `grl-legal-updates` |
+| Gruppo | Figure |
+| ------ | ------ |
+| Governance | Vera, Aldo, Nils |
 | Engineering | Otto, Kai, Bruno, Enzo |
-| Health | Livia e `grl-mdsw` |
-| Web | Iris, Milo e `grl-web` |
-| Fiscale | Marta e `grl-fiscal-updates` |
+| Health | Livia |
+| Web | Iris, Milo |
+| Fiscale | Marta |
 
-`grl-setup`, `grl-profile` e `grl-board` non sono in alcun gruppo: senza di loro il modulo non
-si configura, non ha contesto e non convoca nessuno.
+**I sette workflow non sono in alcun gruppo: si installano sempre.** Si invocano per nome quando
+servono e non si attivano da soli, quindi escluderne uno produrrebbe solo un comando mancante il
+giorno in cui serve. Le spunte scelgono chi ti parla, non quali lavori puoi fare.
 
 **Il passo che rende effettiva la scelta è `grl-setup`.** L'installer copia comunque tutte le
 skill sul disco — il formato dei moduli BMad non ha modo di escluderne alcune dalla copia, né
-hook eseguibili — quindi è `grl-setup` a spostare quelle dei gruppi non spuntati in
+hook eseguibili — quindi è `grl-setup` a spostare le figure dei gruppi non spuntati in
 `_bmad/grl/.disabled/`, dove non si attivano e non compaiono in `bmad-help`. Finché non lo si
 esegue, una figura esclusa può ancora attivarsi da sola.
 

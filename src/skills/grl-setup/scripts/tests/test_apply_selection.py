@@ -32,6 +32,7 @@ SKILLS = (
     "grl-agent-ui-critic",
     "grl-web",
     "grl-agent-fiscal",
+    "grl-fiscal-updates",
 )
 
 
@@ -74,14 +75,16 @@ class ApplySelectionTests(unittest.TestCase):
             self.assertEqual(
                 installed,
                 {
-                    "grl-setup", "grl-profile", "grl-board",
-                    "grl-agent-privacy", "grl-agent-legal",
-                    "grl-agent-compliance", "grl-legal-updates",
+                    # I sette workflow ci sono sempre, qualunque gruppo sia spuntato.
+                    "grl-setup", "grl-profile", "grl-board", "grl-mdsw",
+                    "grl-legal-updates", "grl-fiscal-updates", "grl-web",
+                    # Le figure, invece, solo quelle di governance.
+                    "grl-agent-privacy", "grl-agent-legal", "grl-agent-compliance",
                 },
             )
             disabled = project / "_bmad" / "grl" / ".disabled" / "claude__skills"
             self.assertTrue((disabled / "grl-agent-health").is_dir())
-            self.assertTrue((disabled / "grl-web").is_dir())
+            self.assertTrue((disabled / "grl-agent-ui-critic").is_dir())
 
     def test_restores_a_group_that_is_selected_again(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -93,12 +96,11 @@ class ApplySelectionTests(unittest.TestCase):
             self.assertEqual(result.returncode, 0, result.stderr)
             installed = self.installed(project)
             self.assertIn("grl-agent-health", installed)
-            self.assertIn("grl-mdsw", installed)
-            self.assertNotIn("grl-web", installed)
+            self.assertNotIn("grl-agent-ui-critic", installed)
             # Il contenuto torna com'era, non un guscio vuoto.
             self.assertEqual(
-                (project / ".claude" / "skills" / "grl-mdsw" / "SKILL.md").read_text(encoding="utf-8"),
-                "grl-mdsw",
+                (project / ".claude" / "skills" / "grl-agent-health" / "SKILL.md").read_text(encoding="utf-8"),
+                "grl-agent-health",
             )
 
     def test_is_idempotent(self) -> None:
