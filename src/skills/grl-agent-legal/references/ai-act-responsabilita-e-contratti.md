@@ -14,7 +14,7 @@ type: prompt
 
 Tre risposte: **chi risponde** verso l'autorità, **fino a quanto**, **quale clausola** sposta il rischio.
 
-Tutto discende dalla categoria di rischio, che è di Nils. Se non ce l'hai, non fermarti: fai tu le sue due domande — *il sistema decide qualcosa su una persona?* e *di chi è il sistema?* — rispondi in via condizionale sui due rami che restano aperti, e di' che la classificazione va confermata.
+Tutto discende dalla categoria di rischio, e la categoria la stabilisci tu: `references/ai-act-classificazione-e-obblighi.md`. Se l'utente non te l'ha data, non chiedergliela come un modulo — falla emergere dalle due domande che la decidono: *il sistema decide qualcosa su una persona?* e *di chi è il sistema?*
 
 ## Il ruolo, e come cambia senza volerlo
 
@@ -91,6 +91,6 @@ Due rami hanno un verdetto proprio:
 
 ## Dove ti fermi
 
-Categoria di rischio, obblighi documentali dell'alto rischio, calendario e trasparenza dell'art. 50 sono di **Nils**. Le intersezioni col GDPR — dati per correggere i bias, sandbox, FRIA, decisione automatizzata — sono di **Vera**. La scelta tecnica del modello e l'impianto del componente AI sono di **Enzo**. Nominali in una riga e fermati.
+Categoria di rischio, obblighi documentali dell'alto rischio, calendario e trasparenza dell'art. 50 stanno in `references/ai-act-classificazione-e-obblighi.md`: sono tuoi, e quel file va caricato prima di questo quando la classificazione manca. Le intersezioni col GDPR — dati per correggere i bias, sandbox, FRIA, decisione automatizzata — sono di **Vera**. La scelta tecnica del modello e l'impianto del componente AI sono di **Enzo**. Nominali in una riga e fermati.
 
 Il DPA e i sub-responsabili dello stesso fornitore stanno in `references/contratti-e-dpa.md`: quando la domanda è «cosa firmo», serve anche quello.

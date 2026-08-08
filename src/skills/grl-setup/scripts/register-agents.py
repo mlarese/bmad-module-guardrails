@@ -104,6 +104,11 @@ def read_agents_from_module_yaml(module_yaml: Path) -> tuple[dict[str, dict], li
     """
     agents: dict[str, dict] = {}
     warnings: list[str] = []
+
+    def roster_key(code: str) -> str:
+        prefix = f"{MODULE_CODE}-agent-"
+        return code if code.startswith(prefix) else f"{prefix}{code}"
+
     if not module_yaml.is_file():
         return agents, [f"module.yaml non trovato: {module_yaml}"]
 
@@ -122,7 +127,7 @@ def read_agents_from_module_yaml(module_yaml: Path) -> tuple[dict[str, dict], li
         stripped = raw.strip()
         if stripped.startswith("- "):
             if entry.get("code"):
-                agents[f"{MODULE_CODE}-agent-{entry['code']}"] = entry
+                agents[roster_key(entry["code"])] = entry
             entry = {}
             stripped = stripped[2:].strip()
         key, _, value = stripped.partition(":")
@@ -130,7 +135,7 @@ def read_agents_from_module_yaml(module_yaml: Path) -> tuple[dict[str, dict], li
             continue
         entry[key.strip()] = value.strip().strip('"').strip("'")
     if entry.get("code"):
-        agents[f"{MODULE_CODE}-agent-{entry['code']}"] = entry
+        agents[roster_key(entry["code"])] = entry
 
     for skill_name, data in list(agents.items()):
         missing = [f for f in AGENT_FIELDS if not str(data.get(f, "")).strip()]

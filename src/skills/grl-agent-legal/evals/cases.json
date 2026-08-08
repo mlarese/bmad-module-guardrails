@@ -47,13 +47,14 @@
       "state_prefix": null
     },
     {
-      "id": "confine-compliance",
+      "id": "trasparenza-e-classificazione",
       "input": "Run headless. Il nostro prodotto usa un LLM per suggerire risposte agli operatori del supporto. Dobbiamo dire agli utenti finali che il contenuto è generato da AI, e che rischio siamo secondo l'AI Act?",
       "rubric": [
-        "la risposta riconosce che l'obbligo di trasparenza e la classificazione AI Act sono di Nils e li passa a lui",
-        "la risposta non tenta di classificare il sistema secondo l'AI Act",
-        "sulla parte di sua competenza la risposta parla dei termini del fornitore del modello o della proprietà degli output, se pertinente, oppure dice che dal suo lato non ci sono vincoli",
-        "il rimando occupa poche righe"
+        "la risposta classifica il sistema invece di rimandare la classificazione a un'altra figura: l'operatore umano resta in mezzo, quindi non è Allegato III",
+        "la risposta dice il ruolo — utilizzatore del modello di terzi, salvo rimarchio o modifica sostanziale",
+        "la risposta risponde alla domanda sulla trasparenza distinguendo i due casi: chi parla con l'operatore parla con una persona, mentre l'obbligo dell'art. 50 scatta se l'output arriva all'utente finale senza intermediazione",
+        "la risposta indica la data da cui l'obbligo vale",
+        "la risposta non elenca gli obblighi dell'alto rischio, che qui non si applicano"
       ],
       "state_prefix": null
     },
@@ -75,7 +76,7 @@
         "la risposta dice che mettendoci il proprio marchio il cliente diventa fornitore ai fini dell'AI Act, e che è il fatto a produrre il ruolo, non la clausola",
         "la risposta dice che una clausola che scarica la conformità sul fornitore a monte non toglie al rimarchiante gli obblighi verso l'autorità",
         "la risposta indica cosa mettere davvero nel contratto: documentazione tecnica e istruzioni d'uso da fornire, cooperazione con l'autorità, manleva e tetto",
-        "la risposta chiede o presuppone la categoria di rischio del sistema, e nomina Nils per la classificazione se non c'è",
+        "la risposta chiede la categoria di rischio del sistema, o risponde in via condizionale sui rami che restano aperti, senza rimandare la classificazione a un'altra figura",
         "la risposta cita i massimali dell'art. 99 solo per dimensionare il tetto contrattuale, non come cifra ad effetto",
         "la risposta non rinvia a un avvocato esterno"
       ],
@@ -86,11 +87,63 @@
       "input": "Run headless. Un cliente vuole rivendere il nostro sistema di scoring dei candidati con il suo marchio. Nel contratto scriviamo che la conformità normativa resta a carico nostro. Regge?",
       "rubric": [
         "la risposta dice che chi mette il proprio marchio sul sistema diventa fornitore ai fini dell'art. 25, e che il contratto non sposta quell'obbligo verso l'autorità",
+        "la risposta classifica il sistema come alto rischio dell'Allegato III, perché lo scoring dei candidati decide su persone, e lo fa da sé",
         "la risposta distingue l'obbligo verso l'autorità dalla ripartizione economica fra le parti, che manleve e tetti possono regolare",
         "la risposta nomina la leva dell'art. 25(2): il fornitore originario deve cooperare e dare documentazione, salvo che abbia escluso espressamente la conversione ad alto rischio",
         "la risposta dice cosa il cliente deve pretendere in concreto — documentazione tecnica e istruzioni d'uso — per potersi difendere",
-        "la risposta non classifica il sistema né elenca gli obblighi dell'alto rischio: rimanda a Nils in una riga",
         "la risposta non cita i massimali dell'art. 99 come cifra a effetto, ma solo se servono a fissare un numero nel contratto"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "corso-art-4",
+      "input": "Run headless. Siamo uno studio di 12 persone, tutti usano ChatGPT per scrivere email e riassumere documenti. Ci hanno detto che serve un corso obbligatorio con certificazione. Cosa dobbiamo fare davvero?",
+      "rubric": [
+        "la risposta conferma che l'obbligo di alfabetizzazione dell'art. 4 esiste e vale anche per uno studio di quella dimensione, senza soglia dimensionale",
+        "la risposta dice che non esiste un attestato riconosciuto né un programma minimo di legge, e che la certificazione obbligatoria non è un obbligo",
+        "la risposta dice che la parte che conta è poter dimostrare la formazione, e nomina il registro con i nominativi come la cosa da avere",
+        "la risposta propone un contenuto proporzionato all'uso reale descritto, non un programma da sistema ad alto rischio",
+        "la risposta collega il corso alla regola interna su cosa non si mette nei prompt",
+        "la risposta non allarma con le sanzioni"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "azienda-da-mettere-in-regola",
+      "input": "Run headless. Il nostro cliente è un'azienda di 200 dipendenti che ci chiede di metterla in regola con l'AI Act. Non sanno nemmeno loro quali strumenti AI usano. Da dove partiamo e cosa consegniamo?",
+      "rubric": [
+        "la risposta parte dall'inventario dei sistemi e dice che è il primo deliverable, non una fase preparatoria",
+        "la risposta indica cosa va rilevato per ogni sistema, incluso se decide su una persona e se è sviluppato, comprato o rimarchiato",
+        "la risposta nomina la shadow AI come esito atteso dell'inventario, con la conseguenza concreta — segreto commerciale e dati usciti — non con la sanzione",
+        "la risposta consegna una sequenza di interventi con responsabili e date, non una relazione",
+        "la risposta non propone la certificazione ISO 42001 come obbligo, e se la nomina dice a quali condizioni serve",
+        "la risposta non inventa la figura di un responsabile IA obbligatorio"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "algoritmo-sui-dipendenti",
+      "input": "Run headless. Vogliamo introdurre un software che assegna i turni e misura la produttività individuale dei magazzinieri, e che segnala chi sta sotto soglia. Il fornitore dice che è tutto a posto perché decide sempre un responsabile.",
+      "rubric": [
+        "la risposta dice che il sistema è alto rischio per l'Allegato III, perché valuta e monitora persone nel rapporto di lavoro",
+        "la risposta solleva l'art. 4 dello Statuto dei lavoratori: serve accordo sindacale o autorizzazione dell'Ispettorato, altrimenti i dati non sono utilizzabili",
+        "la risposta nomina l'informativa dovuta ai lavoratori e alle rappresentanze prima della messa in servizio",
+        "la risposta dice che la revisione umana vale solo se chi rivede può decidere diversamente, e che il presidio si verifica dai numeri",
+        "la risposta passa a Vera la parte su base giuridica e art. 22 GDPR",
+        "la risposta dice cosa fare prima dell'acquisto, non solo cosa è dovuto"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "incidente-e-notifica",
+      "input": "Run headless. Il nostro sistema di supporto ha dato a un cliente un'indicazione sbagliata che gli ha causato un danno, e nel log risulta che ha anche mostrato dati di un altro utente. Chi dobbiamo avvisare e in quanto tempo?",
+      "rubric": [
+        "la risposta distingue i due regimi: l'esposizione di dati personali è un data breach, il danno da sistema AI può essere un incidente grave ai fini dell'AI Act",
+        "la risposta dice che i due obblighi si cumulano e non si sostituiscono",
+        "la risposta passa a Vera la notifica al Garante e le 72 ore",
+        "la risposta indica l'autorità competente per il lato AI Act in Italia",
+        "la risposta dice che il termine decorre dalla conoscenza del fatto e che serve una persona designata a qualificare l'incidente",
+        "la risposta dichiara che i termini vanno verificati invece di darli come certi a memoria"
       ],
       "state_prefix": null
     }

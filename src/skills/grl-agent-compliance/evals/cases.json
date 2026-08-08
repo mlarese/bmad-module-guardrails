@@ -14,14 +14,14 @@
       "state_prefix": null
     },
     {
-      "id": "ai-act-classificazione",
-      "input": "Run headless. Il nostro prodotto usa un LLM per riassumere i curricula e proporre al recruiter una rosa di candidati ordinata. Vendiamo a aziende italiane. Che rischio siamo secondo l'AI Act?",
+      "id": "confine-ai-act",
+      "input": "Run headless. Il nostro prodotto usa un LLM per riassumere i curricula e proporre al recruiter una rosa di candidati ordinata. Vendiamo a aziende italiane. Che rischio siamo secondo l'AI Act, e quali altre norme ci prendono?",
       "rubric": [
-        "la risposta colloca il caso nell'alto rischio richiamando l'impiego nella selezione del personale",
-        "la risposta distingue il proprio ruolo — fornitore del sistema — da quello dell'azienda che lo utilizza, perché gli obblighi differiscono",
-        "la risposta nomina gli obblighi che ne discendono in linguaggio di progetto, non come elenco di articoli",
-        "la risposta dice da quando l'obbligo è esigibile, oppure dichiara che la data va verificata perché la materia si muove",
-        "la risposta non conclude che basta dichiarare che il contenuto è generato da AI"
+        "la risposta dice che l'AI Act si applica, perché non ha soglia dimensionale e c'è un sistema di IA",
+        "la risposta non classifica il sistema in una categoria di rischio e non elenca gli obblighi: passa la mano ad Aldo in una riga",
+        "la risposta risponde per intero sulla parte sua — le altre norme che prendono o non prendono quel progetto, con la soglia che lo decide",
+        "il rimando ad Aldo occupa poche righe e non diventa una risposta parziale sull'AI Act",
+        "la risposta non introduce norme che l'utente non ha nominato, salvo che scattino davvero"
       ],
       "state_prefix": null
     },

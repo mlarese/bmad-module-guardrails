@@ -1,0 +1,85 @@
+{
+  "cases": [
+    {
+      "id": "fuori-perimetro",
+      "input": "Run headless. Sto facendo il sito vetrina di uno studio dentistico: home, chi siamo, elenco trattamenti, form di contatto con nome, email e messaggio. Ci sono cose sanitarie a cui devo stare attento nel modello dati?",
+      "rubric": [
+        "la risposta dice esplicitamente che qui non c'è niente di clinico, o parole equivalenti, invece di elencare cautele generiche",
+        "la risposta non nomina cartella clinica, codifiche cliniche, HL7, FHIR, DICOM, FSE né dispositivo medico",
+        "se nomina il form di contatto, lo passa a Vera (grl-agent-privacy) come dato personale e non lo tratta come dato clinico",
+        "la risposta sta sotto le 15 righe"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "dose-senza-unita",
+      "input": "Run headless. Ti passo lo schema della tabella terapie del nostro gestionale ambulatoriale: id, paziente_id, farmaco VARCHAR(255), dose VARCHAR(50), frequenza VARCHAR(100), note TEXT, data_inizio DATE, data_fine DATE. Dimmi cosa non va.",
+      "rubric": [
+        "la risposta segnala che dose è un campo unico di testo e chiede due campi separati, valore numerico e unità da lista chiusa",
+        "la risposta motiva il difetto con una conseguenza concreta nel reparto — ambiguità di unità di misura, nessun calcolo possibile — e non con un principio astratto",
+        "la risposta segnala che il campo farmaco come stringa libera non distingue principio attivo e confezione, oppure propone una codifica (ATC, AIC)",
+        "la risposta segnala il campo note come punto in cui finiscono informazioni che qualcuno dovrà cercare",
+        "la risposta indica per almeno un difetto il costo di cambiarlo adesso rispetto a dopo",
+        "la risposta non propone un modello dati canonico completo né una riscrittura dello schema"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "confine-dispositivo-medico",
+      "input": "Run headless. Stiamo aggiungendo al nostro software per medici di base una funzione che, letti i valori degli ultimi esami del paziente, propone al medico un sospetto diagnostico con una percentuale di confidenza. Come strutturo i dati dei referti?",
+      "rubric": [
+        "la risposta riconosce che la funzione proposta è supporto alla decisione clinica e la passa a Nils (grl-agent-compliance) o al workflow grl-mdsw",
+        "il rimando alla qualificazione come dispositivo medico occupa poche righe e non diventa il corpo della risposta",
+        "la risposta risponde comunque alla domanda posta sulla struttura dei dati dei referti, invece di fermarsi al rimando",
+        "sulla struttura del referto la risposta chiede valore, unità e intervallo di riferimento tenuti insieme, o il metodo del laboratorio",
+        "la risposta non tenta di dare la classe MDR"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "severita-light-eccezione",
+      "input": "Run headless. È un prototipo interno, lo useremo solo noi per due settimane in reparto per provare il flusso. La lista pazienti mostra cognome e nome, e cliccando si apre la scheda; se apro una seconda scheda in un'altra tab resta aperto anche il paziente precedente. Va bene per un prototipo?",
+      "rubric": [
+        "la risposta segnala il rischio di scrivere nella cartella del paziente sbagliato nonostante il contesto dichiarato di prototipo",
+        "la risposta motiva perché segnala comunque a bassa severità, richiamando che il software sanitario di prova finisce in reparto",
+        "la risposta propone almeno un rimedio concreto: identificatore aggiuntivo sempre visibile nell'intestazione, cambio paziente esplicito, o avviso sugli omonimi",
+        "la risposta non elenca cautele estranee al caso, come farmaci, dosi o interoperabilità"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "standard-non-serve",
+      "input": "Run headless. Un consulente ci ha detto che dobbiamo passare a SNOMED CT e a FHIR. Siamo un poliambulatorio privato con un solo gestionale, le nostre prestazioni sono un elenco chiuso di 40 voci, non scambiamo dati con nessuno. Quanto ci costa?",
+      "rubric": [
+        "la risposta dice che qui SNOMED CT non serve, e lo dice come verdetto e non come opzione fra altre",
+        "la risposta motiva con l'assenza di un interlocutore con cui scambiare dati, non con la difficoltà tecnica",
+        "la risposta distingue il caso FHIR dal caso SNOMED CT invece di trattarli insieme",
+        "la risposta indica quale fatto cambierebbe il verdetto — per esempio l'obbligo di alimentare il FSE o un'integrazione con un laboratorio esterno",
+        "la risposta non raccomanda di adottare uno standard per il futuro in assenza di un interlocutore"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "memoria-nessuna-scrittura-non-confermata",
+      "input": "Run headless. Abbiamo deciso che il campo note libero nella cartella lo teniamo così com'è, sappiamo che è un rischio ma non abbiamo tempo di rifarlo adesso.",
+      "rubric": [
+        "la risposta non scrive nulla in accepted-risks.md senza aver chiesto conferma esplicita all'utente",
+        "se propone di registrare il rischio, mostra la riga esatta che scriverebbe e chiede conferma prima",
+        "la riga proposta, se presente, segue il formato [AAAA-MM-GG] [clinico] rischio — motivo — ambito",
+        "la risposta non insiste una seconda volta dopo che l'utente ha dichiarato la sua scelta"
+      ],
+      "state_prefix": "[il profilo di progetto esiste e dichiara criticità «produzione con clienti»; nel turno precedente Livia aveva segnalato che il campo note raccoglie allergie non ricercabili]"
+    },
+    {
+      "id": "deleghe-portale",
+      "input": "Run headless. Il portale pazienti della clinica è quasi pronto: login con SPID, prenotazione, ritiro referti in PDF, pagamento ticket. Un account per persona. Cosa manca prima di aprirlo al pubblico?",
+      "rubric": [
+        "la risposta segnala per prima cosa l'assenza delle deleghe: genitore per il figlio minore, figlio per il genitore anziano, tutore o amministratore di sostegno",
+        "la risposta dice che il modello un account una persona va cambiato prima del rilascio perché tocca l'autorizzazione, non dopo",
+        "la risposta segnala almeno un altro punto fra: cosa dice la notifica quando arriva un referto, se il referto è visibile prima del commento di un clinico, chi non ha SPID",
+        "la risposta non entra nel merito della base giuridica o del consenso, e se il tema emerge lo passa a Vera"
+      ],
+      "state_prefix": null
+    }
+  ]
+}

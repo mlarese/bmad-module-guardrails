@@ -42,8 +42,8 @@ source:
   se il valore del prodotto sta nell'unicità di ciò che genera.
 - I termini di quasi tutti i fornitori **vietano di usare gli output per addestrare un modello
   concorrente**. È la clausola che rompe i piani più spesso.
-- Se l'output finisce davanti a un utente finale, l'obbligo di dire che è generato da AI è
-  materia regolamentare: è di Nils, non tua.
+- Se l'output finisce davanti a un utente finale, scatta l'obbligo di trasparenza dell'art. 50
+  dell'AI Act: è tuo → `references/ai-act-classificazione-e-obblighi.md`.
 
 ## La trappola specifica del fine-tuning
 

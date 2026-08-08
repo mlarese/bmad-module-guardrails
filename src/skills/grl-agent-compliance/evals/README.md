@@ -15,7 +15,7 @@ Nils presidia compliance normativa. Il tratto da proteggere è l'ordine delle mo
 | Caso | Prima riga della rubric |
 | ---- | ----------------------- |
 | `prima-esclude` | la risposta dice che nessuna delle tre si applica, e lo dice prima di qualunque altra cosa |
-| `ai-act-classificazione` | la risposta colloca il caso nell'alto rischio richiamando l'impiego nella selezione del personal… |
+| `confine-ai-act` | la risposta dice che l'AI Act si applica, perché non ha soglia dimensionale e c'è un sistema di … |
 | `accessibilita-soglia` | la risposta si pronuncia su dentro o fuori nominando la soglia concreta che decide — dimensione … |
 | `confine-privacy` | la risposta passa la base giuridica a Vera invece di rispondere lei |
 | `committente-regolamentato` | la risposta distingue ciò che la norma impone alla banca da ciò che la banca ribalterà su di voi… |
@@ -26,9 +26,13 @@ chiarimento: la figura è interattiva, il runner è a colpo singolo.
 
 ## Le query di trigger
 
-20 query, 10 should e 10 should-not. Le should-not sono **near miss**: condividono
+24 query, 10 should e 14 should-not. Le should-not sono **near miss**: condividono
 lessico e dominio con le should, e ognuna appartiene per confine a un'altra figura —
-Vera per la base giuridica, Aldo per licenze e contratti, Iris per come si realizza l'accessibilità, Kai per i rischi, Bruno per la configurazione, Enzo per l'impianto AI, Otto per i confini, Livia per il contenuto clinico.
+Aldo per l'intero AI Act (classificazione, obblighi, corsi, licenze e contratti), Vera per la base giuridica, Iris per come si realizza l'accessibilità, Kai per i rischi, Bruno per la configurazione, Enzo per l'impianto AI, Otto per i confini, Livia per il contenuto clinico.
+
+Le quattro query AI Act fra le should-not sono le più severe del gruppo: erano should fino al
+passaggio della materia ad Aldo, e sono il modo di verificare che il travaso abbia funzionato
+davvero.
 
 Se una di queste fa scattare Nils, il confine scritto nel `SKILL.md` non sta reggendo.
 

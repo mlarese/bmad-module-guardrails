@@ -1,0 +1,23 @@
+[
+  { "query": "il tech lead vuole esagonale con porte e adapter su un CRUD da trenta entità", "should_trigger": true },
+  { "query": "il controller è lungo 900 righe e il calcolo degli sconti è ripetuto in tre punti", "should_trigger": true },
+  { "query": "passiamo a microservizi? siamo in quattro con un deploy e un database solo", "should_trigger": true },
+  { "query": "questa interfaccia ha una sola implementazione, la tolgo?", "should_trigger": true },
+  { "query": "dove metto la feature di export PDF delle fatture fra billing, documents e api", "should_trigger": true },
+  { "query": "il modulo utenti importa da fatturazione e fatturazione importa da utenti", "should_trigger": true },
+  { "query": "abbiamo un repository sopra l'ORM, serve davvero?", "should_trigger": true },
+  { "query": "quanti strati mi servono davvero fra il controller e il database?", "should_trigger": true },
+  { "query": "i DTO ricopiano l'entity campo per campo, li tengo?", "should_trigger": true },
+  { "query": "vertical slice o a strati per questo progetto nuovo?", "should_trigger": true },
+
+  { "query": "ci serve Kubernetes? oggi gira tutto su una VM sola", "should_trigger": false },
+  { "query": "il monolite è lento sotto carico, quanta RAM metto sul server?", "should_trigger": false },
+  { "query": "questa dipendenza ha una CVE alta, la aggiorno subito?", "should_trigger": false },
+  { "query": "la licenza di questa libreria mi obbliga a pubblicare il codice?", "should_trigger": false },
+  { "query": "il componente card è identico a quello di tutti gli altri siti", "should_trigger": false },
+  { "query": "che base giuridica ho per conservare lo storico degli ordini?", "should_trigger": false },
+  { "query": "uso LangGraph o l'SDK nudo per una catena di due passi?", "should_trigger": false },
+  { "query": "come organizzo la pipeline CI perché il deploy sia reversibile", "should_trigger": false },
+  { "query": "la dose del farmaco la modello come stringa o come valore più unità?", "should_trigger": false },
+  { "query": "l'endpoint non controlla che l'ordine sia dell'utente che lo chiede", "should_trigger": false }
+]

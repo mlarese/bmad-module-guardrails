@@ -1,0 +1,74 @@
+{
+  "cases": [
+    {
+      "id": "qui-non-serve",
+      "input": "Run headless. Progetto nuovo, due sviluppatori, un CRUD con una trentina di entità. Il tech lead propone architettura esagonale con porte, adapter, DTO su ogni confine e un repository sopra l'ORM. Partiamo così?",
+      "rubric": [
+        "la risposta dice che qui non serve, e lo dice senza imbarazzo e senza predica sui principi",
+        "la risposta smonta almeno il repository sopra l'ORM chiedendo cosa aggiunge che l'ORM non fa già",
+        "la risposta smonta almeno i DTO che ricopiano l'entity campo per campo chiedendo quale campo è diverso",
+        "la risposta dice cosa si guadagna a non farlo in termini concreti: file in meno, un posto solo da cambiare",
+        "la risposta indica cosa dovrebbe cambiare nel progetto perché quegli strati diventino giustificati",
+        "la risposta non propone in cambio un'altra architettura completa"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "manca-un-confine",
+      "input": "Run headless. Il file `OrderController.ts` è lungo 900 righe: valida l'input, calcola gli sconti, scrive su tre tabelle, manda l'email e formatta la risposta. Il calcolo degli sconti è ripetuto quasi uguale in `CartController` e in un job notturno. Che faccio?",
+      "rubric": [
+        "la risposta riconosce il caso opposto all'over-engineering: qui un confine manca",
+        "la risposta indica il calcolo degli sconti come primo intervento, perché è duplicato in tre punti con esiti potenzialmente diversi",
+        "la risposta propone di estrarre una cosa sola per volta, non un piano che riscrive il controller intero",
+        "la risposta dice chi paga e quando se non si interviene",
+        "la risposta non emette giudizi su chi ha scritto quel codice"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "microservizi-no",
+      "input": "Run headless. Siamo un team di quattro, un deploy solo, un database solo. Vogliamo passare a microservizi per scalare meglio. Da dove cominciamo a tagliare?",
+      "rubric": [
+        "la risposta dice che con un team, un deploy e un database quelli non sarebbero microservizi ma moduli con la latenza di rete in regalo",
+        "la risposta chiede cosa si distribuirebbe separatamente, che è la domanda che smonta la proposta",
+        "la risposta propone l'alternativa concreta: confini netti dentro lo stesso deploy, che è il passo che rende possibile un'eventuale separazione futura",
+        "la risposta indica quale segnale reale giustificherebbe la separazione — team che si pestano i piedi, parti con profili di carico diversi",
+        "la risposta non fornisce comunque un piano di taglio in servizi"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "eccezione-concordata",
+      "input": "Run headless. Sì, lo so che l'interfaccia `PaymentGateway` ha una sola implementazione. L'abbiamo messa due anni fa quando il cliente cambiò provider di pagamento in corsa, e potrebbe risuccedere.",
+      "rubric": [
+        "la risposta accetta la ragione come buona e chiude la partita, invece di insistere",
+        "la risposta propone di registrare l'eccezione come concordata, così non viene ridiscussa alla sessione successiva",
+        "la risposta non ripropone la rimozione dell'interfaccia in altra forma",
+        "la risposta non elenca altre astrazioni sospette per compensare"
+      ],
+      "state_prefix": "[il profilo esiste; nel turno precedente Otto aveva segnalato l'interfaccia con una sola implementazione]"
+    },
+    {
+      "id": "confine-ops",
+      "input": "Run headless. Ci serve Kubernetes? Abbiamo un'applicazione monolitica in Django, 300 utenti attivi al giorno, oggi gira su una VM sola.",
+      "rubric": [
+        "la risposta passa la domanda a Bruno, perché la scelta dell'infrastruttura è sua",
+        "la risposta interviene solo se e nella misura in cui la scelta cambierebbe i confini del codice, e lo dice esplicitamente",
+        "la risposta non fornisce raccomandazioni di dimensionamento, manifest o configurazione",
+        "il rimando occupa poche righe"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "dove-metto-la-feature",
+      "input": "Run headless. Dobbiamo aggiungere l'export in PDF delle fatture. Il codice ha `billing/`, `documents/` e `api/`. Dove la metto e cosa tocco?",
+      "rubric": [
+        "la risposta dice dove collocare la feature e perché, nominando le cartelle che esistono davvero",
+        "la risposta dice esplicitamente cosa non va toccato",
+        "la risposta ragiona sulla direzione delle dipendenze fra i moduli coinvolti, non solo sulla collocazione del file",
+        "la risposta non propone di introdurre un nuovo strato o una nuova cartella se le tre esistenti bastano"
+      ],
+      "state_prefix": null
+    }
+  ]
+}

@@ -15,6 +15,6 @@ code = "compliance"
 name = "Nils"
 title = "Regulatory Compliance"
 icon = "📐"
-description = "Prima esclude, poi prescrive: delle norme che ti preoccupano, quasi sempre metà non ti riguarda. Conosce le soglie di applicabilità di AI Act, NIS2, DORA, accessibilità EAA/WCAG, eIDAS e dei regimi bancario e sanitario — dimensione, settore, mercato, tipo di sistema — e sa da quando un obbligo scatta davvero. Parla come un cartografo che traccia un confine: calmo, mai enfatico, una riga per norma, dentro o fuori."
+description = "Prima esclude, poi prescrive: delle norme che ti preoccupano, quasi sempre metà non ti riguarda. Conosce le soglie di applicabilità di NIS2, DORA, accessibilità EAA/WCAG, eIDAS, Cyber Resilience Act e dei regimi bancario e sanitario — dimensione, settore, mercato, tipo di sistema — e sa da quando un obbligo scatta davvero. Parla come un cartografo che traccia un confine: calmo, mai enfatico, una riga per norma, dentro o fuori."
 agent_type = "stateless"   # stateless | memory | autonomous
 

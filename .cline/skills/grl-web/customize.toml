@@ -1,0 +1,61 @@
+# DO NOT EDIT -- overwritten on every update.
+#
+# Workflow customization surface for grl-web.
+# Team overrides:     {project-root}/_bmad/custom/grl-web.toml
+# Personal overrides: {project-root}/_bmad/custom/grl-web.user.toml
+#
+# Merge: gli scalari vengono sovrascritti (vince l'ultimo strato applicato),
+# gli array vengono accodati. Non esiste un meccanismo di rimozione: una voce
+# di base non si può togliere da un override, si toglie forkando la skill.
+
+[workflow]
+
+# --- Default universali ---
+activation_steps_prepend = []
+activation_steps_append = []
+persistent_facts = ["file:{project-root}/**/project-context.md"]
+on_complete = ""
+
+# --- Punti specifici di questa skill ---
+
+# Dove vivono le pagine prodotte. Ogni lavoro ha la sua cartella, che contiene
+# il brief di conversione e il file della pagina.
+output_path = "{project-root}/_bmad-output/web"
+
+# Nome della cartella del singolo lavoro. {slug} è il nome in kebab-case della
+# pagina o del sito, ricavato da come l'utente lo chiama. Nel modo sito la
+# cartella contiene brief-sito.md e una sottocartella per pagina.
+run_folder_pattern = "{slug}"
+
+# Il brief di UNA PAGINA (`brief.md`): destinatario, promessa, obiezione, prova,
+# azione, più lo stato del gate. È lo stato del lavoro fra un turno e l'altro,
+# quindi cambiarlo cambia cosa sopravvive a una ripresa.
+brief_template = "assets/brief-template.md"
+
+# Il brief di SITO del modo mockup (`brief-sito.md`, alla radice della cartella
+# di lavoro): elenco delle pagine, navigazione, direzione visiva, gate di sito.
+# Da non confondere con site_template qui sotto, che è un altro artefatto.
+site_brief_template = "assets/brief-sito-template.md"
+
+# La scheda del modo `configura` (`sito.md`): il progetto vero, non il mockup —
+# pagine con il loro gate, direzione visiva, sezioni con la forma dei contenuti,
+# animazioni. bmad-spec la adotta come companion e non la riscrive, quindi
+# cambiarne la struttura cambia cosa arriva a chi implementa le fette.
+site_template = "assets/sito-template.md"
+
+# Stack e convenzioni di sviluppo. È il posto dove vive il «come», che nel
+# kernel della spec non può stare. Un'organizzazione che standardizza su un
+# altro framework sovrascrive questo file e non tocca il resto.
+stack_template = "assets/stack-template.md"
+
+# Chi guarda la pagina prima che venga consegnata. Iris è la base e non si può
+# togliere: il modulo Guardrails non consegna pagine che non ha guardato.
+# Un override può aggiungere altri revisori, mai rimuovere questo.
+# Nota: se grl-board è installato, il gate passa da lì e questa lista è il
+# fallback — grl-board seleziona da sé le figure pertinenti.
+finalize_reviewers = ["skill:grl-agent-ui-critic"]
+
+# Dove va instradato il progetto quando è pronto per la messa online. Il modulo
+# manda a Bruno; un'organizzazione con una propria pipeline di rilascio aggiunge
+# la sua destinazione senza perdere questa.
+external_handoffs = ["skill:grl-agent-ops"]

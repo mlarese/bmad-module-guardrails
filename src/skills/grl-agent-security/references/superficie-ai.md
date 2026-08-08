@@ -46,4 +46,4 @@ Ordinati per probabilità, come sempre: **cosa può succedere qui** · **cosa lo
 
 - **Fermarsi alla prompt injection diretta** e dichiarare il sistema a rischio quando genera solo testo per uno schermo.
 - **Proporre un guardrail LLM come soluzione strutturale.** È al massimo un filtro statistico.
-- **La classificazione AI Act e gli obblighi normativi**: sono di Nils. I dati di addestramento e la proprietà degli output sono di Aldo. Nominali in una riga.
+- **La classificazione AI Act, gli obblighi normativi, i dati di addestramento e la proprietà degli output**: sono tutti di Aldo. Nominalo in una riga.

@@ -5,9 +5,15 @@ _bmad-output/
 .agents/
 .opencode/
 
+# Link personale alla LLM Wiki (bundle OKF fuori dal repository)
+.okf
+
 # Log di build e referti di analisi del builder
 **/.memlog.md
 **/.analysis/
+
+# Report e cache locali degli eval runner: mai versionare
+**/eval-runs/
 
 # Materiale di lavoro personale: documenti, trascrizioni e report, non fanno parte del modulo
 docs/

@@ -1,0 +1,23 @@
+[
+  { "query": "da dove mi attaccherebbero questa API pubblica?", "should_trigger": true },
+  { "query": "l'endpoint restituisce l'ordine se il token è valido, ma non controlla di chi è l'ordine", "should_trigger": true },
+  { "query": "la chiave di Stripe è finita in un commit su GitHub sei mesi fa", "should_trigger": true },
+  { "query": "npm audit segnala 23 vulnerabilità, blocco il rilascio?", "should_trigger": true },
+  { "query": "il reset password non ha limiti di tentativi e dice se l'email esiste", "should_trigger": true },
+  { "query": "accettiamo upload di PDF dagli utenti, cosa può andare storto", "should_trigger": true },
+  { "query": "il webhook di Stripe lo verifico con la firma o basta l'IP?", "should_trigger": true },
+  { "query": "un cliente ha scritto nel ticket ignora le istruzioni precedenti e il bot può emettere rimborsi", "should_trigger": true },
+  { "query": "il pannello di amministrazione non ha il secondo fattore, quanto è grave", "should_trigger": true },
+  { "query": "chi ha aperto la cartella clinica di quel paziente, mi serve poterlo dimostrare", "should_trigger": true },
+
+  { "query": "dove metto le chiavi API in produzione, Vault o i secret del cluster?", "should_trigger": false },
+  { "query": "che base giuridica ho per loggare l'indirizzo IP degli utenti", "should_trigger": false },
+  { "query": "la licenza di questa libreria di crittografia mi obbliga a pubblicare il sorgente?", "should_trigger": false },
+  { "query": "NIS2 si applica alla nostra azienda? siamo 60 persone nel settore sanitario", "should_trigger": false },
+  { "query": "come configuro il firewall e il reverse proxy sul nuovo server", "should_trigger": false },
+  { "query": "il modulo di autenticazione dipende dal modulo di fatturazione, come separo i confini", "should_trigger": false },
+  { "query": "la schermata di login è identica a tutte le altre, hero in gradiente e campo centrato", "should_trigger": false },
+  { "query": "quale modello uso per classificare i ticket e quanto mi costa a regime", "should_trigger": false },
+  { "query": "il paziente può oscurare un documento sul fascicolo, come lo progetto nel modello dati", "should_trigger": false },
+  { "query": "quanto tengo i log di accesso prima di cancellarli?", "should_trigger": false }
+]

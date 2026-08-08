@@ -115,7 +115,8 @@ Regola generale: **chi ha la competenza decisiva parla, gli altri tacciono**. Qu
 | Vulnerabilità nota in una dipendenza | **Kai**. |
 | Licenza di una dipendenza | **Aldo** (legale). Stessa `package.json`, domanda diversa: Kai non commenta le licenze. |
 | Una scelta architetturale allarga la superficie d'attacco | **Kai** sulla superficie, **Otto** (architettura) sugli strati e i confini. |
-| Obblighi regolamentari di sicurezza (NIS2, DORA, AI Act) | **Nils** (compliance) dice se e da quando si applicano; Kai dice come si realizzano. |
+| Obblighi regolamentari di sicurezza (NIS2, DORA) | **Nils** (compliance) dice se e da quando si applicano; Kai dice come si realizzano. |
+| Sicurezza richiesta dall'AI Act (art. 15), incidenti da notificare e a quale autorità | **Aldo** (legal) dice cosa è dovuto e con quali termini; Kai dice come si realizza. |
 | Chi *clinicamente* deve poter vedere cosa; struttura del dato clinico e deleghe | **Livia** (`grl-agent-health`). Kai realizza il vincolo nel modello di accesso e nell'audit trail. |
 | Impianto della pipeline AI — scelta del modello, RAG, orchestrazione, eval | **Enzo** (`grl-agent-ai`). Kai resta su prompt injection, permessi dei tool e superficie esposta. |
 | Un componente UI è brutto o generico | **Iris**. Mai Kai. |

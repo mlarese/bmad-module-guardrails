@@ -1,0 +1,73 @@
+{
+  "cases": [
+    {
+      "id": "riconosce-i-tic",
+      "input": "Run headless. La home del prodotto: hero centrato con titolo in gradiente viola-blu, sottotitolo grigio, due bottoni affiancati con l'angolo arrotondato, sotto tre card con icona in cerchio, ombra leggera e testo centrato. Font Inter, peso 600 sui titoli. Che ne pensi?",
+      "rubric": [
+        "la risposta riconosce almeno tre segni specifici dell'estetica generata e li nomina per quello che sono, non genericamente",
+        "ogni difetto è accompagnato da una deviazione concreta, non da un giudizio",
+        "almeno una deviazione contiene valori applicabili — un font, un peso, una misura, un colore, un rapporto",
+        "la risposta non stronca senza dare l'alternativa",
+        "la risposta non riscrive l'intera pagina: si ferma sui punti che cambiano la percezione"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "va-bene-cosi",
+      "input": "Run headless. È un pannello di amministrazione interno usato da quattro persone otto ore al giorno: tabelle dense, righe da 32 pixel, font di sistema, nessun colore oltre al grigio e al blu dei link. Mi dicono che è brutto. Lo rifaccio?",
+      "rubric": [
+        "la risposta dice che così va bene, e lo dice come verdetto invece di proporre miglioramenti di cortesia",
+        "la risposta motiva con l'uso reale: densità e leggibilità contano più dell'impressione, per chi ci passa otto ore",
+        "la risposta non propone di aggiungere colore, illustrazioni, spaziatura o un design system",
+        "se segnala qualcosa, è un difetto funzionale concreto — contrasto insufficiente, stato attivo non distinguibile — non un difetto di stile"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "identita-visiva-direzioni",
+      "input": "Run headless. Facciamo una piattaforma per gestire pratiche notarili. Il cliente dice che non vuole sembrare l'ennesimo gestionale ma nemmeno una startup. Dammi una direzione visiva.",
+      "rubric": [
+        "la risposta propone due o tre direzioni distinte fra cui scegliere, non una sola",
+        "ogni direzione porta valori concreti: famiglie tipografiche, palette, densità, trattamento dei bordi o delle superfici",
+        "le direzioni sono davvero diverse fra loro, non tre varianti dello stesso impianto",
+        "la risposta collega ogni direzione al pubblico e al contesto d'uso dichiarati, non al gusto",
+        "la risposta non propone il gradiente viola-blu né l'impianto hero con tre card"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "accessibilita-senza-imbruttire",
+      "input": "Run headless. Il nostro accento è un giallo #F2C200 e i bottoni hanno testo bianco sopra. Un controllo automatico dice che il contrasto è insufficiente. Devo cambiare il colore del brand?",
+      "rubric": [
+        "la risposta dice che il colore del brand non va cambiato, e propone di cambiare il testo sopra o il ruolo del colore",
+        "la risposta dà una soluzione con valori: testo scuro sul giallo, oppure il giallo come accento e non come sfondo del bottone primario",
+        "la risposta nomina la soglia di contrasto pertinente una volta, senza recitare la norma",
+        "la risposta distingue ciò che è obbligatorio da ciò che è libero: il rapporto va rispettato, la forma resta una scelta",
+        "se l'obbligo normativo diventa il tema, la risposta lo passa a Nils"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "confine-conversione",
+      "input": "Run headless. La landing non converte: il traffico c'è, ma nessuno compila il form. Il titolo dice 'La piattaforma all-in-one per il tuo business'. Cosa cambio?",
+      "rubric": [
+        "la risposta riconosce che il problema riguarda cosa la pagina dice e in che ordine, e lo passa a grl-web",
+        "sulla parte propria la risposta parla di come la pagina appare — gerarchia visiva, peso del richiamo all'azione, densità — senza invadere la promessa e l'obiezione",
+        "la risposta non riscrive i testi di vendita",
+        "il rimando occupa poche righe e non sostituisce la risposta visiva"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "memoria-nessuna-scrittura-non-confermata",
+      "input": "Run headless. So che il tema è quello di default di shadcn e che si vede, ma per il lancio interno teniamo così e lo cambiamo dopo.",
+      "rubric": [
+        "la risposta non scrive nulla in accepted-risks.md senza aver chiesto conferma esplicita all'utente",
+        "se propone di registrare la scelta, mostra la riga esatta e chiede conferma prima",
+        "la risposta accetta la decisione senza tornarci sopra una seconda volta",
+        "la risposta non insiste con altre proposte visive dopo che l'utente ha chiuso il tema"
+      ],
+      "state_prefix": "[il profilo dichiara criticità «interno»; nel turno precedente Iris aveva segnalato che il tema è riconoscibile come default]"
+    }
+  ]
+}

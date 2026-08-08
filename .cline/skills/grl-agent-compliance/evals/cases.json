@@ -1,0 +1,76 @@
+{
+  "cases": [
+    {
+      "id": "prima-esclude",
+      "input": "Run headless. Siamo in otto, facciamo un gestionale in SaaS per officine meccaniche, clienti solo italiani, nessun componente AI. Il commercialista ci ha spaventati con NIS2, DORA e AI Act. Cosa ci riguarda?",
+      "rubric": [
+        "la risposta dice che nessuna delle tre si applica, e lo dice prima di qualunque altra cosa",
+        "per NIS2 la risposta nomina la soglia che chiude la porta: settore non incluso, dimensione sotto la soglia, o entrambe",
+        "per DORA la risposta nomina il perimetro finanziario come motivo dell'esclusione",
+        "per AI Act la risposta nomina l'assenza di un sistema di IA nel prodotto",
+        "la risposta elenca esplicitamente ciò che non si applica invece di limitarsi a parlare di ciò che si applica",
+        "la risposta non introduce norme che l'utente non ha nominato, salvo che scattino davvero"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "ai-act-classificazione",
+      "input": "Run headless. Il nostro prodotto usa un LLM per riassumere i curricula e proporre al recruiter una rosa di candidati ordinata. Vendiamo a aziende italiane. Che rischio siamo secondo l'AI Act?",
+      "rubric": [
+        "la risposta colloca il caso nell'alto rischio richiamando l'impiego nella selezione del personale",
+        "la risposta distingue il proprio ruolo — fornitore del sistema — da quello dell'azienda che lo utilizza, perché gli obblighi differiscono",
+        "la risposta nomina gli obblighi che ne discendono in linguaggio di progetto, non come elenco di articoli",
+        "la risposta dice da quando l'obbligo è esigibile, oppure dichiara che la data va verificata perché la materia si muove",
+        "la risposta non conclude che basta dichiarare che il contenuto è generato da AI"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "accessibilita-soglia",
+      "input": "Run headless. Stiamo per pubblicare un e-commerce di articoli sportivi, vendiamo in Italia e Germania. Siamo 15 persone e fatturiamo 1,8 milioni. L'accessibilità è obbligatoria per noi?",
+      "rubric": [
+        "la risposta si pronuncia su dentro o fuori nominando la soglia concreta che decide — dimensione dell'impresa e fatturato per la microimpresa, tipo di servizio",
+        "la risposta distingue l'obbligo di legge dal livello tecnico da raggiungere, e nomina lo standard solo se l'obbligo scatta",
+        "la risposta nomina la data da cui l'obbligo è esigibile, o dichiara che va verificata",
+        "se l'esito è dentro, la risposta dice cosa comporta in pratica per chi costruisce, in poche righe",
+        "la risposta non entra nel merito di come si realizza l'accessibilità senza peggiorare il design, e se serve lo passa a Iris"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "confine-privacy",
+      "input": "Run headless. Trattiamo dati sanitari dei pazienti di una clinica. Che base giuridica ci serve e per quanto li dobbiamo conservare?",
+      "rubric": [
+        "la risposta passa la base giuridica a Vera invece di rispondere lei",
+        "la risposta interviene sulla parte che le compete: la conservazione imposta dal settore sanitario, che è un vincolo aggiuntivo rispetto al GDPR",
+        "la risposta distingue chiaramente i due piani — ciò che il GDPR lascia decidere e ciò che il settore impone",
+        "il rimando a Vera occupa una riga e non sostituisce la parte di competenza propria"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "committente-regolamentato",
+      "input": "Run headless. Ci ha contattati una banca: vogliono che sviluppiamo per loro un portale interno. Noi siamo cinque persone. Cosa ci chiederanno che oggi non abbiamo?",
+      "rubric": [
+        "la risposta distingue ciò che la norma impone alla banca da ciò che la banca ribalterà su di voi per contratto",
+        "la risposta dice che il fornitore non diventa soggetto vigilato, e questo è il punto che sgonfia l'allarme",
+        "la risposta elenca i requisiti concreti che arriveranno per contratto: diritto di audit, continuità operativa, notifica degli incidenti, gestione dei subfornitori",
+        "la risposta indica quale di questi va preparato prima della trattativa e quale può aspettare",
+        "la risposta non recita l'elenco completo della normativa bancaria"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "dispositivo-medico-rimando",
+      "input": "Run headless. Il nostro software legge i valori degli esami e propone al medico un sospetto diagnostico. Siamo un dispositivo medico? Di che classe?",
+      "rubric": [
+        "la risposta riconosce che si tratta di supporto alla decisione diagnostica e colloca il caso almeno in classe IIa richiamando la Regola 11",
+        "la risposta dice che la classe IIa comporta un organismo notificato, e che questo cambia i tempi del progetto",
+        "la risposta nomina il workflow grl-mdsw come percorso guidato per il verdetto completo",
+        "la risposta dice anche cosa non comporta: non tutto il prodotto va marcato se qualifica un solo modulo",
+        "la risposta non dà la classe come definitiva quando servirebbe il parere di un organismo notificato"
+      ],
+      "state_prefix": null
+    }
+  ]
+}

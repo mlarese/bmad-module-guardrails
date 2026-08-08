@@ -72,4 +72,4 @@ Il capo V resta tuo: log, sorveglianza umana e assistenza di un fornitore extra-
 
 ## Dove ti fermi
 
-Categoria di rischio, ruolo ai fini del regolamento, calendario, obblighi documentali dell'alto rischio e trasparenza dell'art. 50 sono di **Nils**. Manleve, massimali dell'art. 99 e responsabilità civile sono di **Aldo**. Nominali in una riga e fermati.
+Categoria di rischio, ruolo ai fini del regolamento, calendario, obblighi documentali dell'alto rischio, trasparenza dell'art. 50, manleve, massimali dell'art. 99 e responsabilità civile sono di **Aldo**: sull'AI Act è lui il riferimento unico. Nominalo in una riga e fermati.

@@ -1,0 +1,23 @@
+[
+  { "query": "come modello la tabella delle terapie? ho farmaco, dose e frequenza", "should_trigger": true },
+  { "query": "il campo diagnosi lo tengo come testo libero o mi serve una codifica tipo ICD?", "should_trigger": true },
+  { "query": "dobbiamo ricevere i risultati dal laboratorio, mi hanno parlato di HL7 v2 e messaggi ORU", "should_trigger": true },
+  { "query": "cosa serve per pubblicare i referti sul Fascicolo Sanitario Elettronico?", "should_trigger": true },
+  { "query": "sto facendo il portale pazienti della clinica, cosa mi manca prima di aprirlo", "should_trigger": true },
+  { "query": "la nostra piattaforma di televisita è solo una videochiamata o serve altro", "should_trigger": true },
+  { "query": "due pazienti omonimi nella stessa lista, come evito che l'infermiere scriva nella cartella sbagliata", "should_trigger": true },
+  { "query": "il PACS ci manda le immagini, che metadati mi arrivano dentro i file DICOM?", "should_trigger": true },
+  { "query": "il gestionale dello studio deve prenotare sul CUP regionale, da dove parto", "should_trigger": true },
+  { "query": "questa schermata la compila l'infermiere durante il giro visite, quanti campi obbligatori posso mettere", "should_trigger": true },
+
+  { "query": "il nostro software calcola la dose consigliata: dobbiamo marcarlo CE come dispositivo medico?", "should_trigger": false },
+  { "query": "che base giuridica ho per trattare i dati sanitari dei pazienti, mi serve il consenso?", "should_trigger": false },
+  { "query": "chi ha aperto la cartella clinica di quel paziente? mi serve un audit trail degli accessi", "should_trigger": false },
+  { "query": "dove ospito i referti, il conservatore a norma me lo devo comprare o lo configuro io", "should_trigger": false },
+  { "query": "la clinica mi chiede una landing page nuova per il servizio di fisioterapia", "should_trigger": false },
+  { "query": "il visualizzatore DICOM è raggiungibile da internet senza password, quanto è grave", "should_trigger": false },
+  { "query": "quanto mi costa la licenza di SNOMED CT e posso rivenderla dentro il prodotto?", "should_trigger": false },
+  { "query": "la dashboard del reparto è brutta, le card sono tutte uguali e il font è Inter", "should_trigger": false },
+  { "query": "il modulo cartella e il modulo fatturazione dipendono l'uno dall'altro, come separo i confini", "should_trigger": false },
+  { "query": "vorrei un chatbot che risponde ai pazienti sulle prestazioni disponibili, uso RAG sui nostri PDF?", "should_trigger": false }
+]
