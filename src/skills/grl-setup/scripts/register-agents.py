@@ -21,12 +21,7 @@ Cosa scrive
   `module`, `team`, `name`, `title`, `icon`, `description`. La fonte di verità sono i
   blocchi `[agent]` dei `customize.toml` delle skill installate; `--module-yaml` serve
   solo come ripiego quando le skill non si trovano su disco.
-- `_bmad/custom/config.user.toml` → `[modules.grl] strictness_override`, solo se passato
-  `--strictness`. È un'impostazione personale, quindi vive nel layer utente (gitignorato).
-  La sezione è `[modules.<code>]`, la stessa convenzione con cui l'installer scrive
-  `[modules.bmm]` e `[modules.bmb]`, ed è dove le figure del modulo vanno a cercarla.
-
-Entrambe le scritture sono anti-zombie: le tabelle precedenti dello stesso modulo vengono
+La scrittura è anti-zombie: le tabelle precedenti dello stesso modulo vengono
 rimosse prima di riscrivere, perché in TOML una tabella dichiarata due volte è un errore
 di parsing. Il risultato viene riparsato con `tomllib` prima di toccare il disco: se non
 è TOML valido, non si scrive nulla.
@@ -47,7 +42,6 @@ sys.dont_write_bytecode = True
 
 MODULE_CODE = "grl"
 AGENT_FIELDS = ("module", "team", "name", "title", "icon", "description")
-STRICTNESS_VALUES = ("", "light", "normal", "strict")
 
 BEGIN = f"# >>> {MODULE_CODE}:agents — generato da {MODULE_CODE}-setup, non modificare a mano >>>"
 END = f"# <<< {MODULE_CODE}:agents <<<"
@@ -224,10 +218,6 @@ def main() -> int:
         help="module.yaml da cui ricavare il roster se le skill non si trovano su disco.",
     )
     parser.add_argument(
-        "--strictness", choices=STRICTNESS_VALUES,
-        help='Valore di strictness_override. Ometti per non toccare l\'impostazione; "" la fa derivare dalla criticità del progetto.',
-    )
-    parser.add_argument(
         "--dry-run", action="store_true",
         help="Mostra cosa verrebbe scritto senza toccare il disco.",
     )
@@ -289,26 +279,6 @@ def main() -> int:
     text += render_agents_block(agents)
     write_validated(custom_config, text, args.dry_run)
 
-    # --- strictness_override → _bmad/custom/config.user.toml (impostazione personale)
-    user_config = bmad_dir / "custom" / "config.user.toml"
-    strictness_written = None
-    if args.strictness is not None:
-        user_text = user_config.read_text(encoding="utf-8") if user_config.is_file() else ""
-        section = f"modules.{MODULE_CODE}"
-        user_text = strip_tables(user_text, lambda h: h in (section, MODULE_CODE))
-        if user_text and not user_text.endswith("\n"):
-            user_text += "\n"
-        if user_text.strip():
-            user_text += "\n"
-        user_text += (
-            f"# Severità delle figure Guardrails. Vuoto = deriva dalla criticità dichiarata\n"
-            f"# nel profilo di progetto (_bmad/memory/{MODULE_CODE}-shared/project-profile.md).\n"
-            f"[{section}]\n"
-            f"strictness_override = {toml_string(args.strictness)}\n"
-        )
-        write_validated(user_config, user_text, args.dry_run)
-        strictness_written = args.strictness
-
     print(json.dumps({
         "status": "success",
         "dry_run": args.dry_run,
@@ -316,8 +286,6 @@ def main() -> int:
         "agents_registered": sorted(agents),
         "agents_count": len(agents),
         "roster_file": str(custom_config),
-        "strictness_override": strictness_written,
-        "strictness_file": str(user_config) if strictness_written is not None else None,
         "warnings": warnings,
     }, indent=2, ensure_ascii=False))
     return 0

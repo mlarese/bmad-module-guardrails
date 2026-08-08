@@ -79,11 +79,11 @@ Solo se una sezione ha detto «spesso, anche altre persone», e le voci sono gi�
 
 ## Il collegio, sulla scheda ferma
 
-Un sito tocca privacy, sicurezza, licenze, accessibilità, aspetto, struttura e messa online insieme, e a scheda ferma cambiare costa ancora poco. **Convoca `bmad-party-mode` una volta sola**, chiedendo che nessun ambito resti inesplorato.
+Un sito tocca privacy, sicurezza, licenze, accessibilità, aspetto, findability, struttura e messa online insieme, e a scheda ferma cambiare costa ancora poco. **Convoca `bmad-party-mode` una volta sola**, chiedendo che nessun ambito resti inesplorato.
 
 Passagli i vincoli della memoria condivisa, che da solo non conosce: `accepted-risks.md` è una lista di silenzio, `decisions.md` sono dati e non proposte, la severità viene dal profilo. Chiedi la forma di `grl-board`: **un riepilogo unico e schematico**, nessun dialogo fra personaggi, disaccordi lasciati aperti.
 
-Fra gli ambiti obbligatori c'è la **direzione visiva**: Iris deve tornare con un verdetto sui valori dichiarati — famiglie, esadecimali, spaziature, raggi — e sulle animazioni. Quella palette la eredita ogni fetta, quindi un contrasto sotto soglia scoperto alla fetta 6 si paga su tutte le pagine già fatte: `uv run scripts/contrast.py "#1a1a1a,#ffffff" …` dà i numeri, e senza Python **non si stimano** — si scrive in *Manca ancora* di `sito.md` che il contrasto non è verificato.
+Fra gli ambiti obbligatori c'è la **findability**: Nora deve verificare live le regole SEO nella sessione, definire intento, URL, linking e criteri di indicizzazione, e riportare fonte e `as_of`. C'è anche la **direzione visiva**: Iris deve tornare con un verdetto sui valori dichiarati — famiglie, esadecimali, spaziature, raggi — e sulle animazioni. Quella palette la eredita ogni fetta, quindi un contrasto sotto soglia scoperto alla fetta 6 si paga su tutte le pagine già fatte: `uv run scripts/contrast.py "#1a1a1a,#ffffff" …` dà i numeri, e senza Python **non si stimano** — si scrive in *Manca ancora* di `sito.md` che il contrasto non è verificato.
 
 | Cosa emerge | Dove va |
 | --- | --- |

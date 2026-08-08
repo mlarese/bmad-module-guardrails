@@ -71,9 +71,10 @@ modules:
   - code: grw
     name: Guardrails Web Experience
     status: planned
-    purpose: "Qualità visiva, landing page e siti."
+    purpose: "Qualità visiva, findability, landing page e siti."
     skills:
       - grl-agent-ui-critic
+      - grl-agent-seo
       - grl-web
     party_groups:
       - grl-web

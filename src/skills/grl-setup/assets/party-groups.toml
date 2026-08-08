@@ -35,8 +35,8 @@ memory = false
 [[workflow.party_groups]]
 id = "grl-web"
 name = "Guardrails Web Experience"
-scene = "Redazione digitale davanti a una pagina: Iris attacca i cliché visivi e Milo controlla che il modello dei contenuti resti a componenti. Se è installato BMM, Sally può entrare per difendere il flusso utente; la stanza deve consegnare mosse concrete, non gusto personale."
-members = ["grl-agent-ui-critic", "grl-agent-wordpress", "bmad-agent-ux-designer"]
+scene = "Redazione digitale davanti a una pagina: Nora controlla domanda, findability e misurazione; Iris attacca i cliché visivi; Milo controlla che il modello dei contenuti resti a componenti. Se è installato BMM, Sally può entrare per difendere il flusso utente; la stanza deve consegnare mosse concrete, non gusto personale."
+members = ["grl-agent-seo", "grl-agent-ui-critic", "grl-agent-wordpress", "bmad-agent-ux-designer"]
 memory = false
 
 [[workflow.party_groups]]
@@ -49,13 +49,13 @@ memory = false
 [[workflow.party_groups]]
 id = "grl-release-gate"
 name = "Guardrails Release Gate"
-scene = "Gate prima del rilascio: Vera, Kai, Aldo, Nils, Otto e Bruno cercano problemi che cambiano davvero la decisione. Ognuno porta il proprio verdetto e la contromisura minima; nessuno trasforma il gate in una checklist infinita."
-members = ["grl-agent-privacy", "grl-agent-security", "grl-agent-legal", "grl-agent-compliance", "grl-agent-architecture", "grl-agent-ops"]
+scene = "Gate prima del rilascio: Vera, Kai, Aldo, Nils, Otto, Bruno e Nora cercano problemi che cambiano davvero la decisione — dati, sicurezza, vincoli, codice, operatività e findability. Ognuno porta il proprio verdetto e la contromisura minima; nessuno trasforma il gate in una checklist infinita."
+members = ["grl-agent-privacy", "grl-agent-security", "grl-agent-legal", "grl-agent-compliance", "grl-agent-architecture", "grl-agent-ops", "grl-agent-seo"]
 memory = false
 
 [[workflow.party_groups]]
 id = "grl-full-board"
 name = "Guardrails Full Board"
 scene = "Collegio completo Guardrails: tutte le figure del modulo sono disponibili, ma parlano solo quando il loro dominio cambia la decisione. Il collegio deve esplicitare i conflitti e lasciare all'utente la scelta finale."
-members = ["grl-agent-privacy", "grl-agent-security", "grl-agent-legal", "grl-agent-compliance", "grl-agent-fiscal", "grl-agent-ui-critic", "grl-agent-architecture", "grl-agent-ops", "grl-agent-health", "grl-agent-ai", "grl-agent-wordpress"]
+members = ["grl-agent-privacy", "grl-agent-security", "grl-agent-legal", "grl-agent-compliance", "grl-agent-fiscal", "grl-agent-ui-critic", "grl-agent-architecture", "grl-agent-ops", "grl-agent-health", "grl-agent-ai", "grl-agent-wordpress", "grl-agent-seo"]
 memory = false

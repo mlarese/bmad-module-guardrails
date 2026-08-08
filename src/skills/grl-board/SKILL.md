@@ -3,6 +3,24 @@ name: grl-board
 description: Convoca le figure Guardrails pertinenti su un artefatto. Usa quando l'utente dice "grl-board", "convoca il collegio", "fai guardare questo alle figure Guardrails", "chi dovrebbe revisionare questo file", o chiede quali rischi il progetto ha già accettato.
 ---
 
+## Revisione editoriale finale
+
+Ogni output destinato a una persona — risposta in conversazione, riepilogo, digest, profilo o testo
+visibile di una pagina — passa da un controllo di prosa prima della consegna.
+
+- Invoca `bmad-review` con `lenses=prose` se disponibile, impostando la lingua dell'output, la
+  guida di stile del progetto e `reader_type=humans`; se l'output contiene più lingue, revisiona ogni lingua
+  separatamente.
+- Applica solo correzioni di chiarezza, grammatica, coesione, tono e terminologia. Non cambiare
+  fatti, conclusioni, severità, fonti, citazioni, riferimenti normativi o clinici, decisioni o testo
+  fornito dall'utente.
+- Lascia invariati codice, comandi, YAML/JSON/TOML/CSV, frontmatter, URL, identificatori, date,
+  formule, dati strutturati e righe di memoria. Nei file HTML/Markdown revisiona solo la prosa
+  leggibile, non markup e struttura.
+- La review è interna: consegna il testo già migliorato, non la tabella del revisore. Se la skill
+  non è installata, esegui un controllo manuale equivalente e prosegui; non installare Freya per
+  questo passaggio.
+
 # grl-board
 
 Agisci come segretario del collegio Guardrails. L'esito è **un solo riepilogo schematico** in conversazione: per ogni figura convocata i punti che contano su questo artefatto, per ogni figura esclusa la riga che dice perché. Lo consuma l'utente che deve decidere cosa cambiare prima di scrivere altro codice: gli servono punti azionabili, ordinati per costo di non intervenire, e i disaccordi fra figure lasciati aperti come scelta sua. Nessun documento, nessun report: le uniche cose che restano su disco sono righe di memoria condivisa.
@@ -13,12 +31,16 @@ Agisci come segretario del collegio Guardrails. L'esito è **un solo riepilogo s
 
 1. Leggi la memoria condivisa in `{project-root}/_bmad/memory/grl-shared/`: `project-profile.md`, `decisions.md`, `accepted-risks.md`.
 2. Profilo assente → non improvvisare la selezione: proponi `grl-profile`. Se l'utente preferisce non fermarsi, chiedi solo quattro cose — settore, dati personali trattati, mercato (UE/extra-UE), criticità — e dichiara che la selezione è provvisoria.
-3. Risolvi la severità, che decide quanto in basso scende l'asticella del riepilogo: `strictness_override` dalla sezione `[modules.grl]` di `{project-root}/_bmad/config.toml` (o `config.user.toml`) se valorizzato; altrimenti dalla criticità del profilo — hobby/prototipo → `light`, interno → `normal`, produzione con clienti → `normal`, regolamentato → `strict`; senza override né profilo → `normal`. `light`: solo rischi concreti e imminenti. `normal`: ciò che conta, detto una volta. `strict`: anche i rischi minori, e l'accettazione di un rischio serio va messa per iscritto.
+3. Risolvi la severità, che decide quanto in basso scende l'asticella del riepilogo, dalla criticità
+   del profilo — hobby/prototipo → `light`, interno → `normal`, produzione con clienti → `normal`,
+   regolamentato → `strict`; se il profilo manca → `normal`. `light`: solo rischi concreti e
+   imminenti. `normal`: ciò che conta, detto una volta. `strict`: anche i rischi minori, e
+   l'accettazione di un rischio serio va messa per iscritto.
 4. Intento: revisione di un artefatto (default), oppure **vista dei rischi accettati** quando l'utente chiede cosa il progetto ha già scelto di accettare — allora leggi `accepted-risks.md`, mostra l'elenco raggruppato per figura e fermati lì, senza convocare nessuno.
 
 ## Selezione dei convocati
 
-È la parte che dà valore al workflow. Convocarle tutte e undici produce rumore e fa abbandonare lo strumento: punta a **due-quattro figure**, e se le convochi tutte devi poter dire cosa ciascuna ha di decisivo da dire su *questo* artefatto.
+È la parte che dà valore al workflow. Convocarle tutte e dodici produce rumore e fa abbandonare lo strumento: punta a **due-quattro figure**, e se le convochi tutte devi poter dire cosa ciascuna ha di decisivo da dire su *questo* artefatto.
 
 Serve un artefatto concreto: un file (PRD, architettura, story, pagina, componente), una cartella, un repository, o la sua descrizione se un file non c'è. Leggilo **prima** di scegliere: la selezione si fa sui segnali che ci sono davvero dentro, non sul tipo di documento.
 

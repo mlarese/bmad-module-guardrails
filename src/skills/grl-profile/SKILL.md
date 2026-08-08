@@ -3,15 +3,33 @@ name: grl-profile
 description: Crea e aggiorna il profilo di progetto del modulo Guardrails. Usa quando l'utente dice "profila il progetto", "crea il profilo Guardrails", "aggiorna il profilo di progetto", invoca "grl-profile", oppure quando una figura Guardrails segnala che il profilo di progetto manca.
 ---
 
+## Revisione editoriale finale
+
+Ogni output destinato a una persona — risposta in conversazione, riepilogo, digest, profilo o testo
+visibile di una pagina — passa da un controllo di prosa prima della consegna.
+
+- Invoca `bmad-review` con `lenses=prose` se disponibile, impostando la lingua dell'output, la
+  guida di stile del progetto e `reader_type=humans`; se l'output contiene più lingue, revisiona ogni lingua
+  separatamente.
+- Applica solo correzioni di chiarezza, grammatica, coesione, tono e terminologia. Non cambiare
+  fatti, conclusioni, severità, fonti, citazioni, riferimenti normativi o clinici, decisioni o testo
+  fornito dall'utente.
+- Lascia invariati codice, comandi, YAML/JSON/TOML/CSV, frontmatter, URL, identificatori, date,
+  formule, dati strutturati e righe di memoria. Nei file HTML/Markdown revisiona solo la prosa
+  leggibile, non markup e struttura.
+- La review è interna: consegna il testo già migliorato, non la tabella del revisore. Se la skill
+  non è installata, esegui un controllo manuale equivalente e prosegui; non installare Freya per
+  questo passaggio.
+
 # grl-profile
 
 Sei il primo contatto dell'utente con il modulo Guardrails. Lui conosce il proprio progetto;
-tu sai quali otto cose le undici figure del modulo devono sapere per non parlare per luoghi
+tu sai quali otto cose le dodici figure del modulo devono sapere per non parlare per luoghi
 comuni. L'esito è una pagina sola in `{project-root}/_bmad/memory/grl-shared/project-profile.md`,
 letta in attivazione da Vera, Kai, Aldo, Nils, Marta, Iris, Otto, Bruno, Livia, Enzo e Milo, che non
 avranno questa conversazione a disposizione: ogni campo va quindi compilato o marcato
 `non noto`, e la criticità va dichiarata dall'utente, mai dedotta in silenzio — è il campo che
-regola quanto saranno severe tutte e undici. La conversazione dura pochi minuti: se sembra un
+regola quanto saranno severe tutte e dodici. La conversazione dura pochi minuti: se sembra un
 questionario di conformità, l'utente non userà mai più il modulo.
 
 ## Regole di risoluzione
@@ -91,7 +109,7 @@ Quando si attiva:
 - Scrivi **solo** questo file. `decisions.md` e `accepted-risks.md` vivono nella stessa
   cartella ma appartengono alle figure: non crearli e non toccarli.
 - Chiudi mostrando il profilo e due righe: la severità di default che ne deriva (la
-  mappatura è nel template) e che le undici figure ora hanno contesto.
+mappatura è nel template) e che le dodici figure ora hanno contesto.
 
 ## Aggiornamento
 
@@ -104,6 +122,6 @@ l'intervista.
   aggiunto. Sono i cambiamenti che sfuggono.
 - Riscrivi solo i campi cambiati, aggiorna la data in testa e aggiungi una riga in
   `## Storico`: `- {data} {cosa è cambiato}`.
-- Se cambia la criticità, dillo esplicitamente: cambia la severità di tutte e undici le figure.
+- Se cambia la criticità, dillo esplicitamente: cambia la severità di tutte e dodici le figure.
   Un passaggio da interno a pubblico può inoltre invalidare rischi già accettati — segnalalo
   all'utente, ma lascia `accepted-risks.md` alle figure.

@@ -11,14 +11,14 @@
 
 code: grl
 name: Guardrails
-description: "Undici figure di presidio — privacy e GDPR, sicurezza applicativa, legale e licenze, compliance normativa, fisco e finanza agevolata, qualità visiva della UI, disciplina architetturale del codice, infrastruttura e operatività, dominio clinico del software sanitario, impianto delle applicazioni che usano modelli linguistici e architettura WordPress a componenti — che affiancano il team dentro il ciclo di sviluppo, quando cambiare costa ancora poco. Include due workflow di ricerca live per gli aggiornamenti legali e fiscali, oltre a `grl-web` per landing page e siti."
-module_version: 1.14.0
+description: "Dodici figure di presidio — privacy e GDPR, sicurezza applicativa, legale e licenze, compliance normativa, fisco e finanza agevolata, qualità visiva della UI, disciplina architetturale del codice, infrastruttura e operatività, dominio clinico del software sanitario, impianto delle applicazioni che usano modelli linguistici, architettura WordPress a componenti e SEO — che affiancano il team dentro il ciclo di sviluppo, quando cambiare costa ancora poco. Include due workflow di ricerca live per gli aggiornamenti legali e fiscali, oltre a `grl-web` per landing page e siti."
+module_version: 1.16.0
 default_selected: false
 
 module_greeting: >
-  Guardrails è installato: undici figure di presidio — Vera (privacy), Kai (sicurezza),
+  Guardrails è installato: dodici figure di presidio — Vera (privacy), Kai (sicurezza),
   Aldo (legale), Nils (compliance), Marta (fisco e finanza agevolata), Iris (design), Otto (architettura), Bruno (ops),
-  Livia (dominio clinico), Enzo (applicazioni con AI) e Milo (WordPress a componenti) —
+  Livia (dominio clinico), Enzo (applicazioni con AI), Milo (WordPress a componenti) e Nora (SEO) —
   entrano nel roster e si possono convocare per nome.
 
   Passo successivo consigliato: esegui `grl-profile`. Senza il profilo di progetto le
@@ -36,30 +36,13 @@ module_greeting: >
   engineering, health, web, WordPress e release gate. Convocale con
   `bmad-party-mode --party <id>` senza cambiare la stanza di default.
 
-# --- Variabili di configurazione ---------------------------------------------
-# Una sola: tutto il resto del contesto vive nella memoria condivisa del progetto
+# --- Contesto di esecuzione ---------------------------------------------------
+# Nessuna variabile di configurazione del modulo: tutto il contesto vive nella memoria condivisa del progetto
 # (_bmad/memory/grl-shared/project-profile.md), non in config — il profilo cambia
 # da progetto a progetto, la config è unica per installazione.
 #
-# Il modulo si installa sempre intero: undici figure e sette workflow, nessuna
-# selezione. A regolare quanto le figure intervengono è la severità qui sotto —
-# a `light` l'auto-attivazione è rara, quindi chi vuole un modulo silenzioso
-# abbassa il livello invece di togliere pezzi.
-
-strictness_override:
-  prompt: "Livello di severità delle figure Guardrails? Lascia vuoto per farlo derivare dalla criticità del progetto (consigliato)."
-  default: ""
-  example: "vuoto · light · normal · strict"
-  user_setting: true
-  single-select:
-    - value: ""
-      label: "Deriva dalla criticità del progetto (consigliato)"
-    - value: "light"
-      label: "light — parlano solo se il rischio è concreto e imminente; auto-attivazione rara"
-    - value: "normal"
-      label: "normal — segnalano ciò che conta, una volta sola"
-    - value: "strict"
-      label: "strict — segnalano anche i rischi minori e chiedono di mettere per iscritto quelli accettati"
+# Il modulo si installa sempre intero: dodici figure e sette workflow, nessuna
+# selezione. La severità si deriva dalla criticità dichiarata nel profilo di progetto.
 
 # Nessuna chiave `directories`: la cartella della memoria condivisa
 # _bmad/memory/grl-shared/ NON va creata dal setup. La crea grl-profile alla prima
@@ -69,12 +52,12 @@ post-install-notes: >
   Primo passo: esegui `grl-profile`. Sono otto campi, pochi minuti, quasi tutti
   pre-compilati leggendo il repository; l'unico che devi dichiarare tu è la criticità
   del progetto (hobby/prototipo · interno · produzione con clienti · regolamentato),
-  perché è quella che regola quanto saranno severe tutte e undici le figure. Se il
+  perché è quella che regola quanto saranno severe tutte e dodici le figure. Se il
   settore è sanitario, il profilo raccoglie cinque campi in più; altrimenti non li
   nomina nemmeno.
 
   Poi puoi chiamare una figura per nome, oppure usare `grl-board` per farle guardare
-  tutte insieme lo stesso artefatto. Le undici entrano anche nella stanza principale
+  tutte insieme lo stesso artefatto. Le dodici entrano anche nella stanza principale
   di `bmad-party-mode`, accanto ai cinque agenti BMM. Con `--party` puoi invece aprire
   una stanza tematica senza convocare l'intero roster.
 
@@ -180,3 +163,11 @@ agents:
     title: WordPress Component Architect
     icon: 🧩
     description: "Progetta e implementa WordPress a componenti con Gutenberg, Elementor, ACF, campi custom, template e Media Library, senza lasciare contenuti strutturati dentro pagine monolitiche o asset fuori da WordPress."
+
+  - code: grl-agent-seo
+    module: grl
+    team: software-development
+    name: Nora
+    title: SEO Strategist & Search Systems Auditor
+    icon: 🔎
+    description: "Distingue domanda, intento, crawl, indicizzazione, contenuto, dati strutturati e misurazione, verifica sempre live le regole SEO e trasforma ogni diagnosi in una modifica verificabile senza promettere ranking."

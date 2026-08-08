@@ -3,6 +3,24 @@ name: grl-web
 description: Costruisce landing page e siti, dal brief di conversione al progetto. Usa quando l'utente dice «creiamo una web page», «creiamo una landing», «facciamo la landing del mio saas», «costruiamo il sito», quando vuole riprendere o cambiare un mockup già fatto, quando chiede perché una pagina esistente non converte, o quando vuole promuovere un mockup approvato a progetto vero.
 ---
 
+## Revisione editoriale finale
+
+Ogni output destinato a una persona — risposta in conversazione, riepilogo, digest, profilo o testo
+visibile di una pagina — passa da un controllo di prosa prima della consegna.
+
+- Invoca `bmad-review` con `lenses=prose` se disponibile, impostando la lingua dell'output, la
+  guida di stile del progetto e `reader_type=humans`; se l'output contiene più lingue, revisiona ogni lingua
+  separatamente.
+- Applica solo correzioni di chiarezza, grammatica, coesione, tono e terminologia. Non cambiare
+  fatti, conclusioni, severità, fonti, citazioni, riferimenti normativi o clinici, decisioni o testo
+  fornito dall'utente.
+- Lascia invariati codice, comandi, YAML/JSON/TOML/CSV, frontmatter, URL, identificatori, date,
+  formule, dati strutturati e righe di memoria. Nei file HTML/Markdown revisiona solo la prosa
+  leggibile, non markup e struttura.
+- La review è interna: consegna il testo già migliorato, non la tabella del revisore. Se la skill
+  non è installata, esegui un controllo manuale equivalente e prosegui; non installare Freya per
+  questo passaggio.
+
 # grl-web 🌐
 
 Agisci come stratega di conversione e art director. L'utente conosce il suo prodotto e i suoi clienti; tu conosci il mestiere di far decidere qualcuno in otto secondi. L'esito è una pagina che un visitatore freddo capisce senza spiegazioni e su cui compie **una** azione. La consuma lui, non l'utente: deve reggere senza nessuno accanto che la racconti.
@@ -18,7 +36,7 @@ I percorsi nudi (es. `references/mockup-html.md`) e `{skill-root}` si risolvono 
 ## On Activation
 
 1. **Personalizzazione.** `uv run {project-root}/_bmad/scripts/resolve_customization.py --skill {skill-root} --key workflow`; applica i valori `{workflow.*}` per tutta la sessione, e in caso di errore leggi `{skill-root}/customize.toml`. Poi esegui `{workflow.activation_steps_prepend}` e tieni come contesto permanente `{workflow.persistent_facts}`.
-2. **Config.** `uv run {project-root}/_bmad/scripts/resolve_config.py --project-root {project-root} --key core --key modules.grl`; se lo script non c'è o fallisce, leggi direttamente `{project-root}/_bmad/config.toml` e `config.user.toml`. Applica `{user_name}` e `{communication_language}`. `{document_output_language}` vale per il brief; la lingua della **pagina** segue il destinatario, non la conversazione.
+2. **Config.** `uv run {project-root}/_bmad/scripts/resolve_config.py --project-root {project-root} --key core`; se lo script non c'è o fallisce, leggi direttamente `{project-root}/_bmad/config.toml` e `config.user.toml`. Applica `{user_name}` e `{communication_language}`. `{document_output_language}` vale per il brief; la lingua della **pagina** segue il destinatario, non la conversazione.
 3. **Memoria.** Leggi la memoria condivisa, sotto.
 4. **Intento.** Ricavalo da come l'utente è arrivato, non da un quiz; se è ambiguo, chiedi la sola domanda che lo scioglie. Poi carica la rotta e nient'altro.
 5. Esegui `{workflow.activation_steps_append}`.
@@ -48,6 +66,7 @@ In corso d'opera le figure entrano quando compare l'aggancio:
 
 | Momento | Figura | Cosa risolve |
 | --- | --- | --- |
+| Prima di fissare struttura, URL o metadata | Nora `grl-agent-seo` | domanda, intento, findability e verifica live delle regole SEO; restituisce requisiti e test, non promesse di ranking |
 | Prima di scrivere una riga di CSS | Iris `grl-agent-ui-critic` | la direzione visiva, con font ed esadecimali concreti |
 | Il form raccoglie dati | Vera `grl-agent-privacy` | quali campi sono legittimi, base giuridica, informativa |
 | Prodotto pubblico, o settore regolato | Nils `grl-agent-compliance` | quale livello di accessibilità è **obbligatorio**, e da quando |
@@ -74,7 +93,7 @@ Contratto del modulo Guardrails, `{project-root}/_bmad/memory/grl-shared/`.
 **Scrive in append**, righe brevi, data `AAAA-MM-GG`, mostrandole prima e facendosi dire sì:
 
 - `decisions.md` — `[data] [web] decisione — vincolo che l'ha imposta`, quando una scelta vincola il resto: direzione visiva, font, dove arrivano i contatti, dominio.
-- `accepted-risks.md` — `[data] [web] rischio — motivo — ambito`, **solo dopo conferma esplicita**. Una riga qui zittisce le segnalazioni future di tutte e undici le figure.
+- `accepted-risks.md` — `[data] [web] rischio — motivo — ambito`, **solo dopo conferma esplicita**. Una riga qui zittisce le segnalazioni future di tutte e dodici le figure.
 
 ## Confini
 

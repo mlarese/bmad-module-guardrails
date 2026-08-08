@@ -1,7 +1,25 @@
 ---
 name: grl-mdsw
-description: Percorso guidato di qualificazione e classificazione del software come dispositivo medico. Usa quando l'utente chiede "il mio software è un dispositivo medico?", parla di classificazione MDR, regola 11, marcatura CE del software, MDSW, software as a medical device, oppure invoca "grl-mdsw".
+description: Verifica se una funzione software ha una finalità medica su un singolo paziente, distingue archiviazione e visualizzazione da interpretazione clinica e indica se rientra nel MDR e in quale classe (I, IIa, IIb, III). Usa quando l'utente chiede "il mio software è un dispositivo medico?", parla di classificazione MDR, Regola 11, marcatura CE del software, MDSW, software as a medical device, oppure invoca "grl-mdsw".
 ---
+
+## Revisione editoriale finale
+
+Ogni output destinato a una persona — risposta in conversazione, riepilogo, digest, profilo o testo
+visibile di una pagina — passa da un controllo di prosa prima della consegna.
+
+- Invoca `bmad-review` con `lenses=prose` se disponibile, impostando la lingua dell'output, la
+  guida di stile del progetto e `reader_type=humans`; se l'output contiene più lingue, revisiona ogni lingua
+  separatamente.
+- Applica solo correzioni di chiarezza, grammatica, coesione, tono e terminologia. Non cambiare
+  fatti, conclusioni, severità, fonti, citazioni, riferimenti normativi o clinici, decisioni o testo
+  fornito dall'utente.
+- Lascia invariati codice, comandi, YAML/JSON/TOML/CSV, frontmatter, URL, identificatori, date,
+  formule, dati strutturati e righe di memoria. Nei file HTML/Markdown revisiona solo la prosa
+  leggibile, non markup e struttura.
+- La review è interna: consegna il testo già migliorato, non la tabella del revisore. Se la skill
+  non è installata, esegui un controllo manuale equivalente e prosegui; non installare Freya per
+  questo passaggio.
 
 # grl-mdsw
 
@@ -21,7 +39,7 @@ L'esito è **un verdetto in conversazione**: fuori perimetro · dispositivo medi
 
 1. Leggi in silenzio la memoria condivisa in `{project-root}/_bmad/memory/grl-shared/`: `project-profile.md`, `decisions.md`, `accepted-risks.md`. Se un file manca, prosegui senza avvisi.
 2. **Profilo assente** → proponi il workflow `grl-profile`. Se l'utente preferisce non fermarsi, raccogli al volo i quattro dati che servono qui — cosa fa il software, chi lo usa, se produce informazioni usate per decidere su un paziente, in quale mercato si vende — e dichiara in una riga che il verdetto è **provvisorio** finché il profilo non c'è.
-3. Risolvi la severità, una volta: `strictness_override` dalla sezione `[modules.grl]` di `{project-root}/_bmad/config.toml` (o `config.user.toml`) se valorizzato; altrimenti dalla criticità del profilo — hobby/prototipo → `light`, interno → `normal`, produzione con clienti → `normal`, regolamentato → `strict`; senza override né profilo → `normal`.
+3. Risolvi la severità, una volta, dalla criticità del profilo — hobby/prototipo → `light`, interno → `normal`, produzione con clienti → `normal`, regolamentato → `strict`; se il profilo manca → `normal`.
 
    Qui la severità regola **quanto insisti sui casi di confine**, non l'esito: la qualificazione è la stessa a qualsiasi severità. A `light` dai il verdetto e ti fermi; a `strict` segnali anche le funzioni che oggi non qualificano ma qualificherebbero con una piccola aggiunta.
 4. Chiedi cosa fa il software, con parole del prodotto. Ti serve **la finalità dichiarata**, non l'architettura.
