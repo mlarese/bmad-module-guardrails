@@ -1,10 +1,10 @@
 # Guardrails (`grl`)
 
-Modulo [BMad](https://github.com/bmad-code-org/BMAD-METHOD) con **nove figure di presidio** che
+Modulo [BMad](https://github.com/bmad-code-org/BMAD-METHOD) con **dieci figure di presidio** che
 affiancano il team dentro il ciclo di sviluppo software: privacy e GDPR, sicurezza applicativa,
 legale e licenze, compliance normativa, qualità visiva della UI, disciplina architetturale del
 codice, infrastruttura e operatività, dominio clinico del software sanitario, impianto delle
-applicazioni che usano modelli linguistici.
+applicazioni che usano modelli linguistici e architettura WordPress a componenti.
 
 Guardrail, non autista: il modulo tiene il progetto in carreggiata, le decisioni restano al team.
 
@@ -18,7 +18,7 @@ Il modulo **parla, non produce documenti**: niente DPIA formali, niente registro
 niente report di audit. L'unica traccia che lascia sono righe brevi nella memoria condivisa del
 progetto.
 
-## Le nove figure
+## Le dieci figure
 
 | | Nome | Ruolo | Presidia |
 | --- | ---- | ----- | -------- |
@@ -31,6 +31,7 @@ progetto.
 | 🖥️ | **Bruno** | Infrastructure & Ops Engineer | server, SSH, Docker, Kubernetes, deploy, conservazione dei segreti, backup. Il suo mestiere è togliere infrastruttura, non aggiungerne |
 | 🩺 | **Livia** | Clinical Informatics | il contenuto clinico del software sanitario: dato clinico e codifiche, HL7/FHIR/DICOM, FSE 2.0 e Sistema TS, sicurezza del paziente, il reparto vero. Chiede sempre chi userà la schermata e in quanti secondi |
 | 🧠 | **Enzo** | AI Engineer | l'impianto delle applicazioni che usano modelli linguistici: RAG, orchestrazione, agenti e tool, output validato, eval, costi. La sua prima domanda è se un modello serva davvero |
+| 🧩 | **Milo** | WordPress Component Architect | Gutenberg, Elementor, ACF, campi custom, template e componenti riusabili. Impone che i media finiscano nella Media Library e che i dati strutturati non restino dentro pagine monolitiche |
 
 E tre workflow di servizio:
 
@@ -45,7 +46,7 @@ E tre workflow di servizio:
 **Profilo di progetto.** `grl-profile` scrive `_bmad/memory/grl-shared/project-profile.md`: settore,
 tipo di software, dati personali trattati, mercato, stack, componenti AI, vincoli noti e — campo
 decisivo — la **criticità dichiarata** (hobby/prototipo · interno · produzione con clienti ·
-regolamentato). È la criticità a decidere quanto sono severe tutte e nove le figure. Se il
+regolamentato). È la criticità a decidere quanto sono severe tutte e dieci le figure. Se il
 settore dichiarato è sanitario, il profilo raccoglie in più finalità del software, contesto d'uso,
 integrazioni sanitarie, ruolo GDPR ed eventuale qualificazione MDR; altrimenti quei campi non
 vengono nemmeno nominati.
@@ -95,7 +96,7 @@ del codice, originalità visiva. L'attrito è voluto. Enzo si aggiunge alla stes
 lei implementa, lui guarda l'impianto della pipeline AI e chiede cosa succede quando il modello
 sbaglia.
 
-Tutte e nove entrano nel roster principale di `bmad-party-mode`, accanto ai cinque agenti BMM.
+Tutte e dieci entrano nel roster principale di `bmad-party-mode`, accanto ai cinque agenti BMM.
 
 ## Installazione
 
@@ -105,7 +106,7 @@ Con l'installer BMad, indicando questo repository come sorgente custom:
 npx bmad-method install --custom-source https://github.com/mlarese/bmad-module-guardrails
 ```
 
-L'installer copia le tredici skill, registra le nove figure come agenti
+L'installer copia le quindici skill, registra le dieci figure come agenti
 (`[agents.grl-agent-*]` nella configurazione) — che è ciò che le fa comparire nel roster di
 `bmad-party-mode` — e aggiunge le voci di help al catalogo `_bmad/_config/bmad-help.csv`.
 
@@ -136,6 +137,7 @@ src/
     ├── grl-agent-ops/            🖥️ Bruno
     ├── grl-agent-health/         🩺 Livia
     ├── grl-agent-ai/             🧠 Enzo
+    ├── grl-agent-wordpress/      🧩 Milo
     ├── grl-profile/              workflow — profilo di progetto
     ├── grl-board/                workflow — revisione collegiale
     ├── grl-mdsw/                 workflow — qualificazione dispositivo medico

@@ -11,15 +11,15 @@
 
 code: grl
 name: Guardrails
-description: "Nove figure di presidio — privacy e GDPR, sicurezza applicativa, legale e licenze, compliance normativa, qualità visiva della UI, disciplina architetturale del codice, infrastruttura e operatività, dominio clinico del software sanitario, impianto delle applicazioni che usano modelli linguistici — che affiancano il team dentro il ciclo di sviluppo, quando cambiare costa ancora poco. Più `grl-web`, l'unica skill del modulo che produce: landing page e siti, dal brief di conversione al progetto."
-module_version: 1.4.0
+description: "Dieci figure di presidio — privacy e GDPR, sicurezza applicativa, legale e licenze, compliance normativa, qualità visiva della UI, disciplina architetturale del codice, infrastruttura e operatività, dominio clinico del software sanitario, impianto delle applicazioni che usano modelli linguistici e architettura WordPress a componenti — che affiancano il team dentro il ciclo di sviluppo, quando cambiare costa ancora poco. Più `grl-web`, l'unica skill del modulo che produce: landing page e siti, dal brief di conversione al progetto."
+module_version: 1.5.0
 default_selected: false
 
 module_greeting: >
-  Guardrails è installato: nove figure di presidio — Vera (privacy), Kai (sicurezza),
+  Guardrails è installato: dieci figure di presidio — Vera (privacy), Kai (sicurezza),
   Aldo (legale), Nils (compliance), Iris (design), Otto (architettura), Bruno (ops),
-  Livia (dominio clinico) ed Enzo (applicazioni con AI) — entrano nel roster e si
-  possono convocare per nome.
+  Livia (dominio clinico), Enzo (applicazioni con AI) e Milo (WordPress a componenti) —
+  entrano nel roster e si possono convocare per nome.
 
   Passo successivo consigliato: esegui `grl-profile`. Senza il profilo di progetto le
   figure partono cieche e parlano per luoghi comuni; con il profilo sanno cosa non
@@ -59,12 +59,12 @@ post-install-notes: >
   Primo passo: esegui `grl-profile`. Sono otto campi, pochi minuti, quasi tutti
   pre-compilati leggendo il repository; l'unico che devi dichiarare tu è la criticità
   del progetto (hobby/prototipo · interno · produzione con clienti · regolamentato),
-  perché è quella che regola quanto saranno severe tutte e nove le figure. Se il
+  perché è quella che regola quanto saranno severe tutte e dieci le figure. Se il
   settore è sanitario, il profilo raccoglie cinque campi in più; altrimenti non li
   nomina nemmeno.
 
   Poi puoi chiamare una figura per nome, oppure usare `grl-board` per farle guardare
-  tutte insieme lo stesso artefatto. Le nove entrano anche nella stanza principale
+  tutte insieme lo stesso artefatto. Le dieci entrano anche nella stanza principale
   di `bmad-party-mode`, accanto ai cinque agenti BMM.
 
   Facoltativo e reversibile: se vuoi che le figure vengano consultate dentro i flussi
@@ -153,3 +153,11 @@ agents:
     title: AI Engineer
     icon: 🧠
     description: "Costruisce applicazioni che usano modelli linguistici e sa soprattutto quando non servono: metà delle funzioni per cui viene chiamato si risolvono con una query, una regola o un campo in più. Presidia l'impianto — recupero dei documenti e RAG, orchestrazione con LangChain, LangGraph, LlamaIndex o SDK nudo, tool calling e agenti, output strutturato e validato, set di valutazione, costi e latenza, automazioni e code di lavoro. Parla come chi ha già portato in produzione un prototipo che alla demo funzionava: prima chiede cosa si rompe quando il modello sbaglia, poi dà l'impianto minimo che regge."
+
+  - code: grl-agent-wordpress
+    module: grl
+    team: software-development
+    name: Milo
+    title: WordPress Component Architect
+    icon: 🧩
+    description: "Progetta e implementa WordPress a componenti con Gutenberg, Elementor, ACF, campi custom, template e Media Library, senza lasciare contenuti strutturati dentro pagine monolitiche o asset fuori da WordPress."

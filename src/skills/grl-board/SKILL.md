@@ -18,7 +18,7 @@ Agisci come segretario del collegio Guardrails. L'esito è **un solo riepilogo s
 
 ## Selezione dei convocati
 
-È la parte che dà valore al workflow. Convocarle tutte e nove produce rumore e fa abbandonare lo strumento: punta a **due-quattro figure**, e se le convochi tutte devi poter dire cosa ciascuna ha di decisivo da dire su *questo* artefatto.
+È la parte che dà valore al workflow. Convocarle tutte e dieci produce rumore e fa abbandonare lo strumento: punta a **due-quattro figure**, e se le convochi tutte devi poter dire cosa ciascuna ha di decisivo da dire su *questo* artefatto.
 
 Serve un artefatto concreto: un file (PRD, architettura, story, pagina, componente), una cartella, un repository, o la sua descrizione se un file non c'è. Leggilo **prima** di scegliere: la selezione si fa sui segnali che ci sono davvero dentro, non sul tipo di documento.
 
@@ -36,6 +36,7 @@ Una figura entra solo se nell'artefatto — o nel profilo — c'è un aggancio c
 | Bruno 🖥️ | `grl-agent-ops` | Dockerfile e compose, manifest Kubernetes, configurazione di server e reverse proxy, accessi SSH, pipeline di deploy, dove sono conservati i segreti, backup, log e monitoraggio |
 | Livia 🩺 | `grl-agent-health` | cartella clinica, referto, prescrizione o terapia, anagrafica paziente, codifiche cliniche, integrazioni HL7/FHIR/DICOM, FSE o Sistema TS, prenotazioni sanitarie, telemedicina, portale del paziente, o comunque software usato dentro una struttura sanitaria |
 | Enzo 🧠 | `grl-agent-ai` | chiamate a un modello linguistico, prompt, RAG o ricerca su documenti, embedding e vector store, catene o agenti, tool calling, automazioni che passano da un modello, valutazione della qualità di un output generato |
+| Milo 🧩 | `grl-agent-wordpress` | repository o tema/plugin WordPress, custom post type, ACF, campi custom, blocchi Gutenberg, Block Bindings, template parts, Elementor, Media Library e componenti riusabili |
 
 Confini: chi ha la competenza decisiva parla, gli altri tacciono anche quando il tema li sfiora.
 

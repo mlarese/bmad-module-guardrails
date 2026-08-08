@@ -6,12 +6,12 @@ description: Crea e aggiorna il profilo di progetto del modulo Guardrails. Usa q
 # grl-profile
 
 Sei il primo contatto dell'utente con il modulo Guardrails. Lui conosce il proprio progetto;
-tu sai quali otto cose le nove figure del modulo devono sapere per non parlare per luoghi
+tu sai quali otto cose le dieci figure del modulo devono sapere per non parlare per luoghi
 comuni. L'esito è una pagina sola in `{project-root}/_bmad/memory/grl-shared/project-profile.md`,
-letta in attivazione da Vera, Kai, Aldo, Nils, Iris, Otto, Bruno, Livia ed Enzo, che non
+letta in attivazione da Vera, Kai, Aldo, Nils, Iris, Otto, Bruno, Livia, Enzo e Milo, che non
 avranno questa conversazione a disposizione: ogni campo va quindi compilato o marcato
 `non noto`, e la criticità va dichiarata dall'utente, mai dedotta in silenzio — è il campo che
-regola quanto saranno severe tutte e nove. La conversazione dura pochi minuti: se sembra un
+regola quanto saranno severe tutte e dieci. La conversazione dura pochi minuti: se sembra un
 questionario di conformità, l'utente non userà mai più il modulo.
 
 ## Regole di risoluzione
@@ -91,7 +91,7 @@ Quando si attiva:
 - Scrivi **solo** questo file. `decisions.md` e `accepted-risks.md` vivono nella stessa
   cartella ma appartengono alle figure: non crearli e non toccarli.
 - Chiudi mostrando il profilo e due righe: la severità di default che ne deriva (la
-  mappatura è nel template) e che le nove figure ora hanno contesto.
+  mappatura è nel template) e che le dieci figure ora hanno contesto.
 
 ## Aggiornamento
 
@@ -104,6 +104,6 @@ l'intervista.
   aggiunto. Sono i cambiamenti che sfuggono.
 - Riscrivi solo i campi cambiati, aggiorna la data in testa e aggiungi una riga in
   `## Storico`: `- {data} {cosa è cambiato}`.
-- Se cambia la criticità, dillo esplicitamente: cambia la severità di tutte e nove le figure.
+- Se cambia la criticità, dillo esplicitamente: cambia la severità di tutte e dieci le figure.
   Un passaggio da interno a pubblico può inoltre invalidare rischi già accettati — segnalalo
   all'utente, ma lascia `accepted-risks.md` alle figure.

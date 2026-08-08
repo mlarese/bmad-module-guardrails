@@ -3,8 +3,8 @@ title: 'Module Plan — Guardrails'
 status: 'complete'
 module_name: 'Guardrails'
 module_code: 'grl'
-module_description: 'Figure di presidio che affiancano il team di sviluppo su privacy/GDPR, sicurezza applicativa, legale e licenze, compliance normativa, disciplina architetturale e qualità visiva della UI'
-architecture: 'six distinct agents + two service workflows, no orchestrator, personal + shared module memory'
+module_description: 'Figure di presidio che affiancano il team di sviluppo su privacy/GDPR, sicurezza applicativa, legale e licenze, compliance normativa, disciplina architetturale, qualità visiva della UI e implementazione WordPress a componenti'
+architecture: 'ten distinct agents + three service workflows, no orchestrator, personal + shared module memory'
 standalone: false
 expands_module: 'bmm'
 skills_planned:
@@ -15,8 +15,14 @@ skills_planned:
   - grl-agent-ui-critic
   - grl-agent-architecture
   - grl-agent-ops
+  - grl-agent-health
+  - grl-agent-ai
+  - grl-agent-wordpress
   - grl-profile
   - grl-board
+  - grl-mdsw
+  - grl-web
+  - grl-setup
 config_variables:
   - strictness_override
 created: '2026-08-06 22:10'
@@ -49,8 +55,8 @@ compliance normativa, disciplina architetturale, qualità visiva della UI.
 
 ## Architecture
 
-**Decisione: 6 agenti distinti + 2 workflow di servizio, senza orchestratore, con memoria
-condivisa di modulo.**
+**Stato corrente: 10 agenti distinti + 3 workflow di servizio, senza orchestratore, con memoria
+condivisa di modulo.** `grl-web` e `grl-setup` completano il modulo come skill operative.
 
 | Skill | Tipo | Ruolo |
 | ----- | ---- | ----- |
@@ -63,6 +69,7 @@ condivisa di modulo.**
 | `grl-agent-ops` | agente | infrastruttura: server, SSH, Docker, Kubernetes, deploy |
 | `grl-agent-health` | agente | dominio clinico del software sanitario |
 | `grl-agent-ai` | agente | impianto delle applicazioni che usano modelli linguistici |
+| `grl-agent-wordpress` | agente | architettura WordPress a componenti, Gutenberg, Elementor, ACF, template e Media Library |
 | `grl-profile` | workflow | crea e aggiorna il profilo del progetto |
 | `grl-board` | workflow | convoca il collegio su un artefatto |
 | `grl-mdsw` | workflow | qualificazione del software come dispositivo medico |
@@ -672,6 +679,37 @@ al resto del codice.
 
 ---
 
+### grl-agent-wordpress
+
+**Type:** agent · **code:** `wordpress` · **name:** Milo · **title:** WordPress Component Architect · **icon:** 🧩
+
+> Aggiunta successiva alla stesura iniziale del piano (richiesta dell'utente, 2026-08-08).
+
+**Purpose:** costruire e rifattorizzare siti WordPress come sistemi di contenuti modellati e
+componenti riusabili, invece di pagine monolitiche costruite copiando markup dentro editor e
+builder.
+
+**Regole non negoziabili:** i dati propri dei componenti vivono in campi custom e field group;
+ogni sezione ha un template, una parte o un blocco con un contratto di dati; i media usati dal
+componente devono essere attachment della Media Library di WordPress e vengono referenziati con
+ID; senza accesso o risposta verificabile da WordPress l'upload resta pendente e non viene
+dichiarato completato.
+
+**Criterio tecnico:** Gutenberg è il default. Block Bindings risolve un campo dentro un blocco
+core; ACF Blocks serve quando markup o logica sono propri; Elementor resta confinato alle landing
+o ai contesti in cui la velocità di iterazione paga la dipendenza residua. Milo consulta la wiki
+OKF personale prima dei fatti di dominio su WordPress, Gutenberg, Elementor e ACF.
+
+**Capabilities:** CM modello contenuti e campi · GB componenti Gutenberg · EL confine Elementor ·
+TC decomposizione in componenti · ML Media Library · OKF conoscenza WordPress.
+
+**Relationships:** Vera sui dati personali nelle immagini e nei contenuti; Kai su ruoli, upload e
+plugin vulnerabili; Bruno su server, deploy e backup; Aldo su licenze di temi/plugin; Nils sugli
+obblighi di accessibilità; Iris sull'estetica; Otto sui confini oltre WordPress; Enzo sui
+componenti AI.
+
+---
+
 ### grl-mdsw
 
 **Type:** workflow
@@ -699,7 +737,7 @@ esempio che il gestionale attorno al modulo che qualifica resta fuori.
 
 **Type:** workflow
 
-**Purpose:** raccogliere — una volta per progetto — il profilo che dà contesto a tutte e sei le
+**Purpose:** raccogliere — una volta per progetto — il profilo che dà contesto a tutte e dieci le
 figure, e scriverlo in `_bmad/memory/grl-shared/project-profile.md`. Senza questo file le figure
 parlano per luoghi comuni.
 
