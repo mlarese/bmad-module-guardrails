@@ -4,7 +4,7 @@ status: 'complete'
 module_name: 'Guardrails'
 module_code: 'grl'
 module_description: 'Figure di presidio che affiancano il team di sviluppo su privacy/GDPR, sicurezza applicativa, legale e licenze, compliance normativa, disciplina architetturale, qualità visiva della UI e implementazione WordPress a componenti'
-architecture: 'ten distinct agents + three service workflows, no orchestrator, personal + shared module memory'
+architecture: 'compatibility bundle grl with ten agents, service workflows, shared memory, and a staged topic-module topology'
 standalone: false
 expands_module: 'bmm'
 skills_planned:
@@ -26,10 +26,32 @@ skills_planned:
 config_variables:
   - strictness_override
 created: '2026-08-06 22:10'
-updated: '2026-08-06 22:35'
+updated: '2026-08-08 10:00'
 ---
 
 # Module Plan
+
+## Addendum 2026-08-08 — topologia topic-oriented
+
+Il piano originale descriveva il bundle come una singola installazione. La decisione attuale è
+mantenerlo come superficie compatibile e introdurre confini logici per una migrazione successiva:
+
+| Codice futuro | Area | Contenuto |
+| ------------- | ---- | --------- |
+| `grc` | Core | setup, profilo, collegio e memoria condivisa |
+| `grg` | Governance | privacy, legal, compliance |
+| `gre` | Engineering | architecture, security, ops, AI |
+| `grh` | Health | clinical informatics e qualificazione MDR |
+| `grw` | Web Experience | UI critic e web |
+| `gwp` | WordPress | Gutenberg, ACF, componenti, template e Media Library |
+
+La mappa canonica è in `src/module-topology.yaml`. In questa fase non vengono copiate le skill in
+più package: si evitano duplicati e drift. `grl-setup` installa invece le stanze tematiche di
+`bmad-party-mode` nel layer `_bmad/custom/bmad-party-mode.toml`; la stanza di default non cambia.
+
+Le sezioni successive conservano il razionale storico della prima versione del modulo. Quando
+partirà l'estrazione fisica, questo addendum e la topologia saranno il riferimento per aggiornare
+codici, manifest e compatibilità.
 
 ## Vision
 

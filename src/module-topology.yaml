@@ -1,0 +1,77 @@
+# Topologia logica di Guardrails.
+#
+# Questo file non è letto direttamente dall'installer BMad: descrive i confini
+# dei futuri package installabili senza duplicare oggi le skill del bundle grl.
+# Il bundle grl resta la superficie compatibile fino alla migrazione dei codici.
+
+version: 1
+bundle:
+  code: grl
+  mode: compatibility-bundle
+  description: "Bundle completo Guardrails: tutte le figure e i workflow in un'unica installazione."
+
+modules:
+  - code: grc
+    name: Guardrails Core
+    status: planned
+    purpose: "Profilo, setup, collegio e contratto della memoria condivisa."
+    skills:
+      - grl-setup
+      - grl-profile
+      - grl-board
+    party_groups:
+      - grl-full-board
+
+  - code: grg
+    name: Guardrails Governance
+    status: planned
+    purpose: "Privacy, legale, licenze e soglie di applicabilità normativa."
+    skills:
+      - grl-agent-privacy
+      - grl-agent-legal
+      - grl-agent-compliance
+    party_groups:
+      - grl-governance
+      - grl-release-gate
+
+  - code: gre
+    name: Guardrails Engineering
+    status: planned
+    purpose: "Architettura, sicurezza, operations e impianto delle applicazioni AI."
+    skills:
+      - grl-agent-architecture
+      - grl-agent-security
+      - grl-agent-ops
+      - grl-agent-ai
+    party_groups:
+      - grl-engineering
+      - grl-release-gate
+
+  - code: grh
+    name: Guardrails Health
+    status: planned
+    purpose: "Dominio clinico e qualificazione del software sanitario."
+    skills:
+      - grl-agent-health
+      - grl-mdsw
+    party_groups:
+      - grl-health
+
+  - code: grw
+    name: Guardrails Web Experience
+    status: planned
+    purpose: "Qualità visiva, landing page e siti."
+    skills:
+      - grl-agent-ui-critic
+      - grl-web
+    party_groups:
+      - grl-web
+
+  - code: gwp
+    name: Guardrails WordPress
+    status: planned
+    purpose: "WordPress a componenti con Gutenberg, campi custom, template e Media Library."
+    skills:
+      - grl-agent-wordpress
+    party_groups:
+      - grl-wordpress-delivery

@@ -12,7 +12,7 @@
 code: grl
 name: Guardrails
 description: "Dieci figure di presidio — privacy e GDPR, sicurezza applicativa, legale e licenze, compliance normativa, qualità visiva della UI, disciplina architetturale del codice, infrastruttura e operatività, dominio clinico del software sanitario, impianto delle applicazioni che usano modelli linguistici e architettura WordPress a componenti — che affiancano il team dentro il ciclo di sviluppo, quando cambiare costa ancora poco. Più `grl-web`, l'unica skill del modulo che produce: landing page e siti, dal brief di conversione al progetto."
-module_version: 1.5.0
+module_version: 1.6.0
 default_selected: false
 
 module_greeting: >
@@ -30,6 +30,10 @@ module_greeting: >
 
   C'è anche `grl-web`: costruisce landing page e siti, e prima di consegnarli li fa
   guardare alle figure. È l'unica del modulo che produce invece di presidiare.
+
+  `grl-setup` installa anche le stanze tematiche di `bmad-party-mode`: governance,
+  engineering, health, web, WordPress e release gate. Convocale con
+  `bmad-party-mode --party <id>` senza cambiare la stanza di default.
 
 # --- Variabili di configurazione ---------------------------------------------
 # Una sola: tutto il resto del contesto vive nella memoria condivisa del progetto
@@ -65,7 +69,8 @@ post-install-notes: >
 
   Poi puoi chiamare una figura per nome, oppure usare `grl-board` per farle guardare
   tutte insieme lo stesso artefatto. Le dieci entrano anche nella stanza principale
-  di `bmad-party-mode`, accanto ai cinque agenti BMM.
+  di `bmad-party-mode`, accanto ai cinque agenti BMM. Con `--party` puoi invece aprire
+  una stanza tematica senza convocare l'intero roster.
 
   Facoltativo e reversibile: se vuoi che le figure vengano consultate dentro i flussi
   BMM (PRD, architettura, UX, code review) invece che su tua chiamata, si aggiungono

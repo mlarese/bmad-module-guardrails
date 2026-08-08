@@ -98,6 +98,45 @@ sbaglia.
 
 Tutte e dieci entrano nel roster principale di `bmad-party-mode`, accanto ai cinque agenti BMM.
 
+## Stanze tematiche e sottomoduli
+
+Il bundle `grl` resta oggi l'installazione compatibile unica, ma il dominio è già descritto in
+confini topic-oriented in [`src/module-topology.yaml`](src/module-topology.yaml). La topologia
+prepara sei futuri package senza duplicare le skill e senza rinominare i comandi già installati:
+
+| Codice | Area | Skill principali |
+| ------ | ---- | ---------------- |
+| `grc` | Core | setup, profilo, collegio, memoria condivisa |
+| `grg` | Governance | privacy, legale, compliance |
+| `gre` | Engineering | architettura, sicurezza, ops, AI |
+| `grh` | Health | dominio clinico, dispositivo medico |
+| `grw` | Web Experience | critica UI, siti e landing |
+| `gwp` | WordPress | Gutenberg, campi custom, template, Media Library |
+
+I confini di installazione e quelli di conversazione non coincidono: `grl-setup` registra anche
+le stanze di `bmad-party-mode`, che possono convocare agenti di aree diverse:
+
+```text
+grl-governance          Vera · Aldo · Nils
+grl-engineering         Otto · Kai · Bruno · Enzo
+grl-health              Livia · Vera · Nils · Kai
+grl-web                 Iris · Milo · Sally (se BMM è installato)
+grl-wordpress-delivery  Milo · Iris · Otto · Bruno
+grl-release-gate        Vera · Kai · Aldo · Nils · Otto · Bruno
+grl-full-board          tutte le figure Guardrails
+```
+
+Dopo `grl-setup` si apre una stanza con:
+
+```bash
+bmad-party-mode --party grl-wordpress-delivery
+```
+
+La configurazione viene scritta nel layer non rigenerato
+`_bmad/custom/bmad-party-mode.toml`; gli override e i gruppi dell'utente fuori dal blocco
+Guardrails vengono preservati. L'estrazione fisica in package indipendenti sarà una migrazione
+successiva: prima verranno validati `gwp` e `grh`, poi gli altri domini.
+
 ## Installazione
 
 Con l'installer BMad, indicando questo repository come sorgente custom:
@@ -108,7 +147,8 @@ npx bmad-method install --custom-source https://github.com/mlarese/bmad-module-g
 
 L'installer copia le quindici skill, registra le dieci figure come agenti
 (`[agents.grl-agent-*]` nella configurazione) — che è ciò che le fa comparire nel roster di
-`bmad-party-mode` — e aggiunge le voci di help al catalogo `_bmad/_config/bmad-help.csv`.
+`bmad-party-mode` — aggiunge le voci di help al catalogo `_bmad/_config/bmad-help.csv` e,
+eseguendo `grl-setup`, installa anche le stanze tematiche.
 
 In alternativa, per un'installazione manuale o per riconfigurare un'installazione esistente,
 si esegue la skill **`grl-setup`**.
@@ -126,6 +166,7 @@ dopo l'installer sistema la cosa.
 .claude-plugin/marketplace.json   indice letto dall'installer BMad
 src/
 ├── module.yaml                   manifesto del modulo: config e roster delle figure
+├── module-topology.yaml           confini dei futuri package topic-oriented
 ├── module-help.csv               voci di help
 └── skills/
     ├── grl-agent-privacy/        🛡️ Vera
@@ -142,7 +183,8 @@ src/
     ├── grl-board/                workflow — revisione collegiale
     ├── grl-mdsw/                 workflow — qualificazione dispositivo medico
     ├── grl-web/                  l'unica skill che produce: landing page e siti
-    └── grl-setup/                installazione manuale e registrazione degli agenti
+    └── grl-setup/                installazione, roster e stanze party tematiche
+        └── assets/party-groups.toml
 docs/module-plan.md               il documento di piano del modulo
 ```
 

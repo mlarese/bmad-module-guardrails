@@ -6,9 +6,9 @@ description: Installa il modulo Guardrails in un progetto. Usa quando l'utente c
 # Setup del modulo Guardrails
 
 Installi Guardrails in un progetto: una domanda all'utente, la registrazione delle dieci
-figure nel roster degli agenti, e l'avvio della profilazione. L'esito che conta non è il file
-di config — è che l'utente esca da qui con `grl-profile` già eseguito, perché senza profilo
-di progetto le figure parlano per luoghi comuni.
+figure nel roster degli agenti, l'installazione delle stanze tematiche di party mode e l'avvio
+della profilazione. L'esito che conta non è il file di config — è che l'utente esca da qui con
+`grl-profile` già eseguito, perché senza profilo di progetto le figure parlano per luoghi comuni.
 
 Identità del modulo, variabili e roster stanno in `./assets/module.yaml`: leggilo, non dedurli.
 
@@ -81,6 +81,10 @@ python3 ./scripts/register-agents.py \
   --project-root "{project-root}" \
   --module-yaml ./assets/module.yaml \
   --strictness "{valore-scelto}"
+
+python3 ./scripts/merge-party-groups.py \
+  --project-root "{project-root}" \
+  --source ./assets/party-groups.toml
 ```
 
 Cosa fa, e perché così:
@@ -96,6 +100,9 @@ Cosa fa, e perché così:
   rimossa nella stessa passata.
 - I metadati delle figure sono letti dai `customize.toml` delle skill installate, che restano
   la fonte di verità; `--module-yaml` serve solo da ripiego se le skill non si trovano su disco.
+- I gruppi tematici vengono scritti in `{project-root}/_bmad/custom/bmad-party-mode.toml`.
+  Il merger sostituisce solo il blocco marcato da Guardrails e preserva gli override e i gruppi
+  creati dall'utente fuori da quel blocco.
 - Le scritture sono anti-zombie e idempotente: le tabelle `grl` precedenti vengono rimosse prima
   di riscrivere, e il risultato viene riparsato prima di toccare il disco.
 
@@ -154,6 +161,7 @@ Su un'installazione più vecchia valgono gli script generici del template:
 ```bash
 python3 ./scripts/merge-config.py --config-path "{project-root}/_bmad/config.yaml" --user-config-path "{project-root}/_bmad/config.user.yaml" --module-yaml ./assets/module.yaml --answers {file-temp} --legacy-dir "{project-root}/_bmad"
 python3 ./scripts/merge-help-csv.py --target "{project-root}/_bmad/module-help.csv" --source ./assets/module-help.csv --legacy-dir "{project-root}/_bmad" --module-code grl
+python3 ./scripts/merge-party-groups.py --project-root "{project-root}" --source ./assets/party-groups.toml
 ```
 
 Il file temporaneo delle risposte ha forma `{"module": {"strictness_override": "..."}}` (più
@@ -169,8 +177,9 @@ con il meccanismo di quella versione di BMad, altrimenti non compaiono nel party
 
 - **Non crea `{project-root}/_bmad/memory/grl-shared/`.** La crea `grl-profile` alla prima
   esecuzione, quando ha qualcosa da scriverci. Una cartella vuota in `_bmad/memory/` è rumore.
-- **Non crea gruppi di party mode.** Le dieci figure stanno nella stanza principale insieme ai
-  cinque agenti BMM: una sola stanza, quattordici partecipanti, per scelta esplicita.
+- **Non imposta una stanza di default.** Le dieci figure restano nella stanza principale insieme
+  agli agenti BMM; in più `grl-setup` installa stanze tematiche richiamabili con
+  `bmad-party-mode --party <id>`. Il default resta quello deciso dal progetto o dal team.
 - **Non tocca le skill BMM.** Vedi il passo facoltativo qui sotto.
 
 ## Chiusura
