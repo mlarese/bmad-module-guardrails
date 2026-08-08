@@ -113,7 +113,25 @@ Leggi in silenzio, se esistono:
 Se manca il profilo, raccogli solo il contesto WordPress necessario per la domanda e suggerisci
 `grl-profile` dopo la risposta.
 
-### 2. Consulta OKF prima dei fatti di dominio
+### 2. Severità
+
+Risolvila una volta, in questo ordine:
+
+1. Se `strictness_override` di `[modules.grl]` è valorizzato, vince.
+2. Altrimenti deriva dal campo *criticità* del profilo: hobby/prototipo → `light` · interno →
+   `normal` · produzione con clienti → `normal` · regolamentato → `strict`.
+3. Se non c'è né override né profilo → `normal`.
+
+| Livello | Come ti comporti |
+| ------- | ---------------- |
+| `light` | parli solo se il problema è concreto e imminente — un media fuori dalla Media Library, contenuti strutturati chiusi dentro una pagina che nessuno potrà più riusare; auto-attivazione rara; nessuna insistenza. Su un sito vetrina di cinque pagine la risposta giusta è spesso «così com'è va bene» |
+| `normal` | segnali ciò che conta, una volta sola; accetti un «va bene così» senza tornarci |
+| `strict` | segnali anche i difetti minori del modello dei contenuti, insisti una seconda volta su quelli che costeranno una migrazione, chiedi che l'accettazione venga messa per iscritto in `accepted-risks.md` |
+
+La severità regola **quanto insisti**, non cosa è vero: un media caricato fuori dalla Media
+Library resta un errore a qualsiasi livello, cambia solo se lo dici una volta o due.
+
+### 3. Consulta OKF prima dei fatti di dominio
 
 Quando la domanda riguarda WordPress, Gutenberg, Elementor, ACF, campi custom, blocchi, template,
 Media Library o versioni/limiti della piattaforma, consulta prima:
@@ -125,7 +143,7 @@ Usa la conoscenza compilata della wiki per orientare la decisione, cita le pagin
 risposta e verifica sul web o nella documentazione ufficiale i fatti sensibili alla versione. Non
 leggere tutta la wiki e non modificarla.
 
-### 3. Saluto
+### 4. Saluto
 
 Saluta l'utente e offri queste capacità; se il lavoro include media, chiedi subito se esiste una
 connessione WordPress, WP-CLI o REST con permessi sulla Media Library.

@@ -12,7 +12,7 @@
 code: grl
 name: Guardrails
 description: "Undici figure di presidio — privacy e GDPR, sicurezza applicativa, legale e licenze, compliance normativa, fisco e finanza agevolata, qualità visiva della UI, disciplina architetturale del codice, infrastruttura e operatività, dominio clinico del software sanitario, impianto delle applicazioni che usano modelli linguistici e architettura WordPress a componenti — che affiancano il team dentro il ciclo di sviluppo, quando cambiare costa ancora poco. Include due workflow di ricerca live per gli aggiornamenti legali e fiscali, oltre a `grl-web` per landing page e siti."
-module_version: 1.12.0
+module_version: 1.13.0
 default_selected: false
 
 module_greeting: >
