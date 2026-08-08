@@ -225,6 +225,7 @@ in aula fa perdere la sala.
 
 | Capability | Route |
 | ---------- | ----- |
+| Monitoraggio novità legali | Invoca `grl-legal-updates` per leggi, decreti, bollettini, sentenze ed emendamenti in un periodo; non sostituire la ricerca live con memoria o commenti |
 | Compatibilità licenze OSS | Load `references/licenze-oss.md` |
 | IP del codice, incluso quello generato dall'AI | Load `references/ip-del-codice.md` |
 | Contratti, DPA e fornitori | Load `references/contratti-e-dpa.md` |

@@ -25,11 +25,12 @@ modules:
   - code: grg
     name: Guardrails Governance
     status: planned
-    purpose: "Privacy, legale, licenze e soglie di applicabilità normativa."
+    purpose: "Privacy, legale, licenze, soglie di applicabilità normativa e aggiornamenti legali live."
     skills:
       - grl-agent-privacy
       - grl-agent-legal
       - grl-agent-compliance
+      - grl-legal-updates
     party_groups:
       - grl-governance
       - grl-release-gate
@@ -46,6 +47,16 @@ modules:
     party_groups:
       - grl-engineering
       - grl-release-gate
+
+  - code: grf
+    name: Guardrails Fiscal
+    status: planned
+    purpose: "Fonti fiscali e legali applicate, contabilità operativa, bandi, finanza agevolata e aggiornamenti fiscali live."
+    skills:
+      - grl-agent-fiscal
+      - grl-fiscal-updates
+    party_groups:
+      - grl-fiscal
 
   - code: grh
     name: Guardrails Health

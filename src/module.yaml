@@ -11,13 +11,13 @@
 
 code: grl
 name: Guardrails
-description: "Dieci figure di presidio — privacy e GDPR, sicurezza applicativa, legale e licenze, compliance normativa, qualità visiva della UI, disciplina architetturale del codice, infrastruttura e operatività, dominio clinico del software sanitario, impianto delle applicazioni che usano modelli linguistici e architettura WordPress a componenti — che affiancano il team dentro il ciclo di sviluppo, quando cambiare costa ancora poco. Più `grl-web`, l'unica skill del modulo che produce: landing page e siti, dal brief di conversione al progetto."
-module_version: 1.6.0
+description: "Undici figure di presidio — privacy e GDPR, sicurezza applicativa, legale e licenze, compliance normativa, fisco e finanza agevolata, qualità visiva della UI, disciplina architetturale del codice, infrastruttura e operatività, dominio clinico del software sanitario, impianto delle applicazioni che usano modelli linguistici e architettura WordPress a componenti — che affiancano il team dentro il ciclo di sviluppo, quando cambiare costa ancora poco. Include due workflow di ricerca live per gli aggiornamenti legali e fiscali, oltre a `grl-web` per landing page e siti."
+module_version: 1.9.0
 default_selected: false
 
 module_greeting: >
-  Guardrails è installato: dieci figure di presidio — Vera (privacy), Kai (sicurezza),
-  Aldo (legale), Nils (compliance), Iris (design), Otto (architettura), Bruno (ops),
+  Guardrails è installato: undici figure di presidio — Vera (privacy), Kai (sicurezza),
+  Aldo (legale), Nils (compliance), Marta (fisco e finanza agevolata), Iris (design), Otto (architettura), Bruno (ops),
   Livia (dominio clinico), Enzo (applicazioni con AI) e Milo (WordPress a componenti) —
   entrano nel roster e si possono convocare per nome.
 
@@ -29,7 +29,8 @@ module_greeting: >
   questo software è un dispositivo medico, e in quale classe.
 
   C'è anche `grl-web`: costruisce landing page e siti, e prima di consegnarli li fa
-  guardare alle figure. È l'unica del modulo che produce invece di presidiare.
+  guardare alle figure. `grl-legal-updates` e `grl-fiscal-updates` recuperano invece
+  aggiornamenti normativi e fiscali con ricerca live e doppio gate di verifica.
 
   `grl-setup` installa anche le stanze tematiche di `bmad-party-mode`: governance,
   engineering, health, web, WordPress e release gate. Convocale con
@@ -63,12 +64,12 @@ post-install-notes: >
   Primo passo: esegui `grl-profile`. Sono otto campi, pochi minuti, quasi tutti
   pre-compilati leggendo il repository; l'unico che devi dichiarare tu è la criticità
   del progetto (hobby/prototipo · interno · produzione con clienti · regolamentato),
-  perché è quella che regola quanto saranno severe tutte e dieci le figure. Se il
+  perché è quella che regola quanto saranno severe tutte e undici le figure. Se il
   settore è sanitario, il profilo raccoglie cinque campi in più; altrimenti non li
   nomina nemmeno.
 
   Poi puoi chiamare una figura per nome, oppure usare `grl-board` per farle guardare
-  tutte insieme lo stesso artefatto. Le dieci entrano anche nella stanza principale
+  tutte insieme lo stesso artefatto. Le undici entrano anche nella stanza principale
   di `bmad-party-mode`, accanto ai cinque agenti BMM. Con `--party` puoi invece aprire
   una stanza tematica senza convocare l'intero roster.
 
@@ -118,6 +119,14 @@ agents:
     title: Regulatory Compliance
     icon: 📐
     description: "Prima esclude, poi prescrive: delle norme che ti preoccupano, quasi sempre metà non ti riguarda. Conosce le soglie di applicabilità di NIS2, DORA, accessibilità EAA/WCAG, eIDAS, Cyber Resilience Act e dei regimi bancario e sanitario — dimensione, settore, mercato, tipo di sistema — e sa da quando un obbligo scatta davvero. Parla come un cartografo che traccia un confine: calmo, mai enfatico, una riga per norma, dentro o fuori."
+
+  - code: grl-agent-fiscal
+    module: grl
+    team: software-development
+    name: Marta
+    title: Fiscalista e Finanza Agevolata
+    icon: 🧾
+    description: "Ricerca fonti fiscali, contabili e di finanza agevolata italiane ed europee, verifica requisiti, scadenze, spese ammissibili e rendicontazione, e traduce tutto in un verdetto pratico con fonte primaria e data di verifica."
 
   - code: grl-agent-ui-critic
     module: grl

@@ -1,8 +1,8 @@
 # Guardrails (`grl`)
 
-Modulo [BMad](https://github.com/bmad-code-org/BMAD-METHOD) con **dieci figure di presidio** che
+Modulo [BMad](https://github.com/bmad-code-org/BMAD-METHOD) con **undici figure di presidio** che
 affiancano il team dentro il ciclo di sviluppo software: privacy e GDPR, sicurezza applicativa,
-legale e licenze, compliance normativa, qualità visiva della UI, disciplina architetturale del
+legale e licenze, compliance normativa, fisco e finanza agevolata, qualità visiva della UI, disciplina architetturale del
 codice, infrastruttura e operatività, dominio clinico del software sanitario, impianto delle
 applicazioni che usano modelli linguistici e architettura WordPress a componenti.
 
@@ -14,11 +14,12 @@ Vincoli normativi, scelte di sicurezza e debiti strutturali, se emergono a fine 
 riscritture. Guardrails li fa emergere quando cambiare è ancora economico — e li ricontrolla lungo
 tutto il ciclo, dai requisiti al pre-rilascio.
 
-Il modulo **parla, non produce documenti**: niente DPIA formali, niente registro dei trattamenti,
-niente report di audit. L'unica traccia che lascia sono righe brevi nella memoria condivisa del
-progetto.
+Le figure **parlano, non producono documenti formali**: niente DPIA firmate, niente registro dei
+trattamenti, niente parere professionale sostitutivo. I due workflow di ricerca producono invece
+digest temporali verificabili con fonti e data di accesso; `grl-web` produce landing page e siti.
+Le decisioni del modulo restano righe brevi nella memoria condivisa del progetto.
 
-## Le dieci figure
+## Le undici figure
 
 | | Nome | Ruolo | Presidia |
 | --- | ---- | ----- | -------- |
@@ -26,6 +27,7 @@ progetto.
 | 🔐 | **Kai** | Application Security Engineer | rischi ordinati per probabilità reale, con la contromisura minima. Niente fortini dove basta una serratura |
 | ⚖️ | **Aldo** | Tech Lawyer | licenze OSS, proprietà intellettuale (anche del codice generato da AI), contratti e DPA, termini di servizio. Non dice mai «consulta un avvocato»: l'avvocato è lui |
 | 📐 | **Nils** | Regulatory Compliance | AI Act, NIS2, DORA, accessibilità, eIDAS, regimi settoriali. Prima esclude ciò che non ti riguarda, poi prescrive |
+| 🧾 | **Marta** | Fiscalista e Finanza Agevolata | fonti Agenzia delle Entrate, Normattiva, Gazzetta Ufficiale, MIMIT, Invitalia e UE; imposte, IVA, contributi, bandi, incentivi, de minimis e rendicontazione. Non presenta istanze e non sostituisce il professionista abilitato |
 | 👁️ | **Iris** | Design Critic | l'omologazione delle pagine generate — hero in gradiente, tre card, blu-viola. Non stronca mai senza dare la deviazione concreta |
 | 🧱 | **Otto** | Code Architect | confini, dipendenze, over-engineering. SOLID, KISS, DRY, vertical slice ed esagonale come attrezzi, mai come dogmi |
 | 🖥️ | **Bruno** | Infrastructure & Ops Engineer | server, SSH, Docker, Kubernetes, deploy, conservazione dei segreti, backup. Il suo mestiere è togliere infrastruttura, non aggiungerne |
@@ -33,20 +35,22 @@ progetto.
 | 🧠 | **Enzo** | AI Engineer | l'impianto delle applicazioni che usano modelli linguistici: RAG, orchestrazione, agenti e tool, output validato, eval, costi. La sua prima domanda è se un modello serva davvero |
 | 🧩 | **Milo** | WordPress Component Architect | Gutenberg, Elementor, ACF, campi custom, template e componenti riusabili. Impone che i media finiscano nella Media Library e che i dati strutturati non restino dentro pagine monolitiche |
 
-E tre workflow di servizio:
+E cinque workflow di servizio:
 
 | Skill | Cosa fa |
 | ----- | ------- |
 | `grl-profile` | raccoglie il profilo del progetto (otto campi, quasi tutti pre-compilati leggendo il repository; cinque in più se il settore è sanitario). Da eseguire per primo: senza, le figure parlano per luoghi comuni |
 | `grl-board` | convoca sul singolo artefatto **solo le figure pertinenti**, dice perché ha escluso le altre, e lascia aperti i disaccordi invece di appianarli |
 | `grl-mdsw` | dalla finalità del software alla classe MDR: dice se è un dispositivo medico, cosa comporta e — parte che sgonfia più allarmi — cosa non comporta |
+| `grl-legal-updates` | recupera leggi, decreti, bollettini, sentenze ed emendamenti nel periodo richiesto, con ricerca live, matrice di copertura, lineage di vigenza e due gate `bmad-review` |
+| `grl-fiscal-updates` | recupera norme fiscali, circolari, bollettini, bandi, incentivi ed emendamenti nel periodo richiesto, con ricerca live, matrice di copertura, lineage di vigenza e due gate `bmad-review` |
 
 ## Come funziona
 
 **Profilo di progetto.** `grl-profile` scrive `_bmad/memory/grl-shared/project-profile.md`: settore,
 tipo di software, dati personali trattati, mercato, stack, componenti AI, vincoli noti e — campo
 decisivo — la **criticità dichiarata** (hobby/prototipo · interno · produzione con clienti ·
-regolamentato). È la criticità a decidere quanto sono severe tutte e dieci le figure. Se il
+regolamentato). È la criticità a decidere quanto sono severe tutte e undici le figure. Se il
 settore dichiarato è sanitario, il profilo raccoglie in più finalità del software, contesto d'uso,
 integrazioni sanitarie, ruolo GDPR ed eventuale qualificazione MDR; altrimenti quei campi non
 vengono nemmeno nominati.
@@ -96,18 +100,19 @@ del codice, originalità visiva. L'attrito è voluto. Enzo si aggiunge alla stes
 lei implementa, lui guarda l'impianto della pipeline AI e chiede cosa succede quando il modello
 sbaglia.
 
-Tutte e dieci entrano nel roster principale di `bmad-party-mode`, accanto ai cinque agenti BMM.
+Tutte e undici entrano nel roster principale di `bmad-party-mode`, accanto ai cinque agenti BMM.
 
 ## Stanze tematiche e sottomoduli
 
 Il bundle `grl` resta oggi l'installazione compatibile unica, ma il dominio è già descritto in
 confini topic-oriented in [`src/module-topology.yaml`](src/module-topology.yaml). La topologia
-prepara sei futuri package senza duplicare le skill e senza rinominare i comandi già installati:
+prepara sette futuri package senza duplicare le skill e senza rinominare i comandi già installati:
 
 | Codice | Area | Skill principali |
 | ------ | ---- | ---------------- |
 | `grc` | Core | setup, profilo, collegio, memoria condivisa |
-| `grg` | Governance | privacy, legale, compliance |
+| `grg` | Governance | privacy, legale, compliance e monitoraggio novità legali |
+| `grf` | Fiscalità | fisco, contabilità, bandi, finanza agevolata e monitoraggio novità fiscali |
 | `gre` | Engineering | architettura, sicurezza, ops, AI |
 | `grh` | Health | dominio clinico, dispositivo medico |
 | `grw` | Web Experience | critica UI, siti e landing |
@@ -118,6 +123,7 @@ le stanze di `bmad-party-mode`, che possono convocare agenti di aree diverse:
 
 ```text
 grl-governance          Vera · Aldo · Nils
+grl-fiscal              Marta · Aldo · Nils
 grl-engineering         Otto · Kai · Bruno · Enzo
 grl-health              Livia · Vera · Nils · Kai
 grl-web                 Iris · Milo · Sally (se BMM è installato)
@@ -145,7 +151,7 @@ Con l'installer BMad, indicando questo repository come sorgente custom:
 npx bmad-method install --custom-source https://github.com/mlarese/bmad-module-guardrails
 ```
 
-L'installer copia le quindici skill, registra le dieci figure come agenti
+L'installer copia le diciotto skill, registra le undici figure come agenti
 (`[agents.grl-agent-*]` nella configurazione) — che è ciò che le fa comparire nel roster di
 `bmad-party-mode` — aggiunge le voci di help al catalogo `_bmad/_config/bmad-help.csv` e,
 eseguendo `grl-setup`, installa anche le stanze tematiche.
@@ -173,6 +179,7 @@ src/
     ├── grl-agent-security/       🔐 Kai
     ├── grl-agent-legal/          ⚖️ Aldo
     ├── grl-agent-compliance/     📐 Nils
+    ├── grl-agent-fiscal/        🧾 Marta
     ├── grl-agent-ui-critic/      👁️ Iris
     ├── grl-agent-architecture/   🧱 Otto
     ├── grl-agent-ops/            🖥️ Bruno
@@ -182,7 +189,9 @@ src/
     ├── grl-profile/              workflow — profilo di progetto
     ├── grl-board/                workflow — revisione collegiale
     ├── grl-mdsw/                 workflow — qualificazione dispositivo medico
-    ├── grl-web/                  l'unica skill che produce: landing page e siti
+    ├── grl-legal-updates/        workflow — ultime novità legali con doppia verifica
+    ├── grl-fiscal-updates/       workflow — ultime novità fiscali con doppia verifica
+    ├── grl-web/                  workflow che produce landing page e siti
     └── grl-setup/                installazione, roster e stanze party tematiche
         └── assets/party-groups.toml
 docs/module-plan.md               il documento di piano del modulo

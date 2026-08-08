@@ -3,14 +3,15 @@ title: 'Module Plan — Guardrails'
 status: 'complete'
 module_name: 'Guardrails'
 module_code: 'grl'
-module_description: 'Figure di presidio che affiancano il team di sviluppo su privacy/GDPR, sicurezza applicativa, legale e licenze, compliance normativa, disciplina architetturale, qualità visiva della UI e implementazione WordPress a componenti'
-architecture: 'compatibility bundle grl with ten agents, service workflows, shared memory, and a staged topic-module topology'
+module_description: 'Figure di presidio che affiancano il team di sviluppo su privacy/GDPR, sicurezza applicativa, legale e licenze, compliance normativa, fisco e finanza agevolata, disciplina architetturale, qualità visiva della UI e implementazione WordPress a componenti'
+architecture: 'compatibility bundle grl with eleven agents, five service workflows, live research gates, shared memory, and a staged topic-module topology'
 standalone: false
 expands_module: 'bmm'
 skills_planned:
   - grl-agent-privacy
   - grl-agent-security
   - grl-agent-legal
+  - grl-agent-fiscal
   - grl-agent-compliance
   - grl-agent-ui-critic
   - grl-agent-architecture
@@ -21,12 +22,14 @@ skills_planned:
   - grl-profile
   - grl-board
   - grl-mdsw
+  - grl-legal-updates
+  - grl-fiscal-updates
   - grl-web
   - grl-setup
 config_variables:
   - strictness_override
 created: '2026-08-06 22:10'
-updated: '2026-08-08 10:00'
+updated: '2026-08-08 13:00'
 ---
 
 # Module Plan
@@ -40,6 +43,7 @@ mantenerlo come superficie compatibile e introdurre confini logici per una migra
 | ------------- | ---- | --------- |
 | `grc` | Core | setup, profilo, collegio e memoria condivisa |
 | `grg` | Governance | privacy, legal, compliance |
+| `grf` | Fiscal | fisco, contabilità, bandi e finanza agevolata |
 | `gre` | Engineering | architecture, security, ops, AI |
 | `grh` | Health | clinical informatics e qualificazione MDR |
 | `grw` | Web Experience | UI critic e web |
@@ -59,7 +63,7 @@ codici, manifest e compatibilità.
 
 **Guardrails** (`grl`) porta dentro il ciclo di sviluppo software le figure di presidio che oggi
 mancano o arrivano troppo tardi: privacy/GDPR, sicurezza applicativa, legale e licenze,
-compliance normativa, disciplina architetturale, qualità visiva della UI.
+compliance normativa, fisco e finanza agevolata, disciplina architetturale, qualità visiva della UI.
 
 - **Per chi:** team e sviluppatori singoli che costruiscono software soggetto a vincoli
   normativi, o che vogliono tenere alta l'asticella di qualità senza avere in casa un DPO,
@@ -77,8 +81,9 @@ compliance normativa, disciplina architetturale, qualità visiva della UI.
 
 ## Architecture
 
-**Stato corrente: 10 agenti distinti + 3 workflow di servizio, senza orchestratore, con memoria
-condivisa di modulo.** `grl-web` e `grl-setup` completano il modulo come skill operative.
+**Stato corrente: 11 agenti distinti + 5 workflow di servizio, senza orchestratore proprietario,
+con ricerca live delegata a Deep Recon, doppio gate bmad-review e memoria condivisa di modulo.**
+`grl-web` e `grl-setup` completano il modulo come skill operative.
 
 | Skill | Tipo | Ruolo |
 | ----- | ---- | ----- |
@@ -86,6 +91,7 @@ condivisa di modulo.** `grl-web` e `grl-setup` completano il modulo come skill o
 | `grl-agent-security` | agente | sicurezza applicativa |
 | `grl-agent-legal` | agente | legale, contratti, licenze, IP |
 | `grl-agent-compliance` | agente | compliance normativa settoriale |
+| `grl-agent-fiscal` | agente | fonti fiscali, contabilità operativa, bandi e finanza agevolata |
 | `grl-agent-ui-critic` | agente | qualità e originalità visiva |
 | `grl-agent-architecture` | agente | disciplina architetturale del codice |
 | `grl-agent-ops` | agente | infrastruttura: server, SSH, Docker, Kubernetes, deploy |
@@ -95,19 +101,21 @@ condivisa di modulo.** `grl-web` e `grl-setup` completano il modulo come skill o
 | `grl-profile` | workflow | crea e aggiorna il profilo del progetto |
 | `grl-board` | workflow | convoca il collegio su un artefatto |
 | `grl-mdsw` | workflow | qualificazione del software come dispositivo medico |
+| `grl-legal-updates` | workflow | ricerca live di leggi, decreti, bollettini, sentenze ed emendamenti |
+| `grl-fiscal-updates` | workflow | ricerca live di norme fiscali, circolari, bandi, incentivi ed emendamenti |
 
-**Perché 6 agenti e non un agente unico multi-modalità.** Scelta esplicita dell'utente:
+**Perché agenti distinti e non un agente unico multi-modalità.** Scelta esplicita dell'utente:
 vuole personaggi riconoscibili, non modalità. Il razionale regge anche tecnicamente:
 
 - gli ambiti sono domini di competenza realmente distinti, ciascuno con un proprio modo di
   ragionare (il security engineer pensa come un attaccante, il critico di design guarda una
   pagina, l'architetto legge dipendenze) — personas distinte producono output migliori;
-- l'utente deve poter chiamare una figura senza caricare le altre cinque;
+- l'utente deve poter chiamare una figura senza caricare le altre figure;
 - l'auto-attivazione per descrizione (meccanismo A) funziona meglio con skill a fuoco stretto:
-  sei descrizioni tematiche precise scattano dove serve, una descrizione unica onnicomprensiva
+  descrizioni tematiche precise scattano dove serve, una descrizione unica onnicomprensiva
   scatta ovunque o mai.
 
-**Costo accettato:** sei skill da mantenere, rischio di sovrapposizione fra le figure 1-4 e
+**Costo accettato:** skill da mantenere, rischio di sovrapposizione fra le figure 1-4 e
 rischio rumore se si auto-attivano insieme. Mitigazioni: confini tematici espliciti nella
 sezione Cross-Agent Patterns, e memoria condivisa dei rischi accettati per far tacere ciò che
 è già stato valutato.
@@ -118,20 +126,23 @@ l'auto-attivazione (l'orchestratore intercetterebbe trigger che appartengono all
 La funzione di coordinamento è coperta dal workflow `grl-board`, che costa meno e non ha
 persona. L'utente resta il router nel caso singolo.
 
-**Perché due workflow e non capacità interne agli agenti.**
+**Perché workflow distinti e non capacità interne agli agenti.**
 
 - `grl-profile` serve **prima** che qualsiasi figura possa dire qualcosa di sensato, ed è
-  condiviso da tutte e sei: metterlo dentro un agente lo renderebbe di sua proprietà. Nessuna
+  condiviso da tutte le undici: metterlo dentro un agente lo renderebbe di sua proprietà. Nessuna
   persona, nessuna memoria propria, procedura sequenziale → workflow.
 - `grl-board` orchestra più figure sullo stesso artefatto: per definizione non appartiene a
   nessuna di esse.
+- `grl-legal-updates` e `grl-fiscal-updates` hanno una catena propria di ricerca live, registro
+  delle fonti e doppia verifica: incorporarla in Aldo o Marta farebbe perdere il confine fra
+  interpretazione e raccolta evidence.
 
 ### Memory Architecture
 
 **Pattern: memoria personale + memoria condivisa di modulo** (riga 2 della tabella dei
 pattern). Non memoria condivisa unica, perché ogni figura accumula cose che alle altre non
 servono; non solo personale, perché il profilo di progetto e i rischi accettati devono essere
-visti da tutte, altrimenti l'utente ripete sei volte le stesse informazioni.
+visti da tutte, altrimenti l'utente ripete undici volte le stesse informazioni.
 
 ```
 {project-root}/_bmad/memory/
@@ -181,7 +192,7 @@ brevi, e solo per cose che si sono ripetute almeno due volte (es. «il team usa 
 **Il router è l'utente**, con due eccezioni: l'auto-attivazione per descrizione (meccanismo A) e
 il workflow `grl-board`, che convoca il collegio su un artefatto.
 
-**Confini tematici** — servono a evitare che sei figure parlino sopra la stessa questione.
+**Confini tematici** — servono a evitare che undici figure parlino sopra la stessa questione.
 Regola generale: *chi ha la competenza decisiva parla, gli altri tacciono.*
 
 | Questione | Chi parla | Chi tace |
@@ -215,7 +226,7 @@ multipla esiste già ed è esplicita: `grl-board`.
 
 ### Partecipazione al party mode principale
 
-**Requisito dell'utente:** le sei figure fanno parte del gruppo principale di `bmad-party-mode`,
+**Requisito dell'utente:** le undici figure fanno parte del gruppo principale di `bmad-party-mode`,
 non di una stanza separata.
 
 **Come si soddisfa (verificato sul codice, non ipotizzato).**
@@ -224,7 +235,7 @@ installati**, letti via `resolve_config.py --key agents`, cioè dalla tabella `[
 config TOML. Non c'è alcun filtro per `module` o per `team`: chi è registrato come agente entra
 nella stanza di default. Quindi:
 
-1. Le sei figure vanno costruite con **Agent Builder** (non come workflow), così ciascuna
+1. Le undici figure vanno costruite con **Agent Builder** (non come workflow), così ciascuna
    riceve un `customize.toml` con il blocco `[agent]`: `code`, `name`, `title`, `icon`,
    `description`, `agent_type`.
 2. `Create Module (CM)` porta quei metadati nel `module.yaml` del modulo; l'installer li scrive
@@ -241,16 +252,16 @@ nella stanza di default. Quindi:
 - La stanza di default passa da 5 a **11 partecipanti**. L'utente ha scelto di tenere una sola
   stanza, senza `party_groups` aggiuntivi: la regola «al massimo una figura per turno» e i
   confini tematici netti diventano quindi ancora più importanti.
-- Le sei personalità devono reggere il confronto diretto con Mary, John, Sally, Winston e
+- Le undici personalità devono reggere il confronto diretto con Mary, John, Sally, Winston e
   Amelia: caratteri distinti anche fra loro, e attriti prevedibili da sfruttare (Otto contro
   Winston sull'architettura, Iris contro Sally sulla UI, Vera contro John sui requisiti che
   raccolgono troppi dati).
 
 ## Skills
 
-Otto skill: sei agenti (le figure) e due workflow di servizio.
+Diciotto skill: undici agenti (le figure) e cinque workflow di servizio.
 
-### Regole comuni a tutte e sei le figure
+### Regole comuni a tutte le undici figure
 
 Da riportare in ogni agente costruito — non sono contorno, sono ciò che distingue queste figure
 da un checklist-bot.
@@ -466,6 +477,33 @@ tende a produrre obblighi per sembrare utile.
 **Relationships:** confine con Aldo (obblighi regolamentari vs contratti/licenze); con Iris
 sull'accessibilità (lui dice il livello richiesto, lei come realizzarlo senza imbruttire);
 con Vera dove il settore aggiunge regole sui dati oltre al GDPR.
+
+---
+
+### grl-agent-fiscal
+
+**Type:** agent · **code:** `fiscal` · **name:** Marta · **title:** Fiscalista e Finanza Agevolata · **icon:** 🧾
+
+**Persona:** ricercatrice fiscale che parte dalla fonte primaria e non dal ricordo. Distingue norma, prassi, giurisprudenza e sintesi commerciale; quando trova un numero chiede subito per quale soggetto, anno e territorio vale. Non si spaccia per commercialista abilitata e non firma istanze.
+
+**Core Outcome:** il titolare o il team sa se una regola fiscale o un incentivo è applicabile, quale documento lo dimostra, quale dato manca e cosa deve fare dopo.
+
+**The Non-Negotiable:** una data, soglia, percentuale o scadenza aggiornata non viene mai dichiarata senza verifica sul sito dell'ente competente.
+
+**Capabilities:**
+
+| Capability | Outcome | Inputs | Outputs |
+| ---------- | ------- | ------ | ------- |
+| Ricerca di fonte primaria | la decisione è ancorata all'atto o alla pagina ufficiale | domanda, soggetto, periodo e territorio | fonte, URL, data di verifica e passaggio decisivo |
+| Inquadramento fiscale | il regime o l'adempimento applicabile è separato dalle ipotesi | forma giuridica, ATECO, regime, anno e fatto economico | verdetto, dati mancanti e azione concreta |
+| Scouting finanza agevolata | emergono solo misure compatibili con il profilo | sede, dimensione, attività, spesa, tempi e aiuti già ricevuti | scheda misura, requisiti, costi, finestra e liquidità |
+| Controllo bando e rendicontazione | il contributo non viene confuso con cassa immediata | testo del bando, preventivi, cronoprogramma e documenti | spese ammissibili, vincoli, documenti e rischi di revoca |
+
+**Memory:** legge i tre file condivisi del modulo quando esistono; non crea una memoria personale. Una decisione che vincola il progetto va proposta per `decisions.md` e scritta solo dopo conferma esplicita.
+
+**Tool Dependencies:** ricerca web necessaria per materia aggiornata. MIMIT, Invitalia, Agenzia delle Entrate, Gazzetta Ufficiale, Normattiva, EUR-Lex, CURIA e portali regionali sono fonti operative; gli aggregatori servono solo per scoprire misure.
+
+**Design Notes:** il confine con Aldo è diritto tecnologico, contratti e AI Act; quello con Nils è la soglia delle norme regolatorie non fiscali. Contributi Europa può accelerare lo scouting ma non può confermare da solo apertura, percentuale o ammissibilità.
 
 ---
 
@@ -755,11 +793,65 @@ esempio che il gestionale attorno al modulo che qualifica resta fuori.
 
 ---
 
+### grl-legal-updates
+
+**Type:** workflow di ricerca
+
+**Purpose:** raccogliere, nel periodo indicato dall'utente o nell'ultimo mese di calendario,
+leggi, decreti, regolamenti, bollettini, circolari, sentenze ed emendamenti legali, distinguendo
+pubblicazione, approvazione, efficacia, abrogazione e proposta.
+
+**Motore di ricerca:** `bmad-deep-recon` con tipo `domain`, perché il suo pack tratta le regole
+del gioco e impone che lo stato normativo venga verificato a ogni caricamento. Il vecchio
+`bmad-domain-research` è uno shim deprecato e non viene usato direttamente.
+
+**Garanzia:** il report espone `as_of`, una matrice delle fonti (anche quelle senza risultati) e
+una lineage per seguire modifiche, sostituzioni, conversioni, abrogazioni, proroghe e testi
+vigenti. `complete_for_declared_scope` vale solo per il perimetro dichiarato; una fonte decisiva
+inaccessibile porta a `partial`/`blocked`. Deep Recon usa `validation=max` e red team.
+
+**Gate:** due invocazioni separate di `bmad-review`: una revisione adversarial/edge-case sulle
+fonti e sulla vigenza, poi una revisione indipendente `verification-gap`/adversarial dopo le
+correzioni. La verifica interna di Deep Recon è utile per la raccolta, ma non sostituisce i due
+gate.
+
+**Output:** digest con periodo, giurisdizione, `as_of`, copertura dichiarata, stato/versione di
+ogni atto, lineage, fonte primaria, data di accesso, confidenza, risultati esclusi e staleness
+map. Un atto non verificabile o potenzialmente sostituito resta `unverified`/`supersession_risk`.
+
+### grl-fiscal-updates
+
+**Type:** workflow di ricerca
+
+**Purpose:** raccogliere aggiornamenti fiscali, contabili, previdenziali e di finanza agevolata,
+compresi circolari, risoluzioni, bollettini, bandi, incentivi ed emendamenti, con default all'ultimo
+mese di calendario e data iniziale personalizzabile.
+
+**Motore di ricerca:** la stessa rotta `bmad-deep-recon`/`domain`, specializzata sulle fonti live
+di Agenzia Entrate, MEF, INPS/INAIL, MIMIT, Invitalia, UE e portali regionali. CNDCEC, FNC, Eutekne,
+IPSOA e Contributi Europa sono piste professionali o interpretative: il verdetto torna sempre
+all'ente emittente o gestore.
+
+**Garanzia e gate:** il report espone `as_of`, matrice delle fonti anche senza risultati e lineage
+di versione per norme, prassi e misure. `complete_for_declared_scope` è limitato a territorio,
+materie, categorie, fonti e date dichiarati; `partial`/`blocked` impedisce il verdetto corrente.
+Deep Recon usa `validation=max` e red team. Seguono due invocazioni indipendenti di
+`bmad-review`: adversarial/edge-case e poi verification-gap/adversarial, con controllo di periodo
+d'imposta, sostituzioni, proroghe, chiusure, risorse, cumulo, de minimis, scadenze e
+rendicontazione.
+
+**Output:** digest con stato/versione della misura, `as_of`, copertura, lineage, requisiti, spese,
+liquidità, date, fonti primarie, confidenza, finding contestati e prossima data di ricontrollo.
+Marta traduce i finding confermati in pre-screening, senza promettere concessioni o sostituire un
+professionista abilitato.
+
+---
+
 ### grl-profile
 
 **Type:** workflow
 
-**Purpose:** raccogliere — una volta per progetto — il profilo che dà contesto a tutte e dieci le
+**Purpose:** raccogliere — una volta per progetto — il profilo che dà contesto a tutte e undici le
 figure, e scriverlo in `_bmad/memory/grl-shared/project-profile.md`. Senza questo file le figure
 parlano per luoghi comuni.
 
@@ -808,7 +900,7 @@ chiamare una a una.
 | Capability | Outcome | Inputs | Outputs |
 | ---------- | ------- | ------ | ------- |
 | Revisione collegiale | l'artefatto è stato letto da ogni figura pertinente, ognuna dal proprio asse | percorso di un file o descrizione dell'artefatto | riepilogo schematico unico: per figura, i punti che contano |
-| Selezione dei convocati | non parlano tutte e sei quando ne servono due | artefatto + profilo progetto | elenco delle figure pertinenti, con il motivo dell'esclusione delle altre |
+| Selezione dei convocati | non parlano tutte le undici quando ne servono due | artefatto + profilo progetto | elenco delle figure pertinenti, con il motivo dell'esclusione delle altre |
 | Consolidamento dei conflitti | i disaccordi fra figure emergono invece di essere nascosti | pareri raccolti | punti in cui due figure vogliono cose incompatibili, con la scelta che spetta all'utente |
 | Registrazione degli esiti | ciò che è stato deciso non si perde | decisioni prese durante la revisione | righe in `decisions.md` e, su conferma esplicita, in `accepted-risks.md` |
 | Vista dei rischi accettati | si sa cosa il progetto ha già scelto di accettare | `accepted-risks.md` | elenco leggibile, raggruppato per figura |
@@ -840,7 +932,7 @@ progetto, la config è unica per installazione.
 | -------- | ------ | ------- | --------------- | ------------ |
 | `strictness_override` | «Livello di severità delle figure Guardrails? Lascia vuoto per farlo derivare dalla criticità del progetto (consigliato).» — opzioni: vuoto / `light` / `normal` / `strict` | `""` (vuoto = deriva dal profilo) | `strictness_override = "{value}"` | sì (personale) |
 
-**Come si risolve la severità in pratica** (logica identica in tutte e sei le figure):
+**Come si risolve la severità in pratica** (logica identica in tutte le undici figure):
 
 1. Se `strictness_override` è valorizzato, vince.
 2. Altrimenti si deriva dal campo *criticità* di `project-profile.md`:
@@ -868,9 +960,9 @@ Dipendenze **opzionali**, usate se presenti e mai richieste all'utente dal setup
 
 ## UI and Visualization
 
-**Nessuna UI, nessun dashboard, nessun report HTML.** Scelta esplicita dell'utente: l'output è
-solo parere conversazionale. L'unica cosa che persiste sono le tre righe di memoria condivisa,
-che sono file markdown leggibili a occhio.
+**Nessuna UI e nessun dashboard.** Le figure restano conversazionali; `grl-web` produce pagine e
+i due workflow di aggiornamento producono digest Markdown con fonti, mentre non viene generato un
+report HTML formale di audit. Le decisioni delle figure persistono nelle righe di memoria condivisa.
 
 Nota per il futuro: se un giorno servisse una vista d'insieme (es. «tutti i rischi accettati di
 questo progetto»), la si aggiunge come capacità di `grl-board`, non come nuova skill.
@@ -879,7 +971,7 @@ questo progetto»), la si aggiunge come capacità di `grl-board`, non come nuova
 
 Oltre alla raccolta della singola variabile di config, il setup del modulo deve:
 
-1. **Registrare le sei figure come agenti installati** — è ciò che le fa comparire nel party
+1. **Registrare le undici figure come agenti installati** — è ciò che le fa comparire nel party
    mode principale. Deriva automaticamente dai `customize.toml` prodotti dall'Agent Builder,
    ma va verificato: `[agents.grl-agent-*]` deve esistere nel config risolto, con `module = "grl"`
    e `team = "software-development"`.
@@ -894,8 +986,9 @@ Oltre alla raccolta della singola variabile di config, il setup del modulo deve:
    il setup li propone, non li impone, e spiega che toccano il comportamento di skill non del
    modulo.
 
-**Nessun `party_groups`.** Decisione dell'utente: una sola stanza da 11, nessun gruppo tematico
-aggiuntivo da configurare.
+**Party groups tematici.** La stanza principale resta senza default imposto, ma `grl-setup` installa
+gruppi convocabili per governance, engineering, fiscalità, health, web, WordPress, release gate e
+collegio completo; i due workflow di ricerca usano i gruppi di dominio solo quando servono.
 
 ## Integration
 
@@ -910,7 +1003,7 @@ meglio agganciato ai flussi BMM.
 | `bmad-architecture` | Kai, Otto, Vera | superficie d'attacco, confini e dipendenze, dove finiscono i dati personali |
 | `bmad-ux` | Iris | che la UI non esca omologata; con Nils sull'accessibilità |
 | `bmad-build` / `bmad-code-review` | Kai, Otto, Aldo | pattern insicuri, strati inutili, licenze delle dipendenze aggiunte |
-| `bmad-party-mode` | tutte e sei | fanno parte del roster principale |
+| `bmad-party-mode` | tutte le undici | fanno parte del roster principale |
 
 **Valore in autonomia (senza BMM):** ogni figura è consultabile su un progetto qualsiasi —
 basta `grl-profile` per darle contesto. Nessuna skill del modulo importa file prodotti da BMM:

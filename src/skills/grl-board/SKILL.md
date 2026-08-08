@@ -18,7 +18,7 @@ Agisci come segretario del collegio Guardrails. L'esito è **un solo riepilogo s
 
 ## Selezione dei convocati
 
-È la parte che dà valore al workflow. Convocarle tutte e dieci produce rumore e fa abbandonare lo strumento: punta a **due-quattro figure**, e se le convochi tutte devi poter dire cosa ciascuna ha di decisivo da dire su *questo* artefatto.
+È la parte che dà valore al workflow. Convocarle tutte e undici produce rumore e fa abbandonare lo strumento: punta a **due-quattro figure**, e se le convochi tutte devi poter dire cosa ciascuna ha di decisivo da dire su *questo* artefatto.
 
 Serve un artefatto concreto: un file (PRD, architettura, story, pagina, componente), una cartella, un repository, o la sua descrizione se un file non c'è. Leggilo **prima** di scegliere: la selezione si fa sui segnali che ci sono davvero dentro, non sul tipo di documento.
 
@@ -30,6 +30,7 @@ Una figura entra solo se nell'artefatto — o nel profilo — c'è un aggancio c
 | Kai 🔐 | `grl-agent-security` | autenticazione e autorizzazione, segreti e chiavi, superfici esposte (API, upload, webhook), dipendenze, integrazioni LLM |
 | Aldo ⚖️ | `grl-agent-legal` | dipendenze e loro licenze, modello di distribuzione, contratti o capitolati, ToS, titolarità del codice, fonti dei dati di training, e qualunque componente AI — la classificazione AI Act e ciò che ne discende sono sue |
 | Nils 📐 | `grl-agent-compliance` | settore regolamentato, prodotto pubblico soggetto ad accessibilità, obblighi documentali, scadenze normative delle norme diverse dall'AI Act |
+| Marta 🧾 | `grl-agent-fiscal` | imposte, IVA, contributi, bilancio operativo, bandi, incentivi, crediti d'imposta, de minimis, spese ammissibili, domanda e rendicontazione |
 | Iris 👁️ | `grl-agent-ui-critic` | markup, CSS, screenshot, design system, landing o pagine viste dall'utente |
 | grl-web 🌐 | `grl-web` (rotta diagnosi) | una landing o una pagina di prodotto: affianca a Iris l'asse che nessun'altra figura copre — cosa la pagina dice, in che ordine, e se chiede l'azione prima di aver smontato l'obiezione. Quando la pagina arriva dal gate di `grl-web`, la lettura non ripete l'asse ma lo **verifica**: si ricostruisce il brief dalla pagina a freddo e si dice dove diverge da quello scritto. Se non diverge, è una riga sola |
 | Otto 🧱 | `grl-agent-architecture` | struttura delle cartelle, confini fra moduli, strati di astrazione, direzione delle dipendenze, impatto strutturale di una feature |
@@ -47,6 +48,8 @@ Confini: chi ha la competenza decisiva parla, gli altri tacciono anche quando il
 | Libreria con licenza AGPL | Aldo | Nils |
 | Vulnerabilità nota in una dipendenza | Kai | Aldo, anche se la licenza è nello stesso manifest |
 | Il prodotto usa un LLM | tre assi distinti: Enzo sull'impianto (RAG, orchestrazione, eval, costi), Aldo sull'AI Act — classificazione, obblighi, dati di training, IP degli output — e Kai sui rischi dell'integrazione | Nils, salvo che il progetto tocchi anche una norma diversa dall'AI Act |
+| Imposte, IVA, contributi e regimi fiscali | Marta | Aldo se il tema diventa contratto o diritto tecnologico; Nils se riguarda una norma regolatoria non fiscale |
+| Ammissibilità di un bando o incentivo | Marta | Nils solo per una soglia regolatoria distinta; Aldo per contratto, licenza o responsabilità |
 | Accessibilità WCAG | Nils (l'obbligo) | Iris solo su come realizzarla senza imbruttire |
 | Un componente è brutto o generico | Iris | tutti gli altri |
 | Una landing non converte: promessa, obiezione, prova, ordine dei blocchi | `grl-web` | Iris, che parla solo di come appare |

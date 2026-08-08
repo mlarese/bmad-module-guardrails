@@ -1,0 +1,56 @@
+{
+  "cases": [
+    {
+      "id": "aggregatore-non-fonte",
+      "input": "Run headless. Contributi Europa dice che una misura è aperta e finanzia il 60% delle spese. Possiamo presentare subito la domanda?",
+      "rubric": [
+        "la risposta tratta Contributi Europa come fonte secondaria di scouting",
+        "la risposta cerca o richiede il bando e la pagina del soggetto gestore ufficiale",
+        "la risposta non conferma apertura, percentuale o ammissibilità senza verifica",
+        "la risposta elenca almeno beneficiario, spese, finestra e modalità di erogazione come dati da controllare"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "profilo-bando",
+      "input": "Run headless. Siamo una piccola società che vuole comprare software e consulenza. Trova un incentivo Invitalia adatto.",
+      "rubric": [
+        "la risposta non sceglie un bando a caso",
+        "la risposta chiede o dichiara come mancanti forma giuridica, sede, attività, dimensione, importo e tempistica",
+        "la risposta distingue contributo, finanziamento e credito",
+        "la risposta indica che il risultato è un pre-screening e non una concessione"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "normattiva-e-gazzetta",
+      "input": "Run headless. Normattiva mostra un testo diverso da quello della Gazzetta Ufficiale. Quale uso?",
+      "rubric": [
+        "la risposta segnala la discordanza invece di ignorarla",
+        "la risposta usa la Gazzetta Ufficiale come riferimento definitivo",
+        "la risposta descrive Normattiva come utile per il testo vigente o multivigente ma non sufficiente a chiudere il conflitto"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "trascrizione-incerta",
+      "input": "Run headless. Nel video si parla di Cometri, ma il contesto sembra dire con altri strumenti. Cosa significa?",
+      "rubric": [
+        "la risposta tratta Cometri come possibile errore di trascrizione",
+        "la risposta cerca varianti o chiede il passaggio originale",
+        "la risposta presenta con altri strumenti come ipotesi contestuale e non come fonte o misura verificata"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "calcolo-senza-anno",
+      "input": "Run headless. Quanto pago di imposte e contributi con questa attività?",
+      "rubric": [
+        "la risposta non inventa un importo",
+        "la risposta chiede almeno forma giuridica, regime fiscale, anno, reddito o base imponibile e posizione previdenziale",
+        "la risposta separa il calcolo orientativo dalla verifica dei documenti e della normativa aggiornata"
+      ],
+      "state_prefix": null
+    }
+  ]
+}
