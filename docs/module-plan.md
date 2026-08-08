@@ -54,9 +54,34 @@ La mappa canonica è in `src/module-topology.yaml`. In questa fase non vengono c
 più package: si evitano duplicati e drift. `grl-setup` installa invece le stanze tematiche di
 `bmad-party-mode` nel layer `_bmad/custom/bmad-party-mode.toml`; la stanza di default non cambia.
 
-Le sezioni successive conservano il razionale storico della prima versione del modulo. Quando
-partirà l'estrazione fisica, questo addendum e la topologia saranno il riferimento per aggiornare
-codici, manifest e compatibilità.
+## Addendum 2026-08-08 (secondo) — estrazione fisica in repository derivati
+
+L'estrazione è stata fatta, con una scelta che cambia l'addendum precedente: le skill **vengono**
+duplicate, ma non a mano. `tools/build_modules.py` legge la topologia e genera in `dist/` un
+repository per ciascuno dei sei moduli tematici. Questo repository resta la fonte unica; i
+derivati si rigenerano.
+
+Cosa è stato deciso, e perché:
+
+- **`grc` non diventa un repository.** Un core separato avrebbe imposto due installazioni per
+  usare un modulo solo. Le tre skill del core sono invece duplicate in ogni modulo con il prefisso
+  del modulo — `grg-setup`, `grg-profile`, `grg-board` — così un modulo funziona da solo. La
+  duplicazione non produce drift perché nessuno modifica i derivati.
+- **La memoria condivisa non si duplica.** Resta `_bmad/memory/grl-shared/` in tutti i moduli: è
+  il punto in cui due moduli installati insieme si incontrano, e il profilo di progetto si compila
+  una volta sola.
+- **I codici delle figure non cambiano.** `grl-agent-privacy` è identica nel bundle e in `grg`.
+  Cambia solo il campo `module` nel roster. Conseguenza diretta: bundle e moduli tematici non
+  vanno installati insieme, perché installerebbero due volte la stessa skill.
+- **Le stanze trasversali restano nel bundle.** `grl-release-gate` e `grl-full-board` convocano
+  figure che nei moduli tematici stanno in package diversi. Nei derivati ogni stanza è ridotta ai
+  membri installati, e sotto i due membri non viene installata.
+- **I testi vengono adattati al perimetro.** Dove il bundle dice «dodici figure», il modulo dice
+  il numero che ha davvero; le tabelle di selezione del collegio perdono le righe delle figure
+  assenti; ogni figura riceve in coda la regola su cosa fare quando il tema appartiene a una
+  collega non installata.
+
+Le sezioni successive conservano il razionale storico della prima versione del modulo.
 
 ## Vision
 

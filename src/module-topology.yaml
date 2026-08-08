@@ -1,31 +1,51 @@
-# Topologia logica di Guardrails.
+# Topologia di Guardrails: il bundle completo e i moduli tematici derivati.
 #
-# Questo file non è letto direttamente dall'installer BMad: descrive i confini
-# dei futuri package installabili senza duplicare oggi le skill del bundle grl.
-# Il bundle grl resta la superficie compatibile fino alla migrazione dei codici.
+# Questo file non è letto dall'installer BMad. Lo legge `tools/build_modules.py`,
+# che da qui genera in `dist/` un repository per ogni modulo tematico. Questo
+# repository resta la fonte unica: i repository derivati non si modificano a mano,
+# si rigenerano.
+#
+# Il bundle `grl` resta la superficie completa — dodici figure e sette workflow in
+# un'unica installazione. I moduli tematici sono alternative al bundle, non
+# aggiunte: installano le stesse skill con lo stesso nome, quindi bundle e moduli
+# tematici non convivono nello stesso progetto.
+#
+# Le tre skill del core (`core.skills`) sono duplicate in ogni modulo tematico con
+# il prefisso del modulo — `grg-setup`, `grg-profile`, `grg-board` — perché un
+# modulo deve funzionare da solo. La memoria condivisa resta invece la stessa per
+# tutti (`core.shared_memory`): due moduli installati insieme leggono e scrivono
+# un solo profilo di progetto.
 
-version: 1
+version: 2
+
 bundle:
   code: grl
+  name: Guardrails
+  repo: bmad-module-guardrails
   mode: compatibility-bundle
   description: "Bundle completo Guardrails: tutte le figure e i workflow in un'unica installazione."
+  # Gruppi trasversali: restano solo nel bundle, perché convocano figure che nei
+  # moduli tematici stanno in package diversi.
+  party_groups:
+    - grl-full-board
+    - grl-release-gate
+
+core:
+  # Duplicate in ogni modulo tematico, rinominate con il codice del modulo.
+  skills:
+    - grl-setup
+    - grl-profile
+    - grl-board
+  # Non cambia mai: è il punto in cui i moduli si incontrano.
+  shared_memory: "{project-root}/_bmad/memory/grl-shared"
 
 modules:
-  - code: grc
-    name: Guardrails Core
-    status: planned
-    purpose: "Profilo, setup, collegio e contratto della memoria condivisa."
-    skills:
-      - grl-setup
-      - grl-profile
-      - grl-board
-    party_groups:
-      - grl-full-board
-
   - code: grg
     name: Guardrails Governance
-    status: planned
+    repo: bmad-module-guardrails-governance
+    status: derived
     purpose: "Privacy, legale, licenze, soglie di applicabilità normativa e aggiornamenti legali live."
+    description: "Tre figure di presidio su privacy e GDPR, legale e licenze, compliance normativa — più un workflow di ricerca live sugli aggiornamenti legali. Separano l'obbligo vero dalla prassi diffusa, e dicono quali norme non si applicano."
     skills:
       - grl-agent-privacy
       - grl-agent-legal
@@ -33,12 +53,13 @@ modules:
       - grl-legal-updates
     party_groups:
       - grl-governance
-      - grl-release-gate
 
   - code: gre
     name: Guardrails Engineering
-    status: planned
+    repo: bmad-module-guardrails-engineering
+    status: derived
     purpose: "Architettura, sicurezza, operations e impianto delle applicazioni AI."
+    description: "Quattro figure di presidio su disciplina architetturale del codice, sicurezza applicativa, infrastruttura e operatività, impianto delle applicazioni che usano modelli linguistici. Ogni raccomandazione porta il costo di non seguirla."
     skills:
       - grl-agent-architecture
       - grl-agent-security
@@ -46,12 +67,13 @@ modules:
       - grl-agent-ai
     party_groups:
       - grl-engineering
-      - grl-release-gate
 
   - code: grf
     name: Guardrails Fiscal
-    status: planned
+    repo: bmad-module-guardrails-fiscal
+    status: derived
     purpose: "Fonti fiscali e legali applicate, contabilità operativa, bandi, finanza agevolata e aggiornamenti fiscali live."
+    description: "Presidio fiscale e di finanza agevolata: requisiti, scadenze, spese ammissibili e rendicontazione, sempre con fonte primaria e data di verifica. Include un workflow di ricerca live sugli aggiornamenti fiscali, i bandi e gli incentivi."
     skills:
       - grl-agent-fiscal
       - grl-fiscal-updates
@@ -60,8 +82,10 @@ modules:
 
   - code: grh
     name: Guardrails Health
-    status: planned
+    repo: bmad-module-guardrails-health
+    status: derived
     purpose: "Dominio clinico e qualificazione del software sanitario."
+    description: "Presidio del dominio clinico sullo sviluppo di software sanitario — modello dati clinico e codifiche, interoperabilità, sicurezza del paziente, workflow reale di reparto — più il percorso guidato di qualificazione del software come dispositivo medico."
     skills:
       - grl-agent-health
       - grl-mdsw
@@ -70,8 +94,10 @@ modules:
 
   - code: grw
     name: Guardrails Web Experience
-    status: planned
+    repo: bmad-module-guardrails-web
+    status: derived
     purpose: "Qualità visiva, findability, landing page e siti."
+    description: "Due figure di presidio su qualità visiva dell'interfaccia e SEO, più il workflow che costruisce landing page e siti dal brief di conversione al progetto. Contro le pagine che sembrano generate e le promesse di ranking."
     skills:
       - grl-agent-ui-critic
       - grl-agent-seo
@@ -81,8 +107,10 @@ modules:
 
   - code: gwp
     name: Guardrails WordPress
-    status: planned
+    repo: bmad-module-guardrails-wordpress
+    status: derived
     purpose: "WordPress a componenti con Gutenberg, campi custom, template e Media Library."
+    description: "Presidio dell'architettura WordPress a componenti: Gutenberg, Elementor confinato dove serve, ACF e campi custom, template e Media Library, senza contenuti strutturati dentro pagine monolitiche."
     skills:
       - grl-agent-wordpress
     party_groups:

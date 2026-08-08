@@ -144,24 +144,60 @@ sbaglia.
 
 Tutte e dodici entrano nel roster principale di `bmad-party-mode`, accanto ai cinque agenti BMM.
 
-## Stanze tematiche e sottomoduli
+## Moduli tematici
 
-Il bundle `grl` resta oggi l'installazione compatibile unica, ma il dominio è già descritto in
-confini topic-oriented in [`src/module-topology.yaml`](src/module-topology.yaml). La topologia
-prepara sette futuri package senza duplicare le skill e senza rinominare i comandi già installati:
+Il bundle `grl` installa tutto: dodici figure e sette workflow. Chi ha bisogno di una sola area
+può installare il modulo di quell'area — sei repository generati da questo, che resta la fonte
+unica delle skill.
 
-| Codice | Area | Skill principali |
-| ------ | ---- | ---------------- |
-| `grc` | Core | setup, profilo, collegio, memoria condivisa |
-| `grg` | Governance | privacy, legale, compliance e monitoraggio novità legali |
-| `grf` | Fiscalità | fisco, contabilità, bandi, finanza agevolata e monitoraggio novità fiscali |
-| `gre` | Engineering | architettura, sicurezza, ops, AI |
-| `grh` | Health | dominio clinico, dispositivo medico |
-| `grw` | Web Experience | SEO, critica UI, siti e landing |
-| `gwp` | WordPress | Gutenberg, campi custom, template, Media Library |
+| Codice | Repository | Figure e workflow |
+| ------ | ---------- | ----------------- |
+| `grg` | [`…-governance`](https://github.com/mlarese/bmad-module-guardrails-governance) | Vera · Aldo · Nils · `grl-legal-updates` |
+| `gre` | [`…-engineering`](https://github.com/mlarese/bmad-module-guardrails-engineering) | Otto · Kai · Bruno · Enzo |
+| `grf` | [`…-fiscal`](https://github.com/mlarese/bmad-module-guardrails-fiscal) | Marta · `grl-fiscal-updates` |
+| `grh` | [`…-health`](https://github.com/mlarese/bmad-module-guardrails-health) | Livia · `grl-mdsw` |
+| `grw` | [`…-web`](https://github.com/mlarese/bmad-module-guardrails-web) | Iris · Nora · `grl-web` |
+| `gwp` | [`…-wordpress`](https://github.com/mlarese/bmad-module-guardrails-wordpress) | Milo |
+
+Ogni modulo porta la propria copia delle tre skill del core, rinominate con il codice del modulo:
+`grg-setup`, `grg-profile`, `grg-board`. La memoria condivisa resta invece `grl-shared/` per tutti:
+installandone due, il profilo di progetto si compila una volta sola.
+
+**Bundle e moduli tematici non convivono.** Installano skill con lo stesso nome — `grl-agent-seo`
+è identica in `grl` e in `grw` — quindi si sceglie: il bundle completo, oppure i moduli delle aree
+che servono.
+
+### Rigenerare i repository derivati
+
+I repository derivati non si modificano a mano: una modifica fatta lì viene persa alla
+rigenerazione. Si lavora qui, in `src/skills/`, poi:
+
+```bash
+python3 tools/build_modules.py                 # tutti i moduli, in dist/
+python3 tools/build_modules.py --module grw    # solo Web Experience
+python3 tools/publish_modules.py -m "<msg>"    # commit e push sui sei repository
+```
+
+La build legge [`src/module-topology.yaml`](src/module-topology.yaml) — la mappa canonica di cosa
+va dove — e copia **solo i file tracciati da git**, così referti di analisi e cache restano fuori.
+Per ogni modulo filtra roster, catalogo di help, gruppi di party mode e tabelle delle skill al
+perimetro reale, e adatta i conteggi: dove il bundle dice «dodici figure», il modulo dice il numero
+che ha davvero. `dist/` non è versionata qui: ogni cartella è il clone del repository derivato, e
+`tools/publish_modules.py` la committa e la pusha — saltando i moduli senza modifiche e riallineando
+l'About di GitHub.
+
+I test della build stanno in `tools/tests/`:
+
+```bash
+python3 -m pytest tools/tests/
+```
+
+### Stanze di party mode
 
 I confini di installazione e quelli di conversazione non coincidono: `grl-setup` registra anche
-le stanze di `bmad-party-mode`, che possono convocare agenti di aree diverse:
+le stanze di `bmad-party-mode`, che nel bundle possono convocare agenti di aree diverse. Nei moduli
+tematici i membri vengono ridotti alle figure installate, e una stanza che resta sotto i due membri
+non viene installata affatto.
 
 ```text
 grl-governance          Vera · Aldo · Nils
@@ -182,8 +218,8 @@ bmad-party-mode --party grl-wordpress-delivery
 
 La configurazione viene scritta nel layer non rigenerato
 `_bmad/custom/bmad-party-mode.toml`; gli override e i gruppi dell'utente fuori dal blocco
-Guardrails vengono preservati. L'estrazione fisica in package indipendenti sarà una migrazione
-successiva: prima verranno validati `gwp` e `grh`, poi gli altri domini.
+Guardrails vengono preservati. Le due stanze trasversali — `grl-release-gate` e `grl-full-board` —
+esistono solo nel bundle: convocano figure che nei moduli tematici stanno in package diversi.
 
 ## Installazione
 
@@ -213,7 +249,7 @@ La severità non è una scelta di installazione: viene letta dalla criticità di
 .claude-plugin/marketplace.json   indice letto dall'installer BMad
 src/
 ├── module.yaml                   manifesto del modulo: config e roster delle figure
-├── module-topology.yaml           confini dei futuri package topic-oriented
+├── module-topology.yaml          mappa dei moduli tematici derivati, letta dalla build
 ├── module-help.csv               voci di help
 └── skills/
     ├── grl-agent-privacy/        🛡️ Vera
@@ -236,6 +272,9 @@ src/
     ├── grl-web/                  workflow che produce landing page e siti
     └── grl-setup/                installazione, roster e stanze party tematiche
         └── assets/party-groups.toml
+tools/
+├── build_modules.py              genera i sei repository dei moduli tematici in dist/
+└── tests/                        test della build
 docs/module-plan.md               il documento di piano del modulo
 ```
 

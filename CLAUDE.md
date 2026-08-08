@@ -34,6 +34,45 @@ Cambiano insieme, e tutte e cinque devono dire lo stesso numero di figure e le s
 Una skill nuova va aggiunta anche all'elenco `skills` di `.claude-plugin/marketplace.json`,
 altrimenti non viene pubblicata.
 
+Una skill nuova va assegnata anche a un modulo in `src/module-topology.yaml`: quello che non
+compare in nessuna lista `skills` non finisce in nessun repository derivato.
+
+## I sei moduli derivati si rigenerano e si ripubblicano nello stesso turno
+
+Sei repository derivano da questo e li produce `tools/build_modules.py` leggendo
+`src/module-topology.yaml`. Questo repository è la fonte unica delle skill.
+
+| Codice | Repository | Contiene |
+| ------ | ---------- | -------- |
+| `grg` | `mlarese/bmad-module-guardrails-governance` | Vera, Aldo, Nils, `grl-legal-updates` |
+| `gre` | `mlarese/bmad-module-guardrails-engineering` | Kai, Otto, Bruno, Enzo |
+| `grf` | `mlarese/bmad-module-guardrails-fiscal` | Marta, `grl-fiscal-updates` |
+| `grh` | `mlarese/bmad-module-guardrails-health` | Livia, `grl-mdsw` |
+| `grw` | `mlarese/bmad-module-guardrails-web` | Iris, Nora, `grl-web` |
+| `gwp` | `mlarese/bmad-module-guardrails-wordpress` | Milo |
+
+**Regola: ogni modifica che tocca `src/` va propagata ai derivati nello stesso turno, senza
+aspettare che l'utente lo chieda.** Vale per una skill cambiata, una skill nuova, un cambio di
+roster, di catalogo di help o di party group. Un derivato che resta indietro pubblica istruzioni
+diverse da quelle della fonte, e nessuno se ne accorge finché non le esegue.
+
+```bash
+python3 -m pytest tools/tests/                              # test della build
+python3 tools/build_modules.py                              # rigenera dist/
+python3 tools/publish_modules.py -m "<messaggio di commit>"  # commit e push sui sei repo
+```
+
+`publish_modules.py` è idempotente: salta i moduli senza modifiche, crea il repository se manca e
+riallinea l'About di GitHub alla `description` della topologia. Con `--module grw` lavora su uno
+solo, con `--dry-run` mostra cosa farebbe.
+
+**I derivati non si modificano a mano.** Una modifica fatta lì viene persa alla rigenerazione —
+compresi README, `module.yaml` e `marketplace.json`, che sono generati: si correggono cambiando i
+template in `tools/build_modules.py` o le descrizioni in `src/module-topology.yaml`.
+
+Il commit sulla fonte resta separato: i derivati si pubblicano sempre, il push di questo
+repository si fa quando l'utente lo chiede.
+
 ## Niente pull request
 
 Il lavoro finisce con i commit e, se richiesto, con il push del branch.

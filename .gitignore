@@ -20,6 +20,10 @@ docs/
 # Eccezione: il piano del modulo è parte del repository, ed è citato dal README
 !docs/module-plan.md
 
+# Output di tools/build_modules.py: i moduli tematici si rigenerano, non si versionano qui.
+# Il contenuto va committato nei rispettivi repository derivati.
+dist/
+
 # Python
 __pycache__/
 *.py[cod]
