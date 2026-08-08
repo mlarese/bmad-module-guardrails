@@ -1,0 +1,21 @@
+[
+  { "query": "fammi un audit SEO del repository e dimmi cosa impedisce a Google di indicizzare le pagine", "should_trigger": true },
+  { "query": "come interpreto le query e le pagine in Search Console per scegliere i contenuti", "should_trigger": true },
+  { "query": "mi serve una mappa URL per una migrazione e una strategia hreflang", "should_trigger": true },
+  { "query": "posso mettere Product e FAQ schema su tutte le pagine per aumentare il ranking", "should_trigger": true },
+  { "query": "scrivimi un brief editoriale per una pagina che risponda all'intento di ricerca", "should_trigger": true },
+  { "query": "ottimizziamo Core Web Vitals e rendering della pagina", "should_trigger": true },
+  { "query": "il mio sito compare nelle AI Overviews di Google? Come lo verifico?", "should_trigger": true },
+  { "query": "devo creare un file llms.txt per aiutare Google Search e ChatGPT?", "should_trigger": true },
+  { "query": "come blocco GPTBot senza togliere il sito dalla ricerca di ChatGPT?", "should_trigger": true },
+  { "query": "cosa misura davvero il report Generative AI performance di Search Console?", "should_trigger": true },
+  { "query": "il mio INP è sopra soglia: è un problema SEO e come lo diagnostico?", "should_trigger": true },
+  { "query": "progetta i componenti Gutenberg, i field group ACF e i template WordPress", "should_trigger": false },
+  { "query": "scegli la palette, la tipografia e il layout della landing", "should_trigger": false },
+  { "query": "configura nginx, CDN, Docker e il rollback del deploy", "should_trigger": false },
+  { "query": "il server risponde 502: configura nginx, TLS e deploy", "should_trigger": false },
+  { "query": "progetta una pipeline LLM con RAG, tool calling e monitoraggio del modello", "should_trigger": false },
+  { "query": "scrivi gli eval del modello per misurare hallucination e citation quality", "should_trigger": false },
+  { "query": "quali dati personali posso usare nei report analytics e quale consenso serve", "should_trigger": false },
+  { "query": "scrivi una landing HTML con hero, testimonianze e CTA", "should_trigger": false }
+]
