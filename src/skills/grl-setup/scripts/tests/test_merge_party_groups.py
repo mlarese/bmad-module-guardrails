@@ -63,6 +63,52 @@ class MergePartyGroupsTests(unittest.TestCase):
             self.assertTrue(payload["dry_run"])
             self.assertFalse((project / "_bmad" / "custom" / "bmad-party-mode.toml").exists())
 
+    def test_only_agents_drops_members_and_skips_themeless_groups(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            project = Path(directory)
+            (project / "_bmad").mkdir()
+
+            result = self.run_script(
+                project, SOURCE,
+                "--only-agents", "grl-agent-privacy,grl-agent-legal,grl-agent-compliance",
+            )
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+            payload = json.loads(result.stdout)
+            # La stanza fiscale senza Marta non si installa, anche se Aldo e Nils
+            # ne fanno parte: `requires` la protegge dallo svuotamento.
+            self.assertIn("grl-fiscal", payload["groups_skipped"])
+            self.assertIn("grl-governance", payload["groups"])
+
+            target = project / "_bmad" / "custom" / "bmad-party-mode.toml"
+            parsed = tomllib.loads(target.read_text(encoding="utf-8"))
+            members = {
+                member
+                for group in parsed["workflow"]["party_groups"]
+                for member in group["members"]
+                if member.startswith("grl-")
+            }
+            self.assertEqual(
+                members, {"grl-agent-privacy", "grl-agent-legal", "grl-agent-compliance"}
+            )
+
+    def test_only_agents_keeps_members_of_other_modules(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            project = Path(directory)
+            (project / "_bmad").mkdir()
+
+            self.run_script(
+                project, SOURCE,
+                "--only-agents", "grl-agent-ui-critic,grl-agent-wordpress",
+            )
+
+            target = project / "_bmad" / "custom" / "bmad-party-mode.toml"
+            parsed = tomllib.loads(target.read_text(encoding="utf-8"))
+            web = next(
+                group for group in parsed["workflow"]["party_groups"] if group["id"] == "grl-web"
+            )
+            self.assertIn("bmad-agent-ux-designer", web["members"])
+
     def test_invalid_source_fails_without_writing(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             project = Path(directory)

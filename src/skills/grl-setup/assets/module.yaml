@@ -12,14 +12,16 @@
 code: grl
 name: Guardrails
 description: "Undici figure di presidio — privacy e GDPR, sicurezza applicativa, legale e licenze, compliance normativa, fisco e finanza agevolata, qualità visiva della UI, disciplina architetturale del codice, infrastruttura e operatività, dominio clinico del software sanitario, impianto delle applicazioni che usano modelli linguistici e architettura WordPress a componenti — che affiancano il team dentro il ciclo di sviluppo, quando cambiare costa ancora poco. Include due workflow di ricerca live per gli aggiornamenti legali e fiscali, oltre a `grl-web` per landing page e siti."
-module_version: 1.9.0
+module_version: 1.10.0
 default_selected: false
 
 module_greeting: >
-  Guardrails è installato: undici figure di presidio — Vera (privacy), Kai (sicurezza),
-  Aldo (legale), Nils (compliance), Marta (fisco e finanza agevolata), Iris (design), Otto (architettura), Bruno (ops),
-  Livia (dominio clinico), Enzo (applicazioni con AI) e Milo (WordPress a componenti) —
-  entrano nel roster e si possono convocare per nome.
+  Guardrails è installato. Le figure dei gruppi che hai spuntato — fino a undici: Vera
+  (privacy), Kai (sicurezza), Aldo (legale), Nils (compliance), Marta (fisco e finanza
+  agevolata), Iris (design), Otto (architettura), Bruno (ops), Livia (dominio clinico),
+  Enzo (applicazioni con AI) e Milo (WordPress a componenti) — entrano nel roster e si
+  possono convocare per nome. Quelle dei gruppi esclusi sono in `_bmad/grl/.disabled/`:
+  non si attivano, e tornano rieseguendo `grl-setup` e rispuntando il gruppo.
 
   Passo successivo consigliato: esegui `grl-profile`. Senza il profilo di progetto le
   figure partono cieche e parlano per luoghi comuni; con il profilo sanno cosa non
@@ -37,9 +39,36 @@ module_greeting: >
   `bmad-party-mode --party <id>` senza cambiare la stanza di default.
 
 # --- Variabili di configurazione ---------------------------------------------
-# Una sola: tutto il resto del contesto vive nella memoria condivisa del progetto
+# Due: quali gruppi installare e quanto sono severe le figure. Tutto il resto del
+# contesto vive nella memoria condivisa del progetto
 # (_bmad/memory/grl-shared/project-profile.md), non in config — il profilo cambia
 # da progetto a progetto, la config è unica per installazione.
+
+# Le spunte che decidono cosa viene installato davvero. L'installer copia comunque
+# tutte le skill — il formato non ha modo di impedirlo — quindi grl-setup, subito
+# dopo, sposta quelle dei gruppi non spuntati in _bmad/grl/.disabled/ con
+# scripts/apply-selection.py: da lì non si attivano, non entrano nel roster e non
+# compaiono in bmad-help. Niente viene cancellato: rispuntare un gruppo e rieseguire
+# il setup le riporta al loro posto.
+# La mappa gruppo → skill sta in grl-setup/assets/groups.toml, e i `value` qui sotto
+# devono coincidere con gli `id` di quel file.
+# grl-setup, grl-profile e grl-board non sono in alcun gruppo: senza di loro il
+# modulo non si configura, non ha contesto e non convoca nessuno.
+enabled_groups:
+  prompt: "Quali gruppi Guardrails vuoi installare? Spunta quelli che ti servono; gli altri restano fuori dal progetto e si possono aggiungere dopo rieseguendo grl-setup."
+  default: ["governance", "engineering", "health", "web", "fiscal"]
+  example: "governance, engineering — solo presidio normativo e tecnico"
+  multi-select:
+    - value: "governance"
+      label: "Governance — Vera (privacy e GDPR), Aldo (legale, licenze e AI Act), Nils (compliance) e le ultime novità legali"
+    - value: "engineering"
+      label: "Engineering — Otto (architettura), Kai (sicurezza), Bruno (infrastruttura e ops), Enzo (applicazioni con AI)"
+    - value: "health"
+      label: "Health — Livia (dominio clinico) e la qualificazione come dispositivo medico"
+    - value: "web"
+      label: "Web — Iris (critica di design), Milo (WordPress a componenti) e la costruzione di landing e siti"
+    - value: "fiscal"
+      label: "Fiscale — Marta (fisco e finanza agevolata) e le ultime novità fiscali"
 
 strictness_override:
   prompt: "Livello di severità delle figure Guardrails? Lascia vuoto per farlo derivare dalla criticità del progetto (consigliato)."
@@ -61,17 +90,23 @@ strictness_override:
 # esecuzione — una cartella vuota in _bmad/memory/ è solo rumore.
 
 post-install-notes: >
+  Attenzione al primo passo, perché la selezione dei gruppi non è ancora effettiva:
+  l'installer ha copiato sul disco **tutte** le skill del modulo, comprese quelle dei
+  gruppi che non hai spuntato. È `grl-setup` a toglierle. Finché non lo esegui, una
+  figura esclusa può ancora attivarsi da sola. Se stai leggendo questo messaggio dentro
+  `grl-setup`, è già stato fatto.
+
   Primo passo: esegui `grl-profile`. Sono otto campi, pochi minuti, quasi tutti
   pre-compilati leggendo il repository; l'unico che devi dichiarare tu è la criticità
   del progetto (hobby/prototipo · interno · produzione con clienti · regolamentato),
-  perché è quella che regola quanto saranno severe tutte e undici le figure. Se il
+  perché è quella che regola quanto saranno severe tutte le figure installate. Se il
   settore è sanitario, il profilo raccoglie cinque campi in più; altrimenti non li
   nomina nemmeno.
 
   Poi puoi chiamare una figura per nome, oppure usare `grl-board` per farle guardare
-  tutte insieme lo stesso artefatto. Le undici entrano anche nella stanza principale
-  di `bmad-party-mode`, accanto ai cinque agenti BMM. Con `--party` puoi invece aprire
-  una stanza tematica senza convocare l'intero roster.
+  tutte insieme lo stesso artefatto. Le figure installate entrano anche nella stanza
+  principale di `bmad-party-mode`, accanto ai cinque agenti BMM. Con `--party` puoi
+  invece aprire una stanza tematica: vengono installate solo quelle dei gruppi scelti.
 
   Facoltativo e reversibile: se vuoi che le figure vengano consultate dentro i flussi
   BMM (PRD, architettura, UX, code review) invece che su tua chiamata, si aggiungono

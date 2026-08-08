@@ -224,6 +224,15 @@ def main() -> int:
         help="module.yaml da cui ricavare il roster se le skill non si trovano su disco.",
     )
     parser.add_argument(
+        "--only",
+        help=(
+            "Registra solo queste figure, separate da virgola (es. "
+            "grl-agent-privacy,grl-agent-legal). Ometti per registrare tutte quelle trovate. "
+            "Serve al percorso YAML e al ripiego su module.yaml: sul percorso TOML le figure "
+            "disattivate sono già state tolte dal disco da apply-selection.py."
+        ),
+    )
+    parser.add_argument(
         "--strictness", choices=STRICTNESS_VALUES,
         help='Valore di strictness_override. Ometti per non toccare l\'impostazione; "" la fa derivare dalla criticità del progetto.',
     )
@@ -268,6 +277,15 @@ def main() -> int:
         agents, fallback_warnings = read_agents_from_module_yaml(Path(args.module_yaml))
         warnings += fallback_warnings
         source = "module.yaml (ripiego: skill non trovate su disco)"
+
+    excluded: list[str] = []
+    if args.only:
+        wanted = {name.strip() for name in args.only.replace(";", ",").split(",") if name.strip()}
+        unknown = sorted(wanted - set(agents))
+        if unknown:
+            warnings.append(f"--only cita figure non trovate su disco: {', '.join(unknown)}")
+        excluded = sorted(set(agents) - wanted)
+        agents = {name: data for name, data in agents.items() if name in wanted}
 
     if not agents:
         print(json.dumps({
@@ -315,6 +333,7 @@ def main() -> int:
         "source": source,
         "agents_registered": sorted(agents),
         "agents_count": len(agents),
+        "agents_excluded": excluded,
         "roster_file": str(custom_config),
         "strictness_override": strictness_written,
         "strictness_file": str(user_config) if strictness_written is not None else None,

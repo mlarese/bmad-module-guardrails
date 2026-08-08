@@ -32,7 +32,9 @@ Cambiano insieme, e tutte e cinque devono dire lo stesso numero di figure e le s
 | About GitHub | descrizione del repository, via `gh repo edit` |
 
 Una skill nuova va aggiunta anche all'elenco `skills` di `.claude-plugin/marketplace.json`,
-altrimenti non viene pubblicata.
+altrimenti non viene pubblicata, **e** a `src/skills/grl-setup/assets/groups.toml` — o in un
+gruppo, o in `always`. Una skill che non compare in nessuno dei due viene installata sempre,
+fuori da ogni spunta. Il test `scripts/tests/test_groups_coherence.py` fallisce se succede.
 
 ## Niente pull request
 

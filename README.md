@@ -138,6 +138,11 @@ Dopo `grl-setup` si apre una stanza con:
 bmad-party-mode --party grl-wordpress-delivery
 ```
 
+Vengono installate solo le stanze dei gruppi scelti. Da una stanza escono le figure non
+installate, e una stanza che perderebbe la figura da cui prende il tema non viene installata
+affatto: una stanza fiscale senza Marta sarebbe una stanza sbagliata, non una stanza ridotta.
+I membri di altri moduli — Sally di BMM in `grl-web` — non vengono toccati.
+
 La configurazione viene scritta nel layer non rigenerato
 `_bmad/custom/bmad-party-mode.toml`; gli override e i gruppi dell'utente fuori dal blocco
 Guardrails vengono preservati. L'estrazione fisica in package indipendenti sarà una migrazione
@@ -151,13 +156,30 @@ Con l'installer BMad, indicando questo repository come sorgente custom:
 npx bmad-method install --custom-source https://github.com/mlarese/bmad-module-guardrails
 ```
 
-L'installer copia le diciotto skill, registra le undici figure come agenti
-(`[agents.grl-agent-*]` nella configurazione) — che è ciò che le fa comparire nel roster di
-`bmad-party-mode` — aggiunge le voci di help al catalogo `_bmad/_config/bmad-help.csv` e,
-eseguendo `grl-setup`, installa anche le stanze tematiche.
+L'installer chiede **quali gruppi installare** — sono spunte, se ne tengono quante si vuole —
+copia le skill, registra le figure come agenti (`[agents.grl-agent-*]` nella configurazione),
+che è ciò che le fa comparire nel roster di `bmad-party-mode`, aggiunge le voci di help al
+catalogo `_bmad/_config/bmad-help.csv` e installa le stanze tematiche dei gruppi scelti.
 
-In alternativa, per un'installazione manuale o per riconfigurare un'installazione esistente,
-si esegue la skill **`grl-setup`**.
+| Gruppo | Cosa porta |
+| ------ | ---------- |
+| Governance | Vera, Aldo, Nils e `grl-legal-updates` |
+| Engineering | Otto, Kai, Bruno, Enzo |
+| Health | Livia e `grl-mdsw` |
+| Web | Iris, Milo e `grl-web` |
+| Fiscale | Marta e `grl-fiscal-updates` |
+
+`grl-setup`, `grl-profile` e `grl-board` non sono in alcun gruppo: senza di loro il modulo non
+si configura, non ha contesto e non convoca nessuno.
+
+**Il passo che rende effettiva la scelta è `grl-setup`.** L'installer copia comunque tutte le
+skill sul disco — il formato dei moduli BMad non ha modo di escluderne alcune dalla copia, né
+hook eseguibili — quindi è `grl-setup` a spostare quelle dei gruppi non spuntati in
+`_bmad/grl/.disabled/`, dove non si attivano e non compaiono in `bmad-help`. Finché non lo si
+esegue, una figura esclusa può ancora attivarsi da sola.
+
+Niente viene cancellato: per riavere un gruppo si riesegue `grl-setup` e lo si rispunta. La
+selezione applicata resta in `[modules.grl] enabled_groups` di `_bmad/custom/config.toml`.
 
 **Primo passo dopo l'installazione: `grl-profile`.** Senza profilo le figure partono cieche.
 

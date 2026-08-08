@@ -1,0 +1,56 @@
+# Gruppi installabili del modulo Guardrails.
+#
+# È la mappa che traduce le spunte raccolte durante l'installazione — la variabile
+# `enabled_groups` di module.yaml — nell'elenco delle skill da tenere attive.
+# Le skill dei gruppi non spuntati vengono spostate da apply-selection.py in
+# _bmad/grl/.disabled/, quindi non si attivano, non entrano nel roster e non
+# compaiono in bmad-help. Rispuntare un gruppo le riporta al loro posto.
+#
+# Vincolo di coerenza: gli `id` qui sotto devono coincidere con i `value` della
+# multi-select `enabled_groups` in module.yaml, e ogni skill del modulo deve
+# comparire una volta sola fra `always` e i `skills` dei gruppi.
+
+# Skill senza le quali il modulo non funziona: non sono disattivabili.
+# grl-setup rifà la scelta, grl-profile dà il contesto a tutte le figure,
+# grl-board convoca solo quelle attive.
+always = ["grl-setup", "grl-profile", "grl-board"]
+
+[[groups]]
+id = "governance"
+label = "Governance — privacy, legale, compliance"
+detail = "Vera (privacy e GDPR), Aldo (legale, licenze e AI Act), Nils (compliance normativa) e il workflow di ricerca legale."
+skills = [
+  "grl-agent-privacy",
+  "grl-agent-legal",
+  "grl-agent-compliance",
+  "grl-legal-updates",
+]
+
+[[groups]]
+id = "engineering"
+label = "Engineering — architettura, sicurezza, ops, AI"
+detail = "Otto (architettura del codice), Kai (sicurezza applicativa), Bruno (infrastruttura e ops), Enzo (applicazioni con modelli linguistici)."
+skills = [
+  "grl-agent-architecture",
+  "grl-agent-security",
+  "grl-agent-ops",
+  "grl-agent-ai",
+]
+
+[[groups]]
+id = "health"
+label = "Health — dominio clinico e dispositivi medici"
+detail = "Livia (informatica clinica) e grl-mdsw, che dice se il software è un dispositivo medico e in quale classe."
+skills = ["grl-agent-health", "grl-mdsw"]
+
+[[groups]]
+id = "web"
+label = "Web — design, WordPress, landing e siti"
+detail = "Iris (critica di design), Milo (WordPress a componenti) e grl-web, che costruisce landing page e siti."
+skills = ["grl-agent-ui-critic", "grl-agent-wordpress", "grl-web"]
+
+[[groups]]
+id = "fiscal"
+label = "Fiscale — fisco e finanza agevolata"
+detail = "Marta (fisco, contabilità, bandi e incentivi) e il workflow di ricerca fiscale."
+skills = ["grl-agent-fiscal", "grl-fiscal-updates"]

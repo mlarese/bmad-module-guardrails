@@ -3,9 +3,17 @@
 # Sono override di team nel file {project-root}/_bmad/custom/bmad-party-mode.toml.
 # Il bundle resta compatibile con la stanza principale: nessun default_party viene
 # imposto e ogni gruppo può essere convocato con `--party <id>`.
+#
+# `requires` elenca le figure senza le quali la stanza perde il suo tema: se nessuna
+# di esse è installata, `merge-party-groups.py --only-agents` salta il gruppo invece
+# di installarne una versione svuotata (una stanza fiscale senza Marta è una stanza
+# sbagliata, non una stanza ridotta). Basta che ne sia attiva una.
+# I gruppi trasversali — release gate e collegio completo — non lo dichiarano: si
+# installano con le figure che ci sono.
 
 [[workflow.party_groups]]
 id = "grl-governance"
+requires = ["grl-agent-privacy", "grl-agent-legal", "grl-agent-compliance"]
 name = "Guardrails Governance"
 scene = "Tavolo di governance: si parte dai dati e dal contesto, si escludono le norme che non si applicano, poi si traducono gli obblighi rimasti in decisioni pratiche. Vera, Aldo e Nils si interrompono quando una questione appartiene al dominio dell'altro e difendono i confini senza fare teatro normativo."
 members = ["grl-agent-privacy", "grl-agent-legal", "grl-agent-compliance"]
@@ -13,6 +21,7 @@ memory = false
 
 [[workflow.party_groups]]
 id = "grl-engineering"
+requires = ["grl-agent-architecture", "grl-agent-security", "grl-agent-ops", "grl-agent-ai"]
 name = "Guardrails Engineering"
 scene = "Whiteboard tecnico: Otto riduce i confini all'essenziale, Kai prova a entrare, Bruno chiede chi manterrà il sistema alle tre di notte ed Enzo cerca il punto in cui un modello non serve. Le proposte devono avere un impianto minimo, un rischio concreto e una via di ritorno."
 members = ["grl-agent-architecture", "grl-agent-security", "grl-agent-ops", "grl-agent-ai"]
@@ -20,6 +29,7 @@ memory = false
 
 [[workflow.party_groups]]
 id = "grl-fiscal"
+requires = ["grl-agent-fiscal"]
 name = "Guardrails Fiscalità e Incentivi"
 scene = "Tavolo fiscale: Marta risale alla fonte primaria, separa norma, prassi e sintesi, verifica chi può accedere e calcola solo con ipotesi dichiarate. Aldo entra sui contratti o sul diritto tecnologico; Nils solo se una norma regolatoria non fiscale cambia il verdetto."
 members = ["grl-agent-fiscal", "grl-agent-legal", "grl-agent-compliance"]
@@ -27,6 +37,7 @@ memory = false
 
 [[workflow.party_groups]]
 id = "grl-health"
+requires = ["grl-agent-health"]
 name = "Guardrails Health"
 scene = "Reparto e software allo stesso tavolo: Livia parte dall'utente clinico e dal danno possibile, mentre Vera, Nils e Kai intervengono solo sui rispettivi vincoli di dati, applicabilità e sicurezza. Nessuna astrazione viene accettata se nasconde un errore clinico."
 members = ["grl-agent-health", "grl-agent-privacy", "grl-agent-compliance", "grl-agent-security"]
@@ -34,6 +45,7 @@ memory = false
 
 [[workflow.party_groups]]
 id = "grl-web"
+requires = ["grl-agent-ui-critic", "grl-agent-wordpress"]
 name = "Guardrails Web Experience"
 scene = "Redazione digitale davanti a una pagina: Iris attacca i cliché visivi e Milo controlla che il modello dei contenuti resti a componenti. Se è installato BMM, Sally può entrare per difendere il flusso utente; la stanza deve consegnare mosse concrete, non gusto personale."
 members = ["grl-agent-ui-critic", "grl-agent-wordpress", "bmad-agent-ux-designer"]
@@ -41,6 +53,7 @@ memory = false
 
 [[workflow.party_groups]]
 id = "grl-wordpress-delivery"
+requires = ["grl-agent-wordpress"]
 name = "Guardrails WordPress Delivery"
 scene = "Laboratorio WordPress: Milo decide modello contenuti, campi custom, template e componenti; Iris controlla la qualità visiva, Otto i confini e Bruno la messa online. Elementor resta confinato dove serve e ogni media deve avere un attachment ID nella Media Library."
 members = ["grl-agent-wordpress", "grl-agent-ui-critic", "grl-agent-architecture", "grl-agent-ops"]

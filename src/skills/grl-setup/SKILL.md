@@ -5,12 +5,20 @@ description: Installa il modulo Guardrails in un progetto. Usa quando l'utente c
 
 # Setup del modulo Guardrails
 
-Installi Guardrails in un progetto: una domanda all'utente, la registrazione delle undici
-figure nel roster degli agenti, l'installazione delle stanze tematiche di party mode e l'avvio
-della profilazione. L'esito che conta non è il file di config — è che l'utente esca da qui con
-`grl-profile` già eseguito, perché senza profilo di progetto le figure parlano per luoghi comuni.
+Installi Guardrails in un progetto: due domande all'utente, l'applicazione della selezione dei
+gruppi, la registrazione nel roster delle sole figure installate, le stanze tematiche di party
+mode e l'avvio della profilazione. L'esito che conta non è il file di config — è che l'utente
+esca da qui con `grl-profile` già eseguito, perché senza profilo di progetto le figure parlano
+per luoghi comuni.
 
 Identità del modulo, variabili e roster stanno in `./assets/module.yaml`: leggilo, non dedurli.
+La mappa gruppo → skill sta in `./assets/groups.toml`.
+
+**Il passo che non puoi saltare.** L'installer BMad copia sul disco tutte le skill del modulo:
+il formato `module.yaml` non ha modo di escluderne alcune dalla copia, e non ha hook eseguibili.
+Le spunte raccolte durante l'installazione diventano effettive solo qui, con
+`./scripts/apply-selection.py`. Finché non gira, una figura che l'utente non ha voluto è ancora
+sul disco e può attivarsi da sola alla prima frase che assomiglia alla sua `description`.
 
 ## Regole di risoluzione
 
@@ -53,9 +61,36 @@ Identità del modulo, variabili e roster stanno in `./assets/module.yaml`: leggi
 Se l'utente passa argomenti (`--headless`, `accetta i default`, o direttamente un valore),
 usa quelli e salta le domande. Mostra comunque il riepilogo finale.
 
-## La domanda da fare
+## Le domande da fare
 
-Una sola, quella di `strictness_override` in `module.yaml`:
+### 1. Quali gruppi installare
+
+È la multi-select `enabled_groups` di `module.yaml`: cinque caselle, tutte spuntate per default.
+Presentala come spunte, non come scelta singola — se ne possono tenere quante se ne vuole.
+
+> Quali gruppi Guardrails vuoi installare? Spunta quelli che ti servono; gli altri restano fuori
+> dal progetto e si possono aggiungere dopo rieseguendo `grl-setup`.
+
+Le etichette e la composizione di ogni gruppo stanno in `./assets/groups.toml`: leggile da lì e
+mostrale, così l'utente sa quali figure sta spuntando. `grl-setup`, `grl-profile` e `grl-board`
+non compaiono fra le opzioni — sono in `always` e restano sempre installate.
+
+**Se l'installer ha già raccolto la risposta**, non ripetere la domanda: leggila da
+`enabled_groups` di `modules.grl` nel config risolto e dichiara nel riepilogo che stai usando la
+scelta fatta durante l'installazione.
+
+```bash
+uv run {project-root}/_bmad/scripts/resolve_config.py -p "{project-root}" -k modules.grl
+```
+
+**Chiedi conferma solo in riconfigurazione.** Se `enabled_groups` esiste già e la nuova scelta
+toglie gruppi che erano attivi, elenca le figure che stai per disattivare e fatti confermare:
+lì stai togliendo qualcosa che il progetto sta usando. In prima installazione nessuna conferma —
+le spunte *sono* la conferma.
+
+### 2. Quanto sono severe
+
+Quella di `strictness_override` in `module.yaml`:
 
 > Livello di severità delle figure Guardrails? Lascia vuoto per farlo derivare dalla criticità
 > del progetto (consigliato).
@@ -72,25 +107,57 @@ config è unica per installazione, il profilo cambia da progetto a progetto.
 
 ## Percorso TOML
 
-Un solo comando fa entrambe le scritture. Risolvi `{project-root}` prima di eseguirlo, e
-ometti `--strictness` se l'utente non ha scelto un livello (senza il flag l'impostazione non
-viene toccata; con `--strictness ""` viene scritta esplicitamente come "deriva dal profilo").
+**L'ordine conta.** `apply-selection.py` va per primo: toglie dal disco le skill dei gruppi
+esclusi, così tutto quello che viene dopo lavora su ciò che resta davvero installato. Risolvi
+`{project-root}` prima di eseguire.
+
+```bash
+python3 ./scripts/apply-selection.py \
+  --project-root "{project-root}" \
+  --groups "{gruppi-scelti}" \
+  --groups-map ./assets/groups.toml
+```
+
+`{gruppi-scelti}` è la lista separata da virgola degli `id` spuntati (es. `governance,web`);
+`all` li tiene tutti. Lo script è idempotente: se il disco è già così, non tocca niente ed esce
+con `changed: false`. Prima di applicare puoi mostrare l'effetto con `--dry-run`.
+
+Dal suo output JSON prendi `skills_active`: è l'elenco che serve ai due comandi seguenti. Chiama
+`{figure-attive}` le sole voci `grl-agent-*` di quell'elenco, e `{skill-attive}` l'elenco intero.
+
+Poi le scritture di configurazione. Ometti `--strictness` se l'utente non ha scelto un livello
+(senza il flag l'impostazione non viene toccata; con `--strictness ""` viene scritta
+esplicitamente come "deriva dal profilo").
 
 ```bash
 python3 ./scripts/register-agents.py \
   --project-root "{project-root}" \
   --module-yaml ./assets/module.yaml \
+  --only "{figure-attive}" \
   --strictness "{valore-scelto}"
 
 python3 ./scripts/merge-party-groups.py \
   --project-root "{project-root}" \
-  --source ./assets/party-groups.toml
+  --source ./assets/party-groups.toml \
+  --only-agents "{figure-attive}"
 ```
 
 Cosa fa, e perché così:
 
+- **Selezione** → le skill dei gruppi esclusi finiscono in `{project-root}/_bmad/grl/.disabled/`,
+  fuori da `.claude/skills/` e da ogni altra cartella che gli agenti leggono. Niente viene
+  cancellato: sono spostamenti, e rispuntare un gruppo le riporta da dove erano venute — lo
+  script ripristina prima e disattiva dopo, nella stessa passata. La selezione applicata viene
+  scritta in `[modules.grl] enabled_groups` di `_bmad/custom/config.toml`, che è il layer di
+  team: quali gruppi servono dipende dal progetto, non dalla persona.
+- **`--only` su `register-agents.py`** è una cintura di sicurezza, non il meccanismo: le figure
+  disattivate non sono più su disco, quindi non verrebbero trovate comunque. Serve nel caso in
+  cui lo script ripieghi su `module.yaml`, che elenca tutte e undici le figure a prescindere.
+- **`--only-agents` su `merge-party-groups.py`** toglie dalle stanze tematiche le figure non
+  installate e salta i gruppi che restano senza nessuna figura Guardrails. I membri di altri
+  moduli (es. `bmad-agent-ux-designer`) restano dove sono.
 - **Roster** → `{project-root}/_bmad/custom/config.toml`, una tabella `[agents.grl-agent-*]`
-  per figura. È il passo che porta le undici figure nel party mode: `resolve_party.py` costruisce
+  per figura installata. È il passo che le porta nel party mode: `resolve_party.py` costruisce
   la stanza di default dagli agenti registrati nel config, senza filtrare per modulo o per team.
   Si scrive nel layer `custom/` perché `_bmad/config.toml` e `_bmad/config.user.toml` sono
   rigenerati dall'installer a ogni installazione, mentre `custom/` non viene toccato mai.
@@ -112,8 +179,12 @@ Poi registra le voci di help **nel catalogo che BMad legge davvero**:
 python3 ./scripts/merge-help-csv.py \
   --target "{project-root}/_bmad/_config/bmad-help.csv" \
   --source ./assets/module-help.csv \
+  --only-skills "{skill-attive}" \
   --module-code Guardrails
 ```
+
+`--only-skills` scarta le righe delle skill non installate: senza, `bmad-help` elencherebbe
+capacità che il progetto non ha, e l'utente le chiederebbe invano.
 
 Tre cose da sapere, tutte verificate sul campo:
 
@@ -146,10 +217,13 @@ il resolver a quattro layer non legge — la configurazione finirebbe in un file
 python3 {project-root}/_bmad/scripts/resolve_config.py -p "{project-root}" -k agents
 ```
 
-Devono comparire tutte e undici le chiavi `grl-agent-*` accanto agli agenti già installati. Se
-mancano, il party mode non le vedrà: mostra l'output e fermati, invece di chiudere il setup.
+Devono comparire le chiavi `grl-agent-*` dei gruppi scelti, accanto agli agenti già installati —
+tutte e undici se l'utente ha spuntato tutto. Se ne manca una che doveva esserci, il party mode
+non la vedrà: mostra l'output e fermati, invece di chiudere il setup. Se ne compare una che
+doveva restare fuori, `apply-selection.py` non ha girato o è girato dopo: rieseguilo nell'ordine
+giusto.
 
-Stessa verifica per la severità, con `-k modules.grl`. Nota per chi legge questa configurazione
+Stessa verifica per la severità e per i gruppi, con `-k modules.grl`. Nota per chi legge questa configurazione
 dalle skill del modulo: va letta dal config **risolto** (`resolve_config.py`), che fonde i
 quattro layer TOML, non aprendo `_bmad/config.toml` e `_bmad/config.user.toml` direttamente —
 il valore vive nel layer `custom/`, che una lettura dei soli file base non vedrebbe.
@@ -159,17 +233,21 @@ il valore vive nel layer `custom/`, che una lettura dei soli file base non vedre
 Su un'installazione più vecchia valgono gli script generici del template:
 
 ```bash
+python3 ./scripts/apply-selection.py --project-root "{project-root}" --groups "{gruppi-scelti}" --groups-map ./assets/groups.toml
 python3 ./scripts/merge-config.py --config-path "{project-root}/_bmad/config.yaml" --user-config-path "{project-root}/_bmad/config.user.yaml" --module-yaml ./assets/module.yaml --answers {file-temp} --legacy-dir "{project-root}/_bmad"
-python3 ./scripts/merge-help-csv.py --target "{project-root}/_bmad/module-help.csv" --source ./assets/module-help.csv --legacy-dir "{project-root}/_bmad" --module-code grl
-python3 ./scripts/merge-party-groups.py --project-root "{project-root}" --source ./assets/party-groups.toml
+python3 ./scripts/merge-help-csv.py --target "{project-root}/_bmad/module-help.csv" --source ./assets/module-help.csv --only-skills "{skill-attive}" --legacy-dir "{project-root}/_bmad" --module-code grl
+python3 ./scripts/merge-party-groups.py --project-root "{project-root}" --source ./assets/party-groups.toml --only-agents "{figure-attive}"
 ```
+
+`apply-selection.py` funziona anche qui: sposta cartelle e scrive in `_bmad/custom/config.toml`,
+che esiste in entrambi i formati. Va comunque per primo.
 
 Il file temporaneo delle risposte ha forma `{"module": {"strictness_override": "..."}}` (più
 una chiave `core` se i valori di base non sono ancora stati raccolti), e i valori conservano il
 token `{project-root}` letterale.
 
 Avverti però l'utente di un limite reale: `merge-config.py` scrive la sezione del modulo ma
-**non** la tabella degli agenti. Su un'installazione YAML le undici figure vanno quindi registrate
+**non** la tabella degli agenti. Su un'installazione YAML le figure vanno quindi registrate
 con il meccanismo di quella versione di BMad, altrimenti non compaiono nel party mode.
 `register-agents.py` non copre questo caso e lo dichiara invece di fingere.
 
@@ -177,20 +255,26 @@ con il meccanismo di quella versione di BMad, altrimenti non compaiono nel party
 
 - **Non crea `{project-root}/_bmad/memory/grl-shared/`.** La crea `grl-profile` alla prima
   esecuzione, quando ha qualcosa da scriverci. Una cartella vuota in `_bmad/memory/` è rumore.
-- **Non imposta una stanza di default.** Le undici figure restano nella stanza principale insieme
-  agli agenti BMM; in più `grl-setup` installa stanze tematiche richiamabili con
-  `bmad-party-mode --party <id>`. Il default resta quello deciso dal progetto o dal team.
+- **Non imposta una stanza di default.** Le figure installate restano nella stanza principale
+  insieme agli agenti BMM; in più `grl-setup` installa le stanze tematiche dei gruppi scelti,
+  richiamabili con `bmad-party-mode --party <id>`. Il default resta quello deciso dal progetto
+  o dal team.
+- **Non cancella le skill escluse.** Le sposta in `_bmad/grl/.disabled/`, da dove tornano
+  rieseguendo il setup e rispuntando il gruppo. Se l'utente vuole liberare spazio, può
+  cancellare quella cartella a mano — ma allora per riaverle dovrà reinstallare il modulo.
 - **Non tocca le skill BMM.** Vedi il passo facoltativo qui sotto.
 
 ## Chiusura
 
-1. Mostra cosa è stato scritto: le undici figure registrate (nome, icona, titolo), il valore di
-   `strictness_override`, le voci di help aggiunte, e i file toccati.
+1. Mostra cosa è stato scritto: i gruppi installati e le figure registrate (nome, icona, titolo),
+   il valore di `strictness_override`, le voci di help aggiunte, e i file toccati.
+   Se qualche gruppo è rimasto fuori, dillo esplicitamente: quali figure sono state disattivate,
+   dove sono finite, e che si riattivano rieseguendo `grl-setup`.
 2. Mostra il `module_greeting` di `module.yaml`.
 3. **Proponi `grl-profile` e, se l'utente accetta, eseguilo subito.** È il passo che rende utile
    tutto il resto: otto campi, pochi minuti, quasi tutti pre-compilati leggendo il repository.
    L'unico che deve dichiarare l'utente è la criticità del progetto, perché è quella che regola
-   quanto saranno severe tutte e undici le figure. Se rifiuta, va bene: digli che ogni figura
+   quanto saranno severe tutte le figure installate. Se rifiuta, va bene: digli che ogni figura
    proporrà la profilazione da sé quando troverà il profilo mancante.
 4. Nomina il passo **facoltativo e reversibile**, senza eseguirlo: le figure possono essere
    consultate automaticamente dentro i flussi BMM (`bmad-prd`, `bmad-architecture`, `bmad-ux`,
