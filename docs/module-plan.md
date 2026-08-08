@@ -3,8 +3,8 @@ title: 'Module Plan — Guardrails'
 status: 'complete'
 module_name: 'Guardrails'
 module_code: 'grl'
-module_description: 'Figure di presidio che affiancano il team di sviluppo su privacy/GDPR, sicurezza applicativa, legale e licenze, compliance normativa, fisco e finanza agevolata, disciplina architetturale, qualità visiva della UI e implementazione WordPress a componenti'
-architecture: 'compatibility bundle grl with eleven agents, five service workflows, live research gates, shared memory, and a staged topic-module topology'
+module_description: 'Figure di presidio che affiancano il team di sviluppo su privacy/GDPR, sicurezza applicativa, legale e licenze, compliance normativa, fisco e finanza agevolata, disciplina architetturale, qualità visiva della UI, SEO e implementazione WordPress a componenti'
+architecture: 'compatibility bundle grl with twelve agents, five service workflows, live research gates, shared memory, and a staged topic-module topology'
 standalone: false
 expands_module: 'bmm'
 skills_planned:
@@ -19,6 +19,7 @@ skills_planned:
   - grl-agent-health
   - grl-agent-ai
   - grl-agent-wordpress
+  - grl-agent-seo
   - grl-profile
   - grl-board
   - grl-mdsw
@@ -29,7 +30,7 @@ skills_planned:
 config_variables:
   - strictness_override
 created: '2026-08-06 22:10'
-updated: '2026-08-08 13:00'
+updated: '2026-08-08 19:20'
 ---
 
 # Module Plan
@@ -46,7 +47,7 @@ mantenerlo come superficie compatibile e introdurre confini logici per una migra
 | `grf` | Fiscal | fisco, contabilità, bandi e finanza agevolata |
 | `gre` | Engineering | architecture, security, ops, AI |
 | `grh` | Health | clinical informatics e qualificazione MDR |
-| `grw` | Web Experience | UI critic e web |
+| `grw` | Web Experience | SEO, UI critic e web |
 | `gwp` | WordPress | Gutenberg, ACF, componenti, template e Media Library |
 
 La mappa canonica è in `src/module-topology.yaml`. In questa fase non vengono copiate le skill in
@@ -63,7 +64,7 @@ codici, manifest e compatibilità.
 
 **Guardrails** (`grl`) porta dentro il ciclo di sviluppo software le figure di presidio che oggi
 mancano o arrivano troppo tardi: privacy/GDPR, sicurezza applicativa, legale e licenze,
-compliance normativa, fisco e finanza agevolata, disciplina architetturale, qualità visiva della UI.
+compliance normativa, fisco e finanza agevolata, disciplina architetturale, SEO e qualità visiva della UI.
 
 - **Per chi:** team e sviluppatori singoli che costruiscono software soggetto a vincoli
   normativi, o che vogliono tenere alta l'asticella di qualità senza avere in casa un DPO,
@@ -81,7 +82,7 @@ compliance normativa, fisco e finanza agevolata, disciplina architetturale, qual
 
 ## Architecture
 
-**Stato corrente: 11 agenti distinti + 5 workflow di servizio, senza orchestratore proprietario,
+**Stato corrente: 12 agenti distinti + 5 workflow di servizio, senza orchestratore proprietario,
 con ricerca live delegata a Deep Recon, doppio gate bmad-review e memoria condivisa di modulo.**
 `grl-web` e `grl-setup` completano il modulo come skill operative.
 
@@ -98,6 +99,7 @@ con ricerca live delegata a Deep Recon, doppio gate bmad-review e memoria condiv
 | `grl-agent-health` | agente | dominio clinico del software sanitario |
 | `grl-agent-ai` | agente | impianto delle applicazioni che usano modelli linguistici |
 | `grl-agent-wordpress` | agente | architettura WordPress a componenti, Gutenberg, Elementor, ACF, template e Media Library |
+| `grl-agent-seo` | agente | SEO tecnico e strategico: intento, architettura, crawl, indicizzazione, contenuti, dati strutturati e misurazione |
 | `grl-profile` | workflow | crea e aggiorna il profilo del progetto |
 | `grl-board` | workflow | convoca il collegio su un artefatto |
 | `grl-mdsw` | workflow | qualificazione del software come dispositivo medico |
@@ -129,7 +131,7 @@ persona. L'utente resta il router nel caso singolo.
 **Perché workflow distinti e non capacità interne agli agenti.**
 
 - `grl-profile` serve **prima** che qualsiasi figura possa dire qualcosa di sensato, ed è
-  condiviso da tutte le undici: metterlo dentro un agente lo renderebbe di sua proprietà. Nessuna
+  condiviso da tutte le dodici: metterlo dentro un agente lo renderebbe di sua proprietà. Nessuna
   persona, nessuna memoria propria, procedura sequenziale → workflow.
 - `grl-board` orchestra più figure sullo stesso artefatto: per definizione non appartiene a
   nessuna di esse.
@@ -142,11 +144,11 @@ persona. L'utente resta il router nel caso singolo.
 **Pattern: memoria personale + memoria condivisa di modulo** (riga 2 della tabella dei
 pattern). Non memoria condivisa unica, perché ogni figura accumula cose che alle altre non
 servono; non solo personale, perché il profilo di progetto e i rischi accettati devono essere
-visti da tutte, altrimenti l'utente ripete undici volte le stesse informazioni.
+visti da tutte, altrimenti l'utente ripete dodici volte le stesse informazioni.
 
 ```
 {project-root}/_bmad/memory/
-├── grl-shared/                   # memoria di modulo, letta da tutte e 6 le figure
+├── grl-shared/                   # memoria di modulo, letta da tutte e 12 le figure
 │   ├── project-profile.md        # il profilo del progetto (scritto da grl-profile)
 │   ├── decisions.md              # decisioni vincolate: cosa + perché + chi l'ha posta
 │   └── accepted-risks.md         # rischi accettati consapevolmente → silenzio su questi punti
@@ -168,7 +170,7 @@ brevi, e solo per cose che si sono ripetute almeno due volte (es. «il team usa 
 
 | File | Scritto da | Letto da | Contenuto |
 | ---- | ---------- | -------- | --------- |
-| `grl-shared/project-profile.md` | `grl-profile` (unico autore) | tutte le 6 figure, in attivazione | settore e dominio · tipo di software · dati personali trattati (categorie, se ci sono) · utenti e mercato (UE/extra-UE, B2B/B2C) · stack e piattaforma · presenza di componenti AI · criticità dichiarata (hobby / interno / produzione con clienti / regolamentato) · vincoli noti dal committente |
+| `grl-shared/project-profile.md` | `grl-profile` (unico autore) | tutte le 12 figure, in attivazione | settore e dominio · tipo di software · dati personali trattati (categorie, se ci sono) · utenti e mercato (UE/extra-UE, B2B/B2C) · stack e piattaforma · presenza di componenti AI · criticità dichiarata (hobby / interno / produzione con clienti / regolamentato) · vincoli noti dal committente |
 | `grl-shared/decisions.md` | tutte le figure, in append | tutte le figure, in attivazione | una riga per decisione: `[data] [figura] decisione — vincolo che l'ha imposta` |
 | `grl-shared/accepted-risks.md` | tutte le figure, in append, **solo su conferma esplicita dell'utente** | tutte le figure, in attivazione | una riga per rischio: `[data] [figura] rischio — motivo dell'accettazione — ambito di validità` |
 | `grl-agent-{nome}/notes.md` | la sola figura proprietaria | la sola figura proprietaria | osservazioni ricorrenti, preferenze del team nel dominio della figura |
@@ -192,7 +194,7 @@ brevi, e solo per cose che si sono ripetute almeno due volte (es. «il team usa 
 **Il router è l'utente**, con due eccezioni: l'auto-attivazione per descrizione (meccanismo A) e
 il workflow `grl-board`, che convoca il collegio su un artefatto.
 
-**Confini tematici** — servono a evitare che undici figure parlino sopra la stessa questione.
+**Confini tematici** — servono a evitare che dodici figure parlino sopra la stessa questione.
 Regola generale: *chi ha la competenza decisiva parla, gli altri tacciono.*
 
 | Questione | Chi parla | Chi tace |
@@ -226,7 +228,7 @@ multipla esiste già ed è esplicita: `grl-board`.
 
 ### Partecipazione al party mode principale
 
-**Requisito dell'utente:** le undici figure fanno parte del gruppo principale di `bmad-party-mode`,
+**Requisito dell'utente:** le dodici figure fanno parte del gruppo principale di `bmad-party-mode`,
 non di una stanza separata.
 
 **Come si soddisfa (verificato sul codice, non ipotizzato).**
@@ -235,7 +237,7 @@ installati**, letti via `resolve_config.py --key agents`, cioè dalla tabella `[
 config TOML. Non c'è alcun filtro per `module` o per `team`: chi è registrato come agente entra
 nella stanza di default. Quindi:
 
-1. Le undici figure vanno costruite con **Agent Builder** (non come workflow), così ciascuna
+1. Le dodici figure vanno costruite con **Agent Builder** (non come workflow), così ciascuna
    riceve un `customize.toml` con il blocco `[agent]`: `code`, `name`, `title`, `icon`,
    `description`, `agent_type`.
 2. `Create Module (CM)` porta quei metadati nel `module.yaml` del modulo; l'installer li scrive
@@ -252,16 +254,16 @@ nella stanza di default. Quindi:
 - La stanza di default passa da 5 a **11 partecipanti**. L'utente ha scelto di tenere una sola
   stanza, senza `party_groups` aggiuntivi: la regola «al massimo una figura per turno» e i
   confini tematici netti diventano quindi ancora più importanti.
-- Le undici personalità devono reggere il confronto diretto con Mary, John, Sally, Winston e
+- Le dodici personalità devono reggere il confronto diretto con Mary, John, Sally, Winston e
   Amelia: caratteri distinti anche fra loro, e attriti prevedibili da sfruttare (Otto contro
   Winston sull'architettura, Iris contro Sally sulla UI, Vera contro John sui requisiti che
   raccolgono troppi dati).
 
 ## Skills
 
-Diciotto skill: undici agenti (le figure) e cinque workflow di servizio.
+Diciannove skill: dodici agenti (le figure) e cinque workflow di servizio, oltre a `grl-web` e `grl-setup`.
 
-### Regole comuni a tutte le undici figure
+### Regole comuni a tutte le dodici figure
 
 Da riportare in ogni agente costruito — non sono contorno, sono ciò che distingue queste figure
 da un checklist-bot.
@@ -770,6 +772,44 @@ componenti AI.
 
 ---
 
+### grl-agent-seo
+
+**Type:** agent · **code:** `seo` · **name:** Nora · **title:** SEO Strategist & Search Systems Auditor · **icon:** 🔎
+
+> Aggiunta successiva alla stesura iniziale del piano (richiesta dell'utente, 2026-08-08).
+
+**Purpose:** presidiare la findability del prodotto: trasformare domanda e intento in architettura,
+contenuti e segnali tecnici che i motori possano scoprire, comprendere e misurare. Il suo consumatore
+è il team che deve poter applicare e verificare ogni intervento dopo la conversazione.
+
+**Perché una figura distinta da `grl-web`.** `grl-web` costruisce brief di conversione, mockup,
+landing e siti; Nora possiede l'asse che inizia prima della pagina e continua dopo il deploy:
+domanda, crawl, indicizzazione, canonicalizzazione, contenuto, dati strutturati, migrazione e
+Search Console. Non decide il design, non modella WordPress e non configura il server: consegna a
+Iris, Milo e Bruno requisiti e verifiche concrete.
+
+**Persona:** SEO senior allergica alle scorciatoie — keyword density, lunghezze magiche, schema
+copiato, audit a semaforo e promesse di prima posizione. Separa scoperta, rendering, indicizzazione,
+rilevanza, aspetto in SERP e conversione; dà il verdetto solo quando ha evidenza o dichiara l'ipotesi.
+
+**Capabilities:** DI diagnosi tecnica · IA intento e architettura · CT brief editoriale · SD dati
+strutturati e search appearance · MI migrazioni e internazionale · MS misurazione e sperimentazione
+· RL ricerca SEO aggiornata con fonti ufficiali.
+
+**Regole non negoziabili:** verifica web live obbligatoria a ogni consultazione, con fonte e `as_of`;
+niente ranking garantito; niente volumi o CTR inventati; `robots.txt`,
+`noindex`, canonical e sitemap non sono intercambiabili; dati strutturati solo per contenuto visibile
+e pertinente; ogni finding ha evidenza, owner e verifica; Search Console, log e browser si usano per
+misurare il segnale che dichiarano, non per provare una causa che non osservano.
+
+**Relationships:** `grl-web` sulla conversione e sull'implementazione della pagina; Milo sul modello
+WordPress; Iris sull'estetica; Sally sul flusso utente; Bruno su server, CDN e deploy; Vera sugli
+analytics e i dati personali; Nils sull'accessibilità come obbligo; Aldo su licenze e claim; Enzo
+sulla pipeline di contenuti generati. Nora resta titolare di findability, architettura di ricerca e
+misurazione organica.
+
+---
+
 ### grl-mdsw
 
 **Type:** workflow
@@ -851,7 +891,7 @@ professionista abilitato.
 
 **Type:** workflow
 
-**Purpose:** raccogliere — una volta per progetto — il profilo che dà contesto a tutte e undici le
+**Purpose:** raccogliere — una volta per progetto — il profilo che dà contesto a tutte e dodici le
 figure, e scriverlo in `_bmad/memory/grl-shared/project-profile.md`. Senza questo file le figure
 parlano per luoghi comuni.
 
@@ -900,7 +940,7 @@ chiamare una a una.
 | Capability | Outcome | Inputs | Outputs |
 | ---------- | ------- | ------ | ------- |
 | Revisione collegiale | l'artefatto è stato letto da ogni figura pertinente, ognuna dal proprio asse | percorso di un file o descrizione dell'artefatto | riepilogo schematico unico: per figura, i punti che contano |
-| Selezione dei convocati | non parlano tutte le undici quando ne servono due | artefatto + profilo progetto | elenco delle figure pertinenti, con il motivo dell'esclusione delle altre |
+| Selezione dei convocati | non parlano tutte le dodici quando ne servono due | artefatto + profilo progetto | elenco delle figure pertinenti, con il motivo dell'esclusione delle altre |
 | Consolidamento dei conflitti | i disaccordi fra figure emergono invece di essere nascosti | pareri raccolti | punti in cui due figure vogliono cose incompatibili, con la scelta che spetta all'utente |
 | Registrazione degli esiti | ciò che è stato deciso non si perde | decisioni prese durante la revisione | righe in `decisions.md` e, su conferma esplicita, in `accepted-risks.md` |
 | Vista dei rischi accettati | si sa cosa il progetto ha già scelto di accettare | `accepted-risks.md` | elenco leggibile, raggruppato per figura |
@@ -932,7 +972,7 @@ progetto, la config è unica per installazione.
 | -------- | ------ | ------- | --------------- | ------------ |
 | `strictness_override` | «Livello di severità delle figure Guardrails? Lascia vuoto per farlo derivare dalla criticità del progetto (consigliato).» — opzioni: vuoto / `light` / `normal` / `strict` | `""` (vuoto = deriva dal profilo) | `strictness_override = "{value}"` | sì (personale) |
 
-**Come si risolve la severità in pratica** (logica identica in tutte le undici figure):
+**Come si risolve la severità in pratica** (logica identica in tutte le dodici figure):
 
 1. Se `strictness_override` è valorizzato, vince.
 2. Altrimenti si deriva dal campo *criticità* di `project-profile.md`:
@@ -957,6 +997,7 @@ Dipendenze **opzionali**, usate se presenti e mai richieste all'utente dal setup
 | Ricerca web | Nils (compliance), Aldo (legale) | verificare lo stato aggiornato di una norma invece di andare a memoria — obbligatorio quando la materia è cambiata di recente | dichiara che sta andando a memoria e indica la data del proprio riferimento |
 | `npm audit` / `osv-scanner` / equivalenti | Kai (security) | controllo dipendenze vulnerabili sul progetto reale | ragiona sul file di lock e sulle versioni dichiarate |
 | Screenshot o pagina HTML | Iris (ui-critic) | guardare davvero la pagina invece del solo codice | lavora sul markup e sul CSS |
+| Ricerca web, Search Console, crawl e browser | Nora (SEO) | verificare documentazione Search corrente, comportamento osservato e stato delle URL | separa ciò che è osservato da ciò che richiede accesso o verifica |
 
 ## UI and Visualization
 
@@ -971,7 +1012,7 @@ questo progetto»), la si aggiunge come capacità di `grl-board`, non come nuova
 
 Oltre alla raccolta della singola variabile di config, il setup del modulo deve:
 
-1. **Registrare le undici figure come agenti installati** — è ciò che le fa comparire nel party
+1. **Registrare le dodici figure come agenti installati** — è ciò che le fa comparire nel party
    mode principale. Deriva automaticamente dai `customize.toml` prodotti dall'Agent Builder,
    ma va verificato: `[agents.grl-agent-*]` deve esistere nel config risolto, con `module = "grl"`
    e `team = "software-development"`.
@@ -1003,7 +1044,7 @@ meglio agganciato ai flussi BMM.
 | `bmad-architecture` | Kai, Otto, Vera | superficie d'attacco, confini e dipendenze, dove finiscono i dati personali |
 | `bmad-ux` | Iris | che la UI non esca omologata; con Nils sull'accessibilità |
 | `bmad-build` / `bmad-code-review` | Kai, Otto, Aldo | pattern insicuri, strati inutili, licenze delle dipendenze aggiunte |
-| `bmad-party-mode` | tutte le undici | fanno parte del roster principale |
+| `bmad-party-mode` | tutte le dodici | fanno parte del roster principale |
 
 **Valore in autonomia (senza BMM):** ogni figura è consultabile su un progetto qualsiasi —
 basta `grl-profile` per darle contesto. Nessuna skill del modulo importa file prodotti da BMM:
