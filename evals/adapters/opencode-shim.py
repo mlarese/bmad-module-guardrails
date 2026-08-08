@@ -19,7 +19,7 @@ l'installer BMad riscrive a ogni aggiornamento: la traduzione vive qui.
 
 Uso (è il campo `invocation` di un adapter):
 
-    opencode-shim.py --model opencode/deepseek-v4-flash-free -- "{prompt}"
+    opencode-shim.py --model opencode-go/deepseek-v4-flash -- "{prompt}"
 
 Il nome del tool di lettura cambia anch'esso: opencode usa `read` con
 `filePath`, la forma attesa è `Read` con `file_path`. La traduzione normalizza
@@ -32,6 +32,7 @@ import argparse
 import json
 import subprocess
 import sys
+import threading
 
 # nome opencode -> nome nella forma attesa dal runner
 TOOL_ALIAS = {"skill": "Skill", "read": "Read"}
@@ -89,29 +90,61 @@ def main() -> int:
     argv.append(" ".join(args.prompt))
 
     try:
-        proc = subprocess.run(argv, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+        proc = subprocess.Popen(
+            argv,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            bufsize=1,
+        )
     except FileNotFoundError:
         print(json.dumps({"type": "error", "error": f"{args.opencode} non trovato"}),
               file=sys.stderr)
         return 127
 
-    for riga in (proc.stdout or b"").decode("utf-8", errors="replace").splitlines():
-        riga = riga.strip()
-        if not riga:
-            continue
-        try:
-            evento = json.loads(riga)
-        except json.JSONDecodeError:
-            continue
-        if not isinstance(evento, dict):
-            continue
-        tradotto = traduci(evento)
-        if tradotto is not None:
-            print(json.dumps(tradotto, ensure_ascii=False), flush=True)
-        elif args.passthrough:
-            print(riga, flush=True)
+    def inoltra_stderr() -> None:
+        """Mantieni diagnostica disponibile senza bloccare stdout."""
+        if proc.stderr is None:
+            return
+        for riga in proc.stderr:
+            sys.stderr.write(riga)
+            sys.stderr.flush()
 
-    return proc.returncode
+    stderr_thread = threading.Thread(target=inoltra_stderr, daemon=True)
+    stderr_thread.start()
+
+    try:
+        stdout = proc.stdout
+        if stdout is None:
+            return proc.wait()
+        for riga in stdout:
+            riga = riga.strip()
+            if not riga:
+                continue
+            try:
+                evento = json.loads(riga)
+            except json.JSONDecodeError:
+                continue
+            if not isinstance(evento, dict):
+                continue
+            tradotto = traduci(evento)
+            if tradotto is not None:
+                print(json.dumps(tradotto, ensure_ascii=False), flush=True)
+            elif args.passthrough:
+                print(riga, flush=True)
+    except (BrokenPipeError, KeyboardInterrupt):
+        proc.terminate()
+        proc.wait()
+        return 130
+    finally:
+        if proc.stdout is not None:
+            proc.stdout.close()
+
+    return_code = proc.wait()
+    stderr_thread.join(timeout=1)
+    return return_code
 
 
 if __name__ == "__main__":

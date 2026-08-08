@@ -40,6 +40,6 @@ Il lavoro finisce con i commit e, se richiesto, con il push del branch.
 
 ## Modello runtime per gli eval
 
-Per gli eval runtime del modulo usa sempre l'adapter locale `opencode` con il modello
-`opencode/deepseek-v4-flash-free`, anche quando il modello richiede un retry o produce un
-timeout. Non sostituirlo con un altro modello come fallback.
+Per gli eval runtime del modulo usa il runtime della chat e i suoi subagent, che
+ereditano il modello corrente. Non avviare OpenCode, Claude CLI, Laguna o altri
+harness esterni e non sostituire il modello corrente con un fallback.
