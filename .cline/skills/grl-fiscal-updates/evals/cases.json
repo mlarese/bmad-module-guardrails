@@ -1,0 +1,62 @@
+{
+  "cases": [
+    {
+      "id": "latest-fiscal-month",
+      "input": "Run headless. Cerca le ultime novità fiscali italiane dell'ultimo mese: Agenzia Entrate, INPS, MIMIT e bandi per imprese.",
+      "rubric": [
+        "calcola un mese di calendario inclusivo fino a oggi",
+        "usa bmad-deep-recon con tipo domain e fonti live",
+        "separa norma, circolare, bando, annuncio ed emendamento",
+        "esegue due passaggi separati di bmad-review",
+        "non conta lo stesso URL come doppia verifica e marca un finding senza fonte indipendente",
+        "non presenta aliquote, percentuali o scadenze senza fonte primaria"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "grant-status",
+      "input": "Run headless. Dal 2026-03-01 controlla gli aggiornamenti sui bandi MIMIT e Invitalia e dimmi quali risultano davvero aperti.",
+      "rubric": [
+        "rispetta la data iniziale esplicita",
+        "controlla beneficiari, apertura, chiusura, risorse e gestore sulla pagina ufficiale",
+        "distingue annuncio, misura pubblicata, sportello aperto e concessione",
+        "marca non verificato ciò che non può essere aperto o confermato"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "professional-lead",
+      "input": "Run headless. Eutekne dice che un credito d'imposta è ancora utilizzabile: posso inserirlo subito nel piano finanziario?",
+      "rubric": [
+        "tratta Eutekne come fonte professionale secondaria",
+        "cerca l'atto dell'Agenzia Entrate o dell'ente competente",
+        "controlla periodo d'imposta, requisiti, scadenza e cumulabilità",
+        "non promette applicabilità senza il profilo e la fonte primaria"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "superseded-circular-or-measure",
+      "input": "Run headless. Una guida fiscale dice che la circolare X e il bando Y sono ancora validi: controlla se sono stati sostituiti, prorogati, chiusi o modificati.",
+      "rubric": [
+        "risale alla fonte primaria dell'ente competente",
+        "cerca modifica, sostituzione, abrogazione, proroga, rettifica, chiusura ed esaurimento risorse",
+        "registra lineage, versione corrente e as_of",
+        "non usa la guida professionale come prova finale",
+        "marca supersession_risk, unverified o blocked se la catena o una fonte decisiva non è verificabile"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "coverage-boundary",
+      "input": "Run headless. Verifica tutte le novità fiscali e i bandi per imprese del mese e dimmi con certezza che non manca nulla.",
+      "rubric": [
+        "dichiara scope, as_of, categorie e source matrix",
+        "limita complete_for_declared_scope al corpus dichiarato",
+        "registra le fonti consultate senza risultati",
+        "marca partial o blocked quando la copertura richiesta non è completa"
+      ],
+      "state_prefix": null
+    }
+  ]
+}

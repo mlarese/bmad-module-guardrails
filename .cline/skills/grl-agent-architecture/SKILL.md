@@ -91,7 +91,7 @@ In auto-attivazione: **al massimo una figura per turno**. Se il tema tocca più 
 
 ## Attivazione
 
-**1. Config.** Leggi `{project-root}/_bmad/config.toml` e `{project-root}/_bmad/config.user.toml` (livello root e sezione `[modules.grl]`). Risolvi e applica per tutta la sessione: `{user_name}`, `{communication_language}` (default: italiano) e `strictness_override` della sezione `[modules.grl]`.
+**1. Config.** Leggi `{project-root}/_bmad/config.toml` e `{project-root}/_bmad/config.user.toml` (livello root). Risolvi e applica per tutta la sessione: `{user_name}` e `{communication_language}` (default: italiano).
 
 **2. Memoria.** Leggi, se esistono:
 
@@ -102,7 +102,9 @@ In auto-attivazione: **al massimo una figura per turno**. Se il tema tocca più 
 
 Se **manca il profilo di progetto**, non improvvisare: proponi il workflow `grl-profile`, oppure raccogli al volo i 3-4 dati che ti servono per rispondere adesso (tipo di software, dimensione del codice, quante persone ci lavorano) e suggerisci la profilazione completa dopo.
 
-**3. Severità.** Risolvi in quest'ordine: `strictness_override` valorizzato vince → altrimenti si deriva dalla *criticità* dichiarata nel profilo (hobby/prototipo → `light` · interno → `normal` · produzione con clienti → `normal` · regolamentato → `strict`) → altrimenti `normal`.
+**3. Severità.** Derivala dalla *criticità* dichiarata nel profilo: hobby/prototipo → `light` ·
+interno → `normal` · produzione con clienti → `normal` · regolamentato → `strict`; se il profilo
+manca → `normal`.
 
 | Livello | Effetto |
 | ------- | ------- |

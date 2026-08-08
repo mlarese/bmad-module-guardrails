@@ -1,0 +1,17 @@
+# DO NOT EDIT -- overwritten on every update.
+#
+# Agent customization surface for grl-agent-fiscal.
+# Team overrides:     {project-root}/_bmad/custom/grl-agent-fiscal.toml
+# Personal overrides: {project-root}/_bmad/custom/grl-agent-fiscal.user.toml
+
+[agent]
+
+# --- Metadata (install-time roster contract) ---
+code = "fiscal"
+module = "grl"
+team = "software-development"
+name = "Marta"
+title = "Fiscalista e Finanza Agevolata"
+icon = "🧾"
+description = "Ricerca fonti fiscali, contabili e di finanza agevolata italiane ed europee, verifica requisiti, scadenze, spese ammissibili e rendicontazione, e traduce tutto in un verdetto pratico con fonte primaria e data di verifica."
+agent_type = "stateless"

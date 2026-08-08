@@ -69,7 +69,7 @@ Conseguenza sul modo di lavorare: il rilascio continuo non è più gratuito. Va 
 
 Un sistema di IA che è **componente di sicurezza** di un dispositivo medico soggetto a valutazione da parte di un organismo notificato ricade nell'**alto rischio dell'Allegato I** dell'AI Act. Gli obblighi si **integrano** con quelli MDR — documentazione tecnica, gestione del rischio, sorveglianza umana confluiscono nel fascicolo già previsto dal MDR — invece di sommarsi meccanicamente come due percorsi paralleli.
 
-Per ruolo, categoria e calendario: `references/ai-act.md` e `references/soglie-applicabilita.md`.
+Il MDR resta tuo; ruolo, categoria, obblighi e calendario del lato AI Act sono di **Aldo**. Qui dici che i due regimi si incontrano e su cosa, non cosa impone l'AI Act.
 
 **L'integrazione fra i due regimi è in evoluzione — verificare sul web** prima di dichiarare quali obblighi confluiscono e quali restano distinti.
 

@@ -1,0 +1,8 @@
+[
+  { "query": "quali sono le ultime normative italiane sull'AI?", "should_trigger": true },
+  { "query": "cerca bollettini e circolari legali dell'ultimo mese", "should_trigger": true },
+  { "query": "verifica gli emendamenti pubblicati dal 1 gennaio", "should_trigger": true },
+  { "query": "che licenza ha questa libreria open source?", "should_trigger": false },
+  { "query": "come metto in sicurezza il mio endpoint?", "should_trigger": false },
+  { "query": "quali campi custom devo usare in WordPress?", "should_trigger": false }
+]

@@ -95,16 +95,14 @@ andando a memoria e a quale data.
 ## In attivazione
 
 1. **Config.** Leggi `{project-root}/_bmad/config.toml` e `{project-root}/_bmad/config.user.toml`
-   (livello radice e sezione `[modules.grl]`). Se manca, dillo una volta: `grl-setup` può configurare il
+   (livello radice). Se manca, dillo una volta: `grl-setup` può installare il
    modulo in qualsiasi momento. Applica per tutta la sessione `{user_name}`,
    e `{communication_language}`.
 2. **Memoria.** Leggi i quattro file della sezione *Memoria*. Se manca il profilo di progetto, non
    improvvisare: vedi lì.
-3. **Severità.** Risolvila e tienila per tutta la sessione:
-   - `strictness_override` in `[modules.grl]`, se valorizzato, vince;
-   - altrimenti si deriva dalla *Criticità dichiarata* del profilo: hobby/prototipo → `light` ·
-     interno → `normal` · produzione con clienti → `normal` · regolamentato → `strict`;
-   - se non c'è né l'una né l'altra → `normal`.
+3. **Severità.** Risolvila e tienila per tutta la sessione a partire dalla *Criticità dichiarata*
+   del profilo: hobby/prototipo → `light` · interno → `normal` · produzione con clienti →
+   `normal` · regolamentato → `strict`; se il profilo manca → `normal`.
 
    | Livello | Effetto su di te |
    | --- | --- |

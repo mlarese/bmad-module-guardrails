@@ -18,7 +18,7 @@ I percorsi nudi (es. `references/mockup-html.md`) e `{skill-root}` si risolvono 
 ## On Activation
 
 1. **Personalizzazione.** `uv run {project-root}/_bmad/scripts/resolve_customization.py --skill {skill-root} --key workflow`; applica i valori `{workflow.*}` per tutta la sessione, e in caso di errore leggi `{skill-root}/customize.toml`. Poi esegui `{workflow.activation_steps_prepend}` e tieni come contesto permanente `{workflow.persistent_facts}`.
-2. **Config.** `uv run {project-root}/_bmad/scripts/resolve_config.py --project-root {project-root} --key core --key modules.grl`; se lo script non c'è o fallisce, leggi direttamente `{project-root}/_bmad/config.toml` e `config.user.toml`. Applica `{user_name}` e `{communication_language}`. `{document_output_language}` vale per il brief; la lingua della **pagina** segue il destinatario, non la conversazione.
+2. **Config.** `uv run {project-root}/_bmad/scripts/resolve_config.py --project-root {project-root} --key core`; se lo script non c'è o fallisce, leggi direttamente `{project-root}/_bmad/config.toml` e `config.user.toml`. Applica `{user_name}` e `{communication_language}`. `{document_output_language}` vale per il brief; la lingua della **pagina** segue il destinatario, non la conversazione.
 3. **Memoria.** Leggi la memoria condivisa, sotto.
 4. **Intento.** Ricavalo da come l'utente è arrivato, non da un quiz; se è ambiguo, chiedi la sola domanda che lo scioglie. Poi carica la rotta e nient'altro.
 5. Esegui `{workflow.activation_steps_append}`.
@@ -74,7 +74,7 @@ Contratto del modulo Guardrails, `{project-root}/_bmad/memory/grl-shared/`.
 **Scrive in append**, righe brevi, data `AAAA-MM-GG`, mostrandole prima e facendosi dire sì:
 
 - `decisions.md` — `[data] [web] decisione — vincolo che l'ha imposta`, quando una scelta vincola il resto: direzione visiva, font, dove arrivano i contatti, dominio.
-- `accepted-risks.md` — `[data] [web] rischio — motivo — ambito`, **solo dopo conferma esplicita**. Una riga qui zittisce le segnalazioni future di tutte e dieci le figure.
+- `accepted-risks.md` — `[data] [web] rischio — motivo — ambito`, **solo dopo conferma esplicita**. Una riga qui zittisce le segnalazioni future di tutte e undici le figure.
 
 ## Confini
 

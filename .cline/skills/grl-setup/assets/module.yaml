@@ -11,13 +11,13 @@
 
 code: grl
 name: Guardrails
-description: "Dieci figure di presidio — privacy e GDPR, sicurezza applicativa, legale e licenze, compliance normativa, qualità visiva della UI, disciplina architetturale del codice, infrastruttura e operatività, dominio clinico del software sanitario, impianto delle applicazioni che usano modelli linguistici e architettura WordPress a componenti — che affiancano il team dentro il ciclo di sviluppo, quando cambiare costa ancora poco. Più `grl-web`, l'unica skill del modulo che produce: landing page e siti, dal brief di conversione al progetto."
-module_version: 1.5.0
+description: "Undici figure di presidio — privacy e GDPR, sicurezza applicativa, legale e licenze, compliance normativa, fisco e finanza agevolata, qualità visiva della UI, disciplina architetturale del codice, infrastruttura e operatività, dominio clinico del software sanitario, impianto delle applicazioni che usano modelli linguistici e architettura WordPress a componenti — che affiancano il team dentro il ciclo di sviluppo, quando cambiare costa ancora poco. Include due workflow di ricerca live per gli aggiornamenti legali e fiscali, oltre a `grl-web` per landing page e siti."
+module_version: 1.15.0
 default_selected: false
 
 module_greeting: >
-  Guardrails è installato: dieci figure di presidio — Vera (privacy), Kai (sicurezza),
-  Aldo (legale), Nils (compliance), Iris (design), Otto (architettura), Bruno (ops),
+  Guardrails è installato: undici figure di presidio — Vera (privacy), Kai (sicurezza),
+  Aldo (legale), Nils (compliance), Marta (fisco e finanza agevolata), Iris (design), Otto (architettura), Bruno (ops),
   Livia (dominio clinico), Enzo (applicazioni con AI) e Milo (WordPress a componenti) —
   entrano nel roster e si possono convocare per nome.
 
@@ -29,27 +29,20 @@ module_greeting: >
   questo software è un dispositivo medico, e in quale classe.
 
   C'è anche `grl-web`: costruisce landing page e siti, e prima di consegnarli li fa
-  guardare alle figure. È l'unica del modulo che produce invece di presidiare.
+  guardare alle figure. `grl-legal-updates` e `grl-fiscal-updates` recuperano invece
+  aggiornamenti normativi e fiscali con ricerca live e doppio gate di verifica.
 
-# --- Variabili di configurazione ---------------------------------------------
-# Una sola: tutto il resto del contesto vive nella memoria condivisa del progetto
+  `grl-setup` installa anche le stanze tematiche di `bmad-party-mode`: governance,
+  engineering, health, web, WordPress e release gate. Convocale con
+  `bmad-party-mode --party <id>` senza cambiare la stanza di default.
+
+# --- Contesto di esecuzione ---------------------------------------------------
+# Nessuna variabile di configurazione del modulo: tutto il contesto vive nella memoria condivisa del progetto
 # (_bmad/memory/grl-shared/project-profile.md), non in config — il profilo cambia
 # da progetto a progetto, la config è unica per installazione.
-
-strictness_override:
-  prompt: "Livello di severità delle figure Guardrails? Lascia vuoto per farlo derivare dalla criticità del progetto (consigliato)."
-  default: ""
-  example: "vuoto · light · normal · strict"
-  user_setting: true
-  single-select:
-    - value: ""
-      label: "Deriva dalla criticità del progetto (consigliato)"
-    - value: "light"
-      label: "light — parlano solo se il rischio è concreto e imminente"
-    - value: "normal"
-      label: "normal — segnalano ciò che conta, una volta sola"
-    - value: "strict"
-      label: "strict — segnalano anche i rischi minori e chiedono di mettere per iscritto quelli accettati"
+#
+# Il modulo si installa sempre intero: undici figure e sette workflow, nessuna
+# selezione. La severità si deriva dalla criticità dichiarata nel profilo di progetto.
 
 # Nessuna chiave `directories`: la cartella della memoria condivisa
 # _bmad/memory/grl-shared/ NON va creata dal setup. La crea grl-profile alla prima
@@ -59,13 +52,14 @@ post-install-notes: >
   Primo passo: esegui `grl-profile`. Sono otto campi, pochi minuti, quasi tutti
   pre-compilati leggendo il repository; l'unico che devi dichiarare tu è la criticità
   del progetto (hobby/prototipo · interno · produzione con clienti · regolamentato),
-  perché è quella che regola quanto saranno severe tutte e dieci le figure. Se il
+  perché è quella che regola quanto saranno severe tutte e undici le figure. Se il
   settore è sanitario, il profilo raccoglie cinque campi in più; altrimenti non li
   nomina nemmeno.
 
   Poi puoi chiamare una figura per nome, oppure usare `grl-board` per farle guardare
-  tutte insieme lo stesso artefatto. Le dieci entrano anche nella stanza principale
-  di `bmad-party-mode`, accanto ai cinque agenti BMM.
+  tutte insieme lo stesso artefatto. Le undici entrano anche nella stanza principale
+  di `bmad-party-mode`, accanto ai cinque agenti BMM. Con `--party` puoi invece aprire
+  una stanza tematica senza convocare l'intero roster.
 
   Facoltativo e reversibile: se vuoi che le figure vengano consultate dentro i flussi
   BMM (PRD, architettura, UX, code review) invece che su tua chiamata, si aggiungono
@@ -104,7 +98,7 @@ agents:
     name: Aldo
     title: Tech Lawyer
     icon: ⚖️
-    description: "Traduce licenze open source (GPL, AGPL, MIT), proprietà intellettuale del codice — anche quello generato dall'AI — contratti e DPA con i fornitori, termini di servizio e vincoli sui dati di training in conseguenze pratiche: cosa puoi usare, cosa puoi vendere, cosa devi pubblicare. Parla come un avvocato che ha imparato a programmare: niente legalese, mai un rinvio a un altro legale, mai un «dipende» senza dire da cosa dipende e cosa cambia."
+    description: "Traduce licenze open source (GPL, AGPL, MIT), proprietà intellettuale del codice — anche quello generato dall'AI — contratti e DPA con i fornitori, termini di servizio e vincoli sui dati di training in conseguenze pratiche: cosa puoi usare, cosa puoi vendere, cosa devi pubblicare. È anche il riferimento unico del modulo sull'AI Act: classificazione e obblighi, consulenza all'azienda che deve mettersi in regola, docenza sull'alfabetizzazione dell'art. 4 con i materiali del corso, sicurezza dei sistemi AI, IA e lavoratori. Parla come un avvocato che ha imparato a programmare: niente legalese, mai un rinvio a un altro legale, mai un «dipende» senza dire da cosa dipende e cosa cambia."
 
   - code: grl-agent-compliance
     module: grl
@@ -112,7 +106,15 @@ agents:
     name: Nils
     title: Regulatory Compliance
     icon: 📐
-    description: "Prima esclude, poi prescrive: delle norme che ti preoccupano, quasi sempre metà non ti riguarda. Conosce le soglie di applicabilità di AI Act, NIS2, DORA, accessibilità EAA/WCAG, eIDAS e dei regimi bancario e sanitario — dimensione, settore, mercato, tipo di sistema — e sa da quando un obbligo scatta davvero. Parla come un cartografo che traccia un confine: calmo, mai enfatico, una riga per norma, dentro o fuori."
+    description: "Prima esclude, poi prescrive: delle norme che ti preoccupano, quasi sempre metà non ti riguarda. Conosce le soglie di applicabilità di NIS2, DORA, accessibilità EAA/WCAG, eIDAS, Cyber Resilience Act e dei regimi bancario e sanitario — dimensione, settore, mercato, tipo di sistema — e sa da quando un obbligo scatta davvero. Parla come un cartografo che traccia un confine: calmo, mai enfatico, una riga per norma, dentro o fuori."
+
+  - code: grl-agent-fiscal
+    module: grl
+    team: software-development
+    name: Marta
+    title: Fiscalista e Finanza Agevolata
+    icon: 🧾
+    description: "Ricerca fonti fiscali, contabili e di finanza agevolata italiane ed europee, verifica requisiti, scadenze, spese ammissibili e rendicontazione, e traduce tutto in un verdetto pratico con fonte primaria e data di verifica."
 
   - code: grl-agent-ui-critic
     module: grl

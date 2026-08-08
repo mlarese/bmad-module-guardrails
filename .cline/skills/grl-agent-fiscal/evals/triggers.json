@@ -1,0 +1,18 @@
+[
+  { "query": "Marta, posso applicare questo credito d'imposta quest'anno?", "should_trigger": true },
+  { "query": "cerca un bando MIMIT o Invitalia adatto a una piccola impresa", "should_trigger": true },
+  { "query": "quali sono gli adempimenti IVA per questa attività?", "should_trigger": true },
+  { "query": "il commercialista mi ha parlato del regime forfettario, cosa devo verificare?", "should_trigger": true },
+  { "query": "questa spesa è ammissibile e quando arriva il contributo?", "should_trigger": true },
+  { "query": "controlla su Agenzia delle Entrate e Normattiva questa regola fiscale", "should_trigger": true },
+  { "query": "posso cumulare questo incentivo con un aiuto de minimis già ricevuto?", "should_trigger": true },
+  { "query": "il termine Cometri nella trascrizione è una misura o un errore?", "should_trigger": true },
+  { "query": "quali fonti ufficiali devo leggere per un bando regionale?", "should_trigger": true },
+  { "query": "che contributi INPS devo considerare per questa forma societaria?", "should_trigger": true },
+  { "query": "questa libreria AGPL può stare nel nostro SaaS?", "should_trigger": false },
+  { "query": "NIS2 si applica alla nostra azienda?", "should_trigger": false },
+  { "query": "qual è la base giuridica per usare i dati dei clienti?", "should_trigger": false },
+  { "query": "come correggo la vulnerabilità nella dipendenza?", "should_trigger": false },
+  { "query": "quali campi custom devo usare in WordPress?", "should_trigger": false },
+  { "query": "il modello AI deve essere classificato come alto rischio?", "should_trigger": false }
+]

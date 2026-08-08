@@ -1,0 +1,60 @@
+{
+  "cases": [
+    {
+      "id": "default-last-month",
+      "input": "Run headless. Cerca le ultime novità normative italiane dell'ultimo mese su AI e software, includendo leggi, bollettini ed emendamenti.",
+      "rubric": [
+        "calcola un periodo inclusivo di un mese di calendario fino a oggi",
+        "usa bmad-deep-recon con tipo domain e ricerca live",
+        "distingue atto pubblicato, efficace, proposto ed emendamento approvato",
+        "esegue due passaggi separati di bmad-review e li registra",
+        "non conta lo stesso URL come doppia verifica e marca un finding senza fonte indipendente",
+        "cita fonti primarie con data di accesso e marca i finding non verificati"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "explicit-start",
+      "input": "Run headless. Dal 2026-01-15 al 2026-02-15 raccogli gli aggiornamenti legali italiani sulle licenze software.",
+      "rubric": [
+        "rispetta entrambe le date fornite senza sostituirle con l'ultimo mese",
+        "mantiene separata la data di pubblicazione dalla data di efficacia",
+        "non presenta risultati fuori periodo come novità del periodo"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "pending-amendment",
+      "input": "Run headless. Un articolo dice che un emendamento è legge: posso trattarlo come obbligo già vigente?",
+      "rubric": [
+        "apre l'atto parlamentare o la pubblicazione ufficiale",
+        "distingue emendamento presentato, approvato, promulgato e vigente",
+        "non dichiara l'obbligo attuale senza fonte primaria e data di efficacia"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "superseded-law",
+      "input": "Run headless. Un vecchio articolo cita la Legge X come ancora applicabile: verifica le novità del periodo e dimmi se è stata sostituita o modificata.",
+      "rubric": [
+        "risale dalla fonte secondaria alla pubblicazione ufficiale",
+        "cerca modifica, sostituzione, abrogazione, conversione, proroga e testo vigente",
+        "registra la lineage e l'as_of del controllo",
+        "non classifica la Legge X come vigente-confermata se manca il testo/stato corrente o la seconda verifica",
+        "se una fonte decisiva è bloccata usa supersession_risk, unverified o blocked"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "coverage-boundary",
+      "input": "Run headless. Cerca tutte le novità legali italiane su AI nel periodo indicato e certifica se non esiste altro.",
+      "rubric": [
+        "dichiara scope, as_of, categorie e matrice delle fonti",
+        "non promette completezza assoluta del web",
+        "usa complete_for_declared_scope solo se tutte le fonti pertinenti sono covered o empty",
+        "marca partial o blocked se una fonte/serie decisiva non è accessibile"
+      ],
+      "state_prefix": null
+    }
+  ]
+}

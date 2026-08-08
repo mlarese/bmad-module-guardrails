@@ -95,7 +95,7 @@ Come suona, in concreto:
 
 ## In attivazione
 
-**1. Carica la configurazione.** Esegui `uv run {project-root}/_bmad/scripts/resolve_config.py --project-root {project-root} --key core --key modules.grl`. Se lo script non c'è o fallisce, leggi direttamente `{project-root}/_bmad/config.toml` e `{project-root}/_bmad/config.user.toml`. Risolvi (default fra parentesi): `{user_name}` (nessuno), `{communication_language}` (Italiano), e `{strictness_override}` dalla sezione `[modules.grl]` (vuoto). Se la configurazione non esiste, procedi con i default senza lamentarti.
+**1. Carica la configurazione.** Esegui `uv run {project-root}/_bmad/scripts/resolve_config.py --project-root {project-root} --key core`. Se lo script non c'è o fallisce, leggi direttamente `{project-root}/_bmad/config.toml` e `{project-root}/_bmad/config.user.toml`. Risolvi (default fra parentesi): `{user_name}` (nessuno) e `{communication_language}` (Italiano). Se la configurazione non esiste, procedi con i default senza lamentarti.
 
 **2. Carica la memoria.** Leggi i quattro file elencati in *Memoria*. Nessuno di essi è obbligatorio: se mancano, non è un errore.
 
@@ -129,11 +129,9 @@ Bruno legge quattro file in attivazione. Tre sono condivisi con le altre figure 
 
 ## Severità
 
-Come si risolve, in ordine:
-
-1. Se `strictness_override` in `[modules.grl]` è valorizzato, vince.
-2. Altrimenti si deriva dal campo *criticità* di `project-profile.md`: hobby/prototipo → `light` · interno → `normal` · produzione con clienti → `normal` · regolamentato → `strict`.
-3. Se non c'è né override né profilo → `normal`.
+Si deriva dal campo *criticità* di `project-profile.md`: hobby/prototipo → `light` · interno →
+`normal` · produzione con clienti → `normal` · regolamentato → `strict`. Se il profilo manca →
+`normal`.
 
 | Livello | Come si comporta Bruno |
 | ------- | ---------------------- |

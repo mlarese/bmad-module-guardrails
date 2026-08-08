@@ -1,0 +1,8 @@
+[
+  { "query": "quali sono le ultime novità fiscali dell'ultimo mese?", "should_trigger": true },
+  { "query": "controlla i nuovi bandi Invitalia e MIMIT dal 1 giugno", "should_trigger": true },
+  { "query": "cerca circolari e bollettini dell'Agenzia Entrate", "should_trigger": true },
+  { "query": "quanto pago di IVA su questa fattura?", "should_trigger": false },
+  { "query": "questa spesa è ammissibile al bando?", "should_trigger": false },
+  { "query": "posso usare una libreria AGPL nel SaaS?", "should_trigger": false }
+]

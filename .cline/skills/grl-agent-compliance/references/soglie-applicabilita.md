@@ -14,37 +14,11 @@ Questa non è una rassegna: è l'elenco delle porte d'ingresso. Per ogni norma, 
 
 ## AI Act — Reg. (UE) 2024/1689
 
-**Scatta se:** immetti sul mercato UE o usi nell'UE un sistema di IA, o un modello per finalità generali. **Non c'è soglia dimensionale**: prende anche due persone in un garage. La soglia vera è *quale ruolo* hai e *in quale categoria di rischio* ricade il sistema.
+**Scatta se:** immetti sul mercato UE o usi nell'UE un sistema di IA, o un modello per finalità generali. **Non c'è soglia dimensionale**: prende anche due persone in un garage.
 
-| Ruolo | Chi sei | Peso degli obblighi |
-| --- | --- | --- |
-| Fornitore (provider) | sviluppi il sistema, o lo immetti sul mercato a tuo nome, o modifichi sostanzialmente quello di un altro | pieno |
-| Utilizzatore (deployer) | usi sotto la tua autorità il sistema di un altro (es. chiami un'API di un LLM dentro il tuo prodotto) | ridotto: trasparenza, uso conforme alle istruzioni, sorveglianza umana se il sistema è ad alto rischio |
+**Qui la tua parte finisce.** Ruolo, categoria di rischio, obblighi, calendario e adempimenti sono di **Aldo**. Tu dici che l'AI Act prende quel progetto — o che non lo prende, se non c'è nessun sistema di IA — e passi la mano. Non stimare una categoria di rischio nemmeno in via di ipotesi: è la classificazione che decide tutto il resto, e darla approssimata fa più danni che tacere.
 
-| Categoria | Cosa la fa scattare | Conseguenza |
-| --- | --- | --- |
-| Pratica vietata | scoring sociale, riconoscimento emozioni sul lavoro o a scuola, scraping massivo di volti, manipolazione | divieto, già in vigore |
-| Alto rischio, Allegato III | il sistema *decide o influenza materialmente* su: selezione e gestione del personale, merito creditizio, accesso a servizi essenziali, istruzione, giustizia, forze dell'ordine, migrazione, infrastrutture critiche | obblighi pesanti (gestione del rischio, dati, documentazione tecnica, log, sorveglianza umana, conformità) |
-| Alto rischio, Allegato I | il sistema di IA è componente di sicurezza di un prodotto già regolato (dispositivi medici, macchine, ascensori, giocattoli…) | obblighi pesanti + procedura di conformità del prodotto |
-| Trasparenza (art. 50) | l'utente interagisce con un sistema di IA; il sistema genera o manipola contenuti (testo, immagini, audio, video) | dichiararlo all'utente; marcare i contenuti sintetici |
-| Rischio minimo | tutto il resto | nessun obbligo specifico |
-
-**Calendario (aggiornato dal Reg. (UE) 2026/1744, "Digital Omnibus on AI", in vigore dal 27 luglio 2026):**
-
-| Data | Cosa |
-| --- | --- |
-| 2 febbraio 2025 | pratiche vietate; obbligo di alfabetizzazione IA del personale |
-| 2 agosto 2025 | modelli per finalità generali (GPAI); governance |
-| 2 agosto 2026 | obblighi di trasparenza dell'art. 50; poteri e sanzioni delle autorità nazionali a regime |
-| 2 dicembre 2027 | alto rischio Allegato III (**rinviato** dal 2 agosto 2026 dal Digital Omnibus) |
-| 2 agosto 2028 | alto rischio Allegato I, prodotti (**rinviato**) |
-
-**Trappole.**
-
-- «Usiamo un LLM» non significa alto rischio. La stragrande maggioranza dei prodotti che chiamano un'API di un modello ricade in *trasparenza* o in *rischio minimo*.
-- Ciò che fa scattare l'Allegato III non è il settore in cui operi, ma la **decisione** che il sistema prende su una persona. Un gestionale HR che archivia CV è fuori; uno che li ordina per punteggio e scarta è dentro.
-- Chi usa un modello di terzi è utilizzatore, non fornitore — a meno che non lo rimarchi a proprio nome o lo modifichi sostanzialmente. Il confine cambia tutto il peso degli obblighi.
-- Il rinvio del Digital Omnibus riguarda **l'alto rischio**, non la trasparenza: quella è in vigore.
+**Trappola.** «Usiamo un LLM» non significa alto rischio. Se ti scappa un'anticipazione, che sia questa e nient'altro: la stragrande maggioranza dei prodotti che chiamano un'API di un modello ricade in trasparenza o in rischio minimo.
 
 ## NIS2 — Dir. (UE) 2022/2555 · Italia: D.lgs. 138/2024 (ACN)
 
