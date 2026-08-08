@@ -1,13 +1,13 @@
 {
   "name": "guardrails",
   "owner": "mlarese",
-  "description": "Modulo BMad Guardrails: sette figure di presidio per lo sviluppo software",
+  "description": "Modulo BMad Guardrails: dieci figure di presidio per lo sviluppo software, incluso WordPress a componenti",
   "plugins": [
     {
       "name": "grl",
       "source": "./src",
-      "description": "Guardrails — privacy e GDPR, sicurezza applicativa, legale e licenze, compliance normativa, qualità visiva della UI, disciplina architetturale del codice, infrastruttura e operatività: sette figure che affiancano il team dentro il ciclo di sviluppo, quando cambiare costa ancora poco. Più grl-web, l'unica skill che produce: landing page e siti, dal brief di conversione al progetto.",
-      "version": "1.2.0",
+      "description": "Guardrails — privacy e GDPR, sicurezza applicativa, legale e licenze, compliance normativa, qualità visiva della UI, disciplina architetturale, infrastruttura, dominio clinico, applicazioni AI e WordPress a componenti: dieci figure che affiancano il team dentro il ciclo di sviluppo. Più grl-web, l'unica skill che produce: landing page e siti.",
+      "version": "1.5.0",
       "author": "mlarese",
       "homepage": "https://github.com/mlarese/bmad-module-guardrails",
       "repository": "https://github.com/mlarese/bmad-module-guardrails",
@@ -20,6 +20,9 @@
         "src/skills/grl-agent-ui-critic",
         "src/skills/grl-agent-architecture",
         "src/skills/grl-agent-ops",
+        "src/skills/grl-agent-health",
+        "src/skills/grl-agent-ai",
+        "src/skills/grl-agent-wordpress",
         "src/skills/grl-profile",
         "src/skills/grl-board",
         "src/skills/grl-setup",
