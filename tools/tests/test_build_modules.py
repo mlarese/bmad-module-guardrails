@@ -345,16 +345,38 @@ class DedicatedGroupModuleTopologyTests(unittest.TestCase):
                 "grl-mdsw",
                 "grl-web",
                 "grl-ads",
+                "grl-revenue-audit",
+                "grl-revenue-plan",
+                "grl-revenue-preflight",
                 "grl-automation",
             ],
         )
 
-    def test_topology_has_eight_unique_derived_repositories(self) -> None:
+    def test_revenue_has_its_own_repository_and_workflows(self) -> None:
+        module = self.by_code["grv"]
+        self.assertEqual(module["repo"], "bmad-module-guardrails-revenue")
+        self.assertEqual(
+            module["skills"],
+            [
+                "grl-agent-revenue",
+                "grl-revenue-audit",
+                "grl-revenue-plan",
+                "grl-revenue-preflight",
+                "grl-automation",
+            ],
+        )
+        agent_codes = {agent["code"] for agent in self.bundle["agents"]}
+        self.assertEqual(
+            bm.workflow_skills(module["skills"], agent_codes),
+            ["grl-revenue-audit", "grl-revenue-plan", "grl-revenue-preflight", "grl-automation"],
+        )
+
+    def test_topology_has_nine_unique_derived_repositories(self) -> None:
         modules = self.topology["modules"]
         self.assertEqual(self.topology["core"]["skills"], ["grl-profile", "grl-board"])
-        self.assertEqual(len(modules), 8)
-        self.assertEqual(len({module["code"] for module in modules}), 8)
-        self.assertEqual(len({module["repo"] for module in modules}), 8)
+        self.assertEqual(len(modules), 9)
+        self.assertEqual(len({module["code"] for module in modules}), 9)
+        self.assertEqual(len({module["repo"] for module in modules}), 9)
 
 
 class GreetingTests(unittest.TestCase):

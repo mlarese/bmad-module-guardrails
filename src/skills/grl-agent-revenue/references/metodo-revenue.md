@@ -16,6 +16,12 @@ Chiedi solo ciò che può cambiare la decisione:
 
 Se mancano dati decisivi, produci scenari “se/allora” invece di una media inventata.
 
+Quando la richiesta chiede un prezzo ma i dati sono incompleti, la sezione
+“Dati mancanti/rischi” deve nominare senza abbreviazioni la data di soggiorno,
+la data di analisi, il pickup, la finestra di prenotazione, l’inventario, i
+segmenti/canali, la durata del soggiorno, cancellazioni/no-show, obiettivo e
+costi rilevanti o costo di acquisizione.
+
 ## Lettura della domanda
 
 Separa:

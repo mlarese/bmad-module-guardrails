@@ -48,9 +48,9 @@ Non aggiungere al README dettagli estesi su installazione, severità, configuraz
 moduli, build/publish o razionale architetturale. Questi contenuti appartengono a `CLAUDE.md`,
 `docs/module-plan.md` e ai manifesti in `src/`.
 
-## Gli otto moduli derivati si rigenerano e si ripubblicano nello stesso turno
+## I nove moduli derivati si rigenerano e si ripubblicano nello stesso turno
 
-Otto repository derivano da questo e li produce `tools/build_modules.py` leggendo
+Nove repository derivano da questo e li produce `tools/build_modules.py` leggendo
 `src/module-topology.yaml`. Questo repository è la fonte unica delle skill.
 
 | Codice | Repository | Contiene |
@@ -61,6 +61,7 @@ Otto repository derivano da questo e li produce `tools/build_modules.py` leggend
 | `grh` | `mlarese/bmad-module-guardrails-health` | Livia, `grl-mdsw`, `grl-automation` |
 | `grw` | `mlarese/bmad-module-guardrails-web` | Iris, Nora, Dalia, `grl-web`, `grl-ads`, `grl-automation` |
 | `gpm` | `mlarese/bmad-module-guardrails-paid-media` | Vera, Aldo, Iris, Nora, Dalia, `grl-ads`, `grl-automation` |
+| `grv` | `mlarese/bmad-module-guardrails-revenue` | Rhea, `grl-revenue-audit`, `grl-revenue-plan`, `grl-revenue-preflight`, `grl-automation` |
 | `gau` | `mlarese/bmad-module-guardrails-automation` | tutte le quattordici figure, workflow di dominio e `grl-automation` |
 | `gwp` | `mlarese/bmad-module-guardrails-wordpress` | Milo, `grl-wordpress-delivery`, `grl-automation` |
 
@@ -72,7 +73,7 @@ diverse da quelle della fonte, e nessuno se ne accorge finché non le esegue.
 ```bash
 python3 -m pytest tools/tests/                              # test della build
 python3 tools/build_modules.py                              # rigenera dist/
-python3 tools/publish_modules.py -m "<messaggio di commit>"  # commit e push sugli otto repo
+python3 tools/publish_modules.py -m "<messaggio di commit>"  # commit e push sui nove repo
 ```
 
 `publish_modules.py` è idempotente: salta i moduli senza modifiche, crea il repository se manca e

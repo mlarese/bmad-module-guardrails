@@ -3,8 +3,8 @@ title: 'Module Plan — Guardrails'
 status: 'complete'
 module_name: 'Guardrails'
 module_code: 'grl'
-module_description: 'Figure di presidio che affiancano il team di sviluppo su privacy/GDPR, sicurezza applicativa, legale e licenze, compliance normativa, fisco e finanza agevolata, disciplina architetturale, qualità visiva della UI, SEO e implementazione WordPress a componenti'
-architecture: 'compatibility bundle grl with fourteen agents, nine service workflows, live research gates, shared memory, and a staged topic-module topology'
+module_description: 'Figure di presidio che affiancano il team di sviluppo su privacy/GDPR, sicurezza applicativa, legale e licenze, compliance normativa, fisco e finanza agevolata, revenue management, disciplina architetturale, qualità visiva della UI, SEO e implementazione WordPress a componenti'
+architecture: 'compatibility bundle grl with fourteen agents, twelve service workflows, live research gates, shared memory, and a staged topic-module topology'
 standalone: false
 expands_module: 'bmm'
 skills_planned:
@@ -49,6 +49,7 @@ mantenerlo come superficie compatibile e introdurre confini logici per una migra
 | `grh` | Health | clinical informatics e qualificazione MDR |
 | `grw` | Web Experience | SEO, UI critic e web |
 | `gpm` | Paid Media | Google Ads, ADV, tracking, consenso e preflight |
+| `grv` | Revenue | Rhea, audit dati e prezzi, scenari di pricing, preflight PMS/Channel Manager |
 | `gau` | Automation | orchestrazione cross-domain, dry-run, approvazioni e rollback |
 | `gwp` | WordPress | Gutenberg, ACF, componenti, template e Media Library |
 
@@ -59,7 +60,7 @@ vengono letti direttamente dall'installer; non serve una skill separata di setup
 
 L'estrazione è stata fatta, con una scelta che cambia l'addendum precedente: le skill **vengono**
 duplicate, ma non a mano. `tools/build_modules.py` legge la topologia e genera in `dist/` un
-repository per ciascuno degli otto moduli tematici. Questo repository resta la fonte unica; i
+repository per ciascuno dei nove moduli tematici. Questo repository resta la fonte unica; i
 derivati si rigenerano.
 
 Cosa è stato deciso, e perché:
@@ -94,6 +95,11 @@ un calcolatore deterministico senza dipendenze esterne, casi di eval, trigger di
 revisione `bmad-review` su agente e ricerca; la pubblicazione verso sistemi esterni resta sempre
 un gate non operativo.
 
+La capability viene anche estratta nel repository dedicato `grv`
+(`bmad-module-guardrails-revenue`), così Rhea e i tre workflow revenue possono essere installati
+senza portarsi dietro le altre figure di dominio. Il bundle completo e il modulo Automation li
+mantengono comunque disponibili come superfici più ampie.
+
 ## Vision
 
 <!-- What this module does, who it's for, and why it matters -->
@@ -118,7 +124,7 @@ compliance normativa, fisco e finanza agevolata, disciplina architetturale, SEO 
 
 ## Architecture
 
-**Stato corrente: 14 agenti distinti + 9 workflow di servizio, senza orchestratore proprietario,
+**Stato corrente: 14 agenti distinti + 12 workflow di servizio, senza orchestratore proprietario,
 con ricerca live delegata a Deep Recon, doppio gate bmad-review e memoria condivisa di modulo.**
 `grl-web` completa il modulo come skill operativa.
 
@@ -299,7 +305,7 @@ nella stanza di default. Quindi:
 
 ## Skills
 
-Ventitré skill: quattordici agenti (le figure) e nove workflow di servizio.
+Ventisei skill: quattordici agenti (le figure) e dodici workflow di servizio.
 
 ### Regole comuni a tutte le quattordici figure
 

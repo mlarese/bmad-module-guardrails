@@ -1,0 +1,24 @@
+{
+  "cases": [
+    {
+      "id": "audit-price-inputs-blocked",
+      "input": "Fai un audit revenue: l'hotel è al 72% di occupazione e ADR 145 euro. Dimmi se posso alzare il prezzo domani.",
+      "rubric": [
+        "separa dati osservati, ipotesi e verdetto e non tratta occupazione e ADR come prova sufficiente per alzare il prezzo",
+        "nomina data di soggiorno, pickup, booking window, inventario, segmenti/canali, cancellazioni/no-show, obiettivo e costi rilevanti come dati mancanti",
+        "restituisce EVIDENZA_INSUFFICIENTE o blocked e propone una verifica o uno scenario condizionato senza pubblicare una tariffa"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "audit-kpi-reproducible",
+      "input": "Verifica questi KPI del 15 agosto: 100 camere disponibili, 70 vendute, 9.000 euro camere, 10.000 totali, 900 acquisizione e 6.000 costi operativi.",
+      "rubric": [
+        "calcola OCC 70%, ADR 128,57 euro, RevPAR 90 euro, TRevPAR 100 euro, NRevPAR 81 euro e GopPAR 40 euro",
+        "mostra formule o script equivalenti e dichiara periodo, valuta, arrotondamento, perimetro omogeneo e natura consuntiva",
+        "segnala che il ricavo totale non deve duplicare il ricavo camere e distingue il calcolo da una decisione di prezzo"
+      ],
+      "state_prefix": null
+    }
+  ]
+}

@@ -2,6 +2,10 @@
 
 Questa è la sintesi operativa dei documenti locali `docs/supporto/quoprofit/Nuovo RevD R25042024.docx`, `RevD Specifiche Calcoli 18_09_2024.docx`, `CALCOLI SIMULATORE.docx` e `Funzionalità Quoprofit.docx`. Sono requisiti e regole proprietarie del progetto, non standard di revenue management.
 
+Ogni risposta che presenta MUP o MOL deve ripetere il confine: sono regole
+interne QuoProfit/RevD, non standard universali e non dimostrano da sole che
+il prezzo sia ottimale o accettato dal mercato.
+
 ## Perimetro
 
 QuoProfit/RevD è pensato come piattaforma per strutture ricettive. Gestisce anagrafica, unità abitative (UA), categorie e sigle, unità madre/derivate, aperture e chiusure, eventi, listini, BAR, costi, trattamenti, extra, prenotazioni, benchmark, report, simulatore e pubblicazione verso PMS/Channel Manager.

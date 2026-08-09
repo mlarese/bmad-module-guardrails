@@ -1,0 +1,8 @@
+[
+  { "query": "grl-revenue-preflight", "should_trigger": true },
+  { "query": "verifica la pubblicazione delle tariffe sul Channel Manager", "should_trigger": true },
+  { "query": "prepara un dry-run PMS con mapping e rollback", "should_trigger": true },
+  { "query": "fai l'audit dei KPI dell'hotel", "should_trigger": false },
+  { "query": "costruisci scenari di prezzo e domanda", "should_trigger": false },
+  { "query": "il PMS è lento e va in timeout", "should_trigger": false }
+]

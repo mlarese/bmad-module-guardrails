@@ -7,7 +7,7 @@
 
 Perché serve
 ------------
-Il bundle `grl` installa tredici figure e nove workflow in un colpo solo. Chi vuole
+Il bundle `grl` installa quattordici figure e dodici workflow in un colpo solo. Chi vuole
 solo la governance normativa, o solo il presidio ingegneristico, non ha motivo di
 portarsi le altre dieci figure. La soluzione è un repository per area — ma scritto a
 mano diventerebbe subito divergente dal bundle.
@@ -59,7 +59,7 @@ except ImportError:  # pragma: no cover - dipende dall'ambiente, non dalla logic
 # viene copiato byte per byte.
 TEXT_SUFFIXES = {".md", ".yaml", ".yml", ".toml", ".csv", ".json", ".py", ".txt", ".html"}
 
-# Fixture di valutazione aggiunti nello stesso turno ma non ancora presenti
+# File di skill ed eval aggiunti nello stesso turno ma non ancora presenti
 # nell'indice Git gestito dal sandbox. Restano espliciti per non copiare cache o
 # report di eval non destinati ai repository derivati; dopo il commit diventano
 # normali risultati di `git ls-files` e l'allowlist è innocua.
@@ -67,6 +67,18 @@ SOURCE_AUXILIARY_FILES = {
     "src/skills/grl-ads/evals/fixtures/period-b-incomparable.csv",
     "src/skills/grl-agent-ads/evals/fixtures/period-a.csv",
     "src/skills/grl-agent-ads/evals/fixtures/period-b-incomparable.csv",
+    "src/skills/grl-revenue-audit/SKILL.md",
+    "src/skills/grl-revenue-audit/evals/README.md",
+    "src/skills/grl-revenue-audit/evals/cases.json",
+    "src/skills/grl-revenue-audit/evals/triggers.json",
+    "src/skills/grl-revenue-plan/SKILL.md",
+    "src/skills/grl-revenue-plan/evals/README.md",
+    "src/skills/grl-revenue-plan/evals/cases.json",
+    "src/skills/grl-revenue-plan/evals/triggers.json",
+    "src/skills/grl-revenue-preflight/SKILL.md",
+    "src/skills/grl-revenue-preflight/evals/README.md",
+    "src/skills/grl-revenue-preflight/evals/cases.json",
+    "src/skills/grl-revenue-preflight/evals/triggers.json",
 }
 
 # I file del collegio che portano il roster e i confini fra figure. Sono gli unici
@@ -74,12 +86,12 @@ SOURCE_AUXILIARY_FILES = {
 # significato.
 BOARD_ROSTER_FILES = {"SKILL.md", "selection.md"}
 
-# Il bundle conta tredici figure e lo dice ovunque nei testi del core. In un modulo
+# Il bundle conta quattordici figure e lo dice ovunque nei testi del core. In un modulo
 # tematico quel numero è falso, e un numero falso in una skill è un'istruzione
 # sbagliata. Con più figure si sostituisce il numerale; con una sola si toglie e
 # resta il plurale generico, che è impreciso ma non falso — riscrivere l'accordo
 # verbale di frasi arbitrarie non è automatizzabile.
-NUMERALS = {2: "due", 3: "tre", 4: "quattro", 5: "cinque", 6: "sei", 7: "sette"}
+NUMERALS = {2: "due", 3: "tre", 4: "quattro", 5: "cinque", 6: "sei", 7: "sette", 14: "quattordici"}
 
 # Nota appesa a ogni figura del modulo: le tabelle di handoff citano colleghe che
 # qui non sono installate, e senza questa riga l'agente rimanda a un vuoto.
@@ -158,7 +170,7 @@ def core_renames(core_skills: list[str], code: str) -> dict[str, str]:
 def adapt_counts(text: str, count: int) -> str:
     """Riporta al numero reale di figure i conteggi scritti per il bundle.
 
-    Tocca solo le costruzioni in cui `tredici` (o il vecchio `dodici`) è accostato alle
+    Tocca solo le costruzioni in cui `quattordici` (o i vecchi `tredici` e `dodici`) è accostato alle
     figure o alle loro chiavi di config: «tredici documenti» dentro un esempio, o
     «tredici pagine» in una reference, restano quello che sono.
     """
@@ -173,9 +185,9 @@ def adapt_counts(text: str, count: int) -> str:
             return f"{numeral}{space}{noun}"
         return noun
 
-    text = re.sub(r"una\s+delle\s+(?:dodici|tredici)\s+figure", "una delle figure", text)
-    text = re.sub(r"tutte\s+e\s+(?:dodici|tredici)", replace_all_of, text)
-    text = re.sub(r"\b(?:dodici|tredici)(\s+)(figure|chiavi)", replace_noun, text)
+    text = re.sub(r"una\s+delle\s+(?:dodici|tredici|quattordici)\s+figure", "una delle figure", text)
+    text = re.sub(r"tutte\s+e\s+(?:dodici|tredici|quattordici)", replace_all_of, text)
+    text = re.sub(r"\b(?:dodici|tredici|quattordici)(\s+)(figure|chiavi)", replace_noun, text)
     return text
 
 

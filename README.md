@@ -45,6 +45,9 @@ entrano solo sui segnali e sulle competenze necessarie.
 | `grl-web` | Per creare landing e siti, riprendere mockup o diagnosticare una pagina | Parte dal brief di conversione e porta il risultato verso review, accessibilità, SEO e consegna. |
 | `grl-wordpress-delivery` | Per creare, riprendere, migrare o verificare una consegna WordPress | Coordina Milo e conduce la consegna fino al release gate di `grl-board`. |
 | `grl-ads` | Per audit, piano, tracking, ottimizzazione e preflight Google Ads/ADV | Prepara change set controllabili e applica solo con scope, approvazione, limite e rollback. |
+| `grl-revenue-audit` | Per verificare export, qualità dati, KPI e decisioni revenue | Produce un audit read-only con formule, fonti, blocker e dati mancanti. |
+| `grl-revenue-plan` | Per costruire scenari di pricing, domanda e profitto | Separa floor, mercato e domanda, con trigger di monitoraggio senza pubblicare tariffe. |
+| `grl-revenue-preflight` | Prima di inviare prezzi a PMS o Channel Manager | Verifica contratto, mapping, dry-run, response, riconciliazione, idempotenza e rollback. |
 | `grl-automation` | Per processi ripetitivi fra sviluppo, legale, fisco, design, medicina, paid media e revenue management | Instrada il lavoro da read-only a dry-run ed esecuzione osservabile, separando approvazioni e rollback. |
 
 Il repository contiene il bundle completo; i moduli tematici derivati condividono gli stessi agenti

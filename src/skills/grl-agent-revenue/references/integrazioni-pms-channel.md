@@ -36,14 +36,20 @@ Se la disponibilità arriva dal PMS, non ricalcolarla come se fosse interna. Dis
 
 Prima dell’invio verifica:
 
-1. property ID, room type/UA e rate plan esistono nel canale, con evidenza ottenuta in sola lettura;
-2. il modello è per-data o length-of-stay e non viene mischiato senza contratto;
-3. occupazione, trattamento, extra ospiti, tasse e fee hanno semantica dichiarata;
-4. disponibilità, restrizioni e prezzi coprono le stesse date;
-5. aggiornamento delta/overlay/remove non cancella involontariamente altre occupazioni o piani;
-6. valuta, timezone, arrotondamento e prezzo mostrato sono coerenti;
-7. warning/errori, latenza, successo e riconciliazione vengono registrati;
-8. esiste un rollback o un modo per ripristinare l’ultimo set valido.
+1. contratto/API, versione PMS e Channel Manager, autenticazione, endpoint, schema, limiti e frequenza sono noti;
+2. property ID, room type/UA e rate plan esistono nel canale, con evidenza ottenuta in sola lettura;
+3. il modello è per-data o length-of-stay (LOS) e non viene mischiato senza contratto;
+4. occupazione, trattamento, extra ospiti, tasse e fee hanno semantica dichiarata;
+5. disponibilità, restrizioni e prezzi coprono le stesse date;
+6. aggiornamento delta/overlay/remove non cancella involontariamente altre occupazioni o piani;
+7. valuta, timezone, arrotondamento e prezzo mostrato sono coerenti;
+8. request, response, warning/errori, latenza, successo, logging, monitoraggio e riconciliazione vengono registrati;
+9. il test verifica anche idempotenza — replay dello stesso change set senza duplicati o effetti collaterali — e rollback verso l’ultimo set valido.
+
+Il preflight deve restare read-only o in sandbox/dry-run: controlla mapping,
+semantica per-data/LOS, response, riconciliazione, idempotenza e rollback senza
+inviare tariffe reali. Se una prova non è disponibile, marca il campo `non
+noto` invece di inferirlo dal nome del prodotto.
 
 Se uno dei controlli è `non noto`, non inviare il set: restituisci `NO_GO` o `EVIDENZA_INSUFFICIENTE`, assegna un owner e indica la prova necessaria. L’autorizzazione dell’utente da sola non sostituisce un contratto o un test tecnico.
 

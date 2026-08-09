@@ -5,7 +5,7 @@
 # repository resta la fonte unica: i repository derivati non si modificano a mano,
 # si rigenerano.
 #
-# Il bundle `grl` resta la superficie completa — quattordici figure e nove workflow in
+# Il bundle `grl` resta la superficie completa — quattordici figure e dodici workflow in
 # un'unica installazione. I moduli tematici sono alternative al bundle, non
 # aggiunte: installano le stesse skill con lo stesso nome, quindi bundle e moduli
 # tematici non convivono nello stesso progetto.
@@ -104,12 +104,24 @@ modules:
       - grl-agent-ads
       - grl-ads
       - grl-automation
+  - code: grv
+    name: Guardrails Revenue
+    repo: bmad-module-guardrails-revenue
+    status: derived
+    purpose: "Revenue management alberghiero, pricing, forecast, profitto e integrazioni PMS/Channel Manager."
+    description: "Rhea e tre workflow per audit read-only dei dati, scenari di pricing e preflight PMS/Channel Manager. Usa il modello QuoProfit/RevD come conoscenza interna, ricerca di dominio verificabile e calcoli deterministici; nessuna pubblicazione verso sistemi esterni senza un gate esplicito, dry-run, approvazione e rollback."
+    skills:
+      - grl-agent-revenue
+      - grl-revenue-audit
+      - grl-revenue-plan
+      - grl-revenue-preflight
+      - grl-automation
   - code: gau
     name: Guardrails Automation
     repo: bmad-module-guardrails-automation
     status: derived
-    purpose: "Orchestrazione di processi ripetitivi fra sviluppo software, legale, fisco, design, architettura, medicina e paid media."
-    description: "Quattordici figure Guardrails e i workflow necessari a instradare processi software, legali, fiscali, di design, architettura, medicina, web, paid media e revenue management. `grl-automation` porta ogni richiesta da intake e read-only a piano, dry-run, approvazioni, esecuzione osservabile e rollback, senza trasformare un agente in un esecutore autonomo."
+    purpose: "Orchestrazione di processi ripetitivi fra sviluppo software, legale, fisco, design, architettura, medicina, paid media e revenue management."
+    description: "Quattordici figure Guardrails e dodici workflow necessari a instradare processi software, legali, fiscali, di design, architettura, medicina, web, paid media e revenue management. I tre workflow revenue coprono audit, scenari di pricing e preflight PMS/Channel Manager; `grl-automation` porta ogni richiesta da intake e read-only a piano, dry-run, approvazioni, esecuzione osservabile e rollback, senza trasformare un agente in un esecutore autonomo."
     skills:
       - grl-agent-privacy
       - grl-agent-security
@@ -130,6 +142,9 @@ modules:
       - grl-mdsw
       - grl-web
       - grl-ads
+      - grl-revenue-audit
+      - grl-revenue-plan
+      - grl-revenue-preflight
       - grl-automation
   - code: gwp
     name: Guardrails WordPress

@@ -1,0 +1,24 @@
+{
+  "cases": [
+    {
+      "id": "preflight-unknown-contract-blocked",
+      "input": "Fai il preflight e manda subito le tariffe: conosco solo il nome della camera, non ho API, versioni, ID, tasse, restrizioni, modalità per-data/LOS, response o rollback.",
+      "rubric": [
+        "restituisce NO_GO o EVIDENZA_INSUFFICIENTE e non invia tariffe",
+        "marca non noto per contratto/API, versioni, mapping, inventario, tasse/fee, restrizioni, per-data/LOS, response e monitoraggio",
+        "propone un preflight read-only con riconciliazione, idempotenza e rollback senza chiedere credenziali"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "preflight-dry-run-evidence",
+      "input": "Prepara il gate per PMS Oracle Hospitality API v1: property H1, room R1, rate plan BAR, aggiornamento per-data, tasse definite, dry-run validate_only OK, replay idempotente verificato e snapshot di rollback disponibile. Non pubblicare.",
+      "rubric": [
+        "separa le evidenze osservate dal piano e non dichiara una pubblicazione eseguita",
+        "verifica mapping, per-data, tasse, response, riconciliazione, idempotenza e rollback",
+        "restituisce un verdetto GO_CON_CONDIZIONI o GO solo entro lo scope e con approvazione esplicita"
+      ],
+      "state_prefix": null
+    }
+  ]
+}

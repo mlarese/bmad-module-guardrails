@@ -9,8 +9,8 @@
 
 code: grl
 name: Guardrails
-description: "Quattordici figure di presidio — privacy e GDPR, sicurezza applicativa, legale e licenze, compliance normativa, fisco e finanza agevolata, qualità visiva della UI, disciplina architetturale del codice, infrastruttura e operatività, dominio clinico del software sanitario, impianto delle applicazioni che usano modelli linguistici, architettura WordPress a componenti, SEO, media buying/ADV e revenue management alberghiero — che affiancano il team dentro il ciclo di sviluppo, quando cambiare costa ancora poco. Include workflow di ricerca live per gli aggiornamenti legali e fiscali, `grl-web` per landing page e siti, `grl-ads` per Google Ads e advertising e `grl-automation` per orchestrare attività ripetibili con dry-run, approvazioni e rollback."
-module_version: 1.22.0
+description: "Quattordici figure di presidio — privacy e GDPR, sicurezza applicativa, legale e licenze, compliance normativa, fisco e finanza agevolata, qualità visiva della UI, disciplina architetturale del codice, infrastruttura e operatività, dominio clinico del software sanitario, impianto delle applicazioni che usano modelli linguistici, architettura WordPress a componenti, SEO, media buying/ADV e revenue management alberghiero — che affiancano il team dentro il ciclo di sviluppo, quando cambiare costa ancora poco. Include workflow di ricerca live per gli aggiornamenti legali e fiscali, `grl-web` per landing page e siti, `grl-ads` per Google Ads e advertising, tre workflow revenue per audit, pricing e preflight PMS e `grl-automation` per orchestrare attività ripetibili con dry-run, approvazioni e rollback."
+module_version: 1.23.0
 default_selected: false
 
 module_greeting: >
@@ -30,6 +30,8 @@ module_greeting: >
   guardare alle figure. `grl-wordpress-delivery` coordina creazione, ripresa, migrazione
   e verifica di un sito WordPress fino al release gate di `grl-board`.
   `grl-ads` coordina audit, piano, tracking, preflight e ottimizzazione delle campagne;
+  `grl-revenue-audit`, `grl-revenue-plan` e `grl-revenue-preflight` presidiano invece dati,
+  scenari di pricing e gate tecnico PMS/Channel Manager;
   `grl-automation` instrada invece i lavori multidisciplinari e li porta da read-only a
   dry-run e applicazione solo con approvazione.
   `grl-legal-updates` e `grl-fiscal-updates` recuperano invece aggiornamenti normativi
@@ -40,7 +42,7 @@ module_greeting: >
 # (_bmad/memory/grl-shared/project-profile.md), non in config — il profilo cambia
 # da progetto a progetto, la config è unica per installazione.
 #
-# Il modulo si installa sempre intero: quattordici figure e nove workflow, nessuna
+# Il modulo si installa sempre intero: quattordici figure e dodici workflow, nessuna
 # selezione. La severità si deriva dalla criticità dichiarata nel profilo di progetto.
 
 # Nessuna chiave `directories`: la cartella della memoria condivisa

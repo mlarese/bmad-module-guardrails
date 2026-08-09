@@ -1,0 +1,8 @@
+[
+  { "query": "grl-revenue-plan", "should_trigger": true },
+  { "query": "prepara un piano pricing con scenari e trigger", "should_trigger": true },
+  { "query": "che prezzo consigli e come monitoro la domanda?", "should_trigger": true },
+  { "query": "fai un audit del mio export PMS", "should_trigger": false },
+  { "query": "verifica il mapping e fai un dry-run del Channel Manager", "should_trigger": false },
+  { "query": "calcola soltanto il RevPAR", "should_trigger": false }
+]

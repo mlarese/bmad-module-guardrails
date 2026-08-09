@@ -1,0 +1,8 @@
+[
+  { "query": "grl-revenue-audit", "should_trigger": true },
+  { "query": "fai un audit dei KPI e del mio export prenotazioni", "should_trigger": true },
+  { "query": "controlla se i dati revenue dell'hotel sono affidabili", "should_trigger": true },
+  { "query": "prepara una tariffa per domani", "should_trigger": false },
+  { "query": "fai il preflight PMS prima di pubblicare", "should_trigger": false },
+  { "query": "scrivi una landing per l'hotel", "should_trigger": false }
+]

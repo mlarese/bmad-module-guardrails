@@ -1,0 +1,24 @@
+{
+  "cases": [
+    {
+      "id": "plan-scenarios-from-audit",
+      "input": "Dall'audit del mio hotel prepara un piano per il 20 agosto: il MUP è 120 euro, pickup forte nelle ultime 48 ore, 18 camere disponibili e competitive set comparabile a 150 euro. Non pubblicare nulla.",
+      "rubric": [
+        "separa floor economico, base di mercato e domanda prevista e tratta MUP come regola interna QuoProfit/RevD",
+        "propone scenari condizionati con trigger, durata, segmento o canale e metrica di monitoraggio",
+        "non invia tariffe e indica il passaggio successivo al preflight PMS/Channel Manager"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "plan-missing-demand-data",
+      "input": "Consigliami il prezzo per domani: ho solo ADR 145 euro e occupazione 72%, senza data di soggiorno, pickup, disponibilità o canale.",
+      "rubric": [
+        "non produce un prezzo finale come se i dati fossero sufficienti",
+        "elenca i dati decisivi mancanti e mantiene lo stato blocked o EVIDENZA_INSUFFICIENTE",
+        "può proporre scenari se/allora ma distingue osservazioni, ipotesi e raccomandazione"
+      ],
+      "state_prefix": null
+    }
+  ]
+}

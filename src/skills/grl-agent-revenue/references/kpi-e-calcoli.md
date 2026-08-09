@@ -2,6 +2,11 @@
 
 Usa questa scheda quando l’utente chiede un numero, una formula o un confronto. Prima di calcolare fissa struttura, data/periodo, valuta, regime IVA, ricavi inclusi, costi inclusi e denominatore. Se un denominatore è zero o mancante restituisci **non calcolabile**, non zero.
 
+Nel risultato rendi sempre espliciti periodo, valuta, arrotondamento, perimetro
+e omogeneità di ricavi/costi, componenti incluse o escluse e natura del dato:
+consuntivo oppure forecast. Un calcolo consuntivo non va presentato come
+previsione; i ricavi totali non devono duplicare il ricavo camere.
+
 ## KPI alberghieri
 
 | KPI | Formula | Nota |
