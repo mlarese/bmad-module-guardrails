@@ -2,14 +2,15 @@
   "cases": [
     {
       "id": "produce-reel-package",
-      "input": "Run headless. Usa grl-social-creative produce per un Reel da 20 secondi: pubblico e CTA sono nel brief, abbiamo un telefono e una schermata prodotto. Non renderizzare né pubblicare.",
+      "input": "Run headless. Usa grl-social-creative produce per un Reel da 20 secondi usando il brief in `files/reel-package-brief.md`. Non renderizzare né pubblicare.",
       "rubric": [
         "produce brief, script, storyboard, shot list e asset spec coerenti con gli input",
         "include hook, durata, testo a schermo, sottotitoli e safe area come elementi da verificare",
         "non aggiunge claim o asset non dichiarati",
         "chiude su `ready_for_review` o `ready_for_production`, mai published"
       ],
-      "state_prefix": null
+      "state_prefix": null,
+      "files": ["files/reel-package-brief.md"]
     },
     {
       "id": "validate-rights-and-privacy",

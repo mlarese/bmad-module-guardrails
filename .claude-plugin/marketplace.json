@@ -1,13 +1,13 @@
 {
   "name": "guardrails",
   "owner": "mlarese",
-  "description": "Modulo BMad Guardrails: sedici figure e quattordici workflow per sviluppo software, legale, fisco, design, architettura, medicina, revenue management, SEO, social/content, video, Google Ads e automazioni controllate",
+  "description": "Modulo BMad Guardrails: diciassette figure e quattordici workflow per sviluppo software, database, legale, fisco, design, architettura, medicina, revenue management, SEO, social/content, video, Google Ads e automazioni controllate",
   "plugins": [
     {
       "name": "grl",
       "source": "./src",
-      "description": "Guardrails — sedici figure per privacy, sicurezza, legale, compliance, fisco, UI, architettura, ops, sanità, AI, WordPress, SEO, paid media, social/content, creative video e revenue management. Include quattordici workflow, tra cui ricerca live, siti, social, pacchetti creativi, Google Ads, automazione con dry-run e consegna WordPress fino al release gate.",
-      "version": "1.24.0",
+      "description": "Guardrails — diciassette figure per privacy, sicurezza, legale, compliance, fisco, UI, architettura del codice e dei database, ops, sanità, AI, WordPress, SEO, paid media, social/content, creative video e revenue management. Include quattordici workflow, tra cui ricerca live, siti, social, pacchetti creativi, Google Ads, automazione con dry-run e consegna WordPress fino al release gate.",
+      "version": "1.25.0",
       "author": "mlarese",
       "homepage": "https://github.com/mlarese/bmad-module-guardrails",
       "repository": "https://github.com/mlarese/bmad-module-guardrails",
@@ -20,6 +20,7 @@
         "src/skills/grl-agent-fiscal",
         "src/skills/grl-agent-ui-critic",
         "src/skills/grl-agent-architecture",
+        "src/skills/grl-agent-database",
         "src/skills/grl-agent-ops",
         "src/skills/grl-agent-health",
         "src/skills/grl-agent-ai",

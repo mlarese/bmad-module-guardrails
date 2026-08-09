@@ -388,6 +388,13 @@ class DedicatedGroupModuleTopologyTests(unittest.TestCase):
         self.assertEqual(len({module["code"] for module in modules}), 9)
         self.assertEqual(len({module["repo"] for module in modules}), 9)
 
+    def test_every_derived_module_has_an_english_about_copy(self) -> None:
+        for module in self.topology["modules"]:
+            about = module["about"]
+            self.assertLessEqual(len(about), 350)
+            self.assertIn("review agent", about)
+            self.assertIn("controlled BMad workflows", about)
+
 
 class GreetingTests(unittest.TestCase):
     module = {"name": "Guardrails Fiscal", "code": "grf"}

@@ -1,0 +1,23 @@
+[
+  { "query": "quale database scelgo per questo workload transazionale multi-tenant?", "should_trigger": true },
+  { "query": "PostgreSQL o MongoDB per il modello dati degli ordini?", "should_trigger": true },
+  { "query": "come progetto schema, indici e transazioni per questa feature?", "should_trigger": true },
+  { "query": "Oracle 19c verso PostgreSQL: come faccio una migrazione senza downtime?", "should_trigger": true },
+  { "query": "Redis deve essere la fonte di verità o solo cache?", "should_trigger": true },
+  { "query": "pgvector, Qdrant, Milvus o Pinecone per ricerca ibrida?", "should_trigger": true },
+  { "query": "la query è lenta: leggi il piano e dimmi quale indice serve", "should_trigger": true },
+  { "query": "chi interviene nella fase BMad di architettura quando si disegna il database?", "should_trigger": true },
+  { "query": "come progetto RPO, RTO, replica, backup e restore del database?", "should_trigger": true },
+  { "query": "quale database innovativo è oggi migliore per questo carico? Cerca live", "should_trigger": true },
+
+  { "query": "ci serve Kubernetes per fare il deploy dell'applicazione?", "should_trigger": false },
+  { "query": "come configuro autenticazione, ruoli e segreti per il database?", "should_trigger": false },
+  { "query": "quale base giuridica abbiamo per conservare i dati dei clienti?", "should_trigger": false },
+  { "query": "il modello RAG deve usare LangGraph o l'SDK?", "should_trigger": false },
+  { "query": "la licenza commerciale di Oracle e il DPA sono accettabili?", "should_trigger": false },
+  { "query": "il controller importa direttamente il repository o serve un service layer?", "should_trigger": false },
+  { "query": "come modello la dose e le codifiche cliniche del paziente?", "should_trigger": false },
+  { "query": "la UI sembra generica: quali colori e font devo usare?", "should_trigger": false },
+  { "query": "quale RAM e quale CPU devo mettere sulla VM?", "should_trigger": false },
+  { "query": "come testo l'interfaccia mobile con Playwright?", "should_trigger": false }
+]

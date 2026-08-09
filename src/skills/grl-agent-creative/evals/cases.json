@@ -2,14 +2,15 @@
   "cases": [
     {
       "id": "video-brief-producible",
-      "input": "Run headless. Prepara un Reel di 20 secondi per mostrare una funzione già descritta nel brief. Il pubblico è un piccolo imprenditore italiano, il CTA è provare la demo e abbiamo un telefono, una persona e una schermata del prodotto.",
+      "input": "Run headless. Prepara un Reel di 20 secondi usando la funzione descritta in `files/reel-feature-brief.md`.",
       "rubric": [
         "produce hook, script, storyboard, shot list e specifiche coerenti con 20 secondi e con gli asset dichiarati",
         "rende il messaggio comprensibile senza audio e include testo a schermo o sottotitoli",
         "non inventa benefici oltre la funzione descritta",
         "non dichiara di aver montato o pubblicato il Reel"
       ],
-      "state_prefix": null
+      "state_prefix": null,
+      "files": ["files/reel-feature-brief.md"]
     },
     {
       "id": "missing-format-and-rights",

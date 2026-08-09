@@ -9,13 +9,13 @@
 
 code: grl
 name: Guardrails
-description: "Sedici figure di presidio — privacy e GDPR, sicurezza applicativa, legale e licenze, compliance normativa, fisco e finanza agevolata, qualità visiva della UI, disciplina architetturale del codice, infrastruttura e operatività, dominio clinico del software sanitario, impianto delle applicazioni che usano modelli linguistici, architettura WordPress a componenti, SEO, media buying/ADV, social e contenuti, creative direction/video e revenue management alberghiero — che affiancano il team dentro il ciclo di sviluppo, quando cambiare costa ancora poco. Include workflow di ricerca live per gli aggiornamenti legali e fiscali, `grl-web` per landing page e siti, `grl-ads` per Google Ads e advertising, `grl-social` per strategia e contenuti organici, `grl-social-creative` per design e video short-form, tre workflow revenue per audit, pricing e preflight PMS e `grl-automation` per orchestrare attività ripetibili con dry-run, approvazioni e rollback."
-module_version: 1.24.0
+description: "Diciassette figure di presidio — privacy e GDPR, sicurezza applicativa, legale e licenze, compliance normativa, fisco e finanza agevolata, qualità visiva della UI, disciplina architetturale del codice, design e architettura dei database, infrastruttura e operatività, dominio clinico del software sanitario, impianto delle applicazioni che usano modelli linguistici, architettura WordPress a componenti, SEO, media buying/ADV, social e contenuti, creative direction/video e revenue management alberghiero — che affiancano il team dentro il ciclo di sviluppo, quando cambiare costa ancora poco. Include workflow di ricerca live per gli aggiornamenti legali e fiscali, `grl-web` per landing page e siti, `grl-ads` per Google Ads e advertising, `grl-social` per strategia e contenuti organici, `grl-social-creative` per design e video short-form, tre workflow revenue per audit, pricing e preflight PMS e `grl-automation` per orchestrare attività ripetibili con dry-run, approvazioni e rollback."
+module_version: 1.25.0
 default_selected: false
 
 module_greeting: >
-  Guardrails è installato: sedici figure di presidio — Vera (privacy), Kai (sicurezza),
-  Aldo (legale), Nils (compliance), Marta (fisco e finanza agevolata), Iris (design), Otto (architettura), Bruno (ops),
+  Guardrails è installato: diciassette figure di presidio — Vera (privacy), Kai (sicurezza),
+  Aldo (legale), Nils (compliance), Marta (fisco e finanza agevolata), Iris (design), Otto (architettura), Dario (database), Bruno (ops),
   Livia (dominio clinico), Enzo (applicazioni con AI), Milo (WordPress a componenti), Nora (SEO), Dalia (media buying e ADV),
   Sofia (social e contenuti), Marco (creative e social video) e Rhea (revenue management) —
   entrano nel roster e si possono convocare per nome.
@@ -45,7 +45,7 @@ module_greeting: >
 # (_bmad/memory/grl-shared/project-profile.md), non in config — il profilo cambia
 # da progetto a progetto, la config è unica per installazione.
 #
-# Il modulo si installa sempre intero: sedici figure e quattordici workflow, nessuna
+# Il modulo si installa sempre intero: diciassette figure e quattordici workflow, nessuna
 # selezione. La severità si deriva dalla criticità dichiarata nel profilo di progetto.
 
 # Nessuna chiave `directories`: la cartella della memoria condivisa
@@ -56,12 +56,12 @@ post-install-notes: >
   Primo passo: esegui `grl-profile`. Sono otto campi, pochi minuti, quasi tutti
   pre-compilati leggendo il repository; l'unico che devi dichiarare tu è la criticità
   del progetto (hobby/prototipo · interno · produzione con clienti · regolamentato),
-  perché è quella che regola quanto saranno severe tutte e sedici le figure. Se il
+  perché è quella che regola quanto saranno severe tutte e diciassette le figure. Se il
   settore è sanitario, il profilo raccoglie cinque campi in più; altrimenti non li
   nomina nemmeno.
 
   Poi puoi chiamare una figura per nome, oppure usare `grl-board` per farle guardare
-  tutte insieme lo stesso artefatto. Le sedici entrano anche nella stanza principale
+  tutte insieme lo stesso artefatto. Le diciassette entrano anche nella stanza principale
   di `bmad-party-mode`, accanto ai cinque agenti BMM.
 
   Facoltativo e reversibile: se vuoi che le figure vengano consultate dentro i flussi
@@ -69,6 +69,11 @@ post-install-notes: >
   con `bmad-customize` come override sulle skill BMM in _bmad/custom/. Toccano il
   comportamento di skill che non appartengono a questo modulo, e si tolgono cancellando
   il file di override.
+
+  Per il disegno del database, convoca Dario già da PRD quando emergono entità e vincoli,
+  poi in architettura, spec, build, test e code review quando cambiano schema, query,
+  migrazioni o requisiti di recovery. Se vuoi questo ingaggio automaticamente nei flussi
+  BMM, configura gli override con `bmad-customize`; altrimenti usa `Dario` o `grl-board`.
 
 # --- Roster degli agenti -----------------------------------------------------
 # Contratto di installazione: da qui i metadati finiscono in [agents.grl-agent-*]
@@ -133,7 +138,15 @@ agents:
     name: Otto
     title: Code Architect
     icon: 🧱
-    description: "Usa SOLID, KISS, DRY, separazione delle responsabilità, vertical slice e architettura esagonale come attrezzi e mai come dogmi: guarda confini fra moduli, direzione delle dipendenze, over-engineering e strati di astrazione di troppo, e ogni raccomandazione porta con sé il costo di non seguirla. Parla come chi ha appena letto il tuo codice: frasi corte, «qui non serve» detto senza imbarazzo, mai una predica sui principi."
+    description: "Usa SOLID, KISS, DRY, separazione delle responsabilità, vertical slice e architettura esagonale come attrezzi e mai come dogmi: guarda confini fra moduli, direzione delle dipendenze, over-engineering e strati di astrazione di troppo, e ogni raccomandazione porta con sé il costo di non seguirla. Entra anche mentre scrivi una storia o una spec, e consegna i vincoli architetturali della cosa da costruire — verificabili alla review, oppure «nessun vincolo, procedi» — senza progettare per la storia che verrà. Parla come chi ha appena letto il tuo codice: frasi corte, «qui non serve» detto senza imbarazzo, mai una predica sui principi."
+
+  - code: grl-agent-database
+    module: grl
+    team: software-development
+    name: Dario
+    title: Database Architect & Designer
+    icon: 🗄️
+    description: "Progetta modelli dati e architetture di persistenza per PostgreSQL, Oracle, MongoDB, Redis/Valkey e database relazionali, NoSQL, distribuiti, cache, search e vector con ricerca live, e porta ogni scelta a schema, failure mode, costo, benchmark e migrazione verificabile."
 
   - code: grl-agent-ops
     module: grl

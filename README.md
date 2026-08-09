@@ -1,9 +1,9 @@
 # Guardrails (`grl`)
 
-Guardrails is a [BMad](https://github.com/bmad-code-org/BMAD-METHOD) module with **sixteen agents**
+Guardrails is a [BMad](https://github.com/bmad-code-org/BMAD-METHOD) module with **seventeen agents**
 that support software development teams across privacy and GDPR, security, legal, compliance,
-tax, design, architecture, operations, healthcare, AI, WordPress, SEO, social/content, creative
-video, revenue management, and paid media.
+tax, design, code and database architecture, operations, healthcare, AI, WordPress, SEO,
+social/content, creative video, revenue management, and paid media.
 
 Agents surface constraints and risks while changes are still inexpensive; decisions remain with
 the team. They speak operationally, do not produce formal documents, and do not replace qualified
@@ -22,7 +22,8 @@ multidisciplinary review of the same artifact, use `grl-board`.
 | 📐 **Nils** — Regulatory Compliance | NIS2, DORA, EAA/WCAG, eIDAS, CRA, MDR, and sector-specific obligations | Determines whether a rule applies, what threshold activates it, and which obligations follow. |
 | 🧾 **Marta** — Tax and Incentives Specialist | Taxes, VAT, grants, incentives, tax credits, and reporting | Checks primary sources, requirements, deadlines, and eligible expenses in an operational pre-screening. |
 | 👁️ **Iris** — Design Critic | UI, landing pages, markup, CSS, typography, palettes, density, and layout | Recognizes generic patterns and proposes a concrete, usable visual departure. |
-| 🧱 **Otto** — Code Architect | Boundaries, folders, dependencies, interfaces, factories, and architectural layers | Identifies the right place for a responsibility and weighs the cost of alternatives. |
+| 🧱 **Otto** — Code Architect | Boundaries, folders, dependencies, interfaces, factories, architectural layers, and the architectural constraints of a story or spec | Identifies the right place for a responsibility and weighs the cost of alternatives; on a story still being written, delivers constraints that are verifiable at review time. |
+| 🗄️ **Dario** — Database Architect & Designer | Data models, PostgreSQL, Oracle, MongoDB, Redis/Valkey, distributed SQL, NoSQL, search, analytics, time-series, graph, vector and hybrid search | Chooses persistence from workload and invariants, verifies current solutions live, and carries the decision through schema, performance, reliability, benchmark, and migration. |
 | 🖥️ **Bruno** — Infrastructure & Ops Engineer | Servers, VPS, Docker, CI/CD, deployment, TLS, backups, logs, and incidents | Proposes the simplest operational setup that can handle the load and a verifiable way back. |
 | 🩺 **Livia** — Clinical Informatics | Clinical data, codes, HL7/FHIR/DICOM, clinical workflows, and patient safety | Checks the data model, interoperability, and real-world use; routes to `grl-mdsw` when MDR becomes relevant. |
 | 🧠 **Enzo** — AI Engineer | LLMs, prompts, RAG, embeddings, tool calling, evaluations, costs, and latency | Designs the minimum setup that remains reliable when the model is wrong and assesses whether it is actually needed. |

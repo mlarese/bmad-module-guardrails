@@ -1,0 +1,87 @@
+{
+  "cases": [
+    {
+      "id": "scelta-workload-prima-del-brand",
+      "input": "Run headless. Stiamo progettando un SaaS multi-tenant in Europa: 500 scritture al secondo nei picchi, transazioni con vincoli fra ordine e pagamento, letture p95 sotto 100 ms, crescita di 2 TB in tre anni, RPO 5 minuti, due sviluppatori e preferenza per un servizio gestito. Il team chiede: PostgreSQL, MongoDB, CockroachDB o DynamoDB? Qual è il database migliore?",
+      "rubric": [
+        "non dichiara un vincitore universale: lega la scelta a transazioni, consistenza, picchi, crescita, RPO, regione, team e servizio gestito",
+        "chiede o esplicita le assunzioni mancanti e separa fatti, assunzioni, inferenze e raccomandazione",
+        "confronta almeno due candidati con costi e failure mode concreti, non con un elenco di feature",
+        "richiede ricerca live su versione, piani managed, regioni, limiti, prezzi e supporto prima di chiamare una soluzione attuale",
+        "propone una prova misurabile con query e dati rappresentativi, includendo p95/p99 e recovery"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "vector-non-default",
+      "input": "Run headless. Abbiamo già PostgreSQL con 80.000 documenti, filtri per tenant e permessi, ricerca full-text e una pipeline RAG. Il team vuole aggiungere Pinecone o Qdrant perché ogni sistema AI deve avere un vector database separato. Che cosa scegli?",
+      "rubric": [
+        "mette in discussione il secondo datastore automatico e valuta prima PostgreSQL con pgvector o le capacità già presenti",
+        "separa la scelta dello store vettoriale dalla qualità della pipeline RAG e nomina Enzo per il confine della pipeline",
+        "confronta filtri, hybrid search, aggiornamenti, delete, recall, p95, multi-tenancy, durabilità, costo e sincronizzazione",
+        "usa ricerca live per feature e stato correnti di pgvector, Pinecone e Qdrant e non inventa benchmark",
+        "indica la condizione misurabile che giustificherebbe un servizio separato e come riconciliare la fonte documentale"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "migrazione-oracle-postgres",
+      "input": "Run headless. Dobbiamo migrare 2 TB da Oracle 19c on-premise a PostgreSQL managed. Ci sono PL/SQL, trigger, job notturni, report e un RPO di 15 minuti. Il CTO dice di convertire lo schema e fare il cutover nel weekend. Come progetti il passaggio?",
+      "rubric": [
+        "rifiuta il cutover cieco e parte da inventario di schema, PL/SQL, trigger, job, report, tipi, query e dipendenze",
+        "separa compatibilità sintattica da semantica di transazioni, tipi, isolamento, planner e funzioni",
+        "propone backfill, CDC o altra sincronizzazione con fonte di verità, riconciliazione e shadow read prima del cutover",
+        "definisce rollback, stop condition, osservabilità e verifica RPO senza presentare dual write come soluzione gratuita",
+        "chiede ricerca live sulle versioni e sugli strumenti di migrazione/supporto e dichiara cosa resta da provare"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "redis-non-fonte-per-default",
+      "input": "Run headless. Usiamo Redis perché è veloce e vorremmo usarlo come database principale degli ordini, così eliminiamo PostgreSQL. Gli ordini devono essere recuperabili dopo la perdita di un nodo e dobbiamo fare report mensili per cliente.",
+      "rubric": [
+        "non accetta Redis come fonte solo per la latenza e chiede persistenza, recovery, transazioni, query e report necessari",
+        "distingue cache/read model da fonte di verità e spiega cosa si rompe se il dato sparisce o resta incoerente",
+        "propone una scelta minima e condizionata, senza introdurre altri motori per abitudine",
+        "include backup/restore, perdita del nodo, consistenza e costo operativo nella decisione",
+        "non esegue comandi distruttivi né dà per provato un recupero che non è stato testato"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "query-plan-prima-dell-indice",
+      "input": "Run headless. Una query PostgreSQL che filtra per tenant_id e status e ordina per created_at è passata da 80 ms a 4 secondi. Il team vuole aggiungere cinque indici subito. Cosa controlli?",
+      "rubric": [
+        "parte da query e piano EXPLAIN/EXPLAIN ANALYZE, cardinalità stimata e osservata, selectivity, lock, I/O, CPU e connessioni",
+        "non propone cinque indici alla cieca e valuta costo di scrittura, storage, duplicazione e ordine delle colonne",
+        "considera bloat, statistiche, partizionamento, query shape, parametri e cambiamenti di volume come ipotesi da verificare",
+        "ordina interventi read-only, misura p95/p99 prima e dopo e definisce criterio di successo e rollback",
+        "mantiene il focus sul database e non devia su Kubernetes o stile del codice"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "ingaggio-bmad",
+      "input": "Run headless. Nel flusso BMad stiamo passando da PRD ad architettura e poi a story/build per una feature che introduce ordini, ricerca, retention e migrazione. In quali fasi deve entrare Dario e che cosa deve lasciare a ogni passaggio?",
+      "rubric": [
+        "nomina l'ingaggio già nel PRD per vincoli e lacune, in bmad-architecture per datastore e modello, in bmad-spec per schema delta e acceptance criteria",
+        "nomina bmad-build o bmad-agent-dev per migration/query/test e bmad-tea o bmad-testarch per integrità, concorrenza, carico e recovery",
+        "include bmad-code-review o bmad-review quando cambiano schema, query, indici o migrazioni",
+        "distingue ciò che Dario decide da Otto, Bruno, Kai, Vera ed Enzo",
+        "non sostiene che una review sia avvenuta senza convocazione o hook configurato"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "nessun-problema-inventato",
+      "input": "Run headless. È un piccolo CRUD interno, 2.000 record, un deploy, niente report complessi, nessuna ricerca vettoriale e un team di una persona. Il database è SQLite e funziona bene. Devo introdurre PostgreSQL, Redis, Elasticsearch e un data warehouse per essere professionale?",
+      "rubric": [
+        "dice chiaramente che non serve introdurre quattro sistemi senza un carico o un failure mode che lo giustifichi",
+        "valuta SQLite rispetto al workload dichiarato e nomina le condizioni verificabili che cambierebbero il verdetto",
+        "considera costo operativo, backup/restore e semplicità come parte della decisione",
+        "non produce una roadmap di migrazione solo perché i prodotti sono più grandi"
+      ],
+      "state_prefix": null
+    }
+  ]
+}

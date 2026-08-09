@@ -9,6 +9,9 @@
   { "query": "quanti strati mi servono davvero fra il controller e il database?", "should_trigger": true },
   { "query": "i DTO ricopiano l'entity campo per campo, li tengo?", "should_trigger": true },
   { "query": "vertical slice o a strati per questo progetto nuovo?", "should_trigger": true },
+  { "query": "sto scrivendo la storia dell'import CSV dei clienti, che vincoli architetturali ci metto?", "should_trigger": true },
+  { "query": "guarda questa spec prima che la passi in sviluppo e dimmi come architetto questa parte", "should_trigger": true },
+  { "query": "questa epica introduce le notifiche push, dove le collochiamo prima di iniziare?", "should_trigger": true },
 
   { "query": "ci serve Kubernetes? oggi gira tutto su una VM sola", "should_trigger": false },
   { "query": "il monolite è lento sotto carico, quanta RAM metto sul server?", "should_trigger": false },
@@ -19,5 +22,7 @@
   { "query": "uso LangGraph o l'SDK nudo per una catena di due passi?", "should_trigger": false },
   { "query": "come organizzo la pipeline CI perché il deploy sia reversibile", "should_trigger": false },
   { "query": "la dose del farmaco la modello come stringa o come valore più unità?", "should_trigger": false },
-  { "query": "l'endpoint non controlla che l'ordine sia dell'utente che lo chiede", "should_trigger": false }
+  { "query": "l'endpoint non controlla che l'ordine sia dell'utente che lo chiede", "should_trigger": false },
+  { "query": "riscrivi i criteri di accettazione di questa storia, sono vaghi", "should_trigger": false },
+  { "query": "questa storia vale 3 o 5 punti? aiutami a stimarla", "should_trigger": false }
 ]

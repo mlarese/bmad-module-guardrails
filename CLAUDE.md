@@ -9,7 +9,9 @@ fuori dai file versionati: nessun commit la tocca, quindi resta indietro da sola
 skill o un workflow nuovo, un cambio di posizionamento nell'intestazione del `README.md` —
 aggiorna l'About nello stesso turno, senza aspettare che l'utente lo chieda. L'About deve restare
 aggiornato e scritto nella stessa lingua del `README.md` corrispondente; se cambia la lingua del
-README, traduci anche l'About nello stesso turno.
+README, traduci anche l'About nello stesso turno. La regola vale per il repository fonte e per
+tutti i nove sottomoduli: quando un sottomodulo cambia, il suo `README.md` generato e il suo About
+GitHub devono essere aggiornati e pubblicati nello stesso passaggio, mai uno senza l'altro.
 
 ```
 gh repo edit mlarese/bmad-module-guardrails --description "<testo>"
@@ -30,7 +32,7 @@ Cambiano insieme, e tutte e quattro devono dire lo stesso numero di figure e le 
 | README | `README.md` (intestazione, tabella delle figure, tabella dei workflow) |
 | Manifesto e catalogo del modulo | `src/module.yaml` e `src/module-help.csv` (`description`, `module_greeting`, `post-install-notes`, `agents`) |
 | Marketplace BMad | `.claude-plugin/marketplace.json` (`description` del marketplace, `description` e `skills` del plugin `grl`) |
-| About GitHub | descrizione del repository, via `gh repo edit` |
+| About GitHub | descrizione del repository fonte e dei nove derivati, via `gh repo edit`, nella stessa lingua del README corrispondente |
 
 Una skill nuova va aggiunta anche all'elenco `skills` di `.claude-plugin/marketplace.json`,
 altrimenti non viene pubblicata.
@@ -68,13 +70,14 @@ Nove repository derivano da questo e li produce `tools/build_modules.py` leggend
 | `grw` | `mlarese/bmad-module-guardrails-web` | Iris, Nora, Dalia, Sofia, Marco, `grl-web`, `grl-ads`, `grl-social`, `grl-social-creative`, `grl-automation` |
 | `gpm` | `mlarese/bmad-module-guardrails-paid-media` | Vera, Aldo, Iris, Nora, Dalia, Sofia, Marco, `grl-ads`, `grl-social`, `grl-social-creative`, `grl-automation` |
 | `grv` | `mlarese/bmad-module-guardrails-revenue` | Rhea, `grl-revenue-audit`, `grl-revenue-plan`, `grl-revenue-preflight`, `grl-automation` |
-| `gau` | `mlarese/bmad-module-guardrails-automation` | tutte le sedici figure, workflow di dominio e `grl-automation` |
+| `gau` | `mlarese/bmad-module-guardrails-automation` | tutte le diciassette figure, workflow di dominio e `grl-automation` |
 | `gwp` | `mlarese/bmad-module-guardrails-wordpress` | Milo, `grl-wordpress-delivery`, `grl-automation` |
 
 **Regola: ogni modifica che tocca `src/` va propagata ai derivati nello stesso turno, senza
 aspettare che l'utente lo chieda.** Vale per una skill cambiata, una skill nuova, un cambio di
 roster, di catalogo di help o di party group. Un derivato che resta indietro pubblica istruzioni
-diverse da quelle della fonte, e nessuno se ne accorge finché non le esegue.
+diverse da quelle della fonte, e nessuno se ne accorge finché non le esegue. La pubblicazione del
+derivato deve includere sempre sia il `README.md` sia l'About GitHub aggiornato.
 
 ```bash
 python3 -m pytest tools/tests/                              # test della build

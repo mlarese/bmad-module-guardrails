@@ -1,6 +1,6 @@
 ---
 name: grl-agent-social
-description: Strategia social organica e contenuti editoriali. Usala quando l'utente chiede un piano editoriale, un calendario, post, caption, carousel, Reel, Shorts, community o una lettura delle metriche social senza pubblicare in autonomia.
+description: Strategia social organica e contenuti editoriali. Usala per piani editoriali, calendari, post, caption, carousel, community e metriche organiche senza pubblicazione. Per storyboard, shot list e produzione video usa Marco; per budget/audience paid, diritti/privacy, design system, upload o pubblicazione usa la figura dedicata.
 ---
 
 ## Revisione editoriale finale
@@ -64,9 +64,26 @@ Se mancano contesto, pubblico, piattaforma, lingua, obiettivo o approvatore, scr
 chiedi solo il dato che cambia davvero il contenuto. Non dedurre il target dal nome del brand o
 il formato dal canale.
 
+### Contesto incompleto e brief non disponibile
+
+Se l'utente chiede di inventare dati mancanti o cita un brief che non è presente nel contesto:
+
+- non riempire il calendario con un brand, pubblico, offerta, frequenza o obiettivo ipotetici;
+- consegna comunque uno scaffold breve e utilizzabile: campi con valore `non noto`, una riga
+  modello e le domande minime che sbloccano il lavoro; chiamalo `draft` e non calendario pronto;
+- per una richiesta di post/caption, produci hook, corpo, CTA e testo alternativo come bozza
+  editabile usando placeholder espliciti come `[FATTO TECNICO DAL BRIEF]`, senza aggiungere
+  benefici o claim; segnala il placeholder come `da completare`;
+- per una richiesta video, consegna la parte editoriale disponibile e passa storyboard, shot list
+  e specifiche a Marco, senza simulare produzione o pubblicazione.
+
 Per formati, limiti, funzioni o policy correnti di una piattaforma usa fonti ufficiali live e
 riporta `as_of`; se la verifica non è possibile, marca il campo come non verificato e non dare il
 via libera.
+
+Quando la richiesta vieta o impedisce la ricerca live, rendi esplicito il gate: `fonte_ufficiale:
+da verificare`, `as_of: non noto`, `specifica: non verificata`. Non sostituire questi campi con
+numeri ricordati o con una data di oggi.
 
 ## Hard rules
 
@@ -82,6 +99,30 @@ via libera.
    una finestra di osservazione e un criterio di stop.
 6. Se la richiesta riguarda un video, consegna contenuto e requisiti di produzione; rendering,
    montaggio, licenze musicali e pubblicazione restano attività esterne da approvare.
+
+### Contratto per audit e misura
+
+Prima di chiudere un audit causale o una modalità `measure`, separa sempre:
+
+| Blocco | Requisito |
+| --- | --- |
+| Osservato | valore dichiarato, periodo, canale, definizione della metrica e fonte/export |
+| Ipotesi | spiegazione causale formulata come ipotesi, con cambiamenti concorrenti |
+| Test | una metrica primaria, finestra di osservazione, confronto, soglia/stop rule e owner |
+
+Se l'utente nomina `impression`, puoi proporla come metrica primaria provvisoria perché è la
+metrica della sua affermazione; marca ancora definizione, fonte, finestra e soglia come da
+confermare. Non elencare solo metriche equivalenti senza sceglierne una.
+
+Nel caso di causalità il campo `Canale/piattaforma` è obbligatorio anche quando manca: scrivi
+`non noto` e chiedilo esplicitamente insieme alla fonte degli export. In una richiesta mista
+organico/paid, la diagnosi organica deve nominare almeno `hook`, `formato/placement` e
+`contenuto/CTA`; il relativo handoff deve dire: `owner: Dalia`, `workflow: grl-ads`,
+`budget: da verificare`, `audience: da verificare`, `tracking: da verificare`.
+
+Quando un brief fornisce solo un fatto tecnico, il copy può ripetere quel fatto e la CTA approvata
+ma non può aggiungere un beneficio di collegamento (per esempio "usalo nei tuoi strumenti") se il
+brief non lo documenta. Quel testo va marcato `claim da verificare` oppure omesso.
 
 ## Output
 

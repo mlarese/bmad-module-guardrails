@@ -69,6 +69,43 @@
         "la risposta non propone di introdurre un nuovo strato o una nuova cartella se le tre esistenti bastano"
       ],
       "state_prefix": null
+    },
+    {
+      "id": "vincoli-di-storia",
+      "input": "Run headless. Sto scrivendo la storia «import CSV dell'anagrafica clienti da back-office». Il repo ha `customers/` (modello e persistenza cliente), `imports/` (parser e validazione di file già usati per i prodotti), `api/` (solo entrypoint HTTP) e `notifications/`. A fine import va mandata una mail di riepilogo. Che vincoli architetturali metto nella storia?",
+      "rubric": [
+        "la risposta consegna vincoli, non un disegno né una proposta di ristrutturazione: da tre a cinque righe, non una relazione",
+        "ogni vincolo nomina un modulo reale fra `customers/`, `imports/`, `api/` e `notifications/`, e nessun vincolo si limita a invocare un principio senza nominare un modulo",
+        "i vincoli sono verificabili guardando il diff — per esempio che il parsing resti in `imports/` e non entri in `api/`, o che l'invio della mail resti in `notifications/` e non venga chiamato dal parser",
+        "la risposta esplicita la direzione ammessa delle dipendenze fra i moduli toccati e vieta almeno un import inverso",
+        "almeno un vincolo porta con sé il costo concreto di ignorarlo",
+        "la risposta non riscrive i criteri di accettazione della storia e non aggiunge requisiti funzionali",
+        "la risposta non propone di introdurre un modulo o uno strato nuovo, dato che i quattro esistenti coprono il caso"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "storia-senza-vincoli",
+      "input": "Run headless. Storia: «aggiungere il campo facoltativo Partita IVA alla form di modifica del profilo cliente, salvarlo e mostrarlo in sola lettura nel dettaglio». Il campo sta nella stessa tabella clienti. Vincoli architetturali?",
+      "rubric": [
+        "la risposta dice esplicitamente che questa storia non ha vincoli architetturali e che si può procedere",
+        "il verdetto è dato con sicurezza, non come dubbio o ripiego, e occupa poche righe",
+        "la risposta non inventa vincoli per riempire il vuoto — nessuna astrazione, nessun modulo nuovo, nessuna validazione centralizzata proposta di propria iniziativa",
+        "la risposta non apre una discussione sui principi né una checklist di controlli"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "non-architettare-il-futuro",
+      "input": "Run headless. La spec della prima storia dice: oggi si esporta in CSV, ma nel roadmap del prossimo anno ci sono anche XLSX e un webhook verso il gestionale del cliente. Preparo già l'astrazione dell'export così poi basta aggiungere i formati?",
+      "rubric": [
+        "la risposta dice di no: si scrive l'export CSV di oggi, senza l'astrazione per i formati futuri",
+        "la risposta motiva il no con il costo concreto di introdurla adesso — indirezione e file in più a fronte di una sola implementazione reale — e non con un principio nominato",
+        "la risposta osserva che l'astrazione disegnata su un formato solo ha buone probabilità di non reggere i casi veri di XLSX o del webhook, che hanno esigenze diverse dal CSV",
+        "la risposta indica il segnale concreto che imporrà di introdurre il confine — la seconda implementazione reale quando arriva — e dice che a quel punto il costo di estrarla è basso",
+        "la risposta non propone in cambio un'altra astrazione più leggera come compromesso"
+      ],
+      "state_prefix": null
     }
   ]
 }

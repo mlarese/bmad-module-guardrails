@@ -10,7 +10,8 @@ se manca, allinea il remote, committa quello che è cambiato e fa push. Un modul
 senza modifiche viene saltato senza commit vuoti.
 
 L'About del repository su GitHub vive fuori dai file versionati: viene riallineata
-qui alla `description` della topologia, così non resta indietro da sola.
+qui al campo inglese `about` della topologia, nella stessa lingua del README generato,
+così non resta indietro da sola.
 
   python3 tools/publish_modules.py -m "sync: nuova regola su X"
   python3 tools/publish_modules.py --module grw --dry-run
@@ -73,6 +74,18 @@ def sync_description(repo: str, description: str, dry_run: bool) -> None:
         print("  [dry-run] aggiornerei l'About")
         return
     run(["gh", "repo", "edit", f"{OWNER}/{repo}", "--description", description])
+
+
+def module_about(module: dict) -> str:
+    """Restituisce l'About pubblico, obbligatoriamente distinto dalla descrizione interna."""
+    about = module.get("about")
+    if not about:
+        raise RuntimeError(f"topologia: manca `about` per il modulo {module.get('code', '?')}")
+    if len(about) > DESCRIPTION_LIMIT:
+        raise RuntimeError(
+            f"topologia: `about` oltre {DESCRIPTION_LIMIT} caratteri per il modulo {module['code']}"
+        )
+    return about
 
 
 def publish(path: Path, repo: str, message: str, dry_run: bool) -> str:
@@ -149,10 +162,11 @@ def main(argv: list[str] | None = None) -> int:
             failures += 1
             continue
         try:
-            created = ensure_repo(module["repo"], module["description"], args.dry_run)
+            about = module_about(module)
+            created = ensure_repo(module["repo"], about, args.dry_run)
             if created:
                 print("      repository creato")
-            sync_description(module["repo"], module["description"], args.dry_run)
+            sync_description(module["repo"], about, args.dry_run)
             print(f"      {publish(path, module['repo'], args.message, args.dry_run)}")
         except RuntimeError as error:
             print(f"      errore: {error}")

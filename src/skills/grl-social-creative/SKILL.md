@@ -1,6 +1,6 @@
 ---
 name: grl-social-creative
-description: Produce pacchetti creativi per post e video social. Usalo quando l'utente dice "grl-social-creative", "crea un concept", "scrivi lo storyboard", "prepara un Reel/TikTok/Short" o chiede design e varianti di un asset senza montarlo o pubblicarlo.
+description: Produce pacchetti creativi producibili per post e video social: concept, hook, script, storyboard, shot list, carousel e specifiche per Reel/TikTok/Short. Per calendario/caption strategy usa Sofia; per paid, diritti/privacy, design system, upload o pubblicazione usa la figura dedicata.
 ---
 
 ## Revisione editoriale finale
@@ -30,6 +30,11 @@ Lavora in `{output_folder}/social/{slug}/creative/{asset_slug}/` e produci solo 
 Se l'utente chiede solo una caption o un'idea, consegna un pacchetto ridotto in conversazione e
 non creare file senza richiesta.
 
+Se il brief è citato ma non è presente, consegna comunque uno scaffold creativo con i soli dati
+noti, `non noto` per piattaforma/placement/durata/asset mancanti e placeholder `[CONTENUTO DAL
+BRIEF]` per il claim. Non inventare un concept completo e non rispondere soltanto con un elenco di
+domande quando puoi già descrivere produzione, accessibilità e gate.
+
 ## Modalità
 
 ### `brief`
@@ -49,6 +54,11 @@ contrasto e safe area quando pertinenti.
 Adatta un pacchetto a un altro canale, rapporto, durata o placement senza perdere il messaggio.
 Dichiara cosa è stato tagliato, riscritto o mantenuto. Per specifiche correnti usa fonti ufficiali
 live e riporta `as_of`.
+
+Quando la verifica live non è eseguita o è vietata, il pacchetto contiene due blocchi distinti:
+`Specifica piattaforma` con `fonte_ufficiale: da verificare`, `as_of: non noto` e stato
+`EVIDENZA_INSUFFICIENTE`; `Direzione creativa` con le scelte che non dipendono da una policy
+corrente. Non presentare valori ricordati come ufficiali.
 
 ### `validate`
 
@@ -72,6 +82,17 @@ formato verificati. Lo stato può essere `ready_for_review`, `ready_for_producti
 Ogni handoff contiene domanda, evidenza e stato. Se la competenza non è installata, registra
 `missing_capability` e `handoff_status: pending`; il gate dipendente resta `blocked`.
 
+Nel testo dell'handoff usa sempre i destinatari: **Dalia**/`grl-ads` per audience, budget,
+bidding, tracking e piano paid; **Aldo**/`grl-agent-legal` per brani, stock, claim e diritti;
+**Vera**/`grl-agent-privacy` per volti, UGC, messaggi e consenso; **Iris**/`grl-agent-ui-critic`
+per palette, tipografia e token. Non usare solo "Legal", "Privacy" o "account manager" quando
+il modulo dispone dei nomi.
+
+Un handoff è un record operativo anche quando la capacità non viene caricata nel caso isolato:
+scrivi `owner`, `workflow`, `domanda`, `evidenza` e `stato: pending`. Per Iris includi sempre
+`identità visiva`, oltre a palette, tipografia e token. Per Aldo e Vera assegna esplicitamente
+rispettivamente diritti/claim e volti/consenso.
+
 ## Gate creativi
 
 - Non inventare risultati, testimonianze, prima/dopo, prezzi, certificazioni, disponibilità o
@@ -82,6 +103,17 @@ Ogni handoff contiene domanda, evidenza e stato. Se la competenza non è install
   programmazione o pubblicazione.
 - Il test creativo non decide budget, bidding, attribuzione o risultato commerciale: formula solo
   la leva, la metrica, la finestra e il criterio di stop da passare a Dalia.
+
+Per una richiesta paid consegna il pacchetto creativo determinabile (o il suo manifest inline) e
+un handoff a Dalia con `domanda`, `evidenza`, `workflow: grl-ads`, `tracking`, `preflight` e
+`stato`; non fermarti a un `blocked` generico. Se il brief è approvato e l'utente chiede upload o
+programmazione, rifiuta il side effect ma lascia il contenuto in `ready_for_production` o
+`ready_for_review`, con istruzioni producibili, owner, file/asset da usare e gate esterni mancanti.
+
+Nel pacchetto usa esclusivamente l'inventario asset dichiarato dall'utente. Non trasformare
+screen-recording, file CSV, musica, effetti, logo, motion graphic, supporti di scena o dati
+dimostrativi in asset richiesti se non sono stati forniti; se servono, scrivili sotto `asset
+mancante opzionale`, senza inserirli come elementi dello storyboard producibile.
 
 ## Continuità e chiusura
 

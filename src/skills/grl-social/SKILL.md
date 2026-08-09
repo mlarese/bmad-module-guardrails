@@ -1,6 +1,6 @@
 ---
 name: grl-social
-description: Coordina strategia e contenuti social organici. Usalo quando l'utente dice "grl-social", "piano editoriale", "calendario social", "crea post", "prepara Reel" o chiede di analizzare canali e metriche senza pubblicare automaticamente.
+description: Coordina strategia e contenuti social organici: piano editoriale, calendario, post, caption, audit, misura e validazione senza pubblicazione. Usa `grl-social-creative` per storyboard/shot list e `grl-ads` per paid; non attivarlo per licenze, consenso, palette, upload o pubblicazione.
 ---
 
 ## Revisione editoriale finale
@@ -35,6 +35,26 @@ Una richiesta mista resta in più passaggi: Sofia tiene il piano editoriale, Mar
 creativo, Dalia la decisione paid. Ogni handoff riporta domanda, evidenza e stato; se una figura
 manca, usa `missing_capability` e `handoff_status: pending`.
 
+### Routing verificabile in un singolo turno
+
+Nel risultato nomina la persona e l'identificativo della route, non solo un ruolo generico:
+
+- piano, pubblico, obiettivo, calendario e copy → **Sofia**, `grl-agent-social`;
+- concept, hook, storyboard e shot list → **Marco**, `grl-agent-creative` e
+  `grl-social-creative`;
+- budget, account, audience, tracking e lancio paid → **Dalia**, `grl-agent-ads` e `grl-ads`;
+- volti, DM, UGC e consenso → **Vera**, `grl-agent-privacy`;
+- audio, stock, claim e diritti → **Aldo**, `grl-agent-legal`.
+
+Per una richiesta mista consegna almeno il blocco editoriale che è già determinabile e un
+`handoff` con `domanda`, `evidenza`, `owner`, `workflow` e `stato`; non limitarti a dire che il
+lavoro è bloccato.
+
+Se mancano dati decisivi, restituisci comunque in risposta un `draft` minimo: `Obiettivo:
+non noto`, `Pubblico: non noto`, `Canale: non noto`, `CTA: non noto`, una riga di copy o di
+calendario con placeholder, asset/gate mancanti e handoff. La mancanza di contesto non autorizza
+una risposta composta soltanto da domande.
+
 ## Modalità
 
 ### `plan`
@@ -51,6 +71,12 @@ caption, testo a schermo, CTA, alt text/sottotitoli quando pertinenti, asset man
 stato. Per un video o un asset pubblicitario crea anche `creative-brief.md` e passa a
 `grl-social-creative`; non simula il montaggio.
 
+Se il contenuto richiesto è un Reel ma mancano pubblico, obiettivo o brief, mostra comunque in
+risposta il manifest di `creative-brief.md` con valori `non noto`, una bozza copy separata e questo
+handoff: `owner: Marco`, `workflow: grl-social-creative`, `domanda: storyboard e shot list`,
+`evidenza: brief non fornito`, `stato: pending`. Non pubblicare e non aspettare un altro turno per
+materializzare almeno questi gate.
+
 ### `audit`
 
 Legge calendario, post, export o metriche disponibili e separa osservato, dichiarato, ipotesi e
@@ -63,11 +89,19 @@ Confronta periodi solo se canale, mercato, intervallo, definizione, fuso e fonte
 Produce una lettura con metrica primaria, ipotesi testabile, finestra, soglia e criterio di stop;
 non promette crescita e non tratta una correlazione come causalità.
 
+Il blocco di misura deve esplicitare fonte/export, definizione della metrica e cambiamenti
+concorrenti. Se l'utente parla di impression, usa `impression` come metrica primaria provvisoria,
+confronta finestre comparabili (per esempio maggio contro giugno) e lascia da confermare fonte,
+definizione, soglia e owner.
+
 ### `validate`
 
 È read-only. Controlla che ogni contenuto abbia destinatario, formato, messaggio, CTA, fonti,
 diritti, privacy, accessibilità, owner e stato. Restituisce `ready_for_review`, `blocked` o
 `EVIDENZA_INSUFFICIENTE`, non `ready_to_publish` se un gate è aperto.
+
+Nel riepilogo di validazione assegna i gate con i nomi **Vera** (volti/DM/consenso) e **Aldo**
+(audio/stock/claim/diritti), indicando l'evidenza necessaria per riaprirli.
 
 ## Stato e continuità
 
@@ -89,6 +123,22 @@ memlog completo.
   verifica lo stato è `EVIDENZA_INSUFFICIENTE`.
 - `ready_for_review` significa che il pacchetto è leggibile; non significa che claim, diritti,
   consenso, produzione o pubblicazione siano approvati.
+- Se il calendario è già approvato ma mancano i dettagli dell'azione esterna, usa
+  `awaiting_approval` o `ready_to_schedule` per il contenuto e apri un gate separato di
+  esecuzione. Prima di qualunque pubblicazione richiedi scope, account, ambiente, accesso già
+  autorizzato, owner, change set, log e rollback. Non trasformare il rifiuto dell'azione in un
+  generico `blocked` quando il contenuto è pronto per il passaggio esterno.
+
+Per la richiesta "pubblica ora" stampa tutti i prerequisiti in forma nominativa:
+`scope: post/Reel e date da elencare`, `account: da indicare`, `ambiente: da indicare`,
+`accesso autorizzato: da confermare`, `owner: da indicare`, `log: da predisporre`,
+`change set: da predisporre`, `rollback: da predisporre`; poi assegna al contenuto
+`state: ready_to_schedule` o `state: awaiting_approval`, con `azione esterna: non eseguita`.
+
+Nel paid handoff usa `owner: Dalia`, `workflow: grl-ads`, `change set: da approvare` e
+`rollback: da definire prima della modifica`; non descrivere change set o rollback come attività
+successive al lancio. Specifica che il contenuto organico scelto da Sofia è un input creativo, non
+una prova di incremento paid.
 
 ## Chiusura
 

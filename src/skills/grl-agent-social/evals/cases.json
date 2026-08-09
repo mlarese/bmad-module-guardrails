@@ -13,14 +13,15 @@
     },
     {
       "id": "post-with-accessibility",
-      "input": "Scrivi un post LinkedIn per spiegare una nuova funzione B2B. Il fatto tecnico è nel brief dell'utente, il CTA è richiedere una demo e il visual sarà un'immagine con testo.",
+      "input": "Scrivi un post LinkedIn per spiegare la nuova funzione B2B descritta in `files/linkedin-feature-brief.md`. Il CTA è richiedere una demo e il visual sarà un'immagine con testo.",
       "rubric": [
         "produce hook, corpo, CTA e una proposta coerente con LinkedIn senza aggiungere benefici non presenti nel brief",
         "separa il fatto fornito dall'eventuale claim da verificare",
         "include testo alternativo o indicazioni per non affidare il messaggio solo all'immagine",
         "non confonde una bozza con una pubblicazione"
       ],
-      "state_prefix": null
+      "state_prefix": null,
+      "files": ["files/linkedin-feature-brief.md"]
     },
     {
       "id": "organic-paid-boundary",
