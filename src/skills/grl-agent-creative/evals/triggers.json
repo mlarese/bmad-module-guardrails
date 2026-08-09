@@ -1,0 +1,14 @@
+[
+  { "query": "crea il concept di un annuncio video", "should_trigger": true },
+  { "query": "scrivi lo storyboard per un Reel", "should_trigger": true },
+  { "query": "prepara una shot list per TikTok", "should_trigger": true },
+  { "query": "adatta questo video a Shorts e Instagram", "should_trigger": true },
+  { "query": "progetta un carousel pubblicitario", "should_trigger": true },
+  { "query": "dammi tre hook per il video e le varianti creative", "should_trigger": true },
+  { "query": "scegli quanto spendere nella campagna", "should_trigger": false },
+  { "query": "scrivi il calendario editoriale del trimestre", "should_trigger": false },
+  { "query": "verifica i diritti sulla musica", "should_trigger": false },
+  { "query": "controlla il consenso per i volti dei clienti", "should_trigger": false },
+  { "query": "correggi la palette del design system", "should_trigger": false },
+  { "query": "pubblica il Reel sul mio account", "should_trigger": false }
+]

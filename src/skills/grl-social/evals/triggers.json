@@ -1,0 +1,14 @@
+[
+  { "query": "usa grl-social per un piano editoriale", "should_trigger": true },
+  { "query": "crea il calendario dei post del mese", "should_trigger": true },
+  { "query": "prepara una bozza di caption e CTA", "should_trigger": true },
+  { "query": "analizza i risultati organici dei social", "should_trigger": true },
+  { "query": "valida i contenuti prima di programmarli", "should_trigger": true },
+  { "query": "riprendi il lavoro social esistente", "should_trigger": true },
+  { "query": "usa grl-ads per spostare il budget", "should_trigger": false },
+  { "query": "scrivi lo storyboard del video", "should_trigger": false },
+  { "query": "controlla la licenza dell'audio", "should_trigger": false },
+  { "query": "verifica il consenso per i volti", "should_trigger": false },
+  { "query": "correggi la palette dell'annuncio", "should_trigger": false },
+  { "query": "pubblica tutti i contenuti automaticamente", "should_trigger": false }
+]

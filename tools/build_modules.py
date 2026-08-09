@@ -7,7 +7,7 @@
 
 Perché serve
 ------------
-Il bundle `grl` installa quattordici figure e dodici workflow in un colpo solo. Chi vuole
+Il bundle `grl` installa sedici figure e quattordici workflow in un colpo solo. Chi vuole
 solo la governance normativa, o solo il presidio ingegneristico, non ha motivo di
 portarsi le altre dieci figure. La soluzione è un repository per area — ma scritto a
 mano diventerebbe subito divergente dal bundle.
@@ -79,6 +79,24 @@ SOURCE_AUXILIARY_FILES = {
     "src/skills/grl-revenue-preflight/evals/README.md",
     "src/skills/grl-revenue-preflight/evals/cases.json",
     "src/skills/grl-revenue-preflight/evals/triggers.json",
+    "src/skills/grl-agent-social/SKILL.md",
+    "src/skills/grl-agent-social/customize.toml",
+    "src/skills/grl-agent-social/evals/README.md",
+    "src/skills/grl-agent-social/evals/cases.json",
+    "src/skills/grl-agent-social/evals/triggers.json",
+    "src/skills/grl-agent-creative/SKILL.md",
+    "src/skills/grl-agent-creative/customize.toml",
+    "src/skills/grl-agent-creative/evals/README.md",
+    "src/skills/grl-agent-creative/evals/cases.json",
+    "src/skills/grl-agent-creative/evals/triggers.json",
+    "src/skills/grl-social/SKILL.md",
+    "src/skills/grl-social/evals/README.md",
+    "src/skills/grl-social/evals/cases.json",
+    "src/skills/grl-social/evals/triggers.json",
+    "src/skills/grl-social-creative/SKILL.md",
+    "src/skills/grl-social-creative/evals/README.md",
+    "src/skills/grl-social-creative/evals/cases.json",
+    "src/skills/grl-social-creative/evals/triggers.json",
 }
 
 # I file del collegio che portano il roster e i confini fra figure. Sono gli unici
@@ -86,12 +104,12 @@ SOURCE_AUXILIARY_FILES = {
 # significato.
 BOARD_ROSTER_FILES = {"SKILL.md", "selection.md"}
 
-# Il bundle conta quattordici figure e lo dice ovunque nei testi del core. In un modulo
+# Il bundle conta sedici figure e lo dice ovunque nei testi del core. In un modulo
 # tematico quel numero è falso, e un numero falso in una skill è un'istruzione
 # sbagliata. Con più figure si sostituisce il numerale; con una sola si toglie e
 # resta il plurale generico, che è impreciso ma non falso — riscrivere l'accordo
 # verbale di frasi arbitrarie non è automatizzabile.
-NUMERALS = {2: "due", 3: "tre", 4: "quattro", 5: "cinque", 6: "sei", 7: "sette", 14: "quattordici"}
+NUMERALS = {2: "due", 3: "tre", 4: "quattro", 5: "cinque", 6: "sei", 7: "sette", 14: "quattordici", 16: "sedici"}
 
 # Nota appesa a ogni figura del modulo: le tabelle di handoff citano colleghe che
 # qui non sono installate, e senza questa riga l'agente rimanda a un vuoto.
@@ -170,7 +188,7 @@ def core_renames(core_skills: list[str], code: str) -> dict[str, str]:
 def adapt_counts(text: str, count: int) -> str:
     """Riporta al numero reale di figure i conteggi scritti per il bundle.
 
-    Tocca solo le costruzioni in cui `quattordici` (o i vecchi `tredici` e `dodici`) è accostato alle
+    Tocca solo le costruzioni in cui `sedici` (o i vecchi `quattordici`, `tredici` e `dodici`) è accostato alle
     figure o alle loro chiavi di config: «tredici documenti» dentro un esempio, o
     «tredici pagine» in una reference, restano quello che sono.
     """
@@ -185,9 +203,10 @@ def adapt_counts(text: str, count: int) -> str:
             return f"{numeral}{space}{noun}"
         return noun
 
-    text = re.sub(r"una\s+delle\s+(?:dodici|tredici|quattordici)\s+figure", "una delle figure", text)
-    text = re.sub(r"tutte\s+e\s+(?:dodici|tredici|quattordici)", replace_all_of, text)
-    text = re.sub(r"\b(?:dodici|tredici|quattordici)(\s+)(figure|chiavi)", replace_noun, text)
+    numerals = r"(?:dodici|tredici|quattordici|sedici)"
+    text = re.sub(rf"una\s+delle\s+{numerals}\s+figure", "una delle figure", text)
+    text = re.sub(rf"tutte\s+e\s+{numerals}", replace_all_of, text)
+    text = re.sub(rf"\b{numerals}(\s+)(figure|chiavi)", replace_noun, text)
     return text
 
 

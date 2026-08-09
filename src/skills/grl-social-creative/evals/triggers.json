@@ -1,0 +1,14 @@
+[
+  { "query": "usa grl-social-creative per uno storyboard", "should_trigger": true },
+  { "query": "prepara lo script di un Reel", "should_trigger": true },
+  { "query": "crea una shot list per un video social", "should_trigger": true },
+  { "query": "adatta l'asset a YouTube Shorts", "should_trigger": true },
+  { "query": "progetta varianti creative dell'annuncio", "should_trigger": true },
+  { "query": "prepara le specifiche di produzione del carousel", "should_trigger": true },
+  { "query": "fai il calendario editoriale", "should_trigger": false },
+  { "query": "scegli il budget e il pubblico della campagna", "should_trigger": false },
+  { "query": "verifica i diritti del brano", "should_trigger": false },
+  { "query": "controlla il consenso per i clienti nel video", "should_trigger": false },
+  { "query": "correggi i token della palette", "should_trigger": false },
+  { "query": "carica e pubblica il video", "should_trigger": false }
+]

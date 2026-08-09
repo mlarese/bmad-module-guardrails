@@ -21,6 +21,8 @@ Il workflow delega il giudizio a `grl-agent-ads` e convoca le figure Guardrails 
 | Segnale | Route |
 | --- | --- |
 | campagna, account, budget, audience, report, CPA, ROAS, test | `grl-agent-ads` |
+| social organico, calendario, post, caption e community | `grl-agent-social`, `grl-social` |
+| concept, design pubblicitario, video, script, storyboard e shot list | `grl-agent-creative`, `grl-social-creative` |
 | domanda organica, Search Console, indicizzazione | `grl-agent-seo` |
 | design, identità, visual, creatività e landing | `grl-agent-ui-critic`, `grl-web` |
 | form, cookie, tag, import clienti, remarketing, consenso | `grl-agent-privacy` |

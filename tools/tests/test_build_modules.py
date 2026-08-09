@@ -55,6 +55,7 @@ class CountTests(unittest.TestCase):
             bm.adapt_counts("le tredici figure del modulo", 3), "le tre figure del modulo"
         )
         self.assertEqual(bm.adapt_counts("tutte e dodici le chiavi", 4), "tutte e quattro le chiavi")
+        self.assertEqual(bm.adapt_counts("le sedici figure", 3), "le tre figure")
 
     def test_drops_numeral_for_a_single_figure(self) -> None:
         self.assertEqual(bm.adapt_counts("le dodici figure", 1), "le figure")
@@ -320,13 +321,17 @@ class DedicatedGroupModuleTopologyTests(unittest.TestCase):
                 "grl-agent-ui-critic",
                 "grl-agent-seo",
                 "grl-agent-ads",
+                "grl-agent-social",
+                "grl-agent-creative",
                 "grl-ads",
+                "grl-social",
+                "grl-social-creative",
                 "grl-automation",
             ],
         )
         self.assertEqual(
             bm.workflow_skills(module["skills"], {agent["code"] for agent in self.bundle["agents"]}),
-            ["grl-ads", "grl-automation"],
+            ["grl-ads", "grl-social", "grl-social-creative", "grl-automation"],
         )
 
     def test_automation_has_all_domain_agents_and_domain_workflows(self) -> None:
@@ -345,6 +350,8 @@ class DedicatedGroupModuleTopologyTests(unittest.TestCase):
                 "grl-mdsw",
                 "grl-web",
                 "grl-ads",
+                "grl-social",
+                "grl-social-creative",
                 "grl-revenue-audit",
                 "grl-revenue-plan",
                 "grl-revenue-preflight",

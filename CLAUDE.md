@@ -40,6 +40,8 @@ compare in nessuna lista `skills` non finisce in nessun repository derivato.
 
 Il `README.md` è una vetrina breve, non il manuale completo del progetto. Deve contenere soltanto:
 
+**Lingua obbligatoria:** il `README.md` del modulo deve essere scritto interamente in inglese.
+
 - un'introduzione: cosa fa Guardrails e perché esiste;
 - la spiegazione degli agenti;
 - la spiegazione dei workflow.
@@ -59,10 +61,10 @@ Nove repository derivano da questo e li produce `tools/build_modules.py` leggend
 | `gre` | `mlarese/bmad-module-guardrails-engineering` | Kai, Otto, Bruno, Enzo, `grl-automation` |
 | `grf` | `mlarese/bmad-module-guardrails-fiscal` | Marta, `grl-fiscal-updates`, `grl-automation` |
 | `grh` | `mlarese/bmad-module-guardrails-health` | Livia, `grl-mdsw`, `grl-automation` |
-| `grw` | `mlarese/bmad-module-guardrails-web` | Iris, Nora, Dalia, `grl-web`, `grl-ads`, `grl-automation` |
-| `gpm` | `mlarese/bmad-module-guardrails-paid-media` | Vera, Aldo, Iris, Nora, Dalia, `grl-ads`, `grl-automation` |
+| `grw` | `mlarese/bmad-module-guardrails-web` | Iris, Nora, Dalia, Sofia, Marco, `grl-web`, `grl-ads`, `grl-social`, `grl-social-creative`, `grl-automation` |
+| `gpm` | `mlarese/bmad-module-guardrails-paid-media` | Vera, Aldo, Iris, Nora, Dalia, Sofia, Marco, `grl-ads`, `grl-social`, `grl-social-creative`, `grl-automation` |
 | `grv` | `mlarese/bmad-module-guardrails-revenue` | Rhea, `grl-revenue-audit`, `grl-revenue-plan`, `grl-revenue-preflight`, `grl-automation` |
-| `gau` | `mlarese/bmad-module-guardrails-automation` | tutte le quattordici figure, workflow di dominio e `grl-automation` |
+| `gau` | `mlarese/bmad-module-guardrails-automation` | tutte le sedici figure, workflow di dominio e `grl-automation` |
 | `gwp` | `mlarese/bmad-module-guardrails-wordpress` | Milo, `grl-wordpress-delivery`, `grl-automation` |
 
 **Regola: ogni modifica che tocca `src/` va propagata ai derivati nello stesso turno, senza

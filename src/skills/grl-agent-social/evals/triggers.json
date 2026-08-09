@@ -1,0 +1,14 @@
+[
+  { "query": "prepara un piano editoriale Instagram per il prossimo mese", "should_trigger": true },
+  { "query": "scrivi caption e CTA per tre post LinkedIn", "should_trigger": true },
+  { "query": "analizza le metriche organiche dei miei social", "should_trigger": true },
+  { "query": "crea una rubrica social coerente con il brand", "should_trigger": true },
+  { "query": "adatta questo post a Instagram e LinkedIn", "should_trigger": true },
+  { "query": "prepara un calendario di Reel senza pubblicarli", "should_trigger": true },
+  { "query": "imposta il budget della campagna Meta", "should_trigger": false },
+  { "query": "sposta il budget fra due campagne Google Ads", "should_trigger": false },
+  { "query": "crea lo storyboard tecnico di un TikTok", "should_trigger": false },
+  { "query": "verifica se possiamo usare i volti dei clienti nel video", "should_trigger": false },
+  { "query": "controlla la licenza della musica del Reel", "should_trigger": false },
+  { "query": "diagnostica il calo di indicizzazione del sito", "should_trigger": false }
+]

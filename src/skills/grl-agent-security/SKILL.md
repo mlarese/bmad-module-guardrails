@@ -86,7 +86,7 @@ Come suona, in concreto:
 
 ## Memoria
 
-Kai legge quattro file in attivazione. Tre sono condivisi con le altre otto figure di Guardrails, uno è suo.
+Kai legge quattro file in attivazione. Tre sono condivisi con le altre figure di Guardrails, uno è suo.
 
 | File | Cosa contiene | Chi lo scrive |
 | ---- | ------------- | ------------- |

@@ -1,8 +1,9 @@
 # Guardrails (`grl`)
 
-Guardrails è un modulo [BMad](https://github.com/bmad-code-org/BMAD-METHOD) con **quattordici agenti**
+Guardrails è un modulo [BMad](https://github.com/bmad-code-org/BMAD-METHOD) con **sedici agenti**
 che affiancano il team nello sviluppo software: privacy e GDPR, sicurezza, legale, compliance,
-fisco, design, architettura, operations, sanità, AI, WordPress, SEO, revenue management e paid media.
+fisco, design, architettura, operations, sanità, AI, WordPress, SEO, social/content, creative video,
+revenue management e paid media.
 
 Gli agenti fanno emergere vincoli e rischi mentre cambiare è ancora economico; le decisioni restano
 al team. Parlano in modo operativo, non producono documenti formali né sostituiscono professionisti
@@ -28,6 +29,8 @@ revisione multidisciplinare dello stesso artefatto si usa `grl-board`.
 | 🧩 **Milo** — WordPress Component Architect | Gutenberg, Elementor, ACF, post type, template parts e Media Library | Progetta contenuti e componenti riusabili, con Gutenberg come default e confini chiari. |
 | 🔎 **Nora** — SEO Strategist & Search Systems Auditor | Intento, crawling, indicizzazione, contenuti, dati strutturati e Search Console | Verifica le regole e lo stato osservato, distingue fatti da ipotesi e non promette ranking. |
 | 📣 **Dalia** — Media Manager & Paid Advertising Strategist | Google Ads, ADV, audience, creatività, tracking, consenso, budget e policy | Traduce l'obiettivo in un piano misurabile e prepara change set con dry-run e rollback. |
+| 📱 **Sofia** — Social Media & Content Strategist | Strategia organica, rubriche, calendari, post, caption, community e metriche | Trasforma obiettivi e pubblico in contenuti social producibili, approvabili e misurabili senza promettere reach. |
+| 🎬 **Marco** — Advertising Creative Director & Short-form Video Producer | Concept pubblicitari, design, script, storyboard, shot list, Reel, TikTok e Shorts | Porta un'idea dal brief a un pacchetto creativo producibile, con varianti e gate su claim, diritti e privacy. |
 | 📈 **Rhea** — Revenue Management Strategist | Occupazione, ADR, RevPAR, TRevPAR, NRevPAR, GopPAR, MUP, MOL, pickup, forecast, pricing, PMS e Channel Manager | Collega costi, domanda, inventario e canale; mostra formule e assunzioni, separa floor economico, prezzo consigliato e prezzo pubblicato e blocca l'invio senza un gate verificato. |
 
 ## Workflow
@@ -45,6 +48,8 @@ entrano solo sui segnali e sulle competenze necessarie.
 | `grl-web` | Per creare landing e siti, riprendere mockup o diagnosticare una pagina | Parte dal brief di conversione e porta il risultato verso review, accessibilità, SEO e consegna. |
 | `grl-wordpress-delivery` | Per creare, riprendere, migrare o verificare una consegna WordPress | Coordina Milo e conduce la consegna fino al release gate di `grl-board`. |
 | `grl-ads` | Per audit, piano, tracking, ottimizzazione e preflight Google Ads/ADV | Prepara change set controllabili e applica solo con scope, approvazione, limite e rollback. |
+| `grl-social` | Per strategia organica, calendario, post, caption, audit e misura dei canali social | Produce brief, calendario e contenuti pronti per review, senza programmare o pubblicare. |
+| `grl-social-creative` | Per concept, design pubblicitario, script, storyboard, shot list e adattamenti video/social | Consegna pacchetti creativi producibili per post, Reel, TikTok e Shorts, senza montaggio o upload. |
 | `grl-revenue-audit` | Per verificare export, qualità dati, KPI e decisioni revenue | Produce un audit read-only con formule, fonti, blocker e dati mancanti. |
 | `grl-revenue-plan` | Per costruire scenari di pricing, domanda e profitto | Separa floor, mercato e domanda, con trigger di monitoraggio senza pubblicare tariffe. |
 | `grl-revenue-preflight` | Prima di inviare prezzi a PMS o Channel Manager | Verifica contratto, mapping, dry-run, response, riconciliazione, idempotenza e rollback. |
