@@ -3,24 +3,6 @@ name: grl-mdsw
 description: Verifica se una funzione software ha una finalità medica su un singolo paziente, distingue archiviazione e visualizzazione da interpretazione clinica e indica se rientra nel MDR e in quale classe (I, IIa, IIb, III). Usa quando l'utente chiede "il mio software è un dispositivo medico?", parla di classificazione MDR, Regola 11, marcatura CE del software, MDSW, software as a medical device, oppure di un software che calcola o suggerisce una dose o posologia per un singolo paziente, anche se il medico decide comunque, oppure invoca "grl-mdsw".
 ---
 
-## Revisione editoriale finale
-
-Ogni output destinato a una persona — risposta in conversazione, riepilogo, digest, profilo o testo
-visibile di una pagina — passa da un controllo di prosa prima della consegna.
-
-- Invoca `bmad-review` con `lenses=prose` se disponibile, impostando la lingua dell'output, la
-  guida di stile del progetto e `reader_type=humans`; se l'output contiene più lingue, revisiona ogni lingua
-  separatamente.
-- Applica solo correzioni di chiarezza, grammatica, coesione, tono e terminologia. Non cambiare
-  fatti, conclusioni, severità, fonti, citazioni, riferimenti normativi o clinici, decisioni o testo
-  fornito dall'utente.
-- Lascia invariati codice, comandi, YAML/JSON/TOML/CSV, frontmatter, URL, identificatori, date,
-  formule, dati strutturati e righe di memoria. Nei file HTML/Markdown revisiona solo la prosa
-  leggibile, non markup e struttura.
-- La review è interna: consegna il testo già migliorato, non la tabella del revisore. Se la skill
-  non è installata, esegui un controllo manuale equivalente e prosegui; non installare Freya per
-  questo passaggio.
-
 # grl-mdsw
 
 Sei il percorso guidato di qualificazione del software come dispositivo medico. Quattro domande in sequenza, ognuna delle quali può chiudere il discorso.
@@ -53,9 +35,10 @@ Esempi di routing:
 
 - `{project-root}` si risolve dalla directory di lavoro del progetto.
 
-## On Activation
+## In attivazione
 
-1. Leggi in silenzio la memoria condivisa in `{project-root}/_bmad/memory/grl-shared/`: `project-profile.md`, `decisions.md`, `accepted-risks.md`. Se un file manca, prosegui senza avvisi.
+0. Risolvi la configurazione: `uv run {project-root}/_bmad/scripts/resolve_config.py -p {project-root} -k core`. Se fallisce, leggi `{project-root}/_bmad/config.toml` e `{project-root}/_bmad/config.user.toml`. Applica `{communication_language}` (default italiano) a ogni riga del verdetto: la qualificazione non cambia con la lingua, ma il destinatario sì.
+1. Leggi in silenzio la memoria condivisa in `{project-root}/_bmad/memory/grl-shared/`: `project-profile.md`, `decisions.md`, `accepted-risks.md`. Se un file manca, prosegui senza avvisi; se esiste ma è illeggibile, dichiara il limite in una riga e non inferirlo.
 2. **Profilo assente** → proponi il workflow `grl-profile`. Se l'utente preferisce non fermarsi, raccogli al volo i quattro dati che servono qui — cosa fa il software, chi lo usa, se produce informazioni usate per decidere su un paziente, in quale mercato si vende — e dichiara in una riga che il verdetto è **provvisorio** finché il profilo non c'è.
 3. Risolvi la severità, una volta, dalla criticità del profilo — hobby/prototipo → `light`, interno → `normal`, produzione con clienti → `normal`, regolamentato → `strict`; se il profilo manca → `normal`.
 
@@ -174,3 +157,16 @@ Unica scrittura del workflow, in append su `{project-root}/_bmad/memory/grl-shar
 Mostra la riga esatta e fatti dire sì prima di scriverla. Crea il file solo se hai davvero la riga da scrivere.
 
 Su `accepted-risks.md` **non si scrive mai da qui**: la classe di un dispositivo non è un rischio da accettare.
+
+## Revisione editoriale finale
+
+Prima di consegnare, rileggi ogni output destinato a una persona e correggi solo la prosa:
+chiarezza, grammatica, coesione, tono e terminologia. Se `bmad-review` è disponibile, invocalo con
+`lenses=prose`, la lingua dell'output e `reader_type=humans`; altrimenti fai il controllo a mano e
+prosegui.
+
+Restano invariati fatti, conclusioni, severità, fonti, citazioni, riferimenti normativi o clinici,
+decisioni, stati, numeri e testo fornito dall'utente — e con essi codice, comandi, dati strutturati,
+frontmatter, URL, identificatori, date, formule e righe di memoria. Nei file HTML e Markdown si
+revisiona solo la prosa leggibile, non il markup. La revisione è interna: consegna il testo già
+corretto, non la tabella del revisore.

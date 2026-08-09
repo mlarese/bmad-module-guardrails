@@ -1,46 +1,35 @@
 ---
 name: grl-legal-updates
-description: Monitora novità normative e giurisprudenziali recenti. Use when l'utente chiede «ultime normative», «nuove leggi», «bollettini», «emendamenti» o una ricerca legale per periodo.
+description: Monitora novità normative e giurisprudenziali recenti. Usa quando l'utente chiede «ultime normative», «nuove leggi», «bollettini», «emendamenti» o una ricerca legale per periodo.
 ---
-
-## Revisione editoriale finale
-
-Ogni output destinato a una persona — risposta in conversazione, riepilogo, digest, profilo o testo
-visibile di una pagina — passa da un controllo di prosa prima della consegna.
-
-- Invoca `bmad-review` con `lenses=prose` se disponibile, impostando la lingua dell'output, la
-  guida di stile del progetto e `reader_type=humans`; se l'output contiene più lingue, revisiona ogni lingua
-  separatamente.
-- Applica solo correzioni di chiarezza, grammatica, coesione, tono e terminologia. Non cambiare
-  fatti, conclusioni, severità, fonti, citazioni, riferimenti normativi o clinici, decisioni o testo
-  fornito dall'utente.
-- Lascia invariati codice, comandi, YAML/JSON/TOML/CSV, frontmatter, URL, identificatori, date,
-  formule, dati strutturati e righe di memoria. Nei file HTML/Markdown revisiona solo la prosa
-  leggibile, non markup e struttura.
-- La review è interna: consegna il testo già migliorato, non la tabella del revisore. Se la skill
-  non è installata, esegui un controllo manuale equivalente e prosegui; non installare Freya per
-  questo passaggio.
 
 # grl-legal-updates ⚖️
 
-## Overview
+## Panoramica
 
 Questo workflow produce un digest verificabile delle novità legali pubblicate nel periodo
 richiesto: leggi, decreti, regolamenti, bollettini, circolari, sentenze rilevanti e stato degli
 emendamenti. Il destinatario deve poter distinguere in pochi minuti ciò che è stato pubblicato,
 ciò che è già efficace, ciò che è ancora proposto e ciò che non è stato confermato.
 
-Act as a legal research coordinator. Usa ricerca web live e fonti primarie; non trasformare un
+Agisci come coordinatore della ricerca legale. Usa ricerca web live e fonti primarie; non trasformare un
 risultato di ricerca, una newsletter o un commento professionale in una norma.
 
-## Resolution rules
+## Regole di risoluzione
 
 - I percorsi nudi come `references/fonti-live.md` si risolvono dalla radice di questa skill.
 - `{project-root}` è la directory del progetto.
 - `{date}` è la data corrente risolta dalla configurazione BMad; nelle risposte usa sempre la data
   effettivamente verificata, non una data ricordata.
+- La configurazione si risolve con `uv run {project-root}/_bmad/scripts/resolve_config.py -p {project-root} -k core`;
+  se fallisce, leggi `{project-root}/_bmad/config.toml` e `{project-root}/_bmad/config.user.toml`, con
+  italiano come lingua di default.
+- `{planning_artifacts}` è il percorso degli artefatti di pianificazione dichiarato dalla
+  configurazione core. Se la configurazione non lo espone, la cartella di ricerca è
+  `{output_folder}/research`; se manca anche `{output_folder}`, è `{project-root}/_bmad-output/research`.
+  Il report va lì, mai in un percorso indeterminato.
 
-## On Activation
+## In attivazione
 
 Registra `run_started_at` ed esegui prima un **capability preflight**. Nel run annota almeno:
 
@@ -212,3 +201,16 @@ avere almeno:
 Invoca Aldo (`grl-agent-legal`) solo per tradurre l'effetto pratico dei finding confermati: Aldo
 non può colmare una fonte mancante né cambiare lo stato ufficiale di un atto. Non presentare come
 attuale una norma ricordata.
+
+## Revisione editoriale finale
+
+Prima di consegnare, rileggi ogni output destinato a una persona e correggi solo la prosa:
+chiarezza, grammatica, coesione, tono e terminologia. Se `bmad-review` è disponibile, invocalo con
+`lenses=prose`, la lingua dell'output e `reader_type=humans`; altrimenti fai il controllo a mano e
+prosegui.
+
+Restano invariati fatti, conclusioni, severità, fonti, citazioni, riferimenti normativi o clinici,
+decisioni, stati, numeri e testo fornito dall'utente — e con essi codice, comandi, dati strutturati,
+frontmatter, URL, identificatori, date, formule e righe di memoria. Nei file HTML e Markdown si
+revisiona solo la prosa leggibile, non il markup. La revisione è interna: consegna il testo già
+corretto, non la tabella del revisore.

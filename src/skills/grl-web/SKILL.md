@@ -3,24 +3,6 @@ name: grl-web
 description: Costruisce landing page e siti, dal brief di conversione al progetto. Usa quando l'utente dice «creiamo una web page», «creiamo una landing», «facciamo la landing del mio saas», «costruiamo il sito», quando vuole riprendere o cambiare un mockup già fatto, quando chiede perché una pagina esistente non converte, o quando vuole promuovere un mockup approvato a progetto vero.
 ---
 
-## Revisione editoriale finale
-
-Ogni output destinato a una persona — risposta in conversazione, riepilogo, digest, profilo o testo
-visibile di una pagina — passa da un controllo di prosa prima della consegna.
-
-- Invoca `bmad-review` con `lenses=prose` se disponibile, impostando la lingua dell'output, la
-  guida di stile del progetto e `reader_type=humans`; se l'output contiene più lingue, revisiona ogni lingua
-  separatamente.
-- Applica solo correzioni di chiarezza, grammatica, coesione, tono e terminologia. Non cambiare
-  fatti, conclusioni, severità, fonti, citazioni, riferimenti normativi o clinici, decisioni o testo
-  fornito dall'utente.
-- Lascia invariati codice, comandi, YAML/JSON/TOML/CSV, frontmatter, URL, identificatori, date,
-  formule, dati strutturati e righe di memoria. Nei file HTML/Markdown revisiona solo la prosa
-  leggibile, non markup e struttura.
-- La review è interna: consegna il testo già migliorato, non la tabella del revisore. Se la skill
-  non è installata, esegui un controllo manuale equivalente e prosegui; non installare Freya per
-  questo passaggio.
-
 # grl-web 🌐
 
 Agisci come stratega di conversione e art director. L'utente conosce il suo prodotto e i suoi clienti; tu conosci il mestiere di far decidere qualcuno in otto secondi. L'esito è una pagina che un visitatore freddo capisce senza spiegazioni e su cui compie **una** azione. La consuma lui, non l'utente: deve reggere senza nessuno accanto che la racconti.
@@ -33,7 +15,7 @@ Non consegnare mai una pagina senza averla fatta passare per le figure del modul
 
 I percorsi nudi (es. `references/mockup-html.md`) e `{skill-root}` si risolvono dalla cartella di installazione di questa skill; `{project-root}` è la cartella di lavoro del progetto.
 
-## On Activation
+## In attivazione
 
 1. **Personalizzazione.** `uv run {project-root}/_bmad/scripts/resolve_customization.py --skill {skill-root} --key workflow`; applica i valori `{workflow.*}` per tutta la sessione, e in caso di errore leggi `{skill-root}/customize.toml`. Poi esegui `{workflow.activation_steps_prepend}` e tieni come contesto permanente `{workflow.persistent_facts}`.
 2. **Config.** `uv run {project-root}/_bmad/scripts/resolve_config.py --project-root {project-root} --key core`; se lo script non c'è o fallisce, leggi direttamente `{project-root}/_bmad/config.toml` e `config.user.toml`. Applica `{user_name}` e `{communication_language}`. `{document_output_language}` vale per il brief; la lingua della **pagina** segue il destinatario, non la conversazione.
@@ -88,7 +70,7 @@ I vincoli tecnici della singola rotta — file singolo, Tailwind, impianto del p
 
 Contratto del modulo Guardrails, `{project-root}/_bmad/memory/grl-shared/`.
 
-**Legge:** `project-profile.md` (prodotto, pubblico, mercato, criticità), `decisions.md` (vincoli già posti da chiunque), `accepted-risks.md` (ciò su cui tacere). Senza profilo, proponi `grl-profile`; se l'utente non vuole fermarsi, ricava dal brief ciò che ti serve e dichiaralo.
+**Legge:** `project-profile.md` (prodotto, pubblico, mercato, criticità), `decisions.md` (vincoli già posti da chiunque), `accepted-risks.md` (ciò su cui tacere). Se un file esiste ma è illeggibile o ha righe fuori formato, non inferirlo e non riscriverlo: dichiara il limite in una riga, perché senza `accepted-risks.md` leggibile risegnaleresti rischi forse già accettati. Senza profilo, proponi `grl-profile`; se l'utente non vuole fermarsi, ricava dal brief ciò che ti serve e dichiaralo.
 
 **Scrive in append**, righe brevi, data `AAAA-MM-GG`, mostrandole prima e facendosi dire sì:
 
@@ -98,3 +80,16 @@ Contratto del modulo Guardrails, `{project-root}/_bmad/memory/grl-shared/`.
 ## Confini
 
 Il flusso utente e i bisogni sono di Sally (UX designer BMM); come appare la pagina è di Iris, e il repertorio delle direzioni visive resta lì. Qui si decide **cosa dice la pagina, in che ordine, e cosa deve far fare**. Quando tocchi un confine, nominalo in una riga e fermati.
+
+## Revisione editoriale finale
+
+Prima di consegnare, rileggi ogni output destinato a una persona e correggi solo la prosa:
+chiarezza, grammatica, coesione, tono e terminologia. Se `bmad-review` è disponibile, invocalo con
+`lenses=prose`, la lingua dell'output e `reader_type=humans`; altrimenti fai il controllo a mano e
+prosegui.
+
+Restano invariati fatti, conclusioni, severità, fonti, citazioni, riferimenti normativi o clinici,
+decisioni, stati, numeri e testo fornito dall'utente — e con essi codice, comandi, dati strutturati,
+frontmatter, URL, identificatori, date, formule e righe di memoria. Nei file HTML e Markdown si
+revisiona solo la prosa leggibile, non il markup. La revisione è interna: consegna il testo già
+corretto, non la tabella del revisore.

@@ -1,11 +1,11 @@
 ---
 name: grl-revenue-preflight
-description: Prepara il gate PMS e Channel Manager. Usala quando l'utente dice "fai il preflight revenue", "verifica la pubblicazione tariffe" o "manda le tariffe in dry-run".
+description: Gate tecnico e operativo prima di trasformare un piano revenue in tariffe pubblicabili — contratto e API, mapping di property, room type e rate plan, semantica per-data o LOS, dry-run, riconciliazione, idempotenza e rollback. Usala quando l'utente dice "fai il preflight revenue", "verifica la pubblicazione tariffe", "manda le tariffe in dry-run", chiede se l'integrazione con il PMS o il Channel Manager è pronta, o vuole sapere cosa manca prima di inviare i prezzi. Non pubblica, non chiede credenziali e non chiama API reali.
 ---
 
 # Revenue Publication Preflight
 
-## Overview
+## Panoramica
 
 Prepara un gate tecnico e operativo prima di tradurre un piano revenue in prezzi pubblicabili.
 Agisci in sola lettura o sandbox: `grl-agent-revenue` verifica il dominio PMS/Channel Manager,
@@ -14,11 +14,14 @@ mentre il workflow conserva mapping, evidenze, response, riconciliazione, idempo
 Il consumatore è chi autorizza una pubblicazione senza aver seguito il lavoro: deve vedere target,
 scope, contratto, dati non noti, prove del test e motivo del verdetto.
 
-## Resolution rules
+## Regole di risoluzione
 
 - I percorsi interni alla skill sono bare paths dalla radice installata.
 - `{project-root}` è la directory del progetto.
 - `{output_folder}` arriva dalla configurazione core e contiene già `{project-root}`.
+- `{slug}` è lo stesso del piano che il gate verifica. Se il piano manca, ricavalo dal nome che
+  l'utente dà al lavoro, in kebab-case, dopo aver elencato le cartelle già presenti sotto
+  `{output_folder}/revenue/`: un gate su uno slug nuovo non verifica niente.
 - `{preflight}` è `{output_folder}/revenue/{slug}`.
 
 ## In attivazione
@@ -40,6 +43,11 @@ Se manca il piano, marca `plan_status: missing` e valuta soltanto i prerequisiti
 La cartella persistente è `{preflight}`. Mantieni `preflight.md` con target, scope, versioni,
 mapping, perimetro temporale, stato di ogni controllo, evidenza, owner, approvazione e rollback.
 Non conservare credenziali, token o segreti.
+
+**La cartella è condivisa con `grl-revenue-audit` e `grl-revenue-plan`.** Scrivi soltanto
+`preflight.md`: `audit.md` e `plan.md` si leggono e non si modificano. Rileggi `preflight.md`
+immediatamente prima di scriverlo e, se è cambiato rispetto a quando lo hai letto, fermati: un gate
+sovrascritto da un'altra esecuzione autorizzerebbe una pubblicazione su evidenze non sue.
 
 ## Gate tecnico
 
@@ -72,3 +80,16 @@ che nessun output dica “integrazione pronta” senza contratto e riconciliazio
 ```json
 {"status":"complete|blocked","folder":"{preflight}","verdict":"GO|GO_CON_CONDIZIONI|NO_GO|EVIDENZA_INSUFFICIENTE"}
 ```
+
+## Revisione editoriale finale
+
+Prima di consegnare, rileggi ogni output destinato a una persona e correggi solo la prosa:
+chiarezza, grammatica, coesione, tono e terminologia. Se `bmad-review` è disponibile, invocalo con
+`lenses=prose`, la lingua dell'output e `reader_type=humans`; altrimenti fai il controllo a mano e
+prosegui.
+
+Restano invariati fatti, conclusioni, severità, fonti, citazioni, riferimenti normativi o clinici,
+decisioni, stati, numeri e testo fornito dall'utente — e con essi codice, comandi, dati strutturati,
+frontmatter, URL, identificatori, date, formule e righe di memoria. Nei file HTML e Markdown si
+revisiona solo la prosa leggibile, non il markup. La revisione è interna: consegna il testo già
+corretto, non la tabella del revisore.

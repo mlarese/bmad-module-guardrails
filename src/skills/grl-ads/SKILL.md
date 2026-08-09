@@ -1,15 +1,7 @@
 ---
 name: grl-ads
-description: Coordina il ciclo operativo di campagne Google Ads e advertising: audit di account ed export, piano media, tracking e consenso, preflight di policy e landing, ottimizzazione con change set e automazione controllata. Usa quando l'utente dice "grl-ads", "gestisci la campagna", "fai un audit Ads", "ottimizza Google Ads" o chiede di preparare e applicare cambiamenti senza spendere in autonomia.
+description: "Coordina il ciclo operativo di campagne Google Ads e advertising: audit di account ed export, piano media, tracking e consenso, preflight di policy e landing, ottimizzazione con change set e automazione controllata. Usa quando l'utente dice \"grl-ads\", \"gestisci la campagna\", \"fai un audit Ads\", \"ottimizza Google Ads\" o chiede di preparare e applicare cambiamenti senza spendere in autonomia."
 ---
-
-## Revisione editoriale finale
-
-Ogni output leggibile da una persona — piano, audit, proposta, copy, log di decisione o riepilogo —
-passa da `bmad-review` con `lenses=prose` se disponibile. La revisione corregge solo chiarezza,
-tono, coesione e terminologia: non modifica numeri, fonti, policy, formule, stati, URL, ID,
-comandi, configurazioni, decisioni o dati strutturati. Se BMad Review manca, esegui un controllo
-manuale equivalente.
 
 # `grl-ads` — workflow paid media
 
@@ -53,7 +45,7 @@ sia presente nel roster/modulo installato: se manca, registra `missing_capabilit
    Se fallisce, leggi `{project-root}/_bmad/config.toml` e `config.user.toml`, usando italiano come
    default.
 2. Leggi, se presenti, `grl-shared/project-profile.md`, `decisions.md`, `accepted-risks.md` e
-   `grl-agent-ads/notes.md`.
+   `grl-agent-ads/notes.md`. Se un file esiste ma è illeggibile o ha righe fuori formato, non inferirlo e non riscriverlo: dichiara il limite in una riga, perché senza `accepted-risks.md` leggibile risegnaleresti rischi forse già accettati.
 3. Risolvi uno slug in kebab-case. Se l'utente non lo fornisce, proponi quello derivato da azienda,
    prodotto o campagna; non creare una seconda cartella per lo stesso lavoro.
 4. Chiedi soltanto ciò che cambia il gate: obiettivo, conversione primaria, mercato, canale,
@@ -216,7 +208,7 @@ Mostra prima ogni riga proposta per `{project-root}/_bmad/memory/grl-shared/deci
 Scrivi `accepted-risks.md` solo dopo conferma esplicita. Il log operativo non sostituisce la memoria
 condivisa e non deve contenere dati personali o segreti.
 
-## Capabilities
+## Capacità
 
 | Codice | Azione | Output | Prerequisito |
 | --- | --- | --- | --- |
@@ -232,3 +224,16 @@ condivisa e non deve contenere dati personali o segreti.
 Consegna un riepilogo breve: stato, evidenze, decisioni, blocchi, prossima mossa, owner e
 autorizzazione richiesta. Non chiudere con «campagna pronta» se il tracking, il consenso, i claim,
 la destinazione o l'approvazione sono ancora incerti.
+
+## Revisione editoriale finale
+
+Prima di consegnare, rileggi ogni output destinato a una persona e correggi solo la prosa:
+chiarezza, grammatica, coesione, tono e terminologia. Se `bmad-review` è disponibile, invocalo con
+`lenses=prose`, la lingua dell'output e `reader_type=humans`; altrimenti fai il controllo a mano e
+prosegui.
+
+Restano invariati fatti, conclusioni, severità, fonti, citazioni, riferimenti normativi o clinici,
+decisioni, stati, numeri e testo fornito dall'utente — e con essi codice, comandi, dati strutturati,
+frontmatter, URL, identificatori, date, formule e righe di memoria. Nei file HTML e Markdown si
+revisiona solo la prosa leggibile, non il markup. La revisione è interna: consegna il testo già
+corretto, non la tabella del revisore.

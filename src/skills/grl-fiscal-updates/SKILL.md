@@ -1,45 +1,33 @@
 ---
 name: grl-fiscal-updates
-description: Monitora novità fiscali e finanziarie recenti. Use when l'utente chiede «ultime novità fiscali», «aggiornamenti del commercialista», «circolari», «bollettini», «bandi», «incentivi» o emendamenti per periodo.
+description: Monitora novità fiscali e finanziarie recenti. Usa quando l'utente chiede «ultime novità fiscali», «aggiornamenti del commercialista», «circolari», «bollettini», «bandi», «incentivi» o emendamenti per periodo.
 ---
-
-## Revisione editoriale finale
-
-Ogni output destinato a una persona — risposta in conversazione, riepilogo, digest, profilo o testo
-visibile di una pagina — passa da un controllo di prosa prima della consegna.
-
-- Invoca `bmad-review` con `lenses=prose` se disponibile, impostando la lingua dell'output, la
-  guida di stile del progetto e `reader_type=humans`; se l'output contiene più lingue, revisiona ogni lingua
-  separatamente.
-- Applica solo correzioni di chiarezza, grammatica, coesione, tono e terminologia. Non cambiare
-  fatti, conclusioni, severità, fonti, citazioni, riferimenti normativi o clinici, decisioni o testo
-  fornito dall'utente.
-- Lascia invariati codice, comandi, YAML/JSON/TOML/CSV, frontmatter, URL, identificatori, date,
-  formule, dati strutturati e righe di memoria. Nei file HTML/Markdown revisiona solo la prosa
-  leggibile, non markup e struttura.
-- La review è interna: consegna il testo già migliorato, non la tabella del revisore. Se la skill
-  non è esposta, esegui un controllo manuale equivalente, registra `prose_review: manual` e
-  prosegui; non dichiarare una chiamata `bmad-review` che non è avvenuta e non installare Freya
-  per questo passaggio.
 
 # grl-fiscal-updates 🧾
 
-## Overview
+## Panoramica
 
 Questo workflow produce un digest verificabile delle novità fiscali, contabili, previdenziali e
 di finanza agevolata pubblicate nel periodo richiesto. Il destinatario deve poter distinguere
 una norma applicabile da una prassi, un bando aperto da un annuncio e un emendamento da una regola
 già efficace.
 
-Act as a fiscal research coordinator. Parti dalla fonte dell'ente che emette o gestisce la
+Agisci come coordinatore della ricerca fiscale. Parti dalla fonte dell'ente che emette o gestisce la
 misura, usa fonti professionali solo per trovare piste o spiegare il contesto e non sostituire
 mai la verifica live con una risposta ricordata.
 
-## Resolution rules
+## Regole di risoluzione
 
 - I percorsi nudi come `references/fonti-live.md` si risolvono dalla radice di questa skill.
 - `{project-root}` è la directory del progetto.
 - `{date}` è la data corrente risolta dalla configurazione BMad.
+- La configurazione si risolve con `uv run {project-root}/_bmad/scripts/resolve_config.py -p {project-root} -k core`;
+  se fallisce, leggi `{project-root}/_bmad/config.toml` e `{project-root}/_bmad/config.user.toml`, con
+  italiano come lingua di default.
+- `{planning_artifacts}` è il percorso degli artefatti di pianificazione dichiarato dalla
+  configurazione core. Se la configurazione non lo espone, la cartella di ricerca è
+  `{output_folder}/research`; se manca anche `{output_folder}`, è `{project-root}/_bmad-output/research`.
+  Il report va lì, mai in un percorso indeterminato.
 
 ## Capability preflight e fallback
 
@@ -83,7 +71,7 @@ Applica questa sequenza:
    decisive. Se il run è `partial` o `blocked`, lascia `as_of` non fissato (`pending` nel riepilogo)
    e dichiara cosa manca; una data di esecuzione non trasforma materiali vecchi in verifica corrente.
 
-## On Activation
+## In attivazione
 
 Registra `run_started_at`; fissa `as_of` solo dopo il secondo gate e la sweep conclusiva. Leggi il
 report eventuale dello stesso argomento e
@@ -224,3 +212,16 @@ pre-screening: non può completare dati mancanti, promettere la concessione di u
 firmare una dichiarazione. Applica il fallback definito nel capability preflight senza attribuire
 a Deep Recon o a `bmad-review` passaggi non eseguiti. Non dichiarare attuali aliquote, soglie o
 scadenze a memoria.
+
+## Revisione editoriale finale
+
+Prima di consegnare, rileggi ogni output destinato a una persona e correggi solo la prosa:
+chiarezza, grammatica, coesione, tono e terminologia. Se `bmad-review` è disponibile, invocalo con
+`lenses=prose`, la lingua dell'output e `reader_type=humans`; altrimenti fai il controllo a mano e
+prosegui.
+
+Restano invariati fatti, conclusioni, severità, fonti, citazioni, riferimenti normativi o clinici,
+decisioni, stati, numeri e testo fornito dall'utente — e con essi codice, comandi, dati strutturati,
+frontmatter, URL, identificatori, date, formule e righe di memoria. Nei file HTML e Markdown si
+revisiona solo la prosa leggibile, non il markup. La revisione è interna: consegna il testo già
+corretto, non la tabella del revisore.

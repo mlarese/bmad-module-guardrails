@@ -1,11 +1,11 @@
 ---
 name: grl-revenue-audit
-description: Audit dati e KPI revenue alberghieri. Usala quando l'utente dice "fai un audit revenue", "controlla i KPI dell'hotel" o "verifica questi dati di prenotazione".
+description: "Audit read-only di dati, KPI e prezzi revenue alberghieri, con fonti, formule, qualità del dato, blocker e dati mancanti. Usala quando l'utente dice \"fai un audit revenue\", \"controlla i KPI dell'hotel\", \"verifica questi dati di prenotazione\", porta un export del PMS o del Channel Manager da leggere, chiede se occupazione, ADR, RevPAR o TRevPAR sono calcolati bene, o vuole capire cosa non torna nei numeri prima di decidere una tariffa. Non pubblica prezzi e non decide lo scenario: per quello ci sono `grl-revenue-plan` e `grl-revenue-preflight`."
 ---
 
 # Revenue Audit
 
-## Overview
+## Panoramica
 
 Porta dati di prenotazione, inventario, costi e tariffe a un audit revenue leggibile da titolare,
 revenue manager o team tecnico. Agisci come coordinatore read-only: convoca `grl-agent-revenue`
@@ -15,11 +15,15 @@ pubblicazione.
 Il consumatore deve poter distinguere dato osservato, calcolo, ipotesi, blocker e prossima verifica
 senza riaprire questa conversazione.
 
-## Resolution rules
+## Regole di risoluzione
 
 - I percorsi interni alla skill sono bare paths dalla radice installata.
 - `{project-root}` è la directory del progetto.
 - `{output_folder}` arriva dalla configurazione core e contiene già `{project-root}`.
+- `{slug}` è il nome del lavoro in kebab-case **come lo chiama l'utente** — di norma la struttura, o
+  la struttura e il periodo. Prima di aprire una cartella nuova elenca quelle già presenti sotto
+  `{output_folder}/revenue/` e cerca la sua: uno slug coniato due volte perde l'audit e con esso il
+  piano che ci si appoggia. Se non riesci a ricavarlo, chiedilo; non inventarlo dal nome di un file.
 - `{audit}` è `{output_folder}/revenue/{slug}`.
 
 ## In attivazione
@@ -43,6 +47,13 @@ sostituire il suo giudizio con una risposta generica.
 
 La cartella persistente è `{audit}`. Mantieni `audit.md` come fonte canonica con slug, timestamp,
 fonti, periodo, valuta, perimetro, stato e decisioni. Non modificare o spostare export originali.
+
+**La cartella è condivisa con `grl-revenue-plan` e `grl-revenue-preflight`.** Scrivi soltanto
+`audit.md`: `plan.md` e `preflight.md` appartengono agli altri due e non si toccano nemmeno per
+correggerli. Rileggi `audit.md` immediatamente prima di scriverlo e, se è cambiato rispetto a quando
+lo hai letto, fermati e dichiaralo: un'altra esecuzione sta lavorando sullo stesso slug, e
+sovrascriverla perderebbe il suo lavoro. Uno stato incoerente è un blocco, non un'autorizzazione a
+riscrivere.
 Se l'utente non chiede un artefatto persistente, restituisci il verdetto in conversazione e non
 creare una cartella solo per registrare una risposta occasionale.
 
@@ -75,3 +86,16 @@ Chiudi con una riga strutturata:
 ```json
 {"status":"complete|blocked","folder":"{audit}","verdict":"READY_FOR_PLAN|EVIDENZA_INSUFFICIENTE"}
 ```
+
+## Revisione editoriale finale
+
+Prima di consegnare, rileggi ogni output destinato a una persona e correggi solo la prosa:
+chiarezza, grammatica, coesione, tono e terminologia. Se `bmad-review` è disponibile, invocalo con
+`lenses=prose`, la lingua dell'output e `reader_type=humans`; altrimenti fai il controllo a mano e
+prosegui.
+
+Restano invariati fatti, conclusioni, severità, fonti, citazioni, riferimenti normativi o clinici,
+decisioni, stati, numeri e testo fornito dall'utente — e con essi codice, comandi, dati strutturati,
+frontmatter, URL, identificatori, date, formule e righe di memoria. Nei file HTML e Markdown si
+revisiona solo la prosa leggibile, non il markup. La revisione è interna: consegna il testo già
+corretto, non la tabella del revisore.

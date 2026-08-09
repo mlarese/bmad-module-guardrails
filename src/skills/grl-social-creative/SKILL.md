@@ -1,13 +1,7 @@
 ---
 name: grl-social-creative
-description: Attiva solo se il deliverable richiesto è un pacchetto creativo producibile: concept, hook, script, storyboard, shot list o specifiche short-form. Non attivare per calendario editoriale, budget/media, diritti/privacy, visual design system o upload/pubblicazione.
+description: "Attiva solo se il deliverable richiesto è un pacchetto creativo producibile: concept, hook, script, storyboard, shot list o specifiche short-form. Non attivare per calendario editoriale, budget/media, diritti/privacy, visual design system o upload/pubblicazione."
 ---
-
-## Revisione editoriale finale
-
-Ogni brief, concept, script, storyboard, shot list o specifica passa da `bmad-review` con
-`lenses=prose` se disponibile. Correggi solo chiarezza, tono e coesione; lascia invariati claim,
-fonti, diritti, numeri, dimensioni, stati, decisioni e dati strutturati.
 
 # `grl-social-creative` — pacchetto creativo social
 
@@ -15,7 +9,7 @@ Agisci come coordinatore della produzione creativa. Il risultato è un pacchetto
 creator, videomaker o agenzia possa eseguire senza la conversazione in stanza. Non sei un editor
 video né un account manager: non renderizzi, carichi, programmi o pubblichi file.
 
-### Route visuale e side effect di produzione
+## Route visuale e side effect di produzione
 
 Se l'utente chiede di approvare palette/tipografia/token ma non fornisce il pacchetto, rispondi
 comunque con questo record, prima delle domande:
@@ -35,7 +29,14 @@ come stato del pacchetto: consegna istruzioni producibili, owner, file/asset e g
 
 ## Il pacchetto
 
-Lavora in `{output_folder}/social/{slug}/creative/{asset_slug}/` e produci solo ciò che serve:
+Lavora in `{output_folder}/social/{slug}/creative/{asset_slug}/` e produci solo ciò che serve.
+
+`{slug}` è quello del lavoro social a cui l'asset appartiene. `{asset_slug}` è il nome dell'asset in
+kebab-case **come lo chiama l'utente** — non il formato, non la piattaforma: `reel-lancio-marzo`, non
+`reel-9x16`. Prima di aprire una cartella nuova elenca quelle già presenti sotto
+`{output_folder}/social/{slug}/creative/` e cerca la sua; due nomi diversi per lo stesso asset
+separano brief, script e varianti in due pacchetti che nessuno ricomporrà. Se non riesci a
+ricavarlo, chiedilo.
 
 - `creative-brief.md`: obiettivo, destinatario, canale, placement, messaggio, CTA e vincoli;
 - `script.md`: parlato, scena, testo a schermo, audio, durata e chiusura;
@@ -162,3 +163,16 @@ Per un pacchetto multi-turno leggi prima gli artefatti esistenti e il memlog del
 mostra ogni conflitto e conserva le decisioni senza sovrascriverle. Chiudi con stato, output,
 asset mancanti, gate, handoff, approvatore e prossima verifica. Se mancano dati decisivi, consegna
 un brief `blocked`, non una creatività riempita con supposizioni.
+
+## Revisione editoriale finale
+
+Prima di consegnare, rileggi ogni output destinato a una persona e correggi solo la prosa:
+chiarezza, grammatica, coesione, tono e terminologia. Se `bmad-review` è disponibile, invocalo con
+`lenses=prose`, la lingua dell'output e `reader_type=humans`; altrimenti fai il controllo a mano e
+prosegui.
+
+Restano invariati fatti, conclusioni, severità, fonti, citazioni, riferimenti normativi o clinici,
+decisioni, stati, numeri e testo fornito dall'utente — e con essi codice, comandi, dati strutturati,
+frontmatter, URL, identificatori, date, formule e righe di memoria. Nei file HTML e Markdown si
+revisiona solo la prosa leggibile, non il markup. La revisione è interna: consegna il testo già
+corretto, non la tabella del revisore.

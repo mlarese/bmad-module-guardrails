@@ -1,14 +1,7 @@
 ---
 name: grl-social
-description: Attiva solo per un deliverable di piano editoriale organico: piano, calendario, copy, audit, misura o validazione. Non attivare per una richiesta di sola esecuzione su un account, né per storyboard/shot list, paid media, diritti/privacy o visual design.
+description: "Attiva solo per un deliverable di piano editoriale organico: piano, calendario, copy, audit, misura o validazione. Non attivare per una richiesta di sola esecuzione su un account, né per storyboard/shot list, paid media, diritti/privacy o visual design."
 ---
-
-## Revisione editoriale finale
-
-Ogni output leggibile da una persona — brief, calendario, post, caption, script, audit o riepilogo —
-passa da `bmad-review` con `lenses=prose` se disponibile. La revisione migliora solo chiarezza,
-tono e coesione: non cambia fatti, fonti, claim, CTA approvate, numeri, stati, decisioni o dati
-strutturati. Se la skill non è installata, fai un controllo manuale equivalente.
 
 # `grl-social` — strategia e contenuti social
 
@@ -150,3 +143,16 @@ una prova di incremento paid.
 Consegna stato, artefatti, evidenze, dati mancanti, tre mosse ordinate, handoff, approvatore,
 azione autorizzata e verifica successiva. Se il contenuto non è producibile o misurabile, fermati
 su `blocked` e spiega quale dato sblocca il lavoro.
+
+## Revisione editoriale finale
+
+Prima di consegnare, rileggi ogni output destinato a una persona e correggi solo la prosa:
+chiarezza, grammatica, coesione, tono e terminologia. Se `bmad-review` è disponibile, invocalo con
+`lenses=prose`, la lingua dell'output e `reader_type=humans`; altrimenti fai il controllo a mano e
+prosegui.
+
+Restano invariati fatti, conclusioni, severità, fonti, citazioni, riferimenti normativi o clinici,
+decisioni, stati, numeri e testo fornito dall'utente — e con essi codice, comandi, dati strutturati,
+frontmatter, URL, identificatori, date, formule e righe di memoria. Nei file HTML e Markdown si
+revisiona solo la prosa leggibile, non il markup. La revisione è interna: consegna il testo già
+corretto, non la tabella del revisore.

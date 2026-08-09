@@ -358,6 +358,7 @@ class DedicatedGroupModuleTopologyTests(unittest.TestCase):
                 "grl-revenue-audit",
                 "grl-revenue-plan",
                 "grl-revenue-preflight",
+                "grl-wordpress-delivery",
                 "grl-automation",
             ],
         )
