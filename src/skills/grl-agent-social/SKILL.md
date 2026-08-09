@@ -1,6 +1,6 @@
 ---
 name: grl-agent-social
-description: Strategia social organica e contenuti editoriali. Usala per piani editoriali, calendari, post, caption, carousel, community e metriche organiche senza pubblicazione. Per storyboard, shot list e produzione video usa Marco; per budget/audience paid, diritti/privacy, design system, upload o pubblicazione usa la figura dedicata.
+description: Attiva solo se l'intento principale è strategia o copy di contenuti social organici: piani, calendari, post, caption, rubriche o metriche. Non attivare per storyboard o produzione creativa, media buying, diritti/privacy, design system, SEO o azioni sugli account.
 ---
 
 ## Revisione editoriale finale

@@ -1,6 +1,6 @@
 ---
 name: grl-social-creative
-description: Produce pacchetti creativi producibili per post e video social: concept, hook, script, storyboard, shot list, carousel e specifiche per Reel/TikTok/Short. Per calendario/caption strategy usa Sofia; per paid, diritti/privacy, design system, upload o pubblicazione usa la figura dedicata.
+description: Attiva solo se il deliverable richiesto è un pacchetto creativo producibile: concept, hook, script, storyboard, shot list o specifiche short-form. Non attivare per calendario editoriale, budget/media, diritti/privacy, visual design system o upload/pubblicazione.
 ---
 
 ## Revisione editoriale finale
@@ -147,10 +147,10 @@ un handoff a Dalia con `domanda`, `evidenza`, `workflow: grl-ads`, `tracking`, `
 programmazione, rifiuta il side effect ma lascia il contenuto in `ready_for_production` o
 `ready_for_review`, con istruzioni producibili, owner, file/asset da usare e gate esterni mancanti.
 
-Nel pacchetto usa esclusivamente l'inventario asset dichiarato dall'utente. Non trasformare
-screen-recording, file CSV, musica, effetti, logo, motion graphic, supporti di scena o dati
-dimostrativi in asset richiesti se non sono stati forniti; se servono, scrivili sotto `asset
-mancante opzionale`, senza inserirli come elementi dello storyboard producibile.
+Nel pacchetto usa esclusivamente l'inventario asset dichiarato dall'utente. Non nominare né
+proporre screen-recording, file CSV, musica, effetti, logo, motion graphic, supporti di scena,
+fondi o dati dimostrativi se non sono stati forniti: scrivi `asset aggiuntivi: nessuno dichiarato`
+e lascia il gate aperto, senza inventare una lista di materiali opzionali.
 
 Se il brief contiene solo una funzione, usa come claim esclusivamente la frase della funzione e
 la CTA fornita. Non aggiungere payoff come "pronto da usare", "senza procedure complesse",

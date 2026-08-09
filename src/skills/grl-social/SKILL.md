@@ -1,6 +1,6 @@
 ---
 name: grl-social
-description: Coordina strategia e contenuti social organici: piano editoriale, calendario, post, caption, audit, misura e validazione senza pubblicazione. Usa `grl-social-creative` per storyboard/shot list e `grl-ads` per paid; non attivarlo per licenze, consenso, palette, upload o pubblicazione.
+description: Attiva solo per un deliverable di piano editoriale organico: piano, calendario, copy, audit, misura o validazione. Non attivare per una richiesta di sola esecuzione su un account, né per storyboard/shot list, paid media, diritti/privacy o visual design.
 ---
 
 ## Revisione editoriale finale
