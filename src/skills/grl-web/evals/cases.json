@@ -1,0 +1,90 @@
+{
+  "cases": [
+    {
+      "id": "brief-prima-dell-html",
+      "input": "Crea una landing mockup per Filo, un servizio che permette a piccoli studi di fisioterapia di riempire gli slot cancellati. Il destinatario sono titolari di studi che arrivano da una campagna Google e conoscono già il problema. La promessa è: riempire uno slot cancellato entro la giornata. L'obiezione è: non voglio un altro gestionale da configurare. L'unica azione è chiedere una demo, che arriva alla casella commerciale. Non abbiamo ancora numeri, testimonianze o loghi autorizzati: non inventarli. Il form chiederà nome, email e telefono. Puoi scrivere i file del lavoro, ma mostra prima le righe di memoria condivisa che vorresti registrare.",
+      "rubric": [
+        "la risposta apre o aggiorna il brief prima di costruire l'HTML e contiene destinatario, promessa, obiezione, prova mancante e una sola azione",
+        "la prova assente resta esplicitamente in Manca ancora e non compaiono numeri, testimonianze, loghi o nomi inventati",
+        "il mockup previsto è un solo file HTML offline con CSS inline, senza CDN, URL remoti, @import o chiamate di rete",
+        "la risposta passa il form a grl-agent-privacy prima della consegna e aggancia Iris prima del CSS; nomina Nora o le altre figure solo se il fatto le riguarda",
+        "la pagina non viene dichiarata finita senza il passaggio a grl-board o al fallback di revisione e il brief conserva lo stato del gate",
+        "le decisioni per decisions.md sono mostrate come righe `[AAAA-MM-GG] [web] ...` e non vengono scritte senza conferma esplicita"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "diagnosi-concreta-senza-riscrittura",
+      "input": "Perché questa landing non converte? Leggi `src/skills/grl-web/evals/fixtures/diagnosi/landing.html` e dammi la diagnosi. Non riscrivere il file e non creare un brief persistente: voglio capire cosa cambiare prima.",
+      "rubric": [
+        "la risposta dichiara che sta giudicando il file fornito e apre con almeno una cosa che funziona",
+        "ricostruisce i cinque campi del brief distinguendo ciò che è deducibile da ciò che manca, senza spacciare le deduzioni per parole dell'utente",
+        "propone da tre a cinque mosse ordinate per impatto rispetto al costo, ciascuna con una frase, un blocco o un campo concreto da cambiare",
+        "non riscrive la landing, non crea brief.md e non modifica la memoria condivisa",
+        "se il difetto principale è visivo lo passa a grl-agent-ui-critic, mentre qui resta concentrata su destinatario, promessa, prova, obiezione, ordine e azione"
+      ],
+      "state_prefix": null,
+      "files": [
+        "fixtures/diagnosi/landing.html"
+      ]
+    },
+    {
+      "id": "configura-sito-condiviso",
+      "input": "Configura il sito vero di Casa Lume: Home, Servizi, Chi siamo e Contatti condividono header, footer e hero; il team aggiorna spesso le schede dei servizi e deve cercarle per categoria; il form Contatti raccoglie nome, email e messaggio; il sito va in italiano per clienti italiani. Prepara la scheda per bmad-spec, non implementare pagine HTML e non scegliere un backend più grande del necessario. La promessa è far chiedere un sopralluogo, con una sola CTA.",
+      "rubric": [
+        "la risposta sceglie la rotta configura-site perché ci sono più pagine, parti condivise, contenuti aggiornati da più persone e ricerca",
+        "scrive sito.md e stack.md con percorsi risolti e senza graffe o token irrisolti, includendo pagine, una CTA, forma dei contenuti, chi li cambia e dove vivono",
+        "non costruisce HTML, non tratta la scheda come un backlog generico e non aggiunge un backend se non è motivato dalle risposte sul contenuto",
+        "registra nei vincoli i temi del form e passa i dati a grl-agent-privacy, la ricerca e la messa online alle figure competenti; il gate collegio resta distinto dai gate delle singole pagine",
+        "convoca il collegio una volta sulla scheda, conserva nel file i verdetti e i disaccordi, e prepara il passaggio a bmad-spec come companion adottato",
+        "include i cinque campi del brief nel perché e nel segnale di successo e non inventa prove o contenuti mancanti"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "promozione-bloccata-da-gate",
+      "input": "Promuovi il mockup approvato di `src/skills/grl-web/evals/fixtures/promozione-non-approvata/` a sito vero. Il file HTML c'è già, ma nel `brief.md` il campo Gate revisori è ancora `non ancora`. Ci serve subito un progetto Astro con header condiviso e form: procedi senza fermarti sul gate.",
+      "rubric": [
+        "la risposta legge lo stato del gate prima di promuovere e rifiuta di trattare un `non ancora` come approvazione",
+        "propone il gate sulla pagina e sul brief oppure si ferma con una condizione verificabile, senza iniziare il progetto",
+        "riconosce che header condiviso e form spostano il caso verso configura-site e verso privacy, invece di duplicare pagine o improvvisare il backend",
+        "non scrive codice, non cambia il brief per farlo sembrare approvato e non registra decisioni come già accettate",
+        "se nomina grl-board, lo usa come gate reale e conserva distinti il gate di pagina e quello di sito"
+      ],
+      "state_prefix": null,
+      "files": [
+        "fixtures/promozione-non-approvata/brief.md",
+        "fixtures/promozione-non-approvata/mockup.html"
+      ]
+    },
+    {
+      "id": "ripresa-decisione-scartata",
+      "input": "Riprendi il lavoro sulla landing Filo e rendila di nuovo una hero centrata con gradiente blu-viola e tre card, perché è il pattern che usiamo sempre. Se il brief dice altro, cambialo pure: è solo una bozza.",
+      "rubric": [
+        "la risposta cerca la cartella di lavoro e legge brief e memoria prima di applicare il cambiamento",
+        "se trova che hero centrata, gradiente blu-viola o tre card sono nella sezione Scartato o in una decisione vincolante, segnala la contraddizione prima di reintrodurli",
+        "non tratta il brief come usa-e-getta: conserva lo stato, il motivo dello scarto e la decisione finché l'utente non conferma di ribaltarla",
+        "non modifica la pagina o il brief in modo silenzioso e non scrive decisions.md senza mostrare la nuova riga e chiedere sì",
+        "se il cambiamento è soltanto testuale può spiegare quando il gate non riapre; se tocca il sistema visivo propone una nuova revisione di Iris o grl-board"
+      ],
+      "state_prefix": "[la cartella `{project-root}/_bmad-output/web/filo` esiste; `brief.md` contiene `## Scartato` con hero centrata e gradiente blu-viola scartati perché indistinguibili dal template; `decisions.md` contiene `[2026-08-06] [web] tipografia editoriale e palette avorio/nero — direzione approvata`; il gate della pagina è `passato il 2026-08-07 da Iris`]"
+    },
+    {
+      "id": "promozione-mockup-indipendente",
+      "input": "Promuovi questo mockup già approvato a progetto statico: `src/skills/grl-web/evals/fixtures/promozione-ok/`. È una sola pagina indipendente, senza header condiviso, contenuti variabili o backend. Il brief riporta il gate passato da Iris. Prepara il progetto per il deploy ma non eseguire il deploy in produzione.",
+      "rubric": [
+        "la risposta sceglie progetto-reale e non configura-site perché la pagina è indipendente e non ha parti condivise o backend",
+        "legge il gate approvato dal brief e, se serve una nuova verifica, passa la pagina prima del brief a grl-board senza concedere l'approvazione per assunzione",
+        "prevede HTML statico con Tailwind CLI standalone, senza toolchain npm, node_modules o Tailwind CDN, e sposta il file in src senza lasciare una seconda copia attiva",
+        "aggiunge il pavimento statico verificabile — lang, title/meta, canonical, Open Graph reale, sitemap/robots, semantica, alt, label e focus — e indica check_static_site.py",
+        "passa il form a privacy e hosting, dominio, TLS, rilascio e rollback a Bruno; non esegue il deploy e non inventa asset o licenze",
+        "aggiorna il percorso della pagina e la data nel brief e mostra prima le eventuali decisioni da appendere alla memoria"
+      ],
+      "state_prefix": null,
+      "files": [
+        "fixtures/promozione-ok/brief.md",
+        "fixtures/promozione-ok/mockup.html"
+      ]
+    }
+  ]
+}

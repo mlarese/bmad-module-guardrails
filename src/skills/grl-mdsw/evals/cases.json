@@ -1,0 +1,76 @@
+{
+  "cases": [
+    {
+      "id": "benessere-fuori-perimetro",
+      "input": "Run headless. Ho un'app mobile per persone sane che registra passi, ore di sonno e calorie e mostra grafici personali per incoraggiare uno stile di vita migliore. Non diagnostica, non monitora parametri per allertare un medico, non suggerisce terapie e non viene venduta come strumento per una malattia. È un dispositivo medico MDR?",
+      "rubric": [
+        "il verdetto è fuori perimetro perché manca una finalità medica dichiarata su un singolo paziente",
+        "la risposta usa la finalità dichiarata, non il fatto che l'app sia mobile o che elabori dati personali, come criterio decisivo",
+        "il percorso si chiude senza assegnare una classe I, IIa, IIb o III e senza applicare meccanicamente la Regola 11",
+        "la risposta distingue il perimetro di questa qualificazione da privacy, sicurezza o contenuto clinico e non apre una checklist estranea",
+        "non viene prodotto alcun fascicolo, certificato o documento; la riga di memoria non viene scritta senza mostrarela e chiedere conferma"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "supporto-diagnostico-classe-iia",
+      "input": "Run headless. Il modulo NoduleScore legge le immagini di un singolo paziente, calcola un punteggio di sospetto per un nodulo e mostra al radiologo se approfondire con un altro esame. Il radiologo resta libero di decidere, il modulo non prescrive una terapia e il caso non comporta un intervento chirurgico o un pericolo grave immediato. Il resto del prodotto è un gestionale di appuntamenti. Dammi il verdetto MDR.",
+      "rubric": [
+        "la risposta qualifica NoduleScore come software con finalità medica perché produce un'informazione interpretata su un singolo paziente",
+        "il verdetto più probabile è classe IIa secondo la Regola 11, con il fatto che farebbe salire la classe se la decisione avesse conseguenze gravi o chirurgiche",
+        "la risposta nomina la frase o funzione del prodotto che determina il verdetto e non tratta il gestionale di appuntamenti come automaticamente qualificato",
+        "cosa comporta e cosa non comporta sono separati: organismo notificato e impatto su qualità, rischio, ciclo di vita e piano, ma non marcatura dell'intero prodotto",
+        "il risultato è una risposta in cinque punti, non un fascicolo tecnico o una checklist; l'eventuale riga `[data] [compliance]` è mostrata prima di una scrittura"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "monitoraggio-fisiologico-classe-iib",
+      "input": "Run headless. Il software legge in continuo la saturazione e la frequenza cardiaca di un singolo paziente ricoverato e avvisa l'infermiere quando una variazione può indicare un pericolo immediato. L'allarme guida la decisione di chiamare subito il medico. Quale classe MDR esce e cosa cambia nel piano di rilascio?",
+      "rubric": [
+        "la risposta qualifica la funzione come dispositivo medico perché monitora parametri fisiologici di un singolo paziente",
+        "la classe indicata è IIb perché la variazione monitorata può comportare un pericolo immediato",
+        "la risposta distingue IIb dal caso generale IIa e non riduce il verdetto al fatto che l'infermiere possa ignorare l'allarme",
+        "spiega che IIb porta organismo notificato, sistema qualità, tracciabilità del ciclo di vita, gestione del rischio, usabilità e tempi di valutazione prima del lancio",
+        "non allarga automaticamente la qualifica al gestionale o ai dati non coinvolti e non produce documenti o registrazioni senza consenso"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "decisione-con-rischio-mortale-classe-iii",
+      "input": "Run headless. ThromboGuide analizza i dati di un paziente con sospetto ictus e fornisce al medico l'informazione usata per decidere se somministrare un trombolitico. Un errore può causare la morte o un deterioramento irreversibile della salute. Il team chiede di chiamarlo classe I perché il medico decide comunque.",
+      "rubric": [
+        "la risposta respinge l'idea che il controllo finale del medico basti a rendere il software classe I",
+        "il verdetto più probabile è classe III perché l'informazione è usata per una decisione terapeutica con possibile morte o deterioramento irreversibile",
+        "la risposta lega il verdetto alla finalità dichiarata e alla funzione ThromboGuide su quel paziente, non alla tecnologia usata per calcolarla",
+        "spiega l'effetto sul piano: organismo notificato, qualità, ciclo di vita, rischio, usabilità, sorveglianza e ritmo degli aggiornamenti",
+        "mantiene il confine: non apre la qualificazione AI Act o il modello clinico, ma rinvia Nils, Livia o Enzo solo per il tema specifico"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "profilo-assente-verdetto-provvisorio",
+      "input": "Run headless. Nel progetto non c'è ancora il profilo Guardrails. Il software è un portale usato da cardiologi in UE per singoli pazienti; calcola un indice che il cardiologo usa per decidere se cambiare la terapia; lo vende una software house a ospedali. Voglio comunque il verdetto MDR adesso.",
+      "rubric": [
+        "la risposta propone grl-profile prima di trattare il verdetto come definitivo, ma non blocca inutilmente il turno se i quattro dati necessari sono già disponibili",
+        "se prosegue, dichiara esplicitamente che il verdetto è provvisorio finché il profilo non esiste e usa la severità normal",
+        "usa i quattro fatti pertinenti — cosa fa, chi lo usa, se produce informazione per una decisione su un paziente e mercato — senza inventare altri campi",
+        "non deduce silenziosamente la criticità e non scrive project-profile.md, decisions.md o accepted-risks.md in assenza di consenso",
+        "mantiene il percorso MDSW: finalità, singola funzione, classe probabile, cosa comporta e cosa non comporta"
+      ],
+      "state_prefix": "[la memoria condivisa non contiene project-profile.md, decisions.md o accepted-risks.md; l'utente chiede una risposta nella stessa sessione]"
+    },
+    {
+      "id": "ai-solo-visualizzazione-e-confini",
+      "input": "Run headless. Il nostro prodotto usa un modello AI per estrarre i valori da un referto e mostra al medico il testo estratto accanto all'originale. Non calcola un valore clinico, non interpreta il referto, non allerta e non suggerisce diagnosi o terapia: serve solo a cercare e visualizzare il contenuto. Il fatto che usi AI lo rende automaticamente un MDSW?",
+      "rubric": [
+        "la risposta dice che l'AI non decide la qualificazione: contano finalità e trattamento del dato",
+        "la funzione descritta resta fuori dal perimetro perché archivia, cerca o visualizza senza interpretazione clinica su cui prendere una decisione",
+        "non assegna una classe solo perché il prodotto opera in un contesto sanitario e non qualifica l'intero prodotto senza una funzione medica",
+        "rinvia l'incrocio AI Act × MDR a Nils e l'impianto tecnico AI a Enzo, senza sostituire il verdetto MDSW con una consulenza estranea",
+        "non scrive una riga in decisions.md senza mostrare il testo e ottenere conferma"
+      ],
+      "state_prefix": null
+    }
+  ]
+}

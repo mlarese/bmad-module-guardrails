@@ -1,0 +1,22 @@
+[
+  { "query": "il mio software è un dispositivo medico?", "should_trigger": true },
+  { "query": "la nostra app deve avere la marcatura CE come software medicale?", "should_trigger": true },
+  { "query": "come applico la Regola 11 del MDR al modulo che suggerisce una diagnosi", "should_trigger": true },
+  { "query": "questo monitoraggio della saturazione è classe IIa o IIb?", "should_trigger": true },
+  { "query": "il software calcola un indice sul singolo paziente e guida il medico: in che classe finisce?", "should_trigger": true },
+  { "query": "MDSW e software as a medical device: da dove parte la qualificazione", "should_trigger": true },
+  { "query": "se il medico decide comunque, il mio algoritmo resta classe I?", "should_trigger": true },
+  { "query": "la funzione che allerta su un parametro fisiologico può essere un dispositivo medico?", "should_trigger": true },
+  { "query": "quali conseguenze di progetto ha una classificazione MDR IIa", "should_trigger": true },
+  { "query": "una funzione interpreta dati clinici ma il resto del gestionale è amministrativo: cosa si marca", "should_trigger": true },
+  { "query": "quale base giuridica serve per i dati sanitari dei pazienti", "should_trigger": false },
+  { "query": "come modello il farmaco e la dose nella cartella clinica", "should_trigger": false },
+  { "query": "il nostro chatbot sanitario deve usare RAG o un prompt più lungo", "should_trigger": false },
+  { "query": "NIS2 o DORA si applicano alla nostra software house sanitaria?", "should_trigger": false },
+  { "query": "il visualizzatore DICOM è esposto senza autenticazione: qual è il rischio", "should_trigger": false },
+  { "query": "quale licenza serve per integrare questa libreria clinica", "should_trigger": false },
+  { "query": "come verifico HL7, FHIR e i codici LOINC del mio sistema", "should_trigger": false },
+  { "query": "quali test devo scrivere per il componente che calcola il rischio", "should_trigger": false },
+  { "query": "il modello AI che seleziona i candidati è ad alto rischio secondo l'AI Act", "should_trigger": false },
+  { "query": "scrivi il fascicolo tecnico e la dichiarazione di conformità del prodotto", "should_trigger": false }
+]

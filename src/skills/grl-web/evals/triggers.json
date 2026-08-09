@@ -1,0 +1,22 @@
+[
+  { "query": "creiamo una landing per il mio SaaS partendo dal brief", "should_trigger": true },
+  { "query": "costruisci un mockup HTML a file singolo per questa pagina", "should_trigger": true },
+  { "query": "il mio sito ha più pagine: aiutami a definire struttura e contenuti", "should_trigger": true },
+  { "query": "perché questa landing esistente non converte?", "should_trigger": true },
+  { "query": "riprendi il mockup nella cartella web e aggiorna la pagina", "should_trigger": true },
+  { "query": "promuovi il mockup approvato a un sito vero", "should_trigger": true },
+  { "query": "configura un sito con header condiviso e contenuti che cambiano", "should_trigger": true },
+  { "query": "ho un form nella landing: inseriscilo nel brief e instrada i dati", "should_trigger": true },
+  { "query": "voglio una sola CTA e una promessa che parli al destinatario", "should_trigger": true },
+  { "query": "il brief dice che una direzione visiva è stata scartata: come riprendo il lavoro", "should_trigger": true },
+  { "query": "la pagina sembra generata: scegli font, palette e layout concreti", "should_trigger": false },
+  { "query": "quale percorso utente deve avere il form di prenotazione", "should_trigger": false },
+  { "query": "quale intento di ricerca devo coprire e come strutturo gli URL", "should_trigger": false },
+  { "query": "il sito è pronto: configura DNS, TLS e rollback", "should_trigger": false },
+  { "query": "migra il sito WordPress da Elementor a Gutenberg", "should_trigger": false },
+  { "query": "quale base giuridica serve per il form della landing", "should_trigger": false },
+  { "query": "verifica se la mia pagina è accessibile secondo le norme", "should_trigger": false },
+  { "query": "crea i componenti ACF e il modello contenuti per il sito", "should_trigger": false },
+  { "query": "scrivi un CSS originale per non usare il solito gradiente", "should_trigger": false },
+  { "query": "pubblica il pacchetto statico sul server", "should_trigger": false }
+]
