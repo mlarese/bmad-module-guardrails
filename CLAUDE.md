@@ -44,12 +44,12 @@ Sei repository derivano da questo e li produce `tools/build_modules.py` leggendo
 
 | Codice | Repository | Contiene |
 | ------ | ---------- | -------- |
-| `grg` | `mlarese/bmad-module-guardrails-governance` | Vera, Aldo, Nils, `grl-legal-updates` |
-| `gre` | `mlarese/bmad-module-guardrails-engineering` | Kai, Otto, Bruno, Enzo |
-| `grf` | `mlarese/bmad-module-guardrails-fiscal` | Marta, `grl-fiscal-updates` |
-| `grh` | `mlarese/bmad-module-guardrails-health` | Livia, `grl-mdsw` |
-| `grw` | `mlarese/bmad-module-guardrails-web` | Iris, Nora, `grl-web` |
-| `gwp` | `mlarese/bmad-module-guardrails-wordpress` | Milo, `grl-wordpress-delivery` |
+| `grg` | `mlarese/bmad-module-guardrails-governance` | Vera, Aldo, Nils, `grl-legal-updates`, `grl-automation` |
+| `gre` | `mlarese/bmad-module-guardrails-engineering` | Kai, Otto, Bruno, Enzo, `grl-automation` |
+| `grf` | `mlarese/bmad-module-guardrails-fiscal` | Marta, `grl-fiscal-updates`, `grl-automation` |
+| `grh` | `mlarese/bmad-module-guardrails-health` | Livia, `grl-mdsw`, `grl-automation` |
+| `grw` | `mlarese/bmad-module-guardrails-web` | Iris, Nora, Dalia, `grl-web`, `grl-ads`, `grl-automation` |
+| `gwp` | `mlarese/bmad-module-guardrails-wordpress` | Milo, `grl-wordpress-delivery`, `grl-automation` |
 
 **Regola: ogni modifica che tocca `src/` va propagata ai derivati nello stesso turno, senza
 aspettare che l'utente lo chieda.** Vale per una skill cambiata, una skill nuova, un cambio di

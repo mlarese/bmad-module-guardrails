@@ -23,7 +23,7 @@ visibile di una pagina — passa da un controllo di prosa prima della consegna.
 
 # Setup del modulo Guardrails
 
-Installi Guardrails in un progetto: la registrazione delle dodici
+Installi Guardrails in un progetto: la registrazione delle tredici
 figure nel roster degli agenti, l'installazione delle stanze tematiche di party mode e l'avvio
 della profilazione. L'esito che conta non è il file di config — è che l'utente esca da qui con
 `grl-profile` già eseguito, perché senza profilo di progetto le figure parlano per luoghi comuni.
@@ -76,7 +76,7 @@ python3 ./scripts/merge-party-groups.py \
 Cosa fa, e perché così:
 
 - **Roster** → `{project-root}/_bmad/custom/config.toml`, una tabella `[agents.grl-agent-*]`
-  per figura. È il passo che porta le dodici figure nel party mode: `resolve_party.py` costruisce
+  per figura. È il passo che porta le tredici figure nel party mode: `resolve_party.py` costruisce
   la stanza di default dagli agenti registrati nel config, senza filtrare per modulo o per team.
   Si scrive nel layer `custom/` perché `_bmad/config.toml` e `_bmad/config.user.toml` sono
   rigenerati dall'installer a ogni installazione, mentre `custom/` non viene toccato mai.
@@ -128,7 +128,7 @@ il resolver a quattro layer non legge — la configurazione finirebbe in un file
 python3 {project-root}/_bmad/scripts/resolve_config.py -p "{project-root}" -k agents
 ```
 
-Devono comparire tutte e dodici le chiavi `grl-agent-*` accanto agli agenti già installati. Se
+Devono comparire tutte e tredici le chiavi `grl-agent-*` accanto agli agenti già installati. Se
 mancano, il party mode non le vedrà: mostra l'output e fermati, invece di chiudere il setup.
 
 Non serve una verifica separata della severità: le figure la derivano dal profilo condiviso,
@@ -149,7 +149,7 @@ i valori di base non sono ancora stati raccolti); i valori conservano il token `
 letterale.
 
 Avverti però l'utente di un limite reale: `merge-config.py` scrive la sezione del modulo ma
-**non** la tabella degli agenti. Su un'installazione YAML le dodici figure vanno quindi registrate
+**non** la tabella degli agenti. Su un'installazione YAML le tredici figure vanno quindi registrate
 con il meccanismo di quella versione di BMad, altrimenti non compaiono nel party mode.
 `register-agents.py` non copre questo caso e lo dichiara invece di fingere.
 
@@ -157,20 +157,20 @@ con il meccanismo di quella versione di BMad, altrimenti non compaiono nel party
 
 - **Non crea `{project-root}/_bmad/memory/grl-shared/`.** La crea `grl-profile` alla prima
   esecuzione, quando ha qualcosa da scriverci. Una cartella vuota in `_bmad/memory/` è rumore.
-- **Non imposta una stanza di default.** Le dodici figure restano nella stanza principale insieme
+- **Non imposta una stanza di default.** Le tredici figure restano nella stanza principale insieme
   agli agenti BMM; in più `grl-setup` installa stanze tematiche richiamabili con
   `bmad-party-mode --party <id>`. Il default resta quello deciso dal progetto o dal team.
 - **Non tocca le skill BMM.** Vedi il passo facoltativo qui sotto.
 
 ## Chiusura
 
-1. Mostra cosa è stato scritto: le dodici figure registrate (nome, icona, titolo), le voci di
+1. Mostra cosa è stato scritto: le tredici figure registrate (nome, icona, titolo), le voci di
    help aggiunte e i file toccati.
 2. Mostra il `module_greeting` di `module.yaml`.
 3. **Proponi `grl-profile` e, se l'utente accetta, eseguilo subito.** È il passo che rende utile
    tutto il resto: otto campi, pochi minuti, quasi tutti pre-compilati leggendo il repository.
    L'unico che deve dichiarare l'utente è la criticità del progetto, perché è quella che regola
-   quanto saranno severe tutte e dodici le figure. Se rifiuta, va bene: digli che ogni figura
+   quanto saranno severe tutte e tredici le figure. Se rifiuta, va bene: digli che ogni figura
    proporrà la profilazione da sé quando troverà il profilo mancante.
 4. Nomina il passo **facoltativo e reversibile**, senza eseguirlo: le figure possono essere
    consultate automaticamente dentro i flussi BMM (`bmad-prd`, `bmad-architecture`, `bmad-ux`,

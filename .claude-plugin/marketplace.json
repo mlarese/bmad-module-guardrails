@@ -1,13 +1,13 @@
 {
   "name": "guardrails",
   "owner": "mlarese",
-  "description": "Modulo BMad Guardrails: dodici figure e otto workflow per lo sviluppo software, inclusi SEO, WordPress a componenti e consegna WordPress controllata",
+  "description": "Modulo BMad Guardrails: tredici figure e dieci workflow per sviluppo software, legale, fisco, design, architettura, medicina, SEO, Google Ads e automazioni controllate",
   "plugins": [
     {
       "name": "grl",
       "source": "./src",
-      "description": "Guardrails — dodici figure per privacy, sicurezza, legale, compliance, fisco, UI, architettura, ops, sanità, AI, WordPress e SEO. Include otto workflow, tra cui ricerca legale e fiscale live, siti e consegna WordPress fino al release gate.",
-      "version": "1.17.0",
+      "description": "Guardrails — tredici figure per privacy, sicurezza, legale, compliance, fisco, UI, architettura, ops, sanità, AI, WordPress, SEO e paid media. Include dieci workflow, tra cui ricerca live, siti, Google Ads, automazione con dry-run e consegna WordPress fino al release gate.",
+      "version": "1.18.0",
       "author": "mlarese",
       "homepage": "https://github.com/mlarese/bmad-module-guardrails",
       "repository": "https://github.com/mlarese/bmad-module-guardrails",
@@ -25,6 +25,7 @@
         "src/skills/grl-agent-ai",
         "src/skills/grl-agent-wordpress",
         "src/skills/grl-agent-seo",
+        "src/skills/grl-agent-ads",
         "src/skills/grl-profile",
         "src/skills/grl-board",
         "src/skills/grl-mdsw",
@@ -32,7 +33,9 @@
         "src/skills/grl-fiscal-updates",
         "src/skills/grl-setup",
         "src/skills/grl-web",
-        "src/skills/grl-wordpress-delivery"
+        "src/skills/grl-wordpress-delivery",
+        "src/skills/grl-ads",
+        "src/skills/grl-automation"
       ]
     }
   ]

@@ -40,10 +40,24 @@ members = ["grl-agent-seo", "grl-agent-ui-critic", "grl-agent-wordpress", "bmad-
 memory = false
 
 [[workflow.party_groups]]
+id = "grl-paid-media"
+name = "Guardrails Paid Media"
+scene = "Tavolo media buying: Dalia parte dall'obiettivo e dalla conversione che il business riconosce davvero; Nora separa Search organica da paid, Iris controlla creatività e landing, Vera ferma dati e consenso fuori perimetro, Aldo blocca claim o diritti non dimostrati. Nessuno sposta budget o pubblica: si discutono evidenze, test, limiti, approvazioni e rollback."
+members = ["grl-agent-ads", "grl-agent-seo", "grl-agent-ui-critic", "grl-agent-privacy", "grl-agent-legal", "bmad-agent-ux-designer"]
+memory = false
+
+[[workflow.party_groups]]
 id = "grl-wordpress-delivery"
 name = "Guardrails WordPress Delivery"
 scene = "Laboratorio WordPress: Milo decide modello contenuti, campi custom, template e componenti; Iris controlla la qualità visiva, Otto i confini e Bruno la messa online. Elementor resta confinato dove serve e ogni media deve avere un attachment ID nella Media Library."
 members = ["grl-agent-wordpress", "grl-agent-ui-critic", "grl-agent-architecture", "grl-agent-ops"]
+memory = false
+
+[[workflow.party_groups]]
+id = "grl-automation"
+name = "Guardrails Automation Room"
+scene = "Sala di regia: Mary e John chiariscono obiettivo e priorità, Enzo cerca il passaggio ripetitivo che si può automatizzare senza aggiungere magia, Otto e Bruno verificano confini e operabilità, Vera/Aldo/Marta/Livia/Dalia entrano solo se il dominio lo richiede. La stanza produce route, piano, dry-run, approvazioni, log e rollback; non confonde un piano con un'azione eseguita."
+members = ["bmad-agent-analyst", "bmad-agent-pm", "grl-agent-ai", "grl-agent-architecture", "grl-agent-ops", "grl-agent-privacy", "grl-agent-legal", "grl-agent-fiscal", "grl-agent-health", "grl-agent-ads", "bmad-agent-dev"]
 memory = false
 
 [[workflow.party_groups]]
@@ -57,5 +71,5 @@ memory = false
 id = "grl-full-board"
 name = "Guardrails Full Board"
 scene = "Collegio completo Guardrails: tutte le figure del modulo sono disponibili, ma parlano solo quando il loro dominio cambia la decisione. Il collegio deve esplicitare i conflitti e lasciare all'utente la scelta finale."
-members = ["grl-agent-privacy", "grl-agent-security", "grl-agent-legal", "grl-agent-compliance", "grl-agent-fiscal", "grl-agent-ui-critic", "grl-agent-architecture", "grl-agent-ops", "grl-agent-health", "grl-agent-ai", "grl-agent-wordpress", "grl-agent-seo"]
+members = ["grl-agent-privacy", "grl-agent-security", "grl-agent-legal", "grl-agent-compliance", "grl-agent-fiscal", "grl-agent-ui-critic", "grl-agent-architecture", "grl-agent-ops", "grl-agent-health", "grl-agent-ai", "grl-agent-wordpress", "grl-agent-seo", "grl-agent-ads"]
 memory = false

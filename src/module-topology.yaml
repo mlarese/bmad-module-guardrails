@@ -5,7 +5,7 @@
 # repository resta la fonte unica: i repository derivati non si modificano a mano,
 # si rigenerano.
 #
-# Il bundle `grl` resta la superficie completa — dodici figure e otto workflow in
+# Il bundle `grl` resta la superficie completa — tredici figure e dieci workflow in
 # un'unica installazione. I moduli tematici sono alternative al bundle, non
 # aggiunte: installano le stesse skill con lo stesso nome, quindi bundle e moduli
 # tematici non convivono nello stesso progetto.
@@ -24,11 +24,13 @@ bundle:
   repo: bmad-module-guardrails
   mode: compatibility-bundle
   description: "Bundle completo Guardrails: tutte le figure e i workflow in un'unica installazione."
-  # Gruppi trasversali: restano solo nel bundle, perché convocano figure che nei
-  # moduli tematici stanno in package diversi.
+  # Gruppi trasversali del bundle e stanze che possono essere filtrate nei moduli
+  # tematici quando restano abbastanza figure installate.
   party_groups:
     - grl-full-board
     - grl-release-gate
+    - grl-paid-media
+    - grl-automation
 
 core:
   # Duplicate in ogni modulo tematico, rinominate con il codice del modulo.
@@ -51,8 +53,10 @@ modules:
       - grl-agent-legal
       - grl-agent-compliance
       - grl-legal-updates
+      - grl-automation
     party_groups:
       - grl-governance
+      - grl-automation
 
   - code: gre
     name: Guardrails Engineering
@@ -65,8 +69,10 @@ modules:
       - grl-agent-security
       - grl-agent-ops
       - grl-agent-ai
+      - grl-automation
     party_groups:
       - grl-engineering
+      - grl-automation
 
   - code: grf
     name: Guardrails Fiscal
@@ -77,8 +83,10 @@ modules:
     skills:
       - grl-agent-fiscal
       - grl-fiscal-updates
+      - grl-automation
     party_groups:
       - grl-fiscal
+      - grl-automation
 
   - code: grh
     name: Guardrails Health
@@ -89,21 +97,28 @@ modules:
     skills:
       - grl-agent-health
       - grl-mdsw
+      - grl-automation
     party_groups:
       - grl-health
+      - grl-automation
 
   - code: grw
     name: Guardrails Web Experience
     repo: bmad-module-guardrails-web
     status: derived
-    purpose: "Qualità visiva, findability, landing page e siti."
-    description: "Due figure di presidio su qualità visiva dell'interfaccia e SEO, più il workflow che costruisce landing page e siti dal brief di conversione al progetto. Contro le pagine che sembrano generate e le promesse di ranking."
+    purpose: "Qualità visiva, findability, landing page, siti e paid media."
+    description: "Tre figure di presidio su qualità visiva dell'interfaccia, SEO e media buying/ADV, più i workflow che costruiscono landing page e siti e coordinano audit, piano, tracking e preflight delle campagne Google Ads. Contro le pagine che sembrano generate, le promesse di ranking e la spesa senza misura."
     skills:
       - grl-agent-ui-critic
       - grl-agent-seo
+      - grl-agent-ads
       - grl-web
+      - grl-ads
+      - grl-automation
     party_groups:
       - grl-web
+      - grl-paid-media
+      - grl-automation
 
   - code: gwp
     name: Guardrails WordPress
@@ -114,5 +129,7 @@ modules:
     skills:
       - grl-agent-wordpress
       - grl-wordpress-delivery
+      - grl-automation
     party_groups:
       - grl-wordpress-delivery
+      - grl-automation

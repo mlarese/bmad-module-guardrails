@@ -1,0 +1,12 @@
+[
+  { "query": "usa grl-ads per auditare l'export delle mie campagne", "should_trigger": true },
+  { "query": "prepara il piano media e il tracking prima del lancio", "should_trigger": true },
+  { "query": "confronta due periodi e prepara un change set per Google Ads", "should_trigger": true },
+  { "query": "fai il preflight della campagna senza pubblicarla", "should_trigger": true },
+  { "query": "applica il change set con dry-run e rollback", "should_trigger": true },
+  { "query": "crea una nuova identità visiva per il brand", "should_trigger": false },
+  { "query": "verifica la base giuridica del remarketing", "should_trigger": false },
+  { "query": "calcola l'IVA sulla fattura dell'agenzia", "should_trigger": false },
+  { "query": "scrivi il codice del sito", "should_trigger": false },
+  { "query": "il mio sito ha perso indicizzazione", "should_trigger": false }
+]

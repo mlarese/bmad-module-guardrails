@@ -1,10 +1,10 @@
 # Guardrails (`grl`)
 
-Modulo [BMad](https://github.com/bmad-code-org/BMAD-METHOD) con **dodici figure di presidio** che
+Modulo [BMad](https://github.com/bmad-code-org/BMAD-METHOD) con **tredici figure di presidio** che
 affiancano il team dentro il ciclo di sviluppo software: privacy e GDPR, sicurezza applicativa,
 legale e licenze, compliance normativa, fisco e finanza agevolata, qualità visiva della UI, disciplina architetturale del
 codice, infrastruttura e operatività, dominio clinico del software sanitario, impianto delle
-applicazioni che usano modelli linguistici, architettura WordPress a componenti e SEO.
+applicazioni che usano modelli linguistici, architettura WordPress a componenti, SEO e paid media/ADV.
 
 Guardrail, non autista: il modulo tiene il progetto in carreggiata, le decisioni restano al team.
 
@@ -17,12 +17,13 @@ tutto il ciclo, dai requisiti al pre-rilascio.
 Le figure **parlano, non producono documenti formali**: niente DPIA firmate, niente registro dei
 trattamenti, niente parere professionale sostitutivo. I due workflow di ricerca producono invece
 digest temporali verificabili con fonti e data di accesso; `grl-web` produce landing page e siti,
-mentre `grl-wordpress-delivery` porta una consegna WordPress fino al release gate. Le decisioni del
-modulo restano righe brevi nella memoria condivisa del progetto.
+mentre `grl-wordpress-delivery` porta una consegna WordPress fino al release gate. `grl-ads`
+coordina campagne Google Ads e ADV, e `grl-automation` compone i passaggi ripetitivi con read-only,
+dry-run, approvazioni e rollback. Le decisioni del modulo restano righe brevi nella memoria condivisa.
 
-## Le dodici figure
+## Le tredici figure
 
-Le figure sono agenti interattivi, non dodici revisori da convocare sempre insieme. In
+Le figure sono agenti interattivi, non tredici revisori da convocare sempre insieme. In
 auto-attivazione parla al massimo una figura — quella con la competenza decisiva — e lascia una
 traccia breve nella memoria condivisa solo quando nasce una decisione o l'utente accetta un
 rischio. Per una lettura collegiale dello stesso artefatto si usa `grl-board`, che seleziona le
@@ -42,6 +43,7 @@ figure pertinenti e rende espliciti anche i motivi di esclusione.
 | 🧠 **Enzo**<br>AI Engineer | LLM, prompt, RAG, embedding e vector store, orchestrazione, tool calling, agenti, output strutturati, eval, allucinazioni, costi, latenza e automazioni. | Parte dalla domanda «serve davvero un modello?» e, se serve, definisce l'impianto minimo che regge quando il modello sbaglia: pipeline, validazione, valutazione, costi e operatività. |
 | 🧩 **Milo**<br>WordPress Component Architect | Siti e temi/plugin WordPress, Gutenberg, Elementor, ACF, custom post type, campi custom, template parts, Block Bindings e gestione dei media. | Progetta un modello di contenuti e componenti riusabili, usa Gutenberg come default, delimita Elementor e mantiene gli asset nella Media Library invece di lasciarli in pagine monolitiche. |
 | 🔎 **Nora**<br>SEO Strategist & Search Systems Auditor | Domanda e intento di ricerca, architettura informativa, crawling, indicizzazione, contenuti, dati strutturati, performance, migrazioni e Search Console. | Verifica sempre live le regole e le feature SEO, riporta `as_of`, distingue il blocco tecnico dall'ipotesi di ranking e lascia una verifica osservabile; non promette posizionamenti. |
+| 📣 **Dalia**<br>Media Manager & Paid Advertising Strategist | Google Ads, Search, Performance Max, Display, YouTube, campagne ADV, audience, creatività, tracking, consenso, budget e policy. | Traduce l'obiettivo in un piano media misurabile, ordina evidenze e ipotesi, propone change set con dry-run e rollback; non sposta budget o pubblica senza autorizzazione. |
 
 ## Workflow: dal profilo alla consegna
 
@@ -50,7 +52,7 @@ asse tecnico o di dominio. Questa è la scelta pratica da fare:
 
 | Workflow | Quando usarlo | Come lavora | Risultato |
 | --- | --- | --- | --- |
-| `grl-setup` | Prima installazione o riconfigurazione di Guardrails in un progetto BMad. | Riconosce la configurazione TOML/YAML, registra le dodici figure, aggiorna il catalogo help e installa le stanze tematiche di `bmad-party-mode`. È idempotente e preserva gli override fuori dal blocco Guardrails. | Configurazione, roster e stanze aggiornati. Non crea la memoria condivisa: propone subito `grl-profile`. |
+| `grl-setup` | Prima installazione o riconfigurazione di Guardrails in un progetto BMad. | Riconosce la configurazione TOML/YAML, registra le tredici figure, aggiorna il catalogo help e installa le stanze tematiche di `bmad-party-mode`. È idempotente e preserva gli override fuori dal blocco Guardrails. | Configurazione, roster e stanze aggiornati. Non crea la memoria condivisa: propone subito `grl-profile`. |
 | `grl-profile` | Primo passo dopo il setup, progetto nuovo, repository vuoto o profilo da riallineare. | Scansiona manifest, README, dipendenze-segnale e documenti; compila gli otto campi del profilo e chiede solo ciò che il repository non sa. La criticità viene sempre dichiarata dall'utente; in sanità aggiunge fino a cinque campi. | Una pagina in `_bmad/memory/grl-shared/project-profile.md`, da cui deriva la severità di default. Su un repository vuoto i campi non deducibili diventano `non noto`. |
 | `grl-board` | Revisione di un artefatto, vista dei rischi accettati o gate di una release identificata. | Per la revisione legge memoria e artefatto, convoca in genere due-quattro figure sui segnali concreti e rende esplicite le esclusioni. Nel release gate verifica invece identità, ambiente, perimetro, evidenze e blocchi della release. | Riepilogo in conversazione oppure report in `{output_folder}/release-gates/` con verdetto `GO`, `GO_CON_CONDIZIONI`, `NO_GO` o `EVIDENZA_INSUFFICIENTE`. |
 | `grl-mdsw` | Quando vuoi sapere se una **funzione** software, per la finalità dichiarata, rientra nel perimetro dei dispositivi medici. Il solo fatto che usi dati sanitari non basta. | Pone quattro domande: la finalità riguarda un singolo paziente? Il software archivia/mostra il dato oppure lo interpreta, calcola o usa per suggerire una decisione? Quale classe indica la Regola 11? Che cosa cambia nel piano? | Verdetto chiaro: fuori dal MDR oppure classe I, IIa, IIb o III, con conseguenze e non-conseguenze. Non emette una certificazione CE e non produce fascicolo tecnico; registra solo il verdetto in memoria condivisa. |
@@ -58,6 +60,8 @@ asse tecnico o di dominio. Questa è la scelta pratica da fare:
 | `grl-fiscal-updates` | Ricerca di novità fiscali, circolari, bandi, incentivi o emendamenti in un periodo preciso. | Applica lo stesso percorso verificabile del workflow legale, aggiungendo requisiti, versioni, scadenze, spese ammissibili e soggetti interessati. | Digest in `_bmad-output/research`, con fonti primarie, copertura dichiarata, requisiti verificati, registro delle verifiche e staleness map. |
 | `grl-web` | Creare una landing o un sito, riprendere un mockup, diagnosticare una pagina che non converte o promuovere un mockup approvato a progetto vero. | Parte dal brief di conversione — destinatario, promessa, obiezione, prova e una sola azione — prima di scrivere HTML. Usa uno slug di lavoro riutilizzabile, passa il risultato al gate `grl-board` e coinvolge Iris prima della consegna; per la messa online passa a Bruno. | In `_bmad-output/web`: `brief.md` e mockup HTML a file singolo, oppure `sito.md` e `stack.md` per un sito reale. La promozione produce il progetto statico con SEO, accessibilità e CSS generato. |
 | `grl-wordpress-delivery` | Creare una consegna WordPress, riprenderla, migrare un sito esistente o verificare una consegna. | Mantiene uno stato di lavoro strutturato, delega a Milo il lavoro WordPress e porta la stessa `release_identity` attraverso review sostanziale, review di prosa e release gate di `grl-board`. | `delivery.md`, modello, piano componenti, mappa media ed evidenze in `{output_folder}/wordpress/{slug}/`, più il report del release gate. |
+| `grl-ads` | Audit, piano, tracking, ottimizzazione o preflight di Google Ads e ADV. | Coordina Dalia con Nora, Iris, Vera e Aldo quando il tema lo richiede; prepara change set e applica solo con scope, dry-run, approvazione, limite e rollback. | Artefatti in `{output_folder}/ads/{slug}/`: brief, inventory, tracking plan, campaign plan, change set e run log. |
+| `grl-automation` | Automatizzare un processo software, legale, fiscale, di design, architettura, medicina o paid media. | Classifica il dominio, sceglie agenti e workflow, esegue prima read-only e dry-run, separa le approvazioni per scrittura, spesa, dati regolamentati e azioni irreversibili. | Runbook e log in `{output_folder}/automation/{slug}/`, con evidenze, handoff, approvazioni e rollback. |
 
 ### Sequenza consigliata
 
@@ -67,6 +71,8 @@ asse tecnico o di dominio. Questa è la scelta pratica da fare:
 4. Si usa `grl-board` quando lo stesso artefatto richiede più assi di revisione e si vuole vedere anche ciò che non è pertinente.
 5. Per WordPress, `grl-wordpress-delivery` crea, riprende, migra o verifica la consegna e la porta al release gate di `grl-board`.
 6. Per gli altri siti, `grl-web` guida brief, mockup, diagnosi e promozione; Nora verifica la findability e gli altri agenti entrano solo sui segnali che compaiono.
+7. Per Google Ads e ADV, `grl-ads` parte da conversione e tracking, passa da preflight e lascia a Dalia change set controllabili.
+8. Per processi ripetitivi fra più domini, `grl-automation` costruisce il runbook e applica solo i passi approvati.
 
 ### Testi e contenuti in più lingue
 
@@ -95,7 +101,7 @@ per raccogliere i contenuti in tutte le lingue, organizzare le traduzioni e pian
 **Profilo di progetto.** `grl-profile` scrive `_bmad/memory/grl-shared/project-profile.md`: settore,
 tipo di software, dati personali trattati, mercato, stack, componenti AI, vincoli noti e — campo
 decisivo — la **criticità dichiarata** (hobby/prototipo · interno · produzione con clienti ·
-regolamentato). È la criticità a decidere quanto sono severe tutte e dodici le figure. Se il
+regolamentato). È la criticità a decidere quanto sono severe tutte e tredici le figure. Se il
 settore dichiarato è sanitario, il profilo raccoglie in più finalità del software, contesto d'uso,
 integrazioni sanitarie, ruolo GDPR ed eventuale qualificazione MDR; altrimenti quei campi non
 vengono nemmeno nominati.
@@ -145,11 +151,12 @@ del codice, originalità visiva. L'attrito è voluto. Enzo si aggiunge alla stes
 lei implementa, lui guarda l'impianto della pipeline AI e chiede cosa succede quando il modello
 sbaglia.
 
-Tutte e dodici entrano nel roster principale di `bmad-party-mode`, accanto ai cinque agenti BMM.
+Tutte e tredici entrano nel roster principale di `bmad-party-mode`, accanto agli agenti BMM
+installati.
 
 ## Moduli tematici
 
-Il bundle `grl` installa tutto: dodici figure e otto workflow. Chi ha bisogno di una sola area
+Il bundle `grl` installa tutto: tredici figure e dieci workflow. Chi ha bisogno di una sola area
 può installare il modulo di quell'area — sei repository generati da questo, che resta la fonte
 unica delle skill.
 
@@ -159,7 +166,7 @@ unica delle skill.
 | `gre` | [`…-engineering`](https://github.com/mlarese/bmad-module-guardrails-engineering) | Otto · Kai · Bruno · Enzo |
 | `grf` | [`…-fiscal`](https://github.com/mlarese/bmad-module-guardrails-fiscal) | Marta · `grl-fiscal-updates` |
 | `grh` | [`…-health`](https://github.com/mlarese/bmad-module-guardrails-health) | Livia · `grl-mdsw` |
-| `grw` | [`…-web`](https://github.com/mlarese/bmad-module-guardrails-web) | Iris · Nora · `grl-web` |
+| `grw` | [`…-web`](https://github.com/mlarese/bmad-module-guardrails-web) | Iris · Nora · Dalia · `grl-web` · `grl-ads` |
 | `gwp` | [`…-wordpress`](https://github.com/mlarese/bmad-module-guardrails-wordpress) | Milo · `grl-wordpress-delivery` |
 
 Ogni modulo porta la propria copia delle tre skill del core, rinominate con il codice del modulo:
@@ -184,7 +191,7 @@ python3 tools/publish_modules.py -m "<msg>"    # commit e push sui sei repositor
 La build legge [`src/module-topology.yaml`](src/module-topology.yaml) — la mappa canonica di cosa
 va dove — e copia **solo i file tracciati da git**, così referti di analisi e cache restano fuori.
 Per ogni modulo filtra roster, catalogo di help, gruppi di party mode e tabelle delle skill al
-perimetro reale, e adatta i conteggi: dove il bundle dice «dodici figure», il modulo dice il numero
+perimetro reale, e adatta i conteggi: dove il bundle dice «tredici figure», il modulo dice il numero
 che ha davvero. `dist/` non è versionata qui: ogni cartella è il clone del repository derivato, e
 `tools/publish_modules.py` la committa e la pusha — saltando i moduli senza modifiche e riallineando
 l'About di GitHub.
@@ -208,6 +215,8 @@ grl-fiscal              Marta · Aldo · Nils
 grl-engineering         Otto · Kai · Bruno · Enzo
 grl-health              Livia · Vera · Nils · Kai
 grl-web                 Nora · Iris · Milo · Sally (se BMM è installato)
+grl-paid-media          Dalia · Nora · Iris · Vera · Aldo
+grl-automation          agenti di regia e figure del dominio in base alla richiesta
 grl-wordpress-delivery  Milo · Iris · Otto · Bruno
 grl-release-gate        Vera · Kai · Aldo · Nils · Otto · Bruno · Nora
 grl-full-board          tutte le figure Guardrails
@@ -221,8 +230,9 @@ bmad-party-mode --party grl-wordpress-delivery
 
 La configurazione viene scritta nel layer non rigenerato
 `_bmad/custom/bmad-party-mode.toml`; gli override e i gruppi dell'utente fuori dal blocco
-Guardrails vengono preservati. Le due stanze trasversali — `grl-release-gate` e `grl-full-board` —
-esistono solo nel bundle: convocano figure che nei moduli tematici stanno in package diversi.
+Guardrails vengono preservati. `grl-release-gate` e `grl-full-board` restano le stanze trasversali
+del bundle; `grl-paid-media` e `grl-automation` vengono filtrate nei moduli tematici quando restano
+almeno due figure installate.
 
 ## Installazione
 
@@ -232,7 +242,7 @@ Con l'installer BMad, indicando questo repository come sorgente custom:
 npx bmad-method install --custom-source https://github.com/mlarese/bmad-module-guardrails
 ```
 
-L'installer copia le venti skill, registra le dodici figure come agenti
+L'installer copia le ventitré skill, registra le tredici figure come agenti
 (`[agents.grl-agent-*]` nella configurazione) — che è ciò che le fa comparire nel roster di
 `bmad-party-mode` — aggiunge le voci di help al catalogo `_bmad/_config/bmad-help.csv` e,
 eseguendo `grl-setup`, installa anche le stanze tematiche.
@@ -267,6 +277,7 @@ src/
     ├── grl-agent-ai/             🧠 Enzo
     ├── grl-agent-wordpress/      🧩 Milo
     ├── grl-agent-seo/            🔎 Nora
+    ├── grl-agent-ads/            📣 Dalia
     ├── grl-profile/              workflow — profilo di progetto
     ├── grl-board/                workflow — revisione collegiale
     ├── grl-mdsw/                 workflow — qualificazione dispositivo medico
@@ -274,6 +285,8 @@ src/
     ├── grl-fiscal-updates/       workflow — ultime novità fiscali con doppia verifica
     ├── grl-web/                  workflow che produce landing page e siti
     ├── grl-wordpress-delivery/   workflow — consegna WordPress fino al release gate
+    ├── grl-ads/                  workflow — audit, piano, tracking e preflight ADV
+    ├── grl-automation/           workflow — routing, dry-run, approvazioni e rollback
     └── grl-setup/                installazione, roster e stanze party tematiche
         └── assets/party-groups.toml
 tools/

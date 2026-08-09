@@ -1,0 +1,3 @@
+campaign,status,currency,date,spend,impressions,clicks,conversions,conversion_definition
+search-brand,enabled,EUR,2026-07-01,120.00,3400,480,12,lead_validato
+search-generic,enabled,EUR,2026-07-01,520.00,12000,390,3,form_submit_non_verificato

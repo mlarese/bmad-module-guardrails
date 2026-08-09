@@ -7,7 +7,7 @@
 
 Perché serve
 ------------
-Il bundle `grl` installa dodici figure e otto workflow in un colpo solo. Chi vuole
+Il bundle `grl` installa tredici figure e dieci workflow in un colpo solo. Chi vuole
 solo la governance normativa, o solo il presidio ingegneristico, non ha motivo di
 portarsi le altre dieci figure. La soluzione è un repository per area — ma scritto a
 mano diventerebbe subito divergente dal bundle.
@@ -67,7 +67,7 @@ MIN_PARTY_MEMBERS = 2
 # significato.
 BOARD_ROSTER_FILES = {"SKILL.md", "selection.md"}
 
-# Il bundle conta dodici figure e lo dice ovunque nei testi del core. In un modulo
+# Il bundle conta tredici figure e lo dice ovunque nei testi del core. In un modulo
 # tematico quel numero è falso, e un numero falso in una skill è un'istruzione
 # sbagliata. Con più figure si sostituisce il numerale; con una sola si toglie e
 # resta il plurale generico, che è impreciso ma non falso — riscrivere l'accordo
@@ -141,9 +141,9 @@ def core_renames(core_skills: list[str], code: str) -> dict[str, str]:
 def adapt_counts(text: str, count: int) -> str:
     """Riporta al numero reale di figure i conteggi scritti per il bundle.
 
-    Tocca solo le costruzioni in cui `dodici` è accostato alle figure o alle loro
-    chiavi di config: «dodici documenti» dentro l'esempio di Enzo, o «dodici pagine»
-    in una reference di grl-web, restano quello che sono.
+    Tocca solo le costruzioni in cui `tredici` (o il vecchio `dodici`) è accostato alle
+    figure o alle loro chiavi di config: «tredici documenti» dentro un esempio, o
+    «tredici pagine» in una reference, restano quello che sono.
     """
     numeral = NUMERALS.get(count)
 
@@ -156,9 +156,9 @@ def adapt_counts(text: str, count: int) -> str:
             return f"{numeral}{space}{noun}"
         return noun
 
-    text = re.sub(r"una\s+delle\s+dodici\s+figure", "una delle figure", text)
-    text = re.sub(r"tutte\s+e\s+dodici", replace_all_of, text)
-    text = re.sub(r"\bdodici(\s+)(figure|chiavi)", replace_noun, text)
+    text = re.sub(r"una\s+delle\s+(?:dodici|tredici)\s+figure", "una delle figure", text)
+    text = re.sub(r"tutte\s+e\s+(?:dodici|tredici)", replace_all_of, text)
+    text = re.sub(r"\b(?:dodici|tredici)(\s+)(figure|chiavi)", replace_noun, text)
     return text
 
 

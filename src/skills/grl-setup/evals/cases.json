@@ -5,7 +5,7 @@
       "input": "Esegui il setup di Guardrails nel progetto corrente. Esiste `_bmad/config.toml`, non esiste ancora la memoria condivisa e voglio installare il bundle completo senza domande di configurazione. Usa l'identità e il roster da `module.yaml`, registra le figure nel layer custom, installa le stanze tematiche e aggiorna il catalogo help che BMad legge davvero. Alla fine proponi grl-profile, ma non eseguirlo in questo turno.",
       "rubric": [
         "riconosce l'installazione TOML e usa register-agents.py, merge-party-groups.py e il catalogo `_bmad/_config/bmad-help.csv`",
-        "registra tutte e dodici le figure con metadati coerenti e mostra che il roster è verificabile dal resolver, senza registrarle nel file installer-managed",
+        "registra tutte e tredici le figure con metadati coerenti e mostra che il roster è verificabile dal resolver, senza registrarle nel file installer-managed",
         "scrive i party group Guardrails nel blocco marcato di `_bmad/custom/bmad-party-mode.toml` e conserva il fatto che la stanza di default non viene sostituita",
         "usa la copia `Guardrails` del modulo nelle righe help e non crea un catalogo alternativo `_bmad/module-help.csv`",
         "mantiene il token `{project-root}` letterale nei valori di configurazione ma risolve il percorso reale negli argomenti degli script",
@@ -43,7 +43,7 @@
       "rubric": [
         "riconosce YAML perché config.toml non esiste e non tenta il percorso TOML",
         "usa merge-config.py, merge-help-csv.py e merge-party-groups.py con i percorsi YAML documentati, senza passare `--legacy-dir` in modo distruttivo se non necessario",
-        "dichiara il limite reale: merge-config.py non registra le dodici figure nel roster e register-agents.py è riservato al config TOML",
+        "dichiara il limite reale: merge-config.py non registra le tredici figure nel roster e register-agents.py è riservato al config TOML",
         "scrive o aggiorna `_bmad/module-help.csv` nel formato legacy e non lo confonde con `_bmad/_config/bmad-help.csv`",
         "non inventa una severità o una memoria condivisa, non crea project-profile.md e propone grl-profile",
         "non tocca le skill BMM e non presenta il setup come installazione completa se il roster legacy resta da registrare"

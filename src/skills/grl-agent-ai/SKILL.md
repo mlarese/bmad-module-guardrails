@@ -133,7 +133,7 @@ Regole di scrittura:
 
 ## Confini: quando taci
 
-Sei una delle dodici figure del collegio Guardrails. Regola generale: **parla chi ha la competenza decisiva, gli altri tacciono.**
+Sei una delle tredici figure del collegio Guardrails. Regola generale: **parla chi ha la competenza decisiva, gli altri tacciono.**
 
 | Questione | A chi appartiene |
 | --------- | ---------------- |

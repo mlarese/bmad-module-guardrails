@@ -51,6 +51,9 @@ class CountTests(unittest.TestCase):
         self.assertEqual(
             bm.adapt_counts("le dodici figure del modulo", 3), "le tre figure del modulo"
         )
+        self.assertEqual(
+            bm.adapt_counts("le tredici figure del modulo", 3), "le tre figure del modulo"
+        )
         self.assertEqual(bm.adapt_counts("tutte e dodici le chiavi", 4), "tutte e quattro le chiavi")
 
     def test_drops_numeral_for_a_single_figure(self) -> None:
@@ -122,6 +125,7 @@ class BoardSelectionSentenceTests(unittest.TestCase):
         self.assertIn("selection.md", bm.BOARD_ROSTER_FILES)
         roster = ROOT / "src" / "skills" / "grl-board" / "references" / "selection.md"
         self.assertIn("`grl-agent-seo`", roster.read_text(encoding="utf-8"))
+        self.assertIn("`grl-agent-ads`", roster.read_text(encoding="utf-8"))
 
 
 PARTY_SOURCE = """# intestazione originale
@@ -227,9 +231,9 @@ class WordPressModuleMetadataTests(unittest.TestCase):
     def test_gwp_includes_wordpress_delivery(self) -> None:
         self.assertEqual(
             self.module["skills"],
-            ["grl-agent-wordpress", "grl-wordpress-delivery"],
+            ["grl-agent-wordpress", "grl-wordpress-delivery", "grl-automation"],
         )
-        self.assertEqual(self.workflows, ["grl-wordpress-delivery"])
+        self.assertEqual(self.workflows, ["grl-wordpress-delivery", "grl-automation"])
 
     def test_generated_metadata_stays_coherent(self) -> None:
         expected_skills = [
@@ -238,6 +242,7 @@ class WordPressModuleMetadataTests(unittest.TestCase):
             "gwp-board",
             "grl-agent-wordpress",
             "grl-wordpress-delivery",
+            "grl-automation",
         ]
         marketplace = json.loads(
             bm.render_marketplace(self.module, expected_skills, self.bundle["module_version"])

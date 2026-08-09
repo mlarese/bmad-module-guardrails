@@ -11,14 +11,14 @@
 
 code: grl
 name: Guardrails
-description: "Dodici figure di presidio — privacy e GDPR, sicurezza applicativa, legale e licenze, compliance normativa, fisco e finanza agevolata, qualità visiva della UI, disciplina architetturale del codice, infrastruttura e operatività, dominio clinico del software sanitario, impianto delle applicazioni che usano modelli linguistici, architettura WordPress a componenti e SEO — che affiancano il team dentro il ciclo di sviluppo, quando cambiare costa ancora poco. Include due workflow di ricerca live per gli aggiornamenti legali e fiscali, `grl-web` per landing page e siti e `grl-wordpress-delivery` per consegne WordPress fino al release gate."
-module_version: 1.17.0
+description: "Tredici figure di presidio — privacy e GDPR, sicurezza applicativa, legale e licenze, compliance normativa, fisco e finanza agevolata, qualità visiva della UI, disciplina architetturale del codice, infrastruttura e operatività, dominio clinico del software sanitario, impianto delle applicazioni che usano modelli linguistici, architettura WordPress a componenti, SEO e media buying/ADV — che affiancano il team dentro il ciclo di sviluppo, quando cambiare costa ancora poco. Include workflow di ricerca live per gli aggiornamenti legali e fiscali, `grl-web` per landing page e siti, `grl-ads` per Google Ads e advertising e `grl-automation` per orchestrare attività ripetibili con dry-run, approvazioni e rollback."
+module_version: 1.18.0
 default_selected: false
 
 module_greeting: >
-  Guardrails è installato: dodici figure di presidio — Vera (privacy), Kai (sicurezza),
+  Guardrails è installato: tredici figure di presidio — Vera (privacy), Kai (sicurezza),
   Aldo (legale), Nils (compliance), Marta (fisco e finanza agevolata), Iris (design), Otto (architettura), Bruno (ops),
-  Livia (dominio clinico), Enzo (applicazioni con AI), Milo (WordPress a componenti) e Nora (SEO) —
+  Livia (dominio clinico), Enzo (applicazioni con AI), Milo (WordPress a componenti), Nora (SEO) e Dalia (media buying e ADV) —
   entrano nel roster e si possono convocare per nome.
 
   Passo successivo consigliato: esegui `grl-profile`. Senza il profilo di progetto le
@@ -31,6 +31,9 @@ module_greeting: >
   C'è anche `grl-web`: costruisce landing page e siti, e prima di consegnarli li fa
   guardare alle figure. `grl-wordpress-delivery` coordina creazione, ripresa, migrazione
   e verifica di un sito WordPress fino al release gate di `grl-board`.
+  `grl-ads` coordina audit, piano, tracking, preflight e ottimizzazione delle campagne;
+  `grl-automation` instrada invece i lavori multidisciplinari e li porta da read-only a
+  dry-run e applicazione solo con approvazione.
   `grl-legal-updates` e `grl-fiscal-updates` recuperano invece aggiornamenti normativi
   e fiscali con ricerca live e doppio gate di verifica.
 
@@ -43,7 +46,7 @@ module_greeting: >
 # (_bmad/memory/grl-shared/project-profile.md), non in config — il profilo cambia
 # da progetto a progetto, la config è unica per installazione.
 #
-# Il modulo si installa sempre intero: dodici figure e otto workflow, nessuna
+# Il modulo si installa sempre intero: tredici figure e dieci workflow, nessuna
 # selezione. La severità si deriva dalla criticità dichiarata nel profilo di progetto.
 
 # Nessuna chiave `directories`: la cartella della memoria condivisa
@@ -54,12 +57,12 @@ post-install-notes: >
   Primo passo: esegui `grl-profile`. Sono otto campi, pochi minuti, quasi tutti
   pre-compilati leggendo il repository; l'unico che devi dichiarare tu è la criticità
   del progetto (hobby/prototipo · interno · produzione con clienti · regolamentato),
-  perché è quella che regola quanto saranno severe tutte e dodici le figure. Se il
+  perché è quella che regola quanto saranno severe tutte e tredici le figure. Se il
   settore è sanitario, il profilo raccoglie cinque campi in più; altrimenti non li
   nomina nemmeno.
 
   Poi puoi chiamare una figura per nome, oppure usare `grl-board` per farle guardare
-  tutte insieme lo stesso artefatto. Le dodici entrano anche nella stanza principale
+  tutte insieme lo stesso artefatto. Le tredici entrano anche nella stanza principale
   di `bmad-party-mode`, accanto ai cinque agenti BMM. Con `--party` puoi invece aprire
   una stanza tematica senza convocare l'intero roster.
 
@@ -173,3 +176,11 @@ agents:
     title: SEO Strategist & Search Systems Auditor
     icon: 🔎
     description: "Distingue domanda, intento, crawl, indicizzazione, contenuto, dati strutturati e misurazione, verifica sempre live le regole SEO e trasforma ogni diagnosi in una modifica verificabile senza promettere ranking."
+
+  - code: grl-agent-ads
+    module: grl
+    team: marketing
+    name: Dalia
+    title: Media Manager & Paid Advertising Strategist
+    icon: 📣
+    description: "Trasforma un obiettivo commerciale in campagne pagate misurabili: Google Ads, Search, Performance Max, Display, YouTube e gli altri canali ADV entrano solo con destinatario, offerta, tracking, budget e criterio di successo dichiarati. Legge export e report, separa dati osservati da ipotesi, controlla policy, landing, consenso e attribuzione, e propone modifiche con impatto, costo, rischio e rollback. Non mette mai mano a budget, campagne o account senza autorizzazione esplicita."

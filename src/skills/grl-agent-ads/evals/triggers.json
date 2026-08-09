@@ -1,0 +1,12 @@
+[
+  { "query": "fai il media manager e auditami l'account Google Ads", "should_trigger": true },
+  { "query": "crea una struttura di campagne Search e un piano di budget", "should_trigger": true },
+  { "query": "perché il CPA è aumentato e quali modifiche posso testare?", "should_trigger": true },
+  { "query": "controlla il tracking delle conversioni e il consenso", "should_trigger": true },
+  { "query": "prepara una regola automatica per spostare il budget con dry-run e rollback", "should_trigger": true },
+  { "query": "scrivi una landing originale con font e palette", "should_trigger": false },
+  { "query": "posso usare questi dati clienti per il remarketing?", "should_trigger": false },
+  { "query": "quale base giuridica serve per il Customer Match?", "should_trigger": false },
+  { "query": "il sito non è indicizzato su Google", "should_trigger": false },
+  { "query": "quale aliquota IVA applico alla fattura dell'agenzia?", "should_trigger": false }
+]
