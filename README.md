@@ -109,15 +109,6 @@ prototipo, i difetti che possono portare a somministrare, prescrivere o refertar
 sbagliata. Il motivo è che i prototipi sanitari finiscono in reparto più spesso di quanto chi li
 scrive immagini.
 
-**Severità.** Si deriva sempre dalla criticità dichiarata nel profilo di progetto; se il profilo
-manca, il default operativo è `normal`.
-
-| Livello | Comportamento |
-| ------- | ------------- |
-| `light` | parlano solo se il rischio è concreto e imminente; auto-attivazione rara |
-| `normal` | segnalano ciò che conta, una volta sola |
-| `strict` | segnalano anche i rischi minori e chiedono di mettere per iscritto quelli accettati |
-
 **Memoria condivisa.** Tre file in `_bmad/memory/grl-shared/`, letti da tutte le figure in
 attivazione:
 
