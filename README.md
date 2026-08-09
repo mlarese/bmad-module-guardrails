@@ -157,7 +157,7 @@ installati.
 ## Moduli tematici
 
 Il bundle `grl` installa tutto: tredici figure e dieci workflow. Chi ha bisogno di una sola area
-può installare il modulo di quell'area — sei repository generati da questo, che resta la fonte
+può installare il modulo di quell'area — otto repository generati da questo, che resta la fonte
 unica delle skill.
 
 | Codice | Repository | Figure e workflow |
@@ -167,6 +167,8 @@ unica delle skill.
 | `grf` | [`…-fiscal`](https://github.com/mlarese/bmad-module-guardrails-fiscal) | Marta · `grl-fiscal-updates` |
 | `grh` | [`…-health`](https://github.com/mlarese/bmad-module-guardrails-health) | Livia · `grl-mdsw` |
 | `grw` | [`…-web`](https://github.com/mlarese/bmad-module-guardrails-web) | Iris · Nora · Dalia · `grl-web` · `grl-ads` |
+| `gpm` | [`…-paid-media`](https://github.com/mlarese/bmad-module-guardrails-paid-media) | Vera · Aldo · Iris · Nora · Dalia · `grl-ads` |
+| `gau` | [`…-automation`](https://github.com/mlarese/bmad-module-guardrails-automation) | tredici figure · workflow di dominio · `grl-automation` |
 | `gwp` | [`…-wordpress`](https://github.com/mlarese/bmad-module-guardrails-wordpress) | Milo · `grl-wordpress-delivery` |
 
 Ogni modulo porta la propria copia delle tre skill del core, rinominate con il codice del modulo:
@@ -185,7 +187,9 @@ rigenerazione. Si lavora qui, in `src/skills/`, poi:
 ```bash
 python3 tools/build_modules.py                 # tutti i moduli, in dist/
 python3 tools/build_modules.py --module grw    # solo Web Experience
-python3 tools/publish_modules.py -m "<msg>"    # commit e push sui sei repository
+python3 tools/build_modules.py --module gpm    # solo Paid Media
+python3 tools/build_modules.py --module gau    # solo Automation
+python3 tools/publish_modules.py -m "<msg>"    # commit e push sugli otto repository
 ```
 
 La build legge [`src/module-topology.yaml`](src/module-topology.yaml) — la mappa canonica di cosa
@@ -290,7 +294,7 @@ src/
     └── grl-setup/                installazione, roster e stanze party tematiche
         └── assets/party-groups.toml
 tools/
-├── build_modules.py              genera i sei repository dei moduli tematici in dist/
+├── build_modules.py              genera gli otto repository dei moduli tematici in dist/
 └── tests/                        test della build
 docs/module-plan.md               il documento di piano del modulo
 ```

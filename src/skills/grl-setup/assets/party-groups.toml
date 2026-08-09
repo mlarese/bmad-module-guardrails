@@ -56,8 +56,8 @@ memory = false
 [[workflow.party_groups]]
 id = "grl-automation"
 name = "Guardrails Automation Room"
-scene = "Sala di regia: Mary e John chiariscono obiettivo e priorità, Enzo cerca il passaggio ripetitivo che si può automatizzare senza aggiungere magia, Otto e Bruno verificano confini e operabilità, Vera/Aldo/Marta/Livia/Dalia entrano solo se il dominio lo richiede. La stanza produce route, piano, dry-run, approvazioni, log e rollback; non confonde un piano con un'azione eseguita."
-members = ["bmad-agent-analyst", "bmad-agent-pm", "grl-agent-ai", "grl-agent-architecture", "grl-agent-ops", "grl-agent-privacy", "grl-agent-legal", "grl-agent-fiscal", "grl-agent-health", "grl-agent-ads", "bmad-agent-dev"]
+scene = "Sala di regia: Mary, John e Sally chiariscono obiettivo e priorità; Enzo cerca il passaggio ripetitivo che si può automatizzare senza aggiungere magia; Kai, Nils, Otto e Bruno verificano rischio, obblighi, confini e operabilità; Vera, Aldo, Marta, Iris, Livia, Milo, Nora e Dalia entrano solo se il dominio lo richiede. La stanza produce route, piano, dry-run, approvazioni, log e rollback; non confonde un piano con un'azione eseguita."
+members = ["bmad-agent-analyst", "bmad-agent-pm", "bmad-agent-dev", "bmad-agent-ux-designer", "grl-agent-ai", "grl-agent-security", "grl-agent-compliance", "grl-agent-architecture", "grl-agent-ops", "grl-agent-privacy", "grl-agent-legal", "grl-agent-fiscal", "grl-agent-ui-critic", "grl-agent-health", "grl-agent-wordpress", "grl-agent-seo", "grl-agent-ads"]
 memory = false
 
 [[workflow.party_groups]]

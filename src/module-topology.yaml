@@ -120,6 +120,53 @@ modules:
       - grl-paid-media
       - grl-automation
 
+  - code: gpm
+    name: Guardrails Paid Media
+    repo: bmad-module-guardrails-paid-media
+    status: derived
+    purpose: "Strategia paid media, Google Ads, ADV, tracking, consenso, creatività e preflight controllato."
+    description: "Cinque figure di presidio su paid media, SEO, design, privacy e legale, più `grl-ads` per audit, piani, tracking, preflight e change set Google Ads e `grl-automation` per i passaggi ripetitivi. Dalia tiene la spesa sotto controllo: nessuna campagna si pubblica senza evidenze, approvazione e rollback."
+    skills:
+      - grl-agent-privacy
+      - grl-agent-legal
+      - grl-agent-ui-critic
+      - grl-agent-seo
+      - grl-agent-ads
+      - grl-ads
+      - grl-automation
+    party_groups:
+      - grl-paid-media
+      - grl-automation
+
+  - code: gau
+    name: Guardrails Automation
+    repo: bmad-module-guardrails-automation
+    status: derived
+    purpose: "Orchestrazione di processi ripetitivi fra sviluppo software, legale, fisco, design, architettura, medicina e paid media."
+    description: "Tredici figure Guardrails e i workflow necessari a instradare processi software, legali, fiscali, di design, architettura, medicina, web e paid media. `grl-automation` porta ogni richiesta da intake e read-only a piano, dry-run, approvazioni, esecuzione osservabile e rollback, senza trasformare un agente in un esecutore autonomo."
+    skills:
+      - grl-agent-privacy
+      - grl-agent-security
+      - grl-agent-legal
+      - grl-agent-compliance
+      - grl-agent-fiscal
+      - grl-agent-ui-critic
+      - grl-agent-architecture
+      - grl-agent-ops
+      - grl-agent-health
+      - grl-agent-ai
+      - grl-agent-wordpress
+      - grl-agent-seo
+      - grl-agent-ads
+      - grl-legal-updates
+      - grl-fiscal-updates
+      - grl-mdsw
+      - grl-web
+      - grl-ads
+      - grl-automation
+    party_groups:
+      - grl-automation
+
   - code: gwp
     name: Guardrails WordPress
     repo: bmad-module-guardrails-wordpress

@@ -365,6 +365,62 @@ class WordPressModuleMetadataTests(unittest.TestCase):
             self.assertIn("Convoca solo chi ha qualcosa di decisivo", skill)
 
 
+class DedicatedGroupModuleTopologyTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.topology = bm.load_topology(ROOT / "src" / "module-topology.yaml")
+        cls.bundle = bm.load_module_yaml(ROOT / "src" / "module.yaml")
+        cls.by_code = {module["code"]: module for module in cls.topology["modules"]}
+
+    def test_paid_media_has_its_own_repository_and_workflows(self) -> None:
+        module = self.by_code["gpm"]
+        self.assertEqual(module["repo"], "bmad-module-guardrails-paid-media")
+        self.assertEqual(
+            module["skills"],
+            [
+                "grl-agent-privacy",
+                "grl-agent-legal",
+                "grl-agent-ui-critic",
+                "grl-agent-seo",
+                "grl-agent-ads",
+                "grl-ads",
+                "grl-automation",
+            ],
+        )
+        self.assertEqual(
+            bm.workflow_skills(module["skills"], {agent["code"] for agent in self.bundle["agents"]}),
+            ["grl-ads", "grl-automation"],
+        )
+        self.assertEqual(module["party_groups"], ["grl-paid-media", "grl-automation"])
+
+    def test_automation_has_all_domain_agents_and_domain_workflows(self) -> None:
+        module = self.by_code["gau"]
+        self.assertEqual(module["repo"], "bmad-module-guardrails-automation")
+        agent_codes = {agent["code"] for agent in self.bundle["agents"]}
+        self.assertEqual(
+            {skill for skill in module["skills"] if skill in agent_codes},
+            agent_codes,
+        )
+        self.assertEqual(
+            bm.workflow_skills(module["skills"], agent_codes),
+            [
+                "grl-legal-updates",
+                "grl-fiscal-updates",
+                "grl-mdsw",
+                "grl-web",
+                "grl-ads",
+                "grl-automation",
+            ],
+        )
+        self.assertEqual(module["party_groups"], ["grl-automation"])
+
+    def test_topology_has_eight_unique_derived_repositories(self) -> None:
+        modules = self.topology["modules"]
+        self.assertEqual(len(modules), 8)
+        self.assertEqual(len({module["code"] for module in modules}), 8)
+        self.assertEqual(len({module["repo"] for module in modules}), 8)
+
+
 class GreetingTests(unittest.TestCase):
     module = {"name": "Guardrails Fiscal", "code": "grf"}
 

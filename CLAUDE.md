@@ -37,9 +37,9 @@ altrimenti non viene pubblicata.
 Una skill nuova va assegnata anche a un modulo in `src/module-topology.yaml`: quello che non
 compare in nessuna lista `skills` non finisce in nessun repository derivato.
 
-## I sei moduli derivati si rigenerano e si ripubblicano nello stesso turno
+## Gli otto moduli derivati si rigenerano e si ripubblicano nello stesso turno
 
-Sei repository derivano da questo e li produce `tools/build_modules.py` leggendo
+Otto repository derivano da questo e li produce `tools/build_modules.py` leggendo
 `src/module-topology.yaml`. Questo repository è la fonte unica delle skill.
 
 | Codice | Repository | Contiene |
@@ -49,6 +49,8 @@ Sei repository derivano da questo e li produce `tools/build_modules.py` leggendo
 | `grf` | `mlarese/bmad-module-guardrails-fiscal` | Marta, `grl-fiscal-updates`, `grl-automation` |
 | `grh` | `mlarese/bmad-module-guardrails-health` | Livia, `grl-mdsw`, `grl-automation` |
 | `grw` | `mlarese/bmad-module-guardrails-web` | Iris, Nora, Dalia, `grl-web`, `grl-ads`, `grl-automation` |
+| `gpm` | `mlarese/bmad-module-guardrails-paid-media` | Vera, Aldo, Iris, Nora, Dalia, `grl-ads`, `grl-automation` |
+| `gau` | `mlarese/bmad-module-guardrails-automation` | tutte le tredici figure, workflow di dominio e `grl-automation` |
 | `gwp` | `mlarese/bmad-module-guardrails-wordpress` | Milo, `grl-wordpress-delivery`, `grl-automation` |
 
 **Regola: ogni modifica che tocca `src/` va propagata ai derivati nello stesso turno, senza
@@ -59,7 +61,7 @@ diverse da quelle della fonte, e nessuno se ne accorge finché non le esegue.
 ```bash
 python3 -m pytest tools/tests/                              # test della build
 python3 tools/build_modules.py                              # rigenera dist/
-python3 tools/publish_modules.py -m "<messaggio di commit>"  # commit e push sui sei repo
+python3 tools/publish_modules.py -m "<messaggio di commit>"  # commit e push sugli otto repo
 ```
 
 `publish_modules.py` è idempotente: salta i moduli senza modifiche, crea il repository se manca e

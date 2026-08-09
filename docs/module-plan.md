@@ -48,6 +48,8 @@ mantenerlo come superficie compatibile e introdurre confini logici per una migra
 | `gre` | Engineering | architecture, security, ops, AI |
 | `grh` | Health | clinical informatics e qualificazione MDR |
 | `grw` | Web Experience | SEO, UI critic e web |
+| `gpm` | Paid Media | Google Ads, ADV, tracking, consenso e preflight |
+| `gau` | Automation | orchestrazione cross-domain, dry-run, approvazioni e rollback |
 | `gwp` | WordPress | Gutenberg, ACF, componenti, template e Media Library |
 
 La mappa canonica è in `src/module-topology.yaml`. In questa fase non vengono copiate le skill in
@@ -58,7 +60,7 @@ più package: si evitano duplicati e drift. `grl-setup` installa invece le stanz
 
 L'estrazione è stata fatta, con una scelta che cambia l'addendum precedente: le skill **vengono**
 duplicate, ma non a mano. `tools/build_modules.py` legge la topologia e genera in `dist/` un
-repository per ciascuno dei sei moduli tematici. Questo repository resta la fonte unica; i
+repository per ciascuno degli otto moduli tematici. Questo repository resta la fonte unica; i
 derivati si rigenerano.
 
 Cosa è stato deciso, e perché:
