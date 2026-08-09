@@ -40,7 +40,9 @@ compare in nessuna lista `skills` non finisce in nessun repository derivato.
 
 Il `README.md` è una vetrina breve, non il manuale completo del progetto. Deve contenere soltanto:
 
-**Lingua obbligatoria:** il `README.md` del modulo deve essere scritto interamente in inglese.
+**Lingua obbligatoria:** il `README.md` del repository fonte e il `README.md` di ogni modulo
+tematico derivato devono essere scritti interamente in inglese; prima di ogni commit e build
+verifica che non contengano testo in italiano o in altre lingue.
 
 - un'introduzione: cosa fa Guardrails e perché esiste;
 - la spiegazione degli agenti;

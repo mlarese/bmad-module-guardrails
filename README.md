@@ -1,60 +1,60 @@
 # Guardrails (`grl`)
 
-Guardrails è un modulo [BMad](https://github.com/bmad-code-org/BMAD-METHOD) con **sedici agenti**
-che affiancano il team nello sviluppo software: privacy e GDPR, sicurezza, legale, compliance,
-fisco, design, architettura, operations, sanità, AI, WordPress, SEO, social/content, creative video,
-revenue management e paid media.
+Guardrails is a [BMad](https://github.com/bmad-code-org/BMAD-METHOD) module with **sixteen agents**
+that support software development teams across privacy and GDPR, security, legal, compliance,
+tax, design, architecture, operations, healthcare, AI, WordPress, SEO, social/content, creative
+video, revenue management, and paid media.
 
-Gli agenti fanno emergere vincoli e rischi mentre cambiare è ancora economico; le decisioni restano
-al team. Parlano in modo operativo, non producono documenti formali né sostituiscono professionisti
-abilitati. I workflow coordinano invece il percorso, dall'analisi alla consegna.
+Agents surface constraints and risks while changes are still inexpensive; decisions remain with
+the team. They speak operationally, do not produce formal documents, and do not replace qualified
+professionals. Workflows coordinate the path from analysis to delivery.
 
-## Agenti
+## Agents
 
-Gli agenti sono interattivi: si convoca la competenza decisiva per la domanda concreta. Per una
-revisione multidisciplinare dello stesso artefatto si usa `grl-board`.
+Agents are interactive: summon the expertise that decides the concrete question. For a
+multidisciplinary review of the same artifact, use `grl-board`.
 
-| Agente | Ambito | Cosa porta |
+| Agent | Scope | What it contributes |
 | --- | --- | --- |
-| 🛡️ **Vera** — Data Protection Officer | Dati personali, GDPR, DPIA, retention, analytics, log e dati nei prompt | Mappa dati, base giuridica, minimizzazione e rischi privacy; distingue l'obbligo reale dalla prassi. |
-| 🔐 **Kai** — Application Security Engineer | API, autenticazione, autorizzazione, segreti, dipendenze, CVE e superfici LLM | Ordina gli attacchi realistici e propone la contromisura minima con il relativo costo. |
-| ⚖️ **Aldo** — Tech Lawyer | Licenze, contratti, DPA, titolarità, output AI e AI Act | Traduce il vincolo legale in una decisione su uso, distribuzione, accordi e obblighi. |
-| 📐 **Nils** — Regulatory Compliance | NIS2, DORA, EAA/WCAG, eIDAS, CRA, MDR e obblighi settoriali | Stabilisce se una norma si applica, quale soglia la attiva e quali obblighi ne derivano. |
-| 🧾 **Marta** — Fiscalista e Finanza Agevolata | Imposte, IVA, bandi, incentivi, credito d'imposta e rendicontazione | Verifica fonti primarie, requisiti, scadenze e spese ammissibili in un pre-screening operativo. |
-| 👁️ **Iris** — Design Critic | UI, landing, markup, CSS, tipografia, palette, densità e layout | Riconosce i pattern generici e propone una deviazione visiva concreta e utilizzabile. |
-| 🧱 **Otto** — Code Architect | Confini, cartelle, dipendenze, interfacce, factory e strati architetturali | Indica il punto giusto in cui collocare una responsabilità e pesa il costo delle alternative. |
-| 🖥️ **Bruno** — Infrastructure & Ops Engineer | Server, VPS, Docker, CI/CD, deploy, TLS, backup, log e incidenti | Propone l'impianto operativo più semplice che regge il carico e una via di ritorno verificabile. |
-| 🩺 **Livia** — Clinical Informatics | Dati clinici, codifiche, HL7/FHIR/DICOM, workflow di reparto e sicurezza del paziente | Verifica modello dati, interoperabilità e uso reale; indirizza a `grl-mdsw` quando emerge il MDR. |
-| 🧠 **Enzo** — AI Engineer | LLM, prompt, RAG, embedding, tool calling, eval, costi e latenza | Progetta l'impianto minimo che regge quando il modello sbaglia e valuta se serve davvero. |
-| 🧩 **Milo** — WordPress Component Architect | Gutenberg, Elementor, ACF, post type, template parts e Media Library | Progetta contenuti e componenti riusabili, con Gutenberg come default e confini chiari. |
-| 🔎 **Nora** — SEO Strategist & Search Systems Auditor | Intento, crawling, indicizzazione, contenuti, dati strutturati e Search Console | Verifica le regole e lo stato osservato, distingue fatti da ipotesi e non promette ranking. |
-| 📣 **Dalia** — Media Manager & Paid Advertising Strategist | Google Ads, ADV, audience, creatività, tracking, consenso, budget e policy | Traduce l'obiettivo in un piano misurabile e prepara change set con dry-run e rollback. |
-| 📱 **Sofia** — Social Media & Content Strategist | Strategia organica, rubriche, calendari, post, caption, community e metriche | Trasforma obiettivi e pubblico in contenuti social producibili, approvabili e misurabili senza promettere reach. |
-| 🎬 **Marco** — Advertising Creative Director & Short-form Video Producer | Concept pubblicitari, design, script, storyboard, shot list, Reel, TikTok e Shorts | Porta un'idea dal brief a un pacchetto creativo producibile, con varianti e gate su claim, diritti e privacy. |
-| 📈 **Rhea** — Revenue Management Strategist | Occupazione, ADR, RevPAR, TRevPAR, NRevPAR, GopPAR, MUP, MOL, pickup, forecast, pricing, PMS e Channel Manager | Collega costi, domanda, inventario e canale; mostra formule e assunzioni, separa floor economico, prezzo consigliato e prezzo pubblicato e blocca l'invio senza un gate verificato. |
+| 🛡️ **Vera** — Data Protection Officer | Personal data, GDPR, DPIAs, retention, analytics, logs, and data in prompts | Maps data, legal bases, minimization, and privacy risks; distinguishes actual obligations from common practice. |
+| 🔐 **Kai** — Application Security Engineer | APIs, authentication, authorization, secrets, dependencies, CVEs, and LLM attack surfaces | Prioritizes realistic attacks and proposes the smallest countermeasure with its associated cost. |
+| ⚖️ **Aldo** — Tech Lawyer | Licenses, contracts, DPAs, ownership, AI outputs, and the AI Act | Translates legal constraints into decisions about use, distribution, agreements, and obligations. |
+| 📐 **Nils** — Regulatory Compliance | NIS2, DORA, EAA/WCAG, eIDAS, CRA, MDR, and sector-specific obligations | Determines whether a rule applies, what threshold activates it, and which obligations follow. |
+| 🧾 **Marta** — Tax and Incentives Specialist | Taxes, VAT, grants, incentives, tax credits, and reporting | Checks primary sources, requirements, deadlines, and eligible expenses in an operational pre-screening. |
+| 👁️ **Iris** — Design Critic | UI, landing pages, markup, CSS, typography, palettes, density, and layout | Recognizes generic patterns and proposes a concrete, usable visual departure. |
+| 🧱 **Otto** — Code Architect | Boundaries, folders, dependencies, interfaces, factories, and architectural layers | Identifies the right place for a responsibility and weighs the cost of alternatives. |
+| 🖥️ **Bruno** — Infrastructure & Ops Engineer | Servers, VPS, Docker, CI/CD, deployment, TLS, backups, logs, and incidents | Proposes the simplest operational setup that can handle the load and a verifiable way back. |
+| 🩺 **Livia** — Clinical Informatics | Clinical data, codes, HL7/FHIR/DICOM, clinical workflows, and patient safety | Checks the data model, interoperability, and real-world use; routes to `grl-mdsw` when MDR becomes relevant. |
+| 🧠 **Enzo** — AI Engineer | LLMs, prompts, RAG, embeddings, tool calling, evaluations, costs, and latency | Designs the minimum setup that remains reliable when the model is wrong and assesses whether it is actually needed. |
+| 🧩 **Milo** — WordPress Component Architect | Gutenberg, Elementor, ACF, post types, template parts, and the Media Library | Designs reusable content and components, with Gutenberg as the default and clear boundaries. |
+| 🔎 **Nora** — SEO Strategist & Search Systems Auditor | Intent, crawling, indexing, content, structured data, and Search Console | Verifies the rules and observed state, distinguishes facts from hypotheses, and makes no ranking promises. |
+| 📣 **Dalia** — Media Manager & Paid Advertising Strategist | Google Ads, advertising, audiences, creative, tracking, consent, budgets, and policies | Turns the objective into a measurable plan and prepares change sets with dry-run and rollback. |
+| 📱 **Sofia** — Social Media & Content Strategist | Organic strategy, content pillars, calendars, posts, captions, community, and metrics | Turns objectives and audiences into producible, approvable, measurable social content without promising reach. |
+| 🎬 **Marco** — Advertising Creative Director & Short-form Video Producer | Advertising concepts, design, scripts, storyboards, shot lists, Reels, TikToks, and Shorts | Takes an idea from brief to a producible creative package, with variants and gates for claims, rights, and privacy. |
+| 📈 **Rhea** — Revenue Management Strategist | Occupancy, ADR, RevPAR, TRevPAR, NRevPAR, GOPPAR, MUP, MOL, pickup, forecasting, pricing, PMS, and Channel Manager | Connects costs, demand, inventory, and channel; shows formulas and assumptions, separates the economic floor, recommended price, and published price, and blocks transmission without a verified gate. |
 
-## Workflow
+## Workflows
 
-I workflow impongono un percorso ripetibile e producono artefatti o verdetti leggibili. Gli agenti
-entrano solo sui segnali e sulle competenze necessarie.
+Workflows enforce a repeatable path and produce readable artifacts or verdicts. Agents enter only
+when the relevant signals and expertise are needed.
 
-| Workflow | Quando usarlo | Cosa fa e cosa lascia |
+| Workflow | When to use it | What it does and leaves behind |
 | --- | --- | --- |
-| `grl-profile` | All'inizio del progetto o quando il contesto è cambiato | Raccoglie il profilo di progetto e lo scrive in `_bmad/memory/grl-shared/project-profile.md`. |
-| `grl-board` | Quando lo stesso artefatto richiede più assi di revisione o un release gate | Convoca le figure pertinenti, rende esplicite le esclusioni e restituisce riepilogo, conflitti e verdetto. |
-| `grl-mdsw` | Quando una funzione software potrebbe rientrare nel perimetro dei dispositivi medici | Classifica il software rispetto al MDR e indica conseguenze e non-conseguenze per il piano. |
-| `grl-legal-updates` | Per aggiornamenti legali, atti, vigenza e novità in un periodo definito | Cerca fonti primarie e produce un digest con copertura, `as_of`, verifiche e obsolescenza. |
-| `grl-fiscal-updates` | Per novità fiscali, bandi, incentivi, emendamenti e scadenze | Applica lo stesso percorso verificabile a requisiti, spese, soggetti e date fiscali. |
-| `grl-web` | Per creare landing e siti, riprendere mockup o diagnosticare una pagina | Parte dal brief di conversione e porta il risultato verso review, accessibilità, SEO e consegna. |
-| `grl-wordpress-delivery` | Per creare, riprendere, migrare o verificare una consegna WordPress | Coordina Milo e conduce la consegna fino al release gate di `grl-board`. |
-| `grl-ads` | Per audit, piano, tracking, ottimizzazione e preflight Google Ads/ADV | Prepara change set controllabili e applica solo con scope, approvazione, limite e rollback. |
-| `grl-social` | Per strategia organica, calendario, post, caption, audit e misura dei canali social | Produce brief, calendario e contenuti pronti per review, senza programmare o pubblicare. |
-| `grl-social-creative` | Per concept, design pubblicitario, script, storyboard, shot list e adattamenti video/social | Consegna pacchetti creativi producibili per post, Reel, TikTok e Shorts, senza montaggio o upload. |
-| `grl-revenue-audit` | Per verificare export, qualità dati, KPI e decisioni revenue | Produce un audit read-only con formule, fonti, blocker e dati mancanti. |
-| `grl-revenue-plan` | Per costruire scenari di pricing, domanda e profitto | Separa floor, mercato e domanda, con trigger di monitoraggio senza pubblicare tariffe. |
-| `grl-revenue-preflight` | Prima di inviare prezzi a PMS o Channel Manager | Verifica contratto, mapping, dry-run, response, riconciliazione, idempotenza e rollback. |
-| `grl-automation` | Per processi ripetitivi fra sviluppo, legale, fisco, design, medicina, paid media e revenue management | Instrada il lavoro da read-only a dry-run ed esecuzione osservabile, separando approvazioni e rollback. |
+| `grl-profile` | At the start of a project or when its context changes | Collects the project profile and writes it to `_bmad/memory/grl-shared/project-profile.md`. |
+| `grl-board` | When the same artifact needs multiple review perspectives or a release gate | Convenes the relevant figures, makes exclusions explicit, and returns a summary, conflicts, and verdict. |
+| `grl-mdsw` | When a software feature might fall within the scope of medical devices | Classifies the software against the MDR and identifies the consequences and non-consequences for the plan. |
+| `grl-legal-updates` | For legal updates, instruments, validity, and developments in a defined period | Searches primary sources and produces a digest with coverage, `as_of`, checks, and obsolescence. |
+| `grl-fiscal-updates` | For tax developments, grants, incentives, amendments, and deadlines | Applies the same verifiable process to requirements, expenses, eligible parties, and tax dates. |
+| `grl-web` | To create landing pages and websites, recreate mockups, or diagnose a page | Starts from the conversion brief and moves the result through review, accessibility, SEO, and delivery. |
+| `grl-wordpress-delivery` | To create, resume, migrate, or verify a WordPress delivery | Coordinates Milo and leads the delivery through the `grl-board` release gate. |
+| `grl-ads` | For Google Ads/advertising audits, plans, tracking, optimization, and preflight | Prepares controllable change sets and applies them only with scope, approval, limits, and rollback. |
+| `grl-social` | For organic strategy, calendars, posts, captions, audits, and social-channel measurement | Produces briefs, calendars, and review-ready content without scheduling or publishing. |
+| `grl-social-creative` | For concepts, advertising design, scripts, storyboards, shot lists, and video/social adaptations | Delivers producible creative packages for posts, Reels, TikToks, and Shorts without editing or uploading. |
+| `grl-revenue-audit` | To verify exports, data quality, KPIs, and revenue decisions | Produces a read-only audit with formulas, sources, blockers, and missing data. |
+| `grl-revenue-plan` | To build pricing, demand, and profit scenarios | Separates the economic floor, market, and demand, with monitoring triggers and no rate publishing. |
+| `grl-revenue-preflight` | Before sending prices to a PMS or Channel Manager | Verifies the contract, mapping, dry-run, response, reconciliation, idempotency, and rollback. |
+| `grl-automation` | For repeatable processes across development, legal, tax, design, healthcare, paid media, and revenue management | Routes work from read-only checks through dry-run to observable execution, separating approvals and rollback. |
 
-Il repository contiene il bundle completo; i moduli tematici derivati condividono gli stessi agenti
-e workflow nel perimetro dell'area. Per architettura, build e decisioni di progetto si vedano
-`CLAUDE.md` e `docs/module-plan.md`.
+The repository contains the complete bundle; derived thematic modules share the same agents and
+workflows within their area. See `CLAUDE.md` and `docs/module-plan.md` for architecture, build,
+and project decisions.

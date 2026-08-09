@@ -478,6 +478,96 @@ def filter_help_csv(
 # Vetrine del repository derivato
 # --------------------------------------------------------------------------- #
 
+# Il catalogo operativo del modulo resta in italiano perché è la fonte usata
+# dall'installer BMad. I README dei repository pubblici derivati sono invece
+# vetrine in inglese: queste copie editoriali impediscono che la lingua della
+# vetrina dipenda dalla lingua del catalogo interno.
+README_MODULE_COPY = {
+    "grg": "A focused BMad module for privacy, legal and licensing, regulatory compliance, and live legal updates. It separates actual obligations from common practice and identifies rules that do not apply.",
+    "gre": "A focused BMad module for code architecture, application security, infrastructure and operations, and AI application design. Every recommendation includes the cost of ignoring it.",
+    "grf": "A focused BMad module for tax, accounting operations, grants, incentives, and live fiscal updates. It checks requirements, deadlines, eligible expenses, and reporting against primary sources.",
+    "grh": "A focused BMad module for clinical data, healthcare interoperability, patient safety, and medical-device qualification. It keeps real clinical workflows and MDR scope in view.",
+    "grw": "A focused BMad module for visual quality, search, web delivery, paid media, organic social content, and creative video. It guards against generic pages, unsupported ranking promises, unplanned posts, and unmeasured spend.",
+    "gpm": "A focused BMad module for paid media, Google Ads, tracking, consent, social content, and creative production. It keeps campaigns and assets behind evidence, approval, and rollback gates.",
+    "grv": "A focused BMad module for hotel revenue management, pricing, forecasting, profit, and PMS/Channel Manager integrations. It keeps external publication behind explicit gates, dry-runs, approval, and rollback.",
+    "gau": "A focused BMad module for routing repeatable processes across software, legal, tax, design, architecture, healthcare, web, paid media, social content, creative video, and revenue management.",
+    "gwp": "A focused BMad module for component-based WordPress architecture and controlled delivery through the release gate. It covers Gutenberg, Elementor, ACF, templates, the Media Library, and migration work.",
+}
+
+README_AGENT_TITLES = {
+    "grl-agent-fiscal": "Tax and Incentives Specialist",
+}
+
+README_AGENT_FOCUS = {
+    "grl-agent-privacy": "Personal data, GDPR, DPIAs, retention, analytics, logs, and data in prompts.",
+    "grl-agent-security": "APIs, authentication, authorization, secrets, dependencies, CVEs, and LLM attack surfaces.",
+    "grl-agent-legal": "Licenses, contracts, DPAs, ownership, AI outputs, and AI Act obligations.",
+    "grl-agent-compliance": "NIS2, DORA, EAA/WCAG, eIDAS, CRA, MDR, and sector-specific obligations.",
+    "grl-agent-fiscal": "Taxes, VAT, grants, incentives, tax credits, and reporting.",
+    "grl-agent-ui-critic": "UI, landing pages, markup, CSS, typography, palettes, density, and layout.",
+    "grl-agent-architecture": "Boundaries, folders, dependencies, interfaces, factories, and architectural layers.",
+    "grl-agent-ops": "Servers, VPS, Docker, CI/CD, deployment, TLS, backups, logs, and incidents.",
+    "grl-agent-health": "Clinical data, codes, HL7/FHIR/DICOM, clinical workflows, and patient safety.",
+    "grl-agent-ai": "LLMs, prompts, RAG, embeddings, tool calling, evaluations, costs, and latency.",
+    "grl-agent-wordpress": "Gutenberg, Elementor, ACF, post types, template parts, and the Media Library.",
+    "grl-agent-seo": "Search intent, crawling, indexing, content, structured data, and Search Console.",
+    "grl-agent-ads": "Google Ads, paid advertising, audiences, creative, tracking, consent, budgets, and policies.",
+    "grl-agent-social": "Organic strategy, content pillars, calendars, posts, captions, community, and metrics.",
+    "grl-agent-creative": "Advertising concepts, design, scripts, storyboards, shot lists, Reels, TikToks, and Shorts.",
+    "grl-agent-revenue": "Occupancy, ADR, RevPAR, TRevPAR, NRevPAR, GOPPAR, MUP, MOL, pickup, forecasting, pricing, PMS, and Channel Manager.",
+}
+
+README_WORKFLOW_COPY = {
+    "grl-legal-updates": (
+        "Live legal updates",
+        "Searches primary sources for laws, decrees, rulings, and amendments in a defined period, with coverage and freshness checks.",
+    ),
+    "grl-fiscal-updates": (
+        "Live fiscal updates",
+        "Searches primary sources for tax rules, circulars, grants, incentives, amendments, and deadlines in a defined period.",
+    ),
+    "grl-mdsw": (
+        "Medical-device qualification",
+        "Assesses whether a software feature has a medical purpose and identifies the relevant MDR scope and planning impact.",
+    ),
+    "grl-web": (
+        "Web experience delivery",
+        "Moves landing pages and websites from a conversion brief through visual review, accessibility, SEO, and delivery.",
+    ),
+    "grl-wordpress-delivery": (
+        "Controlled WordPress delivery",
+        "Coordinates WordPress creation, migration, resumption, and verification through a release gate.",
+    ),
+    "grl-ads": (
+        "Paid media operations",
+        "Audits, plans, tracks, optimizes, preflights, and applies paid-media change sets behind approval and rollback gates.",
+    ),
+    "grl-social": (
+        "Organic social strategy",
+        "Builds social strategies, calendars, content, audits, and measurement plans without scheduling or publishing.",
+    ),
+    "grl-social-creative": (
+        "Social creative production",
+        "Turns a brief into producible concepts, scripts, storyboards, shot lists, specifications, and channel variants.",
+    ),
+    "grl-revenue-audit": (
+        "Revenue data and pricing audit",
+        "Produces a read-only audit of exports, data quality, KPIs, demand, and the economic floor.",
+    ),
+    "grl-revenue-plan": (
+        "Revenue planning",
+        "Builds pricing, demand, and profit scenarios while separating the economic floor, market, and forecast.",
+    ),
+    "grl-revenue-preflight": (
+        "PMS and Channel Manager preflight",
+        "Checks contract, mapping, dry-run, response, reconciliation, idempotency, and rollback before transmission.",
+    ),
+    "grl-automation": (
+        "Controlled automation",
+        "Routes work from read-only checks through dry-run to observable execution, with explicit approvals and rollback.",
+    ),
+}
+
 
 def render_marketplace(module: dict, skills: list[str], version: str) -> str:
     data = {
@@ -505,70 +595,90 @@ def render_readme(
     module: dict,
     agents: list[dict],
     workflows: list[str],
-    help_rows: dict[str, list[tuple[str, str]]],
+    _help_rows: dict[str, list[tuple[str, str]]],
     renames: dict[str, str],
 ) -> str:
     code = module["code"]
     profile_skill = renames["grl-profile"]
     board_skill = renames["grl-board"]
 
+    try:
+        module_copy = README_MODULE_COPY[code]
+    except KeyError as error:
+        raise BuildError(f"Manca la copia inglese del README per il modulo `{code}`") from error
+
     figure_rows = "\n".join(
-        f"| {a['icon']} {a['name']} | {a['title']} | `{a['code']}` | {short(a['description'])} |"
+        f"| {a['icon']} {a['name']} | {README_AGENT_TITLES.get(a['code'], a['title'])} | `{a['code']}` | {README_AGENT_FOCUS[a['code']]} |"
         for a in agents
     )
 
+    workflow_copy = {
+        profile_skill: (
+            "Project profile",
+            "Collects the project context shared by every installed figure.",
+        ),
+        board_skill: (
+            "Multidisciplinary review",
+            "Convenes the relevant figures on one artifact and returns a review summary or release verdict.",
+        ),
+        **README_WORKFLOW_COPY,
+    }
     workflow_lines = []
     for skill in [profile_skill, board_skill] + list(workflows):
-        for display, description in help_rows.get(skill, []):
-            workflow_lines.append(f"| `{skill}` | {display} | {description} |")
+        try:
+            display, description = workflow_copy[skill]
+        except KeyError as error:
+            raise BuildError(f"Manca la copia inglese del workflow `{skill}`") from error
+        workflow_lines.append(f"| `{skill}` | {display} | {description} |")
     workflow_rows = "\n".join(workflow_lines)
 
     return f"""# {module['name']} (`{code}`)
 
-{module['description']}
+{module_copy}
 
-Modulo BMad. È una porzione del bundle [Guardrails](https://github.com/mlarese/bmad-module-guardrails):
-stesse figure, stesso comportamento, solo l'area {module['name'].replace('Guardrails ', '').lower()}.
+This is a focused BMad module in the [Guardrails](https://github.com/mlarese/bmad-module-guardrails)
+bundle. It keeps the same behavior and shared memory while installing only the figures and
+workflows for the {module['name'].replace('Guardrails ', '').lower()} area.
 
-> **Generato.** Questo repository è prodotto da `tools/build_modules.py` nel
-> repository [bmad-module-guardrails](https://github.com/mlarese/bmad-module-guardrails).
-> Le modifiche si fanno lì e poi si rigenera: qui vengono sovrascritte.
+> **Generated.** This repository is produced by `tools/build_modules.py` in the
+> [bmad-module-guardrails](https://github.com/mlarese/bmad-module-guardrails) repository.
+> Make changes there and regenerate; local changes here will be overwritten.
 
-## Figure
+## Agents
 
-| Figura | Ruolo | Skill | Cosa presidia |
-| ------ | ----- | ----- | ------------- |
+| Agent | Role | Skill | Focus |
+| ----- | ---- | ----- | ----- |
 {figure_rows}
 
-## Skill e workflow
+## Skills and workflows
 
-| Skill | Comando | Cosa fa |
-| ----- | ------- | ------- |
+| Skill | Purpose |
+| ----- | ------- |
 {workflow_rows}
 
-## Installazione
+## Installation
 
 ```
 bmad install {code}
 ```
 
-Poi, come primo passo, `{profile_skill}`: raccoglie il profilo di progetto — settore,
-dati trattati, mercato, stack, criticità — e da lì ogni figura deriva quanto essere
-severa. Senza profilo il default resta `normal` e le figure partono senza contesto.
+As a first step, run `{profile_skill}`. It collects the project profile — sector, data,
+market, stack, and criticality — so each figure can calibrate its review. Without a profile,
+the default remains `normal` and the figures start without context.
 
-## Memoria condivisa
+## Shared memory
 
-Il profilo vive in `{{project-root}}/_bmad/memory/grl-shared/project-profile.md`, insieme
-a `decisions.md` e `accepted-risks.md`. Il percorso è lo stesso per tutti i moduli
-Guardrails: installandone due, il profilo resta uno solo e si compila una volta.
+The profile lives in `{{project-root}}/_bmad/memory/grl-shared/project-profile.md`, together
+with `decisions.md` and `accepted-risks.md`. All Guardrails modules use the same path, so two
+installed modules still share one profile.
 
-## Convivenza con il bundle
+## Using it with the bundle
 
-Questo modulo installa skill con **lo stesso nome** del bundle `grl` — `{agents[0]['code']}`
-sta identica in entrambi. Bundle e moduli tematici non vanno installati insieme nello
-stesso progetto: si sceglie il bundle completo, oppure i moduli delle aree che servono.
+This module installs skills with **the same names** as the `grl` bundle — `{agents[0]['code']}`
+is identical in both. Do not install the full bundle and thematic modules in the same project:
+choose the complete bundle, or only the thematic modules you need.
 
-## Licenza
+## License
 
 MIT.
 """

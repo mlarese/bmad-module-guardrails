@@ -249,8 +249,11 @@ class WordPressModuleMetadataTests(unittest.TestCase):
         )
         self.assertEqual(release_gate["output-location"], "{output_folder}/release-gates")
         self.assertEqual(release_gate["outputs"], "{release_slug}-{gate_started_at_utc}.md")
-        self.assertEqual(readme.count("| `grl-wordpress-delivery` |"), 4)
-        self.assertIn("| `gwp-board` | Gate di rilascio |", readme)
+        self.assertEqual(readme.count("| `grl-wordpress-delivery` |"), 1)
+        self.assertIn("| `gwp-board` | Multidisciplinary review |", readme)
+        self.assertIn("## Skills and workflows", readme)
+        self.assertNotIn("## Figure", readme)
+        self.assertNotIn("## Skill e workflow", readme)
 
     def test_source_metadata_and_marketplace_stay_aligned(self) -> None:
         self.assertTrue((ROOT / "src" / "module.yaml").is_file())
