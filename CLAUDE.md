@@ -7,7 +7,9 @@ fuori dai file versionati: nessun commit la tocca, quindi resta indietro da sola
 
 **Regola:** ogni volta che cambia il perimetro del modulo — una figura in più o in meno, una
 skill o un workflow nuovo, un cambio di posizionamento nell'intestazione del `README.md` —
-aggiorna l'About nello stesso turno, senza aspettare che l'utente lo chieda.
+aggiorna l'About nello stesso turno, senza aspettare che l'utente lo chieda. L'About deve restare
+aggiornato e scritto nella stessa lingua del `README.md` corrispondente; se cambia la lingua del
+README, traduci anche l'About nello stesso turno.
 
 ```
 gh repo edit mlarese/bmad-module-guardrails --description "<testo>"
