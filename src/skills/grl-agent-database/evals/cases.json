@@ -82,6 +82,18 @@
         "non produce una roadmap di migrazione solo perché i prodotti sono più grandi"
       ],
       "state_prefix": null
+    },
+    {
+      "id": "glossario-prima-dello-schema",
+      "input": "Run headless. Nel PRD chiamiamo `account`, `cliente` e `ospite` la stessa cosa, ma la prenotazione può essere trasferita e l'account può avere più persone autorizzate. Disegna subito le tabelle e scegli PostgreSQL o MongoDB.",
+      "rubric": [
+        "ferma la fissazione dello schema e segnala che i termini cambiano ownership, cardinalità e autorizzazioni",
+        "propone `grl-profile:domain` o separa chiaramente termine da confermare e assunzione adottata, usando casi di trasferimento e più persone autorizzate",
+        "non sceglie PostgreSQL o MongoDB per preferenza e spiega quali decisioni di workload e modello restano da verificare",
+        "mantiene la ricerca live per la scelta del motore dopo aver stabilizzato il linguaggio, con fatti, ipotesi e condizioni di riapertura",
+        "non produce uno schema fisico prematuro né inventa una decisione registrata"
+      ],
+      "state_prefix": null
     }
   ]
 }

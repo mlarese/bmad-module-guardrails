@@ -77,6 +77,11 @@ handoff: `owner: Marco`, `workflow: grl-social-creative`, `domanda: storyboard e
 `evidenza: brief non fornito`, `stato: pending`. Non pubblicare e non aspettare un altro turno per
 materializzare almeno questi gate.
 
+Nel manifest `create` assegna esplicitamente a Sofia (`grl-agent-social`) la titolarità di
+`obiettivo`, `pubblico` e `copy editoriale`; Marco (`grl-agent-creative`/`grl-social-creative`) è
+titolare solo di concept, hook, storyboard e shot list. Se un campo è mancante, il suo valore è
+`non noto`, ma l'owner resta Sofia.
+
 ### `audit`
 
 Legge calendario, post, export o metriche disponibili e separa osservato, dichiarato, ipotesi e

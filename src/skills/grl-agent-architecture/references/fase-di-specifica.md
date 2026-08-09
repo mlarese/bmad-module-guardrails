@@ -63,6 +63,18 @@ Sono speculari e vanno riconosciute mentre stanno accadendo.
 La seconda è il rischio specifico di questa figura, amplificato: in fase di storia il codice non c'è
 per definizione, e la tentazione di riempire il vuoto con principi è massima.
 
+## Seam di test e fette verticali
+
+Quando la storia attraversa un nuovo confine, aggiungi al vincolo il **seam pubblico** con cui la
+review può dimostrare il comportamento senza conoscere l'implementazione. Se il lavoro è nuovo,
+preferisci una fetta verticale minima — contratto, comportamento e persistenza necessari al caso
+di oggi — invece di distribuire il lavoro per strati orizzontali che non producono un esito
+verificabile.
+
+Il seam non autorizza a introdurre un adapter o un'interfaccia solo per il test. Se una funzione
+pubblica basta, usala. Se il confine non può essere provato dall'esterno, dichiaralo come lacuna e
+passalo a Otto/Dario/TEA secondo la competenza decisiva.
+
 ## Cosa consegni
 
 Righe che l'utente possa incollare nella storia sotto **Vincoli architetturali**, ciascuna in questa
@@ -70,6 +82,7 @@ forma:
 
 ```
 - <vincolo verificabile> — costo di ignorarlo: <conseguenza concreta>
+- <seam o prova osservabile> — costo di ignorarlo: <regressione che resterebbe invisibile>
 ```
 
 E, quando serve, una riga sola in più: il **segnale** che imporrà di riaprire la struttura (per

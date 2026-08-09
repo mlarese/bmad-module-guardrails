@@ -116,6 +116,9 @@ SOURCE_AUXILIARY_FILES = {
     "src/skills/grl-agent-database/references/revisione-database.md",
     "src/skills/grl-agent-database/references/fasi-bmad.md",
     "src/skills/grl-agent-database/references/prompt-quality-canon.md",
+    "src/skills/grl-agent-architecture/references/deep-module-design.md",
+    "src/skills/grl-automation/references/human-only-wizard.md",
+    "src/skills/grl-profile/assets/domain-glossary-template.md",
 }
 
 # I file del collegio che portano il roster e i confini fra figure. Sono gli unici

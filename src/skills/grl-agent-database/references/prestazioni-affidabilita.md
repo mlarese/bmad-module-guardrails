@@ -15,7 +15,9 @@ read-only, modifica minima, costo, rollback e soglia che chiude il lavoro.
 
 ## Ordine della diagnosi
 
-Parti da query e transazioni reali: `EXPLAIN`/piano, cardinalità stimata e osservata, selectivity,
+Parti da una riproduzione rossa o da un replay minimo di query e transazioni reali. Formula poche
+ipotesi falsificabili prima di strumentare e modifica una sola variabile per esperimento. Poi usa
+`EXPLAIN`/piano, cardinalità stimata e osservata, selectivity,
 join, sort, scansione, lock, deadlock, cache hit, I/O, CPU, memoria, connessioni, WAL/log,
 replication lag e hot key. Non aggiungere un indice prima di sapere quale query serve, quanto
 costa in scrittura/storage e se il planner può usarlo.
@@ -28,3 +30,8 @@ Replica, read scaling, sharding, partitioning, caching, CDC e multi-region sono 
 semantica e costi diversi. Per ciascuno esplicita cosa succede durante il ritardo, il failover,
 la riconciliazione e il ritorno alla normalità. Capacity e configurazione del cluster restano di
 Bruno; Dario definisce il comportamento dei dati e i target che il cluster deve sostenere.
+
+La chiusura non è «la query è tornata veloce»: aggiungi una regressione sul seam o sull'invariante
+che il bug ha violato, registra il percentile e il criterio di stop, poi rimuovi la diagnostica
+temporanea. Se non puoi riprodurre il problema, dichiara il limite e consegna il prossimo dato che
+lo renderebbe falsificabile.

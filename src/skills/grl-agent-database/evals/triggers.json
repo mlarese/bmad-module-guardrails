@@ -9,6 +9,7 @@
   { "query": "chi interviene nella fase BMad di architettura quando si disegna il database?", "should_trigger": true },
   { "query": "come progetto RPO, RTO, replica, backup e restore del database?", "should_trigger": true },
   { "query": "quale database innovativo è oggi migliore per questo carico? Cerca live", "should_trigger": true },
+  { "query": "prima di disegnare lo schema chiarisci i termini cliente, account e ospite", "should_trigger": true },
 
   { "query": "ci serve Kubernetes per fare il deploy dell'applicazione?", "should_trigger": false },
   { "query": "come configuro autenticazione, ruoli e segreti per il database?", "should_trigger": false },

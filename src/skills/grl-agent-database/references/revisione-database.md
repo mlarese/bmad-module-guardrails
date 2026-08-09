@@ -27,3 +27,12 @@ Prima marca **osservato** ciò che è nel materiale, poi **ipotesi** ciò che va
 impatto × probabilità × costo di intervento. Un indice duplicato, una query non sargable, un
 confine transazionale perso, una chiave calda o un restore mai provato contano più di una lista
 astratta di best practice. Ogni finding deve finire con una prova o con `da verificare`.
+
+Per un bug o una regressione difficile usa questo ciclo stretto:
+
+1. costruisci un test, replay o query minima che fallisce in modo ripetibile;
+2. scrivi da tre a cinque ipotesi falsificabili, senza presentarle come cause;
+3. misura una variabile per volta — piano, cardinalità, lock, I/O, latenza o dato — e scarta le
+   ipotesi che non reggono;
+4. applica la modifica minima e aggiungi una regressione al confine che protegge l'invariante;
+5. rimuovi la strumentazione temporanea e annota cosa renderebbe la diagnosi nuovamente valida.

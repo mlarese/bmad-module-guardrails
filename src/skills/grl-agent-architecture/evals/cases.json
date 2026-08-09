@@ -63,7 +63,7 @@
       "id": "dove-metto-la-feature",
       "input": "Run headless. Dobbiamo aggiungere l'export in PDF delle fatture. Il codice ha `billing/`, `documents/` e `api/`: `billing/` possiede il modello e la persistenza della fattura, `documents/` possiede il renderer PDF, `api/` è solo l'entrypoint HTTP. Dove la metto e cosa tocco?",
       "rubric": [
-        "la risposta colloca l'export in una delle cartelle esistenti, nomina `billing/`, `documents/` e `api/` e identifica quale modulo possiede il modello fattura e quale quello che produce il documento",
+        "la risposta indica un unico modulo responsabile dell'export e motiva la scelta con la proprietà del dato o del rendering, non con la sola esistenza della cartella; ripetere l'elenco delle tre cartelle dell'input senza assegnare la responsabilità non conta",
         "la risposta dice esplicitamente che non porta logica di business nel controller di `api/` e non sposta il modello o la persistenza delle fatture fuori da `billing/`",
         "la risposta descrive una direzione unidirezionale delle dipendenze — per esempio `api/` → `billing/` → `documents/` — e vieta almeno l'import inverso dal modulo documenti verso `api/` o il modello di billing",
         "la risposta non propone di introdurre un nuovo strato o una nuova cartella se le tre esistenti bastano"
@@ -75,7 +75,7 @@
       "input": "Run headless. Sto scrivendo la storia «import CSV dell'anagrafica clienti da back-office». Il repo ha `customers/` (modello e persistenza cliente), `imports/` (parser e validazione di file già usati per i prodotti), `api/` (solo entrypoint HTTP) e `notifications/`. A fine import va mandata una mail di riepilogo. Che vincoli architetturali metto nella storia?",
       "rubric": [
         "la risposta consegna vincoli, non un disegno né una proposta di ristrutturazione: da tre a cinque righe, non una relazione",
-        "ogni vincolo nomina un modulo reale fra `customers/`, `imports/`, `api/` e `notifications/`, e nessun vincolo si limita a invocare un principio senza nominare un modulo",
+        "ogni vincolo indica sia dove la cosa va sia almeno un modulo o strato in cui non deve finire, così che alla review si possa rispondere sì o no; un vincolo che nomina un modulo solo per contesto, senza vietare nulla, non conta",
         "i vincoli sono verificabili guardando il diff — per esempio che il parsing resti in `imports/` e non entri in `api/`, o che l'invio della mail resti in `notifications/` e non venga chiamato dal parser",
         "la risposta esplicita la direzione ammessa delle dipendenze fra i moduli toccati e vieta almeno un import inverso",
         "almeno un vincolo porta con sé il costo concreto di ignorarlo",
@@ -89,7 +89,7 @@
       "input": "Run headless. Storia: «aggiungere il campo facoltativo Partita IVA alla form di modifica del profilo cliente, salvarlo e mostrarlo in sola lettura nel dettaglio». Il campo sta nella stessa tabella clienti. Vincoli architetturali?",
       "rubric": [
         "la risposta dice esplicitamente che questa storia non ha vincoli architetturali e che si può procedere",
-        "il verdetto è dato con sicurezza, non come dubbio o ripiego, e occupa poche righe",
+        "il verdetto non è condizionato: la risposta non contiene formule che riaprono la questione dopo averla chiusa — «dipende», «potresti valutare», «male non fa», «per sicurezza» — e non rimanda la decisione a un momento successivo",
         "la risposta non inventa vincoli per riempire il vuoto — nessuna astrazione, nessun modulo nuovo, nessuna validazione centralizzata proposta di propria iniziativa",
         "la risposta non apre una discussione sui principi né una checklist di controlli"
       ],
@@ -104,6 +104,18 @@
         "la risposta osserva che l'astrazione disegnata su un formato solo ha buone probabilità di non reggere i casi veri di XLSX o del webhook, che hanno esigenze diverse dal CSV",
         "la risposta indica il segnale concreto che imporrà di introdurre il confine — la seconda implementazione reale quando arriva — e dice che a quel punto il costo di estrarla è basso",
         "la risposta non propone in cambio un'altra astrazione più leggera come compromesso"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "modulo-profondo-e-seam",
+      "input": "Run headless. Abbiamo introdotto `PaymentGateway` con un adapter e tre DTO per una sola implementazione Stripe. Il test verifica ogni metodo interno dell'adapter. Qual è il problema e cosa devo cambiare?",
+      "rubric": [
+        "separa interfaccia, implementazione e adapter e chiede quale decisione reale o seconda implementazione giustifichi il confine",
+        "riconosce che il test accoppiato ai metodi interni non prova il contratto e propone un seam pubblico comportamentale",
+        "usa il deletion test o la cancellazione dell'indirezione come opzione esplicita, senza introdurre un altro pattern",
+        "indica una condizione verificabile che renderebbe utile l'adapter in futuro, come una seconda implementazione reale o un confine di deploy",
+        "non prescrive microservizi, esagono o una riscrittura completa"
       ],
       "state_prefix": null
     }

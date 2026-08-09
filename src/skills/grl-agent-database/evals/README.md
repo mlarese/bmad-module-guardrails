@@ -1,7 +1,8 @@
 # Eval di grl-agent-database (🗄️ Dario)
 
 La suite verifica quattro contratti: workload prima del brand, ricerca live senza benchmark
-inventati, architettura del dato con failure mode e confine esplicito con le altre figure.
+inventati, architettura del dato con failure mode e confine esplicito con le altre figure. Include
+anche il rifiuto di fissare lo schema quando il linguaggio del dominio è ancora ambiguo.
 
 | File | Modo | Comando |
 | --- | --- | --- |

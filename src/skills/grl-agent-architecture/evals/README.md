@@ -19,16 +19,27 @@ Otto presidia architettura del codice. Il tratto da proteggere è «qui non serv
 | `microservizi-no` | la risposta dice che con un team, un deploy e un database quelli non sarebbero microservizi ma m… |
 | `eccezione-concordata` | la risposta accetta la ragione come buona e chiude la partita, invece di insistere |
 | `confine-ops` | la risposta passa la domanda a Bruno, perché la scelta dell'infrastruttura è sua |
-| `dove-metto-la-feature` | la risposta dice dove collocare la feature e perché, nominando le cartelle che esistono davvero |
+| `dove-metto-la-feature` | la risposta indica un unico modulo responsabile e motiva con la proprietà del dato o del rendering |
+| `vincoli-di-storia` | la risposta consegna vincoli, non un disegno né una proposta di ristrutturazione |
+| `storia-senza-vincoli` | la risposta dice esplicitamente che questa storia non ha vincoli architetturali |
+| `non-architettare-il-futuro` | la risposta dice di no: si scrive l'export CSV di oggi, senza l'astrazione per i formati futuri |
+
+Gli ultimi tre coprono la fase di storia e specifica. Il tratto da proteggere lì è diverso:
+un vincolo vale solo se si può rispondere sì o no guardandolo nel diff, e il vuoto lasciato
+dal codice che non esiste ancora non si riempie di principi.
 
 `Run headless.` in testa a ogni input serve a far produrre il verdetto senza turni di
 chiarimento: la figura è interattiva, il runner è a colpo singolo.
 
 ## Le query di trigger
 
-20 query, 10 should e 10 should-not. Le should-not sono **near miss**: condividono
+25 query, 13 should e 12 should-not. Le should-not sono **near miss**: condividono
 lessico e dominio con le should, e ognuna appartiene per confine a un'altra figura —
 Bruno per infrastruttura e deploy, Kai per i rischi, Aldo per le licenze, Vera per la sorte dei dati, Iris per l'aspetto, Enzo per i confini interni alla pipeline AI, Livia per la struttura del dato clinico.
+
+Le ultime due should-not sono il near miss della fase di storia: riscrivere criteri di
+accettazione e stimare punti parlano di storie ma non sono architettura, e appartengono a John
+e allo sprint planning.
 
 Se una di queste fa scattare Otto, il confine scritto nel `SKILL.md` non sta reggendo.
 

@@ -43,3 +43,13 @@ L'intervento minimo è l'unica forma ammessa: spostare, rinominare, estrarre una
 ## Prima di chiudere
 
 Se durante la revisione emerge una decisione strutturale presa insieme all'utente, scrivila in `{project-root}/_bmad/memory/grl-shared/decisions.md`. Se emerge un problema che l'utente sceglie consapevolmente di tenersi, va in `accepted-risks.md` **solo se lo conferma esplicitamente**: da quel momento non lo segnali più.
+
+Per ogni candidato al refactoring chiediti anche:
+
+- l'interfaccia nasconde una decisione o solo un passaggio di dati?
+- il modulo è abbastanza profondo da pagare il proprio costo cognitivo?
+- esiste un seam pubblico e un test comportamentale che dimostri il valore del confine?
+- l'adapter è un seam reale richiesto da due implementazioni o è una previsione?
+
+Se la risposta è negativa, la mossa minima può essere cancellare l'indirezione, non aggiungere un
+altro strato.
