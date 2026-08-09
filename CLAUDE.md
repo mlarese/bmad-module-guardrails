@@ -49,7 +49,7 @@ Sei repository derivano da questo e li produce `tools/build_modules.py` leggendo
 | `grf` | `mlarese/bmad-module-guardrails-fiscal` | Marta, `grl-fiscal-updates` |
 | `grh` | `mlarese/bmad-module-guardrails-health` | Livia, `grl-mdsw` |
 | `grw` | `mlarese/bmad-module-guardrails-web` | Iris, Nora, `grl-web` |
-| `gwp` | `mlarese/bmad-module-guardrails-wordpress` | Milo |
+| `gwp` | `mlarese/bmad-module-guardrails-wordpress` | Milo, `grl-wordpress-delivery` |
 
 **Regola: ogni modifica che tocca `src/` va propagata ai derivati nello stesso turno, senza
 aspettare che l'utente lo chieda.** Vale per una skill cambiata, una skill nuova, un cambio di

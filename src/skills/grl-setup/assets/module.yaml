@@ -11,8 +11,8 @@
 
 code: grl
 name: Guardrails
-description: "Dodici figure di presidio — privacy e GDPR, sicurezza applicativa, legale e licenze, compliance normativa, fisco e finanza agevolata, qualità visiva della UI, disciplina architetturale del codice, infrastruttura e operatività, dominio clinico del software sanitario, impianto delle applicazioni che usano modelli linguistici, architettura WordPress a componenti e SEO — che affiancano il team dentro il ciclo di sviluppo, quando cambiare costa ancora poco. Include due workflow di ricerca live per gli aggiornamenti legali e fiscali, oltre a `grl-web` per landing page e siti."
-module_version: 1.16.0
+description: "Dodici figure di presidio — privacy e GDPR, sicurezza applicativa, legale e licenze, compliance normativa, fisco e finanza agevolata, qualità visiva della UI, disciplina architetturale del codice, infrastruttura e operatività, dominio clinico del software sanitario, impianto delle applicazioni che usano modelli linguistici, architettura WordPress a componenti e SEO — che affiancano il team dentro il ciclo di sviluppo, quando cambiare costa ancora poco. Include due workflow di ricerca live per gli aggiornamenti legali e fiscali, `grl-web` per landing page e siti e `grl-wordpress-delivery` per consegne WordPress fino al release gate."
+module_version: 1.17.0
 default_selected: false
 
 module_greeting: >
@@ -29,8 +29,10 @@ module_greeting: >
   questo software è un dispositivo medico, e in quale classe.
 
   C'è anche `grl-web`: costruisce landing page e siti, e prima di consegnarli li fa
-  guardare alle figure. `grl-legal-updates` e `grl-fiscal-updates` recuperano invece
-  aggiornamenti normativi e fiscali con ricerca live e doppio gate di verifica.
+  guardare alle figure. `grl-wordpress-delivery` coordina creazione, ripresa, migrazione
+  e verifica di un sito WordPress fino al release gate di `grl-board`.
+  `grl-legal-updates` e `grl-fiscal-updates` recuperano invece aggiornamenti normativi
+  e fiscali con ricerca live e doppio gate di verifica.
 
   `grl-setup` installa anche le stanze tematiche di `bmad-party-mode`: governance,
   engineering, health, web, WordPress e release gate. Convocale con
@@ -41,7 +43,7 @@ module_greeting: >
 # (_bmad/memory/grl-shared/project-profile.md), non in config — il profilo cambia
 # da progetto a progetto, la config è unica per installazione.
 #
-# Il modulo si installa sempre intero: dodici figure e sette workflow, nessuna
+# Il modulo si installa sempre intero: dodici figure e otto workflow, nessuna
 # selezione. La severità si deriva dalla criticità dichiarata nel profilo di progetto.
 
 # Nessuna chiave `directories`: la cartella della memoria condivisa

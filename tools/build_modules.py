@@ -7,7 +7,7 @@
 
 Perché serve
 ------------
-Il bundle `grl` installa dodici figure e sette workflow in un colpo solo. Chi vuole
+Il bundle `grl` installa dodici figure e otto workflow in un colpo solo. Chi vuole
 solo la governance normativa, o solo il presidio ingegneristico, non ha motivo di
 portarsi le altre dieci figure. La soluzione è un repository per area — ma scritto a
 mano diventerebbe subito divergente dal bundle.
@@ -61,6 +61,11 @@ TEXT_SUFFIXES = {".md", ".yaml", ".yml", ".toml", ".csv", ".json", ".py", ".txt"
 
 # Un party group con meno di due membri non è una stanza: si omette.
 MIN_PARTY_MEMBERS = 2
+
+# I file del collegio che portano il roster e i confini fra figure. Sono gli unici
+# su cui si filtra per figura installata: altrove le stesse righe hanno un altro
+# significato.
+BOARD_ROSTER_FILES = {"SKILL.md", "selection.md"}
 
 # Il bundle conta dodici figure e lo dice ovunque nei testi del core. In un modulo
 # tematico quel numero è falso, e un numero falso in una skill è un'istruzione
@@ -166,10 +171,10 @@ def adapt_board(text: str, count: int) -> str:
     if count > 4:
         return text
     return text.replace(
-        "punta a **due-quattro figure**, e se le convochi tutte devi poter dire cosa "
-        "ciascuna ha di decisivo da dire su *questo* artefatto.",
-        "**convoca solo chi ha qualcosa di decisivo da dire su *questo* artefatto**, e se "
-        "le convochi tutte devi poter dire cosa ciascuna ci aggiunge.",
+        "Punta a **due-quattro figure**; se le convochi tutte, indica cosa ciascuna "
+        "ha di decisivo da dire su *questo* artefatto.",
+        "**Convoca solo chi ha qualcosa di decisivo da dire su *questo* artefatto**; "
+        "se le convochi tutte, indica cosa ciascuna ci aggiunge.",
     )
 
 
@@ -258,15 +263,19 @@ def copy_skill(
         if rel.name == "customize.toml":
             text = re.sub(r'^module = "grl"$', f'module = "{module_code}"', text, flags=re.M)
 
-        if rel.name == "SKILL.md" and is_board:
+        if is_board and rel.name in BOARD_ROSTER_FILES:
             # Solo nel collegio: la tabella dice chi convocare, e una figura non
             # installata non è convocabile. Nelle figure le stesse righe dicono
             # invece «questo non è mio dominio» — un confine che vale comunque, e
             # che togliendolo lascerebbe la figura libera di invadere il tema.
+            # Il roster vive in references/selection.md: filtrare il solo SKILL.md
+            # lascerebbe convocabili figure che il modulo non installa.
             text = filter_tables(text, context["codes"], context["names"])
             text = adapt_board(text, context["count"])
 
-        if rel.name == "SKILL.md" and (is_board or is_figure):
+        # La nota va dove stanno le tabelle: nelle figure è SKILL.md, nel collegio
+        # è references/selection.md, che dopo il carve porta roster e confini.
+        if (is_figure and rel.name == "SKILL.md") or (is_board and rel.name == "selection.md"):
             text = text.rstrip("\n") + OUT_OF_MODULE_NOTE.format(installed=context["listing"])
 
         destination.write_text(text, encoding="utf-8")

@@ -5,7 +5,7 @@
 # repository resta la fonte unica: i repository derivati non si modificano a mano,
 # si rigenerano.
 #
-# Il bundle `grl` resta la superficie completa — dodici figure e sette workflow in
+# Il bundle `grl` resta la superficie completa — dodici figure e otto workflow in
 # un'unica installazione. I moduli tematici sono alternative al bundle, non
 # aggiunte: installano le stesse skill con lo stesso nome, quindi bundle e moduli
 # tematici non convivono nello stesso progetto.
@@ -109,9 +109,10 @@ modules:
     name: Guardrails WordPress
     repo: bmad-module-guardrails-wordpress
     status: derived
-    purpose: "WordPress a componenti con Gutenberg, campi custom, template e Media Library."
-    description: "Presidio dell'architettura WordPress a componenti: Gutenberg, Elementor confinato dove serve, ACF e campi custom, template e Media Library, senza contenuti strutturati dentro pagine monolitiche."
+    purpose: "WordPress a componenti e consegna controllata fino al release gate."
+    description: "Presidio dell'architettura e della consegna WordPress a componenti: Gutenberg, Elementor confinato dove serve, ACF e campi custom, template e Media Library, con creazione, ripresa, migrazione e verifica fino al release gate."
     skills:
       - grl-agent-wordpress
+      - grl-wordpress-delivery
     party_groups:
       - grl-wordpress-delivery

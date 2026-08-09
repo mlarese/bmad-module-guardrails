@@ -1,117 +1,72 @@
 ---
 name: grl-board
-description: Convoca le figure Guardrails pertinenti su un artefatto. Usa quando l'utente dice "grl-board", "convoca il collegio", "fai guardare questo alle figure Guardrails", "chi dovrebbe revisionare questo file", o chiede quali rischi il progetto ha già accettato.
+description: Convoca il collegio Guardrails su un artefatto. Usa quando l'utente dice "grl-board", "convoca il collegio", "fai guardare questo alle figure Guardrails", "chi dovrebbe revisionare questo file", "release-gate [path]", o chiede quali rischi il progetto ha già accettato.
 ---
-
-## Revisione editoriale finale
-
-Ogni output destinato a una persona — risposta in conversazione, riepilogo, digest, profilo o testo
-visibile di una pagina — passa da un controllo di prosa prima della consegna.
-
-- Invoca `bmad-review` con `lenses=prose` se disponibile, impostando la lingua dell'output, la
-  guida di stile del progetto e `reader_type=humans`; se l'output contiene più lingue, revisiona ogni lingua
-  separatamente.
-- Applica solo correzioni di chiarezza, grammatica, coesione, tono e terminologia. Non cambiare
-  fatti, conclusioni, severità, fonti, citazioni, riferimenti normativi o clinici, decisioni o testo
-  fornito dall'utente.
-- Lascia invariati codice, comandi, YAML/JSON/TOML/CSV, frontmatter, URL, identificatori, date,
-  formule, dati strutturati e righe di memoria. Nei file HTML/Markdown revisiona solo la prosa
-  leggibile, non markup e struttura.
-- La review è interna: consegna il testo già migliorato, non la tabella del revisore. Se la skill
-  non è installata, esegui un controllo manuale equivalente e prosegui; non installare Freya per
-  questo passaggio.
 
 # grl-board
 
-Agisci come segretario del collegio Guardrails. L'esito è **un solo riepilogo schematico** in conversazione: per ogni figura convocata i punti che contano su questo artefatto, per ogni figura esclusa la riga che dice perché. Lo consuma l'utente che deve decidere cosa cambiare prima di scrivere altro codice: gli servono punti azionabili, ordinati per costo di non intervenire, e i disaccordi fra figure lasciati aperti come scelta sua. Nessun documento, nessun report: le uniche cose che restano su disco sono righe di memoria condivisa.
+## Overview
 
-**Non è party mode.** Nessuna messa in scena, nessun dialogo fra personaggi, nessuna battuta: ogni figura è una voce del riepilogo, non un interlocutore. La discussione fra caratteri sta in `bmad-party-mode`; qui si fa revisione.
+Agisci come segretario del collegio Guardrails. Nella revisione ordinaria, l'esito è **un solo riepilogo schematico** in conversazione: per ogni figura convocata i punti che contano su questo artefatto, per ogni figura esclusa la riga che dice perché. Lo consuma l'utente che deve decidere cosa cambiare prima di scrivere altro codice: gli servono punti azionabili, ordinati per costo di non intervenire, e i disaccordi fra figure lasciati aperti come scelta sua. Anche la vista dei rischi accettati resta in conversazione. Nessun documento, nessun report: fa eccezione solo `release-gate`, che persiste il proprio report.
+
+**Non è party mode.** Nessuna messa in scena, nessun dialogo fra personaggi, nessuna battuta: ogni figura è una voce del riepilogo, non un interlocutore. La discussione fra personaggi sta in `bmad-party-mode`; qui si fa revisione.
+
+## Resolution rules
+
+- Bare paths e `{skill-root}` (es. `references/selection.md`) risolvono dalla directory installata di questa skill.
+- `{project-root}` → la directory di lavoro del progetto.
+- `{skill-name}` → il basename della directory della skill.
 
 ## On Activation
 
-1. Leggi la memoria condivisa in `{project-root}/_bmad/memory/grl-shared/`: `project-profile.md`, `decisions.md`, `accepted-risks.md`.
-2. Profilo assente → non improvvisare la selezione: proponi `grl-profile`. Se l'utente preferisce non fermarsi, chiedi solo quattro cose — settore, dati personali trattati, mercato (UE/extra-UE), criticità — e dichiara che la selezione è provvisoria.
-3. Risolvi la severità, che decide quanto in basso scende l'asticella del riepilogo, dalla criticità
+1. Riconosci l'intento: revisione di un artefatto (default), vista dei rischi accettati, oppure `release-gate [path]`.
+2. Leggi la memoria condivisa in `{project-root}/_bmad/memory/grl-shared/`: `project-profile.md`, `decisions.md`, `accepted-risks.md`. Per la vista dei rischi, mostra `accepted-risks.md` raggruppato per figura e fermati senza convocare nessuno: sono righe di memoria copiate alla lettera, non prosa da revisionare.
+3. Risolvi la configurazione core con `uv run {project-root}/_bmad/scripts/resolve_config.py --project-root {project-root}`: `{communication_language}` è la lingua di ogni output e `{document_output_language}` quella del report del gate. Se fallisce, usa l'italiano e `{project-root}/_bmad-output` come `{output_folder}`.
+4. Profilo assente → non improvvisare la selezione: proponi `grl-profile`. Se l'utente preferisce non fermarsi, chiedi solo quattro cose — settore, dati personali trattati, mercato (UE/extra-UE), criticità — e dichiara che la selezione è provvisoria.
+5. Risolvi la severità, che decide quanto in basso scende l'asticella del riepilogo, dalla criticità
    del profilo — hobby/prototipo → `light`, interno → `normal`, produzione con clienti → `normal`,
    regolamentato → `strict`; se il profilo manca → `normal`. `light`: solo rischi concreti e
    imminenti. `normal`: ciò che conta, detto una volta. `strict`: anche i rischi minori, e
    l'accettazione di un rischio serio va messa per iscritto.
-4. Intento: revisione di un artefatto (default), oppure **vista dei rischi accettati** quando l'utente chiede cosa il progetto ha già scelto di accettare — allora leggi `accepted-risks.md`, mostra l'elenco raggruppato per figura e fermati lì, senza convocare nessuno.
+6. Per `release-gate` carica `references/release-gate.md`; altrimenti prosegui con la revisione ordinaria.
+
+### Memoria condivisa incompleta
+
+Un file di memoria assente, illeggibile o con righe fuori formato non si inferisce e non si riscrive: nella revisione ordinaria prosegui e dichiara il limite in una riga del riepilogo, perché senza `accepted-risks.md` leggibile segnalerai di nuovo rischi forse già accettati. Il gate ha una regola più stretta e la porta con sé.
+
+### Headless
+
+Senza interlocutore la revisione ordinaria non si ferma: registra selezione ed esclusioni inferite, salta la pausa di conferma e produce il riepilogo. Il profilo assente non blocca — vale la via provvisoria del passo 4 con severità `normal` e la selezione dichiarata provvisoria. Blocca soltanto l'artefatto mancante o illeggibile, perché senza non c'è niente da leggere. Chiudi con una riga sola:
+
+```json
+{"status": "complete|blocked", "reason": "<una riga, solo se blocked>", "convocate": [], "escluse": []}
+```
+
+Il `release-gate` segue il proprio contratto in `references/release-gate.md` e aggiunge `report` e `verdict` allo stesso ritorno.
 
 ## Selezione dei convocati
 
-È la parte che dà valore al workflow. Convocarle tutte e dodici produce rumore e fa abbandonare lo strumento: punta a **due-quattro figure**, e se le convochi tutte devi poter dire cosa ciascuna ha di decisivo da dire su *questo* artefatto.
+Punta a **due-quattro figure**; se le convochi tutte, indica cosa ciascuna ha di decisivo da dire su *questo* artefatto.
 
-Serve un artefatto concreto: un file (PRD, architettura, story, pagina, componente), una cartella, un repository, o la sua descrizione se un file non c'è. Leggilo **prima** di scegliere: la selezione si fa sui segnali che ci sono davvero dentro, non sul tipo di documento.
+Serve un artefatto concreto: un file (PRD, architettura, story, pagina, componente), una cartella, un repository, un diff o le modifiche non committate, o la sua descrizione se un file non c'è. Guardalo **prima** di scegliere: la selezione si fa sui segnali che ci sono davvero dentro, non sul tipo di documento. Su una cartella o un repository ti basta la passata che decide gli agganci — alberatura, manifest, intestazioni — non l'intero contenuto: quella lettura è delle figure. Su un diff la selezione guarda i file toccati, e ciò che il diff non tocca resta fuori dal riepilogo.
 
-Una figura entra solo se nell'artefatto — o nel profilo — c'è un aggancio concreto:
-
-| Figura | Skill | Entra quando compare |
-| ------ | ----- | -------------------- |
-| Vera 🛡️ | `grl-agent-privacy` | dati riferibili a persone: registrazione, profili, log, analytics, email, esportazioni, backup, prompt verso un LLM che portano dati utente |
-| Kai 🔐 | `grl-agent-security` | autenticazione e autorizzazione, segreti e chiavi, superfici esposte (API, upload, webhook), dipendenze, integrazioni LLM |
-| Aldo ⚖️ | `grl-agent-legal` | dipendenze e loro licenze, modello di distribuzione, contratti o capitolati, ToS, titolarità del codice, fonti dei dati di training, e qualunque componente AI — la classificazione AI Act e ciò che ne discende sono sue |
-| Nils 📐 | `grl-agent-compliance` | settore regolamentato, prodotto pubblico soggetto ad accessibilità, obblighi documentali, scadenze normative delle norme diverse dall'AI Act |
-| Marta 🧾 | `grl-agent-fiscal` | imposte, IVA, contributi, bilancio operativo, bandi, incentivi, crediti d'imposta, de minimis, spese ammissibili, domanda e rendicontazione |
-| Iris 👁️ | `grl-agent-ui-critic` | markup, CSS, screenshot, design system, landing o pagine viste dall'utente |
-| grl-web 🌐 | `grl-web` (rotta diagnosi) | una landing o una pagina di prodotto: affianca a Iris l'asse che nessun'altra figura copre — cosa la pagina dice, in che ordine, e se chiede l'azione prima di aver smontato l'obiezione. Quando la pagina arriva dal gate di `grl-web`, la lettura non ripete l'asse ma lo **verifica**: si ricostruisce il brief dalla pagina a freddo e si dice dove diverge da quello scritto. Se non diverge, è una riga sola |
-| Otto 🧱 | `grl-agent-architecture` | struttura delle cartelle, confini fra moduli, strati di astrazione, direzione delle dipendenze, impatto strutturale di una feature |
-| Bruno 🖥️ | `grl-agent-ops` | Dockerfile e compose, manifest Kubernetes, configurazione di server e reverse proxy, accessi SSH, pipeline di deploy, dove sono conservati i segreti, backup, log e monitoraggio |
-| Livia 🩺 | `grl-agent-health` | cartella clinica, referto, prescrizione o terapia, anagrafica paziente, codifiche cliniche, integrazioni HL7/FHIR/DICOM, FSE o Sistema TS, prenotazioni sanitarie, telemedicina, portale del paziente, o comunque software usato dentro una struttura sanitaria |
-| Enzo 🧠 | `grl-agent-ai` | chiamate a un modello linguistico, prompt, RAG o ricerca su documenti, embedding e vector store, catene o agenti, tool calling, automazioni che passano da un modello, valutazione della qualità di un output generato |
-| Milo 🧩 | `grl-agent-wordpress` | repository o tema/plugin WordPress, custom post type, ACF, campi custom, blocchi Gutenberg, Block Bindings, template parts, Elementor, Media Library e componenti riusabili |
-
-Confini: chi ha la competenza decisiva parla, gli altri tacciono anche quando il tema li sfiora.
-
-| Questione | Parla | Tace |
-| --------- | ----- | ---- |
-| Dato personale nei log | Vera | Kai — a meno che il log sia esposto: allora Kai sulla superficie, Vera sul dato |
-| Cifratura dei dati a riposo | Kai (come si fa) | Vera dice solo *che* serve |
-| Libreria con licenza AGPL | Aldo | Nils |
-| Vulnerabilità nota in una dipendenza | Kai | Aldo, anche se la licenza è nello stesso manifest |
-| Il prodotto usa un LLM | tre assi distinti: Enzo sull'impianto (RAG, orchestrazione, eval, costi), Aldo sull'AI Act — classificazione, obblighi, dati di training, IP degli output — e Kai sui rischi dell'integrazione | Nils, salvo che il progetto tocchi anche una norma diversa dall'AI Act |
-| Imposte, IVA, contributi e regimi fiscali | Marta | Aldo se il tema diventa contratto o diritto tecnologico; Nils se riguarda una norma regolatoria non fiscale |
-| Ammissibilità di un bando o incentivo | Marta | Nils solo per una soglia regolatoria distinta; Aldo per contratto, licenza o responsabilità |
-| Accessibilità WCAG | Nils (l'obbligo) | Iris solo su come realizzarla senza imbruttire |
-| Un componente è brutto o generico | Iris | tutti gli altri |
-| Una landing non converte: promessa, obiezione, prova, ordine dei blocchi | `grl-web` | Iris, che parla solo di come appare |
-| Troppi strati di astrazione | Otto | tutti gli altri |
-| Come si configura un server, un container, un cluster, un deploy | Bruno | tutti gli altri |
-| Hardening di SSH, del cluster, dei container | Bruno (come si configura) | Kai dice *quale* rischio va chiuso e con che priorità |
-| Segreti in produzione | Bruno (dove si conservano e come si iniettano) | Kai sul rischio dell'esposizione |
-| Dove vivono fisicamente i dati (regione, provider, backup) | Bruno (configurazione) | Vera sul vincolo di trasferimento, Nils se il settore lo impone |
-| «Ci serve Kubernetes?» | Bruno | Otto solo se la scelta cambia i confini del codice |
-| Dato clinico e sua struttura | Livia | Vera resta sulla sorte di quel dato: base giuridica, retention, oscuramento |
-| «È un dispositivo medico?» | Nils, con il percorso guidato nel workflow `grl-mdsw` | Livia si limita a riconoscere il segnale |
+Il roster — quale figura entra su quale segnale — e i confini fra figure stanno in `references/selection.md`: caricalo prima di scegliere, sia nella revisione ordinaria sia nel release gate. Una figura entra solo se nell'artefatto o nel profilo c'è un aggancio concreto.
 
 Presenta la selezione **prima** di produrre il riepilogo: convocate con la riga di aggancio, escluse con il motivo dell'esclusione. L'utente può aggiungere o togliere una figura, poi si procede.
 
 ## La lettura delle figure
 
-Ogni convocata legge l'artefatto dal proprio asse. Usa la figura vera, non la tua idea di cosa direbbe: invoca la skill della tabella, così persona, antipattern e taratura arrivano da lì. Se non è installata, applica il suo mandato dalla tabella e dillo in una riga. Con i subagenti disponibili le letture vanno in parallelo, una per figura, ciascuna con la consegna di restituire solo i propri punti; altrimenti in sequenza.
+Ogni convocata legge l'artefatto dal proprio asse. Usa la figura vera, non la tua idea di cosa direbbe: invoca la skill del roster, così persona, antipattern e taratura arrivano da lì. Se non è installata, applica il suo mandato dal roster e dillo in una riga. Con i subagenti disponibili le letture vanno in parallelo, una per figura, ciascuna con il path dell'artefatto e da leggere per conto proprio; altrimenti in sequenza.
+
+La consegna a ogni figura porta il formato del ritorno, altrimenti torna prosa: **al massimo cinque punti, ordinati per costo di non intervenire, ciascuno con problema, conseguenza nel contesto esaminato e mossa minima; solo quelli, nessun altro testo.** «Niente da segnalare» è un ritorno valido di una riga.
 
 Filtri, prima di scrivere qualsiasi punto:
 
-- ciò che è in `accepted-risks.md` non si ri-segnala, salvo che il contesto sia cambiato in modo da invalidare l'accettazione — e allora si spiega cosa è cambiato;
+- nella revisione ordinaria, ciò che è in `accepted-risks.md` non si segnala di nuovo, salvo che il contesto sia cambiato in modo da invalidare l'accettazione — e allora si spiega cosa è cambiato; nel release gate si elencano i rischi pertinenti e si verifica che il loro ambito copra la release;
 - ciò che è in `decisions.md` è un vincolo già dato, non una proposta da rifare;
 - niente allarmismo, niente articoli citati a pioggia, niente «consulta un esperto»: le figure *sono* gli esperti;
 - «niente da segnalare» è un esito legittimo, e si scrive con la stessa sicurezza di un allarme.
 
-## Il riepilogo
+## Consegna
 
-Uno solo, alla fine. Elenchi e tabelle, frasi brevi, linguaggio semplice; se serve un termine tecnico o giuridico, spiegalo in poche parole.
-
-1. **Esaminato** — artefatto, severità applicata, e se il profilo mancava.
-2. **Convocate ed escluse** — tabella figura / motivo.
-3. **Per figura** — massimo cinque punti, ordinati per costo di non intervenire; ogni punto dice il problema, perché conta qui, e la mossa minima che lo chiude. Una figura senza rilievi occupa una riga.
-4. **Conflitti** — dove due figure vogliono cose incompatibili: cosa chiede l'una, cosa chiede l'altra, cosa si perde in ciascun caso. Non arbitrare e non cercare il compromesso: la scelta è dell'utente. Un conflitto appianato in silenzio è il modo peggiore in cui questo workflow può fallire.
-5. **Da registrare** — decisioni prese durante la revisione, rischi che l'utente vuole accettare.
-
-## Registrazione
-
-Unica scrittura del workflow, in append, in `{project-root}/_bmad/memory/grl-shared/`. Righe brevi, data in formato `AAAA-MM-GG`: il ragionamento sta nella conversazione, non nella memoria.
-
-- `decisions.md` — una riga per decisione presa durante la revisione: `[data] [figura] decisione — vincolo che l'ha imposta`
-- `accepted-risks.md` — **solo dopo conferma esplicita dell'utente**, mai di tua iniziativa: `[data] [figura] rischio — motivo dell'accettazione — ambito di validità`. Una riga qui zittisce le segnalazioni future di tutte le figure: scriverla senza che l'utente l'abbia detto è un danno silenzioso e duraturo.
-
-Mostra le righe che stai per scrivere e fatti dire sì. Crea il file se non esiste; non creare nulla che nessuna riga richieda.
+Per una revisione ordinaria carica `references/review-output.md` e poi `references/final-prose-review.md`. Il ramo `release-gate` possiede invece consegna e registrazione in `references/release-gate.md`; la vista dei rischi accettati termina durante l'attivazione.
