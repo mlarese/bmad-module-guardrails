@@ -34,7 +34,7 @@ def test_all_eval_suites_and_fixture_references_are_structurally_valid() -> None
     case_files = sorted((ROOT / "src" / "skills").glob("*/evals/cases.json"))
     trigger_files = sorted((ROOT / "src" / "skills").glob("*/evals/triggers.json"))
 
-    assert len(case_files) == 22
+    assert len(case_files) == 23
     assert len(trigger_files) == len(case_files)
 
     case_count = 0

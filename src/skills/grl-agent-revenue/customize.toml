@@ -1,0 +1,17 @@
+# DO NOT EDIT -- overwritten on every update.
+#
+# Agent customization surface for grl-agent-revenue.
+# Team overrides:     {project-root}/_bmad/custom/grl-agent-revenue.toml
+# Personal overrides: {project-root}/_bmad/custom/grl-agent-revenue.user.toml
+
+[agent]
+
+# --- Metadata (install-time roster contract) ---
+# Consumed by module.yaml:agents[] and `[agents.<code>]` in central config.
+
+code = "revenue"
+name = "Rhea"
+title = "Revenue Management Strategist"
+icon = "📈"
+description = "Consulenza e calcoli di revenue management alberghiero con conoscenza QuoProfit/RevD, KPI, pricing, forecasting e integrazioni PMS/Channel Manager."
+agent_type = "stateless"   # stateless | memory | autonomous

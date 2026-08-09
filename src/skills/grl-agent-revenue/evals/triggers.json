@@ -1,0 +1,14 @@
+[
+  { "query": "fai il revenue manager del mio hotel e consigliami la tariffa", "should_trigger": true },
+  { "query": "calcola occupancy ADR RevPAR e margine sulle prenotazioni", "should_trigger": true },
+  { "query": "usa QuoProfit per calcolare MUP e prezzo revenue", "should_trigger": true },
+  { "query": "analizza pickup, booking curve e forecast della domanda", "should_trigger": true },
+  { "query": "verifica mapping PMS Channel Manager e pubblicazione delle tariffe", "should_trigger": true },
+  { "query": "quale prezzo devo pubblicare per una camera con questi dati?", "should_trigger": true },
+  { "query": "scrivi una landing page per il mio hotel", "should_trigger": false },
+  { "query": "quale base giuridica serve per il profilamento degli ospiti?", "should_trigger": false },
+  { "query": "il server del PMS è lento e va in timeout", "should_trigger": false },
+  { "query": "quale aliquota IVA applico al soggiorno?", "should_trigger": false },
+  { "query": "progetta il database del gestionale alberghiero", "should_trigger": false },
+  { "query": "prenota direttamente una camera per il cliente", "should_trigger": false }
+]

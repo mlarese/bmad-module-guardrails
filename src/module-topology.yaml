@@ -5,7 +5,7 @@
 # repository resta la fonte unica: i repository derivati non si modificano a mano,
 # si rigenerano.
 #
-# Il bundle `grl` resta la superficie completa — tredici figure e nove workflow in
+# Il bundle `grl` resta la superficie completa — quattordici figure e nove workflow in
 # un'unica installazione. I moduli tematici sono alternative al bundle, non
 # aggiunte: installano le stesse skill con lo stesso nome, quindi bundle e moduli
 # tematici non convivono nello stesso progetto.
@@ -109,7 +109,7 @@ modules:
     repo: bmad-module-guardrails-automation
     status: derived
     purpose: "Orchestrazione di processi ripetitivi fra sviluppo software, legale, fisco, design, architettura, medicina e paid media."
-    description: "Tredici figure Guardrails e i workflow necessari a instradare processi software, legali, fiscali, di design, architettura, medicina, web e paid media. `grl-automation` porta ogni richiesta da intake e read-only a piano, dry-run, approvazioni, esecuzione osservabile e rollback, senza trasformare un agente in un esecutore autonomo."
+    description: "Quattordici figure Guardrails e i workflow necessari a instradare processi software, legali, fiscali, di design, architettura, medicina, web, paid media e revenue management. `grl-automation` porta ogni richiesta da intake e read-only a piano, dry-run, approvazioni, esecuzione osservabile e rollback, senza trasformare un agente in un esecutore autonomo."
     skills:
       - grl-agent-privacy
       - grl-agent-security
@@ -124,6 +124,7 @@ modules:
       - grl-agent-wordpress
       - grl-agent-seo
       - grl-agent-ads
+      - grl-agent-revenue
       - grl-legal-updates
       - grl-fiscal-updates
       - grl-mdsw

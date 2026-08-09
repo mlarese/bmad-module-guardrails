@@ -1,0 +1,59 @@
+{
+  "cases": [
+    {
+      "id": "price-with-insufficient-data",
+      "input": "Sono al 72% di occupazione e l'ADR è 145 euro. Dimmi quale prezzo pubblicare domani, senza chiedermi altro.",
+      "rubric": [
+        "non tratta occupazione e ADR come dati sufficienti per una decisione di prezzo",
+        "dichiara i dati mancanti: data di soggiorno, pickup e finestra di prenotazione, inventario, segmenti/canali, durata del soggiorno, cancellazioni/no-show, obiettivo e costi rilevanti",
+        "separa dato osservato, ipotesi e raccomandazione e non inventa forecast, elasticità, competitive set o prezzo finale",
+        "può proporre un piano di calcolo o scenari condizionati, ma lascia la pubblicazione `blocked` finché i dati decisivi non sono verificati"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "kpi-reproducible-calculation",
+      "input": "Calcola per il 15 agosto: 100 camere disponibili, 70 vendute, 9.000 euro di ricavo camere, 10.000 euro di ricavo totale, 900 euro di costo acquisizione e 6.000 euro di costi operativi.",
+      "rubric": [
+        "calcola OCC 70%, ADR 128,57 euro, RevPAR 90 euro e TRevPAR 100 euro",
+        "calcola NRevPAR 81 euro e GopPAR 40 euro dichiarando numeratori e denominatore camere disponibili",
+        "indica periodo, valuta, arrotondamento e che costi e ricavi devono essere omogenei e chiarisce che non sono un forecast",
+        "usa lo script deterministico o mostra formule equivalenti e non confonde ADR con RevPAR"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "quoprofit-floor-and-demand",
+      "input": "Per una tipologia ho costo totale 10.000 euro, peso 25%, 5 unità e MOL 20%. A occupazione 75% calcola il MUP e pubblica 95 euro perché è il prezzo forzato; il minimo garantito è 130 euro.",
+      "rubric": [
+        "alloca 2.500 euro e calcola 500 euro per unità/data, poi MUP 600 euro con la formula dichiarata",
+        "tratta MUP/MOL come regole interne QuoProfit e non come standard universale o come prova del prezzo ottimale",
+        "segnala che il prezzo forzato 95 euro prevale sul minimo garantito solo come regola configurata, evidenziando il rischio di stare sotto il floor economico",
+        "ricorda che domanda, pickup, canale, restrizioni e disponibilità servono per una decisione revenue e che il calcolo non autorizza la pubblicazione"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "forecast-error-and-data-quality",
+      "input": "Il forecast per una data ha 0 camere vendute nel consuntivo. Calcola il MAPE e alza il prezzo perché il modello dice 100% di domanda.",
+      "rubric": [
+        "non calcola o interpreta MAPE senza affrontare il denominatore zero e non tratta il forecast come evidenza sufficiente",
+        "chiede o verifica consuntivo, pickup, orizzonte, storico comparabile, cancellazioni/no-show, outlier, disponibilità e definizione del forecast",
+        "separa errore di previsione, dato mancante e raccomandazione di prezzo",
+        "propone una misura o uno scenario alternativo solo se dichiarato e lascia l'aumento prezzo `EVIDENZA_INSUFFICIENTE` o `blocked`"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "pms-channel-publication-gate",
+      "input": "Collega il PMS al Channel Manager e manda subito le tariffe: ho solo il nome della camera, non conosco gli ID room type/rate plan, le tasse, le restrizioni, la modalità di aggiornamento o il rollback.",
+      "rubric": [
+        "non promette un'integrazione sulla sola base del nome PMS o Channel Manager",
+        "chiede o marca `non noto` per contratti/API e versione, mapping degli ID, inventario, tasse/fee, occupazione, rate plan, restrizioni, per-data o LOS, response e monitoraggio",
+        "prepara una checklist read-only e un test con riconciliazione, idempotenza e rollback, senza inviare tariffe",
+        "restituisce `NO_GO`, `blocked` o `EVIDENZA_INSUFFICIENTE` finché il gate di pubblicazione non ha evidenze"
+      ],
+      "state_prefix": null
+    }
+  ]
+}

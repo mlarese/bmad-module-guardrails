@@ -9,14 +9,14 @@
 
 code: grl
 name: Guardrails
-description: "Tredici figure di presidio — privacy e GDPR, sicurezza applicativa, legale e licenze, compliance normativa, fisco e finanza agevolata, qualità visiva della UI, disciplina architetturale del codice, infrastruttura e operatività, dominio clinico del software sanitario, impianto delle applicazioni che usano modelli linguistici, architettura WordPress a componenti, SEO e media buying/ADV — che affiancano il team dentro il ciclo di sviluppo, quando cambiare costa ancora poco. Include workflow di ricerca live per gli aggiornamenti legali e fiscali, `grl-web` per landing page e siti, `grl-ads` per Google Ads e advertising e `grl-automation` per orchestrare attività ripetibili con dry-run, approvazioni e rollback."
-module_version: 1.21.0
+description: "Quattordici figure di presidio — privacy e GDPR, sicurezza applicativa, legale e licenze, compliance normativa, fisco e finanza agevolata, qualità visiva della UI, disciplina architetturale del codice, infrastruttura e operatività, dominio clinico del software sanitario, impianto delle applicazioni che usano modelli linguistici, architettura WordPress a componenti, SEO, media buying/ADV e revenue management alberghiero — che affiancano il team dentro il ciclo di sviluppo, quando cambiare costa ancora poco. Include workflow di ricerca live per gli aggiornamenti legali e fiscali, `grl-web` per landing page e siti, `grl-ads` per Google Ads e advertising e `grl-automation` per orchestrare attività ripetibili con dry-run, approvazioni e rollback."
+module_version: 1.22.0
 default_selected: false
 
 module_greeting: >
-  Guardrails è installato: tredici figure di presidio — Vera (privacy), Kai (sicurezza),
+  Guardrails è installato: quattordici figure di presidio — Vera (privacy), Kai (sicurezza),
   Aldo (legale), Nils (compliance), Marta (fisco e finanza agevolata), Iris (design), Otto (architettura), Bruno (ops),
-  Livia (dominio clinico), Enzo (applicazioni con AI), Milo (WordPress a componenti), Nora (SEO) e Dalia (media buying e ADV) —
+  Livia (dominio clinico), Enzo (applicazioni con AI), Milo (WordPress a componenti), Nora (SEO), Dalia (media buying e ADV) e Rhea (revenue management) —
   entrano nel roster e si possono convocare per nome.
 
   Passo successivo consigliato: esegui `grl-profile`. Senza il profilo di progetto le
@@ -40,7 +40,7 @@ module_greeting: >
 # (_bmad/memory/grl-shared/project-profile.md), non in config — il profilo cambia
 # da progetto a progetto, la config è unica per installazione.
 #
-# Il modulo si installa sempre intero: tredici figure e nove workflow, nessuna
+# Il modulo si installa sempre intero: quattordici figure e nove workflow, nessuna
 # selezione. La severità si deriva dalla criticità dichiarata nel profilo di progetto.
 
 # Nessuna chiave `directories`: la cartella della memoria condivisa
@@ -51,12 +51,12 @@ post-install-notes: >
   Primo passo: esegui `grl-profile`. Sono otto campi, pochi minuti, quasi tutti
   pre-compilati leggendo il repository; l'unico che devi dichiarare tu è la criticità
   del progetto (hobby/prototipo · interno · produzione con clienti · regolamentato),
-  perché è quella che regola quanto saranno severe tutte e tredici le figure. Se il
+  perché è quella che regola quanto saranno severe tutte e quattordici le figure. Se il
   settore è sanitario, il profilo raccoglie cinque campi in più; altrimenti non li
   nomina nemmeno.
 
   Poi puoi chiamare una figura per nome, oppure usare `grl-board` per farle guardare
-  tutte insieme lo stesso artefatto. Le tredici entrano anche nella stanza principale
+  tutte insieme lo stesso artefatto. Le quattordici entrano anche nella stanza principale
   di `bmad-party-mode`, accanto ai cinque agenti BMM.
 
   Facoltativo e reversibile: se vuoi che le figure vengano consultate dentro i flussi
@@ -177,3 +177,11 @@ agents:
     title: Media Manager & Paid Advertising Strategist
     icon: 📣
     description: "Trasforma un obiettivo commerciale in campagne pagate misurabili: Google Ads, Search, Performance Max, Display, YouTube e gli altri canali ADV entrano solo con destinatario, offerta, tracking, budget e criterio di successo dichiarati. Legge export e report, separa dati osservati da ipotesi, controlla policy, landing, tracking tecnico e attribuzione, e propone modifiche con impatto, costo, rischio e rollback. Non decide base giuridica, consenso o se usare dati clienti/Customer Match — Vera — e non mette mai mano a budget, campagne o account senza autorizzazione esplicita."
+
+  - code: grl-agent-revenue
+    module: grl
+    team: software-development
+    name: Rhea
+    title: Revenue Management Strategist
+    icon: 📈
+    description: "Consulenza e calcoli di revenue management alberghiero con conoscenza QuoProfit/RevD, KPI, pricing, forecasting e integrazioni PMS/Channel Manager."

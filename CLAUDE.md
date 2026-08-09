@@ -36,6 +36,18 @@ altrimenti non viene pubblicata.
 Una skill nuova va assegnata anche a un modulo in `src/module-topology.yaml`: quello che non
 compare in nessuna lista `skills` non finisce in nessun repository derivato.
 
+## README essenziale
+
+Il `README.md` è una vetrina breve, non il manuale completo del progetto. Deve contenere soltanto:
+
+- un'introduzione: cosa fa Guardrails e perché esiste;
+- la spiegazione degli agenti;
+- la spiegazione dei workflow.
+
+Non aggiungere al README dettagli estesi su installazione, severità, configurazione, topologia dei
+moduli, build/publish o razionale architetturale. Questi contenuti appartengono a `CLAUDE.md`,
+`docs/module-plan.md` e ai manifesti in `src/`.
+
 ## Gli otto moduli derivati si rigenerano e si ripubblicano nello stesso turno
 
 Otto repository derivano da questo e li produce `tools/build_modules.py` leggendo
@@ -49,7 +61,7 @@ Otto repository derivano da questo e li produce `tools/build_modules.py` leggend
 | `grh` | `mlarese/bmad-module-guardrails-health` | Livia, `grl-mdsw`, `grl-automation` |
 | `grw` | `mlarese/bmad-module-guardrails-web` | Iris, Nora, Dalia, `grl-web`, `grl-ads`, `grl-automation` |
 | `gpm` | `mlarese/bmad-module-guardrails-paid-media` | Vera, Aldo, Iris, Nora, Dalia, `grl-ads`, `grl-automation` |
-| `gau` | `mlarese/bmad-module-guardrails-automation` | tutte le tredici figure, workflow di dominio e `grl-automation` |
+| `gau` | `mlarese/bmad-module-guardrails-automation` | tutte le quattordici figure, workflow di dominio e `grl-automation` |
 | `gwp` | `mlarese/bmad-module-guardrails-wordpress` | Milo, `grl-wordpress-delivery`, `grl-automation` |
 
 **Regola: ogni modifica che tocca `src/` va propagata ai derivati nello stesso turno, senza
