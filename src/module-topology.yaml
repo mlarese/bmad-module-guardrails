@@ -5,13 +5,13 @@
 # repository resta la fonte unica: i repository derivati non si modificano a mano,
 # si rigenerano.
 #
-# Il bundle `grl` resta la superficie completa — tredici figure e dieci workflow in
+# Il bundle `grl` resta la superficie completa — tredici figure e nove workflow in
 # un'unica installazione. I moduli tematici sono alternative al bundle, non
 # aggiunte: installano le stesse skill con lo stesso nome, quindi bundle e moduli
 # tematici non convivono nello stesso progetto.
 #
-# Le tre skill del core (`core.skills`) sono duplicate in ogni modulo tematico con
-# il prefisso del modulo — `grg-setup`, `grg-profile`, `grg-board` — perché un
+# Le due skill del core (`core.skills`) sono duplicate in ogni modulo tematico con
+# il prefisso del modulo — `grg-profile`, `grg-board` — perché un
 # modulo deve funzionare da solo. La memoria condivisa resta invece la stessa per
 # tutti (`core.shared_memory`): due moduli installati insieme leggono e scrivono
 # un solo profilo di progetto.
@@ -24,18 +24,9 @@ bundle:
   repo: bmad-module-guardrails
   mode: compatibility-bundle
   description: "Bundle completo Guardrails: tutte le figure e i workflow in un'unica installazione."
-  # Gruppi trasversali del bundle e stanze che possono essere filtrate nei moduli
-  # tematici quando restano abbastanza figure installate.
-  party_groups:
-    - grl-full-board
-    - grl-release-gate
-    - grl-paid-media
-    - grl-automation
-
 core:
   # Duplicate in ogni modulo tematico, rinominate con il codice del modulo.
   skills:
-    - grl-setup
     - grl-profile
     - grl-board
   # Non cambia mai: è il punto in cui i moduli si incontrano.
@@ -54,10 +45,6 @@ modules:
       - grl-agent-compliance
       - grl-legal-updates
       - grl-automation
-    party_groups:
-      - grl-governance
-      - grl-automation
-
   - code: gre
     name: Guardrails Engineering
     repo: bmad-module-guardrails-engineering
@@ -70,10 +57,6 @@ modules:
       - grl-agent-ops
       - grl-agent-ai
       - grl-automation
-    party_groups:
-      - grl-engineering
-      - grl-automation
-
   - code: grf
     name: Guardrails Fiscal
     repo: bmad-module-guardrails-fiscal
@@ -84,10 +67,6 @@ modules:
       - grl-agent-fiscal
       - grl-fiscal-updates
       - grl-automation
-    party_groups:
-      - grl-fiscal
-      - grl-automation
-
   - code: grh
     name: Guardrails Health
     repo: bmad-module-guardrails-health
@@ -98,10 +77,6 @@ modules:
       - grl-agent-health
       - grl-mdsw
       - grl-automation
-    party_groups:
-      - grl-health
-      - grl-automation
-
   - code: grw
     name: Guardrails Web Experience
     repo: bmad-module-guardrails-web
@@ -115,11 +90,6 @@ modules:
       - grl-web
       - grl-ads
       - grl-automation
-    party_groups:
-      - grl-web
-      - grl-paid-media
-      - grl-automation
-
   - code: gpm
     name: Guardrails Paid Media
     repo: bmad-module-guardrails-paid-media
@@ -134,10 +104,6 @@ modules:
       - grl-agent-ads
       - grl-ads
       - grl-automation
-    party_groups:
-      - grl-paid-media
-      - grl-automation
-
   - code: gau
     name: Guardrails Automation
     repo: bmad-module-guardrails-automation
@@ -164,9 +130,6 @@ modules:
       - grl-web
       - grl-ads
       - grl-automation
-    party_groups:
-      - grl-automation
-
   - code: gwp
     name: Guardrails WordPress
     repo: bmad-module-guardrails-wordpress
@@ -175,8 +138,5 @@ modules:
     description: "Presidio dell'architettura e della consegna WordPress a componenti: Gutenberg, Elementor confinato dove serve, ACF e campi custom, template e Media Library, con creazione, ripresa, migrazione e verifica fino al release gate."
     skills:
       - grl-agent-wordpress
-      - grl-wordpress-delivery
-      - grl-automation
-    party_groups:
       - grl-wordpress-delivery
       - grl-automation

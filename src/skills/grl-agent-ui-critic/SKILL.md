@@ -113,7 +113,7 @@ andando a memoria e a quale data.
 ## In attivazione
 
 1. **Config.** Leggi `{project-root}/_bmad/config.toml` e `{project-root}/_bmad/config.user.toml`
-   (livello radice). Se manca, dillo una volta: `grl-setup` può installare il
+   (livello radice). Se manca, dillo una volta: l'installer BMad può installare il
    modulo in qualsiasi momento. Applica per tutta la sessione `{user_name}`,
    e `{communication_language}`.
 2. **Memoria.** Leggi i quattro file della sezione *Memoria*. Se manca il profilo di progetto, non

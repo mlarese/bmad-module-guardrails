@@ -4,7 +4,7 @@ status: 'complete'
 module_name: 'Guardrails'
 module_code: 'grl'
 module_description: 'Figure di presidio che affiancano il team di sviluppo su privacy/GDPR, sicurezza applicativa, legale e licenze, compliance normativa, fisco e finanza agevolata, disciplina architetturale, qualità visiva della UI, SEO e implementazione WordPress a componenti'
-architecture: 'compatibility bundle grl with twelve agents, five service workflows, live research gates, shared memory, and a staged topic-module topology'
+architecture: 'compatibility bundle grl with thirteen agents, nine service workflows, live research gates, shared memory, and a staged topic-module topology'
 standalone: false
 expands_module: 'bmm'
 skills_planned:
@@ -26,7 +26,6 @@ skills_planned:
   - grl-legal-updates
   - grl-fiscal-updates
   - grl-web
-  - grl-setup
 config_variables:
   - strictness_override
 created: '2026-08-06 22:10'
@@ -42,7 +41,7 @@ mantenerlo come superficie compatibile e introdurre confini logici per una migra
 
 | Codice futuro | Area | Contenuto |
 | ------------- | ---- | --------- |
-| `grc` | Core | setup, profilo, collegio e memoria condivisa |
+| `grc` | Core | profilo, collegio e memoria condivisa |
 | `grg` | Governance | privacy, legal, compliance |
 | `grf` | Fiscal | fisco, contabilità, bandi e finanza agevolata |
 | `gre` | Engineering | architecture, security, ops, AI |
@@ -52,9 +51,8 @@ mantenerlo come superficie compatibile e introdurre confini logici per una migra
 | `gau` | Automation | orchestrazione cross-domain, dry-run, approvazioni e rollback |
 | `gwp` | WordPress | Gutenberg, ACF, componenti, template e Media Library |
 
-La mappa canonica è in `src/module-topology.yaml`. In questa fase non vengono copiate le skill in
-più package: si evitano duplicati e drift. `grl-setup` installa invece le stanze tematiche di
-`bmad-party-mode` nel layer `_bmad/custom/bmad-party-mode.toml`; la stanza di default non cambia.
+La mappa canonica è in `src/module-topology.yaml`. Il manifesto radice e il catalogo di help
+vengono letti direttamente dall'installer; non serve una skill separata di setup.
 
 ## Addendum 2026-08-08 (secondo) — estrazione fisica in repository derivati
 
@@ -66,8 +64,8 @@ derivati si rigenerano.
 Cosa è stato deciso, e perché:
 
 - **`grc` non diventa un repository.** Un core separato avrebbe imposto due installazioni per
-  usare un modulo solo. Le tre skill del core sono invece duplicate in ogni modulo con il prefisso
-  del modulo — `grg-setup`, `grg-profile`, `grg-board` — così un modulo funziona da solo. La
+  usare un modulo solo. Le due skill del core sono invece duplicate in ogni modulo con il prefisso
+  del modulo — `grg-profile`, `grg-board` — così un modulo funziona da solo. La
   duplicazione non produce drift perché nessuno modifica i derivati.
 - **La memoria condivisa non si duplica.** Resta `_bmad/memory/grl-shared/` in tutti i moduli: è
   il punto in cui due moduli installati insieme si incontrano, e il profilo di progetto si compila
@@ -75,10 +73,10 @@ Cosa è stato deciso, e perché:
 - **I codici delle figure non cambiano.** `grl-agent-privacy` è identica nel bundle e in `grg`.
   Cambia solo il campo `module` nel roster. Conseguenza diretta: bundle e moduli tematici non
   vanno installati insieme, perché installerebbero due volte la stessa skill.
-- **Le stanze trasversali restano nel bundle.** `grl-release-gate` e `grl-full-board` convocano
-  figure che nei moduli tematici stanno in package diversi. Nei derivati ogni stanza è ridotta ai
-  membri installati, e sotto i due membri non viene installata.
-- **I testi vengono adattati al perimetro.** Dove il bundle dice «dodici figure», il modulo dice
+- **Il party mode usa il roster del manifesto.** Le figure entrano nella stanza principale quando
+  il modulo viene installato; le stanze nominate restano una responsabilità del progetto e non
+  vengono più generate dal modulo.
+- **I testi vengono adattati al perimetro.** Dove il bundle dice «tredici figure», il modulo dice
   il numero che ha davvero; le tabelle di selezione del collegio perdono le righe delle figure
   assenti; ogni figura riceve in coda la regola su cosa fare quando il tema appartiene a una
   collega non installata.
@@ -109,9 +107,9 @@ compliance normativa, fisco e finanza agevolata, disciplina architetturale, SEO 
 
 ## Architecture
 
-**Stato corrente: 12 agenti distinti + 5 workflow di servizio, senza orchestratore proprietario,
+**Stato corrente: 13 agenti distinti + 9 workflow di servizio, senza orchestratore proprietario,
 con ricerca live delegata a Deep Recon, doppio gate bmad-review e memoria condivisa di modulo.**
-`grl-web` e `grl-setup` completano il modulo come skill operative.
+`grl-web` completa il modulo come skill operativa.
 
 | Skill | Tipo | Ruolo |
 | ----- | ---- | ----- |
@@ -158,7 +156,7 @@ persona. L'utente resta il router nel caso singolo.
 **Perché workflow distinti e non capacità interne agli agenti.**
 
 - `grl-profile` serve **prima** che qualsiasi figura possa dire qualcosa di sensato, ed è
-  condiviso da tutte le dodici: metterlo dentro un agente lo renderebbe di sua proprietà. Nessuna
+  condiviso da tutte le tredici: metterlo dentro un agente lo renderebbe di sua proprietà. Nessuna
   persona, nessuna memoria propria, procedura sequenziale → workflow.
 - `grl-board` orchestra più figure sullo stesso artefatto: per definizione non appartiene a
   nessuna di esse.
@@ -171,11 +169,11 @@ persona. L'utente resta il router nel caso singolo.
 **Pattern: memoria personale + memoria condivisa di modulo** (riga 2 della tabella dei
 pattern). Non memoria condivisa unica, perché ogni figura accumula cose che alle altre non
 servono; non solo personale, perché il profilo di progetto e i rischi accettati devono essere
-visti da tutte, altrimenti l'utente ripete dodici volte le stesse informazioni.
+visti da tutte, altrimenti l'utente ripete tredici volte le stesse informazioni.
 
 ```
 {project-root}/_bmad/memory/
-├── grl-shared/                   # memoria di modulo, letta da tutte e 12 le figure
+├── grl-shared/                   # memoria di modulo, letta da tutte e 13 le figure
 │   ├── project-profile.md        # il profilo del progetto (scritto da grl-profile)
 │   ├── decisions.md              # decisioni vincolate: cosa + perché + chi l'ha posta
 │   └── accepted-risks.md         # rischi accettati consapevolmente → silenzio su questi punti
@@ -221,7 +219,7 @@ brevi, e solo per cose che si sono ripetute almeno due volte (es. «il team usa 
 **Il router è l'utente**, con due eccezioni: l'auto-attivazione per descrizione (meccanismo A) e
 il workflow `grl-board`, che convoca il collegio su un artefatto.
 
-**Confini tematici** — servono a evitare che dodici figure parlino sopra la stessa questione.
+**Confini tematici** — servono a evitare che tredici figure parlino sopra la stessa questione.
 Regola generale: *chi ha la competenza decisiva parla, gli altri tacciono.*
 
 | Questione | Chi parla | Chi tace |
@@ -255,7 +253,7 @@ multipla esiste già ed è esplicita: `grl-board`.
 
 ### Partecipazione al party mode principale
 
-**Requisito dell'utente:** le dodici figure fanno parte del gruppo principale di `bmad-party-mode`,
+**Requisito dell'utente:** le tredici figure fanno parte del gruppo principale di `bmad-party-mode`,
 non di una stanza separata.
 
 **Come si soddisfa (verificato sul codice, non ipotizzato).**
@@ -264,7 +262,7 @@ installati**, letti via `resolve_config.py --key agents`, cioè dalla tabella `[
 config TOML. Non c'è alcun filtro per `module` o per `team`: chi è registrato come agente entra
 nella stanza di default. Quindi:
 
-1. Le dodici figure vanno costruite con **Agent Builder** (non come workflow), così ciascuna
+1. Le tredici figure vanno costruite con **Agent Builder** (non come workflow), così ciascuna
    riceve un `customize.toml` con il blocco `[agent]`: `code`, `name`, `title`, `icon`,
    `description`, `agent_type`.
 2. `Create Module (CM)` porta quei metadati nel `module.yaml` del modulo; l'installer li scrive
@@ -278,19 +276,19 @@ nella stanza di default. Quindi:
   `description` è ciò che ne definisce la voce quando parla in mezzo agli altri. Va scritta
   con lo stesso registro delle descrizioni BMM (tratto caratteriale + modo di parlare), non
   come sommario di funzionalità.
-- La stanza di default passa da 5 a **11 partecipanti**. L'utente ha scelto di tenere una sola
+- La stanza di default passa da 5 a **18 partecipanti**. L'utente ha scelto di tenere una sola
   stanza, senza `party_groups` aggiuntivi: la regola «al massimo una figura per turno» e i
   confini tematici netti diventano quindi ancora più importanti.
-- Le dodici personalità devono reggere il confronto diretto con Mary, John, Sally, Winston e
+- Le tredici personalità devono reggere il confronto diretto con Mary, John, Sally, Winston e
   Amelia: caratteri distinti anche fra loro, e attriti prevedibili da sfruttare (Otto contro
   Winston sull'architettura, Iris contro Sally sulla UI, Vera contro John sui requisiti che
   raccolgono troppi dati).
 
 ## Skills
 
-Diciannove skill: dodici agenti (le figure) e cinque workflow di servizio, oltre a `grl-web` e `grl-setup`.
+Ventidue skill: tredici agenti (le figure) e nove workflow di servizio.
 
-### Regole comuni a tutte le dodici figure
+### Regole comuni a tutte le tredici figure
 
 Da riportare in ogni agente costruito — non sono contorno, sono ciò che distingue queste figure
 da un checklist-bot.
@@ -918,7 +916,7 @@ professionista abilitato.
 
 **Type:** workflow
 
-**Purpose:** raccogliere — una volta per progetto — il profilo che dà contesto a tutte e dodici le
+**Purpose:** raccogliere — una volta per progetto — il profilo che dà contesto a tutte e tredici le
 figure, e scriverlo in `_bmad/memory/grl-shared/project-profile.md`. Senza questo file le figure
 parlano per luoghi comuni.
 
@@ -949,7 +947,7 @@ più il modulo. Crea la cartella `grl-shared/` se non esiste.
 
 **Activation Modes:** interattivo.
 
-**Relationships:** da eseguire per primo, proposto dal setup del modulo e da ogni figura che
+**Relationships:** da eseguire per primo, proposto dal manifesto del modulo e da ogni figura che
 trovi il profilo mancante.
 
 ---
@@ -967,7 +965,7 @@ chiamare una a una.
 | Capability | Outcome | Inputs | Outputs |
 | ---------- | ------- | ------ | ------- |
 | Revisione collegiale | l'artefatto è stato letto da ogni figura pertinente, ognuna dal proprio asse | percorso di un file o descrizione dell'artefatto | riepilogo schematico unico: per figura, i punti che contano |
-| Selezione dei convocati | non parlano tutte le dodici quando ne servono due | artefatto + profilo progetto | elenco delle figure pertinenti, con il motivo dell'esclusione delle altre |
+| Selezione dei convocati | non parlano tutte le tredici quando ne servono due | artefatto + profilo progetto | elenco delle figure pertinenti, con il motivo dell'esclusione delle altre |
 | Consolidamento dei conflitti | i disaccordi fra figure emergono invece di essere nascosti | pareri raccolti | punti in cui due figure vogliono cose incompatibili, con la scelta che spetta all'utente |
 | Registrazione degli esiti | ciò che è stato deciso non si perde | decisioni prese durante la revisione | righe in `decisions.md` e, su conferma esplicita, in `accepted-risks.md` |
 | Vista dei rischi accettati | si sa cosa il progetto ha già scelto di accettare | `accepted-risks.md` | elenco leggibile, raggruppato per figura |
@@ -999,7 +997,7 @@ progetto, la config è unica per installazione.
 | -------- | ------ | ------- | --------------- | ------------ |
 | `strictness_override` | «Livello di severità delle figure Guardrails? Lascia vuoto per farlo derivare dalla criticità del progetto (consigliato).» — opzioni: vuoto / `light` / `normal` / `strict` | `""` (vuoto = deriva dal profilo) | `strictness_override = "{value}"` | sì (personale) |
 
-**Come si risolve la severità in pratica** (logica identica in tutte le dodici figure):
+**Come si risolve la severità in pratica** (logica identica in tutte le tredici figure):
 
 1. Se `strictness_override` è valorizzato, vince.
 2. Altrimenti si deriva dal campo *criticità* di `project-profile.md`:
@@ -1017,7 +1015,7 @@ progetto, la config è unica per installazione.
 
 **Nessuna dipendenza obbligatoria.** Il modulo funziona con i soli strumenti standard.
 
-Dipendenze **opzionali**, usate se presenti e mai richieste all'utente dal setup:
+Dipendenze **opzionali**, usate se presenti e mai richieste all'utente dall'installer:
 
 | Strumento | Chi lo usa | A cosa serve | Se manca |
 | --------- | ---------- | ------------ | -------- |
@@ -1035,28 +1033,24 @@ report HTML formale di audit. Le decisioni delle figure persistono nelle righe d
 Nota per il futuro: se un giorno servisse una vista d'insieme (es. «tutti i rischi accettati di
 questo progetto»), la si aggiunge come capacità di `grl-board`, non come nuova skill.
 
-## Setup Extensions
+## Installer Contract
 
-Oltre alla raccolta della singola variabile di config, il setup del modulo deve:
+Il manifesto radice del modulo deve:
 
-1. **Registrare le dodici figure come agenti installati** — è ciò che le fa comparire nel party
+1. **Registrare le tredici figure come agenti installati** — è ciò che le fa comparire nel party
    mode principale. Deriva automaticamente dai `customize.toml` prodotti dall'Agent Builder,
    ma va verificato: `[agents.grl-agent-*]` deve esistere nel config risolto, con `module = "grl"`
    e `team = "software-development"`.
 2. **Non creare la cartella di memoria condivisa.** La crea `grl-profile` alla prima esecuzione:
    una cartella vuota in `_bmad/memory/` è solo rumore.
-3. **Proporre l'esecuzione di `grl-profile`** come passo finale del setup: senza profilo le
+3. **Proporre l'esecuzione di `grl-profile`** come primo passo dopo l'installazione: senza profilo le
    figure partono cieche.
 4. **Opzionale, da confermare in fase di build: gli agganci al flusso BMM** (meccanismo B).
    Sono override di customizzazione sugli skill BMM (`_bmad/custom/bmad-prd.toml`,
    `bmad-architecture.toml`, …) che aggiungono un passo di consultazione delle figure nei punti
    chiave. Vanno scritti con `bmad-customize`, sono facoltativi e devono essere **reversibili**:
-   il setup li propone, non li impone, e spiega che toccano il comportamento di skill non del
+   il progetto li aggiunge solo quando servono, non li impone, e spiega che toccano il comportamento di skill non del
    modulo.
-
-**Party groups tematici.** La stanza principale resta senza default imposto, ma `grl-setup` installa
-gruppi convocabili per governance, engineering, fiscalità, health, web, WordPress, release gate e
-collegio completo; i due workflow di ricerca usano i gruppi di dominio solo quando servono.
 
 ## Integration
 
@@ -1071,7 +1065,7 @@ meglio agganciato ai flussi BMM.
 | `bmad-architecture` | Kai, Otto, Vera | superficie d'attacco, confini e dipendenze, dove finiscono i dati personali |
 | `bmad-ux` | Iris | che la UI non esca omologata; con Nils sull'accessibilità |
 | `bmad-build` / `bmad-code-review` | Kai, Otto, Aldo | pattern insicuri, strati inutili, licenze delle dipendenze aggiunte |
-| `bmad-party-mode` | tutte le dodici | fanno parte del roster principale |
+| `bmad-party-mode` | tutte le tredici | fanno parte del roster principale |
 
 **Valore in autonomia (senza BMM):** ogni figura è consultabile su un progetto qualsiasi —
 basta `grl-profile` per darle contesto. Nessuna skill del modulo importa file prodotti da BMM:

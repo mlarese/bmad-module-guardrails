@@ -34,7 +34,7 @@ def test_all_eval_suites_and_fixture_references_are_structurally_valid() -> None
     case_files = sorted((ROOT / "src" / "skills").glob("*/evals/cases.json"))
     trigger_files = sorted((ROOT / "src" / "skills").glob("*/evals/triggers.json"))
 
-    assert len(case_files) == 23
+    assert len(case_files) == 22
     assert len(trigger_files) == len(case_files)
 
     case_count = 0
@@ -53,8 +53,8 @@ def test_all_eval_suites_and_fixture_references_are_structurally_valid() -> None
     for trigger_file in trigger_files:
         trigger_count += len(_trigger_entries(trigger_file))
 
-    assert case_count >= 153
-    assert trigger_count >= 418
+    assert case_count >= 155
+    assert trigger_count >= 399
     assert not missing, "fixture non risolti: " + "; ".join(missing)
 
 
@@ -81,19 +81,11 @@ def test_privacy_ai_act_ownership_matches_the_skill_contract() -> None:
     assert "Aldo" in by_id["fria-oltre-alla-dpia"]
 
 
-def test_legacy_setup_path_is_non_destructive_by_default() -> None:
-    skill = (ROOT / "src/skills/grl-setup/SKILL.md").read_text(encoding="utf-8")
-    yaml_section = skill.split("## Percorso YAML", 1)[1].split("## Cosa il setup non fa", 1)[0]
-
-    assert "merge-config.py" in yaml_section and "--legacy-dir" not in next(
-        line for line in yaml_section.splitlines() if "merge-config.py" in line
-    )
-    assert "merge-help-csv.py" in yaml_section and "--legacy-dir" not in next(
-        line for line in yaml_section.splitlines() if "merge-help-csv.py" in line
-    )
-    assert "merge-config.py" in yaml_section
-    assert "merge-help-csv.py" in yaml_section
-    assert "merge-party-groups.py" in yaml_section
+def test_module_uses_root_metadata_without_a_setup_skill() -> None:
+    assert not (ROOT / "src/skills/grl-setup").exists()
+    help_csv = (ROOT / "src/module-help.csv").read_text(encoding="utf-8")
+    assert "grl-setup" not in help_csv
+    assert "grl-profile" in help_csv
 
 
 def test_live_update_workflows_have_explicit_capability_fallbacks() -> None:
@@ -107,8 +99,8 @@ def test_live_update_workflows_have_explicit_capability_fallbacks() -> None:
 
 def test_install_manifest_and_roster_metadata_preserve_routing_boundaries() -> None:
     manifest = (ROOT / "src/module.yaml").read_bytes()
-    install_manifest = (ROOT / "src/skills/grl-setup/assets/module.yaml").read_bytes()
-    assert manifest == install_manifest
+    assert manifest
+    assert (ROOT / "src/module-help.csv").is_file()
     manifest_text = manifest.decode("utf-8")
 
     for name, tokens in {

@@ -168,7 +168,7 @@ Derivalo dal campo *criticità* di `project-profile.md`: hobby/prototipo → `li
 
 ## On Activation
 
-Leggi la config disponibile da `{project-root}/_bmad/config.toml` e `{project-root}/_bmad/config.user.toml` (livello root). Se manca, fai da solo con i default e segnala che `grl-setup` può installare il modulo in qualsiasi momento. Applica per tutta la sessione (default fra parentesi):
+Leggi la config disponibile da `{project-root}/_bmad/config.toml` e `{project-root}/_bmad/config.user.toml` (livello root). Se manca, fai da solo con i default e segnala che l'installer BMad può installare il modulo in qualsiasi momento. Applica per tutta la sessione (default fra parentesi):
 
 - `{user_name}` (nessuno) — rivolgiti all'utente per nome
 - `{communication_language}` (italiano) — usalo per tutto ciò che dici

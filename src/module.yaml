@@ -3,8 +3,6 @@
 # Questa e' la copia che legge l'installer BMad: la cerca in src/module.yaml
 # (oppure skills/module.yaml, o in una sottocartella di quelle due). Un manifesto
 # piu' in profondita' — per esempio dentro assets/ di una skill — non viene trovato.
-# La copia in src/skills/grl-setup/assets/module.yaml resta per l'installazione
-# manuale via grl-setup: le due vanno tenute allineate.
 #
 # Guardrails è un'espansione di BMM (software development) e funziona anche da sola:
 # nessuna skill del modulo pretende file prodotti da BMM, li legge se ci sono.
@@ -12,7 +10,7 @@
 code: grl
 name: Guardrails
 description: "Tredici figure di presidio — privacy e GDPR, sicurezza applicativa, legale e licenze, compliance normativa, fisco e finanza agevolata, qualità visiva della UI, disciplina architetturale del codice, infrastruttura e operatività, dominio clinico del software sanitario, impianto delle applicazioni che usano modelli linguistici, architettura WordPress a componenti, SEO e media buying/ADV — che affiancano il team dentro il ciclo di sviluppo, quando cambiare costa ancora poco. Include workflow di ricerca live per gli aggiornamenti legali e fiscali, `grl-web` per landing page e siti, `grl-ads` per Google Ads e advertising e `grl-automation` per orchestrare attività ripetibili con dry-run, approvazioni e rollback."
-module_version: 1.20.0
+module_version: 1.21.0
 default_selected: false
 
 module_greeting: >
@@ -37,20 +35,16 @@ module_greeting: >
   `grl-legal-updates` e `grl-fiscal-updates` recuperano invece aggiornamenti normativi
   e fiscali con ricerca live e doppio gate di verifica.
 
-  `grl-setup` installa anche le stanze tematiche di `bmad-party-mode`: governance,
-  engineering, health, web, WordPress e release gate. Convocale con
-  `bmad-party-mode --party <id>` senza cambiare la stanza di default.
-
 # --- Contesto di esecuzione ---------------------------------------------------
 # Nessuna variabile di configurazione del modulo: tutto il contesto vive nella memoria condivisa del progetto
 # (_bmad/memory/grl-shared/project-profile.md), non in config — il profilo cambia
 # da progetto a progetto, la config è unica per installazione.
 #
-# Il modulo si installa sempre intero: tredici figure e dieci workflow, nessuna
+# Il modulo si installa sempre intero: tredici figure e nove workflow, nessuna
 # selezione. La severità si deriva dalla criticità dichiarata nel profilo di progetto.
 
 # Nessuna chiave `directories`: la cartella della memoria condivisa
-# _bmad/memory/grl-shared/ NON va creata dal setup. La crea grl-profile alla prima
+# _bmad/memory/grl-shared/ NON va creata dall'installer. La crea grl-profile alla prima
 # esecuzione — una cartella vuota in _bmad/memory/ è solo rumore.
 
 post-install-notes: >
@@ -63,14 +57,13 @@ post-install-notes: >
 
   Poi puoi chiamare una figura per nome, oppure usare `grl-board` per farle guardare
   tutte insieme lo stesso artefatto. Le tredici entrano anche nella stanza principale
-  di `bmad-party-mode`, accanto ai cinque agenti BMM. Con `--party` puoi invece aprire
-  una stanza tematica senza convocare l'intero roster.
+  di `bmad-party-mode`, accanto ai cinque agenti BMM.
 
   Facoltativo e reversibile: se vuoi che le figure vengano consultate dentro i flussi
   BMM (PRD, architettura, UX, code review) invece che su tua chiamata, si aggiungono
   con `bmad-customize` come override sulle skill BMM in _bmad/custom/. Toccano il
-  comportamento di skill che non appartengono a questo modulo: il setup non li scrive,
-  e si tolgono cancellando il file di override.
+  comportamento di skill che non appartengono a questo modulo, e si tolgono cancellando
+  il file di override.
 
 # --- Roster degli agenti -----------------------------------------------------
 # Contratto di installazione: da qui i metadati finiscono in [agents.grl-agent-*]

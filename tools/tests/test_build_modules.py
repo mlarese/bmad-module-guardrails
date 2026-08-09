@@ -3,7 +3,7 @@
 
 Coprono le trasformazioni che possono produrre un modulo sbagliato in silenzio:
 la rinomina del core, i conteggi di figure adattati al perimetro, il filtro delle
-tabelle e dei gruppi di party mode, e il filtro del catalogo di help.
+tabelle e il filtro del catalogo di help.
 """
 
 from __future__ import annotations
@@ -22,7 +22,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import build_modules as bm  # noqa: E402
 
 
-CORE = ["grl-setup", "grl-profile", "grl-board"]
+CORE = ["grl-profile", "grl-board"]
 ROOT = Path(__file__).resolve().parents[2]
 
 
@@ -30,7 +30,7 @@ class CoreRenameTests(unittest.TestCase):
     def test_prefixes_core_skills_with_module_code(self) -> None:
         self.assertEqual(
             bm.core_renames(CORE, "grg"),
-            {"grl-setup": "grg-setup", "grl-profile": "grg-profile", "grl-board": "grg-board"},
+            {"grl-profile": "grg-profile", "grl-board": "grg-board"},
         )
 
     def test_rewrites_only_whole_names(self) -> None:
@@ -128,59 +128,8 @@ class BoardSelectionSentenceTests(unittest.TestCase):
         self.assertIn("`grl-agent-ads`", roster.read_text(encoding="utf-8"))
 
 
-PARTY_SOURCE = """# intestazione originale
-
-[[workflow.party_groups]]
-id = "grl-governance"
-name = "Governance"
-scene = "tavolo"
-members = ["grl-agent-privacy", "grl-agent-legal", "grl-agent-health"]
-memory = false
-
-[[workflow.party_groups]]
-id = "grl-wordpress-delivery"
-name = "WordPress"
-scene = "laboratorio"
-members = ["grl-agent-wordpress", "grl-agent-ops", "bmad-agent-ux-designer"]
-memory = false
-"""
-
-
-class PartyGroupTests(unittest.TestCase):
-    def test_reduces_members_to_installed_figures(self) -> None:
-        toml, dropped = bm.filter_party_groups(
-            PARTY_SOURCE,
-            ["grl-governance"],
-            {"grl-agent-privacy", "grl-agent-legal"},
-            "Guardrails Governance",
-        )
-        self.assertIn('members = ["grl-agent-privacy", "grl-agent-legal"]', toml)
-        self.assertNotIn("grl-agent-health", toml)
-        self.assertEqual(dropped, [])
-
-    def test_keeps_bmm_members(self) -> None:
-        toml, _ = bm.filter_party_groups(
-            PARTY_SOURCE,
-            ["grl-wordpress-delivery"],
-            {"grl-agent-wordpress", "grl-agent-ops"},
-            "Guardrails WordPress",
-        )
-        self.assertIn("bmad-agent-ux-designer", toml)
-
-    def test_drops_groups_left_below_the_threshold(self) -> None:
-        toml, dropped = bm.filter_party_groups(
-            PARTY_SOURCE, ["grl-wordpress-delivery"], {"grl-agent-wordpress"}, "Guardrails WordPress"
-        )
-        self.assertEqual(dropped, ["grl-wordpress-delivery"])
-        self.assertNotIn("[[workflow.party_groups]]", toml)
-
-    def test_fails_on_an_unknown_group(self) -> None:
-        with self.assertRaises(bm.BuildError):
-            bm.filter_party_groups(PARTY_SOURCE, ["grl-health"], {"grl-agent-health"}, "Health")
-
-
 HELP_SOURCE = """module,skill,display-name,menu-code,description,action
-Guardrails,grl-setup,Installa Guardrails,GS,"Registra Guardrails e le dodici figure.",configure
+Guardrails,grl-profile,Profila Guardrails,GP,"Profila le dodici figure.",profile
 Guardrails,grl-agent-privacy,Vera — privacy,GV,"Quali dati personali tocca il progetto.",consult
 Guardrails,grl-agent-fiscal,Marta — fisco,GT,"Imposte e bandi.",consult
 """
@@ -190,18 +139,18 @@ class HelpCsvTests(unittest.TestCase):
     def test_keeps_only_installed_skills_and_renames_them(self) -> None:
         result = bm.filter_help_csv(
             HELP_SOURCE,
-            {"grl-setup", "grl-agent-privacy"},
+            {"grl-profile", "grl-agent-privacy"},
             "Guardrails Governance",
             bm.core_renames(CORE, "grg"),
             3,
         )
-        self.assertIn("Guardrails Governance,grg-setup,Installa Guardrails Governance", result)
+        self.assertIn("Guardrails Governance,grg-profile,Profila Guardrails", result)
         self.assertIn("grl-agent-privacy", result)
         self.assertNotIn("grl-agent-fiscal", result)
 
     def test_adapts_the_figure_count(self) -> None:
         result = bm.filter_help_csv(
-            HELP_SOURCE, {"grl-setup"}, "Guardrails Governance", bm.core_renames(CORE, "grg"), 3
+            HELP_SOURCE, {"grl-profile"}, "Guardrails Governance", bm.core_renames(CORE, "grg"), 3
         )
         self.assertIn("le tre figure", result)
         self.assertNotIn("dodici", result)
@@ -237,7 +186,6 @@ class WordPressModuleMetadataTests(unittest.TestCase):
 
     def test_generated_metadata_stays_coherent(self) -> None:
         expected_skills = [
-            "gwp-setup",
             "gwp-profile",
             "gwp-board",
             "grl-agent-wordpress",
@@ -262,8 +210,6 @@ class WordPressModuleMetadataTests(unittest.TestCase):
             self.workflows,
             bm.parse_help_rows(self.help_csv),
             self.renames,
-            [],
-            self.module["party_groups"],
         )
 
         self.assertEqual(
@@ -305,18 +251,14 @@ class WordPressModuleMetadataTests(unittest.TestCase):
         self.assertEqual(readme.count("| `grl-wordpress-delivery` |"), 4)
         self.assertIn("| `gwp-board` | Gate di rilascio |", readme)
 
-    def test_source_metadata_copies_and_marketplace_stay_aligned(self) -> None:
-        self.assertEqual(
-            (ROOT / "src" / "module.yaml").read_bytes(),
-            (ROOT / "src" / "skills" / "grl-setup" / "assets" / "module.yaml").read_bytes(),
-        )
-        self.assertEqual(
-            (ROOT / "src" / "module-help.csv").read_bytes(),
-            (ROOT / "src" / "skills" / "grl-setup" / "assets" / "module-help.csv").read_bytes(),
-        )
+    def test_source_metadata_and_marketplace_stay_aligned(self) -> None:
+        self.assertTrue((ROOT / "src" / "module.yaml").is_file())
+        self.assertTrue((ROOT / "src" / "module-help.csv").is_file())
+        self.assertFalse((ROOT / "src" / "skills" / "grl-setup").exists())
         plugin = json.loads((ROOT / ".claude-plugin" / "marketplace.json").read_text())["plugins"][0]
         self.assertEqual(plugin["version"], self.bundle["module_version"])
         self.assertIn("src/skills/grl-wordpress-delivery", plugin["skills"])
+        self.assertNotIn("src/skills/grl-setup", plugin["skills"])
 
     def test_build_module_contains_delivery_and_board_references(self) -> None:
         def filesystem_files(source_root: Path, relative_dir: str) -> list[Path]:
@@ -344,14 +286,9 @@ class WordPressModuleMetadataTests(unittest.TestCase):
             self.assertTrue(
                 (derived / "src" / "skills" / "gwp-board" / "references" / "release-gate.md").is_file()
             )
-            self.assertEqual(
-                (derived / "src" / "module.yaml").read_bytes(),
-                (derived / "src" / "skills" / "gwp-setup" / "assets" / "module.yaml").read_bytes(),
-            )
-            self.assertEqual(
-                (derived / "src" / "module-help.csv").read_bytes(),
-                (derived / "src" / "skills" / "gwp-setup" / "assets" / "module-help.csv").read_bytes(),
-            )
+            self.assertTrue((derived / "src" / "module.yaml").is_file())
+            self.assertTrue((derived / "src" / "module-help.csv").is_file())
+            self.assertFalse((derived / "src" / "skills" / "gwp-setup").exists())
 
             board = derived / "src" / "skills" / "gwp-board"
             roster = (board / "references" / "selection.md").read_text(encoding="utf-8")
@@ -391,7 +328,6 @@ class DedicatedGroupModuleTopologyTests(unittest.TestCase):
             bm.workflow_skills(module["skills"], {agent["code"] for agent in self.bundle["agents"]}),
             ["grl-ads", "grl-automation"],
         )
-        self.assertEqual(module["party_groups"], ["grl-paid-media", "grl-automation"])
 
     def test_automation_has_all_domain_agents_and_domain_workflows(self) -> None:
         module = self.by_code["gau"]
@@ -412,10 +348,10 @@ class DedicatedGroupModuleTopologyTests(unittest.TestCase):
                 "grl-automation",
             ],
         )
-        self.assertEqual(module["party_groups"], ["grl-automation"])
 
     def test_topology_has_eight_unique_derived_repositories(self) -> None:
         modules = self.topology["modules"]
+        self.assertEqual(self.topology["core"]["skills"], ["grl-profile", "grl-board"])
         self.assertEqual(len(modules), 8)
         self.assertEqual(len({module["code"] for module in modules}), 8)
         self.assertEqual(len({module["repo"] for module in modules}), 8)

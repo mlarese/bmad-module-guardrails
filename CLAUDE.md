@@ -21,13 +21,12 @@ Vincoli:
 
 ## Le altre vetrine da tenere allineate nello stesso passaggio
 
-Cambiano insieme, e tutte e cinque devono dire lo stesso numero di figure e le stesse skill:
+Cambiano insieme, e tutte e quattro devono dire lo stesso numero di figure e le stesse skill:
 
 | Punto | File |
 | ----- | ---- |
 | README | `README.md` (intestazione, tabella delle figure, tabella dei workflow) |
-| Manifesto del modulo | `src/module.yaml` (`description`, `module_greeting`, `post-install-notes`, `agents`) |
-| Copia per l'installazione manuale | `src/skills/grl-setup/assets/module.yaml` — deve restare **identica** a `src/module.yaml` (`diff` senza differenze) |
+| Manifesto e catalogo del modulo | `src/module.yaml` e `src/module-help.csv` (`description`, `module_greeting`, `post-install-notes`, `agents`) |
 | Marketplace BMad | `.claude-plugin/marketplace.json` (`description` del marketplace, `description` e `skills` del plugin `grl`) |
 | About GitHub | descrizione del repository, via `gh repo edit` |
 

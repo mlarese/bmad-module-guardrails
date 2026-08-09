@@ -7,7 +7,7 @@
 
 Perché serve
 ------------
-Il bundle `grl` installa tredici figure e dieci workflow in un colpo solo. Chi vuole
+Il bundle `grl` installa tredici figure e nove workflow in un colpo solo. Chi vuole
 solo la governance normativa, o solo il presidio ingegneristico, non ha motivo di
 portarsi le altre dieci figure. La soluzione è un repository per area — ma scritto a
 mano diventerebbe subito divergente dal bundle.
@@ -22,13 +22,12 @@ Cosa fa, in ordine
 1. Copia le skill del modulo, prendendo **solo i file tracciati da git** e gli eventuali
    file ausiliari esplicitamente allowlisted in `SOURCE_AUXILIARY_FILES` — così referti di
    analisi, cache ed eval run restano fuori.
-2. Duplica le tre skill del core (`grl-setup`, `grl-profile`, `grl-board`)
-   rinominandole con il codice del modulo (`grg-setup`, …) e riscrive ogni
-   riferimento testuale a quei tre nomi. I codici delle figure (`grl-agent-*`) e la
+2. Duplica le due skill del core (`grl-profile`, `grl-board`)
+   rinominandole con il codice del modulo (`grg-profile`, …) e riscrive ogni
+   riferimento testuale a quei due nomi. I codici delle figure (`grl-agent-*`) e la
    memoria condivisa (`grl-shared`) restano invariati: è il punto in cui due moduli
    installati insieme si incontrano.
-3. Filtra il roster in `module.yaml`, le righe di `module-help.csv`, i gruppi di
-   `party-groups.toml` (con i membri ridotti alle figure presenti) e la lista di
+3. Filtra il roster in `module.yaml`, le righe di `module-help.csv` e la lista di
    skill in `marketplace.json`.
 4. Genera `README.md`, `CLAUDE.md` e `.gitignore` del repository derivato.
 
@@ -59,9 +58,6 @@ except ImportError:  # pragma: no cover - dipende dall'ambiente, non dalla logic
 # Estensioni su cui si applica la riscrittura dei nomi del core. Tutto il resto
 # viene copiato byte per byte.
 TEXT_SUFFIXES = {".md", ".yaml", ".yml", ".toml", ".csv", ".json", ".py", ".txt", ".html"}
-
-# Un party group con meno di due membri non è una stanza: si omette.
-MIN_PARTY_MEMBERS = 2
 
 # Fixture di valutazione aggiunti nello stesso turno ma non ancora presenti
 # nell'indice Git gestito dal sandbox. Restano espliciti per non copiare cache o
@@ -151,7 +147,7 @@ def tracked_files(source_root: Path, relative_dir: str) -> list[Path]:
 
 
 def core_renames(core_skills: list[str], code: str) -> dict[str, str]:
-    """`grl-setup` → `grg-setup`, e così per profilo e collegio."""
+    """Rinomina le skill core con il prefisso del modulo derivato."""
     renames = {}
     for skill in core_skills:
         suffix = skill.split("-", 1)[1]
@@ -364,7 +360,6 @@ def render_greeting(module: dict, agents: list[dict], renames: dict[str, str]) -
 
 def render_module_yaml(module: dict, agents: list[dict], renames: dict[str, str], version: str) -> str:
     code = module["code"]
-    setup_skill = renames["grl-setup"]
     profile_skill = renames["grl-profile"]
     board_skill = renames["grl-board"]
 
@@ -374,8 +369,6 @@ def render_module_yaml(module: dict, agents: list[dict], renames: dict[str, str]
 # Non modificare qui: le modifiche si fanno nella fonte e poi si rigenera.
 #
 # Questa è la copia che legge l'installer BMad: la cerca in src/module.yaml.
-# La copia in src/skills/{setup_skill}/assets/module.yaml resta per
-# l'installazione manuale via {setup_skill}: le due sono identiche.
 
 code: {code}
 name: {module['name']}
@@ -391,7 +384,7 @@ module_greeting: >
 # memoria condivisa del progetto (_bmad/memory/grl-shared/project-profile.md).
 # La severità si deriva dalla criticità dichiarata nel profilo di progetto.
 #
-# La cartella della memoria condivisa NON va creata dal setup: la crea
+# La cartella della memoria condivisa NON va creata dall'installer: la crea
 # {profile_skill} alla prima esecuzione.
 #
 # Questo modulo è una porzione del bundle Guardrails (`grl`). Bundle e moduli
@@ -451,78 +444,6 @@ def filter_help_csv(
 
 
 # --------------------------------------------------------------------------- #
-# Gruppi di party mode
-# --------------------------------------------------------------------------- #
-
-
-def parse_party_blocks(source: str) -> tuple[str, list[tuple[str, str]]]:
-    """Divide il file in intestazione e blocchi `[[workflow.party_groups]]`.
-
-    Il parsing è testuale, non via tomllib, per conservare commenti e formattazione
-    originali: dei blocchi va cambiata solo la riga `members`.
-    """
-    marker = "[[workflow.party_groups]]"
-    chunks = source.split(marker)
-    head = chunks[0]
-    blocks = []
-    for chunk in chunks[1:]:
-        match = re.search(r'^id\s*=\s*"([^"]+)"', chunk, flags=re.M)
-        if not match:
-            raise BuildError("party-groups.toml: un blocco non ha `id`")
-        blocks.append((match.group(1), marker + chunk))
-    return head, blocks
-
-
-def filter_party_groups(
-    source: str,
-    wanted_ids: list[str],
-    installed_agents: set[str],
-    module_name: str,
-) -> tuple[str, list[str]]:
-    """Tiene i gruppi del modulo e riduce i membri alle figure installate.
-
-    I membri `bmad-agent-*` restano: appartengono a BMM e sono facoltativi.
-    Un gruppo che resta con meno di due membri viene scartato.
-    """
-    head, blocks = parse_party_blocks(source)
-    kept: list[str] = []
-    dropped: list[str] = []
-
-    by_id = {group_id: block for group_id, block in blocks}
-    for group_id in wanted_ids:
-        block = by_id.get(group_id)
-        if block is None:
-            raise BuildError(f"party-groups.toml: gruppo `{group_id}` non trovato")
-
-        match = re.search(r"^members\s*=\s*\[(.*?)\]", block, flags=re.M | re.S)
-        if not match:
-            raise BuildError(f"gruppo `{group_id}`: manca `members`")
-        members = re.findall(r'"([^"]+)"', match.group(1))
-        filtered = [m for m in members if m in installed_agents or m.startswith("bmad-agent-")]
-        own = [m for m in filtered if not m.startswith("bmad-agent-")]
-
-        if len(own) < MIN_PARTY_MEMBERS:
-            dropped.append(group_id)
-            continue
-
-        rendered = "[" + ", ".join(f'"{m}"' for m in filtered) + "]"
-        kept.append(block[: match.start()] + f"members = {rendered}" + block[match.end() :])
-
-    header = (
-        f"# Gruppi tematici di bmad-party-mode installati dal setup di {module_name}.\n"
-        "#\n"
-        "# GENERATO da tools/build_modules.py: i membri sono ridotti alle figure che\n"
-        "# questo modulo installa. Le figure delle altre aree Guardrails restano fuori.\n"
-        "#\n"
-        "# Sono override di team in {project-root}/_bmad/custom/bmad-party-mode.toml:\n"
-        "# nessun default_party viene imposto, ogni gruppo si convoca con `--party <id>`.\n\n"
-    )
-    if not kept:
-        return header + "# Nessun gruppo: il modulo installa troppe poche figure per una stanza.\n", dropped
-    return header + "\n".join(block.rstrip() + "\n" for block in kept), dropped
-
-
-# --------------------------------------------------------------------------- #
 # Vetrine del repository derivato
 # --------------------------------------------------------------------------- #
 
@@ -555,11 +476,8 @@ def render_readme(
     workflows: list[str],
     help_rows: dict[str, list[tuple[str, str]]],
     renames: dict[str, str],
-    dropped_groups: list[str],
-    party_ids: list[str],
 ) -> str:
     code = module["code"]
-    setup_skill = renames["grl-setup"]
     profile_skill = renames["grl-profile"]
     board_skill = renames["grl-board"]
 
@@ -569,21 +487,10 @@ def render_readme(
     )
 
     workflow_lines = []
-    for skill in [setup_skill, profile_skill, board_skill] + list(workflows):
+    for skill in [profile_skill, board_skill] + list(workflows):
         for display, description in help_rows.get(skill, []):
             workflow_lines.append(f"| `{skill}` | {display} | {description} |")
     workflow_rows = "\n".join(workflow_lines)
-
-    party_section = ""
-    live_groups = [g for g in party_ids if g not in dropped_groups]
-    if live_groups:
-        listed = "\n".join(f"- `bmad-party-mode --party {g}`" for g in live_groups)
-        party_section = (
-            "\n## Stanze di party mode\n\n"
-            f"{setup_skill} installa le stanze del modulo in "
-            "`_bmad/custom/bmad-party-mode.toml`, senza cambiare la stanza di default:\n\n"
-            f"{listed}\n"
-        )
 
     return f"""# {module['name']} (`{code}`)
 
@@ -629,7 +536,7 @@ Guardrails: installandone due, il profilo resta uno solo e si compila una volta.
 Questo modulo installa skill con **lo stesso nome** del bundle `grl` — `{agents[0]['code']}`
 sta identica in entrambi. Bundle e moduli tematici non vanno installati insieme nello
 stesso progetto: si sceglie il bundle completo, oppure i moduli delle aree che servono.
-{party_section}
+
 ## Licenza
 
 MIT.
@@ -660,9 +567,7 @@ fonte, poi `python3 tools/build_modules.py --module {module['code']}`, poi commi
 ## Cosa cambia rispetto al bundle
 
 - il roster contiene solo le figure di quest'area
-- le tre skill del core sono rinominate: `{renames['grl-setup']}`, `{renames['grl-profile']}`,
-  `{renames['grl-board']}`
-- i gruppi di party mode contengono solo i membri installati
+- le due skill del core sono rinominate: `{renames['grl-profile']}`, `{renames['grl-board']}`
 - la memoria condivisa resta `_bmad/memory/grl-shared/`, uguale per tutti i moduli
 
 ## Niente pull request
@@ -762,30 +667,15 @@ def build_module(source_root: Path, out_root: Path, topology: dict, module: dict
     for skill in module["skills"]:
         copied += copy_skill(source_root, module_out, skill, skill, renames, code, context)
 
-    # Manifesto: in src/ per l'installer, e identico negli assets del setup.
+    # Manifesto: in src/ per l'installer.
     manifest = render_module_yaml(module, module_agents, renames, version)
     (module_out / "src" / "module.yaml").write_text(manifest, encoding="utf-8")
-    setup_assets = module_out / "src" / "skills" / renames["grl-setup"] / "assets"
-    (setup_assets / "module.yaml").write_text(manifest, encoding="utf-8")
 
     # Catalogo di help.
     help_source = (source_root / "src" / "module-help.csv").read_text(encoding="utf-8")
     installed = set(module["skills"]) | set(core_skills)
     help_csv = filter_help_csv(help_source, installed, module["name"], renames, context["count"])
     (module_out / "src" / "module-help.csv").write_text(help_csv, encoding="utf-8")
-    (setup_assets / "module-help.csv").write_text(help_csv, encoding="utf-8")
-
-    # Stanze di party mode.
-    party_source = (
-        source_root / "src" / "skills" / "grl-setup" / "assets" / "party-groups.toml"
-    ).read_text(encoding="utf-8")
-    party_toml, dropped = filter_party_groups(
-        party_source,
-        module.get("party_groups", []),
-        {a["code"] for a in module_agents},
-        module["name"],
-    )
-    (setup_assets / "party-groups.toml").write_text(party_toml, encoding="utf-8")
 
     # Vetrine.
     skill_order = [renames[s] for s in core_skills] + list(module["skills"])
@@ -800,8 +690,6 @@ def build_module(source_root: Path, out_root: Path, topology: dict, module: dict
             module_workflows,
             parse_help_rows(help_csv),
             renames,
-            dropped,
-            module.get("party_groups", []),
         ),
         encoding="utf-8",
     )
@@ -815,7 +703,6 @@ def build_module(source_root: Path, out_root: Path, topology: dict, module: dict
         "files": copied,
         "agents": [a["name"] for a in module_agents],
         "workflows": module_workflows,
-        "dropped_groups": dropped,
     }
 
 
@@ -853,9 +740,6 @@ def main(argv: list[str] | None = None) -> int:
         print(f"      {result['files']} file · figure: {figures_list}")
         if result["workflows"]:
             print(f"      workflow: {', '.join(result['workflows'])}")
-        if result["dropped_groups"]:
-            print(f"      stanze omesse (meno di {MIN_PARTY_MEMBERS} membri installati): "
-                  f"{', '.join(result['dropped_groups'])}")
     print(f"\n{len(results)} moduli in {out_root}")
     return 0
 
