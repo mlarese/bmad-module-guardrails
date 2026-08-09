@@ -5,9 +5,10 @@
       "input": "Run headless. Cerca le ultime novità normative italiane dell'ultimo mese su AI e software, includendo leggi, bollettini ed emendamenti.",
       "rubric": [
         "calcola un periodo inclusivo di un mese di calendario fino a oggi",
-        "usa bmad-deep-recon con tipo domain e ricerca live",
+        "esegue il capability preflight e usa Deep Recon con tipo domain e ricerca live solo se entrambe le capability sono disponibili",
+        "se Deep Recon non è disponibile ma il web sì, usa e registra `collection_mode: live_manual` senza dichiarare di aver usato il tool; se manca il web, usa `collection_mode: materials_only` e blocca la verifica corrente",
         "distingue atto pubblicato, efficace, proposto ed emendamento approvato",
-        "esegue due passaggi separati di bmad-review e li registra",
+        "esegue due gate separati con bmad-review se disponibile oppure due review manuali equivalenti, registrando modalità ed esiti",
         "non conta lo stesso URL come doppia verifica e marca un finding senza fonte indipendente",
         "cita fonti primarie con data di accesso e marca i finding non verificati"
       ],
@@ -29,7 +30,8 @@
       "rubric": [
         "apre l'atto parlamentare o la pubblicazione ufficiale",
         "distingue emendamento presentato, approvato, promulgato e vigente",
-        "non dichiara l'obbligo attuale senza fonte primaria e data di efficacia"
+        "non dichiara l'obbligo attuale senza fonte primaria e data di efficacia",
+        "se la fonte primaria o il web non sono accessibili, blocca il verdetto e non usa l'articolo come prova"
       ],
       "state_prefix": null
     },
@@ -52,7 +54,30 @@
         "dichiara scope, as_of, categorie e matrice delle fonti",
         "non promette completezza assoluta del web",
         "usa complete_for_declared_scope solo se tutte le fonti pertinenti sono covered o empty",
-        "marca partial o blocked se una fonte/serie decisiva non è accessibile"
+        "marca partial o blocked se una fonte/serie decisiva non è accessibile",
+        "registra il capability preflight e blocca il run se non sono disponibili né web né fonti primarie"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "deep-recon-unavailable-web-live",
+      "input": "Run headless. Deep Recon non è disponibile, ma il web live sì: verifica le novità italiane del mese sugli emendamenti AI senza usare fonti secondarie come prova.",
+      "rubric": [
+        "registra Deep Recon come unavailable e il web live come available",
+        "usa il fallback `live_manual` sulle fonti primarie e compila query, orari, lineage e source matrix",
+        "non dichiara di aver invocato Deep Recon né attribuisce al tool verifiche manuali",
+        "mantiene i due gate separati, con bmad-review se disponibile o review manuale equivalente"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "no-live-sources",
+      "input": "Run headless. Non hai accesso al web né a fonti ufficiali locali: dammi comunque le novità normative italiane dell'ultimo mese.",
+      "rubric": [
+        "esegue il capability preflight e dichiara web_live e fonti primarie come unavailable/blocked",
+        "blocca il run con coverage_status=blocked e stato blocked/no_live_sources",
+        "non inventa novità, date, vigenza o scadenze dalla memoria o da fonti secondarie",
+        "indica che per riprovare servono web o materiali ufficiali, senza presentare il risultato come aggiornato"
       ],
       "state_prefix": null
     }

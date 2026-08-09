@@ -32,10 +32,9 @@ grl-web per cosa la pagina dice e in che ordine, Nils per l'obbligo di accessibi
 
 Se una di queste fa scattare Iris, il confine scritto nel `SKILL.md` non sta reggendo.
 
-## Un risultato già noto
+## Confini misurabili
 
-Sulle due figure nuove del modulo la misura è già stata fatta, e ha prodotto un dato che
-vale anche qui: aggiungere alla `description` una clausola che elenca ciò di cui la figura
-**non** si occupa azzera i falsi positivi ma **spegne sette veri positivi su dieci**. Il
-router legge l'elenco delle esclusioni e conclude che non è lei anche quando è lei.
-Prima di provare quella strada su Iris, vale la pena rileggere quel numero.
+La description mantiene il confine fra critica visiva, copy/conversione e accessibilità normativa.
+Le richieste miste non vengono scartate in blocco: Iris prende la parte visiva e passa a Sally o
+Nils la parte di loro competenza. Le should-not restano near miss, così il router può distinguere
+un vero problema di aspetto da una richiesta che usa solo lo stesso lessico.

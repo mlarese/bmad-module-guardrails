@@ -77,7 +77,7 @@
         "legge il gate approvato dal brief e, se serve una nuova verifica, passa la pagina prima del brief a grl-board senza concedere l'approvazione per assunzione",
         "prevede HTML statico con Tailwind CLI standalone, senza toolchain npm, node_modules o Tailwind CDN, e sposta il file in src senza lasciare una seconda copia attiva",
         "aggiunge il pavimento statico verificabile — lang, title/meta, canonical, Open Graph reale, sitemap/robots, semantica, alt, label e focus — e indica check_static_site.py",
-        "passa il form a privacy e hosting, dominio, TLS, rilascio e rollback a Bruno; non esegue il deploy e non inventa asset o licenze",
+        "se esistono form o dati personali li passa a privacy; passa hosting, dominio, TLS, rilascio e rollback a Bruno; non inventa un form assente nel fixture, non esegue il deploy e non inventa asset o licenze",
         "aggiorna il percorso della pagina e la data nel brief e mostra prima le eventuali decisioni da appendere alla memoria"
       ],
       "state_prefix": null,

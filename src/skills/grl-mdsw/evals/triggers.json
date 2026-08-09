@@ -1,6 +1,7 @@
 [
   { "query": "il mio software è un dispositivo medico?", "should_trigger": true },
   { "query": "la nostra app deve avere la marcatura CE come software medicale?", "should_trigger": true },
+  { "query": "il nostro software calcola la dose consigliata: dobbiamo marcarlo CE come dispositivo medico?", "should_trigger": true },
   { "query": "come applico la Regola 11 del MDR al modulo che suggerisce una diagnosi", "should_trigger": true },
   { "query": "questo monitoraggio della saturazione è classe IIa o IIb?", "should_trigger": true },
   { "query": "il software calcola un indice sul singolo paziente e guida il medico: in che classe finisce?", "should_trigger": true },

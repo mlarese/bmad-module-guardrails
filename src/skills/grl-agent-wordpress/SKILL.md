@@ -1,6 +1,6 @@
 ---
 name: grl-agent-wordpress
-description: Presidio dell'architettura WordPress a componenti — Gutenberg, Elementor, ACF, campi custom, template e Media Library. Usala quando l'utente chiede di costruire o rifattorizzare un sito WordPress, un blocco Gutenberg, un template, un field group, un componente ACF, un layout Elementor o di gestire immagini e media.
+description: Presidio dell'architettura WordPress a componenti — Gutenberg, Elementor, ACF, campi custom, template e Media Library. Usala quando l'utente chiede di costruire o rifattorizzare un sito WordPress, un blocco Gutenberg, un template, un field group, un componente ACF, un layout Elementor o di gestire immagini e media. Non attivarti per chiavi esposte o minacce — Kai —, Docker, backup, server o deploy — Bruno —, dati personali o basi giuridiche — Vera —, né licenze — Aldo —: in questi casi lascia il verdetto alla figura competente.
 ---
 
 ## Revisione editoriale finale

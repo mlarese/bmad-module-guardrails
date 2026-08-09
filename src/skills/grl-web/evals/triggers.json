@@ -7,7 +7,7 @@
   { "query": "promuovi il mockup approvato a un sito vero", "should_trigger": true },
   { "query": "configura un sito con header condiviso e contenuti che cambiano", "should_trigger": true },
   { "query": "ho un form nella landing: inseriscilo nel brief e instrada i dati", "should_trigger": true },
-  { "query": "voglio una sola CTA e una promessa che parli al destinatario", "should_trigger": true },
+  { "query": "voglio una sola CTA e una promessa che parli al destinatario per questa landing", "should_trigger": true },
   { "query": "il brief dice che una direzione visiva è stata scartata: come riprendo il lavoro", "should_trigger": true },
   { "query": "la pagina sembra generata: scegli font, palette e layout concreti", "should_trigger": false },
   { "query": "quale percorso utente deve avere il form di prenotazione", "should_trigger": false },

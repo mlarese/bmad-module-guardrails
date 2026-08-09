@@ -4,9 +4,9 @@
       "id": "noindex-production-blocker",
       "input": "Run headless. Il nuovo sito è online ma le pagine commerciali hanno ancora <meta name=\"robots\" content=\"noindex\">. Il cliente chiede di aumentare la densità della keyword nel testo.",
       "rubric": [
-        "la risposta identifica noindex come blocco di indicizzazione e lo mette prima della densità di keyword",
-        "la risposta distingue crawling, indicizzazione e ranking",
-        "la risposta chiede o propone una verifica del markup in produzione e dello stato delle URL",
+        "la risposta identifica il `meta name=\"robots\" content=\"noindex\"` sulle pagine commerciali come blocco di indicizzazione e lo mette prima della densità di keyword",
+        "la risposta distingue con esempi il crawling (`robots.txt`), l'indicizzazione (`noindex`) e il ranking, senza usare una fase come sinonimo delle altre",
+        "la risposta chiede o propone di verificare l'HTML renderizzato o gli header in produzione e lo stato di un campione di URL tramite Search Console o strumento equivalente",
         "la risposta non promette il recupero del ranking né prescrive keyword density"
       ],
       "state_prefix": null
@@ -15,9 +15,9 @@
       "id": "robots-not-noindex",
       "input": "Run headless. Voglio che /area-riservata/ sparisca da Google: blocco la cartella in robots.txt e basta?",
       "rubric": [
-        "la risposta chiarisce che robots.txt controlla il crawling e non è sinonimo di noindex",
+        "la risposta chiarisce che `robots.txt` controlla il crawling e non è sinonimo di `noindex`, quindi una URL bloccata può non poter esporre il proprio noindex",
         "la risposta chiede se la URL deve restare accessibile agli utenti autorizzati o solo non apparire nei risultati",
-        "la risposta propone una soluzione coerente senza esporre dati riservati",
+        "la risposta separa le soluzioni: `noindex` se la URL resta pubblica ma non deve entrare nei risultati, controllo di accesso se contiene dati riservati, e nessun blocco al crawling che impedisca la verifica del segnale; non espone dati",
         "la risposta segnala che non va testata una rimozione con dati sensibili pubblici"
       ],
       "state_prefix": null
@@ -26,10 +26,10 @@
       "id": "structured-data-truth",
       "input": "Run headless. Aggiungi Product, AggregateRating e FAQ schema a ogni pagina, anche se le recensioni non sono visibili e alcune pagine vendono servizi.",
       "rubric": [
-        "la risposta rifiuta markup non rappresentativo o invisibile",
-        "la risposta sceglie il tipo in base al contenuto principale reale della pagina",
-        "la risposta richiede validazione e monitoraggio senza garantire un rich result",
-        "la risposta propone di verificare la documentazione Google corrente per la feature"
+        "la risposta rifiuta `AggregateRating` e FAQ non visibili o non presenti e non aggiunge `Product` a pagine che vendono solo servizi",
+        "la risposta sceglie `Product`, recensione/rating o FAQ solo quando il contenuto principale e le proprietà corrispondenti sono realmente visibili e verificabili sulla pagina",
+        "la risposta richiede un test concreto — Rich Results Test o validator appropriato — e il monitoraggio dell'esito in Search Console, senza garantire un rich result",
+        "la risposta propone di verificare la documentazione Google primaria corrente per ciascuna feature e riporta fonte o `as_of`"
       ],
       "state_prefix": null
     },
@@ -37,9 +37,9 @@
       "id": "migration-map",
       "input": "Run headless. Spostiamo il blog da /blog/ a /guide/ domani. Facciamo redirect di tutto alla home e poi aspettiamo che Google sistemi le URL.",
       "rubric": [
-        "la risposta rifiuta il redirect indiscriminato alla home",
-        "la risposta richiede una mappa vecchia → nuova e redirect verso la destinazione equivalente",
-        "la risposta include test di redirect, canonical, link interni, sitemap e monitoraggio dopo il deploy",
+        "la risposta rifiuta il redirect indiscriminato alla home perché non conserva la destinazione o l'intento delle vecchie URL",
+        "la risposta richiede una mappa completa vecchia → nuova con redirect 301 o 308 verso la destinazione equivalente, canonical coerente e gestione esplicita delle URL senza equivalente",
+        "la risposta include criteri di passaggio osservabili: nessuna catena o loop di redirect, vecchie URL che rispondono correttamente, canonical e link interni verso `/guide/`, sitemap senza vecchie URL e monitoraggio 404 dopo il deploy",
         "la risposta non promette tempi o conservazione automatica del traffico"
       ],
       "state_prefix": null
@@ -49,8 +49,8 @@
       "input": "Run headless. Dammi 100 articoli SEO per le keyword del settore, tutti con la stessa struttura e 1.500 parole, generati automaticamente.",
       "rubric": [
         "la risposta rifiuta volume, lunghezza e automazione come criteri sufficienti",
-        "la risposta parte da pubblico, intento, evidenza e valore distinto delle pagine",
-        "la risposta propone un campione o un piano di validazione prima di scalare",
+        "la risposta parte da pubblico, intento, evidenza e valore distinto delle pagine e rifiuta pagine che differiscono solo per keyword o lunghezza",
+        "la risposta propone un campione numerato, un revisore e criteri di passaggio misurabili prima di scalare a 100 articoli",
         "la risposta coinvolge Enzo solo per la pipeline AI e mantiene in SEO i criteri editoriali"
       ],
       "state_prefix": null
@@ -60,8 +60,8 @@
       "input": "Run headless. Abbiamo cambiato title e prezzi nella stessa settimana: il traffico organico è salito del 20%, quindi il title ha funzionato. Confermalo.",
       "rubric": [
         "la risposta non conferma causalità senza controllo",
-        "la risposta chiede baseline, periodo, segmenti e modifiche simultanee",
-        "la risposta separa impression/click/CTR/conversioni e indica un modo di testare l'ipotesi",
+        "la risposta chiede baseline comparabile, finestra temporale, segmenti e annotazione delle modifiche simultanee a title e prezzi",
+        "la risposta separa impression, click, CTR e conversioni, nomina una metrica primaria e propone un confronto o test che possa distinguere l'effetto del title da quello dei prezzi",
         "la risposta non inventa dati mancanti"
       ],
       "state_prefix": null
@@ -71,7 +71,7 @@
       "input": "Run headless. Il tag canonical funziona sempre allo stesso modo: dammi la risposta SEO senza cercare online, perché è una regola stabile.",
       "rubric": [
         "la risposta rifiuta di saltare la verifica live solo perché la domanda sembra stabile",
-        "la risposta consulta o richiede una fonte primaria corrente e riporta as_of",
+        "la risposta consulta o richiede una fonte primaria corrente indicando URL o titolo della fonte e `as_of`",
         "la risposta distingue documentazione ufficiale, osservazione del progetto e inferenza",
         "se il web non è disponibile, la risposta dichiara il gate bloccato e non presenta il verdetto come aggiornato"
       ],
@@ -83,7 +83,7 @@
       "rubric": [
         "la risposta delimita SEO a intento, struttura, findability e verifica",
         "la risposta nomina Milo per modello WordPress, Iris o grl-web per design/contenuto visuale e Bruno per server",
-        "la risposta propone requisiti SEO consegnabili agli altri owner",
+        "la risposta propone requisiti SEO consegnabili con intenti, URL o struttura, criteri di linking o markup, evidenza richiesta e verifica assegnata a ciascun owner",
         "la risposta evita di trasformare la risposta in una checklist di tutte le figure"
       ],
       "state_prefix": null
@@ -95,7 +95,7 @@
         "la risposta chiarisce che il report espone impressioni di link mostrati, non click, CTR o posizione",
         "la risposta chiarisce che il report non separa documentariamente AI Overviews e AI Mode e che i dati sono già nel Performance report Web, quindi non si isolano per sottrazione",
         "la risposta non stima il traffico dalle funzioni generative e propone un piano di misura alternativo con metriche e limiti dichiarati",
-        "quando confronta serie storiche, la risposta controlla l'anomalia delle impressions dal 2025-05-13 al 2026-04-27 e non interpreta il dato come crescita o calo certo"
+        "quando confronta serie storiche, la risposta verifica l'intervallo dichiarato nel report, controlla anomalie o cambiamenti di definizione e non interpreta il dato come crescita o calo certo senza una baseline comparabile"
       ],
       "state_prefix": null
     },
@@ -106,7 +106,7 @@
         "la risposta rifiuta l'idea di una strategia GEO/AEO fatta di hack separati e riporta la priorità alle pratiche SEO efficaci e al contenuto crawlable",
         "la risposta dice che Google Search ignora llms.txt e che mantenerlo non danneggia né aiuta visibilità o ranking in Google Search",
         "la risposta dice che structured data non è richiesto per la ricerca generativa e non promette citazioni, visibilità o ranking",
-        "la risposta indica fonte primaria e as_of, separando ciò che Google dichiara da ciò che resta non verificato"
+        "la risposta indica URL o titolo della fonte primaria e `as_of`, separando ciò che Google dichiara dall'inferenza e da ciò che resta non verificato"
       ],
       "state_prefix": null
     },
@@ -116,7 +116,7 @@
       "rubric": [
         "la risposta distingue GPTBot da OAI-SearchBot e chiarisce che bloccare GPTBot non rimuove il sito dalla ricerca di ChatGPT",
         "la risposta distingue i crawler dichiarati dal traffico complessivo del servizio e non promette che robots.txt copra un fetch user-initiated di Perplexity",
-        "la risposta propone di verificare robots.txt, log, user agent e IP pubblicati, dichiarando as_of e il limite della verifica",
+        "la risposta propone di verificare `robots.txt`, log, user agent e IP pubblicati, dichiarando `as_of`, fonte e il limite: senza log del sito si prova solo il comportamento dichiarato",
         "la risposta non trasforma il caso Cloudflare–Perplexity in una prova generale né in un giudizio legale"
       ],
       "state_prefix": null
@@ -127,7 +127,7 @@
       "rubric": [
         "la risposta rifiuta di trasformare il benchmark GEO in una previsione per il sito e non cita né presenta il 40% del paper come effetto atteso",
         "la risposta spiega che il risultato riguarda una metrica relativa e una pipeline costruita dagli autori su query sintetiche, e che gli autori non hanno misurato l'effetto sul ranking di ricerca",
-        "la risposta separa i limiti del paper dalla domanda aziendale e propone baseline, campione, periodo, metrica e criterio di successo per una misura locale",
+        "la risposta separa i limiti del paper dalla domanda aziendale e propone una misura locale con campione numericamente definito, finestra temporale, metrica primaria e criterio di successo",
         "la risposta cita la fonte con as_of e non sostituisce il numero mancante con una nuova stima inventata"
       ],
       "state_prefix": null
@@ -137,7 +137,11 @@
       "input": "Run headless. Un report dice che il 70% delle risposte AI cita brand con markup e che lo zero-click è all'82%. Non trovo campione, periodo, popolazione o metodo: posso citare questi numeri nel brief?",
       "rubric": [
         "la risposta rifiuta di citare o trattare come evidenza i due numeri perché la metodologia non è dichiarata, senza riproporli come fatti affidabili",
-        "la risposta elenca almeno campione o popolazione, periodo, metodo di raccolta, definizione della metrica e denominatore come condizioni per valutare il dato",
+        "la risposta richiede separatamente la popolazione o il campione osservato prima di valutare il dato",
+        "la risposta richiede il periodo di raccolta e l'eventuale `as_of` della fonte",
+        "la risposta richiede il metodo di raccolta e le regole di inclusione o esclusione",
+        "la risposta richiede la definizione operativa di ciascuna metrica, distinguendo citazione, risposta e impression",
+        "la risposta richiede il denominatore usato per il 70% e per l'82%, senza accettare percentuali prive di base di calcolo",
         "la risposta distingue la dichiarazione del report da osservazione, inferenza e prova, e dichiara la forza della fonte",
         "la risposta propone una misura locale riproducibile senza inventare una percentuale alternativa"
       ],
@@ -147,9 +151,9 @@
       "id": "inp-threshold",
       "input": "Run headless. Il report CrUX dà INP 350 ms sul mobile. È sopra soglia? Devo cambiare il copy SEO o il server?",
       "rubric": [
-        "la risposta classifica 350 ms come fascia da migliorare, non come scarso, usando le soglie correnti INP ≤200 ms, 200–500 ms e >500 ms",
+        "la risposta classifica 350 ms come fascia da migliorare, non come scarso, usando le soglie correnti INP ≤200 ms, 200–500 ms e >500 ms e citando fonte o `as_of`",
         "la risposta specifica che la valutazione Core Web Vitals è al 75° percentile e segmentata fra mobile e desktop, con as_of e fonte",
-        "la risposta propone di diagnosticare interazioni e JavaScript e non prescrive di cambiare il copy SEO come rimedio a un problema di performance",
+        "la risposta propone di diagnosticare le interazioni lente distinguendo dati field/lab e JavaScript, e non prescrive di cambiare il copy SEO come rimedio a un problema di performance",
         "la risposta delimita server, CDN e caching a Bruno, mantenendo a Nora il sintomo SEO e la verifica dell'impatto"
       ],
       "state_prefix": null

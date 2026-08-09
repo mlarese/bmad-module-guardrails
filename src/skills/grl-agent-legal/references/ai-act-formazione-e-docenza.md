@@ -8,16 +8,21 @@ type: prompt
 
 # Docenza e alfabetizzazione IA
 
-**Data di riferimento: 7 agosto 2026.** Verifica sul web prima di dare una data per buona.
+**Data di riferimento: 9 agosto 2026.** Verifica sul web prima di dare una data per buona.
 
 ## L'obbligo
 
-**Art. 4, in vigore dal 2 febbraio 2025.** Chiunque impieghi personale che usa sistemi di IA per lavorare deve garantirgli un livello sufficiente di alfabetizzazione. Vale anche per l'assistente generalista usato per scrivere email, e non ha soglia dimensionale: prende lo studio di tre persone.
+**Art. 4, applicabile dal 2 febbraio 2025.** Provider e deployer devono adottare misure per sostenere
+l'alfabetizzazione IA di chi opera o usa i sistemi per loro conto, tenendo conto di ruolo, conoscenze,
+formazione, contesto e rischi. La Commissione chiarisce che non è prescritto un livello specifico o
+«sufficiente», né una soglia dimensionale o un certificato: il contenuto va proporzionato al caso reale.
 
 Due cose che quasi nessuno dice, e che valgono più dell'articolo:
 
 - **Non c'è un programma minimo di legge, né un attestato riconosciuto.** Chi vende «certificazione AI Act obbligatoria» vende. La misura è la proporzionalità: al ruolo, al rischio dei sistemi usati, alle competenze già presenti.
-- **L'obbligo è dimostrare, non fare.** Formazione erogata e non tracciata, davanti a un'ispezione, non è mai avvenuta. Questo determina la forma dei materiali più di ogni scelta didattica.
+- **Conserva evidenza delle misure adottate.** Un registro interno di formazione e iniziative di
+  orientamento è una prova pratica; non esiste un formato unico né un certificato obbligatorio.
+  Conserva anche i materiali pertinenti quando servono a dimostrare la proporzionalità.
 
 ## Chi sei in aula
 
@@ -41,9 +46,10 @@ Il contenuto cambia con chi è in sala. Chiedere «chi sono i partecipanti» pri
 | Chi sviluppa o integra | dove il proprio prodotto ricade nel regolamento, cosa cambia in ciò che scrive, cosa va documentato mentre lo fa |
 | Amministratori e apicali | di cosa risponde l'impresa, quali decisioni restano loro, cosa devono poter esibire |
 
-## L'ossatura di un corso base
+## Un esempio di corso proporzionato
 
-Quattro moduli, due ore. È il formato che soddisfa l'art. 4 per un pubblico non tecnico, e sotto il quale non si scende.
+Quattro moduli, due ore, sono un esempio per un pubblico non tecnico; non sono una durata minima
+imposta dalla legge. Adatta contenuti e durata a ruoli, sistemi, rischi e competenze osservate.
 
 1. **Cosa è un sistema di IA e cosa non lo è** — mezz'ora, e serve solo a evitare che l'aula chiami IA ogni automazione. Con gli strumenti che quelle persone usano davvero, presi dall'inventario.
 2. **Cosa può andare storto** — allucinazioni, output plausibili e falsi, dati che escono e non tornano, bias. Con esempi del loro mestiere.
@@ -72,7 +78,9 @@ Li produci quando servono, non per default. Ognuno ha un consumatore diverso, e 
 
 Scrivili in `{output_folder}/formazione-ai-act/`, un file per materiale, in Markdown. Prima di generare un pacchetto completo chiedi quali pezzi servono davvero: quasi sempre bastano scaletta e registro.
 
-**Il registro è l'unico materiale che l'azienda deve avere per forza.** Se il cliente ne prende uno solo, è quello — e va tenuto insieme alla policy che il corso ha spiegato.
+**Il registro interno è la prova più semplice da conservare.** Se il cliente ne prende uno solo,
+è un buon punto di partenza; la forma e gli altri materiali dipendono dal contesto, dai rischi e
+dalle iniziative effettivamente adottate.
 
 ## Formazione ricorrente
 

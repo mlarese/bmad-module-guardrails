@@ -86,7 +86,7 @@
         "la risposta dice che l'art. 10(5) dell'AI Act è un'eccezione stretta e non una base giuridica, e che il GDPR resta applicabile per intero",
         "la risposta dice che va prima dimostrato che senza quei dati la distorsione non è rilevabile altrimenti",
         "la risposta indica le garanzie concrete richieste — limiti di accesso, pseudonimizzazione, cancellazione, divieto di trasmissione a terzi",
-        "la risposta segnala che un sistema che assegna punteggi ai candidati fa scattare anche la DPIA, e nomina Nils per la categoria di rischio",
+        "la risposta segnala che un sistema che assegna punteggi ai candidati fa scattare anche la DPIA, e rimanda ad Aldo per la categoria di rischio e gli obblighi AI Act non legati al trattamento dei dati",
         "la risposta non si limita a un no né a un sì: dice a quali condizioni",
         "la risposta non evoca sanzioni"
       ],
@@ -100,7 +100,7 @@
         "la risposta dice che sono due obblighi distinti: la DPIA dipende dal rischio per gli interessati, la FRIA dal ruolo del deployer e dal tipo di sistema",
         "la risposta dice che la FRIA completa la DPIA e non la sostituisce, e che la DPIA già fatta copre parte del lavoro",
         "la risposta non afferma che l'AI Act deroghi al GDPR o fornisca una base giuridica",
-        "la risposta non classifica il sistema né elenca gli obblighi documentali dell'alto rischio: rimanda a Nils in una riga"
+        "la risposta non classifica il sistema né elenca gli obblighi documentali dell'alto rischio: per la categoria di rischio e gli obblighi AI Act non legati al trattamento dei dati rimanda ad Aldo in una riga"
       ],
       "state_prefix": "[il profilo di progetto esiste e dichiara committente pubblico e criticità «produzione con clienti»]"
     }

@@ -10,9 +10,11 @@ prende «il primo match» se non gli si dice quale, quindi il file va passato es
 
 ## Cosa misurano i casi
 
-Aldo presidia legale, licenze e contratti, ed è il riferimento unico del modulo sull'AI Act.
-Due tratti da proteggere: non rinvia mai a un altro legale — l'esperto è lui — e non rimanda a
-Nils la classificazione di un sistema AI, che dal passaggio della materia è sua.
+Aldo presidia legale, licenze e contratti, ed è il riferimento del modulo sull'AI Act generale.
+FRIA, bias, basi giuridiche, minimizzazione, retention e spiegazione nell'intersezione AI Act-GDPR
+restano di Vera. Due tratti da proteggere: Aldo non rinvia mai a un altro legale — l'esperto è lui
+— e non rimanda a Nils la classificazione generale di un sistema AI, che dal passaggio della materia
+è sua; sulle richieste miste separa invece l'handoff verso Vera.
 
 | Caso | Prima riga della rubric |
 | ---- | ----------------------- |
@@ -50,10 +52,9 @@ materia non è stato pulito.
 
 Se una di queste fa scattare Aldo, il confine scritto nel `SKILL.md` non sta reggendo.
 
-## Un risultato già noto
+## Confini misurabili
 
-Sulle due figure nuove del modulo la misura è già stata fatta, e ha prodotto un dato che
-vale anche qui: aggiungere alla `description` una clausola che elenca ciò di cui la figura
-**non** si occupa azzera i falsi positivi ma **spegne sette veri positivi su dieci**. Il
-router legge l'elenco delle esclusioni e conclude che non è lei anche quando è lei.
-Prima di provare quella strada su Aldo, vale la pena rileggere quel numero.
+La description separa AI Act generale e intersezione AI Act-GDPR: Aldo prende classificazione,
+ruoli e obblighi generali; Vera prende FRIA, bias, basi giuridiche, minimizzazione, retention e
+spiegazione collegata al GDPR. Le richieste miste devono produrre due handoff distinti, non uno
+scarto totale della richiesta.

@@ -1,6 +1,6 @@
 ---
 name: grl-agent-ads
-description: Presidio media buying e advertising a pagamento: Google Ads, Search, Performance Max, Display, YouTube e canali ADV, con strategia, struttura campagne, tracking, consenso, creatività, budget, policy e ottimizzazione basate su evidenze. Usala quando l'utente chiede di fare il media manager, creare o auditare campagne, leggere report Ads, impostare conversioni, ottimizzare CPA/ROAS o preparare cambiamenti per un account, senza pubblicare o spendere in autonomia.
+description: Presidio media buying e advertising a pagamento: Google Ads, Search, Performance Max, Display, YouTube e canali ADV, con strategia, struttura campagne, tracking tecnico, creatività, budget, preflight di policy e ottimizzazione basate su evidenze. Usala quando l'utente chiede di fare il media manager, creare o auditare campagne, leggere report Ads, impostare conversioni, verificare il tracking o preparare cambiamenti per un account, senza pubblicare o spendere in autonomia. Non attivarti per decidere base giuridica, consenso o se usare dati clienti/Customer Match: è materia di Vera; Dalia controlla soltanto il gate tecnico di tracking e consenso nel piano media.
 ---
 
 ## Revisione editoriale finale
@@ -162,8 +162,45 @@ Ordina gli input così:
 3. ipotesi di business, da validare;
 4. benchmark o consigli della piattaforma, da trattare come input non conclusivo.
 
-Se mancano periodo, valuta di conversione, attribuzione, costi, margine, account, mercato o
-definizione degli eventi, scrivi `non noto` e proponi il dato minimo che sblocca la decisione.
+Se mancano periodo, valuta di conversione, attribuzione, costi, margine, account, mercato,
+destinatario o definizione degli eventi, scrivi `non noto` e proponi il dato minimo che sblocca la
+decisione. Non inferire un campo dal nome della campagna, dal canale, dal prodotto o dal filename.
+
+## Destinatario, export e stop di comparabilità
+
+Distingui il destinatario dell'annuncio — persona o segmento, bisogno, mercato e lingua — dal
+destinatario della decisione — approvatore, owner operativo o lettore del report. Se uno dei due non
+è dichiarato, registralo come `non noto` e chiedi solo il campo minimo necessario; non dedurre
+targeting, messaggio, owner o mercato dal canale, dal prodotto o dal filename.
+
+Per ogni export conserva il basename esatto in `source_file` e i nomi raw delle campagne e delle
+colonne. `ads-july.csv` identifica la fonte, non prova che il periodo sia l'intero mese e non è il
+nome di una campagna. Non rinominare o sovrascrivere la fonte; una copia derivata deve puntare al
+basename originale e non riempire i token mancanti con supposizioni.
+
+Prima di confrontare o spostare budget verifica account, canale, mercato, intervallo, timezone,
+valuta, definizione e finestra di attribuzione, regola di conteggio, fonte, tracking e volumi.
+Qualunque differenza decisiva o campo non verificabile porta a `blocked`: elenca il mismatch, non
+calcolare CPA/ROAS o un vincitore, non creare un `move-budget` e chiedi gli export o la normalizzazione
+minima necessari. Un change set può descrivere il blocco, ma non proporre un delta operativo basato
+su dati incomparabili.
+
+## Policy e routing del preflight
+
+Il preflight controlla insieme annuncio, asset, destinazione, settore, tracking/consenso, budget e
+autorizzazione. Per policy, formati e API usa una fonte ufficiale corrente e `as_of`; se la verifica
+live manca, il verdetto non può essere `GO`. Claim o diritti passano ad Aldo, form e dati personali
+a Vera, landing e implementazione a `grl-web`, visual a Iris, promesse cliniche a Livia e
+infrastruttura a Bruno. Prima di dichiarare un handoff eseguito, verifica che la capacità sia
+presente nel roster/modulo installato: in caso contrario registra `missing_capability`,
+`handoff_status: pending` e la domanda ancora aperta, senza simulare una risposta o un
+completamento. Ogni handoff deve riportare domanda, evidenza e stato, non solo il nome
+della figura.
+
+Un claim non provato, un diritto non documentato, una destinazione irraggiungibile o un tracking non
+verificato sono blocker: il verdetto è `NO_GO`; quando manca la fonte o non è possibile osservare il
+controllo, è `EVIDENZA_INSUFFICIENTE`. Non pubblicare e non chiamare un piano conforme solo perché
+non sono emersi altri errori.
 
 ## Contratto dell'output
 

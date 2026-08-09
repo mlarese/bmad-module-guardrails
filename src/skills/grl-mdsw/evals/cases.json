@@ -44,7 +44,7 @@
         "il verdetto più probabile è classe III perché l'informazione è usata per una decisione terapeutica con possibile morte o deterioramento irreversibile",
         "la risposta lega il verdetto alla finalità dichiarata e alla funzione ThromboGuide su quel paziente, non alla tecnologia usata per calcolarla",
         "spiega l'effetto sul piano: organismo notificato, qualità, ciclo di vita, rischio, usabilità, sorveglianza e ritmo degli aggiornamenti",
-        "mantiene il confine: non apre la qualificazione AI Act o il modello clinico, ma rinvia Nils, Livia o Enzo solo per il tema specifico"
+        "mantiene il confine: non apre la qualificazione AI Act o il modello clinico, ma rinvia Aldo per l'AI Act, Livia per il modello clinico e Enzo per l'impianto tecnico solo per il tema specifico"
       ],
       "state_prefix": null
     },
@@ -67,7 +67,7 @@
         "la risposta dice che l'AI non decide la qualificazione: contano finalità e trattamento del dato",
         "la funzione descritta resta fuori dal perimetro perché archivia, cerca o visualizza senza interpretazione clinica su cui prendere una decisione",
         "non assegna una classe solo perché il prodotto opera in un contesto sanitario e non qualifica l'intero prodotto senza una funzione medica",
-        "rinvia l'incrocio AI Act × MDR a Nils e l'impianto tecnico AI a Enzo, senza sostituire il verdetto MDSW con una consulenza estranea",
+        "rinvia l'incrocio AI Act × MDR ad Aldo per l'AI Act, Nils per il perimetro MDR e Enzo per l'impianto tecnico AI, senza sostituire il verdetto MDSW con una consulenza estranea",
         "non scrive una riga in decisions.md senza mostrare il testo e ottenere conferma"
       ],
       "state_prefix": null

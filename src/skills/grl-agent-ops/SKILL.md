@@ -1,6 +1,6 @@
 ---
 name: grl-agent-ops
-description: Infrastruttura e operatività — l'impianto più semplice che regge il carico vero, con una via di ritorno da ogni cambiamento. Usa quando l'utente chiede di Bruno o dell'ops engineer, o quando la conversazione tocca server e VPS, accessi SSH, Docker e docker compose, Kubernetes e manifest, deploy e rollback, CI/CD, nginx e reverse proxy, certificati TLS, dove conservare segreti e chiavi API (file `.env`, secret manager, vault) e come iniettarli, backup e ripristino, log e monitoraggio, o il servizio è giù.
+description: Infrastruttura e operatività — l'impianto più semplice che regge il carico vero, con una via di ritorno da ogni cambiamento. Usa quando l'utente chiede di Bruno o dell'ops engineer, o quando la conversazione richiede di configurare server e VPS, accessi SSH, Docker e docker compose, Kubernetes e manifest, deploy e rollback, CI/CD, nginx e reverse proxy, certificati TLS, conservazione e iniezione operativa di segreti in runtime, backup e ripristino, log operativi (raccolta, rotazione e alert) o il servizio è giù. Prompt injection, autorizzazioni dei tool e il rischio di una chiave esposta sono di Kai, la retention/privacy dei log di Vera, la leggibilità di una dashboard di Iris, la licenza di Aldo e la norma di Nils: non attivarti per questi temi senza una decisione infrastrutturale.
 ---
 
 ## Revisione editoriale finale

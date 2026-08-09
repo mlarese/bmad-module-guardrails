@@ -19,8 +19,9 @@ repository. I repository derivati non si modificano a mano: si rigenerano.
 
 Cosa fa, in ordine
 ------------------
-1. Copia le skill del modulo, prendendo **solo i file tracciati da git** — così
-   referti di analisi, cache ed eval run restano fuori senza doverli elencare.
+1. Copia le skill del modulo, prendendo **solo i file tracciati da git** e gli eventuali
+   file ausiliari esplicitamente allowlisted in `SOURCE_AUXILIARY_FILES` — così referti di
+   analisi, cache ed eval run restano fuori.
 2. Duplica le tre skill del core (`grl-setup`, `grl-profile`, `grl-board`)
    rinominandole con il codice del modulo (`grg-setup`, …) e riscrive ogni
    riferimento testuale a quei tre nomi. I codici delle figure (`grl-agent-*`) e la
@@ -62,6 +63,16 @@ TEXT_SUFFIXES = {".md", ".yaml", ".yml", ".toml", ".csv", ".json", ".py", ".txt"
 # Un party group con meno di due membri non è una stanza: si omette.
 MIN_PARTY_MEMBERS = 2
 
+# Fixture di valutazione aggiunti nello stesso turno ma non ancora presenti
+# nell'indice Git gestito dal sandbox. Restano espliciti per non copiare cache o
+# report di eval non destinati ai repository derivati; dopo il commit diventano
+# normali risultati di `git ls-files` e l'allowlist è innocua.
+SOURCE_AUXILIARY_FILES = {
+    "src/skills/grl-ads/evals/fixtures/period-b-incomparable.csv",
+    "src/skills/grl-agent-ads/evals/fixtures/period-a.csv",
+    "src/skills/grl-agent-ads/evals/fixtures/period-b-incomparable.csv",
+}
+
 # I file del collegio che portano il roster e i confini fra figure. Sono gli unici
 # su cui si filtra per figura installata: altrove le stesse righe hanno un altro
 # significato.
@@ -84,9 +95,12 @@ Le tabelle qui sopra citano anche figure Guardrails che questo modulo non instal
 Qui sono installate: {installed}.
 
 Quando il tema appartiene a una figura assente, il confine resta valido: **dichiara che
-il tema esce dal perimetro, nomina la competenza che servirebbe e prosegui su ciò che
-resta.** Non improvvisare il parere della figura mancante e non fermare il lavoro. Il
-modulo che la contiene si installa a parte; il bundle completo `grl` le contiene tutte.
+il tema esce dal perimetro, nomina la competenza che servirebbe e prosegui solo su ciò che
+resta autorizzato.** Registra `missing_capability` e `handoff_status: pending`; non
+improvvisare il parere mancante, non dichiarare completato il passaggio e non superare un
+gate che dipende da quella capacità. Il lavoro indipendente può continuare, il gate dipendente
+resta `blocked` o `EVIDENZA_INSUFFICIENTE`. Il modulo che la contiene si installa a parte; il
+bundle completo `grl` le contiene tutte.
 """
 
 
@@ -121,7 +135,14 @@ def tracked_files(source_root: Path, relative_dir: str) -> list[Path]:
     )
     if result.returncode != 0:
         raise BuildError(f"git ls-files {relative_dir}: {result.stderr.strip()}")
-    return [Path(p) for p in result.stdout.split("\0") if p]
+    paths = [Path(p) for p in result.stdout.split("\0") if p]
+    prefix = relative_dir.rstrip("/") + "/"
+    for value in sorted(SOURCE_AUXILIARY_FILES):
+        if value.startswith(prefix):
+            path = Path(value)
+            if path.is_file() and path not in paths:
+                paths.append(path)
+    return paths
 
 
 # --------------------------------------------------------------------------- #

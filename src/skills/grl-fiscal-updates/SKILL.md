@@ -18,8 +18,9 @@ visibile di una pagina — passa da un controllo di prosa prima della consegna.
   formule, dati strutturati e righe di memoria. Nei file HTML/Markdown revisiona solo la prosa
   leggibile, non markup e struttura.
 - La review è interna: consegna il testo già migliorato, non la tabella del revisore. Se la skill
-  non è installata, esegui un controllo manuale equivalente e prosegui; non installare Freya per
-  questo passaggio.
+  non è esposta, esegui un controllo manuale equivalente, registra `prose_review: manual` e
+  prosegui; non dichiarare una chiamata `bmad-review` che non è avvenuta e non installare Freya
+  per questo passaggio.
 
 # grl-fiscal-updates 🧾
 
@@ -40,14 +41,59 @@ mai la verifica live con una risposta ricordata.
 - `{project-root}` è la directory del progetto.
 - `{date}` è la data corrente risolta dalla configurazione BMad.
 
+## Capability preflight e fallback
+
+Prima di chiamare una skill o un tool, verifica le capability realmente esposte dal runtime e
+registra nel run almeno:
+
+```yaml
+capability_preflight:
+  bmad_deep_recon: available | unavailable | error
+  bmad_review: available | unavailable | error
+  web_live: available | unavailable | error
+  primary_sources: available | partial | blocked
+```
+
+Il nome di una skill scritto in questo documento, in un prompt o in una guida non dimostra che la
+capability sia esposta. Se il runtime non rende verificabile la sua presenza, marcala
+`unavailable`, registra `missing_capability` con nome, motivo e prossimo passo, e non tentare la
+chiamata. Invoca `bmad-deep-recon` o `bmad-review` solo quando il preflight li marca `available`.
+Se una chiamata esposta fallisce, registra `error` e non scrivere nel report che il passaggio è
+stato completato. Un fallback deve dichiarare il proprio modo (`live_manual`,
+`materials_only` o `manual_review`); non deve creare tool call, transcript o esiti attribuiti a una
+skill non disponibile.
+
+Applica questa sequenza:
+
+1. Se `bmad_deep_recon=available` e `web_live=available`, invocalo direttamente con `type=domain`
+   e conserva la risposta effettiva. Se è `unavailable` o `error` e `web_live=available`, usa
+   `live_manual`: stesso brief, stessa mappa delle fonti, ricerca nelle fonti ufficiali,
+   query/filtri, URL, timestamp e stato `covered`, `empty`, `partial` o `blocked`. Se
+   `web_live=unavailable|error`, imposta `collection_mode: materials_only`, usa solo i materiali
+   forniti e lascia `coverage_status: blocked`; non produrre un verdetto corrente.
+2. Se `bmad_review=available`, esegui le due invocazioni separate descritte sotto e registra le
+   chiamate reali. Se è `unavailable` o `error`, registra `missing_capability: bmad-review` e, se
+   il web e le fonti decisive sono accessibili, esegui due gate `manual_review` distinti marcati
+   `fallback_review`: il primo su evidenza/vigenza, il secondo da zero su completezza e fonti
+   indipendenti. Registra per ciascuno checklist, URL o versione controllata, timestamp, correzioni
+   ed esito; il secondo controllo non può contare lo stesso URL come verifica indipendente. Se il
+   web o una fonte decisiva mancano, registra il gate come `blocked` e conserva i finding in
+   `unverified`, `disputed` o `blocked`.
+3. Fissa `as_of` solo dopo un secondo gate effettivamente concluso e la sweep finale delle URL
+   decisive. Se il run è `partial` o `blocked`, lascia `as_of` non fissato (`pending` nel riepilogo)
+   e dichiara cosa manca; una data di esecuzione non trasforma materiali vecchi in verifica corrente.
+
 ## On Activation
 
 Registra `run_started_at`; fissa `as_of` solo dopo il secondo gate e la sweep conclusiva. Leggi il
 report eventuale dello stesso argomento e
 instrada la richiesta:
-nuova finestra → raccolta; stessa finestra già presente → `Refresh` di Deep Recon; sola richiesta
-di controllo → i due gate `bmad-review` sul report esistente. Se mancano territorio o periodo
-esplicito, applica i default qui sotto e chiedi solo il dato economico che cambia il verdetto.
+nuova finestra → raccolta; stessa finestra già presente → refresh tramite la capability esposta
+(`bmad-deep-recon` se disponibile, altrimenti `live_manual`); sola richiesta di controllo → i due
+gate disponibili (`bmad-review` se esposto, altrimenti `manual_review`) sul report esistente. Se
+il preflight segnala web o fonti decisive mancanti, conserva `blocked` invece di simulare il
+refresh o i gate. Se mancano territorio o periodo esplicito, applica i default qui sotto e chiedi
+solo il dato economico che cambia il verdetto.
 
 ## Periodo e dati minimi
 
@@ -85,23 +131,32 @@ indipendente e due gate superati. Altrimenti usa `supersession_risk`, `stale`, `
 
 ## Raccolta live
 
-Carica `references/fonti-live.md` e `references/assurance-controls.md` e invoca
-**`bmad-deep-recon` direttamente**, con tipo `domain`.
-Non usare `bmad-domain-research`: è deprecato e inoltra alla stessa skill. Nel brief indica
-periodo, territorio, temi fiscali e questo obiettivo: costruire un registro corrente di norme,
-circolari, risoluzioni, bollettini, emendamenti e misure agevolative, potando le dimensioni del
-pack domain a “regole del gioco” e “cambiamenti pendenti”.
+Carica `references/fonti-live.md` e `references/assurance-controls.md`, poi applica il capability
+preflight. Con `bmad_deep_recon=available` invoca **`bmad-deep-recon` direttamente**, con tipo
+`domain`. Non usare `bmad-domain-research`: è deprecato e inoltra alla stessa skill. Nel brief
+indica periodo, territorio, temi fiscali e questo obiettivo: costruire un registro corrente di
+norme, circolari, risoluzioni, bollettini, emendamenti e misure agevolative, potando le dimensioni
+del pack domain a “regole del gioco” e “cambiamenti pendenti”.
 
-Usa il preset `standard`, `validation = max`, ricerca web live e `red_team = on`: per materia
-fiscale e incentivi il controllo massimo è il default, anche se aumenta tempi e consumo. Gli
-assistenti possono dividersi per Agenzia/ente, previdenza e incentivi, ma il lead deve eliminare
-duplicati e comunicati che rinviano allo stesso atto e compilare la matrice di copertura.
+Con `bmad_deep_recon=unavailable|error` non tentare una chiamata inventata: se `web_live=available`
+esegui il fallback `live_manual` con lo stesso brief e la stessa mappa delle fonti. Una ricerca
+manuale è verificabile solo se conserva query/filtri, URL ufficiali aperte, ora di ricerca e stato
+di ogni fonte; non chiamarla Deep Recon. Se il web non è disponibile, passa a `materials_only`,
+separa i materiali forniti dalla verifica mancante e lascia il report `blocked`.
+
+Se `bmad_deep_recon=available`, usa il preset `standard`, `validation = max`, ricerca web live e
+`red_team = on`: per materia fiscale e incentivi il controllo massimo è il default, anche se
+aumenta tempi e consumo. Nel fallback `live_manual` applica la stessa checklist e severità, ma non
+attribuire a Deep Recon preset, assistenti o risultati che non sono stati eseguiti. Gli assistenti
+possono dividersi per Agenzia/ente, previdenza e incentivi, ma il lead deve eliminare duplicati e
+comunicati che rinviano allo stesso atto e compilare la matrice di copertura.
 
 Ogni finding deve avere fonte primaria aperta, ente, atto o misura, data, stato, destinatari,
 condizioni economiche e URL diretto, oltre alla versione/lineage e alla data di ultima verifica.
 Per un incentivo controlla almeno beneficiari, territorio,
 ATECO o attività, spese, intensità, cumulo/de minimis, risorse, apertura, chiusura, erogazione e
-rendicontazione. La verifica interna di Deep Recon non sostituisce i due gate `bmad-review`.
+rendicontazione. La verifica interna della raccolta, sia `deep_recon` sia `live_manual`, non
+sostituisce i due gate `bmad_review` o `manual_review`.
 Registra anche le categorie di fonti consultate senza risultato e usa richiami inline che
 risolvono a una riga del source appendix: un elenco vuoto non dimostra che non esistano novità.
 Dopo il secondo gate, riapri le URL decisive e registra `final_accessed_at` prima di `as_of`;
@@ -109,8 +164,8 @@ altrimenti il finding non è corrente-confermato.
 
 ## Doppio gate bmad-review
 
-Quando report e source appendix sono completi, esegui due invocazioni separate di
-**`bmad-review`**, in contesto fresco:
+Quando report e source appendix sono completi e `bmad_review=available`, esegui due invocazioni
+separate di **`bmad-review`**, in contesto fresco:
 
 1. **Gate evidenza e vigenza.** Lenti `adversarial,edge-case-hunter`: aprire ogni URL, verificare
    fonte primaria, date, versione dell'atto, stato della misura, lineage di modifiche/sostituzioni/
@@ -123,17 +178,26 @@ Quando report e source appendix sono completi, esegui due invocazioni separate d
    richiesto, proroghe, riaperture, esaurimento risorse e che ogni stato “confermato” rispetti il
    reference.
 
+Se `bmad_review=unavailable|error`, sostituisci le due chiamate con due gate `manual_review`:
+
+1. **Gate manuale evidenza e vigenza.** Ripeti il controllo di URL, fonte primaria, date, versione,
+   stato, lineage e condizioni economiche con la checklist del primo gate.
+2. **Gate manuale indipendente di completezza.** Riparti dai finding decisivi e dalla source matrix,
+   cerca un editore diverso o una versione ufficiale successiva, registra le correzioni e non usare
+   il verdetto del primo gate come prova. Lo stesso URL non conta due volte.
+
 Un finding decisivo senza fonte primaria, senza seconda verifica indipendente, con lineage
 incompleta, matrice `partial`/`blocked`, gate discordanti, pagina non accessibile o
-`bmad-review` non disponibile resta `unverified`/`disputed`/`blocked`; il workflow lo dichiara con
-il passaggio mancante. Non si risolve scegliendo la fonte più ottimistica. Se una fonte
+gate manuale non eseguibile resta `unverified`/`disputed`/`blocked`; il workflow lo dichiara con il
+passaggio mancante. Non si risolve scegliendo la fonte più ottimistica. Se una fonte
 professionale (CNDCEC/FNC, Eutekne, IPSOA o Contributi Europa) anticipa un dato, usala come lead e
 poi sostituiscila con l'atto dell'ente competente. La data di accesso non prova da sola che la
 pagina sia la versione più recente.
 
 ## Output
 
-Conserva il report prodotto da Deep Recon nella sua cartella e restituisci un riepilogo breve.
+Conserva nella sua cartella il report prodotto dal modo effettivo di raccolta (`deep_recon`,
+`live_manual` o `materials_only`) e restituisci un riepilogo breve.
 Includi:
 
 - periodo, territorio e criteri di ricerca;
@@ -146,7 +210,10 @@ Includi:
 - stato `vigente`, `efficace`, `aperto`, `chiuso`, `prorogato`, `esaurito`, `proposto`,
   `unverified` o `disputed`;
 - risultati esclusi o fuori periodo;
-- registro dei due gate `bmad-review` e delle correzioni;
+- `capability_preflight`, modo effettivo di raccolta (`deep_recon`, `live_manual` o
+  `materials_only`) e modo effettivo dei gate (`bmad_review`, `manual_review` o `blocked`);
+- registro dei due gate `bmad-review` oppure dei due gate `manual_review`, senza attribuire a un
+  tool non esposto passaggi non eseguiti, e delle correzioni;
 - fonti con ente, URL, data di pubblicazione, data di accesso, ruolo della fonte (primaria o
   indipendente) e confidenza;
 - source matrix con fonti controllate senza risultato e query/filtri usati;
@@ -154,7 +221,6 @@ Includi:
 
 Invoca Marta (`grl-agent-fiscal`) per tradurre i finding confermati in impatto pratico o
 pre-screening: non può completare dati mancanti, promettere la concessione di un incentivo o
-firmare una dichiarazione. Se Deep Recon non è disponibile, usa una ricerca web live diretta con
-lo stesso brief e la stessa mappa delle fonti; se manca anche il web, separa chiaramente ciò che è
-nei materiali forniti da ciò che richiede verifica. Non dichiarare attuali aliquote, soglie o
+firmare una dichiarazione. Applica il fallback definito nel capability preflight senza attribuire
+a Deep Recon o a `bmad-review` passaggi non eseguiti. Non dichiarare attuali aliquote, soglie o
 scadenze a memoria.

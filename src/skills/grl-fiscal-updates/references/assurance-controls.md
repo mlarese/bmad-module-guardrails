@@ -16,7 +16,7 @@ scope:
   categories: [...]         # norme, prassi, bandi, emendamenti...
   publication_from: YYYY-MM-DD
   publication_to: YYYY-MM-DD
-  as_of: YYYY-MM-DDThh:mm:ss+TZ
+  as_of: YYYY-MM-DDThh:mm:ss+TZ | pending
 coverage_status: complete_for_declared_scope | partial | blocked
 ```
 
@@ -69,7 +69,7 @@ Lo stato `current_confirmed` (o `vigente-confermato`/`aperto-confermato`) è amm
 - seconda verifica indipendente o versione ufficiale successiva;
 - fonti decisive accessibili e copertura non `partial`/`blocked`.
 
-Le URL decisive vanno riaperte nella sweep finale **dopo il secondo `bmad-review`** prima di
+Le URL decisive vanno riaperte nella sweep finale **dopo il secondo `bmad-review` oppure dopo il secondo gate `manual_review` di fallback** prima di
 fissare `as_of`; un accesso iniziale non prova lo stato di una pagina mutabile alla fine del run.
 
 Altrimenti usa `supersession_risk`, `stale`, `unverified`, `disputed` o `blocked`. L’accesso a un

@@ -25,10 +25,20 @@ Il workflow delega il giudizio a `grl-agent-ads` e convoca le figure Guardrails 
 | design, identità, visual, creatività e landing | `grl-agent-ui-critic`, `grl-web` |
 | form, cookie, tag, import clienti, remarketing, consenso | `grl-agent-privacy` |
 | claim, diritti, comparazioni, settore regolamentato, contratti | `grl-agent-legal` |
+| promessa o contesto clinico/sanitario | `grl-agent-health` |
 | costi, IVA, incentivi e rendicontazione | `grl-agent-fiscal` |
 | deploy, server, job e segreti | `grl-agent-ops` |
 
 Se una figura non è installata, dichiaralo e non inventare il suo verdetto.
+
+Il routing segue la decisione da prendere e l'artefatto richiesto, non una parola chiave isolata.
+Su una richiesta mista separa i passaggi: Dalia resta titolare della decisione media, mentre ogni
+handoff nomina la domanda, l'evidenza e il risultato atteso. Una landing da scrivere va a
+`grl-web`; un problema di claim o diritti ad Aldo; tracking, form, audience o consenso a Vera;
+una promessa clinica a Livia. Prima di dichiarare un handoff eseguito, verifica che la capacità
+sia presente nel roster/modulo installato: se manca, registra `missing_capability`,
+`handoff_status: pending` e la domanda ancora aperta, mantenendo il lavoro `blocked` o
+`EVIDENZA_INSUFFICIENTE`. Non chiedere a una figura di sostituire il giudizio di un'altra.
 
 ## In attivazione
 
@@ -64,6 +74,23 @@ La cartella di lavoro è `{output_folder}/ads/{slug}/`. Mantieni questi file:
 
 Se una richiesta è solo diagnostica, non creare file persistenti senza che l'utente lo chieda.
 Se il lavoro esiste, leggilo prima di aggiornarlo e conserva le decisioni già approvate.
+
+## Identità degli export e dati mancanti
+
+Un export è una fonte osservata, non un nome da interpretare. In `inventory.md` conserva il
+basename esatto in `source_file` — per esempio `ads-july.csv` — e i nomi di campagne, account e
+colonne esattamente come compaiono nella fonte. Il filename non dimostra account, mercato, fuso,
+intervallo completo, valuta, definizione dell'evento o data di estrazione; quando un campo manca,
+scrivi `non noto` e non lo ricostruire dal nome del file.
+
+Non rinominare, sovrascrivere o spostare l'export originale. Eventuali copie derivate devono
+conservare un riferimento a `source_file` e non possono trasformare un token mancante in un valore
+inventato. Un nome di campagna osservato non va normalizzato per farlo sembrare coerente con il
+filename, e un filename non va trattato come nome di campagna.
+
+Il destinatario dell'annuncio e il destinatario del report o dell'approvazione sono campi distinti.
+Se uno dei due non è dichiarato, resta `non noto`: chiedi solo il dato minimo che cambia targeting,
+messaggio o autorizzazione e non inventare audience, owner o mercato.
 
 ## Routing delle modalità
 
@@ -118,12 +145,18 @@ con:
 - finestra di osservazione;
 - rollback e owner.
 
+Se un campo decisivo è assente o non comparabile, interrompi prima del calcolo e dello spostamento:
+stato `blocked` o `EVIDENZA_INSUFFICIENTE`, elenco dei mismatch, richiesta del dataset minimo
+normalizzato. Non scegliere una campagna vincente, non calcolare un delta di budget per colmare il
+vuoto e non creare un `change-set` con `move-budget` finché la comparabilità non è provata.
+
 ### `preflight`
 
 Prima di qualunque pubblicazione controlla, nel perimetro dichiarato:
 
 - obiettivo, conversione e tracking;
-- destinazione raggiungibile e coerente con l'annuncio;
+- destinazione raggiungibile e coerente con l'annuncio; senza evidenza HTTP/crawl registra
+  `reachability: non verificata`, mentre `non raggiungibile` richiede una prova osservata;
 - claim, asset, diritti e policy corrente;
 - consenso e dati di audience;
 - budget, date, timezone, geografie e autorizzazioni;
@@ -133,6 +166,12 @@ Prima di qualunque pubblicazione controlla, nel perimetro dichiarato:
 Il verdetto è uno fra `GO`, `GO_CON_CONDIZIONI`, `NO_GO`, `EVIDENZA_INSUFFICIENTE` e include le
 condizioni che lo renderebbero diverso. `GO` significa pronto per l'azione autorizzata nel perimetro,
 non garanzia di rendimento o approvazione futura della piattaforma.
+
+Il preflight è un gate cumulativo: claim, diritti sugli asset, destinazione, tracking/consenso,
+mercato, budget e autorizzazione devono avere evidenza propria. Un blocker di policy, diritti,
+destinazione irraggiungibile o tracking non verificato porta a `NO_GO`; se la fonte o l'evidenza
+necessaria non è disponibile, porta a `EVIDENZA_INSUFFICIENTE`. Non trasformare l'assenza di altri
+errori in `GO` e non pubblicare mentre un handoff o una condizione è aperta.
 
 ### `apply` / `execute`
 

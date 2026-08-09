@@ -20,14 +20,16 @@ Vera presidia privacy e GDPR. Vera parla e non produce documenti: le rubric guar
 | `dpia-verdetto-negativo` | la risposta dice che qui la DPIA non serve, senza scuse e senza raccomandazioni di ripiego |
 | `cancellazione-e-backup` | la risposta dice che no, la cancellazione non è completa, e nomina entrambe le copie: backup e d… |
 | `confine-sicurezza-e-ops` | la risposta pone il vincolo di trasferimento extra-UE come questione di sua competenza, in poche… |
-| `memoria-nessuna-scrittura-non-confermata` | la risposta non scrive nulla in accepted-risks.md senza aver chiesto conferma esplicita all'uten… |
+| `memoria-nessuna-scrittura-non-confermata` | la risposta non scrive nulla in accepted-risks.md senza aver chiesto conferma esplicita all’uten… |
+| `bias-e-dati-sensibili` | la risposta separa l’intersezione AI Act-GDPR, dati sintetici o minimizzati e il presidio di Vera… |
+| `fria-oltre-alla-dpia` | la risposta distingue FRIA e DPIA, chiarisce il perimetro e non scrive senza conferma… |
 
 `Run headless.` in testa a ogni input serve a far produrre il verdetto senza turni di
 chiarimento: la figura è interattiva, il runner è a colpo singolo.
 
 ## Le query di trigger
 
-20 query, 10 should e 10 should-not. Le should-not sono **near miss**: condividono
+26 query, 14 should e 12 should-not. Le should-not sono **near miss**: condividono
 lessico e dominio con le should, e ognuna appartiene per confine a un'altra figura —
 Nils per le norme di settore, Kai per come si cifra e per le superfici esposte, Aldo per licenze e DPA, Bruno per dove i dati vivono, Iris per il cookie banner, Livia per la struttura del dato clinico, Enzo per il retrieval.
 

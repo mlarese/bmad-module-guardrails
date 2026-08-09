@@ -1,6 +1,6 @@
 ---
 name: grl-mdsw
-description: Verifica se una funzione software ha una finalità medica su un singolo paziente, distingue archiviazione e visualizzazione da interpretazione clinica e indica se rientra nel MDR e in quale classe (I, IIa, IIb, III). Usa quando l'utente chiede "il mio software è un dispositivo medico?", parla di classificazione MDR, Regola 11, marcatura CE del software, MDSW, software as a medical device, oppure invoca "grl-mdsw".
+description: Verifica se una funzione software ha una finalità medica su un singolo paziente, distingue archiviazione e visualizzazione da interpretazione clinica e indica se rientra nel MDR e in quale classe (I, IIa, IIb, III). Usa quando l'utente chiede "il mio software è un dispositivo medico?", parla di classificazione MDR, Regola 11, marcatura CE del software, MDSW, software as a medical device, oppure di un software che calcola o suggerisce una dose o posologia per un singolo paziente, anche se il medico decide comunque, oppure invoca "grl-mdsw".
 ---
 
 ## Revisione editoriale finale
@@ -30,6 +30,24 @@ L'esito è **un verdetto in conversazione**: fuori perimetro · dispositivo medi
 **Non produci documenti.** Niente fascicolo tecnico, niente analisi di rischio, niente dichiarazione di conformità: è la linea del modulo, si parla e non si compila. L'unica cosa che resta su disco è una riga di memoria condivisa.
 
 «Questo software non è un dispositivo medico» è un esito legittimo e frequente, e si dice con la stessa sicurezza di una classe III.
+
+## Routing
+
+Carica questo percorso quando la richiesta collega una funzione software alla qualificazione MDR,
+anche se usa un linguaggio operativo:
+
+- marcatura CE/CE, software medicale, Regola 11 o classe MDR;
+- calcolo, determinazione, raccomandazione o suggerimento di dose/posologia per un singolo
+  paziente, anche se il medico mantiene la decisione finale.
+
+Il secondo segnale conta perché la dose proposta è informazione usata per una decisione
+terapeutica. La parola «dose» da sola non basta: il solo modello di farmaco, dose e unità nella
+cartella resta materia di `grl-agent-health`.
+
+Esempi di routing:
+
+- «Il software calcola la dose e deve avere la marcatura CE?» → `grl-mdsw`.
+- «Come modello farmaco, dose e unità nella cartella?» → `grl-agent-health`.
 
 ## Convenzioni
 
@@ -140,7 +158,7 @@ La qualificazione appartiene a **Nils** (`grl-agent-compliance`): questo workflo
 | --------- | ---------------- |
 | Il contenuto clinico: cosa rappresenta il dato, chi lo usa, dove il software viene aggirato | **Livia** (`grl-agent-health`) |
 | Dati sanitari come categoria particolare, base giuridica, informativa, conservazione | **Vera** (`grl-agent-privacy`) |
-| Il software usa un modello di AI: incrocio AI Act × MDR, obblighi che si sommano | **Nils** — resta materia di conformità |
+| Il software usa un modello di AI: incrocio AI Act × MDR, obblighi che si sommano | **Aldo** (`grl-agent-legal`) per l'AI Act; Nils resta sul perimetro MDR e di conformità |
 | Impianto tecnico del componente AI: modello, dati, eval, orchestrazione | **Enzo** (`grl-agent-ai`) |
 
 Fuori da queste, non aprire altri temi: qui si qualifica e si classifica.

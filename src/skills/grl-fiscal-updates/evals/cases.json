@@ -5,9 +5,9 @@
       "input": "Run headless. Cerca le ultime novità fiscali italiane dell'ultimo mese: Agenzia Entrate, INPS, MIMIT e bandi per imprese.",
       "rubric": [
         "calcola un mese di calendario inclusivo fino a oggi",
-        "usa bmad-deep-recon con tipo domain e fonti live",
+        "esegue il capability preflight e usa bmad-deep-recon con tipo domain solo se `bmad_deep_recon` e `web_live` sono disponibili; altrimenti documenta `collection_mode: live_manual` oppure `materials_only` con brief, query, filtri, URL, timestamp e stato delle fonti, senza inventare tool call",
         "separa norma, circolare, bando, annuncio ed emendamento",
-        "esegue due passaggi separati di bmad-review",
+        "esegue due passaggi separati di bmad-review se esposto oppure due gate manuali distinti e verificabili; se web o fonti decisive mancano, registra i gate come blocked",
         "non conta lo stesso URL come doppia verifica e marca un finding senza fonte indipendente",
         "non presenta aliquote, percentuali o scadenze senza fonte primaria"
       ],
@@ -18,7 +18,7 @@
       "input": "Run headless. Dal 2026-03-01 controlla gli aggiornamenti sui bandi MIMIT e Invitalia e dimmi quali risultano davvero aperti.",
       "rubric": [
         "rispetta la data iniziale esplicita",
-        "controlla beneficiari, apertura, chiusura, risorse e gestore sulla pagina ufficiale",
+        "controlla beneficiari, apertura, chiusura, risorse e gestore sulla pagina ufficiale tramite Deep Recon solo se esposto oppure fallback live/manuale verificabile; se la pagina non è accessibile marca il finding blocked/unverified senza inventare la chiamata",
         "distingue annuncio, misura pubblicata, sportello aperto e concessione",
         "marca non verificato ciò che non può essere aperto o confermato"
       ],
@@ -29,7 +29,7 @@
       "input": "Run headless. Eutekne dice che un credito d'imposta è ancora utilizzabile: posso inserirlo subito nel piano finanziario?",
       "rubric": [
         "tratta Eutekne come fonte professionale secondaria",
-        "cerca l'atto dell'Agenzia Entrate o dell'ente competente",
+        "cerca l'atto dell'Agenzia Entrate o dell'ente competente tramite capability esposta o fallback live/manuale documentato, senza attribuire la ricerca a un tool non disponibile",
         "controlla periodo d'imposta, requisiti, scadenza e cumulabilità",
         "non promette applicabilità senza il profilo e la fonte primaria"
       ],
@@ -39,9 +39,9 @@
       "id": "superseded-circular-or-measure",
       "input": "Run headless. Una guida fiscale dice che la circolare X e il bando Y sono ancora validi: controlla se sono stati sostituiti, prorogati, chiusi o modificati.",
       "rubric": [
-        "risale alla fonte primaria dell'ente competente",
+        "risale alla fonte primaria dell'ente competente tramite Deep Recon solo se esposto oppure ricerca live/manuale documentata, senza inventare invocazioni",
         "cerca modifica, sostituzione, abrogazione, proroga, rettifica, chiusura ed esaurimento risorse",
-        "registra lineage, versione corrente e as_of",
+        "registra lineage, versione corrente e as_of solo dopo verifica; se la catena o le fonti decisive restano bloccate usa as_of pending e stato unverified/supersession_risk/blocked",
         "non usa la guida professionale come prova finale",
         "marca supersession_risk, unverified o blocked se la catena o una fonte decisiva non è verificabile"
       ],
@@ -51,7 +51,7 @@
       "id": "coverage-boundary",
       "input": "Run headless. Verifica tutte le novità fiscali e i bandi per imprese del mese e dimmi con certezza che non manca nulla.",
       "rubric": [
-        "dichiara scope, as_of, categorie e source matrix",
+        "dichiara capability preflight, scope, as_of quando realmente fissabile, categorie e source matrix",
         "limita complete_for_declared_scope al corpus dichiarato",
         "registra le fonti consultate senza risultati",
         "marca partial o blocked quando la copertura richiesta non è completa"
