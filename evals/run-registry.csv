@@ -7,3 +7,4 @@ grl-bug-finder,2026-08-10,baseline,pass,4/4 con la skill contro 2/4 senza,subage
 grl-profile,2026-08-10,trigger,pass,22/22 query su due router indipendenti,subagent della sessione di chat,scratchpad eval/grl-profile/router-a.json e router-b.json
 grl-profile,2026-08-10,baseline,pass,6/6 con la skill contro 2/6 senza,subagent della sessione di chat,scratchpad eval/grl-profile/judge-baseline-prima-profilazione-dai-fatti.json
 grl-board,2026-08-10,trigger,pass,20/20 query su due router indipendenti,subagent della sessione di chat,scratchpad eval/grl-board/router-a.json e router-b.json
+grl-profile,2026-08-10,quality,pass,"33/33 criteri su sei casi, dopo tre correzioni alla skill",subagent della sessione di chat,scratchpad eval/grl-profile/judge-*.json
