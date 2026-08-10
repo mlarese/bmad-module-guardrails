@@ -293,6 +293,8 @@ def _extract_fps(
         f"fps={fps:g},{_scale_filter(width)}",
         "-frames:v",
         str(max_frames),
+        "-start_number",
+        "0",
         *_quality_options(image_format, quality),
         str(pattern),
     ]
@@ -396,6 +398,7 @@ def main(argv: list[str] | None = None) -> int:
                 verbose=args.verbose,
             )
             timestamps = [min(index / args.fps, info["duration_seconds"]) for index in range(len(frame_paths))]
+            sampling["actual_count"] = len(frame_paths)
 
         if not frame_paths:
             raise UserError("ffmpeg non ha prodotto frame")
