@@ -105,3 +105,22 @@ Il lavoro finisce con i commit e, se richiesto, con il push del branch.
 Per gli eval runtime del modulo usa il runtime della chat e i suoi subagent, che
 ereditano il modello corrente. Non avviare OpenCode, Claude CLI, Laguna o altri
 harness esterni e non sostituire il modello corrente con un fallback.
+
+### Ogni run finisce nel registro
+
+I report delle run restano fuori dal repository: `.gitignore` esclude `**/eval-runs/` di
+proposito. L'esito però va conservato, altrimenti ogni sessione riparte dal dubbio su cosa
+sia già stato validato.
+
+**Regola: chiusa una run, registrala nello stesso turno.** Una riga per tipo — `quality`,
+`trigger`, `baseline` — con data, esito, conteggio e dove sta l'evidenza.
+
+```bash
+python3 tools/eval_registry.py                 # copertura delle skill
+python3 tools/eval_registry.py --scoperte      # solo quelle mai validate
+python3 tools/eval_registry.py --add grl-web --data 2026-08-10 \
+    --tipo quality --esito pass --dettaglio "6/6 casi" --evidenza "<percorso del report>"
+```
+
+Il registro sta in `evals/run-registry.csv` ed è versionato. Non contiene i report: li indicizza.
+Una riga senza data o senza evidenza fa fallire i test.

@@ -1,0 +1,6 @@
+skill,data,tipo,esito,dettaglio,runtime,evidenza
+grl-agent-product-config,2026-08-10,quality,pass,7/7 casi dopo quattro round,subagent della sessione di chat,skills/reports/eval-runs/20260810-104445-grl-agent-product-config/summary.json
+grl-agent-product-config,2026-08-10,trigger,pass,27/27 query su due router indipendenti,subagent della sessione di chat,skills/reports/eval-runs/20260810-104445-grl-agent-product-config/summary.json
+grl-bug-finder,2026-08-10,quality,pass,17/17 criteri dopo due correzioni alla skill,subagent della sessione di chat,memlog della stanza
+grl-bug-finder,2026-08-10,trigger,pass,18/18 query su due router indipendenti,subagent della sessione di chat,memlog della stanza
+grl-bug-finder,2026-08-10,baseline,pass,4/4 con la skill contro 2/4 senza,subagent della sessione di chat,memlog della stanza
