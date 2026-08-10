@@ -1,0 +1,40 @@
+# Convertito da un export dell'ERP. Nessuna revisione umana: mancano
+# `reviewed_by` e `reviewed_on`.
+version: 1
+
+line:
+  code: infissi-pvc
+  name: Serramenti in PVC
+  as_of: 2026-08-01
+  source: "export anagrafica articoli, gestionale, 2026-08-01"
+
+options:
+  - code: serie
+    name: Serie del profilo
+    type: enum
+    required: true
+    impact: blocking
+    values:
+      - code: s70
+      - code: s82
+
+  - code: larghezza
+    name: Larghezza foro
+    type: number
+    unit: mm
+    required: true
+    impact: blocking
+    min: 400
+    max: 2400
+
+  - code: colore_interno
+    name: Colore interno
+    type: enum
+    required: false
+    impact: pricing
+    values:
+      - code: bianco
+      - code: noce
+      - code: ral
+
+rules: []

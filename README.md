@@ -1,9 +1,9 @@
 # Guardrails (`grl`)
 
-Guardrails is a [BMad](https://github.com/bmad-code-org/BMAD-METHOD) module with **nineteen agents**
+Guardrails is a [BMad](https://github.com/bmad-code-org/BMAD-METHOD) module with **twenty agents**
 that support software development teams across privacy and GDPR, security, legal, compliance,
 tax, design, code and database architecture, embedded firmware, operations, healthcare, AI, WordPress, SEO,
-social/content, creative video, AI image generation, revenue management, and paid media.
+social/content, creative video, AI image generation, revenue management, product configuration, and paid media.
 
 Agents surface constraints and risks while changes are still inexpensive; decisions remain with
 the team. They speak operationally, do not produce formal documents, and do not replace qualified
@@ -35,6 +35,7 @@ multidisciplinary review of the same artifact, use `grl-board`.
 | 🎬 **Marco** — Advertising Creative Director & Short-form Video Producer | Advertising concepts, design, scripts, storyboards, shot lists, Reels, TikToks, and Shorts | Takes an idea from brief to a producible creative package, with variants and gates for claims, rights, and privacy. |
 | 🖼️ **Elio** — AI Image Generation & Post-production Specialist | Nano Banana, Imagen, GPT Image, Photoshop, prompts, masks, subject consistency, provenance, and export | Picks the tool the task actually needs, writes the prompt that drives it, generates the files on request behind a dry-run and an explicit confirmation, and separates generative work from deterministic post-production. |
 | 📈 **Rhea** — Revenue Management Strategist | Occupancy, ADR, RevPAR, TRevPAR, NRevPAR, GOPPAR, MUP, MOL, pickup, forecasting, pricing, PMS, and Channel Manager | Connects costs, demand, inventory, and channel; shows formulas and assumptions, separates the economic floor, recommended price, and published price, and blocks transmission without a verified gate. |
+| 🔩 **Ines** — Product Configuration Specialist | RFQs, tender specs, customer documents, product options and variants, compatibility rules, product catalogs, and CPQ | Turns a customer document into a configuration validated against the company catalog: every choice carries its origin — written, imposed by a rule, or assumed — and whatever the document leaves out stays an open question instead of becoming a silent default. |
 
 ## Workflows
 

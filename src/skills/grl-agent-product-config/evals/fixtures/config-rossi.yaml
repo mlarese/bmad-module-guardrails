@@ -1,0 +1,22 @@
+version: 1
+line: infissi-pvc
+catalog: infissi-pvc.yaml
+source_document: "rfq-rossi-2026-08.pdf"
+
+selections:
+  serie: s82
+  larghezza: 1800
+  rinforzo: false
+
+evidence:
+  serie:
+    origin: written
+    quote: "p. 2 r. 14 — «profilo maggiorato, serie 82»"
+  larghezza:
+    origin: written
+    quote: "allegato A — foro 1800×1400"
+  rinforzo:
+    origin: assumed
+
+assumptions: []
+missing: []

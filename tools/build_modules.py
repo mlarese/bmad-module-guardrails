@@ -526,13 +526,13 @@ def filter_help_csv(
 # vetrina dipenda dalla lingua del catalogo interno.
 README_MODULE_COPY = {
     "grg": "A focused BMad module for privacy, legal and licensing, regulatory compliance, and live legal updates. It separates actual obligations from common practice and identifies rules that do not apply.",
-    "gre": "A focused BMad module for code architecture, database architecture and design, embedded firmware, application security, infrastructure and operations, and AI application design. Every recommendation includes the cost of ignoring it.",
+    "gre": "A focused BMad module for code architecture, database architecture and design, embedded firmware, application security, infrastructure and operations, AI application design, and product configuration from customer documents. Every recommendation includes the cost of ignoring it.",
     "grf": "A focused BMad module for tax, accounting operations, grants, incentives, and live fiscal updates. It checks requirements, deadlines, eligible expenses, and reporting against primary sources.",
     "grh": "A focused BMad module for clinical data, healthcare interoperability, patient safety, and medical-device qualification. It keeps real clinical workflows and MDR scope in view.",
     "grw": "A focused BMad module for visual quality, search, web delivery, paid media, organic social content, creative video, and AI image generation. It guards against generic pages, unsupported ranking promises, unplanned posts, and unmeasured spend.",
     "gpm": "A focused BMad module for paid media, Google Ads, tracking, consent, social content, creative production, and AI image generation. It keeps campaigns and assets behind evidence, approval, and rollback gates.",
     "grv": "A focused BMad module for hotel revenue management, pricing, forecasting, profit, and PMS/Channel Manager integrations. It keeps external publication behind explicit gates, dry-runs, approval, and rollback.",
-    "gau": "A focused BMad module for routing repeatable processes across software, databases, legal, tax, design, architecture, healthcare, web, paid media, social content, creative video, AI image generation, and revenue management.",
+    "gau": "A focused BMad module for routing repeatable processes across software, databases, legal, tax, design, architecture, healthcare, web, paid media, social content, creative video, AI image generation, revenue management, and product configuration.",
     "gwp": "A focused BMad module for component-based WordPress architecture and controlled delivery through the release gate. It covers Gutenberg, Elementor, ACF, templates, the Media Library, and migration work.",
 }
 
@@ -560,6 +560,7 @@ README_AGENT_FOCUS = {
     "grl-agent-creative": "Advertising concepts, design, scripts, storyboards, shot lists, Reels, TikToks, and Shorts.",
     "grl-agent-imaging": "Nano Banana, Imagen, GPT Image, Photoshop, prompts, masks, subject consistency, provenance, and export.",
     "grl-agent-revenue": "Occupancy, ADR, RevPAR, TRevPAR, NRevPAR, GOPPAR, MUP, MOL, pickup, forecasting, pricing, PMS, and Channel Manager.",
+    "grl-agent-product-config": "RFQs, tender specs, customer documents, product options and variants, compatibility rules, product catalogs, and CPQ.",
 }
 
 README_WORKFLOW_COPY = {

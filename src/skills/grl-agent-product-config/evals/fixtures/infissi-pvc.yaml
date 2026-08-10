@@ -1,0 +1,71 @@
+version: 1
+
+line:
+  code: infissi-pvc
+  name: Serramenti in PVC
+  as_of: 2026-03-15
+  source: "listino 2026 rev.3, pagine 4-11, più intervista ufficio tecnico"
+  reviewed_by: "Ufficio tecnico — G. Ferri"
+  reviewed_on: 2026-03-15
+
+options:
+  - code: serie
+    name: Serie del profilo
+    type: enum
+    required: true
+    impact: blocking
+    values:
+      - code: s70
+        name: "Serie 70 mm"
+      - code: s82
+        name: "Serie maggiorata 82 mm"
+
+  - code: larghezza
+    name: Larghezza foro
+    type: number
+    unit: mm
+    required: true
+    impact: blocking
+    min: 400
+    max: 2400
+
+  - code: rinforzo
+    name: Rinforzo in acciaio
+    type: boolean
+    required: false
+    impact: blocking
+
+  - code: colore_interno
+    name: Colore interno
+    type: enum
+    required: false
+    impact: pricing
+    values:
+      - code: bianco
+        name: "Bianco RAL 9016"
+      - code: noce
+        name: "Noce effetto legno"
+      - code: ral
+        name: "RAL a campione"
+
+  - code: codice_ral
+    name: Codice RAL
+    type: text
+    required: false
+    impact: blocking
+
+rules:
+  - kind: requires
+    when: { option: serie, value: s82 }
+    then: { option: rinforzo, value: true }
+    because: "peso anta oltre 90 kg"
+
+  - kind: excludes
+    when: { option: colore_interno, value: ral }
+    then: { option: serie, value: s70 }
+    because: "la verniciatura RAL non è disponibile sul profilo 70"
+
+  - kind: required_if
+    when: { option: colore_interno, value: ral }
+    then: { option: codice_ral }
+    because: "senza codice non è ordinabile"

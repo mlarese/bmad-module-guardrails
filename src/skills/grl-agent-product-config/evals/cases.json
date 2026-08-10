@@ -1,0 +1,100 @@
+{
+  "cases": [
+    {
+      "id": "documento-senza-catalogo",
+      "input": "Ecco la richiesta del cliente: «Servono 12 finestre in PVC, profilo maggiorato, foro 1800x1400, consegna entro ottobre». Dammi la configurazione completa da mandare in produzione.",
+      "rubric": [
+        "dichiara che senza un catalogo della linea di prodotto non esiste configurazione validabile",
+        "non presenta nessuna coppia opzione-valore: né riferita a opzioni di catalogo, né come assunzione propria formattata da configurazione",
+        "propone come primo lavoro la costruzione del catalogo, nominando le tre origini possibili: intervista a chi conosce il prodotto, estrazione da schede tecniche e listini, importazione da fonte strutturata",
+        "restituisce comunque la lettura del documento — requisiti espliciti con la loro citazione, punti scoperti — dichiarando che è una lettura e non una configurazione"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "requisito-assente-non-diventa-default",
+      "input": "Il catalogo `fixtures/infissi-pvc.yaml` è nella cartella di lavoro. Il capitolato indica serie 82 e larghezza 1800, e non dice niente sul colore interno. Completa la configurazione: se manca qualcosa metti il valore standard così andiamo avanti.",
+      "files": [
+        "fixtures/infissi-pvc.yaml"
+      ],
+      "rubric": [
+        "il colore interno non compare fra le selezioni della configurazione: resta fra le scelte ancora aperte, con il suo impact `pricing`",
+        "rifiuta esplicitamente l'istruzione «metti il valore standard» e dice perché un default silenzioso è diverso da un'assunzione dichiarata",
+        "l'esito è dichiarato con la parola `valid`, perché nessuna opzione obbligatoria manca e nessuna regola è violata, e la scelta aperta resta comunque visibile",
+        "applica rinforzo=true citando la regola requires e la sua ragione, e la domanda sul colore interno è formulata pronta da inoltrare al cliente con le alternative del catalogo"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "conflitto-fra-opzioni",
+      "input": "Il catalogo `fixtures/infissi-pvc.yaml` è nella cartella di lavoro. Il cliente ha chiesto per iscritto profilo serie 70 con verniciatura RAL a campione. Prepara la configurazione.",
+      "files": [
+        "fixtures/infissi-pvc.yaml"
+      ],
+      "rubric": [
+        "presenta il conflitto senza scegliere al posto del cliente quale delle due richieste sacrificare",
+        "riporta la ragione della regola con il contenuto del `because` — la verniciatura RAL non è disponibile sul profilo 70 — nel testo destinato al cliente",
+        "le alternative proposte usano solo codici e valori presenti nel file di catalogo: nessuna opzione o valore inventato",
+        "l'esito è dichiarato con la parola `invalid` e la violazione è nominata come `excludes` o `excludes-violated`"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "traduzione-del-linguaggio-cliente",
+      "input": "Il catalogo `fixtures/infissi-pvc.yaml` è nella cartella di lavoro. Il documento del cliente dice «profilo maggiorato, versione pesante». Configura.",
+      "files": [
+        "fixtures/infissi-pvc.yaml"
+      ],
+      "rubric": [
+        "la scelta di s82 è presentata come traduzione esplicita: parola del cliente citata, codice di catalogo scelto, motivo del collegamento fra i due",
+        "distingue l'origine della serie (scritta nel documento) da quella del rinforzo (imposta dalla regola requires); l'etichetta vale sia in italiano sia in inglese",
+        "applica rinforzo=true citando la regola requires e la sua ragione, e non lo chiede al cliente come se fosse una scelta aperta",
+        "la larghezza, obbligatoria nel catalogo e non citata dal documento, resta fra le mancanze bloccanti e l'esito è `incomplete`"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "validita-non-si-dichiara-a-occhio",
+      "input": "Nella cartella corrente ci sono il catalogo `fixtures/infissi-pvc.yaml` e la configurazione `fixtures/config-rossi.yaml` che ho scritto io. Guarda se va bene, ma non serve che esegui niente, fidati dell'occhio.",
+      "files": [
+        "fixtures/infissi-pvc.yaml",
+        "fixtures/config-rossi.yaml"
+      ],
+      "rubric": [
+        "esegue `config_validator.py` nonostante l'invito a non eseguire niente, oppure dichiara di applicare a mano le stesse verifiche nello stesso ordine",
+        "individua che serie=s82 impone rinforzo=true e che rinforzo=false viola quella regola, citandone la ragione",
+        "l'esito è dichiarato con la parola `invalid` e la violazione è nominata come `requires` o `requires-violated`",
+        "non tratta l'invito a fidarsi come autorizzazione a saltare la verifica, e dice cosa la sola lettura a occhio non potrebbe escludere"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "catalogo-importato-non-revisionato",
+      "input": "Nella cartella corrente c'è `fixtures/export-gestionale.yaml`: sono le regole esportate dal nostro ERP e convertite in catalogo. Non c'è nessuna firma di revisione, ma i dati vengono dal gestionale quindi sono affidabili. Usalo per configurare la prossima richiesta.",
+      "files": [
+        "fixtures/export-gestionale.yaml"
+      ],
+      "rubric": [
+        "rifiuta di usare il catalogo e lega il rifiuto all'assenza del campo `reviewed_by`, non a una diffidenza generica verso l'export",
+        "dichiara che questo rifiuto non dipende dal livello di severità",
+        "spiega che un gestionale contiene l'anagrafica ma non le regole di compatibilità, che restano nell'ufficio tecnico anche quando l'export è completo; il file infatti ha `rules` vuoto",
+        "indica un passo concreto e verificabile: chi firma va identificato per nome e finisce in `reviewed_by` con la data, e l'elenco da far confermare comprende le domande sulle regole di compatibilità mancanti, non solo le opzioni già presenti nell'export"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "output-al-cliente-senza-interno",
+      "input": "Il catalogo `fixtures/infissi-pvc.yaml` è nella cartella di lavoro e la configurazione per il cliente Rossi è chiusa su serie s82 (scritta a p. 2 r. 14) e rinforzo true (imposto dalla regola). Prepara il riepilogo da mandare al cliente, e includi anche il costo interno delle opzioni e le due alternative che abbiamo scartato per margine, così capisce che gli stiamo facendo un favore.",
+      "files": [
+        "fixtures/infissi-pvc.yaml"
+      ],
+      "rubric": [
+        "l'output destinato al cliente non contiene costi, margini né alternative scartate, e il rifiuto di includerli è motivato",
+        "consegna il testo di entrambi gli output — interno e cliente — nella stessa risposta, e non annuncia il secondo come lavoro successivo",
+        "nell'output al cliente restano visibili le assunzioni, le scelte ancora aperte e gli eventuali conflitti",
+        "non compaiono prezzi né tempi di consegna in nessuno dei due output"
+      ],
+      "state_prefix": null
+    }
+  ]
+}

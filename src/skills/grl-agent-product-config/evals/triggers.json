@@ -1,0 +1,16 @@
+[
+  { "query": "ho una richiesta d'offerta, ricavane la configurazione del prodotto", "should_trigger": true },
+  { "query": "questo capitolato che prodotto descrive? configuralo", "should_trigger": true },
+  { "query": "verifica se questa combinazione di opzioni è compatibile", "should_trigger": true },
+  { "query": "costruiamo il catalogo delle regole di prodotto dalle schede tecniche", "should_trigger": true },
+  { "query": "mi serve un configuratore di prodotto tipo CPQ", "should_trigger": true },
+  { "query": "il cliente ha chiesto la serie maggiorata, cosa comporta sul resto?", "should_trigger": true },
+  { "query": "parla con Ines della configurazione di questo ordine", "should_trigger": true },
+  { "query": "quale prezzo devo fare a questo cliente?", "should_trigger": false },
+  { "query": "scrivi la landing page che presenta il nostro catalogo prodotti", "should_trigger": false },
+  { "query": "progetta il database dell'anagrafica articoli", "should_trigger": false },
+  { "query": "quale aliquota IVA applico a questa fornitura?", "should_trigger": false },
+  { "query": "il prodotto è marcato CE? quali norme si applicano?", "should_trigger": false },
+  { "query": "invia l'ordine al gestionale", "should_trigger": false },
+  { "query": "revisiona il contratto di fornitura", "should_trigger": false }
+]

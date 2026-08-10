@@ -1,0 +1,50 @@
+# Scheletro di catalogo. Copiare in
+# {project-root}/_bmad/memory/grl-agent-product-config/catalog/<linea>.yaml
+# e compilare. Lo schema completo è in references/schema-catalogo.md.
+#
+# Prima di usarlo: uv run scripts/config_validator.py catalog <path>
+
+version: 1
+
+line:
+  code: ""            # identificatore breve della linea di prodotto
+  name: ""
+  as_of: ""           # data delle regole qui dentro
+  source: ""          # da dove vengono, e quale parte della linea coprono
+  reviewed_by: ""     # chi in azienda le ha confermate — senza questo il catalogo non si usa
+  reviewed_on: ""
+
+options:
+  - code: ""
+    name: ""
+    type: enum        # enum | number | boolean | text
+    required: true
+    impact: blocking  # blocking | pricing | cosmetic — serve a ordinare le domande
+    values:
+      - code: ""
+        name: ""
+
+  # - code: ""
+  #   name: ""
+  #   type: number
+  #   unit: mm
+  #   required: false
+  #   impact: pricing
+  #   min: 0
+  #   max: 0
+
+rules: []
+  # - kind: requires        # se when vale, then deve valere
+  #   when: { option: "", value: "" }
+  #   then: { option: "", value: "" }
+  #   because: ""           # la frase che spiega il vincolo al cliente — obbligatoria
+  #
+  # - kind: excludes        # se when vale, then non può valere
+  #   when: { option: "", value: "" }
+  #   then: { option: "", value: "" }
+  #   because: ""
+  #
+  # - kind: required_if     # se when vale, l'opzione va compilata
+  #   when: { option: "", value: "" }
+  #   then: { option: "" }
+  #   because: ""
