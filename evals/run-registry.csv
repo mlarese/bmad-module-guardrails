@@ -10,3 +10,36 @@ grl-board,2026-08-10,trigger,pass,20/20 query su due router indipendenti,subagen
 grl-profile,2026-08-10,quality,pass,"33/33 criteri su sei casi, dopo tre correzioni alla skill",subagent della sessione di chat,scratchpad eval/grl-profile/judge-*.json
 grl-board,2026-08-10,quality,parziale,1 caso su 4 chiuso a 6/7; gli altri tre bloccati dall'annidamento dei subagent,subagent della sessione di chat,scratchpad eval/grl-board/judge-gate-evidenza-insufficiente.json
 grl-board,2026-08-10,quality,parziale,"19/25 criteri sui quattro casi; tre correzioni applicate, non riverificate",subagent della sessione di chat,scratchpad eval/grl-board/judge-*.json
+grl-ads,2026-08-10,trigger,pass,"router A 10/10, router B 10/10",subagent della sessione di chat,scratchpad eval/lotti/router-*.json
+grl-agent-ads,2026-08-10,trigger,parziale,"router A 9/10, router B 9/10",subagent della sessione di chat,scratchpad eval/lotti/router-*.json
+grl-agent-ai,2026-08-10,trigger,pass,"router A 20/20, router B 20/20",subagent della sessione di chat,scratchpad eval/lotti/router-*.json
+grl-agent-architecture,2026-08-10,trigger,pass,"router A 26/26, router B 26/26",subagent della sessione di chat,scratchpad eval/lotti/router-*.json
+grl-agent-blockers,2026-08-10,trigger,pass,"router A 27/27, router B 27/27",subagent della sessione di chat,scratchpad eval/lotti/router-*.json
+grl-agent-compliance,2026-08-10,trigger,parziale,"router A 23/24, router B 23/24",subagent della sessione di chat,scratchpad eval/lotti/router-*.json
+grl-agent-creative,2026-08-10,trigger,pass,"router A 12/12, router B 12/12",subagent della sessione di chat,scratchpad eval/lotti/router-*.json
+grl-agent-database,2026-08-10,trigger,pass,"router A 21/21, router B 21/21",subagent della sessione di chat,scratchpad eval/lotti/router-*.json
+grl-agent-firmware,2026-08-10,trigger,pass,"router A 26/26, router B 26/26",subagent della sessione di chat,scratchpad eval/lotti/router-*.json
+grl-agent-fiscal,2026-08-10,trigger,parziale,"router A 15/16, router B 15/16",subagent della sessione di chat,scratchpad eval/lotti/router-*.json
+grl-agent-health,2026-08-10,trigger,pass,"router A 20/20, router B 20/20",subagent della sessione di chat,scratchpad eval/lotti/router-*.json
+grl-agent-imaging,2026-08-10,trigger,pass,"router A 14/14, router B 14/14",subagent della sessione di chat,scratchpad eval/lotti/router-*.json
+grl-agent-legal,2026-08-10,trigger,pass,"router A 39/39, router B 39/39",subagent della sessione di chat,scratchpad eval/lotti/router-*.json
+grl-agent-ops,2026-08-10,trigger,parziale,"router A 19/20, router B 19/20",subagent della sessione di chat,scratchpad eval/lotti/router-*.json
+grl-agent-privacy,2026-08-10,trigger,pass,"router A 26/26, router B 26/26",subagent della sessione di chat,scratchpad eval/lotti/router-*.json
+grl-agent-revenue,2026-08-10,trigger,parziale,"router A 10/12, router B 10/12",subagent della sessione di chat,scratchpad eval/lotti/router-*.json
+grl-agent-security,2026-08-10,trigger,pass,"router A 20/20, router B 20/20",subagent della sessione di chat,scratchpad eval/lotti/router-*.json
+grl-agent-seo,2026-08-10,trigger,pass,"router A 19/19, router B 19/19",subagent della sessione di chat,scratchpad eval/lotti/router-*.json
+grl-agent-social,2026-08-10,trigger,parziale,"router A 7/12, router B 6/12",subagent della sessione di chat,scratchpad eval/lotti/router-*.json
+grl-agent-ui-critic,2026-08-10,trigger,pass,"router A 20/20, router B 20/20",subagent della sessione di chat,scratchpad eval/lotti/router-*.json
+grl-agent-wordpress,2026-08-10,trigger,parziale,"router A 11/12, router B 11/12",subagent della sessione di chat,scratchpad eval/lotti/router-*.json
+grl-automation,2026-08-10,trigger,pass,"router A 12/12, router B 12/12",subagent della sessione di chat,scratchpad eval/lotti/router-*.json
+grl-fiscal-updates,2026-08-10,trigger,pass,"router A 6/6, router B 6/6",subagent della sessione di chat,scratchpad eval/lotti/router-*.json
+grl-legal-updates,2026-08-10,trigger,pass,"router A 6/6, router B 6/6",subagent della sessione di chat,scratchpad eval/lotti/router-*.json
+grl-mdsw,2026-08-10,trigger,parziale,"router A 20/21, router B 20/21",subagent della sessione di chat,scratchpad eval/lotti/router-*.json
+grl-revenue-audit,2026-08-10,trigger,pass,"router A 6/6, router B 6/6",subagent della sessione di chat,scratchpad eval/lotti/router-*.json
+grl-revenue-plan,2026-08-10,trigger,pass,"router A 6/6, router B 6/6",subagent della sessione di chat,scratchpad eval/lotti/router-*.json
+grl-revenue-preflight,2026-08-10,trigger,pass,"router A 6/6, router B 6/6",subagent della sessione di chat,scratchpad eval/lotti/router-*.json
+grl-social,2026-08-10,trigger,pass,"router A 12/12, router B 12/12",subagent della sessione di chat,scratchpad eval/lotti/router-*.json
+grl-social-creative,2026-08-10,trigger,pass,"router A 12/12, router B 12/12",subagent della sessione di chat,scratchpad eval/lotti/router-*.json
+grl-toolchain,2026-08-10,trigger,pass,"router A 20/20, router B 20/20",subagent della sessione di chat,scratchpad eval/lotti/router-*.json
+grl-web,2026-08-10,trigger,pass,"router A 20/20, router B 20/20",subagent della sessione di chat,scratchpad eval/lotti/router-*.json
+grl-wordpress-delivery,2026-08-10,trigger,pass,"router A 7/7, router B 7/7",subagent della sessione di chat,scratchpad eval/lotti/router-*.json
