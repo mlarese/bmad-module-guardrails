@@ -119,6 +119,20 @@ repository del modulo. Il giudice ispeziona la sandbox per verificare cosa è st
 Nella prima run di `grl-profile` questo errore ha prodotto due fallimenti su cinque. Entrambi sono
 diventati `pass` a parità di skill, appena l'esecutore ha avuto dove scrivere.
 
+### Le skill che convocano altre figure non stanno in un subagent
+
+`grl-board` e i workflow che passano dal collegio convocano le figure come agenti separati.
+Dentro un esecutore che è già un subagent, quelle convocazioni annidano un secondo livello che
+spesso non rientra: l'esecutore resta in attesa e la run non chiude. Lo stesso limite colpisce i
+criteri che pretendono l'invocazione di `bmad-review`, che un subagent non può fare.
+
+**Regola: valuta queste skill dalla sessione principale, un caso per volta**, non con un fan-out di
+esecutori. Il costo è alto — un solo caso del release gate vale cinque skill semplici — quindi
+mettile in coda da sole, non in mezzo a una tornata.
+
+Un criterio che il banco non può soddisfare si registra come limite noto. **Non si ammorbidisce la
+rubric per farlo passare**: una rubric si irrigidisce soltanto.
+
 ### Ogni run finisce nel registro
 
 I report delle run restano fuori dal repository: `.gitignore` esclude `**/eval-runs/` di
