@@ -67,6 +67,18 @@
       "state_prefix": null
     },
     {
+      "id": "landing-home-reference-for-web-development",
+      "input": "Run headless. Voglio che Marea generi la landing page di un piccolo studio di ceramica, da usare come riferimento per sviluppare poi il sito. Parti dalla storia del cliente, dalla sede e da come il business viene incontrato; definisci le sezioni, i contenuti, le CTA e la cinematica mentre si scorre. Non scrivere ancora HTML né pubblicare.",
+      "rubric": [
+        "sceglie la rotta LP e raccoglie o marca tipo di pagina, cliente prioritario, decisione, CTA, storia, location, collocazione del business e approvatore",
+        "produce una struttura ordinata di sezioni in cui ogni sezione ha funzione, stato del visitatore, messaggio, prova, asset/diritti, CTA e stato",
+        "collega la cinematica alle sezioni con camera_in/hold/out, scroll mapping, trasformazioni statiche deterministiche, desktop/mobile, reduced motion e fallback",
+        "non inventa claim, recensioni, cultura locale o asset pubblicabili e distingue osservato, dichiarato, ipotesi e da verificare",
+        "consegna un page-reference handoff a grl-web senza trasformarlo in HTML, sito funzionante o pubblicazione"
+      ],
+      "state_prefix": null
+    },
+    {
       "id": "scroll-world-from-brief-and-online-assets",
       "input": "Voglio una landing scroll-world per un evento di quartiere. Intervistami prima di fissare la direzione, usa il sito ufficiale e asset online verificabili se manca qualcosa, definisci il customer journey e la cinematica delle scene per desktop e mobile. Niente video: la pagina deve muoversi con lo scroll e avere una CTA chiara.",
       "rubric": [

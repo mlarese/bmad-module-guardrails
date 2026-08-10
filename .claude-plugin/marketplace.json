@@ -1,13 +1,13 @@
 {
   "name": "guardrails",
   "owner": "mlarese",
-  "description": "Modulo BMad Guardrails: ventidue figure e diciassette workflow per sviluppo software, database, bug e regressioni, punti di blocco, firmware embedded, legale, fisco, design, customer journey, visual storytelling, search system, landing scroll-driven statiche, video-to-scroll da sorgenti autorizzate, pacchetti di frame, architettura, medicina, revenue management, configurazione di prodotto, SEO, social/content, video, immagini generate con AI, Google Ads e automazioni controllate",
+  "description": "Modulo BMad Guardrails: ventidue figure e diciassette workflow per sviluppo software, database, bug e regressioni, punti di blocco, firmware embedded, legale, fisco, design, customer journey, visual storytelling, pagine landing/home di riferimento, search system, landing scroll-driven statiche, video-to-scroll da sorgenti autorizzate, pacchetti di frame, architettura, medicina, revenue management, configurazione di prodotto, SEO, social/content, video, immagini generate con AI, Google Ads e automazioni controllate",
   "plugins": [
     {
       "name": "grl",
       "source": "./src",
-      "description": "Guardrails — ventidue figure per privacy, sicurezza, legale, compliance, fisco, UI, customer journey, visual storytelling, search system, landing scroll-driven statiche, video-to-scroll da sorgenti autorizzate, pacchetti di frame, architettura del codice e dei database, punti di blocco, firmware embedded, ops, sanità, AI, WordPress, SEO, paid media, social/content, creative video, generazione di immagini, revenue management e configurazione di prodotto. Include diciassette workflow, tra cui preflight degli strumenti e pacchettizzazione video-to-scroll, diagnosi read-only di bug e regressioni, ricerca live, siti, social, pacchetti creativi, Google Ads, automazione con dry-run, consegna WordPress fino al release gate e installazione controllata di skill e server MCP su ogni harness.",
-      "version": "1.32.0",
+      "description": "Guardrails — ventidue figure per privacy, sicurezza, legale, compliance, fisco, UI, customer journey, visual storytelling, pagine landing/home di riferimento, search system, landing scroll-driven statiche, video-to-scroll da sorgenti autorizzate, pacchetti di frame, architettura del codice e dei database, punti di blocco, firmware embedded, ops, sanità, AI, WordPress, SEO, paid media, social/content, creative video, generazione di immagini, revenue management e configurazione di prodotto. Include diciassette workflow, tra cui preflight degli strumenti e pacchettizzazione video-to-scroll, diagnosi read-only di bug e regressioni, ricerca live, siti, social, pacchetti creativi, Google Ads, automazione con dry-run, consegna WordPress fino al release gate e installazione controllata di skill e server MCP su ogni harness.",
+      "version": "1.33.0",
       "author": "mlarese",
       "homepage": "https://github.com/mlarese/bmad-module-guardrails",
       "repository": "https://github.com/mlarese/bmad-module-guardrails",

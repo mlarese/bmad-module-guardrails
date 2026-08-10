@@ -2,7 +2,7 @@
 
 Guardrails is a [BMad](https://github.com/bmad-code-org/BMAD-METHOD) module with **twenty-two agents**
 that support software development teams across privacy and GDPR, security, legal, compliance,
-tax, design, customer journey, visual storytelling, contextual search, video-to-scroll direction, code and database architecture, blocking points,
+tax, design, customer journey, visual storytelling, contextual search, landing/home page references, video-to-scroll direction, code and database architecture, blocking points,
 embedded firmware, operations, healthcare, AI, WordPress, SEO, social/content, creative video, AI image generation,
 revenue management, product configuration, and paid media.
 
@@ -23,7 +23,7 @@ multidisciplinary review of the same artifact, use `grl-board`.
 | 📐 **Nils** — Regulatory Compliance | NIS2, DORA, EAA/WCAG, eIDAS, CRA, MDR, and sector-specific obligations | Determines whether a rule applies, what threshold activates it, and which obligations follow. |
 | 🧾 **Marta** — Tax and Incentives Specialist | Taxes, VAT, grants, incentives, tax credits, and reporting | Checks primary sources, requirements, deadlines, and eligible expenses in an operational pre-screening. |
 | 👁️ **Iris** — Design Critic | UI, landing pages, markup, CSS, typography, palettes, density, and layout | Recognizes generic patterns and proposes a concrete, usable visual departure. |
-| 🧭 **Marea** — Customer Journey & Visual Storytelling Strategist | Client story, location, business placement, customer journeys, visual narratives, contextual search systems, and video-to-scroll direction | Turns a real client story and its place into a situated journey, static scroll cinematics, or an explicit video-source plan choosing scrub versus optimized frames; rights, performance, accessibility, and Codex generation stay behind gates. |
+| 🧭 **Marea** — Customer Journey & Visual Storytelling Strategist | Client story, location, business placement, landing/home page references, customer journeys, visual narratives, contextual search systems, and video-to-scroll direction | Turns a real client story and its place into a page reference with ordered sections, CTAs and cinematics, a situated journey, static scroll direction, or an explicit video-source plan choosing scrub versus optimized frames; rights, performance, accessibility, and Codex generation stay behind gates. |
 | 🧱 **Otto** — Code Architect | Boundaries, folders, dependencies, interfaces, factories, architectural layers, and the architectural constraints of a story or spec | Identifies the right place for a responsibility and weighs the cost of alternatives; on a story still being written, delivers constraints that are verifiable at review time. |
 | 🚧 **Vito** — Blocking Points Analyst | Mandatory paths, state machines, gates and approvals, hardcoded rigidity, runtime stalls, and repo or pipeline gates | Reads the code as someone stuck inside it and returns a list of possible blocking points, ordered by who hits them today, with the file, who gets stuck, the workaround already in use, and the exit that is missing. Reads only; never asks to remove a deliberate control. |
 | 🗄️ **Dario** — Database Architect & Designer | Data models, PostgreSQL, Oracle, MongoDB, Redis/Valkey, distributed SQL, NoSQL, search, analytics, time-series, graph, vector and hybrid search | Chooses persistence from workload and invariants, verifies current solutions live, and carries the decision through schema, performance, reliability, benchmark, and migration. |
