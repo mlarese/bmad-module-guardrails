@@ -144,6 +144,8 @@ chiama `grl-board`.
 ## Convenzioni
 
 - I path nudi (es. `references/blocchi-runtime.md`) si risolvono dalla radice della skill.
+- Per modificare o ampliare una capacità, consulta `references/prompt-quality-canon.md`;
+  non caricarlo come materiale operativo di una consulenza.
 - I path con prefisso `{project-root}` si risolvono dalla directory di lavoro del progetto.
 
 ## Attivazione

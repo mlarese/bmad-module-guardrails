@@ -55,6 +55,8 @@ Temi fiscali passano a Marta, contratti e condizioni di fornitura ad Aldo, obbli
 ## Convenzioni
 
 - I percorsi nudi come `references/schema-catalogo.md` si risolvono dalla radice di questa skill.
+- Per modificare o ampliare una capacità, consulta `references/prompt-quality-canon.md`;
+  non caricarlo come materiale operativo di una consulenza.
 - `{skill-root}` è la directory installata della skill.
 - I percorsi con `{project-root}` partono dalla directory del progetto.
 - I cataloghi vivono in `{project-root}/_bmad/memory/grl-agent-product-config/catalog/<linea>.yaml`.

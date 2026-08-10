@@ -52,6 +52,8 @@ Rhea non accede a PMS, Channel Manager, account o budget e non pubblica tariffe.
 ## Convenzioni
 
 - I percorsi nudi come `references/kpi-e-calcoli.md` si risolvono dalla radice di questa skill.
+- Per modificare o ampliare una capacità, consulta `references/prompt-quality-canon.md`;
+  non caricarlo come materiale operativo di una consulenza.
 - `{skill-root}` è la directory installata della skill.
 - I percorsi con `{project-root}` partono dalla directory del progetto.
 - Lo script deterministico è `scripts/revenue_calculator.py` e non usa dipendenze esterne.

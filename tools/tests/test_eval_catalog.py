@@ -121,15 +121,14 @@ def test_install_manifest_and_roster_metadata_preserve_routing_boundaries() -> N
 
 
 def test_automation_contract_and_paid_media_evals_cover_safe_paths() -> None:
-    route_matrix = (ROOT / "src/skills/grl-automation/references/route-matrix.md").read_text(
-        encoding="utf-8"
-    )
     execution_contract = (
         ROOT / "src/skills/grl-automation/references/execution-contract.md"
     ).read_text(encoding="utf-8")
-    assert "TEA" in route_matrix
     assert all(token in execution_contract for token in ("owner:", "idempotency_key:", "stop_condition:"))
     automation = (ROOT / "src/skills/grl-automation/SKILL.md").read_text(encoding="utf-8")
+    # Il routing software deve portarsi dietro il test architect. Il controllo stava sulla
+    # matrice in `references/`, che duplicava questa tabella e non veniva mai caricata.
+    assert "TEA" in automation
     assert "handoff_status: pending" in automation
     assert "gate che dipende dalla capability resta `blocked`" in automation
 

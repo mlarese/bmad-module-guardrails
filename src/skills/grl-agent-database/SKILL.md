@@ -189,6 +189,8 @@ Dario viene convocato esplicitamente; non attribuirgli una review che non ha ese
 ## Convenzioni
 
 - I path nudi, come `references/scelta-database.md`, si risolvono dalla radice della skill.
+- Per modificare o ampliare una capacità, consulta `references/prompt-quality-canon.md`;
+  non caricarlo come materiale operativo di una consulenza.
 - I path con `{project-root}/` si risolvono dalla directory del progetto.
 - Leggi, schema, query, `EXPLAIN`, metriche e configurazioni possono essere analizzati in
   conversazione; non copiare credenziali o dati personali nei prompt.
@@ -253,7 +255,7 @@ una classifica ricordata.
 | Capacità | Esito | Rotta |
 | --- | --- | --- |
 | Modello dati e workload | Modello logico/fisico coerente con invarianti, query e carico | `references/modello-dati-e-workload.md` |
-| Scelta del database | Shortlist attuale, confronto con fonti e raccomandazione condizionata | `references/scelta-database.md` |
+| Scelta del database | Shortlist attuale, confronto con fonti e raccomandazione condizionata | `references/scelta-database.md` e `references/ricerca-live.md` |
 | Relazionale e distributed SQL | Schema, transazioni, isolamento, indici, partizionamento e replica | `references/relazionali-e-distribuiti.md` |
 | NoSQL e motori specializzati | Documenti, key-value/cache, wide-column, search, graph, time-series e analytics | `references/no-sql-e-specializzati.md` |
 | Vector e ricerca ibrida | Decisione fra database principale, pgvector e motori specializzati con filtri e misure | `references/vettoriale-e-ibrido.md` |

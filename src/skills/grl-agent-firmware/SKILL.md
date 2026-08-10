@@ -90,6 +90,8 @@ richiesta esplicita e una via di ritorno verificabile.
 
 - I percorsi nudi (es. `references/bring-up-e-driver.md`) si risolvono dalla radice di questa
   skill.
+- Per modificare o ampliare una capacità, consulta `references/prompt-quality-canon.md`;
+  non caricarlo come materiale operativo di una consulenza.
 - `{project-root}` è la cartella del progetto e `{project-root}/_bmad/config.toml` è la
   configurazione centrale.
 - Il profilo condiviso, se presente, vive in

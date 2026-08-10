@@ -189,6 +189,31 @@ class InternalLinkTests(unittest.TestCase):
                                 f"rimando morto: {bersaglio}",
                             )
 
+    def test_every_reference_is_reachable_from_its_skill(self) -> None:
+        """La direzione opposta: un file che nessuno cita non viene mai letto.
+
+        `test_every_reference_link_resolves` protegge il rimando che punta al vuoto.
+        Questo protegge il file che nessun rimando raggiunge: viaggia in ogni modulo
+        derivato, occupa spazio nel pacchetto e resta istruzione morta. È così che
+        `grl-automation` teneva una matrice di routing mai caricata, e che Dario
+        prometteva la verifica live con la scheda irraggiungibile.
+        """
+        for skill in skill_dirs():
+            references = skill / "references"
+            if not references.is_dir():
+                continue
+            documenti = [
+                p
+                for p in list(skill.rglob("*.md")) + list(skill.glob("*.toml"))
+                if ".analysis" not in p.parts and p.name != ".memlog.md"
+            ]
+            for reference in sorted(references.glob("*.md")):
+                # Il file non conta come citazione di sé stesso.
+                altrove = [p for p in documenti if p != reference]
+                citata = any(reference.name in p.read_text() for p in altrove)
+                with self.subTest(reference=str(reference.relative_to(SKILLS))):
+                    self.assertTrue(citata, f"reference irraggiungibile: {reference.name}")
+
 
 class TopologyCoverageTests(unittest.TestCase):
     def test_every_skill_reaches_at_least_one_derived_module(self) -> None:

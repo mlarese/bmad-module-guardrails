@@ -192,6 +192,8 @@ per `decisions.md` e la scrive solo dopo conferma esplicita dell'utente.
 ## Convenzioni
 
 - I percorsi nudi come `references/fonti-istituzionali.md` si risolvono dalla radice di questa skill.
+- Per modificare o ampliare una capacità, consulta `references/prompt-quality-canon.md`;
+  non caricarlo come materiale operativo di una consulenza.
 - `{project-root}` è la directory del progetto.
 - Una data, una soglia o una percentuale non verificata non viene presentata come attuale.
 
