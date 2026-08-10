@@ -79,6 +79,7 @@ serve per la decisione. Ogni sezione deve avere una sola funzione primaria e un'
 | `asset` e `rights_status` | Quale immagine, testo, dato, luogo o testimonianza serve e con quale gate? |
 | `visual_composition` | Cosa deve essere visibile, vicino, lontano, in primo piano o fuori campo? |
 | `cinematic_behavior` | Quale ingresso, permanenza, uscita o trasformazione sostiene il gesto? |
+| `cinematic_pattern` | Quale pattern nominato di `CM` — curtain, doppia tenda o gallery — rende eseguibile la regia? |
 | `cta` | Quale azione può compiere qui e dove porta? |
 | `desktop_mobile` | Cosa cambia per viewport, input, peso o ordine? |
 | `accessibility` | Quale contenuto resta comprensibile senza movimento, audio o colore? |
@@ -117,6 +118,22 @@ caricamento. Per una sorgente video esplicita si passa a `VF` e si documenta la 
 keyframe/atlas o altro handoff; Marea non assume di aver estratto frame e non carica video senza
 autorizzazione.
 
+Quando la pagina richiede una transizione più marcata, carica `references/cinematic-library.md` e
+scegli un pattern in base alla funzione, non alla disponibilità dell'effetto. Le opzioni includono
+`curtain-right`, `curtain-left`, `curtain-top`, `curtain-bottom`, `curtain-split-vertical` per una
+doppia tenda che si apre ai lati e `curtain-split-horizontal` per un'apertura alto/basso. Per una
+gallery puoi usare `gallery-curtain`, `gallery-track`, `gallery-mosaic-reveal`, `gallery-focus`,
+`gallery-stagger` o `gallery-before-after`, dichiarando ordine, immagine focale, avanzamento,
+controlli e fallback.
+
+### Gallery come prova
+
+La gallery deve rispondere a una domanda del visitatore: mostrare una trasformazione, confrontare
+varianti, attraversare un luogo o portare un dettaglio in primo piano. Per ogni elemento registra
+ordine, ruolo, focal point, alt text, sorgente, diritti e stato. La sequenza resta comprensibile come
+griglia o lista quando il movimento è disattivato; non usare autoplay, hover o scroll orizzontale
+intrappolato come unica via per raggiungere una prova.
+
 Per desktop e mobile annota almeno: punto di ingresso, altezza o durata percepita, ordine dei
 contenuti, comportamento con input touch/pointer e resa senza movimento. `reduced_motion` non è una
 nota finale: è una versione equivalente della stessa informazione e della stessa CTA.
@@ -140,7 +157,7 @@ page-reference/
 Se non servono file separati, usa gli stessi titoli in un unico documento. `asset-manifest.md`
 conserva per ogni sorgente URL, autore/titolare, licenza, attribuzione, data di verifica, ambito
 d'uso e stato. `implementation-handoff.md` deve dire a `grl-web` cosa implementare, cosa non
-assumere, quale pacchetto `SW` o `VF` allegare e quali gate restano aperti.
+assumere, quale pattern `CM` e quale pacchetto `SW` o `VF` allegare e quali gate restano aperti.
 
 ## Stati e handoff
 

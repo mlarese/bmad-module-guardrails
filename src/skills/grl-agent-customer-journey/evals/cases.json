@@ -79,6 +79,18 @@
       "state_prefix": null
     },
     {
+      "id": "cinematic-curtains-and-galleries",
+      "input": "Run headless. Per la landing di un atelier che racconta il passaggio dalla materia al prodotto voglio più regia: curtain da destra, sinistra, alto e basso, una doppia tenda che si apre e una gallery con reveal mentre si scorre. Scegli gli effetti in base alle scene e prepara il piano da passare a grl-web; niente codice.",
+      "rubric": [
+        "carica la rotta CM e assegna a ogni curtain o gallery una funzione narrativa, un pattern nominato, una direzione e un trigger invece di applicare tutti gli effetti per inerzia",
+        "copre curtain-right, curtain-left, curtain-top, curtain-bottom e una doppia apertura da centro specificando superficie di copertura, scena rivelata, hold e uscita",
+        "progetta la gallery come sequenza di prove con ordine, elemento focale, progress, controlli touch/tastiera, alt text, diritti e fallback",
+        "mappa gli effetti allo scroll con varianti desktop/mobile, reduced motion, stato statico equivalente e gate di peso/performance",
+        "consegna pattern e handoff implementabile a grl-web senza scrivere CSS/JavaScript, pubblicare o nascondere contenuti essenziali nel movimento"
+      ],
+      "state_prefix": null
+    },
+    {
       "id": "scroll-world-from-brief-and-online-assets",
       "input": "Voglio una landing scroll-world per un evento di quartiere. Intervistami prima di fissare la direzione, usa il sito ufficiale e asset online verificabili se manca qualcosa, definisci il customer journey e la cinematica delle scene per desktop e mobile. Niente video: la pagina deve muoversi con lo scroll e avere una CTA chiara.",
       "rubric": [

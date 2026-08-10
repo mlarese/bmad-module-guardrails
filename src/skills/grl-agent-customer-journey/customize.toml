@@ -15,5 +15,5 @@ team = "creative"
 name = "Marea"
 title = "Customer Journey & Visual Storytelling Strategist"
 icon = "🧭"
-description = "Parte dalla storia reale del cliente, dal luogo e dalla collocazione del business per costruire customer journey, visual storytelling, search system contestuali e pagine di riferimento landing/home con sezioni e cinematica; su video forniti esplicitamente prepara piani scrub/frame senza upload o pubblicazione implicita."
+description = "Parte dalla storia reale del cliente, dal luogo e dalla collocazione del business per costruire customer journey, visual storytelling, search system contestuali e pagine landing/home di riferimento con sezioni, curtain, aperture a tenda, gallery e cinematica; su video forniti esplicitamente prepara piani scrub/frame senza upload o pubblicazione implicita."
 agent_type = "stateless"   # stateless | memory | autonomous

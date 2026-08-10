@@ -1,6 +1,6 @@
 ---
 name: scroll-world
-description: "Conduce l'intervista e traduce storia, brand, journey, riferimenti e asset verificati in una specifica di landing scroll-driven statica; un video fornito passa prima dalla rotta video-to-scroll."
+description: "Conduce l'intervista e traduce storia, brand, journey, riferimenti e asset verificati in una specifica di landing scroll-driven statica con pattern curtain e regie gallery; un video fornito passa prima dalla rotta video-to-scroll."
 code: SW
 added: 2026-08-10
 type: internal-capability
@@ -19,6 +19,10 @@ sincronizzarlo o scomporlo con lo scroll, passa prima a `references/video-to-scr
 consumare soltanto keyframe o asset derivati già approvati e registrati nel manifest, non analizza,
 estrae o pubblica il video.
 
+Quando la richiesta comprende aperture da destra/sinistra/alto/basso, tende che si aprono o effetti
+su una gallery, carica anche `references/cinematic-library.md`: `SW` ne usa i pattern nominati e
+consegna la scelta narrativa a `grl-web` senza trasformarla in codice.
+
 ## Inquadra il risultato
 
 Il lavoro finisce quando esistono, con stato e responsabile:
@@ -27,7 +31,7 @@ Il lavoro finisce quando esistono, con stato e responsabile:
 - il pubblico prioritario, la decisione richiesta e una CTA concreta;
 - un journey di scene ordinate, ciascuna con funzione, prova, copy provvisorio e criterio di uscita;
 - una grammatica di camera applicabile ad asset statici: fuoco, scala, posizione, ingresso, uscita,
-  profondità, transizione e comportamento su desktop e mobile;
+  profondità, transizione, pattern curtain/gallery e comportamento su desktop e mobile;
 - un registro di asset già forniti, trovati online, derivati da asset approvati o eventualmente da
   generare, con provenienza e diritti separati;
 - una scheda pronta per `grl-web`, con i gate aperti chiaramente visibili.
@@ -96,12 +100,25 @@ Scegli una grammatica che il team possa eseguire con asset statici e che renda p
   chiarisce una relazione fra elementi.
 - **Cambio di stato:** dissolvenza, maschera, clip o sostituzione di asset quando cambia il momento
   narrativo; non animare ogni elemento allo stesso modo.
+- **Curtain di bordo:** un pannello entra da destra, sinistra, alto o basso e rivela la scena solo
+  quando il gesto corrisponde a un ingresso, un passaggio o una prova.
+- **Apertura a tenda:** due ante verticali o orizzontali si separano dal centro per aprire un mondo,
+  una trasformazione o un nuovo capitolo; la scena deve restare leggibile anche già rivelata.
 - **Arrivo e azione:** rallenta, stabilizza il fuoco, lascia spazio e contrasto alla CTA; il climax
   non deve rendere il bottone difficile da trovare.
 
 Per ogni scena descrivi `camera_in`, `camera_hold`, `camera_out` e il legame con il progresso dello
 scroll. Un mapping utile è qualitativo (`0–25%`, `25–60%`, `60–100%`) finché il canvas e le misure
 non sono approvati; non inventare coordinate precise quando l'asset non è ancora scelto.
+
+### Gallery come sequenza
+
+Una gallery entra nel journey con una funzione precisa: confronto, trasformazione, attraversamento
+di un luogo o dettaglio di una prova. Scegli fra `gallery-curtain`, `gallery-track`,
+`gallery-mosaic-reveal`, `gallery-focus`, `gallery-stagger` e `gallery-before-after`; registra ordine,
+elemento focale, criterio di avanzamento, controllo touch/tastiera, progress, alt text e fallback.
+La gallery deve restare una lista o griglia leggibile con `prefers-reduced-motion`, senza autoplay,
+hover obbligatorio o scroll orizzontale che intrappola il percorso principale.
 
 La resa predefinita è deterministica: `transform`, `opacity`, `clip-path`, livelli con parallax,
 Intersection Observer, SVG o canvas possono realizzare il movimento. Mantieni una versione ridotta
@@ -170,7 +187,7 @@ conversazione se la richiesta è esplorativa, con questi artefatti logici:
 scroll-world/
 ├── interview.md          # dichiarato, non noto, decisioni e domande aperte
 ├── journey.md            # tappe, frizioni, prove, CTA e metriche
-├── cinematic-plan.md     # scene, camera_in/hold/out e scroll mapping
+├── cinematic-plan.md     # scene, pattern, camera_in/hold/out e scroll mapping
 ├── asset-manifest.md     # sorgenti, diritti, focal point e stato
 ├── scroll-spec.md        # comportamento statico desktop/mobile e fallback
 └── review.md             # gate, handoff, approvazioni e blocchi
