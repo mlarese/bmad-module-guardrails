@@ -7,7 +7,7 @@
 
 Perché serve
 ------------
-Il bundle `grl` installa diciassette figure e quattordici workflow in un colpo solo. Chi vuole
+Il bundle `grl` installa diciotto figure e quattordici workflow in un colpo solo. Chi vuole
 solo la governance normativa, o solo il presidio ingegneristico, non ha motivo di
 portarsi le altre dieci figure. La soluzione è un repository per area — ma scritto a
 mano diventerebbe subito divergente dal bundle.
@@ -91,6 +91,14 @@ SOURCE_AUXILIARY_FILES = {
     "src/skills/grl-agent-creative/evals/cases.json",
     "src/skills/grl-agent-creative/evals/triggers.json",
     "src/skills/grl-agent-creative/evals/files/reel-feature-brief.md",
+    "src/skills/grl-agent-imaging/SKILL.md",
+    "src/skills/grl-agent-imaging/customize.toml",
+    "src/skills/grl-agent-imaging/scripts/generate_image.py",
+    "src/skills/grl-agent-imaging/scripts/tests/test_generate_image.py",
+    "src/skills/grl-agent-imaging/evals/README.md",
+    "src/skills/grl-agent-imaging/evals/cases.json",
+    "src/skills/grl-agent-imaging/evals/triggers.json",
+    "src/skills/grl-agent-imaging/evals/files/product-shot-brief.md",
     "src/skills/grl-social/SKILL.md",
     "src/skills/grl-social/evals/README.md",
     "src/skills/grl-social/evals/cases.json",
@@ -126,12 +134,12 @@ SOURCE_AUXILIARY_FILES = {
 # significato.
 BOARD_ROSTER_FILES = {"SKILL.md", "selection.md"}
 
-# Il bundle conta diciassette figure e lo dice ovunque nei testi del core. In un modulo
+# Il bundle conta diciotto figure e lo dice ovunque nei testi del core. In un modulo
 # tematico quel numero è falso, e un numero falso in una skill è un'istruzione
 # sbagliata. Con più figure si sostituisce il numerale; con una sola si toglie e
 # resta il plurale generico, che è impreciso ma non falso — riscrivere l'accordo
 # verbale di frasi arbitrarie non è automatizzabile.
-NUMERALS = {2: "due", 3: "tre", 4: "quattro", 5: "cinque", 6: "sei", 7: "sette", 14: "quattordici", 16: "sedici", 17: "diciassette"}
+NUMERALS = {2: "due", 3: "tre", 4: "quattro", 5: "cinque", 6: "sei", 7: "sette", 8: "otto", 14: "quattordici", 16: "sedici", 17: "diciassette", 18: "diciotto"}
 
 # Nota appesa a ogni figura del modulo: le tabelle di handoff citano colleghe che
 # qui non sono installate, e senza questa riga l'agente rimanda a un vuoto.
@@ -210,7 +218,7 @@ def core_renames(core_skills: list[str], code: str) -> dict[str, str]:
 def adapt_counts(text: str, count: int) -> str:
     """Riporta al numero reale di figure i conteggi scritti per il bundle.
 
-    Tocca solo le costruzioni in cui `diciassette` (o i vecchi `sedici`, `quattordici`, `tredici` e `dodici`) è accostato alle
+    Tocca solo le costruzioni in cui `diciotto` (o i vecchi `diciassette`, `sedici`, `quattordici`, `tredici` e `dodici`) è accostato alle
     figure o alle loro chiavi di config: «tredici documenti» dentro un esempio, o
     «tredici pagine» in una reference, restano quello che sono.
     """
@@ -225,7 +233,7 @@ def adapt_counts(text: str, count: int) -> str:
             return f"{numeral}{space}{noun}"
         return noun
 
-    numerals = r"(?:dodici|tredici|quattordici|sedici|diciassette)"
+    numerals = r"(?:dodici|tredici|quattordici|sedici|diciassette|diciotto)"
     text = re.sub(rf"una\s+delle\s+{numerals}\s+figure", "una delle figure", text)
     text = re.sub(rf"tutte\s+e\s+{numerals}", replace_all_of, text)
     text = re.sub(rf"\b{numerals}(\s+)(figure|chiavi)", replace_noun, text)
@@ -509,10 +517,10 @@ README_MODULE_COPY = {
     "gre": "A focused BMad module for code architecture, database architecture and design, application security, infrastructure and operations, and AI application design. Every recommendation includes the cost of ignoring it.",
     "grf": "A focused BMad module for tax, accounting operations, grants, incentives, and live fiscal updates. It checks requirements, deadlines, eligible expenses, and reporting against primary sources.",
     "grh": "A focused BMad module for clinical data, healthcare interoperability, patient safety, and medical-device qualification. It keeps real clinical workflows and MDR scope in view.",
-    "grw": "A focused BMad module for visual quality, search, web delivery, paid media, organic social content, and creative video. It guards against generic pages, unsupported ranking promises, unplanned posts, and unmeasured spend.",
-    "gpm": "A focused BMad module for paid media, Google Ads, tracking, consent, social content, and creative production. It keeps campaigns and assets behind evidence, approval, and rollback gates.",
+    "grw": "A focused BMad module for visual quality, search, web delivery, paid media, organic social content, creative video, and AI image generation. It guards against generic pages, unsupported ranking promises, unplanned posts, and unmeasured spend.",
+    "gpm": "A focused BMad module for paid media, Google Ads, tracking, consent, social content, creative production, and AI image generation. It keeps campaigns and assets behind evidence, approval, and rollback gates.",
     "grv": "A focused BMad module for hotel revenue management, pricing, forecasting, profit, and PMS/Channel Manager integrations. It keeps external publication behind explicit gates, dry-runs, approval, and rollback.",
-    "gau": "A focused BMad module for routing repeatable processes across software, databases, legal, tax, design, architecture, healthcare, web, paid media, social content, creative video, and revenue management.",
+    "gau": "A focused BMad module for routing repeatable processes across software, databases, legal, tax, design, architecture, healthcare, web, paid media, social content, creative video, AI image generation, and revenue management.",
     "gwp": "A focused BMad module for component-based WordPress architecture and controlled delivery through the release gate. It covers Gutenberg, Elementor, ACF, templates, the Media Library, and migration work.",
 }
 
@@ -537,6 +545,7 @@ README_AGENT_FOCUS = {
     "grl-agent-ads": "Google Ads, paid advertising, audiences, creative, tracking, consent, budgets, and policies.",
     "grl-agent-social": "Organic strategy, content pillars, calendars, posts, captions, community, and metrics.",
     "grl-agent-creative": "Advertising concepts, design, scripts, storyboards, shot lists, Reels, TikToks, and Shorts.",
+    "grl-agent-imaging": "Nano Banana, Imagen, GPT Image, Photoshop, prompts, masks, subject consistency, provenance, and export.",
     "grl-agent-revenue": "Occupancy, ADR, RevPAR, TRevPAR, NRevPAR, GOPPAR, MUP, MOL, pickup, forecasting, pricing, PMS, and Channel Manager.",
 }
 

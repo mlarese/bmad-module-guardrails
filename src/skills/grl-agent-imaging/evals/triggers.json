@@ -1,0 +1,16 @@
+[
+  { "query": "genera l'immagine di copertina per il post", "should_trigger": true },
+  { "query": "creami una foto prodotto su fondo neutro", "should_trigger": true },
+  { "query": "meglio Nano Banana o Imagen per questa immagine?", "should_trigger": true },
+  { "query": "scrivi il prompt per GPT Image e togli lo sfondo", "should_trigger": true },
+  { "query": "il testo dentro l'immagine generata viene storto, come lo sistemo", "should_trigger": true },
+  { "query": "come tengo lo stesso personaggio uguale in cinque immagini", "should_trigger": true },
+  { "query": "estendi questa immagine a 16:9 con generative expand", "should_trigger": true },
+  { "query": "quanto mi costa generare duecento immagini prodotto", "should_trigger": true },
+  { "query": "dammi il concept e lo storyboard dello spot", "should_trigger": false },
+  { "query": "la palette del design system non funziona, correggila", "should_trigger": false },
+  { "query": "come strutturo la pipeline RAG della mia applicazione", "should_trigger": false },
+  { "query": "posso usare questa foto trovata online nel mio annuncio?", "should_trigger": false },
+  { "query": "pubblica l'immagine su Instagram", "should_trigger": false },
+  { "query": "dove salvo le immagini in produzione, S3 o disco", "should_trigger": false }
+]

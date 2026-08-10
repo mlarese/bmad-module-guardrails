@@ -34,7 +34,7 @@ def test_all_eval_suites_and_fixture_references_are_structurally_valid() -> None
     case_files = sorted((ROOT / "src" / "skills").glob("*/evals/cases.json"))
     trigger_files = sorted((ROOT / "src" / "skills").glob("*/evals/triggers.json"))
 
-    assert len(case_files) == 31
+    assert len(case_files) == 32
     assert len(trigger_files) == len(case_files)
 
     case_count = 0
@@ -53,8 +53,8 @@ def test_all_eval_suites_and_fixture_references_are_structurally_valid() -> None
     for trigger_file in trigger_files:
         trigger_count += len(_trigger_entries(trigger_file))
 
-    assert case_count >= 155
-    assert trigger_count >= 399
+    assert case_count >= 162
+    assert trigger_count >= 413
     assert not missing, "fixture non risolti: " + "; ".join(missing)
 
 

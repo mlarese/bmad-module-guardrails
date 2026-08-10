@@ -9,15 +9,16 @@
 
 code: grl
 name: Guardrails
-description: "Diciassette figure di presidio — privacy e GDPR, sicurezza applicativa, legale e licenze, compliance normativa, fisco e finanza agevolata, qualità visiva della UI, disciplina architetturale del codice, design e architettura dei database, infrastruttura e operatività, dominio clinico del software sanitario, impianto delle applicazioni che usano modelli linguistici, architettura WordPress a componenti, SEO, media buying/ADV, social e contenuti, creative direction/video e revenue management alberghiero — che affiancano il team dentro il ciclo di sviluppo, quando cambiare costa ancora poco. Include workflow di ricerca live per gli aggiornamenti legali e fiscali, `grl-web` per landing page e siti, `grl-ads` per Google Ads e advertising, `grl-social` per strategia e contenuti organici, `grl-social-creative` per design e video short-form, tre workflow revenue per audit, pricing e preflight PMS e `grl-automation` per orchestrare attività ripetibili con dry-run, approvazioni e rollback."
+description: "Diciotto figure di presidio — privacy e GDPR, sicurezza applicativa, legale e licenze, compliance normativa, fisco e finanza agevolata, qualità visiva della UI, disciplina architetturale del codice, design e architettura dei database, infrastruttura e operatività, dominio clinico del software sanitario, impianto delle applicazioni che usano modelli linguistici, architettura WordPress a componenti, SEO, media buying/ADV, social e contenuti, creative direction/video, generazione di immagini con modelli AI e revenue management alberghiero — che affiancano il team dentro il ciclo di sviluppo, quando cambiare costa ancora poco. Include workflow di ricerca live per gli aggiornamenti legali e fiscali, `grl-web` per landing page e siti, `grl-ads` per Google Ads e advertising, `grl-social` per strategia e contenuti organici, `grl-social-creative` per design e video short-form, tre workflow revenue per audit, pricing e preflight PMS e `grl-automation` per orchestrare attività ripetibili con dry-run, approvazioni e rollback."
 module_version: 1.25.0
 default_selected: false
 
 module_greeting: >
-  Guardrails è installato: diciassette figure di presidio — Vera (privacy), Kai (sicurezza),
+  Guardrails è installato: diciotto figure di presidio — Vera (privacy), Kai (sicurezza),
   Aldo (legale), Nils (compliance), Marta (fisco e finanza agevolata), Iris (design), Otto (architettura), Dario (database), Bruno (ops),
   Livia (dominio clinico), Enzo (applicazioni con AI), Milo (WordPress a componenti), Nora (SEO), Dalia (media buying e ADV),
-  Sofia (social e contenuti), Marco (creative e social video) e Rhea (revenue management) —
+  Sofia (social e contenuti), Marco (creative e social video), Elio (immagini generate con AI) e
+  Rhea (revenue management) —
   entrano nel roster e si possono convocare per nome.
 
   Passo successivo consigliato: esegui `grl-profile`. Senza il profilo di progetto le
@@ -45,7 +46,7 @@ module_greeting: >
 # (_bmad/memory/grl-shared/project-profile.md), non in config — il profilo cambia
 # da progetto a progetto, la config è unica per installazione.
 #
-# Il modulo si installa sempre intero: diciassette figure e quattordici workflow, nessuna
+# Il modulo si installa sempre intero: diciotto figure e quattordici workflow, nessuna
 # selezione. La severità si deriva dalla criticità dichiarata nel profilo di progetto.
 
 # Nessuna chiave `directories`: la cartella della memoria condivisa
@@ -56,12 +57,12 @@ post-install-notes: >
   Primo passo: esegui `grl-profile`. Sono otto campi, pochi minuti, quasi tutti
   pre-compilati leggendo il repository; l'unico che devi dichiarare tu è la criticità
   del progetto (hobby/prototipo · interno · produzione con clienti · regolamentato),
-  perché è quella che regola quanto saranno severe tutte e diciassette le figure. Se il
+  perché è quella che regola quanto saranno severe tutte e diciotto le figure. Se il
   settore è sanitario, il profilo raccoglie cinque campi in più; altrimenti non li
   nomina nemmeno.
 
   Poi puoi chiamare una figura per nome, oppure usare `grl-board` per farle guardare
-  tutte insieme lo stesso artefatto. Le diciassette entrano anche nella stanza principale
+  tutte insieme lo stesso artefatto. Le diciotto entrano anche nella stanza principale
   di `bmad-party-mode`, accanto ai cinque agenti BMM.
 
   Facoltativo e reversibile: se vuoi che le figure vengano consultate dentro i flussi
@@ -211,6 +212,14 @@ agents:
     title: Advertising Creative Director & Short-form Video Producer
     icon: 🎬
     description: "Trasforma brief in concept pubblicitari, design, script, storyboard, shot list e specifiche producibili per post, Reel, TikTok e Shorts, con gate espliciti su claim, diritti, privacy e approvazione."
+
+  - code: grl-agent-imaging
+    module: grl
+    team: creative
+    name: Elio
+    title: AI Image Generation & Post-production Specialist
+    icon: 🖼️
+    description: "Sceglie il modello immagine adatto al compito fra Nano Banana, Imagen, GPT Image e Photoshop, scrive il prompt che lo governa, genera i file su richiesta con dry-run e conferma, e distingue ciò che si chiede a un modello da ciò che va fatto in post-produzione, con gate su somiglianze, marchi, dati personali e provenienza."
 
   - code: grl-agent-revenue
     module: grl

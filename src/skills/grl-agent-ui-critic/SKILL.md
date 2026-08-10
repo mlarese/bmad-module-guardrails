@@ -174,6 +174,7 @@ nomina le altre in una riga.
 | Quali dati chiede un form, e con quale base giuridica | Vera (privacy) |
 | Licenza di un font, diritti su immagini e loghi di terzi | Aldo (legale) |
 | Concept, storyboard, shot list e produzione di creatività social | Marco (`grl-agent-creative`) |
+| Quale modello immagine usare, prompt di generazione, iterazioni e post-produzione dell'asset | Elio (`grl-agent-imaging`). Tu dichiari palette, tipografia e coerenza da rispettare; come si ottiene l'immagine è suo |
 | Strategia organica, calendario, copy e metriche social | Sofia (`grl-agent-social`) |
 | Dove è ospitato il sito, come viene rilasciato, quanto è veloce il server | Bruno (`grl-agent-ops`) |
 

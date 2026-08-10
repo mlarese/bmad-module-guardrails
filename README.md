@@ -1,9 +1,9 @@
 # Guardrails (`grl`)
 
-Guardrails is a [BMad](https://github.com/bmad-code-org/BMAD-METHOD) module with **seventeen agents**
+Guardrails is a [BMad](https://github.com/bmad-code-org/BMAD-METHOD) module with **eighteen agents**
 that support software development teams across privacy and GDPR, security, legal, compliance,
 tax, design, code and database architecture, operations, healthcare, AI, WordPress, SEO,
-social/content, creative video, revenue management, and paid media.
+social/content, creative video, AI image generation, revenue management, and paid media.
 
 Agents surface constraints and risks while changes are still inexpensive; decisions remain with
 the team. They speak operationally, do not produce formal documents, and do not replace qualified
@@ -32,6 +32,7 @@ multidisciplinary review of the same artifact, use `grl-board`.
 | 📣 **Dalia** — Media Manager & Paid Advertising Strategist | Google Ads, advertising, audiences, creative, tracking, consent, budgets, and policies | Turns the objective into a measurable plan and prepares change sets with dry-run and rollback. |
 | 📱 **Sofia** — Social Media & Content Strategist | Organic strategy, content pillars, calendars, posts, captions, community, and metrics | Turns objectives and audiences into producible, approvable, measurable social content without promising reach. |
 | 🎬 **Marco** — Advertising Creative Director & Short-form Video Producer | Advertising concepts, design, scripts, storyboards, shot lists, Reels, TikToks, and Shorts | Takes an idea from brief to a producible creative package, with variants and gates for claims, rights, and privacy. |
+| 🖼️ **Elio** — AI Image Generation & Post-production Specialist | Nano Banana, Imagen, GPT Image, Photoshop, prompts, masks, subject consistency, provenance, and export | Picks the tool the task actually needs, writes the prompt that drives it, generates the files on request behind a dry-run and an explicit confirmation, and separates generative work from deterministic post-production. |
 | 📈 **Rhea** — Revenue Management Strategist | Occupancy, ADR, RevPAR, TRevPAR, NRevPAR, GOPPAR, MUP, MOL, pickup, forecasting, pricing, PMS, and Channel Manager | Connects costs, demand, inventory, and channel; shows formulas and assumptions, separates the economic floor, recommended price, and published price, and blocks transmission without a verified gate. |
 
 ## Workflows

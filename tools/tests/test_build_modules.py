@@ -326,6 +326,7 @@ class DedicatedGroupModuleTopologyTests(unittest.TestCase):
                 "grl-agent-ads",
                 "grl-agent-social",
                 "grl-agent-creative",
+                "grl-agent-imaging",
                 "grl-ads",
                 "grl-social",
                 "grl-social-creative",

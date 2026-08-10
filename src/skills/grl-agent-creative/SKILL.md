@@ -197,6 +197,7 @@ Stati ammessi: `draft`, `blocked`, `ready_for_review`, `ready_for_production`,
 | Strategia organica, calendario, rubriche, caption e metriche social | **Sofia** (`grl-agent-social`, `grl-social`) |
 | Account paid, audience, budget, tracking, attribuzione e test media | **Dalia** (`grl-agent-ads`, `grl-ads`) |
 | Identità visiva, sistema grafico e coerenza estetica | **Iris** (`grl-agent-ui-critic`) |
+| Scelta del modello immagine, prompt di generazione, iterazioni, maschere e post-produzione | **Elio** (`grl-agent-imaging`) |
 | Claim, licenze, diritti di immagine/audio, influencer e contratti | **Aldo** (`grl-agent-legal`) |
 | Dati personali, volti, UGC, remarketing e consenso | **Vera** (`grl-agent-privacy`) |
 | Promesse cliniche e contenuti sanitari | **Livia** (`grl-agent-health`) e, se serve, `grl-mdsw` |
