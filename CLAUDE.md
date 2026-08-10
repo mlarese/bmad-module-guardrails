@@ -122,13 +122,14 @@ diventati `pass` a parità di skill, appena l'esecutore ha avuto dove scrivere.
 ### Le skill che convocano altre figure non stanno in un subagent
 
 `grl-board` e i workflow che passano dal collegio convocano le figure come agenti separati.
-Dentro un esecutore che è già un subagent, quelle convocazioni annidano un secondo livello che
-spesso non rientra: l'esecutore resta in attesa e la run non chiude. Lo stesso limite colpisce i
-criteri che pretendono l'invocazione di `bmad-review`, che un subagent non può fare.
+Dentro un esecutore che è già un subagent, quelle convocazioni annidano un secondo livello: alcune
+lenti non rientrano e l'esecutore le aspetta a lungo. Un solo caso del release gate ha richiesto
+quattordici minuti e oltre centomila token. Lo stesso limite colpisce i criteri che pretendono
+l'invocazione di `bmad-review`, che un subagent non può fare.
 
-**Regola: valuta queste skill dalla sessione principale, un caso per volta**, non con un fan-out di
-esecutori. Il costo è alto — un solo caso del release gate vale cinque skill semplici — quindi
-mettile in coda da sole, non in mezzo a una tornata.
+**Regola: metti queste skill in coda da sole, un caso per volta**, e conta almeno un quarto d'ora
+per caso. Un solo caso del release gate costa quanto cinque skill semplici: non infilarlo in mezzo
+a una tornata, o la tornata si ferma lì.
 
 Un criterio che il banco non può soddisfare si registra come limite noto. **Non si ammorbidisce la
 rubric per farlo passare**: una rubric si irrigidisce soltanto.
