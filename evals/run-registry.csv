@@ -42,4 +42,4 @@ grl-social,2026-08-10,trigger,pass,"router A 12/12, router B 12/12",subagent del
 grl-social-creative,2026-08-10,trigger,pass,"router A 12/12, router B 12/12",subagent della sessione di chat,scratchpad eval/lotti/router-*.json
 grl-toolchain,2026-08-10,trigger,pass,"router A 20/20, router B 20/20",subagent della sessione di chat,scratchpad eval/lotti/router-*.json
 grl-web,2026-08-10,trigger,pass,"router A 20/20, router B 20/20",subagent della sessione di chat,scratchpad eval/lotti/router-*.json
-grl-wordpress-delivery,2026-08-10,trigger,pass,"router A 7/7, router B 7/7",subagent della sessione di chat,scratchpad eval/lotti/router-*.json
+grl-wordpress-delivery,2026-08-10,trigger,pass,"router A 20/20, router B 20/20",subagent della sessione di chat,scratchpad eval/lotti/router-*.json
