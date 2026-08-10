@@ -405,11 +405,68 @@ def indent_block(text: str, prefix: str) -> str:
 # --------------------------------------------------------------------------- #
 
 
+def help_field_bounds(line: str) -> list[tuple[int, int]]:
+    """Confini (inizio, fine) di ogni campo della riga, rispettando le virgolette.
+
+    Serve a riscrivere un campo singolo senza ri-serializzare la riga: il writer
+    del modulo `csv` normalizzerebbe il quoting di tutte le altre colonne.
+    """
+    bounds: list[tuple[int, int]] = []
+    start, quoted = 0, False
+    for index, char in enumerate(line):
+        if char == '"':
+            quoted = not quoted
+        elif char == "," and not quoted:
+            bounds.append((start, index))
+            start = index + 1
+    bounds.append((start, len(line)))
+    return bounds
+
+
+def help_row_id(line: str) -> str:
+    """Identificatore `skill:action` della riga, come lo scrivono preceded-by e followed-by."""
+    bounds = help_field_bounds(line)
+    skill = line[slice(*bounds[1])]
+    action = line[slice(*bounds[5])]
+    return f"{skill}:{action}"
+
+
+def prune_help_links(lines: list[str], board_skill: str = "") -> list[str]:
+    """Corregge i rimandi che puntano a voci assenti dal modulo.
+
+    Un modulo tematico riceve solo le righe delle proprie skill. Un `preceded-by`
+    o un `followed-by` verso una voce rimasta fuori diventa un rimando morto: il
+    router lo propone e l'utente non lo trova.
+
+    Un `preceded-by` fuori perimetro si azzera: un prerequisito non si inventa. Un
+    `followed-by` ripiega invece sul collegio del modulo, che raccoglie qualsiasi
+    consulenza — meglio di un passo successivo assente.
+    """
+    known = {help_row_id(line) for line in lines if len(help_field_bounds(line)) > 5}
+    fallback = f"{board_skill}:review" if f"{board_skill}:review" in known else ""
+    pruned = []
+    for line in lines:
+        bounds = help_field_bounds(line)
+        if len(bounds) <= 9:  # riga senza le colonne dei rimandi: niente da potare
+            pruned.append(line)
+            continue
+        riga_id = help_row_id(line)
+        for column in (9, 8):  # dall'ultima alla prima: i confini a monte restano validi
+            start, end = bounds[column]
+            target = line[start:end]
+            if not target or target in known:
+                continue
+            sostituto = fallback if column == 9 and fallback != riga_id else ""
+            line = line[:start] + sostituto + line[end:]
+        pruned.append(line)
+    return pruned
+
+
 def filter_help_csv(
     source: str, skills: set[str], module_name: str, renames: dict[str, str], count: int
 ) -> str:
     lines = source.splitlines()
-    kept = [lines[0]]
+    kept = []
     for line in lines[1:]:
         if not line.strip():
             continue
@@ -424,7 +481,7 @@ def filter_help_csv(
         rewritten = rewritten.replace("Guardrails,", f"{module_name},", 1)
         rewritten = rewritten.replace("Installa Guardrails,", f"Installa {module_name},", 1)
         kept.append(rewritten)
-    return "\n".join(kept) + "\n"
+    return "\n".join([lines[0], *prune_help_links(kept, renames.get("grl-board", "grl-board"))]) + "\n"
 
 
 # --------------------------------------------------------------------------- #

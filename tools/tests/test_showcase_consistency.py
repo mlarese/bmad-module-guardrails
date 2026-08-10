@@ -102,6 +102,53 @@ class CatalogCoverageTests(unittest.TestCase):
                 self.assertIn(agent["name"], greeting)
 
 
+class SequenceGraphTests(unittest.TestCase):
+    """`preceded-by` e `followed-by` guidano il router: devono puntare a voci vere.
+
+    `bmad-help` legge questi due campi per dire dove sei e cosa viene dopo. Un
+    rimando verso una voce inesistente manda l'utente su un passo che non trova,
+    e un passo senza uscita lo lascia fermo. Nessun test copriva questo grafo.
+    """
+
+    def righe(self) -> list[dict]:
+        with HELP.open() as handle:
+            return list(csv.DictReader(handle))
+
+    def voci(self) -> set[str]:
+        return {f"{r['skill']}:{r['action']}" for r in self.righe()}
+
+    def test_every_link_points_at_an_existing_entry(self) -> None:
+        """Un rimando verso una voce assente propone un passo che l'utente non trova."""
+        voci = self.voci()
+        for row in self.righe():
+            for campo in ("preceded-by", "followed-by"):
+                bersaglio = row[campo].strip()
+                if not bersaglio:
+                    continue
+                with self.subTest(voce=f"{row['skill']}:{row['action']}", campo=campo):
+                    self.assertIn(bersaglio, voci)
+
+    def test_no_entry_links_to_itself(self) -> None:
+        """Una voce che rimanda a sé stessa manda il router in cerchio."""
+        for row in self.righe():
+            voce = f"{row['skill']}:{row['action']}"
+            for campo in ("preceded-by", "followed-by"):
+                with self.subTest(voce=voce, campo=campo):
+                    self.assertNotEqual(row[campo].strip(), voce)
+
+    def test_every_figure_offers_a_next_step(self) -> None:
+        """Dopo una consulenza il router deve saper dire cosa viene dopo.
+
+        Le figure sono il punto d'ingresso più frequente del modulo. Se nessuna
+        dichiara un seguito, ogni consulenza finisce in un vicolo cieco.
+        """
+        for row in self.righe():
+            if not row["skill"].startswith("grl-agent-"):
+                continue
+            with self.subTest(figura=row["skill"], azione=row["action"]):
+                self.assertTrue(row["followed-by"].strip())
+
+
 class NumeralConsistencyTests(unittest.TestCase):
     """Il numero di figure e di workflow scritto a parole nelle vetrine."""
 

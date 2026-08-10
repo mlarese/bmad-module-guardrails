@@ -159,6 +159,106 @@ class HelpCsvTests(unittest.TestCase):
         self.assertNotIn("dodici", result)
 
 
+# Catalogo minimo con le colonne dei rimandi: `grl-agent-health` punta a una voce
+# che un modulo ristretto non riceve.
+HELP_LINKS_SOURCE = """module,skill,display-name,menu-code,description,action,args,phase,preceded-by,followed-by,required,output-location,outputs
+Guardrails,grl-profile,Profila Guardrails,GP,"Profila le figure.",profile,,1-analysis,,grl-board:review,true,,profilo
+Guardrails,grl-board,Convoca il collegio,GB,"Fa leggere l'artefatto.",review,[path],anytime,grl-profile:profile,grl-board:release-gate,false,,riepilogo
+Guardrails,grl-agent-health,Livia — dominio clinico,GH,"Dato clinico e reparto.",consult,,anytime,grl-profile:profile,grl-mdsw:qualify,false,,clinico
+Guardrails,grl-mdsw,È un dispositivo medico?,GQ,"Qualifica il software.",qualify,,anytime,grl-profile:profile,,false,,verdetto
+"""
+
+
+class HelpLinkPruningTests(unittest.TestCase):
+    """Un modulo tematico riceve solo alcune righe: i rimandi fuori perimetro vanno tolti.
+
+    Prima di questa potatura, `grh` pubblicava `grl-mdsw:qualify -> grl-agent-compliance:consult`
+    verso una figura che quel modulo non installa, e `grw` faceva lo stesso con Bruno.
+    """
+
+    def filtra(self, skills: set[str]) -> str:
+        return bm.filter_help_csv(HELP_LINKS_SOURCE, skills, "Guardrails Health", {}, 3)
+
+    def test_drops_links_to_entries_left_out_of_the_module(self) -> None:
+        result = self.filtra({"grl-profile", "grl-agent-health"})
+        self.assertNotIn("grl-mdsw:qualify", result)
+        self.assertNotIn("grl-board:review", result)
+
+    def test_a_figure_falls_back_to_the_module_board(self) -> None:
+        """Persa l'uscita verticale, la figura rimanda comunque al collegio."""
+        result = self.filtra({"grl-profile", "grl-board", "grl-agent-health"})
+        livia = next(
+            r for r in csv.DictReader(io.StringIO(result)) if r["skill"] == "grl-agent-health"
+        )
+        self.assertEqual(livia["followed-by"], "grl-board:review")
+
+    def test_a_missing_prerequisite_is_not_invented(self) -> None:
+        """`preceded-by` è un vincolo: fuori perimetro si azzera, non si sostituisce."""
+        result = self.filtra({"grl-board", "grl-agent-health"})
+        livia = next(
+            r for r in csv.DictReader(io.StringIO(result)) if r["skill"] == "grl-agent-health"
+        )
+        self.assertEqual(livia["preceded-by"], "")
+
+    def test_the_board_does_not_fall_back_to_itself(self) -> None:
+        """Il collegio non può essere il proprio passo successivo."""
+        result = self.filtra({"grl-board", "grl-agent-health"})
+        board = next(r for r in csv.DictReader(io.StringIO(result)) if r["skill"] == "grl-board")
+        self.assertEqual(board["followed-by"], "")
+
+    def test_keeps_links_whose_target_is_installed(self) -> None:
+        result = self.filtra({"grl-profile", "grl-agent-health", "grl-mdsw", "grl-board"})
+        self.assertIn("grl-mdsw:qualify", result)
+        self.assertIn("grl-board:review", result)
+
+    def test_pruning_only_empties_the_link_columns(self) -> None:
+        """La potatura non deve spostare o riscrivere le altre colonne."""
+        result = self.filtra({"grl-profile", "grl-agent-health"})
+        righe = list(csv.DictReader(io.StringIO(result)))
+        livia = next(r for r in righe if r["skill"] == "grl-agent-health")
+        self.assertEqual(livia["display-name"], "Livia — dominio clinico")
+        self.assertEqual(livia["description"], "Dato clinico e reparto.")
+        self.assertEqual(livia["outputs"], "clinico")
+        self.assertEqual(livia["followed-by"], "")
+
+    def test_pruning_follows_the_core_rename(self) -> None:
+        """Un rimando al core rinominato resta valido sotto il nuovo nome."""
+        result = bm.filter_help_csv(
+            HELP_LINKS_SOURCE,
+            {"grl-profile", "grl-board", "grl-agent-health", "grl-mdsw"},
+            "Guardrails Health",
+            bm.core_renames(CORE, "grh"),
+            3,
+        )
+        self.assertIn("grh-board:review", result)
+        self.assertIn("grh-profile:profile", result)
+        self.assertNotIn("grl-board:review", result)
+
+
+class DerivedModuleLinkTests(unittest.TestCase):
+    """Nessuno dei nove moduli generati pubblica un rimando verso una voce che non ha."""
+
+    def test_no_derived_module_publishes_a_dead_link(self) -> None:
+        topology = bm.load_topology(ROOT / "src" / "module-topology.yaml")
+        source = (ROOT / "src" / "module-help.csv").read_text(encoding="utf-8")
+        core = topology["core"]["skills"]
+        for module in topology["modules"]:
+            code = module["code"]
+            installed = set(module["skills"]) | set(core)
+            csv_text = bm.filter_help_csv(
+                source, installed, module["name"], bm.core_renames(core, code), len(installed)
+            )
+            righe = list(csv.DictReader(io.StringIO(csv_text)))
+            voci = {f"{r['skill']}:{r['action']}" for r in righe}
+            for row in righe:
+                for campo in ("preceded-by", "followed-by"):
+                    bersaglio = row[campo].strip()
+                    if not bersaglio:
+                        continue
+                    with self.subTest(modulo=code, voce=row["skill"], campo=campo):
+                        self.assertIn(bersaglio, voci)
+
+
 class WordPressModuleMetadataTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
