@@ -48,14 +48,20 @@ def leggi() -> list[dict]:
 
 
 def copertura() -> dict[str, dict[str, dict]]:
-    """Per ogni skill, la run più recente di ciascun tipo."""
+    """Per ogni skill, la run più recente di ciascun tipo.
+
+    A parità di data vince l'ultima riga del file. Il registro è append-only, quindi
+    l'ordine è cronologico: senza questa regola una run ripetuta lo stesso giorno —
+    che è il caso normale quando si corregge una skill e la si rivaluta — resterebbe
+    invisibile dietro il proprio primo tentativo.
+    """
     mappa: dict[str, dict[str, dict]] = {s: {} for s in skill_names()}
     for riga in leggi():
         skill, tipo = riga["skill"], riga["tipo"]
         if skill not in mappa:
             continue
         corrente = mappa[skill].get(tipo)
-        if corrente is None or riga["data"] > corrente["data"]:
+        if corrente is None or riga["data"] >= corrente["data"]:
             mappa[skill][tipo] = riga
     return mappa
 

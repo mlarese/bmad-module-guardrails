@@ -60,6 +60,28 @@ class RegistryContentTests(unittest.TestCase):
         """La copertura elenca tutte le skill, anche quelle senza alcuna run."""
         self.assertEqual(set(er.copertura()), self.skills)
 
+    def test_a_rerun_on_the_same_day_supersedes_the_first_attempt(self) -> None:
+        """Correggere una skill e rivalutarla nello stesso giorno è il caso normale.
+
+        Il registro è append-only e cronologico: a parità di data deve vincere
+        l'ultima riga, altrimenti l'esito corretto resta invisibile dietro il
+        proprio primo tentativo — che è quello che si voleva superare.
+        """
+        skill = sorted(self.skills)[0]
+        righe = [
+            {"skill": skill, "data": "2026-01-01", "tipo": "quality", "esito": "parziale",
+             "dettaglio": "primo tentativo", "runtime": "chat", "evidenza": "x"},
+            {"skill": skill, "data": "2026-01-01", "tipo": "quality", "esito": "pass",
+             "dettaglio": "dopo la correzione", "runtime": "chat", "evidenza": "x"},
+        ]
+        originale, er.leggi = er.leggi, lambda: righe
+        try:
+            vincente = er.copertura()[skill]["quality"]
+        finally:
+            er.leggi = originale
+        self.assertEqual(vincente["esito"], "pass")
+        self.assertEqual(vincente["dettaglio"], "dopo la correzione")
+
 
 class RegistryWriteTests(unittest.TestCase):
     """`--add` non deve accettare una skill inventata né perdere le righe esistenti."""
