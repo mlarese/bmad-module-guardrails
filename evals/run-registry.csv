@@ -48,3 +48,4 @@ grl-web,2026-08-10,quality,parziale,"27/27 su cinque casi, nessuna correzione ne
 grl-web,2026-08-10,quality,pass,"33/33 criteri su sei casi, nessuna correzione necessaria",subagent della sessione di chat,scratchpad eval/grl-web/judge-*.json
 grl-mdsw,2026-08-10,quality,pass,"30/30 criteri su sei casi, nessuna correzione necessaria",subagent della sessione di chat,scratchpad eval/grl-mdsw/judge-*.json
 grl-mdsw,2026-08-10,quality,pass,"30/30 criteri su sei casi, nessuna correzione",subagent della sessione di chat,scratchpad eval/grl-mdsw/judge-*.json
+grl-agent-privacy,2026-08-10,quality,parziale,38/41 dopo la prima correzione; tre criteri su confine e FRIA da riverificare,subagent della sessione di chat,scratchpad eval/grl-agent-privacy/judge*.json
