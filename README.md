@@ -47,6 +47,7 @@ when the relevant signals and expertise are needed.
 | --- | --- | --- |
 | `grl-profile` | At the start of a project or when its context changes | Collects the project profile and writes it to `_bmad/memory/grl-shared/project-profile.md`. |
 | `grl-board` | When the same artifact needs multiple review perspectives or a release gate | Convenes the relevant figures, makes exclusions explicit, and returns a summary, conflicts, and verdict. |
+| `grl-bug-finder` | When a code path, configuration, integration, or regression behaves incorrectly | Builds a minimal reproduction, traces the failure path, separates evidence from hypotheses, and proposes a regression test without changing the artifact. |
 | `grl-mdsw` | When a software feature might fall within the scope of medical devices | Classifies the software against the MDR and identifies the consequences and non-consequences for the plan. |
 | `grl-legal-updates` | For legal updates, instruments, validity, and developments in a defined period | Searches primary sources and produces a digest with coverage, `as_of`, checks, and obsolescence. |
 | `grl-fiscal-updates` | For tax developments, grants, incentives, amendments, and deadlines | Applies the same verifiable process to requirements, expenses, eligible parties, and tax dates. |

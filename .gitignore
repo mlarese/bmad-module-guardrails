@@ -1,8 +1,12 @@
-# Installazione BMad locale e skill di terze parti — non appartengono a questo modulo
-_bmad/
-_bmad-output/
+# Installazione BMad locale e skill di terze parti — non appartengono a questo modulo.
+# La barra iniziale limita la regola alla radice: le fixture degli eval vivono in
+# `src/skills/*/evals/_bmad/` e devono restare versionate, altrimenti il derivato
+# pubblica un eval senza il file che il caso dichiara.
+/_bmad/
+/_bmad-output/
 .claude/
 .agents/
+.cline/
 .opencode/
 
 # Link personale alla LLM Wiki (bundle OKF fuori dal repository)

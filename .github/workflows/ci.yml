@@ -1,0 +1,61 @@
+# Controlli automatici del repository fonte di Guardrails.
+#
+# I test verificano gli invarianti delle skill e la coerenza delle vetrine. La build
+# verifica che i nove moduli derivati si generino davvero e che due esecuzioni
+# producano lo stesso albero: una build non deterministica pubblica differenze che
+# nessuno ha scritto.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  verifica:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Installa le dipendenze
+        run: python -m pip install --upgrade pip PyYAML pytest
+
+      - name: Esegui i test
+        run: python -m pytest tools/tests/ -q
+
+      - name: Genera i moduli derivati
+        run: python tools/build_modules.py --out build-1
+
+      - name: Genera i moduli derivati una seconda volta
+        run: python tools/build_modules.py --out build-2
+
+      - name: Confronta le due build
+        run: diff -r build-1 build-2
+
+      - name: Verifica che ogni skill raggiunga almeno un derivato
+        run: |
+          python - <<'PY'
+          import pathlib, sys
+
+          fonte = {p.name for p in pathlib.Path("src/skills").iterdir() if (p / "SKILL.md").is_file()}
+          generate = set()
+          for skill in pathlib.Path("build-1").glob("*/src/skills/*"):
+              nome = skill.name
+              # Le due skill del core arrivano rinominate con il codice del modulo.
+              if nome.endswith("-profile"):
+                  nome = "grl-profile"
+              elif nome.endswith("-board"):
+                  nome = "grl-board"
+              generate.add(nome)
+
+          mancanti = sorted(fonte - generate)
+          if mancanti:
+              print("skill che non raggiungono nessun modulo derivato:", *mancanti, sep="\n  ")
+              sys.exit(1)
+          print(f"{len(fonte)} skill, tutte presenti in almeno un derivato")
+          PY

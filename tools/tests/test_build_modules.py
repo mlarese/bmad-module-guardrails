@@ -11,6 +11,7 @@ from __future__ import annotations
 import csv
 import io
 import json
+import re
 import sys
 import tempfile
 import unittest
@@ -361,6 +362,7 @@ class DedicatedGroupModuleTopologyTests(unittest.TestCase):
                 "grl-revenue-plan",
                 "grl-revenue-preflight",
                 "grl-wordpress-delivery",
+                "grl-bug-finder",
                 "grl-automation",
                 "grl-toolchain",
             ],
@@ -414,6 +416,21 @@ class GreetingTests(unittest.TestCase):
         greeting = bm.render_greeting(self.module, agents, bm.core_renames(CORE, "grg"))
         self.assertIn("Vera (dpo) e Aldo (tech lawyer) entrano nel roster", greeting)
         self.assertIn("le figure partono cieche", greeting)
+
+
+class GeneratedGitignoreTests(unittest.TestCase):
+    """Il `.gitignore` del derivato non deve escludere le fixture degli eval.
+
+    Una regola `_bmad/` senza barra iniziale vale a ogni livello, quindi copre anche
+    `src/skills/*/evals/_bmad/`. Nel derivato la fixture arriva ma non entra in git, e
+    l'eval che la dichiara parte senza il file.
+    """
+
+    def test_local_install_rules_are_anchored_to_the_root(self) -> None:
+        for regola in ("_bmad/", "_bmad-output/"):
+            with self.subTest(regola=regola):
+                self.assertIn(f"/{regola}", bm.GITIGNORE)
+                self.assertNotRegex(bm.GITIGNORE, rf"(?m)^{re.escape(regola)}$")
 
 
 class ShortDescriptionTests(unittest.TestCase):

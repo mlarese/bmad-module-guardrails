@@ -9,8 +9,8 @@
 
 code: grl
 name: Guardrails
-description: "Ventuno figure di presidio — privacy e GDPR, sicurezza applicativa, legale e licenze, compliance normativa, fisco e finanza agevolata, qualità visiva della UI, disciplina architetturale del codice, punti di blocco e rigidità del software, design e architettura dei database, scrittura firmware embedded e sistemi real-time, infrastruttura e operatività, dominio clinico del software sanitario, impianto delle applicazioni che usano modelli linguistici, architettura WordPress a componenti, SEO, media buying/ADV, social e contenuti, creative direction/video, generazione di immagini con modelli AI, revenue management alberghiero e configurazione di prodotto da documento — che affiancano il team dentro il ciclo di sviluppo, quando cambiare costa ancora poco. Include workflow di ricerca live per gli aggiornamenti legali e fiscali, `grl-web` per landing page e siti, `grl-ads` per Google Ads e advertising, `grl-social` per strategia e contenuti organici, `grl-social-creative` per design e video short-form, tre workflow revenue per audit, pricing e preflight PMS `grl-automation` per orchestrare attività ripetibili con dry-run, approvazioni e rollback e `grl-toolchain` per trovare, valutare e installare skill e server MCP su ogni harness."
-module_version: 1.27.0
+description: "Ventuno figure di presidio — privacy e GDPR, sicurezza applicativa, legale e licenze, compliance normativa, fisco e finanza agevolata, qualità visiva della UI, disciplina architetturale del codice, punti di blocco e rigidità del software, design e architettura dei database, scrittura firmware embedded e sistemi real-time, infrastruttura e operatività, dominio clinico del software sanitario, impianto delle applicazioni che usano modelli linguistici, architettura WordPress a componenti, SEO, media buying/ADV, social e contenuti, creative direction/video, generazione di immagini con modelli AI, revenue management alberghiero e configurazione di prodotto da documento — che affiancano il team dentro il ciclo di sviluppo, quando cambiare costa ancora poco. Include workflow di ricerca live per gli aggiornamenti legali e fiscali, `grl-bug-finder` per diagnosi read-only di bug e regressioni, `grl-web` per landing page e siti, `grl-ads` per Google Ads e advertising, `grl-social` per strategia e contenuti organici, `grl-social-creative` per design e video short-form, tre workflow revenue per audit, pricing e preflight PMS, `grl-automation` per orchestrare attività ripetibili con dry-run, approvazioni e rollback e `grl-toolchain` per trovare, valutare e installare skill e server MCP su ogni harness."
+module_version: 1.28.0
 default_selected: false
 
 module_greeting: >
@@ -41,6 +41,8 @@ module_greeting: >
   e fiscali con ricerca live e doppio gate di verifica.
   `grl-social` coordina strategia, calendario, copy e misura dei contenuti organici; `grl-social-creative`
   prepara concept, script, storyboard, shot list e specifiche per post, annunci e video short-form.
+  `grl-bug-finder` indaga bug e regressioni in modalità read-only, con riproduzione, failure path,
+  ipotesi falsificabili e test di regressione senza correggere il codice.
   `grl-toolchain` cerca skill e server MCP, li valuta prima di installarli e li porta su ogni
   harness della macchina con la sintassi di quell'harness, con dry-run, backup e rollback.
 
@@ -49,7 +51,7 @@ module_greeting: >
 # (_bmad/memory/grl-shared/project-profile.md), non in config — il profilo cambia
 # da progetto a progetto, la config è unica per installazione.
 #
-# Il modulo si installa sempre intero: ventuno figure e quindici workflow, nessuna
+# Il modulo si installa sempre intero: ventuno figure e sedici workflow, nessuna
 # selezione. La severità si deriva dalla criticità dichiarata nel profilo di progetto.
 
 # Nessuna chiave `directories`: la cartella della memoria condivisa
@@ -67,6 +69,10 @@ post-install-notes: >
   Poi puoi chiamare una figura per nome, oppure usare `grl-board` per farle guardare
   tutte insieme lo stesso artefatto. Le ventuno entrano anche nella stanza principale
   di `bmad-party-mode`, accanto ai cinque agenti BMM.
+
+  Se qualcosa non torna nel codice, nella configurazione o in una pipeline, usa `grl-bug-finder`:
+  separa osservato e atteso, prova a riprodurre, ordina i finding e prepara il test di regressione
+  senza applicare la correzione.
 
   Facoltativo e reversibile: se vuoi che le figure vengano consultate dentro i flussi
   BMM (PRD, architettura, UX, code review) invece che su tua chiamata, si aggiungono

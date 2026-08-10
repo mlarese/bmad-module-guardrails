@@ -105,6 +105,55 @@ class DistributionHygieneTests(unittest.TestCase):
                     self.assertNotIn("{project-root}/../", path.read_text())
 
 
+class GitTrackingTests(unittest.TestCase):
+    """`build_modules.py` copia nei derivati solo i file che `git ls-files` restituisce.
+
+    Un file non tracciato non arriva al derivato, e nessun test lo segnala: la skill
+    parte monca. Il caso è già successo con `grl-bug-finder` e con la fixture di
+    `grl-profile`, esclusa da una regola `.gitignore` troppo larga. La scorciatoia
+    applicata allora — una allowlist di percorsi dentro `build_modules.py` — ha nascosto
+    il problema per 75 file: il secondo test vieta di rimetterla.
+    """
+
+    ESCLUSI = ("__pycache__", ".analysis")
+
+    def _distribuibili(self) -> set[str]:
+        risultato = set()
+        for path in SKILLS.rglob("*"):
+            if not path.is_file():
+                continue
+            parti = path.relative_to(REPO).parts
+            if any(p in self.ESCLUSI or p.startswith(".") for p in parti):
+                continue
+            risultato.add(str(path.relative_to(REPO)))
+        return risultato
+
+    def _tracciati(self) -> set[str]:
+        import subprocess
+
+        result = subprocess.run(
+            ["git", "ls-files", "--", "src/skills"],
+            cwd=REPO, capture_output=True, text=True, check=True,
+        )
+        return set(result.stdout.split())
+
+    def test_every_distributed_file_is_tracked_by_git(self) -> None:
+        mancanti = sorted(self._distribuibili() - self._tracciati())
+        self.assertEqual(mancanti, [], "file non tracciati: non arrivano nei derivati")
+
+    def test_the_build_copies_only_what_git_tracks(self) -> None:
+        """Nessuna allowlist di percorsi rientra in `build_modules.py`."""
+        import sys
+
+        sys.path.insert(0, str(REPO / "tools"))
+        import build_modules
+
+        self.assertFalse(
+            hasattr(build_modules, "SOURCE_AUXILIARY_FILES"),
+            "un file che serve al derivato si committa, non si elenca nel builder",
+        )
+
+
 class TopologyCoverageTests(unittest.TestCase):
     def test_every_skill_reaches_at_least_one_derived_module(self) -> None:
         topology = yaml.safe_load(TOPOLOGY.read_text())

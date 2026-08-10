@@ -7,7 +7,7 @@
 
 Perché serve
 ------------
-Il bundle `grl` installa diciannove figure e quattordici workflow in un colpo solo. Chi vuole
+Il bundle `grl` installa ventuno figure e sedici workflow in un colpo solo. Chi vuole
 solo la governance normativa, o solo il presidio ingegneristico, non ha motivo di
 portarsi le altre dieci figure. La soluzione è un repository per area — ma scritto a
 mano diventerebbe subito divergente dal bundle.
@@ -19,9 +19,9 @@ repository. I repository derivati non si modificano a mano: si rigenerano.
 
 Cosa fa, in ordine
 ------------------
-1. Copia le skill del modulo, prendendo **solo i file tracciati da git** e gli eventuali
-   file ausiliari esplicitamente allowlisted in `SOURCE_AUXILIARY_FILES` — così referti di
-   analisi, cache ed eval run restano fuori.
+1. Copia le skill del modulo, prendendo **solo i file tracciati da git** — così referti di
+   analisi, cache ed eval run restano fuori. Un file non committato non arriva al
+   derivato: `tools/tests/test_skill_contracts.py` tiene chiusa la regola.
 2. Duplica le due skill del core (`grl-profile`, `grl-board`)
    rinominandole con il codice del modulo (`grg-profile`, …) e riscrive ogni
    riferimento testuale a quei due nomi. I codici delle figure (`grl-agent-*`) e la
@@ -59,94 +59,12 @@ except ImportError:  # pragma: no cover - dipende dall'ambiente, non dalla logic
 # viene copiato byte per byte.
 TEXT_SUFFIXES = {".md", ".yaml", ".yml", ".toml", ".csv", ".json", ".py", ".txt", ".html"}
 
-# File di skill ed eval aggiunti nello stesso turno ma non ancora presenti
-# nell'indice Git gestito dal sandbox. Restano espliciti per non copiare cache o
-# report di eval non destinati ai repository derivati; dopo il commit diventano
-# normali risultati di `git ls-files` e l'allowlist è innocua.
-SOURCE_AUXILIARY_FILES = {
-    "src/skills/grl-ads/evals/fixtures/period-b-incomparable.csv",
-    "src/skills/grl-agent-ads/evals/fixtures/period-a.csv",
-    "src/skills/grl-agent-ads/evals/fixtures/period-b-incomparable.csv",
-    "src/skills/grl-revenue-audit/SKILL.md",
-    "src/skills/grl-revenue-audit/evals/README.md",
-    "src/skills/grl-revenue-audit/evals/cases.json",
-    "src/skills/grl-revenue-audit/evals/triggers.json",
-    "src/skills/grl-revenue-plan/SKILL.md",
-    "src/skills/grl-revenue-plan/evals/README.md",
-    "src/skills/grl-revenue-plan/evals/cases.json",
-    "src/skills/grl-revenue-plan/evals/triggers.json",
-    "src/skills/grl-revenue-preflight/SKILL.md",
-    "src/skills/grl-revenue-preflight/evals/README.md",
-    "src/skills/grl-revenue-preflight/evals/cases.json",
-    "src/skills/grl-revenue-preflight/evals/triggers.json",
-    "src/skills/grl-agent-social/SKILL.md",
-    "src/skills/grl-agent-social/customize.toml",
-    "src/skills/grl-agent-social/evals/README.md",
-    "src/skills/grl-agent-social/evals/cases.json",
-    "src/skills/grl-agent-social/evals/triggers.json",
-    "src/skills/grl-agent-social/evals/files/linkedin-feature-brief.md",
-    "src/skills/grl-agent-creative/SKILL.md",
-    "src/skills/grl-agent-creative/customize.toml",
-    "src/skills/grl-agent-creative/evals/README.md",
-    "src/skills/grl-agent-creative/evals/cases.json",
-    "src/skills/grl-agent-creative/evals/triggers.json",
-    "src/skills/grl-agent-creative/evals/files/reel-feature-brief.md",
-    "src/skills/grl-agent-imaging/SKILL.md",
-    "src/skills/grl-agent-imaging/customize.toml",
-    "src/skills/grl-agent-imaging/scripts/generate_image.py",
-    "src/skills/grl-agent-imaging/scripts/tests/test_generate_image.py",
-    "src/skills/grl-agent-imaging/evals/README.md",
-    "src/skills/grl-agent-imaging/evals/cases.json",
-    "src/skills/grl-agent-imaging/evals/triggers.json",
-    "src/skills/grl-agent-imaging/evals/files/product-shot-brief.md",
-    "src/skills/grl-social/SKILL.md",
-    "src/skills/grl-social/evals/README.md",
-    "src/skills/grl-social/evals/cases.json",
-    "src/skills/grl-social/evals/triggers.json",
-    "src/skills/grl-social-creative/SKILL.md",
-    "src/skills/grl-social-creative/evals/README.md",
-    "src/skills/grl-social-creative/evals/cases.json",
-    "src/skills/grl-social-creative/evals/triggers.json",
-    "src/skills/grl-social-creative/evals/files/reel-package-brief.md",
-    "src/skills/grl-agent-database/SKILL.md",
-    "src/skills/grl-agent-database/customize.toml",
-    "src/skills/grl-agent-database/evals/README.md",
-    "src/skills/grl-agent-database/evals/cases.json",
-    "src/skills/grl-agent-database/evals/triggers.json",
-    "src/skills/grl-agent-database/references/ricerca-live.md",
-    "src/skills/grl-agent-database/references/modello-dati-e-workload.md",
-    "src/skills/grl-agent-database/references/scelta-database.md",
-    "src/skills/grl-agent-database/references/relazionali-e-distribuiti.md",
-    "src/skills/grl-agent-database/references/no-sql-e-specializzati.md",
-    "src/skills/grl-agent-database/references/vettoriale-e-ibrido.md",
-    "src/skills/grl-agent-database/references/prestazioni-affidabilita.md",
-    "src/skills/grl-agent-database/references/migrazione-e-benchmark.md",
-    "src/skills/grl-agent-database/references/revisione-database.md",
-    "src/skills/grl-agent-database/references/fasi-bmad.md",
-    "src/skills/grl-agent-database/references/prompt-quality-canon.md",
-    "src/skills/grl-agent-firmware/SKILL.md",
-    "src/skills/grl-agent-firmware/customize.toml",
-    "src/skills/grl-agent-firmware/evals/README.md",
-    "src/skills/grl-agent-firmware/evals/cases.json",
-    "src/skills/grl-agent-firmware/evals/triggers.json",
-    "src/skills/grl-agent-firmware/references/scrittura-e-review.md",
-    "src/skills/grl-agent-firmware/references/bring-up-e-driver.md",
-    "src/skills/grl-agent-firmware/references/real-time-e-rtos.md",
-    "src/skills/grl-agent-firmware/references/test-e-debug.md",
-    "src/skills/grl-agent-firmware/references/secure-update-e-safety.md",
-    "src/skills/grl-agent-firmware/references/ricerca-live.md",
-    "src/skills/grl-agent-firmware/references/prompt-quality-canon.md",
-    "src/skills/grl-agent-architecture/references/deep-module-design.md",
-    "src/skills/grl-automation/references/human-only-wizard.md",
-    "src/skills/grl-profile/assets/domain-glossary-template.md",
-}
-
 # I file del collegio che portano il roster e i confini fra figure. Sono gli unici
 # su cui si filtra per figura installata: altrove le stesse righe hanno un altro
 # significato.
 BOARD_ROSTER_FILES = {"SKILL.md", "selection.md"}
 
-# Il bundle conta diciannove figure e lo dice ovunque nei testi del core. In un modulo
+# Il bundle conta ventuno figure e lo dice ovunque nei testi del core. In un modulo
 # tematico quel numero è falso, e un numero falso in una skill è un'istruzione
 # sbagliata. Con più figure si sostituisce il numerale; con una sola si toglie e
 # resta il plurale generico, che è impreciso ma non falso — riscrivere l'accordo
@@ -203,14 +121,7 @@ def tracked_files(source_root: Path, relative_dir: str) -> list[Path]:
     )
     if result.returncode != 0:
         raise BuildError(f"git ls-files {relative_dir}: {result.stderr.strip()}")
-    paths = [Path(p) for p in result.stdout.split("\0") if p]
-    prefix = relative_dir.rstrip("/") + "/"
-    for value in sorted(SOURCE_AUXILIARY_FILES):
-        if value.startswith(prefix):
-            path = Path(value)
-            if path.is_file() and path not in paths:
-                paths.append(path)
-    return paths
+    return [Path(p) for p in result.stdout.split("\0") if p]
 
 
 # --------------------------------------------------------------------------- #
@@ -617,6 +528,10 @@ README_WORKFLOW_COPY = {
         "Skills and MCP servers across harnesses",
         "Finds and assesses skills and MCP servers, then installs them in each harness's own syntax behind a dry-run, a backup, and a verification step.",
     ),
+    "grl-bug-finder": (
+        "Bug and regression diagnosis",
+        "Builds a minimal reproduction, traces the failure path, separates evidence from hypotheses, and proposes a regression test without changing the artifact.",
+    ),
 }
 
 
@@ -768,9 +683,11 @@ Il lavoro finisce con i commit e, se richiesto, con il push del branch.
 """
 
 
-GITIGNORE = """# Installazione BMad locale e skill di terze parti
-_bmad/
-_bmad-output/
+GITIGNORE = """# Installazione BMad locale e skill di terze parti.
+# La barra iniziale limita la regola alla radice: le fixture degli eval vivono in
+# `src/skills/*/evals/_bmad/` e devono restare versionate.
+/_bmad/
+/_bmad-output/
 .claude/
 .agents/
 .opencode/

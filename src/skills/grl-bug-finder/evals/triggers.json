@@ -1,0 +1,20 @@
+[
+  { "query": "trova il bug in questo file", "should_trigger": true },
+  { "query": "cerca una regressione dopo l'ultimo deploy", "should_trigger": true },
+  { "query": "debugga questo errore con una riproduzione minima", "should_trigger": true },
+  { "query": "indaga perché l'API restituisce un totale sbagliato", "should_trigger": true },
+  { "query": "fai un bug hunt read-only sul repository", "should_trigger": true },
+  { "query": "trova il difetto e prepara il test di regressione senza correggere", "should_trigger": true },
+  { "query": "la query è diventata lenta dopo una migrazione: trova la causa", "should_trigger": true },
+  { "query": "cerca bug nel flusso di retry e concorrenza", "should_trigger": true },
+  { "query": "controlla se questo endpoint ha un bug di sicurezza", "should_trigger": true },
+  { "query": "qualcosa non funziona, aiutami a isolare il failure path", "should_trigger": true },
+  { "query": "esegui il bug finder su una fixture senza modificare il codice", "should_trigger": true },
+  { "query": "fai il debug di una regressione intermittente", "should_trigger": true },
+  { "query": "convoca Vito per cercare un wizard senza via d'uscita", "should_trigger": false },
+  { "query": "fammi una review generale di questo artefatto", "should_trigger": false },
+  { "query": "orchestra una procedura di diagnosi e deploy con rollback", "should_trigger": false },
+  { "query": "correggi direttamente il bug e committa la patch", "should_trigger": false },
+  { "query": "progetta l'architettura di questo servizio", "should_trigger": false },
+  { "query": "scrivi il test senza indagare un difetto", "should_trigger": false }
+]
