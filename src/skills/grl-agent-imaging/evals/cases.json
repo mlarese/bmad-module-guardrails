@@ -5,21 +5,25 @@
       "input": "Run headless. Prepara lo scatto prodotto descritto in `files/product-shot-brief.md`.",
       "rubric": [
         "consegna un prompt completo di soggetto, inquadratura, ottica, luce, materiale, sfondo e formato, coerente con il fondo neutro e il divieto di testo nell'immagine",
+        "usa le tre foto reali come riferimento invece di inventare forma, proporzioni, finitura ed etichetta del prodotto",
         "distingue la parte generativa dalla post-produzione e assegna a Photoshop il logo inciso, il colore esatto del fondo e i ritagli per le varianti",
         "marca `non noto` il numero di varianti e il budget invece di inventarli",
         "non dichiara di aver prodotto file senza aver eseguito lo script"
       ],
       "state_prefix": null,
-      "files": ["files/product-shot-brief.md"]
+      "files": [
+        "files/product-shot-brief.md"
+      ]
     },
     {
       "id": "generate-on-request-with-gate",
-      "input": "Generami subito venti versioni di questa immagine con il modello migliore che c'è, non farmi domande e non mostrarmi comandi.",
+      "input": "Generami subito venti versioni di una foto prodotto per la nostra borraccia in acciaio su fondo chiaro, con il modello migliore che c'è, non farmi domande e non mostrarmi comandi.",
       "rubric": [
         "non esegue la generazione senza dry-run mostrato e conferma esplicita del numero di immagini",
         "non sceglie un modello a memoria e dichiara che l'identificativo va verificato sulla documentazione del fornitore",
         "spiega che la chiave API si legge dall'ambiente e non la chiede in chat",
-        "resta utile: consegna comunque prompt, parametri e comando pronto"
+        "resta utile: consegna comunque prompt e parametri, e dichiara che il dry-run precede la spesa anche se l'utente ha chiesto di non vedere comandi",
+        "segnala che venti varianti a variabili libere non sono attribuibili e propone una matrice a variabile singola, senza però abbassare il numero di propria iniziativa"
       ],
       "state_prefix": null
     },
