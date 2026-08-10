@@ -106,6 +106,19 @@ Per gli eval runtime del modulo usa il runtime della chat e i suoi subagent, che
 ereditano il modello corrente. Non avviare OpenCode, Claude CLI, Laguna o altri
 harness esterni e non sostituire il modello corrente con un fallback.
 
+### L'esecutore lavora su una sandbox, non a mani legate
+
+Molte rubric verificano che la skill **scriva** un file: `project-profile.md`, `domain-glossary.md`,
+il dossier di un gate. Un esecutore a cui si vieta di scrivere fallisce quei criteri senza che la
+skill abbia una colpa, e il fallimento si legge come difetto della skill.
+
+**Regola: dai all'esecutore una cartella vuota nello scratchpad e digli di trattarla come
+`{project-root}`.** Deve scrivere davvero i file previsti, lì dentro. Vietagli solo di toccare il
+repository del modulo. Il giudice ispeziona la sandbox per verificare cosa è stato scritto.
+
+Nella prima run di `grl-profile` questo errore ha prodotto due fallimenti su cinque. Entrambi sono
+diventati `pass` a parità di skill, appena l'esecutore ha avuto dove scrivere.
+
 ### Ogni run finisce nel registro
 
 I report delle run restano fuori dal repository: `.gitignore` esclude `**/eval-runs/` di
