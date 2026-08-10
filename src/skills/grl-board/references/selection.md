@@ -16,6 +16,7 @@ Chi entra e su quale segnale. Una figura entra solo se nell'artefatto — o nel 
 | Marco 🎬 | `grl-agent-creative` | concept pubblicitari, hook, design creativo, script, storyboard, shot list, asset spec e varianti per post, Reel, TikTok e Shorts |
 | Elio 🖼️ | `grl-agent-imaging` | immagini generate o ritoccate con un modello, prompt per immagini, Nano Banana, Imagen, GPT Image, maschere e inpainting, generative fill di Photoshop, coerenza del soggetto, provenienza e marcatori, export degli asset visivi |
 | Otto 🧱 | `grl-agent-architecture` | struttura delle cartelle, confini fra moduli, strati di astrazione, direzione delle dipendenze, impatto strutturale di una feature |
+| Vito 🚧 | `grl-agent-blockers` | percorsi obbligatori senza uscita, gate e approvazioni, macchine a stati senza ritorno, rigidità cablata nel codice, blocchi a runtime, gate di repo e pipeline |
 | Dario 🗄️ | `grl-agent-database` | schema e modello dati, migrazioni, query e indici, scelta del motore, transazioni e consistenza, backup/restore e RPO/RTO del datastore, vector store e ricerca ibrida |
 | Ada ⚙️ | `grl-agent-firmware` | MCU/SoC, startup e linker, registri e periferiche, interrupt/DMA, RTOS, timing, memoria, bring-up, test/debug, bootloader e aggiornamenti sicuri |
 | Rhea 📈 | `grl-agent-revenue` | tariffe e pricing, KPI alberghieri (ADR, RevPAR, TRevPAR, GopPAR), forecast e pickup, inventario e canali, integrazioni PMS e Channel Manager |

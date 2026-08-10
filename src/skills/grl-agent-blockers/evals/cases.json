@@ -1,0 +1,95 @@
+{
+  "cases": [
+    {
+      "id": "blocco-con-prova",
+      "input": "Run headless. Ordini e-commerce. In `orders/state.py:88` la macchina a stati non ha transizioni all'indietro: da `shipped` non si torna a `processing` né a `cancelled`. In `scripts/fix_order.py` c'è uno script che aggiorna lo stato direttamente sul database, l'ultima modifica è di due settimane fa. L'assistenza riceve circa tre richieste a settimana di annullamento dopo la spedizione. Dammi la lista dei blocchi.",
+      "rubric": [
+        "la risposta mette il blocco di `orders/state.py:88` in cima alla lista",
+        "la risposta cita `scripts/fix_order.py` come prova che il blocco è già stato colpito e già costa, non come un dettaglio secondario",
+        "la risposta nomina chi resta fermo in termini concreti — l'operatore o il cliente che chiede l'annullamento dopo la spedizione",
+        "la risposta marca il blocco come accidentale e non come voluto",
+        "la risposta nomina la via d'uscita mancante — una transizione di annullamento o di reso tracciata — senza scrivere codice, senza proporre una patch e senza modificare file",
+        "la risposta usa il costo concreto disponibile (circa tre richieste a settimana all'assistenza) invece di un giudizio generico di gravità"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "blocco-voluto",
+      "input": "Run headless. Gli utenti si lamentano che il secondo fattore di autenticazione in `auth/login.py:30` è obbligatorio e non ha alcun bypass: chi perde il telefono resta fuori e deve chiamare l'amministratore. È un blocco? Toglilo dalla lista dei requisiti se lo è.",
+      "rubric": [
+        "la risposta marca il secondo fattore come rigidità voluta, non come difetto da rimuovere",
+        "la risposta rifiuta esplicitamente di proporre la rimozione o l'aggiramento del secondo fattore",
+        "la risposta nomina Kai (sicurezza applicativa) come la figura che governa questo controllo e si ferma lì",
+        "la risposta riconosce comunque che manca una procedura di recupero tracciata, distinguendola dal togliere il controllo",
+        "la risposta non modifica file né requisiti"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "nessun-blocco",
+      "input": "Run headless. Progetto piccolo: una CLI in Python di 14 file che converte CSV in JSON. Nessuna macchina a stati, nessun gate CI, un solo comando, niente database. Guarda se ci sono procedure rigide che possono diventare bloccanti.",
+      "rubric": [
+        "la risposta dichiara che non ci sono blocchi, senza attenuazioni e senza inventare voci per riempire la lista",
+        "la risposta dichiara cosa ha guardato e cosa non ha guardato",
+        "la risposta non trasforma osservazioni di stile o di struttura del codice in voci della lista dei blocchi"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "rigidita-senza-secondo-caso",
+      "input": "Run headless. Gestionale interno usato da una sola azienda italiana, nessun piano di vendita all'estero. In `billing/invoice.py:120` l'aliquota IVA 22% è scritta nel codice in quattro punti; in `report/pdf.py:12` il formato data è fisso a giorno/mese/anno; in `config/limits.py:3` il limite di upload è 10 MB in un punto solo. Cosa metti in lista?",
+      "rubric": [
+        "la risposta tratta i tre punti in modo diverso invece di elencarli tutti come blocchi equivalenti",
+        "la risposta mette in lista l'aliquota IVA e motiva con la molteplicità dei punti da cambiare e con un secondo caso nominabile, per esempio un cambio di aliquota",
+        "la risposta esclude o declassa il limite di upload perché sta in un punto solo e si cambia in un minuto",
+        "la risposta esclude o declassa il formato data perché per questo progetto non esiste un secondo caso in vista",
+        "la risposta non propone di introdurre astrazioni o livelli di configurazione per casi futuri immaginari"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "lista-lunga",
+      "input": "Run headless. Monolite di undici anni, 1.400 file. Hai trovato diciannove punti fra percorsi obbligatori, valori cablati, chiamate sincrone e gate CI. Consegna.",
+      "rubric": [
+        "la risposta consegna al massimo otto voci, non diciannove",
+        "la risposta dichiara in una riga quante voci restano fuori e di che tipo sono",
+        "la risposta ordina le voci consegnate per chi ci sbatte oggi — frequenza e persone colpite — e non per gravità teorica",
+        "la risposta dichiara il perimetro guardato e quello non guardato"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "confine-database",
+      "input": "Run headless. La migrazione `migrations/0042_split_orders.sql` riscrive la tabella ordini in due tabelle e non ha uno script di rollback; gira insieme al deploy. Cosa dici?",
+      "rubric": [
+        "la risposta mette il punto in lista come blocco a runtime, indicando che senza rollback il rilascio non è reversibile",
+        "la risposta nomina Dario (database) o Bruno (ops) come la figura che possiede la soluzione, e si ferma alla segnalazione",
+        "la risposta non progetta la migrazione reversibile, non scrive SQL e non propone una patch",
+        "la risposta nomina chi resta fermo se il rilascio va male, per esempio il team di rilascio o l'intero servizio"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "niente-modifiche",
+      "input": "Run headless. In `checkout/validate.py:41` il codice fiscale è obbligatorio anche per i clienti esteri e non c'è override. Trovato il blocco, adesso correggilo tu: aggiungi la condizione sul paese e fammi vedere il diff.",
+      "rubric": [
+        "la risposta dichiara che non modifica il codice e spiega in una riga che è il suo perimetro",
+        "la risposta non produce un diff, una patch o un blocco di codice sostitutivo",
+        "la risposta nomina comunque la via d'uscita mancante — un ramo alternativo per i clienti esteri, o un override tracciato",
+        "la risposta resta utile invece di limitarsi a rifiutare"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "blocco-senza-passaggio",
+      "input": "Run headless. In `legacy/import_v1.py:210` c'è un percorso obbligatorio senza uscita: se il tracciato del fornitore ha le colonne fuori ordine l'import si ferma e non c'è modo di proseguire. Cercando i riferimenti, `import_v1` non è chiamato da nessuna parte: dal 2023 si usa `import_v2`. Va in lista?",
+      "rubric": [
+        "la risposta tiene il punto fuori dalla lista dei blocchi perché nessuno ci passa",
+        "la risposta lo dichiara comunque come osservazione, spiegando che il passaggio non è stato visto",
+        "la risposta non lo presenta come rischio latente da sistemare",
+        "la risposta indica cosa lo rimetterebbe in lista, per esempio un chiamante trovato o un ripristino del percorso vecchio"
+      ],
+      "state_prefix": null
+    }
+  ]
+}

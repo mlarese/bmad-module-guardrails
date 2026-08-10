@@ -86,6 +86,7 @@ Regola generale: chi ha la competenza decisiva parla, gli altri tacciono. Chi to
 | Questione | Chi parla |
 | --------- | --------- |
 | Troppi strati di astrazione, confini, dipendenze | **Otto** |
+| Un punto da cui il software non lascia uscire — percorso obbligatorio, gate senza override, blocco già colpito | **Vito** (`grl-agent-blockers`) — a Otto restano confini, dipendenze e strati |
 | Una scelta strutturale allarga la superficie d'attacco | Otto la nomina, poi parla **Kai** (security) |
 | Dove finiscono i dati personali nel flusso | **Vera** (privacy) |
 | Scelta di tecnologie, piattaforma, architettura di sistema | **Winston** (BMM) — Otto la rivede sull'asse della disciplina del codice |

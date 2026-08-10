@@ -548,6 +548,7 @@ README_AGENT_FOCUS = {
     "grl-agent-fiscal": "Taxes, VAT, grants, incentives, tax credits, and reporting.",
     "grl-agent-ui-critic": "UI, landing pages, markup, CSS, typography, palettes, density, and layout.",
     "grl-agent-architecture": "Boundaries, folders, dependencies, interfaces, factories, architectural layers, and the architectural constraints of a story or spec.",
+    "grl-agent-blockers": "Mandatory paths, state machines, gates and approvals, hardcoded rigidity, runtime stalls, and repo or pipeline gates.",
     "grl-agent-database": "Data models, PostgreSQL, Oracle, MongoDB, Redis/Valkey, distributed SQL, NoSQL, search, analytics, time-series, graph, vector, and hybrid search.",
     "grl-agent-firmware": "MCU and SoC firmware, startup, drivers, registers, interrupts/DMA, RTOS, timing, memory, bring-up, testing, debugging, bootloaders, and secure updates.",
     "grl-agent-ops": "Servers, VPS, Docker, CI/CD, deployment, TLS, backups, logs, and incidents.",

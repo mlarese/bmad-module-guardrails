@@ -64,7 +64,7 @@ Nove repository derivano da questo e li produce `tools/build_modules.py` leggend
 | Codice | Repository | Contiene |
 | ------ | ---------- | -------- |
 | `grg` | `mlarese/bmad-module-guardrails-governance` | Vera, Aldo, Nils, `grl-legal-updates`, `grl-automation` |
-| `gre` | `mlarese/bmad-module-guardrails-engineering` | Kai, Otto, Dario, Ada, Bruno, Enzo, `grl-automation` |
+| `gre` | `mlarese/bmad-module-guardrails-engineering` | Kai, Otto, Vito, Dario, Ada, Bruno, Enzo, Ines, `grl-automation`, `grl-toolchain` |
 | `grf` | `mlarese/bmad-module-guardrails-fiscal` | Marta, `grl-fiscal-updates`, `grl-automation` |
 | `grh` | `mlarese/bmad-module-guardrails-health` | Livia, `grl-mdsw`, `grl-automation` |
 | `grw` | `mlarese/bmad-module-guardrails-web` | Iris, Nora, Dalia, Sofia, Marco, `grl-web`, `grl-ads`, `grl-social`, `grl-social-creative`, `grl-automation` |

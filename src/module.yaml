@@ -9,13 +9,14 @@
 
 code: grl
 name: Guardrails
-description: "Venti figure di presidio — privacy e GDPR, sicurezza applicativa, legale e licenze, compliance normativa, fisco e finanza agevolata, qualità visiva della UI, disciplina architetturale del codice, design e architettura dei database, scrittura firmware embedded e sistemi real-time, infrastruttura e operatività, dominio clinico del software sanitario, impianto delle applicazioni che usano modelli linguistici, architettura WordPress a componenti, SEO, media buying/ADV, social e contenuti, creative direction/video, generazione di immagini con modelli AI, revenue management alberghiero e configurazione di prodotto da documento — che affiancano il team dentro il ciclo di sviluppo, quando cambiare costa ancora poco. Include workflow di ricerca live per gli aggiornamenti legali e fiscali, `grl-web` per landing page e siti, `grl-ads` per Google Ads e advertising, `grl-social` per strategia e contenuti organici, `grl-social-creative` per design e video short-form, tre workflow revenue per audit, pricing e preflight PMS `grl-automation` per orchestrare attività ripetibili con dry-run, approvazioni e rollback e `grl-toolchain` per trovare, valutare e installare skill e server MCP su ogni harness."
-module_version: 1.26.0
+description: "Ventuno figure di presidio — privacy e GDPR, sicurezza applicativa, legale e licenze, compliance normativa, fisco e finanza agevolata, qualità visiva della UI, disciplina architetturale del codice, punti di blocco e rigidità del software, design e architettura dei database, scrittura firmware embedded e sistemi real-time, infrastruttura e operatività, dominio clinico del software sanitario, impianto delle applicazioni che usano modelli linguistici, architettura WordPress a componenti, SEO, media buying/ADV, social e contenuti, creative direction/video, generazione di immagini con modelli AI, revenue management alberghiero e configurazione di prodotto da documento — che affiancano il team dentro il ciclo di sviluppo, quando cambiare costa ancora poco. Include workflow di ricerca live per gli aggiornamenti legali e fiscali, `grl-web` per landing page e siti, `grl-ads` per Google Ads e advertising, `grl-social` per strategia e contenuti organici, `grl-social-creative` per design e video short-form, tre workflow revenue per audit, pricing e preflight PMS `grl-automation` per orchestrare attività ripetibili con dry-run, approvazioni e rollback e `grl-toolchain` per trovare, valutare e installare skill e server MCP su ogni harness."
+module_version: 1.27.0
 default_selected: false
 
 module_greeting: >
-  Guardrails è installato: venti figure di presidio — Vera (privacy), Kai (sicurezza),
-  Aldo (legale), Nils (compliance), Marta (fisco e finanza agevolata), Iris (design), Otto (architettura), Dario (database), Ada (firmware), Bruno (ops),
+  Guardrails è installato: ventuno figure di presidio — Vera (privacy), Kai (sicurezza),
+  Aldo (legale), Nils (compliance), Marta (fisco e finanza agevolata), Iris (design), Otto (architettura),
+  Vito (punti di blocco), Dario (database), Ada (firmware), Bruno (ops),
   Livia (dominio clinico), Enzo (applicazioni con AI), Milo (WordPress a componenti), Nora (SEO), Dalia (media buying e ADV),
   Sofia (social e contenuti), Marco (creative e social video), Elio (immagini generate con AI),
   Rhea (revenue management) e Ines (configurazione di prodotto) —
@@ -48,7 +49,7 @@ module_greeting: >
 # (_bmad/memory/grl-shared/project-profile.md), non in config — il profilo cambia
 # da progetto a progetto, la config è unica per installazione.
 #
-# Il modulo si installa sempre intero: venti figure e quindici workflow, nessuna
+# Il modulo si installa sempre intero: ventuno figure e quindici workflow, nessuna
 # selezione. La severità si deriva dalla criticità dichiarata nel profilo di progetto.
 
 # Nessuna chiave `directories`: la cartella della memoria condivisa
@@ -59,12 +60,12 @@ post-install-notes: >
   Primo passo: esegui `grl-profile`. Sono otto campi, pochi minuti, quasi tutti
   pre-compilati leggendo il repository; l'unico che devi dichiarare tu è la criticità
   del progetto (hobby/prototipo · interno · produzione con clienti · regolamentato),
-  perché è quella che regola quanto saranno severe tutte e venti le figure. Se il
+  perché è quella che regola quanto saranno severe tutte e ventuno le figure. Se il
   settore è sanitario, il profilo raccoglie cinque campi in più; altrimenti non li
   nomina nemmeno.
 
   Poi puoi chiamare una figura per nome, oppure usare `grl-board` per farle guardare
-  tutte insieme lo stesso artefatto. Le venti entrano anche nella stanza principale
+  tutte insieme lo stesso artefatto. Le ventuno entrano anche nella stanza principale
   di `bmad-party-mode`, accanto ai cinque agenti BMM.
 
   Facoltativo e reversibile: se vuoi che le figure vengano consultate dentro i flussi
@@ -147,6 +148,14 @@ agents:
     title: Code Architect
     icon: 🧱
     description: "Usa SOLID, KISS, DRY, separazione delle responsabilità, vertical slice e architettura esagonale come attrezzi e mai come dogmi: guarda confini fra moduli, direzione delle dipendenze, over-engineering e strati di astrazione di troppo, e ogni raccomandazione porta con sé il costo di non seguirla. Entra anche mentre scrivi una storia o una spec, e consegna i vincoli architetturali della cosa da costruire — verificabili alla review, oppure «nessun vincolo, procedi» — senza progettare per la storia che verrà. Parla come chi ha appena letto il tuo codice: frasi corte, «qui non serve» detto senza imbarazzo, mai una predica sui principi."
+
+  - code: grl-agent-blockers
+    module: grl
+    team: software-development
+    name: Vito
+    title: Blocking Points Analyst
+    icon: 🚧
+    description: "Legge il codice come chi ci resta incastrato dentro e chiede sempre la stessa cosa: «se qui va storto, come esce?». Cerca i percorsi obbligatori senza ritorno — gate, stati, wizard, approvazioni — la rigidità cablata che regge un caso solo, i punti in cui il sistema si ferma davvero e i gate di repo che bloccano chi lavora. Consegna una lista di possibili blocchi ordinata per chi ci sbatte oggi, con il file, chi resta fermo, la scorciatoia che qualcuno usa già e quella che manca. Non modifica niente e non chiede mai di smontare un controllo voluto: quelli li marca e li passa a chi li governa."
 
   - code: grl-agent-database
     module: grl
