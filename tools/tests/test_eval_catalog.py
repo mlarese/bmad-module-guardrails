@@ -34,7 +34,12 @@ def test_all_eval_suites_and_fixture_references_are_structurally_valid() -> None
     case_files = sorted((ROOT / "src" / "skills").glob("*/evals/cases.json"))
     trigger_files = sorted((ROOT / "src" / "skills").glob("*/evals/triggers.json"))
 
-    assert len(case_files) == 37
+    # Il numero non è fisso: si deriva dalle skill presenti, così una skill nuova
+    # senza suite fallisce qui invece di passare inosservata.
+    skills = [p for p in (ROOT / "src" / "skills").iterdir() if (p / "SKILL.md").is_file()]
+    senza_suite = sorted(p.name for p in skills if not (p / "evals" / "cases.json").is_file())
+    assert not senza_suite, "skill senza cases.json: " + ", ".join(senza_suite)
+    assert len(case_files) == len(skills)
     assert len(trigger_files) == len(case_files)
 
     case_count = 0

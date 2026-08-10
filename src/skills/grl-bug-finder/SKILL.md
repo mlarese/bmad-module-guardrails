@@ -1,6 +1,6 @@
 ---
 name: grl-bug-finder
-description: "Individua bug e regressioni in codice, configurazioni, pipeline o artefatti tecnici con scansione read-only, riproduzione minima, evidenze file/riga, ipotesi falsificabili, severità, confidenza e test di regressione. Usala quando l'utente dice \"trova il bug\", \"cerca bug\", \"debugga\", \"indaga una regressione\", \"qualcosa non funziona\" o chiede una diagnosi prima della correzione. Non modifica codice, non esegue side effect e non sostituisce le figure di dominio."
+description: "Individua bug e regressioni in codice, configurazioni, pipeline o artefatti tecnici con scansione read-only, riproduzione minima, evidenze file/riga, ipotesi falsificabili, severità, confidenza e test di regressione. Usala quando l'utente dice \"trova il bug\", \"cerca bug\", \"debugga\", \"indaga una regressione\", \"qualcosa non funziona\", oppure chiede di controllare se un file, un endpoint o una query ha un difetto — anche quando il difetto sospetto è di sicurezza, di prestazioni o di dati: la diagnosi parte da qui e passa l'owner alla figura di dominio. Non modifica codice, non esegue side effect e non sostituisce le figure di dominio: la valutazione del rischio e la contromisura restano a loro."
 ---
 
 # `grl-bug-finder` — diagnosi di bug e regressioni
@@ -139,6 +139,11 @@ Usa questa scala operativa, motivandola nel contesto:
 
 Un `P0`/`P1` non è automaticamente `confirmed`: la severità non sostituisce la prova.
 
+La reachability è un asse separato, e resta `open` finché non hai la prova che il percorso è
+percorribile con i permessi e le precondizioni dichiarate. Con reachability `open` non scrivere
+«già raggiungibile» in `impact` e non fondarci sopra un `P0`: alza la priorità solo dopo la prova,
+oppure dichiara la priorità condizionata alla precondizione ancora aperta.
+
 ### 6. Regression test e handoff
 
 Per ogni finding confermato o probabile proponi il test più piccolo sul seam o sull'invariante che
@@ -176,6 +181,7 @@ Il report, in conversazione o in `{output_folder}/bug-finder/{slug}/report.md`, 
    id: BF-001
    priority: P0|P1|P2|P3
    confidence: confirmed|likely|suspected|ruled_out
+   reachability: reachable|precondition-required|open
    status: reproduced|not_reproduced|unverified|ruled_out
    location: file:line o configurazione/versione
    problem: cosa diverge dal contratto

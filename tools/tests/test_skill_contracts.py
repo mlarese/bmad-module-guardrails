@@ -154,6 +154,42 @@ class GitTrackingTests(unittest.TestCase):
         )
 
 
+class InternalLinkTests(unittest.TestCase):
+    """Ogni rimando a `references/` o `assets/` punta a un file che esiste.
+
+    Una skill carica le sue reference su richiesta: il rimando è l'unico indirizzo che
+    l'agente ha. Un file rinominato o spostato lascia il rimando in piedi, e l'agente
+    prosegue senza la parte di istruzioni che quel file conteneva.
+    """
+
+    # Il rimando sta sempre dentro backtick, e vale sia dentro la skill
+    # (`references/x.md`) sia verso un'altra skill (`grl-agent-ads/references/x.md`).
+    RIMANDO = re.compile(r"`([A-Za-z0-9_.<>{}-]*/?(?:references|assets)/[A-Za-z0-9_./-]+\.[a-z]{2,4})`")
+
+    def test_every_reference_link_resolves(self) -> None:
+        nomi = {skill.name for skill in skill_dirs()}
+        for skill in skill_dirs():
+            for documento in sorted(skill.rglob("*.md")):
+                if ".analysis" in documento.parts or documento.name == ".memlog.md":
+                    continue
+                testo = documento.read_text()
+                for numero, riga in enumerate(testo.splitlines(), 1):
+                    for match in self.RIMANDO.finditer(riga):
+                        bersaglio = match.group(1)
+                        # I rimandi con segnaposto (`{project-root}`, `<skill>`) non
+                        # sono indirizzi: li risolve chi legge, a runtime.
+                        if "{" in bersaglio or "<" in bersaglio:
+                            continue
+                        testa, _, coda = bersaglio.partition("/")
+                        base = SKILLS / testa if testa in nomi else skill
+                        percorso = coda if testa in nomi else bersaglio
+                        with self.subTest(file=f"{documento.relative_to(SKILLS)}:{numero}"):
+                            self.assertTrue(
+                                (base / percorso).is_file(),
+                                f"rimando morto: {bersaglio}",
+                            )
+
+
 class TopologyCoverageTests(unittest.TestCase):
     def test_every_skill_reaches_at_least_one_derived_module(self) -> None:
         topology = yaml.safe_load(TOPOLOGY.read_text())
