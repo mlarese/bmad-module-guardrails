@@ -1,0 +1,28 @@
+# DO NOT EDIT -- overwritten on every update.
+#
+# Workflow customization surface for grl-video-to-scroll.
+# Team overrides:     {project-root}/_bmad/custom/grl-video-to-scroll.toml
+# Personal overrides: {project-root}/_bmad/custom/grl-video-to-scroll.user.toml
+#
+# Merge: scalars override; ordinary arrays append.
+
+[workflow]
+
+activation_steps_prepend = []
+activation_steps_append = []
+persistent_facts = ["file:{project-root}/**/project-context.md"]
+on_complete = ""
+
+output_path = "{project-root}/_bmad-output/video-to-scroll"
+run_folder_pattern = "{slug}"
+finalize_reviewers = ["skill:grl-board"]
+external_sources = [
+  "live web search for candidate video source pages and current license terms",
+]
+external_handoffs = [
+  "skill:grl-agent-customer-journey",
+  "skill:grl-agent-legal",
+  "skill:grl-agent-privacy",
+  "skill:grl-agent-ops",
+  "skill:grl-web",
+]

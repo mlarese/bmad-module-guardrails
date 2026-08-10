@@ -7,7 +7,7 @@
 
 Perché serve
 ------------
-Il bundle `grl` installa ventidue figure e sedici workflow in un colpo solo. Chi vuole
+Il bundle `grl` installa ventidue figure e diciassette workflow in un colpo solo. Chi vuole
 solo la governance normativa, o solo il presidio ingegneristico, non ha motivo di
 portarsi le altre dieci figure. La soluzione è un repository per area — ma scritto a
 mano diventerebbe subito divergente dal bundle.
@@ -497,10 +497,10 @@ README_MODULE_COPY = {
     "gre": "A focused BMad module for code architecture, database architecture and design, embedded firmware, application security, infrastructure and operations, AI application design, and product configuration from customer documents. Every recommendation includes the cost of ignoring it.",
     "grf": "A focused BMad module for tax, accounting operations, grants, incentives, and live fiscal updates. It checks requirements, deadlines, eligible expenses, and reporting against primary sources.",
     "grh": "A focused BMad module for clinical data, healthcare interoperability, patient safety, and medical-device qualification. It keeps real clinical workflows and MDR scope in view.",
-    "grw": "A focused BMad module for customer journeys, static and video-source scroll-driven visual storytelling, verified asset rights, visual quality, search, web delivery, paid media, organic social content, creative video, and AI image generation. It guards against generic journeys, anonymous pages, unsupported ranking promises, unplanned posts, and unmeasured spend.",
+    "grw": "A focused BMad module for customer journeys, static and video-source scroll-driven visual storytelling, licensed video sourcing and frame packages, verified asset rights, visual quality, search, web delivery, paid media, organic social content, creative video, and AI image generation. It guards against generic journeys, anonymous pages, unsupported ranking promises, unplanned posts, and unmeasured spend.",
     "gpm": "A focused BMad module for paid media, Google Ads, tracking, consent, social content, creative production, and AI image generation. It keeps campaigns and assets behind evidence, approval, and rollback gates.",
     "grv": "A focused BMad module for hotel revenue management, pricing, forecasting, profit, and PMS/Channel Manager integrations. It keeps external publication behind explicit gates, dry-runs, approval, and rollback.",
-    "gau": "A focused BMad module for routing repeatable processes across software, databases, legal, tax, design, customer journeys, static and video-source scroll-driven visual storytelling from verified assets, search, architecture, healthcare, web, paid media, social content, creative video, AI image generation, revenue management, and product configuration.",
+    "gau": "A focused BMad module for routing repeatable processes across software, databases, legal, tax, design, customer journeys, static and video-source scroll-driven visual storytelling from verified assets, licensed video sourcing and frame packages, search, architecture, healthcare, web, paid media, social content, creative video, AI image generation, revenue management, and product configuration.",
     "gwp": "A focused BMad module for component-based WordPress architecture and controlled delivery through the release gate. It covers Gutenberg, Elementor, ACF, templates, the Media Library, and migration work.",
 }
 
@@ -549,6 +549,10 @@ README_WORKFLOW_COPY = {
     "grl-web": (
         "Web experience delivery",
         "Moves landing pages and websites from a conversion brief through visual review, accessibility, SEO, and delivery.",
+    ),
+    "grl-video-to-scroll": (
+        "Video-to-scroll frame packages",
+        "Collects the customer journey, searches for usable video sources, extracts authorized local frames, and hands a validated scroll specification to web delivery.",
     ),
     "grl-wordpress-delivery": (
         "Controlled WordPress delivery",

@@ -1,0 +1,10 @@
+[
+  { "query": "costruisci un workflow che cerchi video con licenza e li trasformi in frame per lo scroll", "should_trigger": true },
+  { "query": "chiedimi customer journey, location e CTA e prepara la sequenza frame", "should_trigger": true },
+  { "query": "estrai frame da questo mp4 per una landing scroll-driven", "should_trigger": true },
+  { "query": "crea una pagina che scorre mostrando fotogrammi", "should_trigger": true },
+  { "query": "crea soltanto un customer journey", "should_trigger": false },
+  { "query": "scegli il modello RAG per il progetto", "should_trigger": false },
+  { "query": "pubblica il video su YouTube", "should_trigger": false },
+  { "query": "genera immagini con Codex", "should_trigger": false }
+]

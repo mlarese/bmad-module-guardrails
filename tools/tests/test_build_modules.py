@@ -455,6 +455,7 @@ class DedicatedGroupModuleTopologyTests(unittest.TestCase):
                 "grl-fiscal-updates",
                 "grl-mdsw",
                 "grl-web",
+                "grl-video-to-scroll",
                 "grl-ads",
                 "grl-social",
                 "grl-social-creative",
