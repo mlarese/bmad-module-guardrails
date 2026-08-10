@@ -4,3 +4,6 @@ grl-agent-product-config,2026-08-10,trigger,pass,27/27 query su due router indip
 grl-bug-finder,2026-08-10,quality,pass,17/17 criteri dopo due correzioni alla skill,subagent della sessione di chat,memlog della stanza
 grl-bug-finder,2026-08-10,trigger,pass,18/18 query su due router indipendenti,subagent della sessione di chat,memlog della stanza
 grl-bug-finder,2026-08-10,baseline,pass,4/4 con la skill contro 2/4 senza,subagent della sessione di chat,memlog della stanza
+grl-profile,2026-08-10,trigger,pass,22/22 query su due router indipendenti,subagent della sessione di chat,scratchpad eval/grl-profile/router-a.json e router-b.json
+grl-profile,2026-08-10,baseline,pass,6/6 con la skill contro 2/6 senza,subagent della sessione di chat,scratchpad eval/grl-profile/judge-baseline-prima-profilazione-dai-fatti.json
+grl-board,2026-08-10,trigger,pass,20/20 query su due router indipendenti,subagent della sessione di chat,scratchpad eval/grl-board/router-a.json e router-b.json
