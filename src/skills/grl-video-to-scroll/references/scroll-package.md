@@ -5,6 +5,7 @@ Il pacchetto deve poter essere consegnato a chi implementa la pagina senza ricos
 ## Artefatti
 
 - `interview.md`: risposte del cliente, `non noto`, vincoli e autorizzazioni dichiarate.
+- `tool-preflight.json`: capability locali, versioni rilevate, strumenti mancanti e stato del gate.
 - `journey.md`: fasi del visitatore, tensione, prova, scena, transizione, CTA e criterio di successo.
 - `source-search.md`: query, fonti consultate, data `as_of` e limiti della ricerca.
 - `video-candidates.md`: matrice diritti/qualità/fit narrativo e candidato selezionato o bloccato.

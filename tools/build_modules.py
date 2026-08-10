@@ -552,7 +552,7 @@ README_WORKFLOW_COPY = {
     ),
     "grl-video-to-scroll": (
         "Video-to-scroll frame packages",
-        "Collects the customer journey, searches for usable video sources, extracts authorized local frames, and hands a validated scroll specification to web delivery.",
+        "Runs a tool preflight, asks before installing missing capabilities, collects the customer journey, searches for usable video sources, extracts authorized local frames, and hands a validated scroll specification to web delivery.",
     ),
     "grl-wordpress-delivery": (
         "Controlled WordPress delivery",

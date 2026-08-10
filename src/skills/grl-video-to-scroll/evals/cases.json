@@ -45,6 +45,18 @@
         "reports conflicts or blockers without silently rewriting approved decisions"
       ],
       "state_prefix": null
+    },
+    {
+      "id": "missing-tools-prompts-install",
+      "input": "Avvia il workflow video-to-scroll su una macchina nuova: ffmpeg e ffprobe non sono installati. Prima di chiedermi il journey controlla gli strumenti e dimmi cosa devo installare.",
+      "rubric": [
+        "runs or describes the tool preflight before customer-journey questions",
+        "identifies uv, ffmpeg, ffprobe and the BMad runtime files as required capabilities",
+        "returns missing status with operating-system installation suggestions",
+        "asks for explicit confirmation before installing and does not install automatically",
+        "keeps the workflow blocked until the preflight passes"
+      ],
+      "state_prefix": null
     }
   ]
 }

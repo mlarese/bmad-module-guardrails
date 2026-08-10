@@ -20,8 +20,12 @@ Questo workflow trasforma la storia di un cliente e una sorgente video autorizza
 
 1. Risolvi la configurazione con `uv run {project-root}/_bmad/scripts/resolve_config.py --project-root {project-root} --key core`; se non è disponibile, usa i default ragionevoli e dichiaralo.
 2. Risolvi la personalizzazione con `uv run {project-root}/_bmad/scripts/resolve_customization.py --skill {skill-root} --key workflow`. Applica `{workflow.activation_steps_prepend}`, carica `{workflow.persistent_facts}` e poi `{workflow.activation_steps_append}`. Se il resolver fallisce, fondi base, override di team e override personali in quell'ordine.
-3. Elenca i lavori esistenti sotto `{workflow.output_path}`. Se trovi lo slug, leggi una sola volta `.memlog.md` e gli artefatti già prodotti; altrimenti crea la cartella e inizializza il memlog con `uv run {project-root}/_bmad/scripts/memlog.py init --path <run>/.memlog.md`.
-4. Ricava l'intento dalla richiesta: `create` prepara un pacchetto nuovo, `update` riprende un pacchetto, `validate` lo controlla in sola lettura. Se l'intento è ambiguo, chiedi una sola domanda che lo separi.
+3. Elenca i lavori esistenti sotto `{workflow.output_path}` e risolvi lo slug. Se trovi il lavoro, riusa la cartella; altrimenti creala.
+4. Esegui il preflight obbligatorio prima dell'intervista o della ricerca: `uv run scripts/check_tools.py {project-root} --output <run>/tool-preflight.json`. Controlla `uv`, `ffmpeg`, `ffprobe` e gli script runtime BMad (`resolve_config.py`, `resolve_customization.py`, `memlog.py`). Se `uv` manca, esegui il controllo con il Python disponibile per poterlo dichiarare come capability mancante.
+5. Se il report è `missing`, fermati e mostra strumenti mancanti, versione rilevata, comando d'installazione per il sistema operativo e cosa rimane bloccato. Chiedi esplicitamente: «Vuoi che proceda con l'installazione?». Non installare nulla senza un sì; dopo l'installazione riesegui il preflight e prosegui solo con `status: pass`. Se l'utente sceglie di non installare, lascia `blocked` e conserva il report; non fingere di poter estrarre frame.
+6. Ricava l'intento dalla richiesta: `create` prepara un pacchetto nuovo, `update` riprende un pacchetto, `validate` lo controlla in sola lettura. Se l'intento è ambiguo, chiedi una sola domanda che lo separi. Dopo il preflight, leggi una sola volta `.memlog.md` e gli artefatti esistenti oppure inizializza il memlog con `uv run {project-root}/_bmad/scripts/memlog.py init --path <run>/.memlog.md`.
+
+Il preflight copre gli strumenti locali indispensabili; ricerca web, skill BMad di handoff e revisori sono capability dell'harness. Se una di queste non è installata o disponibile, registrala come `missing_capability`, chiedi di abilitarla/installarla e mantieni il relativo gate `blocked` senza inventare il loro verdetto. Le istruzioni per i package manager sono in `references/tool-preflight.md`.
 
 ## Scoperta della storia
 
@@ -73,6 +77,7 @@ Alla consegna distilla il memlog, verifica che ogni decisione rilevante sia nell
 | --- | --- |
 | Cercare sorgenti e verificare diritti | `references/source-search.md` |
 | Definire frame, manifest e comportamento dello scroll | `references/scroll-package.md` |
+| Controllare gli strumenti prima di partire | `scripts/check_tools.py`, `references/tool-preflight.md` |
 | Estrarre e validare localmente | `scripts/extract_frames.py`, `scripts/validate_manifest.py` |
 
 ## Revisione editoriale finale
