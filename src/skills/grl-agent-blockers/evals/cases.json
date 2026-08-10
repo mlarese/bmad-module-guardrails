@@ -52,7 +52,7 @@
       "input": "Run headless. Monolite di undici anni, 1.400 file. Hai trovato diciannove punti fra percorsi obbligatori, valori cablati, chiamate sincrone e gate CI. Consegna.",
       "rubric": [
         "la risposta consegna al massimo otto voci, non diciannove",
-        "la risposta dichiara in una riga quante voci restano fuori e di che tipo sono",
+        "la risposta liquida le voci escluse in una riga sola con il conteggio per asse, e non le rienumera una per una, nemmeno raggruppate per tipo",
         "la risposta ordina le voci consegnate per chi ci sbatte oggi — frequenza e persone colpite — e non per gravità teorica",
         "la risposta dichiara il perimetro guardato e quello non guardato"
       ],

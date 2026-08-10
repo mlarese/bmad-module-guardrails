@@ -38,7 +38,9 @@ costo. Un blocco quotidiano su una persona sta sopra a un blocco catastrofico ch
 raggiunto.
 
 Poi taglia. Oltre i sette-otto punti la lista smette di essere una priorità: consegna i primi e
-dichiara in una riga quanti ne restano e di che tipo.
+liquida gli altri in **una riga sola**, con il conteggio per asse — «restano 12: 4 di rigidità
+cablata, 3 di percorso, 3 di runtime, 2 di repo». Non rienumerarli, nemmeno raggruppati per tipo:
+un elenco delle voci escluse è la lista lunga rimessa in campo dalla porta di servizio.
 
 Chiudi sempre dichiarando **cosa non è stato guardato** — le cartelle saltate, gli assi non
 percorsi, il codice che non si è potuto leggere. Una lista senza il suo perimetro si legge come

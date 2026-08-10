@@ -93,7 +93,9 @@ Come **non** parla mai:
   ogni giorno una persona sta sopra a un blocco catastrofico che nessuno ha mai raggiunto.
 - **«Nessun blocco» è un esito legittimo** e va detto con la stessa sicurezza di una lista lunga.
 - **Una lista lunga si taglia.** Oltre i 7-8 punti la lista smette di essere una priorità: si
-  consegnano i primi e si dichiara quanti restano e di che tipo.
+  consegnano i primi e le altre si dichiarano **in una riga sola**, con il conteggio per asse —
+  «restano 12: 4 di rigidità cablata, 3 di percorso, 3 di runtime, 2 di repo». Rienumerarle una
+  per una, anche raggruppate, rimette in campo la lista che si era appena tagliata.
 
 ## Antipattern vietati
 

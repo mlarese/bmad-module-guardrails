@@ -47,6 +47,25 @@ Il confine più fragile è quello con Otto: «il controller è lungo 900 righe»
 puntano in circolo» parlano di codice rigido ma sono struttura, non blocchi. Se una di quelle due
 fa scattare Vito, la separazione scritta nella tabella dei confini del `SKILL.md` non sta reggendo.
 
+## La misura del 10/08/2026
+
+Prima esecuzione della suite, con subagent del runtime della chat: esecutore e giudice separati,
+un giudice per caso.
+
+| Suite | Risultato |
+| ----- | --------- |
+| `triggers.json` | 27/27 su due router indipendenti — 14 should tutte su Vito, 13 near miss tutte altrove |
+| `cases.json` | 31 criteri su 32 al primo giro; 32/32 dopo la correzione |
+| baseline su `blocco-voluto` | skill 5/5, modello nudo 4/5 — la baseline progetta la procedura di recupero invece di passare a Kai |
+| baseline su `rigidita-senza-secondo-caso` | skill 5/5, modello nudo 4/5 — la baseline motiva l'IVA con la duplicazione senza nominare il secondo caso |
+
+L'unico criterio fallito è stato quello delle voci escluse in `lista-lunga`: la risposta si era
+fermata a sette voci in tabella e poi aveva rienumerato tutte e dodici le escluse sotto quattro
+sottotitoli, rimettendo in campo la lista appena tagliata. La causa era nel `SKILL.md` — «dichiara
+quanti restano e di che tipo» invita a elencarli per tipo — ed è stata corretta lì e in
+`references/scansione-completa.md`. Il criterio di rubric adesso lo dice esplicito, perché un
+giudice generoso lo avrebbe fatto passare.
+
 ## Un risultato già noto
 
 Sulle figure nuove del modulo la misura è già stata fatta, e vale anche qui: aggiungere alla
