@@ -43,3 +43,5 @@ grl-social-creative,2026-08-10,trigger,pass,"router A 12/12, router B 12/12",sub
 grl-toolchain,2026-08-10,trigger,pass,"router A 20/20, router B 20/20",subagent della sessione di chat,scratchpad eval/lotti/router-*.json
 grl-web,2026-08-10,trigger,pass,"router A 20/20, router B 20/20",subagent della sessione di chat,scratchpad eval/lotti/router-*.json
 grl-wordpress-delivery,2026-08-10,trigger,pass,"router A 20/20, router B 20/20",subagent della sessione di chat,scratchpad eval/lotti/router-*.json
+grl-board,2026-08-10,quality,parziale,"23/25 dopo le correzioni: GO e NO-GO risaliti a 6/6, restano due casi non riverificati",subagent della sessione di chat,scratchpad eval/grl-board/judge*-*.json
+grl-web,2026-08-10,quality,parziale,"27/27 su cinque casi, nessuna correzione necessaria; sesto caso in corso",subagent della sessione di chat,scratchpad eval/grl-web/judge-*.json
