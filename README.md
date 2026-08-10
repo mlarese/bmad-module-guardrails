@@ -1,8 +1,8 @@
 # Guardrails (`grl`)
 
-Guardrails is a [BMad](https://github.com/bmad-code-org/BMAD-METHOD) module with **eighteen agents**
+Guardrails is a [BMad](https://github.com/bmad-code-org/BMAD-METHOD) module with **nineteen agents**
 that support software development teams across privacy and GDPR, security, legal, compliance,
-tax, design, code and database architecture, operations, healthcare, AI, WordPress, SEO,
+tax, design, code and database architecture, embedded firmware, operations, healthcare, AI, WordPress, SEO,
 social/content, creative video, AI image generation, revenue management, and paid media.
 
 Agents surface constraints and risks while changes are still inexpensive; decisions remain with
@@ -24,6 +24,7 @@ multidisciplinary review of the same artifact, use `grl-board`.
 | 👁️ **Iris** — Design Critic | UI, landing pages, markup, CSS, typography, palettes, density, and layout | Recognizes generic patterns and proposes a concrete, usable visual departure. |
 | 🧱 **Otto** — Code Architect | Boundaries, folders, dependencies, interfaces, factories, architectural layers, and the architectural constraints of a story or spec | Identifies the right place for a responsibility and weighs the cost of alternatives; on a story still being written, delivers constraints that are verifiable at review time. |
 | 🗄️ **Dario** — Database Architect & Designer | Data models, PostgreSQL, Oracle, MongoDB, Redis/Valkey, distributed SQL, NoSQL, search, analytics, time-series, graph, vector and hybrid search | Chooses persistence from workload and invariants, verifies current solutions live, and carries the decision through schema, performance, reliability, benchmark, and migration. |
+| ⚙️ **Ada** — Firmware Engineer | MCU/SoC firmware, startup, drivers, registers, interrupts/DMA, RTOS, timing, memory, testing, debugging, and secure updates | Turns embedded changes into compilable, measurable, recoverable firmware and refuses to invent a target-specific contract. |
 | 🖥️ **Bruno** — Infrastructure & Ops Engineer | Servers, VPS, Docker, CI/CD, deployment, TLS, backups, logs, and incidents | Proposes the simplest operational setup that can handle the load and a verifiable way back. |
 | 🩺 **Livia** — Clinical Informatics | Clinical data, codes, HL7/FHIR/DICOM, clinical workflows, and patient safety | Checks the data model, interoperability, and real-world use; routes to `grl-mdsw` when MDR becomes relevant. |
 | 🧠 **Enzo** — AI Engineer | LLMs, prompts, RAG, embeddings, tool calling, evaluations, costs, and latency | Designs the minimum setup that remains reliable when the model is wrong and assesses whether it is actually needed. |

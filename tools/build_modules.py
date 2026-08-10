@@ -7,7 +7,7 @@
 
 Perché serve
 ------------
-Il bundle `grl` installa diciotto figure e quattordici workflow in un colpo solo. Chi vuole
+Il bundle `grl` installa diciannove figure e quattordici workflow in un colpo solo. Chi vuole
 solo la governance normativa, o solo il presidio ingegneristico, non ha motivo di
 portarsi le altre dieci figure. La soluzione è un repository per area — ma scritto a
 mano diventerebbe subito divergente dal bundle.
@@ -124,6 +124,18 @@ SOURCE_AUXILIARY_FILES = {
     "src/skills/grl-agent-database/references/revisione-database.md",
     "src/skills/grl-agent-database/references/fasi-bmad.md",
     "src/skills/grl-agent-database/references/prompt-quality-canon.md",
+    "src/skills/grl-agent-firmware/SKILL.md",
+    "src/skills/grl-agent-firmware/customize.toml",
+    "src/skills/grl-agent-firmware/evals/README.md",
+    "src/skills/grl-agent-firmware/evals/cases.json",
+    "src/skills/grl-agent-firmware/evals/triggers.json",
+    "src/skills/grl-agent-firmware/references/scrittura-e-review.md",
+    "src/skills/grl-agent-firmware/references/bring-up-e-driver.md",
+    "src/skills/grl-agent-firmware/references/real-time-e-rtos.md",
+    "src/skills/grl-agent-firmware/references/test-e-debug.md",
+    "src/skills/grl-agent-firmware/references/secure-update-e-safety.md",
+    "src/skills/grl-agent-firmware/references/ricerca-live.md",
+    "src/skills/grl-agent-firmware/references/prompt-quality-canon.md",
     "src/skills/grl-agent-architecture/references/deep-module-design.md",
     "src/skills/grl-automation/references/human-only-wizard.md",
     "src/skills/grl-profile/assets/domain-glossary-template.md",
@@ -134,12 +146,12 @@ SOURCE_AUXILIARY_FILES = {
 # significato.
 BOARD_ROSTER_FILES = {"SKILL.md", "selection.md"}
 
-# Il bundle conta diciotto figure e lo dice ovunque nei testi del core. In un modulo
+# Il bundle conta diciannove figure e lo dice ovunque nei testi del core. In un modulo
 # tematico quel numero è falso, e un numero falso in una skill è un'istruzione
 # sbagliata. Con più figure si sostituisce il numerale; con una sola si toglie e
 # resta il plurale generico, che è impreciso ma non falso — riscrivere l'accordo
 # verbale di frasi arbitrarie non è automatizzabile.
-NUMERALS = {2: "due", 3: "tre", 4: "quattro", 5: "cinque", 6: "sei", 7: "sette", 8: "otto", 14: "quattordici", 16: "sedici", 17: "diciassette", 18: "diciotto"}
+NUMERALS = {2: "due", 3: "tre", 4: "quattro", 5: "cinque", 6: "sei", 7: "sette", 8: "otto", 14: "quattordici", 16: "sedici", 17: "diciassette", 18: "diciotto", 19: "diciannove"}
 
 # Nota appesa a ogni figura del modulo: le tabelle di handoff citano colleghe che
 # qui non sono installate, e senza questa riga l'agente rimanda a un vuoto.
@@ -218,7 +230,7 @@ def core_renames(core_skills: list[str], code: str) -> dict[str, str]:
 def adapt_counts(text: str, count: int) -> str:
     """Riporta al numero reale di figure i conteggi scritti per il bundle.
 
-    Tocca solo le costruzioni in cui `diciotto` (o i vecchi `diciassette`, `sedici`, `quattordici`, `tredici` e `dodici`) è accostato alle
+    Tocca solo le costruzioni in cui `diciannove` o `diciotto` (o i vecchi `diciassette`, `sedici`, `quattordici`, `tredici` e `dodici`) è accostato alle
     figure o alle loro chiavi di config: «tredici documenti» dentro un esempio, o
     «tredici pagine» in una reference, restano quello che sono.
     """
@@ -233,7 +245,7 @@ def adapt_counts(text: str, count: int) -> str:
             return f"{numeral}{space}{noun}"
         return noun
 
-    numerals = r"(?:dodici|tredici|quattordici|sedici|diciassette|diciotto)"
+    numerals = r"(?:dodici|tredici|quattordici|sedici|diciassette|diciotto|diciannove)"
     text = re.sub(rf"una\s+delle\s+{numerals}\s+figure", "una delle figure", text)
     text = re.sub(rf"tutte\s+e\s+{numerals}", replace_all_of, text)
     text = re.sub(rf"\b{numerals}(\s+)(figure|chiavi)", replace_noun, text)
@@ -514,7 +526,7 @@ def filter_help_csv(
 # vetrina dipenda dalla lingua del catalogo interno.
 README_MODULE_COPY = {
     "grg": "A focused BMad module for privacy, legal and licensing, regulatory compliance, and live legal updates. It separates actual obligations from common practice and identifies rules that do not apply.",
-    "gre": "A focused BMad module for code architecture, database architecture and design, application security, infrastructure and operations, and AI application design. Every recommendation includes the cost of ignoring it.",
+    "gre": "A focused BMad module for code architecture, database architecture and design, embedded firmware, application security, infrastructure and operations, and AI application design. Every recommendation includes the cost of ignoring it.",
     "grf": "A focused BMad module for tax, accounting operations, grants, incentives, and live fiscal updates. It checks requirements, deadlines, eligible expenses, and reporting against primary sources.",
     "grh": "A focused BMad module for clinical data, healthcare interoperability, patient safety, and medical-device qualification. It keeps real clinical workflows and MDR scope in view.",
     "grw": "A focused BMad module for visual quality, search, web delivery, paid media, organic social content, creative video, and AI image generation. It guards against generic pages, unsupported ranking promises, unplanned posts, and unmeasured spend.",
@@ -537,6 +549,7 @@ README_AGENT_FOCUS = {
     "grl-agent-ui-critic": "UI, landing pages, markup, CSS, typography, palettes, density, and layout.",
     "grl-agent-architecture": "Boundaries, folders, dependencies, interfaces, factories, architectural layers, and the architectural constraints of a story or spec.",
     "grl-agent-database": "Data models, PostgreSQL, Oracle, MongoDB, Redis/Valkey, distributed SQL, NoSQL, search, analytics, time-series, graph, vector, and hybrid search.",
+    "grl-agent-firmware": "MCU and SoC firmware, startup, drivers, registers, interrupts/DMA, RTOS, timing, memory, bring-up, testing, debugging, bootloaders, and secure updates.",
     "grl-agent-ops": "Servers, VPS, Docker, CI/CD, deployment, TLS, backups, logs, and incidents.",
     "grl-agent-health": "Clinical data, codes, HL7/FHIR/DICOM, clinical workflows, and patient safety.",
     "grl-agent-ai": "LLMs, prompts, RAG, embeddings, tool calling, evaluations, costs, and latency.",

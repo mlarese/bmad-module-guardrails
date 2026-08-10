@@ -5,7 +5,7 @@
 # repository resta la fonte unica: i repository derivati non si modificano a mano,
 # si rigenerano.
 #
-# Il bundle `grl` resta la superficie completa — diciotto figure e quattordici workflow in
+# Il bundle `grl` resta la superficie completa — diciannove figure e quattordici workflow in
 # un'unica installazione. I moduli tematici sono alternative al bundle, non
 # aggiunte: installano le stesse skill con lo stesso nome, quindi bundle e moduli
 # tematici non convivono nello stesso progetto.
@@ -51,11 +51,12 @@ modules:
     repo: bmad-module-guardrails-engineering
     status: derived
     purpose: "Architettura del codice e dei database, sicurezza, operations e impianto delle applicazioni AI."
-    description: "Cinque figure di presidio su disciplina architetturale del codice, design e architettura dei database, sicurezza applicativa, infrastruttura e operatività, impianto delle applicazioni che usano modelli linguistici. Ogni raccomandazione porta il costo di non seguirla."
-    about: "Guardrails Engineering: 5 review agents and 3 controlled BMad workflows for code architecture, database architecture and design, application security, infrastructure, operations, and AI application design."
+    description: "Sei figure di presidio su disciplina architetturale del codice, design e architettura dei database, scrittura firmware embedded e sistemi real-time, sicurezza applicativa, infrastruttura e operatività, impianto delle applicazioni che usano modelli linguistici. Ogni raccomandazione porta il costo di non seguirla."
+    about: "Guardrails Engineering: 6 review agents and 3 controlled BMad workflows for code architecture, database architecture and design, embedded firmware, application security, infrastructure, operations, and AI application design."
     skills:
       - grl-agent-architecture
       - grl-agent-database
+      - grl-agent-firmware
       - grl-agent-security
       - grl-agent-ops
       - grl-agent-ai
@@ -139,8 +140,8 @@ modules:
     repo: bmad-module-guardrails-automation
     status: derived
     purpose: "Orchestrazione di processi ripetitivi fra sviluppo software, database, legale, fisco, design, architettura, medicina, paid media e revenue management."
-    description: "Diciotto figure Guardrails e quattordici workflow necessari a instradare processi software, database, legali, fiscali, di design, architettura, medicina, web, WordPress, paid media, social/content, creative video e revenue management. I workflow social coprono strategia, calendario, contenuti e pacchetti creativi; i tre workflow revenue coprono audit, scenari di pricing e preflight PMS/Channel Manager; `grl-wordpress-delivery` porta un sito dal modello dei contenuti al release gate; `grl-automation` porta ogni richiesta da intake e read-only a piano, dry-run, approvazioni, esecuzione osservabile e rollback, senza trasformare un agente in un esecutore autonomo."
-    about: "Guardrails Automation: 18 review agents and 14 controlled BMad workflows for routing repeatable processes across software, databases, legal, tax, design, healthcare, web, WordPress, paid media, social content, creative video, AI image generation, and revenue management."
+    description: "Diciannove figure Guardrails e quattordici workflow necessari a instradare processi software, database, firmware embedded, legali, fiscali, di design, architettura, medicina, web, WordPress, paid media, social/content, creative video e revenue management. I workflow social coprono strategia, calendario, contenuti e pacchetti creativi; i tre workflow revenue coprono audit, scenari di pricing e preflight PMS/Channel Manager; `grl-wordpress-delivery` porta un sito dal modello dei contenuti al release gate; `grl-automation` porta ogni richiesta da intake e read-only a piano, dry-run, approvazioni, esecuzione osservabile e rollback, senza trasformare un agente in un esecutore autonomo."
+    about: "Guardrails Automation: 19 review agents and 14 controlled BMad workflows for routing repeatable processes across software, databases, embedded firmware, legal, tax, design, healthcare, web, WordPress, paid media, social content, creative video, AI image generation, and revenue management."
     skills:
       - grl-agent-privacy
       - grl-agent-security
@@ -150,6 +151,7 @@ modules:
       - grl-agent-ui-critic
       - grl-agent-architecture
       - grl-agent-database
+      - grl-agent-firmware
       - grl-agent-ops
       - grl-agent-health
       - grl-agent-ai

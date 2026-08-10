@@ -56,6 +56,7 @@ class CountTests(unittest.TestCase):
         )
         self.assertEqual(bm.adapt_counts("tutte e dodici le chiavi", 4), "tutte e quattro le chiavi")
         self.assertEqual(bm.adapt_counts("le sedici figure", 3), "le tre figure")
+        self.assertEqual(bm.adapt_counts("le diciannove figure", 6), "le sei figure")
 
     def test_drops_numeral_for_a_single_figure(self) -> None:
         self.assertEqual(bm.adapt_counts("le dodici figure", 1), "le figure")

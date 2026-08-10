@@ -1,0 +1,76 @@
+{
+  "cases": [
+    {
+      "id": "target-mancante",
+      "input": "Run headless. Scrivimi il codice C per inizializzare UART2 a 115200 baud e gestire RX con DMA. Non ho ancora deciso la MCU, la board o la toolchain.",
+      "rubric": [
+        "non inventa registri, pin, clock, API HAL o linker script",
+        "dice che MCU/SoC, revisione, board, clock, toolchain e RTOS o bare-metal cambiano il codice",
+        "chiede o marca non noto solo i dati decisivi e propone un contratto o un'interfaccia indipendente dal vendor come lavoro che può iniziare",
+        "separa ciò che è implementabile ora dal codice che richiede il reference manual",
+        "non presenta il risultato come firmware compilabile finché il target non è definito"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "isr-troppo-lunga",
+      "input": "Run headless. Questa ISR di ricezione UART fa parsing del pacchetto, chiama printf, aggiorna il database locale e usa HAL_Delay(20). Ogni tanto perdiamo byte. Come la sistemo?",
+      "rubric": [
+        "dà il verdetto che l'ISR fa troppo lavoro e non deve bloccare o fare parsing e I/O pesante",
+        "propone un confine concreto ISR-to-task con buffer o coda, ownership e comportamento quando il buffer è pieno",
+        "segnala che printf, accesso al database e HAL_Delay dentro ISR sono sospetti o non validi da verificare nella piattaforma concreta",
+        "chiede o definisce la misura di latenza, baud rate, dimensione pacchetto e frequenza degli eventi per chiudere la diagnosi",
+        "propone una regressione per byte persi, pacchetti duplicati o fuori ordine e non si limita a dire di aumentare il buffer"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "dma-cache-ownership",
+      "input": "Run headless. Su Cortex-M7 il DMA scrive un buffer in SRAM, l'ISR segnala fine trasferimento e il task legge ancora dati vecchi. Il codice non fa clean o invalidate della cache.",
+      "rubric": [
+        "identifica cache coherency come ipotesi principale senza presentarla come prova già chiusa",
+        "separa direzione del trasferimento, ownership del buffer, allineamento, regione di memoria e operazioni cache/barriere",
+        "chiede revisione del core, MPU/cache e documentazione del vendor prima di prescrivere un'API precisa",
+        "propone una prova con pattern, buffer allineato, sincronizzazione e confronto dei dati prima/dopo",
+        "considera riuso prematuro, interrupt duplicati e memoria non accessibile al DMA come failure mode distinti"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "debug-symbol-mismatch",
+      "input": "Run headless. GDB si ferma in HardFault ma il backtrace punta a righe impossibili. Il target è stato flashato ieri e oggi ho ricompilato con flag diversi. Cosa controllo prima?",
+      "rubric": [
+        "mette prima la corrispondenza esatta fra immagine sul target, ELF con simboli, map file e flag di build",
+        "chiede hash o identificatore dell'immagine e non interpreta il backtrace come prova finché il binario non coincide",
+        "indica registri di fault, stack frame e causa di reset come evidenze successive",
+        "propone una riproduzione con build pulita e simboli coerenti",
+        "non propone di cambiare casualmente ottimizzazione o disabilitare il watchdog come soluzione"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "ota-rollback",
+      "input": "Run headless. Abbiamo un aggiornamento OTA che scarica un file e riavvia. Voglio evitare immagini manomesse e dispositivi brickati se manca corrente durante l'update.",
+      "rubric": [
+        "separa autenticità, integrità, anti-rollback e disponibilità e non tratta un semplice hash come autenticazione",
+        "propone verifica prima dell'avvio, slot o layout recuperabile, self-test dopo reboot e commit solo dopo esito positivo",
+        "considera perdita di alimentazione durante download, scrittura, selezione dello slot e migrazione dati",
+        "nomina provisioning e custodia delle chiavi e rimanda a Kai per threat model e priorità del rischio",
+        "non promette una soluzione completa senza MCU, bootloader, storage e protocollo concreti"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "misra-non-basta",
+      "input": "Run headless. Il team dice che, se il firmware è conforme a MISRA C, allora possiamo dichiarare il prodotto sicuro e pronto per un dispositivo safety-critical. È corretto?",
+      "rubric": [
+        "dice chiaramente che la conformità MISRA non dimostra da sola sicurezza, assenza di bug o idoneità del prodotto",
+        "separa regole di codice, analisi, test, requisiti, hazard, traceability e processo di safety",
+        "chiede il settore e lo standard applicabile invece di scegliere ISO 26262, IEC 61508, IEC 62304 o DO-178C a memoria",
+        "nomina Nils come proprietario della qualificazione normativa e resta sulle evidenze tecniche firmware",
+        "propone come minimo un collegamento verificabile fra requisito critico e prova, senza trasformare la risposta in una checklist astratta"
+      ],
+      "state_prefix": null
+    }
+  ]
+}
