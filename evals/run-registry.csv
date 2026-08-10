@@ -9,3 +9,4 @@ grl-profile,2026-08-10,baseline,pass,6/6 con la skill contro 2/6 senza,subagent 
 grl-board,2026-08-10,trigger,pass,20/20 query su due router indipendenti,subagent della sessione di chat,scratchpad eval/grl-board/router-a.json e router-b.json
 grl-profile,2026-08-10,quality,pass,"33/33 criteri su sei casi, dopo tre correzioni alla skill",subagent della sessione di chat,scratchpad eval/grl-profile/judge-*.json
 grl-board,2026-08-10,quality,parziale,1 caso su 4 chiuso a 6/7; gli altri tre bloccati dall'annidamento dei subagent,subagent della sessione di chat,scratchpad eval/grl-board/judge-gate-evidenza-insufficiente.json
+grl-board,2026-08-10,quality,parziale,"19/25 criteri sui quattro casi; tre correzioni applicate, non riverificate",subagent della sessione di chat,scratchpad eval/grl-board/judge-*.json
