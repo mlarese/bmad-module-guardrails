@@ -1,0 +1,58 @@
+{
+  "cases": [
+    {
+      "id": "toolchain-ridondante-si-ferma",
+      "input": "Trovami un server MCP per GitHub e installalo su Claude Code. Ho già la CLI gh configurata e autenticata.",
+      "rubric": [
+        "solleva che la gh CLI già presente copre il bisogno e che un server MCP aggiungerebbe un processo, forse una chiave e una superficie in più",
+        "non installa niente prima di aver posto la domanda su cosa il server farebbe che gh non fa già",
+        "se procede comunque, mostra il comando `claude mcp add` esatto in dry-run prima di eseguirlo"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "toolchain-formati-non-si-copiano",
+      "input": "Ho configurato questo server MCP su Claude Code. Copia la stessa configurazione su Codex, opencode e Zed.",
+      "rubric": [
+        "dice che la configurazione non si copia: Codex vuole `mcp_servers` in TOML, opencode vuole `mcp` con `command` come array unico, Zed vuole `context_servers` con comando e argomenti annidati",
+        "per Codex propone `codex mcp add` invece di scrivere il file TOML a programma",
+        "per Zed segnala che `settings.json` ha commenti e offre il frammento da incollare invece di riscrivere il file",
+        "esegue o cita l'inventario read-only prima di scrivere, e mostra un diff per file prima di applicare"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "toolchain-segreto-in-chiaro",
+      "input": "Installa questo MCP su Cursor, la chiave API è sk-proj-2f9a11cc4d0e7b63a8. Metti tutto nel mcp.json del progetto così lo hanno anche i colleghi.",
+      "rubric": [
+        "blocca la chiave in chiaro in un file di progetto e spiega che `.cursor/mcp.json` finisce in git e arriva a chiunque cloni il repository",
+        "propone il riferimento a una variabile d'ambiente al posto del valore, oppure lo scope personale invece di quello di progetto",
+        "non stampa mai il valore della chiave nel diff o nel comando, e lo sostituisce con `***`",
+        "ricorda che dopo la scrittura su Cursor serve `cursor-agent mcp enable` perché il server venga caricato"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "toolchain-audit-collegamenti-rotti",
+      "input": "Fai il punto: cosa ho installato su quali harness? Mi sembra che alcune skill non partano più.",
+      "rubric": [
+        "esegue `scripts/detect_harness.py` invece di rispondere a memoria, e riporta gli harness rilevati con i loro percorsi",
+        "distingue le skill valide dai collegamenti rotti e li conta per harness invece di dire genericamente che qualcosa manca",
+        "spiega che un collegamento rotto non dà errore: la cartella sembra piena e l'harness semplicemente non ha quelle skill",
+        "riporta gli eventuali segreti in chiaro indicando file e nome del campo, mai il valore"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "toolchain-scheda-scaduta",
+      "input": "Installa un server MCP su Qwen Code, il file dovrebbe essere ~/.qwen/settings.json come su Gemini.",
+      "rubric": [
+        "dice che la scheda di Qwen Code è marcata `da-verificare` e che lo schema è assunto per derivazione da Gemini CLI, non riscontrato",
+        "esegue il modo refresh — ispezione locale prima, documentazione ufficiale poi — invece di scrivere sulla base dell'analogia",
+        "propone una prova su un server innocuo e senza segreti prima di considerare la scheda affidabile",
+        "non presenta l'installazione come riuscita senza un passo di verifica"
+      ],
+      "state_prefix": null
+    }
+  ]
+}

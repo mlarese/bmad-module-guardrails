@@ -611,6 +611,10 @@ README_WORKFLOW_COPY = {
         "Controlled automation",
         "Routes work from read-only checks through dry-run to observable execution, with explicit approvals and rollback.",
     ),
+    "grl-toolchain": (
+        "Skills and MCP servers across harnesses",
+        "Finds and assesses skills and MCP servers, then installs them in each harness's own syntax behind a dry-run, a backup, and a verification step.",
+    ),
 }
 
 

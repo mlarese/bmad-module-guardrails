@@ -1,12 +1,12 @@
 {
   "name": "guardrails",
   "owner": "mlarese",
-  "description": "Modulo BMad Guardrails: diciannove figure e quattordici workflow per sviluppo software, database, firmware embedded, legale, fisco, design, architettura, medicina, revenue management, SEO, social/content, video, immagini generate con AI, Google Ads e automazioni controllate",
+  "description": "Modulo BMad Guardrails: diciannove figure e quindici workflow per sviluppo software, database, firmware embedded, legale, fisco, design, architettura, medicina, revenue management, SEO, social/content, video, immagini generate con AI, Google Ads e automazioni controllate",
   "plugins": [
     {
       "name": "grl",
       "source": "./src",
-      "description": "Guardrails — diciannove figure per privacy, sicurezza, legale, compliance, fisco, UI, architettura del codice e dei database, firmware embedded, ops, sanità, AI, WordPress, SEO, paid media, social/content, creative video, generazione di immagini e revenue management. Include quattordici workflow, tra cui ricerca live, siti, social, pacchetti creativi, Google Ads, automazione con dry-run e consegna WordPress fino al release gate.",
+      "description": "Guardrails — diciannove figure per privacy, sicurezza, legale, compliance, fisco, UI, architettura del codice e dei database, firmware embedded, ops, sanità, AI, WordPress, SEO, paid media, social/content, creative video, generazione di immagini e revenue management. Include quindici workflow, tra cui ricerca live, siti, social, pacchetti creativi, Google Ads, automazione con dry-run, consegna WordPress fino al release gate e installazione controllata di skill e server MCP su ogni harness.",
       "version": "1.26.0",
       "author": "mlarese",
       "homepage": "https://github.com/mlarese/bmad-module-guardrails",
@@ -45,7 +45,8 @@
         "src/skills/grl-revenue-audit",
         "src/skills/grl-revenue-plan",
         "src/skills/grl-revenue-preflight",
-        "src/skills/grl-automation"
+        "src/skills/grl-automation",
+        "src/skills/grl-toolchain"
       ]
     }
   ]

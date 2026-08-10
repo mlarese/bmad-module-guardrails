@@ -1,0 +1,70 @@
+# DO NOT EDIT -- overwritten on every update.
+#
+# Workflow customization surface for grl-toolchain.
+# Team overrides:     {project-root}/_bmad/custom/grl-toolchain.toml
+# Personal overrides: {project-root}/_bmad/custom/grl-toolchain.user.toml
+#
+# Merge: gli scalari vengono sovrascritti (vince l'ultimo strato applicato),
+# gli array vengono accodati. Non esiste un meccanismo di rimozione: una voce
+# di base non si può togliere da un override, si toglie forkando la skill.
+
+[workflow]
+
+# --- Default universali ---
+activation_steps_prepend = []
+activation_steps_append = []
+persistent_facts = ["file:{project-root}/**/project-context.md"]
+on_complete = ""
+
+# --- Punti specifici di questa skill ---
+
+# Dove finiscono inventari, piani di allineamento e registri delle installazioni.
+output_path = "{project-root}/_bmad-output/toolchain"
+
+# Gli harness su cui si può scrivere senza chiedere ogni volta quale. Vuoto
+# significa: chiedi sempre. Un'organizzazione che ha standardizzato su due
+# harness li elenca qui e si risparmia la domanda a ogni installazione.
+default_targets = []
+
+# Harness che questa installazione non deve toccare mai, qualunque cosa chieda
+# l'utente. Serve quando un harness è gestito da un'altra squadra o da un
+# sistema di provisioning, e una scrittura locale verrebbe sovrascritta.
+excluded_harnesses = []
+
+# Giorni dopo i quali una scheda di references/harness-registry.md è considerata
+# scaduta e va aggiornata con il modo refresh prima di scriverci sopra. Portarlo
+# a un numero alto non rende le schede più giuste: rende più tardi la scoperta
+# che non lo sono.
+harness_card_max_age_days = 90
+
+# Strategia di distribuzione delle skill fra gli harness.
+#   "copy"    una cartella indipendente per harness
+#   "symlink" una sorgente unica e un collegamento per harness
+# Il collegamento tiene tutto allineato ma si rompe in silenzio quando la
+# sorgente si sposta: il modo audit cerca esattamente questo.
+skill_distribution = "copy"
+
+# Cartella sorgente quando skill_distribution = "symlink". Deve essere un
+# percorso stabile: se cambia, ogni harness resta con collegamenti rotti.
+skill_source_path = "~/.agents/skills"
+
+# Fonti di ricerca, in ordine di attendibilità. La prima è l'unica con uno
+# schema stabile ed è il punto da cui si traduce per ogni harness; le ultime
+# servono a trovare un nome, non a decidere.
+discovery_sources = [
+  "https://registry.modelcontextprotocol.io",
+  "https://github.com/modelcontextprotocol/servers",
+  "https://github.com/anthropics/skills",
+]
+
+# Verdetti che permettono di procedere all'installazione. Togliere
+# "INSTALLABILE_CON_CONDIZIONI" rende il gate più severo: passano solo i
+# candidati che non richiedono nessun vincolo.
+allowed_verdicts = ["INSTALLABILE", "INSTALLABILE_CON_CONDIZIONI"]
+
+# Chi guarda un'installazione prima che venga applicata, quando il candidato è
+# un server remoto o richiede un segreto. Kai è la base e non si può togliere.
+finalize_reviewers = ["skill:grl-agent-security"]
+
+# Dove instradare quello che esce dal perimetro di questa skill.
+external_handoffs = ["skill:grl-agent-ops", "skill:grl-agent-privacy"]

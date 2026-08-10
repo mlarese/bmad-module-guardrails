@@ -1,0 +1,22 @@
+[
+  { "query": "cerca un server MCP per leggere i ticket di Linear", "should_trigger": true },
+  { "query": "installa questa skill su tutti gli harness che ho", "should_trigger": true },
+  { "query": "quale MCP mi serve per interrogare Postgres dall'agente", "should_trigger": true },
+  { "query": "allinea le skill fra Claude Code, Codex, Cursor e opencode", "should_trigger": true },
+  { "query": "cosa ho installato dove: fammi l'inventario degli harness", "should_trigger": true },
+  { "query": "i symlink delle mie skill sono rotti, controlla", "should_trigger": true },
+  { "query": "come si configura un server MCP su Zed e su Goose", "should_trigger": true },
+  { "query": "aggiungi questo MCP anche su Windsurf e su Droid", "should_trigger": true },
+  { "query": "il server MCP è configurato ma l'harness non lo vede", "should_trigger": true },
+  { "query": "vale la pena installare questo MCP o basta la CLI che ho già", "should_trigger": true },
+  { "query": "aggiorna quello che sai sui percorsi di configurazione degli harness", "should_trigger": true },
+  { "query": "togli questo server MCP da tutti gli harness", "should_trigger": true },
+  { "query": "scrivi una skill nuova per il mio flusso di lavoro", "should_trigger": false },
+  { "query": "questo server MCP espone dati sensibili: fai il threat model", "should_trigger": false },
+  { "query": "dove conservo le chiavi API in produzione e come le ruoto", "should_trigger": false },
+  { "query": "la licenza di questo server MCP è compatibile con il mio prodotto?", "should_trigger": false },
+  { "query": "posso mandare i dati dei pazienti a questo servizio remoto?", "should_trigger": false },
+  { "query": "costruisci un server MCP mio da zero", "should_trigger": false },
+  { "query": "orchestra gli agenti per automatizzare il rilascio", "should_trigger": false },
+  { "query": "il deploy è fallito, controlla i log del server", "should_trigger": false }
+]

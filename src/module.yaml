@@ -9,7 +9,7 @@
 
 code: grl
 name: Guardrails
-description: "Diciannove figure di presidio — privacy e GDPR, sicurezza applicativa, legale e licenze, compliance normativa, fisco e finanza agevolata, qualità visiva della UI, disciplina architetturale del codice, design e architettura dei database, scrittura firmware embedded e sistemi real-time, infrastruttura e operatività, dominio clinico del software sanitario, impianto delle applicazioni che usano modelli linguistici, architettura WordPress a componenti, SEO, media buying/ADV, social e contenuti, creative direction/video, generazione di immagini con modelli AI e revenue management alberghiero — che affiancano il team dentro il ciclo di sviluppo, quando cambiare costa ancora poco. Include workflow di ricerca live per gli aggiornamenti legali e fiscali, `grl-web` per landing page e siti, `grl-ads` per Google Ads e advertising, `grl-social` per strategia e contenuti organici, `grl-social-creative` per design e video short-form, tre workflow revenue per audit, pricing e preflight PMS e `grl-automation` per orchestrare attività ripetibili con dry-run, approvazioni e rollback."
+description: "Diciannove figure di presidio — privacy e GDPR, sicurezza applicativa, legale e licenze, compliance normativa, fisco e finanza agevolata, qualità visiva della UI, disciplina architetturale del codice, design e architettura dei database, scrittura firmware embedded e sistemi real-time, infrastruttura e operatività, dominio clinico del software sanitario, impianto delle applicazioni che usano modelli linguistici, architettura WordPress a componenti, SEO, media buying/ADV, social e contenuti, creative direction/video, generazione di immagini con modelli AI e revenue management alberghiero — che affiancano il team dentro il ciclo di sviluppo, quando cambiare costa ancora poco. Include workflow di ricerca live per gli aggiornamenti legali e fiscali, `grl-web` per landing page e siti, `grl-ads` per Google Ads e advertising, `grl-social` per strategia e contenuti organici, `grl-social-creative` per design e video short-form, tre workflow revenue per audit, pricing e preflight PMS `grl-automation` per orchestrare attività ripetibili con dry-run, approvazioni e rollback e `grl-toolchain` per trovare, valutare e installare skill e server MCP su ogni harness."
 module_version: 1.26.0
 default_selected: false
 
@@ -40,13 +40,15 @@ module_greeting: >
   e fiscali con ricerca live e doppio gate di verifica.
   `grl-social` coordina strategia, calendario, copy e misura dei contenuti organici; `grl-social-creative`
   prepara concept, script, storyboard, shot list e specifiche per post, annunci e video short-form.
+  `grl-toolchain` cerca skill e server MCP, li valuta prima di installarli e li porta su ogni
+  harness della macchina con la sintassi di quell'harness, con dry-run, backup e rollback.
 
 # --- Contesto di esecuzione ---------------------------------------------------
 # Nessuna variabile di configurazione del modulo: tutto il contesto vive nella memoria condivisa del progetto
 # (_bmad/memory/grl-shared/project-profile.md), non in config — il profilo cambia
 # da progetto a progetto, la config è unica per installazione.
 #
-# Il modulo si installa sempre intero: diciannove figure e quattordici workflow, nessuna
+# Il modulo si installa sempre intero: diciannove figure e quindici workflow, nessuna
 # selezione. La severità si deriva dalla criticità dichiarata nel profilo di progetto.
 
 # Nessuna chiave `directories`: la cartella della memoria condivisa

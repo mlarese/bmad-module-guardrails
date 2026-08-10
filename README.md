@@ -57,6 +57,7 @@ when the relevant signals and expertise are needed.
 | `grl-revenue-plan` | To build pricing, demand, and profit scenarios | Separates the economic floor, market, and demand, with monitoring triggers and no rate publishing. |
 | `grl-revenue-preflight` | Before sending prices to a PMS or Channel Manager | Verifies the contract, mapping, dry-run, response, reconciliation, idempotency, and rollback. |
 | `grl-automation` | For repeatable processes across development, legal, tax, design, healthcare, paid media, and revenue management | Routes work from read-only checks through dry-run to observable execution, separating approvals and rollback. |
+| `grl-toolchain` | To find, assess, and install skills and MCP servers across every agent harness on the machine | Translates a candidate into each harness's own syntax, writes only after a dry-run and a backup, and refreshes its own harness cards from the source. |
 
 The repository contains the complete bundle; derived thematic modules share the same agents and
 workflows within their area. See `CLAUDE.md` and `docs/module-plan.md` for architecture, build,

@@ -51,8 +51,8 @@ modules:
     repo: bmad-module-guardrails-engineering
     status: derived
     purpose: "Architettura del codice e dei database, sicurezza, operations e impianto delle applicazioni AI."
-    description: "Sei figure di presidio su disciplina architetturale del codice, design e architettura dei database, scrittura firmware embedded e sistemi real-time, sicurezza applicativa, infrastruttura e operatività, impianto delle applicazioni che usano modelli linguistici. Ogni raccomandazione porta il costo di non seguirla."
-    about: "Guardrails Engineering: 6 review agents and 3 controlled BMad workflows for code architecture, database architecture and design, embedded firmware, application security, infrastructure, operations, and AI application design."
+    description: "Sei figure di presidio su disciplina architetturale del codice, design e architettura dei database, scrittura firmware embedded e sistemi real-time, sicurezza applicativa, infrastruttura e operatività, impianto delle applicazioni che usano modelli linguistici — più un workflow che trova, valuta e installa skill e server MCP su ogni harness. Ogni raccomandazione porta il costo di non seguirla."
+    about: "Guardrails Engineering: 6 review agents and 4 controlled BMad workflows for code architecture, database architecture and design, embedded firmware, application security, infrastructure, operations, AI application design, and installing skills and MCP servers across every agent harness."
     skills:
       - grl-agent-architecture
       - grl-agent-database
@@ -61,6 +61,7 @@ modules:
       - grl-agent-ops
       - grl-agent-ai
       - grl-automation
+      - grl-toolchain
   - code: grf
     name: Guardrails Fiscal
     repo: bmad-module-guardrails-fiscal
@@ -140,8 +141,8 @@ modules:
     repo: bmad-module-guardrails-automation
     status: derived
     purpose: "Orchestrazione di processi ripetitivi fra sviluppo software, database, legale, fisco, design, architettura, medicina, paid media e revenue management."
-    description: "Diciannove figure Guardrails e quattordici workflow necessari a instradare processi software, database, firmware embedded, legali, fiscali, di design, architettura, medicina, web, WordPress, paid media, social/content, creative video e revenue management. I workflow social coprono strategia, calendario, contenuti e pacchetti creativi; i tre workflow revenue coprono audit, scenari di pricing e preflight PMS/Channel Manager; `grl-wordpress-delivery` porta un sito dal modello dei contenuti al release gate; `grl-automation` porta ogni richiesta da intake e read-only a piano, dry-run, approvazioni, esecuzione osservabile e rollback, senza trasformare un agente in un esecutore autonomo."
-    about: "Guardrails Automation: 19 review agents and 14 controlled BMad workflows for routing repeatable processes across software, databases, embedded firmware, legal, tax, design, healthcare, web, WordPress, paid media, social content, creative video, AI image generation, and revenue management."
+    description: "Diciannove figure Guardrails e quindici workflow necessari a instradare processi software, database, firmware embedded, legali, fiscali, di design, architettura, medicina, web, WordPress, paid media, social/content, creative video e revenue management. I workflow social coprono strategia, calendario, contenuti e pacchetti creativi; i tre workflow revenue coprono audit, scenari di pricing e preflight PMS/Channel Manager; `grl-wordpress-delivery` porta un sito dal modello dei contenuti al release gate; `grl-automation` porta ogni richiesta da intake e read-only a piano, dry-run, approvazioni, esecuzione osservabile e rollback, senza trasformare un agente in un esecutore autonomo; `grl-toolchain` trova, valuta e installa skill e server MCP su ogni harness con la sintassi di quell'harness."
+    about: "Guardrails Automation: 19 review agents and 15 controlled BMad workflows for routing repeatable processes across software, databases, embedded firmware, legal, tax, design, healthcare, web, WordPress, paid media, social content, creative video, AI image generation, revenue management, and agent-harness tooling."
     skills:
       - grl-agent-privacy
       - grl-agent-security
@@ -174,6 +175,7 @@ modules:
       - grl-revenue-preflight
       - grl-wordpress-delivery
       - grl-automation
+      - grl-toolchain
   - code: gwp
     name: Guardrails WordPress
     repo: bmad-module-guardrails-wordpress
