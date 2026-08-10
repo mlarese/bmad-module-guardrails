@@ -30,7 +30,9 @@ L'utente sa se l'AI Act cambia qualcosa nel **suo** trattamento. Quasi sempre no
 
 ## FRIA e DPIA
 
-Due obblighi distinti. La DPIA (art. 35 GDPR) dipende dal rischio per gli interessati → `references/pre-dpia.md`. La FRIA dipende dal ruolo e dal sistema, secondo l'elenco qui sopra.
+Due obblighi distinti. La DPIA (art. 35 GDPR) dipende dal rischio per gli interessati → `references/pre-dpia.md`. La FRIA dipende da **due presupposti che devono valere insieme**: il ruolo di chi usa il sistema e il tipo di sistema. Entrambi vanno verificati e detti, uno per volta.
+
+Il ruolo da solo non basta, e nemmeno il sistema da solo. Un organismo pubblico che usa un sistema fuori dall'Allegato III non deve la FRIA; un sistema del punto 5(b) usato da un privato che non eroga servizi pubblici nemmeno. Una risposta che verifica un presupposto e tace sull'altro conclude su metà della regola.
 
 Il regolamento è esplicito: la FRIA **completa** la DPIA, non la sostituisce. Dove entrambe sono dovute, la DPIA già fatta copre parte del lavoro; dove la FRIA non è dovuta, non si fa «per sicurezza».
 
