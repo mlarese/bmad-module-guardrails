@@ -310,16 +310,34 @@ profilo cambia con il profilo attivo e non si indovina.
 | Rilevamento | `~/.config/zed/settings.json` esiste |
 | MCP | `~/.config/zed/settings.json`, chiave `context_servers` |
 
+Forma corrente, dalla documentazione ufficiale (`zed.dev/docs/ai/mcp`, verificata il 2026-08-10):
+i campi sono **piatti**, e i server remoti sono supportati.
+
 ```json
 { "context_servers": {
-    "nome": { "source": "custom",
-              "command": { "path": "npx", "args": ["-y","@org/pkg"], "env": {} } } } }
+    "locale": { "command": "npx", "args": ["-y","@org/pkg"], "env": {} },
+    "remoto": { "url": "https://host/mcp", "headers": { "Authorization": "Bearer …" } } } }
 ```
 
-Due trappole: la chiave si chiama `context_servers`, e comando e argomenti stanno **dentro** un
-oggetto `command`. In più `settings.json` di Zed è JSON **con commenti**: un ciclo
-lettura-scrittura con un parser JSON standard fallisce o cancella i commenti dell'utente. Va
-modificato preservando il testo, o lasciato all'utente con il frammento pronto da incollare.
+Senza `Authorization` negli header, Zed avvia da sé il flusso OAuth.
+
+**Discordanza da conoscere.** Molte fonti di terzi, e la documentazione Zed precedente, mostrano
+una forma diversa e più vecchia:
+
+```json
+{ "context_servers": { "nome": {
+    "source": "custom",
+    "command": { "path": "npx", "args": ["-y","@org/pkg"], "env": {} } } } }
+```
+
+Le due non sono compatibili: comando e argomenti annidati dentro un oggetto `command` contro
+campi piatti. Prima di scrivere su una versione di Zed non recente, verifica quale delle due
+accetta — è la trappola che questa scheda ha già sbagliato una volta.
+
+La chiave si chiama `context_servers`, non `mcpServers`. In più `settings.json` di Zed è JSON
+**con commenti**: un ciclo lettura-scrittura con un parser JSON standard fallisce o cancella i
+commenti dell'utente. Va modificato preservando il testo, o lasciato all'utente con il frammento
+pronto da incollare.
 
 ---
 

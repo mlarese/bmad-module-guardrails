@@ -149,11 +149,20 @@ def test_crush_usa_header_al_singolare():
     assert "headers" not in entry
 
 
-def test_zed_annida_comando_e_argomenti():
+def test_zed_usa_campi_piatti_non_annidati():
+    """La forma con `source: custom` e `command: {path}` è quella vecchia."""
     harness = BY_ID["zed"]
     entry = apply_mcp.build_entry(harness, harness.mcp_files[0], _args())
-    assert entry["command"]["path"] == "npx"
-    assert entry["command"]["args"] == ["-y", "@org/pkg"]
+    assert entry == {"command": "npx", "args": ["-y", "@org/pkg"]}
+    assert "source" not in entry
+
+
+def test_zed_supporta_i_server_remoti():
+    harness = BY_ID["zed"]
+    entry = apply_mcp.build_entry(
+        harness, harness.mcp_files[0], _args(url="https://h/mcp", header=["Authorization: Bearer x"])
+    )
+    assert entry == {"url": "https://h/mcp", "headers": {"Authorization": "Bearer x"}}
 
 
 def test_env_ref_diventa_un_riferimento_non_un_valore():

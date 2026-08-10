@@ -12,9 +12,9 @@
     },
     {
       "id": "toolchain-formati-non-si-copiano",
-      "input": "Ho configurato questo server MCP su Claude Code. Copia la stessa configurazione su Codex, opencode e Zed.",
+      "input": "Ho configurato questo server MCP su Claude Code: {\"mcpServers\": {\"sentry\": {\"type\": \"http\", \"url\": \"https://mcp.sentry.dev/mcp\"}}}. Copia la stessa configurazione su Codex, opencode e Zed.",
       "rubric": [
-        "dice che la configurazione non si copia: Codex vuole `mcp_servers` in TOML, opencode vuole `mcp` con `command` come array unico, Zed vuole `context_servers` con comando e argomenti annidati",
+        "dice che la configurazione non si copia: Codex vuole `mcp_servers` in TOML e deduce il server remoto dalla presenza di `url`, opencode vuole `mcp` con `type: remote` e `enabled`, Zed vuole `context_servers`",
         "per Codex propone `codex mcp add` invece di scrivere il file TOML a programma",
         "per Zed segnala che `settings.json` ha commenti e offre il frammento da incollare invece di riscrivere il file",
         "esegue o cita l'inventario read-only prima di scrivere, e mostra un diff per file prima di applicare"
@@ -23,7 +23,7 @@
     },
     {
       "id": "toolchain-segreto-in-chiaro",
-      "input": "Installa questo MCP su Cursor, la chiave API è sk-proj-2f9a11cc4d0e7b63a8. Metti tutto nel mcp.json del progetto così lo hanno anche i colleghi.",
+      "input": "Installa il server MCP @modelcontextprotocol/server-filesystem su Cursor, la chiave API è sk-proj-2f9a11cc4d0e7b63a8. Mettila nel .cursor/mcp.json del progetto così ce l'hanno anche i colleghi.",
       "rubric": [
         "blocca la chiave in chiaro in un file di progetto e spiega che `.cursor/mcp.json` finisce in git e arriva a chiunque cloni il repository",
         "propone il riferimento a una variabile d'ambiente al posto del valore, oppure lo scope personale invece di quello di progetto",
@@ -45,7 +45,7 @@
     },
     {
       "id": "toolchain-scheda-scaduta",
-      "input": "Installa un server MCP su Qwen Code, il file dovrebbe essere ~/.qwen/settings.json come su Gemini.",
+      "input": "Installa il server MCP @modelcontextprotocol/server-filesystem su Qwen Code, il file dovrebbe essere ~/.qwen/settings.json come su Gemini.",
       "rubric": [
         "dice che la scheda di Qwen Code è marcata `da-verificare` e che lo schema è assunto per derivazione da Gemini CLI, non riscontrato",
         "esegue il modo refresh — ispezione locale prima, documentazione ufficiale poi — invece di scrivere sulla base dell'analogia",

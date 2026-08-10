@@ -158,10 +158,17 @@ def build_entry(harness: Harness, spec: McpFile, args: argparse.Namespace) -> di
         return entry
 
     if harness.id == "zed":
-        entry = {
-            "source": "custom",
-            "command": {"path": args.command[0], "args": args.command[1:], "env": env},
-        }
+        # Campi piatti e supporto remoto, come la documentazione ufficiale corrente.
+        # La forma con `source: "custom"` e `command: {path, args, env}` è quella
+        # vecchia: la scheda dell'harness spiega la discordanza.
+        if remote:
+            entry = {"url": args.url}
+            if headers:
+                entry["headers"] = headers
+        else:
+            entry = {"command": args.command[0], "args": args.command[1:]}
+            if env:
+                entry["env"] = env
         return entry
 
     # Forma comune: Cursor, Windsurf, Crush, VS Code, Qwen, Claude Code (file).
