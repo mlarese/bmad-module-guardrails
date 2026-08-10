@@ -76,6 +76,8 @@ Prima di fissare il verdetto invoca `bmad-review` senza `lenses=` sul diff o sna
 
 Il report dichiara l'esito reale della review, non un riassunto assolutorio: quanti finding sono arrivati, quali sono decisivi, e per ciascuno se è stato corretto, confutato o accettato — con la prova che lo chiude. «Nessun finding decisivo aperto» si scrive solo dopo aver elencato quelli arrivati e come sono stati chiusi. Un report che dichiara una review pulita mentre la review ha prodotto finding mente a chi autorizza il rilascio, ed è il solo lettore che quel documento abbia.
 
+Dichiara anche **con quale mezzo** la review è avvenuta: `bmad-review` invocata, oppure le lenti applicate a mano perché la skill non era raggiungibile. Il secondo caso è previsto e non degrada il verdetto; attribuire a `bmad-review` un lavoro fatto altrimenti sì, perché promette una garanzia che nessuno ha dato.
+
 Quando contenuto e verdetto sono congelati, conserva una copia del report e invoca separatamente `bmad-review lenses=prose` con output in italiano e `reader_type=humans`. Applica soltanto correzioni editoriali, poi confronta le due copie:
 
 ```
