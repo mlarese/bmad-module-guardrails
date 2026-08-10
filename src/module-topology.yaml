@@ -5,7 +5,7 @@
 # repository resta la fonte unica: i repository derivati non si modificano a mano,
 # si rigenerano.
 #
-# Il bundle `grl` resta la superficie completa — ventuno figure e sedici workflow in
+# Il bundle `grl` resta la superficie completa — ventidue figure e sedici workflow in
 # un'unica installazione. I moduli tematici sono alternative al bundle, non
 # aggiunte: installano le stesse skill con lo stesso nome, quindi bundle e moduli
 # tematici non convivono nello stesso progetto.
@@ -91,11 +91,12 @@ modules:
     name: Guardrails Web Experience
     repo: bmad-module-guardrails-web
     status: derived
-    purpose: "Qualità visiva, findability, landing page, siti, social content, immagini generate e paid media."
-    description: "Sei figure di presidio su qualità visiva dell'interfaccia, SEO, media buying/ADV, strategia social, creative video e generazione di immagini con modelli AI, più i workflow che costruiscono landing page e siti, coordinano campagne e producono contenuti social e pacchetti creativi senza pubblicazione implicita. Contro le pagine generiche, le promesse di ranking, i post senza piano e la spesa senza misura."
-    about: "Guardrails Web Experience: 6 review agents and 7 controlled BMad workflows for visual quality, search, web delivery, paid media, organic social content, creative video, and AI image generation."
+    purpose: "Customer journey, visual storytelling, search system contestuali, landing scroll-driven statiche, video-to-scroll da sorgenti autorizzate, qualità visiva, findability, landing page, siti, social content, immagini generate e paid media."
+    description: "Sette figure di presidio su customer journey e visual storytelling situati, regia di landing scroll-driven statiche da asset online verificati e piani video-to-scroll da sorgenti autorizzate, qualità visiva dell'interfaccia, SEO, media buying/ADV, strategia social, creative video e generazione di immagini con modelli AI, più i workflow che costruiscono landing page e siti, coordinano campagne e producono contenuti social e pacchetti creativi senza pubblicazione implicita. Contro i percorsi generici, le pagine anonime, le promesse di ranking, i post senza piano e la spesa senza misura."
+    about: "Guardrails Web Experience: 7 review agents and 7 controlled BMad workflows for customer journeys, static and video-source scroll storytelling, visual quality, search, web delivery, paid media, social content, creative video, and AI image generation."
     skills:
       - grl-agent-ui-critic
+      - grl-agent-customer-journey
       - grl-agent-seo
       - grl-agent-ads
       - grl-agent-social
@@ -143,9 +144,9 @@ modules:
     name: Guardrails Automation
     repo: bmad-module-guardrails-automation
     status: derived
-    purpose: "Orchestrazione di processi ripetitivi fra sviluppo software, diagnosi di bug, database, legale, fisco, design, architettura, medicina, paid media, revenue management e configurazione di prodotto."
-    description: "Ventuno figure Guardrails e sedici workflow necessari a instradare processi software, database, punti di blocco, firmware embedded, diagnosi di bug e regressioni, legali, fiscali, di design, architettura, medicina, web, WordPress, paid media, social/content, creative video, revenue management e configurazione di prodotto. I workflow social coprono strategia, calendario, contenuti e pacchetti creativi; i tre workflow revenue coprono audit, scenari di pricing e preflight PMS/Channel Manager; `grl-bug-finder` costruisce riproduzioni, evidenze e test di regressione senza correggere; `grl-wordpress-delivery` porta un sito dal modello dei contenuti al release gate; `grl-automation` porta ogni richiesta da intake e read-only a piano, dry-run, approvazioni, esecuzione osservabile e rollback, senza trasformare un agente in un esecutore autonomo; `grl-toolchain` trova, valuta e installa skill e server MCP su ogni harness con la sintassi di quell'harness."
-    about: "Guardrails Automation: 21 review agents and 16 controlled BMad workflows for routing repeatable processes across software, databases, bug diagnosis, blocking points, firmware, legal, tax, design, healthcare, web, WordPress, paid media, social content, video, AI imaging, revenue management, product configuration, and agent-harness tooling."
+    purpose: "Orchestrazione di processi ripetitivi fra sviluppo software, diagnosi di bug, database, legale, fisco, design, customer journey, visual storytelling, scroll-world, video-to-scroll, search system, architettura, medicina, paid media, revenue management e configurazione di prodotto."
+    description: "Ventidue figure Guardrails e sedici workflow necessari a instradare processi software, database, punti di blocco, firmware embedded, diagnosi di bug e regressioni, legali, fiscali, di design, customer journey, visual storytelling, landing scroll-driven statiche, piani video-to-scroll da sorgenti autorizzate, search system, architettura, medicina, web, WordPress, paid media, social/content, creative video, revenue management e configurazione di prodotto. I workflow social coprono strategia, calendario, contenuti e pacchetti creativi; i tre workflow revenue coprono audit, scenari di pricing e preflight PMS/Channel Manager; `grl-bug-finder` costruisce riproduzioni, evidenze e test di regressione senza correggere; `grl-wordpress-delivery` porta un sito dal modello dei contenuti al release gate; `grl-automation` porta ogni richiesta da intake e read-only a piano, dry-run, approvazioni, esecuzione osservabile e rollback, senza trasformare un agente in un esecutore autonomo; `grl-toolchain` trova, valuta e installa skill e server MCP su ogni harness con la sintassi di quell'harness."
+    about: "Guardrails Automation: 22 review agents and 16 controlled BMad workflows for software, legal, tax, design, customer journeys, static and video-source scroll storytelling, search, healthcare, web, WordPress, paid media, social/video, AI imaging, revenue, product configuration, and agent tooling."
     skills:
       - grl-agent-privacy
       - grl-agent-security
@@ -161,6 +162,7 @@ modules:
       - grl-agent-health
       - grl-agent-ai
       - grl-agent-wordpress
+      - grl-agent-customer-journey
       - grl-agent-seo
       - grl-agent-ads
       - grl-agent-social

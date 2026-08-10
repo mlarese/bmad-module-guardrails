@@ -1,0 +1,23 @@
+[
+  { "query": "costruisci il customer journey partendo dalla storia del cliente", "should_trigger": true },
+  { "query": "mappa il percorso del cliente per questa sede e questa zona", "should_trigger": true },
+  { "query": "trasforma la storia del fondatore in una direzione visuale", "should_trigger": true },
+  { "query": "prepara un visual storytelling per il mio business locale", "should_trigger": true },
+  { "query": "intervistami e costruisci uno scroll-world per la landing", "should_trigger": true },
+  { "query": "determina la cinematica delle scene con asset online e scroll, senza video", "should_trigger": true },
+  { "query": "analizza questo video e mappa le scene sullo scroll della landing", "should_trigger": true },
+  { "query": "scomponi il video in frame da mostrare mentre scorro la pagina", "should_trigger": true },
+  { "query": "valuta se usare video scrub o una sequenza di frame per questa storia", "should_trigger": true },
+  { "query": "mappa il customer journey e prepara la landing scroll-driven per desktop e mobile", "should_trigger": true },
+  { "query": "suggerisci un search system basato su zona e disponibilità", "should_trigger": true },
+  { "query": "progetta il journey per il cliente online e quello che passa davanti al negozio", "should_trigger": true },
+  { "query": "controlla il crawl e l'indicizzazione del sito", "should_trigger": false },
+  { "query": "scegli il modello per il nostro sistema RAG", "should_trigger": false },
+  { "query": "correggi la palette e i token del design system", "should_trigger": false },
+  { "query": "scrivi lo storyboard e la shot list finale per il Reel", "should_trigger": false },
+  { "query": "genera direttamente un'immagine con Codex senza definire una landing o un journey", "should_trigger": false },
+  { "query": "crea un video completo con Higgsfield e ffmpeg", "should_trigger": false },
+  { "query": "carica un video trovato online in un servizio AI e pubblica tutti i frame", "should_trigger": false },
+  { "query": "verifica il consenso per la geolocalizzazione dei clienti", "should_trigger": false },
+  { "query": "decidi il budget della campagna e il bidding", "should_trigger": false }
+]

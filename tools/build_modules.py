@@ -7,7 +7,7 @@
 
 Perché serve
 ------------
-Il bundle `grl` installa ventuno figure e sedici workflow in un colpo solo. Chi vuole
+Il bundle `grl` installa ventidue figure e sedici workflow in un colpo solo. Chi vuole
 solo la governance normativa, o solo il presidio ingegneristico, non ha motivo di
 portarsi le altre dieci figure. La soluzione è un repository per area — ma scritto a
 mano diventerebbe subito divergente dal bundle.
@@ -64,7 +64,7 @@ TEXT_SUFFIXES = {".md", ".yaml", ".yml", ".toml", ".csv", ".json", ".py", ".txt"
 # significato.
 BOARD_ROSTER_FILES = {"SKILL.md", "selection.md"}
 
-# Il bundle conta ventuno figure e lo dice ovunque nei testi del core. In un modulo
+# Il bundle conta ventidue figure e lo dice ovunque nei testi del core. In un modulo
 # tematico quel numero è falso, e un numero falso in una skill è un'istruzione
 # sbagliata. Con più figure si sostituisce il numerale; con una sola si toglie e
 # resta il plurale generico, che è impreciso ma non falso — riscrivere l'accordo
@@ -497,10 +497,10 @@ README_MODULE_COPY = {
     "gre": "A focused BMad module for code architecture, database architecture and design, embedded firmware, application security, infrastructure and operations, AI application design, and product configuration from customer documents. Every recommendation includes the cost of ignoring it.",
     "grf": "A focused BMad module for tax, accounting operations, grants, incentives, and live fiscal updates. It checks requirements, deadlines, eligible expenses, and reporting against primary sources.",
     "grh": "A focused BMad module for clinical data, healthcare interoperability, patient safety, and medical-device qualification. It keeps real clinical workflows and MDR scope in view.",
-    "grw": "A focused BMad module for visual quality, search, web delivery, paid media, organic social content, creative video, and AI image generation. It guards against generic pages, unsupported ranking promises, unplanned posts, and unmeasured spend.",
+    "grw": "A focused BMad module for customer journeys, static and video-source scroll-driven visual storytelling, verified asset rights, visual quality, search, web delivery, paid media, organic social content, creative video, and AI image generation. It guards against generic journeys, anonymous pages, unsupported ranking promises, unplanned posts, and unmeasured spend.",
     "gpm": "A focused BMad module for paid media, Google Ads, tracking, consent, social content, creative production, and AI image generation. It keeps campaigns and assets behind evidence, approval, and rollback gates.",
     "grv": "A focused BMad module for hotel revenue management, pricing, forecasting, profit, and PMS/Channel Manager integrations. It keeps external publication behind explicit gates, dry-runs, approval, and rollback.",
-    "gau": "A focused BMad module for routing repeatable processes across software, databases, legal, tax, design, architecture, healthcare, web, paid media, social content, creative video, AI image generation, revenue management, and product configuration.",
+    "gau": "A focused BMad module for routing repeatable processes across software, databases, legal, tax, design, customer journeys, static and video-source scroll-driven visual storytelling from verified assets, search, architecture, healthcare, web, paid media, social content, creative video, AI image generation, revenue management, and product configuration.",
     "gwp": "A focused BMad module for component-based WordPress architecture and controlled delivery through the release gate. It covers Gutenberg, Elementor, ACF, templates, the Media Library, and migration work.",
 }
 
@@ -515,6 +515,7 @@ README_AGENT_FOCUS = {
     "grl-agent-compliance": "NIS2, DORA, EAA/WCAG, eIDAS, CRA, MDR, and sector-specific obligations.",
     "grl-agent-fiscal": "Taxes, VAT, grants, incentives, tax credits, and reporting.",
     "grl-agent-ui-critic": "UI, landing pages, markup, CSS, typography, palettes, density, and layout.",
+    "grl-agent-customer-journey": "Client story, location, business placement, customer journeys, visual narratives, static and video-source scroll cinematics, timecode/frame plans, online asset sources and rights gates, and contextual search systems; no upload or publication is implicit.",
     "grl-agent-architecture": "Boundaries, folders, dependencies, interfaces, factories, architectural layers, and the architectural constraints of a story or spec.",
     "grl-agent-blockers": "Mandatory paths, state machines, gates and approvals, hardcoded rigidity, runtime stalls, and repo or pipeline gates.",
     "grl-agent-database": "Data models, PostgreSQL, Oracle, MongoDB, Redis/Valkey, distributed SQL, NoSQL, search, analytics, time-series, graph, vector, and hybrid search.",

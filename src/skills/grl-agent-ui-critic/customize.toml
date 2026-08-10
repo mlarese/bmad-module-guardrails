@@ -18,7 +18,7 @@ agent_type = "stateless"   # stateless | memory | autonomous
 
 # Raggruppamento del roster, dichiarato dal piano del modulo Guardrails.
 # È ciò che porta Iris nella stanza principale di bmad-party-mode insieme alle
-# altre sei figure grl e ai cinque agenti BMM.
+# altre sette figure grl e ai cinque agenti BMM.
 
 module = "grl"
 team = "software-development"

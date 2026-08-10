@@ -9,15 +9,15 @@
 
 code: grl
 name: Guardrails
-description: "Ventuno figure di presidio — privacy e GDPR, sicurezza applicativa, legale e licenze, compliance normativa, fisco e finanza agevolata, qualità visiva della UI, disciplina architetturale del codice, punti di blocco e rigidità del software, design e architettura dei database, scrittura firmware embedded e sistemi real-time, infrastruttura e operatività, dominio clinico del software sanitario, impianto delle applicazioni che usano modelli linguistici, architettura WordPress a componenti, SEO, media buying/ADV, social e contenuti, creative direction/video, generazione di immagini con modelli AI, revenue management alberghiero e configurazione di prodotto da documento — che affiancano il team dentro il ciclo di sviluppo, quando cambiare costa ancora poco. Include workflow di ricerca live per gli aggiornamenti legali e fiscali, `grl-bug-finder` per diagnosi read-only di bug e regressioni, `grl-web` per landing page e siti, `grl-ads` per Google Ads e advertising, `grl-social` per strategia e contenuti organici, `grl-social-creative` per design e video short-form, tre workflow revenue per audit, pricing e preflight PMS, `grl-automation` per orchestrare attività ripetibili con dry-run, approvazioni e rollback e `grl-toolchain` per trovare, valutare e installare skill e server MCP su ogni harness."
-module_version: 1.28.0
+description: "Ventidue figure di presidio — privacy e GDPR, sicurezza applicativa, legale e licenze, compliance normativa, fisco e finanza agevolata, qualità visiva della UI, customer journey, visual storytelling e search system, landing scroll-driven statiche da asset verificati e piani video-to-scroll da sorgenti autorizzate, disciplina architetturale del codice, punti di blocco e rigidità del software, design e architettura dei database, scrittura firmware embedded e sistemi real-time, infrastruttura e operatività, dominio clinico del software sanitario, impianto delle applicazioni che usano modelli linguistici, architettura WordPress a componenti, SEO, media buying/ADV, social e contenuti, creative direction/video, generazione di immagini con modelli AI, revenue management alberghiero e configurazione di prodotto da documento — che affiancano il team dentro il ciclo di sviluppo, quando cambiare costa ancora poco. Include workflow di ricerca live per gli aggiornamenti legali e fiscali, `grl-bug-finder` per diagnosi read-only di bug e regressioni, `grl-web` per landing page e siti, `grl-ads` per Google Ads e advertising, `grl-social` per strategia e contenuti organici, `grl-social-creative` per design e video short-form, tre workflow revenue per audit, pricing e preflight PMS, `grl-automation` per orchestrare attività ripetibili con dry-run, approvazioni e rollback e `grl-toolchain` per trovare, valutare e installare skill e server MCP su ogni harness."
+module_version: 1.30.0
 default_selected: false
 
 module_greeting: >
-  Guardrails è installato: ventuno figure di presidio — Vera (privacy), Kai (sicurezza),
+  Guardrails è installato: ventidue figure di presidio — Vera (privacy), Kai (sicurezza),
   Aldo (legale), Nils (compliance), Marta (fisco e finanza agevolata), Iris (design), Otto (architettura),
   Vito (punti di blocco), Dario (database), Ada (firmware), Bruno (ops),
-  Livia (dominio clinico), Enzo (applicazioni con AI), Milo (WordPress a componenti), Nora (SEO), Dalia (media buying e ADV),
+  Livia (dominio clinico), Enzo (applicazioni con AI), Milo (WordPress a componenti), Marea (customer journey, visual storytelling, search system, scroll-world statici e video-to-scroll con gate), Nora (SEO), Dalia (media buying e ADV),
   Sofia (social e contenuti), Marco (creative e social video), Elio (immagini generate con AI),
   Rhea (revenue management) e Ines (configurazione di prodotto) —
   entrano nel roster e si possono convocare per nome.
@@ -51,7 +51,7 @@ module_greeting: >
 # (_bmad/memory/grl-shared/project-profile.md), non in config — il profilo cambia
 # da progetto a progetto, la config è unica per installazione.
 #
-# Il modulo si installa sempre intero: ventuno figure e sedici workflow, nessuna
+# Il modulo si installa sempre intero: ventidue figure e sedici workflow, nessuna
 # selezione. La severità si deriva dalla criticità dichiarata nel profilo di progetto.
 
 # Nessuna chiave `directories`: la cartella della memoria condivisa
@@ -62,12 +62,12 @@ post-install-notes: >
   Primo passo: esegui `grl-profile`. Sono otto campi, pochi minuti, quasi tutti
   pre-compilati leggendo il repository; l'unico che devi dichiarare tu è la criticità
   del progetto (hobby/prototipo · interno · produzione con clienti · regolamentato),
-  perché è quella che regola quanto saranno severe tutte e ventuno le figure. Se il
+  perché è quella che regola quanto saranno severe tutte e ventidue le figure. Se il
   settore è sanitario, il profilo raccoglie cinque campi in più; altrimenti non li
   nomina nemmeno.
 
   Poi puoi chiamare una figura per nome, oppure usare `grl-board` per farle guardare
-  tutte insieme lo stesso artefatto. Le ventuno entrano anche nella stanza principale
+  tutte insieme lo stesso artefatto. Le ventidue entrano anche nella stanza principale
   di `bmad-party-mode`, accanto ai cinque agenti BMM.
 
   Se qualcosa non torna nel codice, nella configurazione o in una pipeline, usa `grl-bug-finder`:
@@ -266,3 +266,11 @@ agents:
     title: Product Configuration Specialist
     icon: 🔩
     description: "Legge la richiesta del cliente — RFQ, capitolato, email, specifica — e la traduce in una configurazione di prodotto validata contro il catalogo dell'azienda: ogni scelta porta la sua origine (scritta nel documento, imposta da una regola, assunta), e ciò che il documento non dice resta una domanda invece di diventare un default. Se il catalogo non esiste, il primo lavoro è costruirlo — intervista, estrazione da schede tecniche e listini, o importazione dal gestionale — e non si usa finché una persona dell'azienda non lo ha confermato. Parla come chi ha visto una configurazione impossibile fermarsi in produzione: verdetto in una riga, poi le domande che mancano in ordine di impatto."
+
+  - code: grl-agent-customer-journey
+    module: grl
+    team: creative
+    name: Marea
+    title: Customer Journey & Visual Storytelling Strategist
+    icon: 🧭
+    description: "Parte dalla storia reale del cliente, dal luogo e dalla collocazione del business per costruire customer journey, visual storytelling, search system contestuali e landing scroll-driven statiche da asset verificati; su video forniti esplicitamente prepara piani scrub/frame senza upload o pubblicazione implicita."

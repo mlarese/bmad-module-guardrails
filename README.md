@@ -1,9 +1,10 @@
 # Guardrails (`grl`)
 
-Guardrails is a [BMad](https://github.com/bmad-code-org/BMAD-METHOD) module with **twenty-one agents**
+Guardrails is a [BMad](https://github.com/bmad-code-org/BMAD-METHOD) module with **twenty-two agents**
 that support software development teams across privacy and GDPR, security, legal, compliance,
-tax, design, code and database architecture, blocking points, embedded firmware, operations, healthcare, AI, WordPress, SEO,
-social/content, creative video, AI image generation, revenue management, product configuration, and paid media.
+tax, design, customer journey, visual storytelling, contextual search, video-to-scroll direction, code and database architecture, blocking points,
+embedded firmware, operations, healthcare, AI, WordPress, SEO, social/content, creative video, AI image generation,
+revenue management, product configuration, and paid media.
 
 Agents surface constraints and risks while changes are still inexpensive; decisions remain with
 the team. They speak operationally, do not produce formal documents, and do not replace qualified
@@ -22,6 +23,7 @@ multidisciplinary review of the same artifact, use `grl-board`.
 | 📐 **Nils** — Regulatory Compliance | NIS2, DORA, EAA/WCAG, eIDAS, CRA, MDR, and sector-specific obligations | Determines whether a rule applies, what threshold activates it, and which obligations follow. |
 | 🧾 **Marta** — Tax and Incentives Specialist | Taxes, VAT, grants, incentives, tax credits, and reporting | Checks primary sources, requirements, deadlines, and eligible expenses in an operational pre-screening. |
 | 👁️ **Iris** — Design Critic | UI, landing pages, markup, CSS, typography, palettes, density, and layout | Recognizes generic patterns and proposes a concrete, usable visual departure. |
+| 🧭 **Marea** — Customer Journey & Visual Storytelling Strategist | Client story, location, business placement, customer journeys, visual narratives, contextual search systems, and video-to-scroll direction | Turns a real client story and its place into a situated journey, static scroll cinematics, or an explicit video-source plan choosing scrub versus optimized frames; rights, performance, accessibility, and Codex generation stay behind gates. |
 | 🧱 **Otto** — Code Architect | Boundaries, folders, dependencies, interfaces, factories, architectural layers, and the architectural constraints of a story or spec | Identifies the right place for a responsibility and weighs the cost of alternatives; on a story still being written, delivers constraints that are verifiable at review time. |
 | 🚧 **Vito** — Blocking Points Analyst | Mandatory paths, state machines, gates and approvals, hardcoded rigidity, runtime stalls, and repo or pipeline gates | Reads the code as someone stuck inside it and returns a list of possible blocking points, ordered by who hits them today, with the file, who gets stuck, the workaround already in use, and the exit that is missing. Reads only; never asks to remove a deliberate control. |
 | 🗄️ **Dario** — Database Architect & Designer | Data models, PostgreSQL, Oracle, MongoDB, Redis/Valkey, distributed SQL, NoSQL, search, analytics, time-series, graph, vector and hybrid search | Chooses persistence from workload and invariants, verifies current solutions live, and carries the decision through schema, performance, reliability, benchmark, and migration. |
@@ -51,7 +53,7 @@ when the relevant signals and expertise are needed.
 | `grl-mdsw` | When a software feature might fall within the scope of medical devices | Classifies the software against the MDR and identifies the consequences and non-consequences for the plan. |
 | `grl-legal-updates` | For legal updates, instruments, validity, and developments in a defined period | Searches primary sources and produces a digest with coverage, `as_of`, checks, and obsolescence. |
 | `grl-fiscal-updates` | For tax developments, grants, incentives, amendments, and deadlines | Applies the same verifiable process to requirements, expenses, eligible parties, and tax dates. |
-| `grl-web` | To create landing pages and websites, recreate mockups, or diagnose a page | Starts from the conversion brief and moves the result through review, accessibility, SEO, and delivery. |
+| `grl-web` | To create landing pages and websites, consume an approved `scroll-world` package, recreate mockups, or diagnose a page | Starts from the conversion brief, can implement static scroll direction from Marea, and moves the result through review, accessibility, SEO, and delivery. |
 | `grl-wordpress-delivery` | To create, resume, migrate, or verify a WordPress delivery | Coordinates Milo and leads the delivery through the `grl-board` release gate. |
 | `grl-ads` | For Google Ads/advertising audits, plans, tracking, optimization, and preflight | Prepares controllable change sets and applies them only with scope, approval, limits, and rollback. |
 | `grl-social` | For organic strategy, calendars, posts, captions, audits, and social-channel measurement | Produces briefs, calendars, and review-ready content without scheduling or publishing. |

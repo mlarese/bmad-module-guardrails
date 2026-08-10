@@ -67,10 +67,10 @@ Nove repository derivano da questo e li produce `tools/build_modules.py` leggend
 | `gre` | `mlarese/bmad-module-guardrails-engineering` | Kai, Otto, Vito, Dario, Ada, Bruno, Enzo, Ines, `grl-bug-finder`, `grl-automation`, `grl-toolchain` |
 | `grf` | `mlarese/bmad-module-guardrails-fiscal` | Marta, `grl-fiscal-updates`, `grl-automation` |
 | `grh` | `mlarese/bmad-module-guardrails-health` | Livia, `grl-mdsw`, `grl-automation` |
-| `grw` | `mlarese/bmad-module-guardrails-web` | Iris, Nora, Dalia, Sofia, Marco, Elio, `grl-web`, `grl-ads`, `grl-social`, `grl-social-creative`, `grl-automation` |
+| `grw` | `mlarese/bmad-module-guardrails-web` | Iris, Marea (journey, static scroll-world e video-to-scroll), Nora, Dalia, Sofia, Marco, Elio, `grl-web`, `grl-ads`, `grl-social`, `grl-social-creative`, `grl-automation` |
 | `gpm` | `mlarese/bmad-module-guardrails-paid-media` | Vera, Aldo, Iris, Nora, Dalia, Sofia, Marco, Elio, `grl-ads`, `grl-social`, `grl-social-creative`, `grl-automation` |
 | `grv` | `mlarese/bmad-module-guardrails-revenue` | Rhea, `grl-revenue-audit`, `grl-revenue-plan`, `grl-revenue-preflight`, `grl-automation` |
-| `gau` | `mlarese/bmad-module-guardrails-automation` | tutte le ventuno figure, workflow di dominio, `grl-bug-finder` e `grl-automation` |
+| `gau` | `mlarese/bmad-module-guardrails-automation` | tutte le ventidue figure, workflow di dominio, `grl-bug-finder` e `grl-automation` |
 | `gwp` | `mlarese/bmad-module-guardrails-wordpress` | Milo, `grl-wordpress-delivery`, `grl-automation` |
 
 **Regola: ogni modifica che tocca `src/` va propagata ai derivati nello stesso turno, senza
