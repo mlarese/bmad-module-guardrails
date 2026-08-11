@@ -34,6 +34,11 @@ nominato.
 | `frames` | Servono asset statici, controllo per scena o fallback forte | Piano e, solo dopo gate tecnico, sequenza di keyframe/atlas/chunk con manifest | Il peso cumulativo può superare il video; servono budget, lazy loading, cache, dimensioni e numero massimo di richieste |
 | `wire` | La direzione è approvata e deve diventare pagina | Pacchetto `video-analysis`, `frame-plan`, `scroll-spec`, manifest e review per `grl-web` | Non equivale a implementazione, rendering, upload o pubblicazione |
 
+**Il confronto fra `scrub` e `frames` nomina tutte e sei le voci, una per una.** Sono: peso
+cumulativo, decodifica sul dispositivo, comportamento mobile, **caching** — che cosa resta in cache
+fra una visita e l'altra, e cosa si riscarica —, **controllo per scena**, fallback. Una voce non
+nominata è una voce non decisa, e chi implementa la scopre in produzione.
+
 Non scegliere `frames` soltanto perché è più visibile. Se basta una continuità controllata, valuta
 prima `scrub`; se basta dimostrare un passaggio, usa keyframe selezionati. La modalità scelta deve
 seguire la funzione della scena e i vincoli del cliente, non l'effetto tecnico.
@@ -67,7 +72,9 @@ non nasconde però il peso totale.
 Registra nel manifest la sorgente, il titolare, la licenza o liberatoria, il territorio/canale/durata
 d'uso, la data della verifica, il diritto a creare derivati e lo stato. Tratta come gate separati:
 
-- volti, voci, nomi, targhe, messaggi e posizione precisa;
+- volti, **voci**, nomi, targhe, messaggi e posizione precisa — l'elenco si percorre per intero, e
+  ogni voce riceve un gate proprio o la dichiarazione che non ricorre. La voce registrata è un dato
+  personale come il volto: se qualcuno parla nel video, serve la stessa liberatoria;
 - musica, audio, loghi, opere o luoghi con condizioni d'uso proprie;
 - metadati, geolocalizzazione incorporata e copie temporanee;
 - retention della sorgente e dei frame derivati.

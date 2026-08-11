@@ -51,10 +51,15 @@ Query che funzionano:
 
 | Situazione | Cosa scrivere |
 | --- | --- |
-| Locale e doc concordano | scheda aggiornata, stato `locale` |
+| Locale e doc concordano | scheda aggiornata, stato `locale` — **ma solo se la scheda non partiva da `da-verificare`** |
 | Locale non ha il file, doc chiara | stato `doc`, con il percorso atteso |
 | Locale e doc discordano | vince il locale, e la discordanza si scrive nella scheda — è l'informazione più utile della pagina |
 | Nessuna delle due è chiara | stato `da-verificare`, e non si scrive su quell'harness finché una prova non riesce |
+
+**Una scheda che partiva da `da-verificare` non arriva a `locale` per riconciliazione.** L'accordo
+fra ispezione locale e documentazione la porta al massimo a `doc`: dice che il formato è plausibile,
+non che l'harness lo accetta. Per passare a `locale` serve la prova del punto 4, e finché non
+riesce la scheda resta `da-verificare` e su quell'harness non si scrive.
 
 Una scheda non si aggiorna «per pulizia»: se non c'è evidenza nuova, si lascia com'è con la sua
 data. Una data spostata senza controllo è peggio di una data vecchia, perché toglie il segnale che
@@ -65,6 +70,11 @@ serviva a far scattare il prossimo refresh.
 Per un harness `da-verificare`, prima di dichiarare la scheda buona: si installa un server MCP
 banale e senza segreti — uno che risponde a un `ping`, o il server di riferimento del filesystem
 limitato a una cartella temporanea — e si verifica che l'harness lo veda. Poi si rimuove.
+
+**Il server della prova non è il candidato dell'utente.** Un candidato che scrive file, chiede una
+chiave o tocca dati non è innocuo, e usarlo come prova mette insieme due domande — «il formato è
+giusto?» e «questo server è sicuro?» — che vanno tenute separate. Se la prova non è eseguibile ora,
+proponila comunque con il comando esatto, e lascia la scheda a `da-verificare`.
 
 È l'unico modo per distinguere «la scheda descrive il formato giusto» da «la scheda descrive un
 formato plausibile».

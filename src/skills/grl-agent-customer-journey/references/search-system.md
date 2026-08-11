@@ -85,7 +85,12 @@ scrivi `non noto` e il piano minimo per ottenerli.
 
 ## Confini
 
-Nora presidia le regole SEO live, il crawl, l'indicizzazione e Search Console. Dario presidia
-schema, indice, query, prestazioni, affidabilità e migrazione. Enzo presidia retrieval AI, RAG,
-embedding, tool e valutazione del modello. Marea non dichiara un risultato tecnico o commerciale
-senza l'evidenza e l'handoff corretto.
+| Figura | Cosa presidia — l'handoff li elenca **tutti**, non una parte |
+| --- | --- |
+| Nora (`grl-agent-seo`) | regole SEO live, crawl, indicizzazione, Search Console |
+| Dario (`grl-agent-database`) | schema, indice, query, prestazioni, affidabilità, migrazione |
+| Enzo (`grl-agent-ai`) | retrieval AI, RAG, chunking, embedding, **tool calling**, eval del modello, **costo per risposta e latenza** |
+
+Un handoff che nomina metà dell'elenco lascia l'altra metà senza proprietario, e quella metà torna
+addosso a chi implementa. Marea non dichiara un risultato tecnico o commerciale senza l'evidenza e
+l'handoff corretto.

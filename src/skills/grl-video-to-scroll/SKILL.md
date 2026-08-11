@@ -46,6 +46,18 @@ In `update` rileggi prima memlog e artefatti, mostra ogni conflitto con una deci
 
 Se manca un video, chiedi il perimetro di ricerca se non è già chiaro: archivio del cliente, fonte ufficiale, stock con licenza, dominio pubblico/open licence, territorio e motivo visuale. Cerca con le fonti dichiarate in `{workflow.external_sources}` e registra in `source-search.md` le query, la data `as_of`, i risultati consultati e i limiti della ricerca. La matrice `video-candidates.md` deve contenere per ogni candidato URL della pagina sorgente e dell'asset, autore/titolare, licenza e testo applicabile, attribuzione, territorio/canali/durata d'uso, persone e musica, risoluzione/durata, stato `verified`, `needs_rights`, `rejected` o `unknown` e motivo della scelta.
 
+**Il blocco sui diritti ferma i file, non la pianificazione.** Sono due cose diverse, e confonderle
+lascia il committente senza niente in mano:
+
+| Bloccato finché i diritti non reggono | Si redige comunque, in bozza |
+| --- | --- |
+| scaricare, estrarre, incorporare un asset | `journey.md`: fasi, tensione, prova visiva, CTA |
+| dichiarare un candidato utilizzabile | `frame-plan.md`: scene, funzione, numero di frame, budget — con i timecode marcati `da verificare` |
+| consegnare frame a `grl-web` | `scroll-spec.md`: comportamento, mobile, fallback, reduced motion |
+
+Una bozza porta `status: blocked` e dice quale autorizzazione la sblocca. Consegnare solo l'intervista
+e un elenco di query non è prudenza: è il lavoro non fatto.
+
 Un risultato di ricerca, la parola «free» o un'anteprima non provano il diritto d'uso. Senza licenza verificabile non si scarica e non si estrae: passa il candidato alla figura competente fra quelle di `{workflow.external_handoffs}` — di serie Aldo (`grl-agent-legal`) per i diritti; volti, targhe, indirizzi o altri dati personali passano anche a Vera (`grl-agent-privacy`). Nora (`grl-agent-seo`) entra quando la ricerca deve diventare un sistema di domanda, intento e contenuto locale.
 
 ## Piano e produzione
@@ -65,7 +77,22 @@ La specifica `scroll-spec.md`, consumata da `grl-web`, descrive la mappa `scroll
 
 ## Validazione e consegna
 
-`validate` è read-only: controlla diritti e fonti, esistenza/hash/byte dei file, ordine dei timestamp e del progresso, budget, mapping, accessibilità, privacy, performance e fallback. Non correggere o rigenerare senza passare a `update`.
+`validate` è read-only e passa **tutti** questi controlli, uno per uno, dichiarando l'esito di
+ciascuno. Un controllo non nominato è un controllo non fatto:
+
+| # | Controllo | Dove guarda |
+| --- | --- | --- |
+| 1 | diritti e fonti di ogni candidato usato | `video-candidates.md` |
+| 2 | esistenza, hash e byte reali di ogni frame | `frame-manifest.json` e `frames/` |
+| 3 | ordine dei timestamp e monotonia del progresso `0..1` | `frame-plan.md`, manifest |
+| 4 | budget in byte e numero massimo di frame | `validate_manifest.py` |
+| 5 | mapping scena → progresso → frame | `frame-plan.md`, `scroll-spec.md` |
+| 6 | accessibilità: alt, caption, `prefers-reduced-motion` | `scroll-spec.md` |
+| 7 | privacy: persone riconoscibili, targhe, interni privati | `asset-manifest.md`, `review.md` |
+| 8 | performance: peso per viewport, poster, caricamento a blocchi | `scroll-spec.md` |
+| 9 | **fallback**: cosa vede chi non ha il movimento, e l'alternativa semantica | `scroll-spec.md` |
+
+Non correggere o rigenerare senza passare a `update`.
 
 Prima del verdetto, passa il pacchetto a `{workflow.finalize_reviewers}` o, se `grl-board` non è installato, ai revisori pertinenti: Marea per la coerenza narrativa, Iris per la qualità visuale, Aldo per diritti, Vera per dati personali, Nils per accessibilità applicabile, Nora per ricerca e Bruno per runtime. `review.md` registra evidenze, blocchi, approvazioni, reviewer, `as_of` e stato. Gli stati ammessi sono `draft`, `blocked`, `ready_for_review` e `ready_for_implementation`; non usare `published`.
 
