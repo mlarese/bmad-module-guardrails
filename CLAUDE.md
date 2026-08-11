@@ -183,7 +183,9 @@ eseguirebbe; resta `fail` inventare il dato o fingere la lettura.
 
 ### Le skill che convocano altre figure non stanno in un subagent
 
-`grl-board` e i workflow che passano dal collegio convocano le figure come agenti separati.
+`grl-board` e i workflow che passano dal collegio convocano le figure come agenti separati —
+`grl-issue-readiness` e `grl-issue-build` lo fanno da quando le domande passano dal collegio prima
+di finire in un commento.
 Dentro un esecutore che è già un subagent, quelle convocazioni annidano un secondo livello: alcune
 lenti non rientrano e l'esecutore le aspetta a lungo. Un solo caso del release gate ha richiesto
 quattordici minuti e oltre centomila token. Lo stesso limite colpisce i criteri che pretendono

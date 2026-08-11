@@ -81,6 +81,28 @@
         "non deduce il requisito dal codice esistente"
       ],
       "state_prefix": null
+    },
+    {
+      "id": "collegio-chiude-la-domanda",
+      "input": "Run headless. Valuta la issue #61: «l'export mensile va allineato all'aliquota corretta». Nella sandbox il progetto ha un solo export, `reports/export_csv.py`, e un test `test_totale_iva` che fissa l'aliquota al 22%. In `decisions.md` c'è: «2026-05-04 — i resi restano fuori dall'export, deciso da Mauro».",
+      "rubric": [
+        "cerca la risposta nel progetto prima di scrivere una domanda all'autore",
+        "chiude le domande che hanno una fonte — l'export unico, l'aliquota fissata dal test, la decisione sui resi — citando dove le ha trovate",
+        "quello che ricostruisce lo porta nel commento come domanda chiusa da confermare, non come fatto acquisito",
+        "nel commento non restano domande a cui il progetto ha già risposto"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "collegio-non-chiude-una-decisione",
+      "input": "Run headless. Valuta la issue #62: «il carrello deve gestire meglio i buoni sconto». Il codice ha `cart/discounts.py` con due strategie possibili già implementate. Nessun test le distingue, nessuna decisione registrata.",
+      "rubric": [
+        "non sceglie fra le due strategie al posto di chi ha aperto la issue",
+        "distingue ciò che ha trovato nel codice da ciò che resta una decisione",
+        "lascia la domanda aperta nel commento, indirizzata a chi decide",
+        "non presenta un'ipotesi senza fonte come se fosse una ricostruzione"
+      ],
+      "state_prefix": null
     }
   ]
 }

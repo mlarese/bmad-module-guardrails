@@ -1,6 +1,6 @@
 ---
 name: grl-issue-readiness
-description: "Dice se una issue GitHub è abbastanza chiara da essere sviluppata — dopo aver guardato il codice, non solo il testo — e prepara il commento che elenca cosa manca. Usala quando l'utente dice «questa issue è chiara?», «si può iniziare questa issue?», «cosa manca a questa issue per essere sviluppata», «commenta sulla issue le cose da chiarire», «verifica la prontezza delle issue della milestone» o «controlla se qualcuno ha scritto di non farla ancora». Applica sette criteri con citazione, emette PRONTA, PRONTA_CON_RISERVA, NON_PRONTA o SOSPESA, e non inventa mai il requisito assente: scrive la domanda. Pubblica un solo commento per issue, riconoscibile e aggiornabile, sempre dopo conferma di una persona: non chiude, non riapre, non cancella. Il registro e gli stati sono di `grl-issues`; la verifica del lavoro finito è di `grl-issue-verify`."
+description: "Dice se una issue GitHub è abbastanza chiara da essere sviluppata — dopo aver guardato il codice, non solo il testo — e prepara il commento che elenca cosa manca. Prima di chiedere qualcosa a una persona convoca il collegio delle figure, che chiude le domande a cui il progetto già risponde: nel commento resta solo ciò che è una decisione, e le ricostruzioni diventano domande chiuse da confermare. Usala quando l'utente dice «questa issue è chiara?», «si può iniziare questa issue?», «cosa manca a questa issue per essere sviluppata», «commenta sulla issue le cose da chiarire», «verifica la prontezza delle issue della milestone» o «controlla se qualcuno ha scritto di non farla ancora». Applica sette criteri con citazione, emette PRONTA, PRONTA_CON_RISERVA, NON_PRONTA o SOSPESA, e non inventa mai il requisito assente: scrive la domanda. Pubblica un solo commento per issue, riconoscibile e aggiornabile, sempre dopo conferma di una persona: non chiude, non riapre, non cancella. Il registro e gli stati sono di `grl-issues`; la verifica del lavoro finito è di `grl-issue-verify`."
 ---
 
 # `grl-issue-readiness` — chiarezza della issue e commento di chiarimento
@@ -151,9 +151,32 @@ criterio di accettazione dal titolo, non proporre una soluzione tecnica. Scrivi 
 chiude il vuoto, e a chi va rivolta.
 
 Al massimo `{workflow.max_questions_per_comment}` domande per issue, ordinate per impatto: prima
-quelle che cambiano cosa si costruisce, poi quelle che cambiano come si verifica.
+quelle che cambiano cosa si costruisce, poi quelle che cambiano come si verifica. Il tetto vale
+sulle domande che **restano dopo il collegio**, non su quelle di partenza.
 
-### 5. Registra
+### 5. Porta le domande al collegio, prima di scriverle
+
+Se restano domande aperte, **non finiscono subito nel commento**: prima si convoca il collegio —
+`bmad-party-mode`, o `grl-board` se il primo non è installato — e si vede quante si chiudono con
+l'evidenza che il progetto già contiene. Il metodo, le figure da convocare e i confini stanno in
+`references/collegio-sulle-domande.md`.
+
+Tre esiti, e cambiano cosa esce:
+
+| Esito | Dove va |
+| --- | --- |
+| chiusa con evidenza (codice, test, decisione registrata, glossario) | nel verdetto, con la fonte |
+| ricostruita ma da confermare | nel commento come domanda chiusa: «risulta X, confermi?» |
+| aperta | nel commento come domanda vera: è una decisione, non conoscenza |
+
+Il collegio chiude ciò che è **conoscenza** — dove sta l'export, quale aliquota fissa già un test,
+cosa fu deciso a giugno. Non chiude ciò che è **volontà**: quale comportamento si vuole, se un caso
+limite si copre, cosa il cliente ha chiesto davvero. Chiuderle lo stesso significa scrivere il
+requisito al posto dell'autore.
+
+Una risposta senza fonte non è una risposta: torna a essere una domanda.
+
+### 6. Registra
 
 ```bash
 uv run {grl-issues-root}/scripts/registry.py set \
@@ -172,7 +195,7 @@ Se il registro non esiste, scrivi il verdetto in `{workflow.registry_path}/{slug
 commento — e dillo. Il primo `sync` di `grl-issues` lo assorbe. Senza questo ripiego, otto letture
 complete e otto giudizi restano solo nella conversazione, e domani si ricomincia da zero.
 
-### 6. Override
+### 7. Override
 
 `NON_PRONTA` non impedisce di lavorare. Se l'utente decide di procedere lo stesso, registra la
 scelta come decisione di backlog (`grl-issues` azione `decide`): chi ha deciso, quando, con quale

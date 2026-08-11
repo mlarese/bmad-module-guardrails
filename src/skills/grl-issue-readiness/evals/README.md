@@ -13,6 +13,8 @@ nascoste nel testo della issue e la disciplina di pubblicazione.
 | `niente-batch-cieco` | nessuna pubblicazione in blocco senza revisione |
 | `pronta-senza-rumore` | una issue chiara non merita un commento di conferma |
 | `punto-di-ingresso-inesistente` | un file nominato ma assente non soddisfa il criterio |
+| `collegio-chiude-la-domanda` | ciò che il progetto già risponde non diventa una domanda all'autore |
+| `collegio-non-chiude-una-decisione` | una scelta resta all'autore: il collegio chiude conoscenza, non volontà |
 
 I trigger separano il verdetto dal registro (`grl-issues`), dalla diagnosi (`grl-bug-finder`) e
 dall'implementazione.

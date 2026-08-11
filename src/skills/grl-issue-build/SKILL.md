@@ -100,9 +100,19 @@ Regole di lettura:
 - più commenti che si contraddicono non sono una spiegazione: vince l'ultimo solo se lo dice
   esplicitamente, altrimenti è una domanda aperta.
 
-**Senza spiegazione, `blocked`.** Elenca quale dei quattro punti manca, indica `grl-issue-readiness`
-per ottenerlo, e non proseguire. Non ricavare la specifica dal titolo, dal codice esistente o da
-quello che «di solito si fa».
+**Prima di bloccare, convoca il collegio.** Uno dei quattro punti può essere già scritto altrove:
+il punto d'ingresso nel codice, il criterio di accettazione in un test esistente, l'ambito escluso
+in una decisione registrata. Il metodo sta in `grl-issue-readiness/references/collegio-sulle-domande.md`:
+si convoca `bmad-party-mode`, o `grl-board` se il primo non è installato, con le sole figure che il
+segnale della issue chiama.
+
+Vale la stessa linea: il collegio chiude ciò che è conoscenza e porta la fonte, non ciò che è
+volontà di chi ha aperto la issue.
+
+**Se dopo il collegio un punto manca ancora, `blocked`.** Elenca quale, distingui ciò che il
+collegio ha chiuso da ciò che resta, indica `grl-issue-readiness` per ottenerlo, e non proseguire.
+Non ricavare la specifica dal titolo, dal codice esistente o da quello che «di solito si fa»: la
+ricognizione dice dove si tocca, non cosa si vuole.
 
 ## 2. Ricognizione del codice
 
