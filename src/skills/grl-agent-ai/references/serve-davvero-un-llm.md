@@ -44,6 +44,24 @@ Regola pratica: se la funzione si può descrivere per intero come una tabella di
 - **Compiti a coda lunga**: mille varianti rare, ciascuna troppo poco frequente per meritare una regola.
 - **Prototipazione**: un modello può coprire in un giorno una funzione che vale la pena studiare prima di costruirla per bene. Questo è un uso legittimo, purché sia dichiarato come temporaneo e non finisca in produzione per inerzia.
 
+## Fine-tuning contro prompting
+
+Quando il modello serve, resta la domanda su **come** adattarlo. L'ordine è sempre lo stesso, dal
+più economico al più costoso: prompt migliore → esempi nel prompt → recupero dei dati giusti (RAG)
+→ fine-tuning.
+
+| Segnale | Cosa dice |
+| ------- | --------- |
+| Il modello sbaglia perché non conosce i tuoi dati | serve recupero, non fine-tuning: i dati cambiano, i pesi no |
+| Il modello sbaglia perché non capisce l'istruzione | serve un prompt migliore, o esempi |
+| Il modello capisce e conosce, ma non tiene la forma o il tono su migliaia di casi | qui il fine-tuning paga |
+| Il compito è raro o il volume è basso | il fine-tuning non rientra: costa dati etichettati, una pipeline di training e una nuova versione da mantenere |
+
+Il fine-tuning insegna un **comportamento**, non dei **fatti**. Chi lo usa per iniettare
+conoscenza aggiornabile compra un modello che sarà vecchio alla prossima modifica dei dati, e non
+saprà dire cosa sa. Prima di proporlo servono: un set di casi che misura il difetto, la prova che
+prompting e recupero non lo chiudono, e chi manterrà il modello addestrato.
+
 ## Il costo nascosto, che va detto prima
 
 Un LLM non è una funzione più costosa: è un tipo diverso di componente.

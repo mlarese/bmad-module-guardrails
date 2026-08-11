@@ -20,14 +20,14 @@ mai la verifica live con una risposta ricordata.
 
 - I percorsi nudi come `references/fonti-live.md` si risolvono dalla radice di questa skill.
 - `{project-root}` è la directory del progetto.
-- `{date}` è la data corrente risolta dalla configurazione BMad.
+- `{date}` è la data corrente risolta dalla configurazione BMad: è il riferimento per «oggi» nel controllo della finestra, nella data del report e in `as_of`.
 - La configurazione si risolve con `uv run {project-root}/_bmad/scripts/resolve_config.py -p {project-root} -k core`;
   se fallisce, leggi `{project-root}/_bmad/config.toml` e `{project-root}/_bmad/config.user.toml`, con
   italiano come lingua di default.
-- `{planning_artifacts}` è il percorso degli artefatti di pianificazione dichiarato dalla
-  configurazione core. Se la configurazione non lo espone, la cartella di ricerca è
-  `{output_folder}/research`; se manca anche `{output_folder}`, è `{project-root}/_bmad-output/research`.
-  Il report va lì, mai in un percorso indeterminato.
+- Il report va in `{output_folder}/research/`, e si chiama `fiscal-updates-{dal}_{al}.md`, con le date in
+  ISO. Se `{output_folder}` non è risolvibile, vale `{project-root}/_bmad-output/research`. Mai un
+  percorso indeterminato. Il percorso `planning_artifacts` non serve qui: vive sotto `[modules.bmm]`
+  e il comando di risoluzione qui sopra legge solo `core`.
 
 ## Capability preflight e fallback
 
@@ -88,8 +88,8 @@ solo il dato economico che cambia il verdetto.
 Il periodo è inclusivo e termina oggi, salvo un termine esplicito. Senza `dal`, usa **un mese di
 calendario prima di oggi**; se il giorno corrispondente non esiste, usa l'ultimo giorno del mese
 precedente. Accetta `dal YYYY-MM-DD`, `dal DD/MM/YYYY` e `al ...`, poi mostra le date normalizzate
-in ISO. Rifiuta date malformate, `dal > al` e una finestra futura senza correggere l'input in
-silenzio; in headless segnala `blocked/invalid_scope` e non produrre un verdetto corrente. Se
+in ISO. Rifiuta date malformate, `dal > al` e una finestra futura; non correggere l'input in
+silenzio. In headless segnala `blocked/invalid_scope` e non produrre un verdetto corrente. Se
 l'utente chiede solo un bollettino generale, non inventare un profilo
 aziendale; per dire se una misura vale per qualcuno chiedi forma giuridica, sede, ATECO/regime,
 dimensione, anno d'imposta e tipo di spesa solo quando cambiano il verdetto.
@@ -104,7 +104,7 @@ percentuale, cumulabilità o ammissibilità.
 
 ## Garanzia di attualità e completezza
 
-Leggi `references/assurance-controls.md` e apri il run con `scope` e `as_of`: “completo” significa
+Leggi `references/assurance-controls.md` e apri il run con `scope` e `as_of: pending`: “completo” significa
 solo completo per territorio, materie, categorie, fonti e finestra dichiarati. Per ogni fonte
 primaria registra query/filtri, ora di ricerca e stato `covered`, `empty`, `partial` o `blocked`.
 Una fonte dell'Agenzia, dell'ente previdenziale o del gestore non accessibile, quando è decisiva,
@@ -195,8 +195,11 @@ Includi:
   corrente;
 - per ogni misura: chi, cosa, quanto solo se verificato, quando, vincoli, liquidità e
   rendicontazione;
-- stato `vigente`, `efficace`, `aperto`, `chiuso`, `prorogato`, `esaurito`, `proposto`,
-  `unverified` o `disputed`;
+- **stato della misura**: `vigente`, `efficace`, `aperto`, `chiuso`, `prorogato`, `esaurito` o
+  `proposto` — dice cosa fa la norma;
+- **stato di verifica**: `vigente-confermato`/`aperto-confermato`, `supersession_risk`, `stale`,
+  `unverified`, `disputed` o `blocked` — dice quanto regge la prova. I due assi si scrivono
+  sempre entrambi: un bando aperto mai confermato non è un bando aperto verificato;
 - risultati esclusi o fuori periodo;
 - `capability_preflight`, modo effettivo di raccolta (`deep_recon`, `live_manual` o
   `materials_only`) e modo effettivo dei gate (`bmad_review`, `manual_review` o `blocked`);

@@ -7,7 +7,7 @@
 
 Perché serve
 ------------
-Il bundle `grl` installa ventidue figure e diciassette workflow in un colpo solo. Chi vuole
+Il bundle `grl` installa ventitré figure e ventuno workflow in un colpo solo. Chi vuole
 solo la governance normativa, o solo il presidio ingegneristico, non ha motivo di
 portarsi le altre dieci figure. La soluzione è un repository per area — ma scritto a
 mano diventerebbe subito divergente dal bundle.
@@ -64,12 +64,16 @@ TEXT_SUFFIXES = {".md", ".yaml", ".yml", ".toml", ".csv", ".json", ".py", ".txt"
 # significato.
 BOARD_ROSTER_FILES = {"SKILL.md", "selection.md"}
 
-# Il bundle conta ventidue figure e lo dice ovunque nei testi del core. In un modulo
+# Il bundle conta ventitré figure e lo dice ovunque nei testi del core. In un modulo
 # tematico quel numero è falso, e un numero falso in una skill è un'istruzione
 # sbagliata. Con più figure si sostituisce il numerale; con una sola si toglie e
 # resta il plurale generico, che è impreciso ma non falso — riscrivere l'accordo
 # verbale di frasi arbitrarie non è automatizzabile.
-NUMERALS = {2: "due", 3: "tre", 4: "quattro", 5: "cinque", 6: "sei", 7: "sette", 8: "otto", 14: "quattordici", 16: "sedici", 17: "diciassette", 18: "diciotto", 19: "diciannove"}
+NUMERALS = {
+    2: "due", 3: "tre", 4: "quattro", 5: "cinque", 6: "sei", 7: "sette", 8: "otto",
+    14: "quattordici", 16: "sedici", 17: "diciassette", 18: "diciotto", 19: "diciannove",
+    20: "venti", 21: "ventuno", 22: "ventidue", 23: "ventitré",
+}
 
 # Nota appesa a ogni figura del modulo: le tabelle di handoff citano colleghe che
 # qui non sono installate, e senza questa riga l'agente rimanda a un vuoto.
@@ -141,7 +145,8 @@ def core_renames(core_skills: list[str], code: str) -> dict[str, str]:
 def adapt_counts(text: str, count: int) -> str:
     """Riporta al numero reale di figure i conteggi scritti per il bundle.
 
-    Tocca solo le costruzioni in cui `diciannove` o `diciotto` (o i vecchi `diciassette`, `sedici`, `quattordici`, `tredici` e `dodici`) è accostato alle
+    Tocca solo le costruzioni in cui il numerale del bundle — oggi `ventitré`, ieri
+    `diciannove` e prima ancora `dodici` — è accostato alle
     figure o alle loro chiavi di config: «tredici documenti» dentro un esempio, o
     «tredici pagine» in una reference, restano quello che sono.
     """
@@ -156,7 +161,10 @@ def adapt_counts(text: str, count: int) -> str:
             return f"{numeral}{space}{noun}"
         return noun
 
-    numerals = r"(?:dodici|tredici|quattordici|sedici|diciassette|diciotto|diciannove)"
+    numerals = (
+        r"(?:dodici|tredici|quattordici|sedici|diciassette|diciotto|diciannove"
+        r"|ventitré|ventitre|ventidue|ventuno|venti)"  # i più lunghi per primi: «venti» è prefisso di «ventitré»
+    )
     text = re.sub(rf"una\s+delle\s+{numerals}\s+figure", "una delle figure", text)
     text = re.sub(rf"tutte\s+e\s+{numerals}", replace_all_of, text)
     text = re.sub(rf"\b{numerals}(\s+)(figure|chiavi)", replace_noun, text)
@@ -172,8 +180,9 @@ def adapt_board(text: str, count: int) -> str:
     if count > 4:
         return text
     return text.replace(
-        "Punta a **due-quattro figure**; se le convochi tutte, indica cosa ciascuna "
-        "ha di decisivo da dire su *questo* artefatto.",
+        "Punta a **due-quattro figure** nella revisione ordinaria — il release gate ha "
+        "la propria soglia, da una a quattro —; se le convochi tutte, indica cosa "
+        "ciascuna ha di decisivo da dire su *questo* artefatto.",
         "**Convoca solo chi ha qualcosa di decisivo da dire su *questo* artefatto**; "
         "se le convochi tutte, indica cosa ciascuna ci aggiunge.",
     )
@@ -389,7 +398,7 @@ module_greeting: >
 # nello stesso progetto.
 
 post-install-notes: >
-  Primo passo: esegui `{profile_skill}`. Sono otto campi, pochi minuti, quasi tutti
+  Primo passo: esegui `{profile_skill}`. Sono nove campi, pochi minuti, quasi tutti
   pre-compilati leggendo il repository; l'unico che devi dichiarare tu è la criticità
   del progetto (hobby/prototipo · interno · produzione con clienti · regolamentato),
   perché è quella che regola quanto sarà severa ogni figura.

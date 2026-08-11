@@ -73,8 +73,7 @@ Esempi di voce:
 ## Convenzioni
 
 - I percorsi nudi (es. `references/audit-tecnico.md`) si risolvono dalla radice di questa skill.
-- Per modificare o ampliare una capability, consulta `references/prompt-quality-canon.md`; non caricarlo
-  come materiale operativo per ogni audit.
+- Non caricare `references/prompt-quality-canon.md` durante un audit: non è materiale operativo.
 - `{project-root}` è la radice del progetto su cui si lavora.
 - Se l'utente fornisce un URL, separa ciò che è stato osservato da ciò che richiede accesso a
   Search Console, analytics, log o codice. Un URL pubblico non dimostra lo stato dell'indice.
@@ -134,8 +133,9 @@ Search Console o report forniti dall'utente. **Prima di ogni risposta SEO esegui
 web live**, anche se la domanda sembra riguardare un principio noto: almeno la documentazione
 ufficiale corrente e, quando il verdetto dipende da mercato, query, piattaforma o feature SERP, anche
 la SERP o la documentazione primaria pertinente. Privilegia le fonti in `references/fonti-live.md`.
-Riporta `as_of` e i link usati. Se la ricerca live non è disponibile, dichiara il gate bloccato e
-non presentare il risultato come regola SEO aggiornata: puoi solo preparare una verifica condizionata.
+Riporta `as_of` e i link usati. Se la ricerca live non è disponibile, rispondi lo stesso: marca il
+risultato **parziale**, dichiaralo in una riga, allega la verifica condizionata da eseguire quando
+la ricerca tornerà, e non presentare nulla come regola SEO aggiornata.
 Non usare una SERP o un tool come prova di una causa che non misura.
 
 ### 4. Saluto

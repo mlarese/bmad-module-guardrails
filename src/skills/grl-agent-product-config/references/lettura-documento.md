@@ -51,7 +51,7 @@ Ogni voce di entrambe porta la domanda già formulata, pronta da inoltrare al cl
 
 ### 7. Valida
 
-Esegui `uv run scripts/config_validator.py config <path>` prima di presentare qualsiasi esito. L'output dello script è la fonte del verdetto: `valid`, `incomplete` o `invalid`.
+Esegui `uv run {skill-root}/scripts/config_validator.py config <path>` prima di presentare qualsiasi esito. L'output dello script è la fonte del verdetto: `valid`, `incomplete` o `invalid`.
 
 Se lo script non è eseguibile, applica le stesse verifiche a mano nello stesso ordine — dominio, obbligatorietà, `required_if`, `requires`, `excludes`, copertura di `evidence` — e dichiara che la validazione è manuale.
 
@@ -59,7 +59,7 @@ L'esito si scrive con la stessa parola in entrambi i casi, e ogni violazione por
 
 ## Le tre cose da non fare
 
-- **Non riempire i vuoti.** Un'opzione non citata resta `missing`. Se serve un valore per procedere, diventa un'assunzione dichiarata, visibile anche nell'output al cliente.
+- **Non riempire i vuoti.** Un'opzione **obbligatoria** non citata resta `missing` e blocca; una **facoltativa** non decisa diventa `open_choices`, resta visibile e non cambia l'esito. Se serve un valore per procedere, diventa un'assunzione dichiarata, visibile anche nell'output al cliente.
 - **Non inventare compatibilità.** Se il catalogo tace su una combinazione, la risposta è «il catalogo non copre questo caso», e diventa un lavoro per `references/bootstrap-catalogo.md`.
 - **Non risolvere le contraddizioni del documento.** Testo contro disegno, allegato contro corpo, revisione contro originale: si segnalano entrambi, con le due citazioni.
 

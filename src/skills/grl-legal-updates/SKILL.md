@@ -24,10 +24,10 @@ risultato di ricerca, una newsletter o un commento professionale in una norma.
 - La configurazione si risolve con `uv run {project-root}/_bmad/scripts/resolve_config.py -p {project-root} -k core`;
   se fallisce, leggi `{project-root}/_bmad/config.toml` e `{project-root}/_bmad/config.user.toml`, con
   italiano come lingua di default.
-- `{planning_artifacts}` è il percorso degli artefatti di pianificazione dichiarato dalla
-  configurazione core. Se la configurazione non lo espone, la cartella di ricerca è
-  `{output_folder}/research`; se manca anche `{output_folder}`, è `{project-root}/_bmad-output/research`.
-  Il report va lì, mai in un percorso indeterminato.
+- Il report va in `{output_folder}/research/`, e si chiama `legal-updates-{dal}_{al}.md`, con le date in
+  ISO. Se `{output_folder}` non è risolvibile, vale `{project-root}/_bmad-output/research`. Mai un
+  percorso indeterminato. Il percorso `planning_artifacts` non serve qui: vive sotto `[modules.bmm]`
+  e il comando di risoluzione qui sopra legge solo `core`.
 
 ## In attivazione
 
@@ -118,7 +118,7 @@ gate sono tutti presenti; altrimenti usa `supersession_risk`, `stale`, `unverifi
 ## Raccolta live
 
 Carica `references/fonti-live.md` e `references/assurance-controls.md`. Quando il preflight
-segnala `deep_recon=available` e `web_live=available`, invoca **`bmad-deep-recon` direttamente**,
+segnala `bmad_deep_recon=available` e `web_live=available`, invoca **`bmad-deep-recon` direttamente**,
 con tipo `domain`. Non invocare `bmad-domain-research`: è uno shim deprecato che inoltra alla
 stessa skill e non aggiunge capacità. Negli altri casi applica il fallback dichiarato sopra e
 registra la modalità effettivamente usata.
@@ -160,7 +160,7 @@ altrimenti sono due passaggi manuali separati con le stesse lenti e checklist:
    cercare affermazioni senza fonte, fonti stale, duplicati, titoli che non sostengono il testo e
    risultati che mostrano una legge vecchia mentre esiste un testo successivo.
 2. **Gate indipendente di completezza.** Dopo le correzioni, esegui il secondo passaggio in
-   contesto fresco con le lenti `verification-gap,adversarial` e istruzione nuova: ricontrollare da
+   contesto fresco con le lenti `adversarial,edge-case-hunter` — `verification-gap` è una lente per il codice e su un report documentale non trova nulla — e istruzione nuova: ricontrollare da
    zero ogni finding load-bearing, la matrice di copertura e l'atto contrario/successivo usando
    un editore diverso o una versione ufficiale successiva. Se `bmad_review=available` usa
    `bmad-review`; altrimenti applica la stessa checklist manualmente. Lo stesso URL non conta due
@@ -188,8 +188,10 @@ avere almeno:
 - capability preflight, `collection_mode` (`deep_recon`, `live_manual` o `materials_only`), `review_mode` e motivazione di ogni eventuale blocco;
 - tabella degli atti pubblicati, bollettini, prassi, sentenze e emendamenti;
 - tabella di lineage/versione per ogni finding decisivo, inclusi atti sostitutivi o abrogativi;
-- stato `vigente`, `efficace`, `approvato-non-efficace`, `proposto`, `scaduto`, `abrogato`,
-  `unverified` o `disputed`;
+- **stato della norma**: `vigente`, `efficace`, `approvato-non-efficace`, `proposto`, `scaduto` o
+  `abrogato` — dice cosa fa la norma;
+- **stato di verifica**: `vigente-confermato`, `supersession_risk`, `stale`, `unverified`, `disputed` o
+  `blocked` — dice quanto regge la prova. I due assi si scrivono sempre entrambi;
 - impatto pratico, soggetti coinvolti e prossima data da controllare;
 - sezione separata per risultati esclusi o fuori periodo;
 - registro dei due gate `bmad-review` oppure dei due gate `manual_review` di fallback, con esito e correzioni;

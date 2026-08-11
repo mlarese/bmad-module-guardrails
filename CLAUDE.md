@@ -114,7 +114,7 @@ diverse da quelle della fonte, e nessuno se ne accorge finché non le esegue. La
 derivato deve includere sempre sia il `README.md` sia l'About GitHub aggiornato.
 
 ```bash
-python3 -m pytest tools/tests/                              # test della build
+python3 -m pytest tools/tests/ src/skills/*/scripts/tests/  # test della build e degli script
 python3 tools/build_modules.py                              # rigenera dist/
 python3 tools/publish_modules.py -m "<messaggio di commit>"  # commit e push sui dieci repo
 ```

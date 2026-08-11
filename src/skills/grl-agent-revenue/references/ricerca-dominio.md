@@ -1,6 +1,6 @@
 # Ricerca di dominio e fonti
 
-Questa scheda contiene la ricerca di dominio eseguita il 2026-08-09. Il report completo è in `{project-root}/_bmad-output/research/domain-revenue-management-alberghiero-per-agent-2026-08-09/research.md`; i digest sono nella relativa cartella `digests/`.
+Questa scheda è la sintesi della ricerca di dominio condotta il 2026-08-09 sul revenue management alberghiero. Il report esteso e i digest restano fuori dalla skill, nella cartella di ricerca del progetto in cui furono prodotti: non sono un percorso apribile da qui.
 
 ## Regola epistemica
 

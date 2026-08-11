@@ -51,6 +51,9 @@ altro, non lo si fa di nascosto. Si dichiara cosa serve, e si chiede.
 | **c'è la spiegazione, e cosa dice** | **questa skill** | **cosa costruiamo esattamente?** |
 | il codice | `bmad-build` | come si scrive |
 | il codice è buono? | `bmad-review`, `grl-board` | qualità |
+
+Le skill di `{workflow.external_handoffs}` sono le sole destinazioni ammesse di un passaggio di
+consegne da qui.
 | risolve la issue? | `grl-issue-verify` | i criteri sono coperti? |
 | registro e stati | `grl-issues` | dove siamo |
 
@@ -61,8 +64,10 @@ Questa skill non scrive codice: lo fa `bmad-build`. Non giudica la qualità del 
 
 I percorsi nudi e `{skill-root}` si risolvono dalla cartella di installazione di questa skill;
 `{project-root}` è la cartella di lavoro del progetto. `{slug}` è `nameWithOwner` con `/`
-sostituito da `-`. `{grl-issues-root}` è `{skill-root}` con l'ultimo segmento sostituito da
-`grl-issues`: la skill sorella che possiede il registro.
+sostituito da `-`. Un percorso che comincia con il nome di un'altra skill —
+`grl-issue-readiness/references/…` — si risolve da `{skill-root}` con l'ultimo segmento sostituito
+da quel nome: le skill sorelle sono installate accanto a questa. `{grl-issues-root}` è la stessa
+regola applicata a `grl-issues`, la skill sorella che possiede il registro.
 
 ## In attivazione
 
@@ -70,7 +75,7 @@ sostituito da `-`. `{grl-issues-root}` è `{skill-root}` con l'ultimo segmento s
 2. **Config.** `uv run {project-root}/_bmad/scripts/resolve_config.py --project-root {project-root}`; usa `{communication_language}`. Se fallisce, usa italiano.
 3. **Memoria.** Leggi `{project-root}/_bmad/memory/grl-shared/` e, in `{workflow.registry_path}/{slug}/`, il registro e `decisions.md`.
 4. **Account e repository.** Stampa l'account (`gh api user --jq .login`, `gh repo view --json nameWithOwner`); se `{workflow.expected_account}` non è vuoto e diverge, fermati con `blocked`.
-5. **Issue.** Il numero arriva come argomento. Senza numero non partire: «la prossima da fare» è una decisione di Tito, non tua.
+5. **Issue.** Il numero arriva come argomento. Senza numero non partire: «la prossima da fare» è una decisione di Tito (`grl-agent-issues`), non tua.
 6. Esegui `{workflow.activation_steps_append}`.
 
 **Modalità.** L'analisi e il brief reggono un'invocazione non presidiata. Il passaggio a
@@ -105,14 +110,19 @@ Fermati subito se lo stato lo impone:
 | stato `IN_SVILUPPO` con un altro assegnatario | `blocked` — due persone sullo stesso lavoro |
 
 Poi cerca **il commento di spiegazione**: il commento — o l'insieme di commenti — che dice come va
-fatta. Vale come spiegazione approfondita solo se copre tutti e quattro questi punti:
+fatta. Vale come spiegazione approfondita solo se copre **tutti** i punti elencati in
+`{workflow.required_explanation_points}`. Di serie sono questi quattro:
 
-| Punto | Vale quando |
+| Punto (`id`) | Vale quando |
 | --- | --- |
-| Comportamento atteso | è scritto cosa deve succedere, con un caso concreto |
-| Criterio di accettazione | si capisce cosa si guarda per dire «è fatto» |
-| Punto d'ingresso | è indicato dove si tocca: file, modulo, endpoint, schermata |
-| Ambito escluso | è chiaro cosa questa modifica **non** fa |
+| `comportamento_atteso` | è scritto cosa deve succedere, con un caso concreto |
+| `criterio_di_accettazione` | si capisce cosa si guarda per dire «è fatto» |
+| `punto_di_ingresso` | è indicato dove si tocca: file, modulo, endpoint, schermata |
+| `ambito_escluso` | è chiaro cosa questa modifica **non** fa |
+
+Se la lista risolta contiene un punto che questa tabella non descrive, chiedi all'utente cosa
+verifica quel punto e trattalo come gli altri. Se ne esclude uno, non applicarlo: il gate è quello
+configurato, non quello di fabbrica.
 
 Regole di lettura:
 
@@ -141,7 +151,8 @@ ricognizione dice dove si tocca, non cosa si vuole.
 
 ## 2. Ricognizione del codice
 
-Prima di scrivere il brief, guarda il codice: `grl-issue-readiness/references/ricognizione-codice.md`.
+Prima di scrivere il brief, guarda il codice: `grl-issue-readiness/references/ricognizione-codice.md`,
+con il budget di `{workflow.code_survey_max_files}` file letti per issue.
 Il punto d'ingresso dichiarato nella spiegazione va **trovato**, non creduto.
 
 Tre esiti, tre conseguenze:
@@ -196,12 +207,17 @@ Con l'autorizzazione:
      --issue {N} --status IN_SVILUPPO --note "{chi autorizza}, {data}: build avviata"
    ```
 
-2. Invoca `bmad-build` passando il brief come intento, e con esso i vincoli che vengono da questa
-   skill: l'ambito escluso è un vincolo, non un suggerimento; le domande aperte non si risolvono
-   inventando; il lavoro fuori dai file dichiarati va segnalato.
+2. Invoca chi costruisce — `{workflow.builder_skill}`, di serie `bmad-build` — passando il brief
+   come intento, e con esso i vincoli che vengono da questa skill: l'ambito escluso è un vincolo,
+   non un suggerimento; le domande aperte non si risolvono inventando; il lavoro fuori dai file
+   dichiarati va segnalato.
 
-3. Se `bmad-build` non è installato, dichiaralo (`missing_capability`), consegna il brief e fermati:
-   il brief resta utile a una persona.
+3. Due casi fermano la costruzione, e si dichiarano in modo diverso:
+
+   - `{workflow.builder_skill}` **vuoto**: nessuno deve costruire qui. Consegna il brief, scrivi
+     `build: non autorizzata` e fermati. Non è un difetto: è la configurazione.
+   - `{workflow.builder_skill}` valorizzato ma **non installato**: dichiaralo
+     (`missing_capability`), consegna il brief e fermati. Il brief resta utile a una persona.
 
 4. Non allargare l'ambito mentre si costruisce. Se emerge che serve altro, quello è un'altra issue:
    scrivila come proposta, non come lavoro fatto.
@@ -236,9 +252,10 @@ Finita la costruzione:
    È così che la issue si chiude: da GitHub, quando il lavoro arriva davvero dove serve. Non con
    una chiamata API dell'agente.
 
-2. Porta la issue a `IN_VERIFICA` e passa a `grl-issue-verify`, che confronta i criteri con il
-   codice scritto e controlla che le review risultino fatte. Solo `RISOLTA` con review autorizza
-   la chiusura.
+2. Porta la issue a `IN_VERIFICA` e passa a chi verifica — `{workflow.verifier_skill}`, di serie
+   `grl-issue-verify` — che confronta i criteri con il codice scritto e controlla che le review
+   risultino fatte. Solo `RISOLTA` con review autorizza la chiusura. Se la chiave è vuota, la
+   verifica tocca a una persona: dichiaralo e lascia la issue in `IN_VERIFICA`.
 
 3. Se l'utente chiede la chiusura diretta, richiede due condizioni insieme: verdetto `RISOLTA` e
    conferma esplicita in questo turno. Il comando lo prepari, non lo esegui:
@@ -252,12 +269,15 @@ dichiara la verifica già avvenuta: quella è una dichiarazione, non una prova.
 
 ## Consegna
 
+Le figure e le skill di `{workflow.external_handoffs}` sono le sole destinazioni ammesse di un passaggio di consegne: nominane una quando la materia è sua, e dichiara il passaggio all'utente. Finito il lavoro, esegui `{workflow.on_complete}`.
+
 ```text
 issue: #{N} — {titolo}
 descrizione: {sintesi dal registro, o «nessuna descrizione»}
 spiegazione: presente (commento di @{autore}, {data}) | assente: manca {punto}
 brief: {n} requisiti, {n} criteri, {n} domande aperte
-build: non autorizzata | eseguita con bmad-build | capability mancante
+build: non autorizzata | eseguita con {workflow.builder_skill} | capability mancante
+review: {skill} — {esito}, {data} | non eseguita: {motivo}
 stato: IN_SVILUPPO | IN_VERIFICA | invariato
 prossimo passo: {grl-issue-verify | grl-issue-readiness | conferma dell'utente}
 ```
@@ -265,7 +285,7 @@ prossimo passo: {grl-issue-verify | grl-issue-readiness | conferma dell'utente}
 Poi una sola riga strutturata:
 
 ```json
-{"status":"complete|blocked","issue":0,"explanation_found":false,"missing":[],"brief":"…","build_invoked":false,"state":"…","registry_updated":false}
+{"status":"complete|blocked","issue":0,"explanation_found":false,"missing":[],"brief":"…","build_invoked":false,"review_done":false,"review_outcome":"…","state":"…","registry_updated":false}
 ```
 
 `blocked` vale quando la spiegazione manca, la issue è chiusa, decisa o in attesa, l'account

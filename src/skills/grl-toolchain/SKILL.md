@@ -18,6 +18,12 @@ Due cose sono facili da sbagliare e questa skill esiste per non sbagliarle:
    invece di `command`, opencode vuole `mcp` con `type: local`. Una configurazione copiata da un
    harness all'altro non dà errore: dà un server che non parte, e nessuno se ne accorge.
 
+## Convenzioni
+
+I percorsi nudi — `references/harness-registry.md`, `scripts/detect_harness.py` — si risolvono da
+`{skill-root}`, la cartella installata di questa skill; `{project-root}` è la cartella di lavoro del
+progetto. Gli script si eseguono con `uv run` e il percorso completo.
+
 Riferimenti che questa skill legge, mai a memoria:
 
 | File | Contiene |
@@ -30,17 +36,23 @@ Riferimenti che questa skill legge, mai a memoria:
 
 ## In attivazione
 
-1. Risolvi la lingua dall'ultimo messaggio dell'utente e rispondi in quella lingua.
-2. Leggi il profilo di progetto in `{project-root}/_bmad/memory/grl-shared/project-profile.md` se
+1. **Personalizzazione.** `uv run {project-root}/_bmad/scripts/resolve_customization.py --skill {skill-root} --key workflow`; applica i valori `{workflow.*}` per tutta la sessione, e in caso di errore leggi `{skill-root}/customize.toml`. Poi esegui `{workflow.activation_steps_prepend}` e tieni come contesto permanente `{workflow.persistent_facts}`.
+2. Risolvi la lingua dall'ultimo messaggio dell'utente e rispondi in quella lingua.
+3. Leggi il profilo di progetto in `{project-root}/_bmad/memory/grl-shared/project-profile.md` se
    esiste. La criticità dichiarata regola quanto è severa la valutazione: su un progetto
    regolamentato un server MCP remoto che vede il codice sorgente è un blocco, su un prototipo è
    una nota.
-3. Esegui `scripts/detect_harness.py` prima di qualsiasi altra cosa. Ti dice quali harness
+4. Esegui `uv run {skill-root}/scripts/detect_harness.py` prima di qualsiasi altra cosa. Ti dice quali harness
    esistono davvero su **questa** macchina, con quali percorsi e cosa contengono. Non decidere
    nulla sulla base della scheda finché non hai l'inventario reale.
-4. Se lo stato di una scheda in `references/harness-registry.md` è più vecchio di novanta giorni,
-   o se l'inventario trova un percorso che la scheda non prevede, esegui il modo `refresh` su
-   quell'harness prima di scrivere qualunque configurazione.
+5. Togli dall'inventario ogni harness elencato in `{workflow.excluded_harnesses}`. Restano fuori da
+   `install`, da `sync` e da ogni proposta: quell'elenco è una decisione già presa, non un parere
+   da rivalutare. Dichiara quali hai tolto.
+6. Se lo stato di una scheda in `references/harness-registry.md` supera
+   `{workflow.harness_card_max_age_days}` giorni, o se l'inventario trova un percorso che la scheda
+   non prevede, esegui il modo `refresh` su quell'harness prima di scrivere qualunque
+   configurazione.
+7. Esegui `{workflow.activation_steps_append}`.
 
 ## I sei modi
 
@@ -60,6 +72,9 @@ niente.
 
 1. **Chiedi cosa deve succedere**, non quale tool si vuole. «Leggere le issue di GitHub» e
    «commentare sulle issue di GitHub» portano a candidati diversi e a rischi diversi.
+   Quando cerchi, parti da `{workflow.discovery_sources}`: sono i cataloghi ufficiali. Una fonte
+   fuori da quell'elenco si può usare, ma si dichiara.
+   Se il modo produce un documento da conservare, scrivilo sotto `{workflow.output_path}`.
 2. **Verifica se serve un server MCP.** Se l'harness ha già Bash e la `gh` CLI è installata, un
    MCP server per GitHub aggiunge un processo, una chiave e una superficie in più per fare quello
    che `gh` fa già. Dillo prima di cercare. Vale lo stesso per: filesystem, git, esecuzione di
@@ -77,6 +92,10 @@ niente.
 Applica i sette controlli di `references/valutazione-rischio.md` e chiudi con un verdetto solo:
 `INSTALLABILE`, `INSTALLABILE_CON_CONDIZIONI`, `NON_INSTALLARE`, `EVIDENZA_INSUFFICIENTE`.
 
+Solo i verdetti elencati in `{workflow.allowed_verdicts}` aprono la strada a `install` e a `sync`.
+Gli altri fermano il flusso: l'utente può scavalcarli con una conferma esplicita, che si registra
+come rischio accettato.
+
 Non passare mai da `discover` a `install` saltando questo modo. Se l'utente chiede di installare
 direttamente, esegui comunque i controlli e mostra il verdetto prima del dry-run: un rifiuto
 consapevole dell'utente è ammesso e va registrato, un'installazione senza verdetto no.
@@ -91,8 +110,9 @@ Blocchi che non si negoziano, qualunque sia la criticità del progetto:
 
 ### `install` — su uno o più harness
 
-Un harness per volta, nell'ordine dichiarato dall'utente; se non lo dichiara, chiedi la lista una
-sola volta mostrando gli harness rilevati.
+Un harness per volta, nell'ordine dichiarato dall'utente. Se non lo dichiara, usa
+`{workflow.default_targets}`; solo quando quella lista è vuota chiedi la lista una sola volta,
+mostrando gli harness rilevati. Dichiara sempre su quali harness stai per scrivere.
 
 1. **Traduci il candidato nella forma dell'harness** leggendo la sua scheda. Il punto di partenza
    è sempre la forma canonica del registro MCP (`packages[]` con `transport`, oppure `remotes[]`);
@@ -102,7 +122,7 @@ sola volta mostrando gli harness rilevati.
    comando conosce lo schema corrente meglio della scheda e non rompe il resto del file. Gli
    harness che hanno un comando utilizzabile sono elencati nella colonna *CLI* della scheda.
 3. **Dry-run obbligatorio**: mostra il diff esatto — file, chiave, valore prima e dopo — e
-   fermati. Con `scripts/apply_mcp.py` il dry-run è il comportamento di default; serve `--apply`
+   fermati. Con `uv run {skill-root}/scripts/apply_mcp.py` il dry-run è il comportamento di default; serve `--apply`
    per scrivere.
 4. **Backup prima della scrittura**, accanto al file originale, con timestamp. Lo script lo fa da
    sé e stampa il percorso del backup: riportalo all'utente, è la via di ritorno.
@@ -114,8 +134,10 @@ sola volta mostrando gli harness rilevati.
 
 Per le skill vale lo stesso protocollo con una differenza sostanziale: il formato `SKILL.md` è
 comune a tutti gli harness, quindi non si traduce niente — si decide **dove** metterla e se
-copiarla o collegarla. Le due strategie sono in `references/protocollo-installazione.md`; la
-scelta ha conseguenze e va dichiarata, non presa in silenzio.
+copiarla o collegarla. Le due strategie sono in `references/protocollo-installazione.md`.
+
+La scelta di serie è `{workflow.skill_distribution}` e la sorgente è `{workflow.skill_source_path}`.
+Dichiarala prima di scrivere; chiedi conferma solo per cambiarla, non per applicarla.
 
 ### `sync` — lo stesso set ovunque
 
@@ -132,7 +154,7 @@ Serve quando l'utente vuole che gli harness si somiglino, non quando vuole insta
 
 ### `audit` — cosa c'è, dove, e cosa è rotto
 
-Read-only. Esegui `scripts/detect_harness.py --report` e riporta, in quest'ordine:
+Read-only. Esegui `uv run {skill-root}/scripts/detect_harness.py --report` e riporta, in quest'ordine:
 
 1. gli harness rilevati e i loro percorsi di configurazione;
 2. i server MCP per harness, con trasporto;
@@ -155,8 +177,10 @@ non è aspettare che un'installazione fallisca.
 
 Segui `references/aggiornamento-conoscenze.md`. In sintesi, per ogni harness da aggiornare:
 ispezione locale prima, documentazione ufficiale poi, e la scheda si riscrive solo se le due
-concordano o se la discordanza è spiegata nella scheda stessa. Ogni scheda porta la data e il
-metodo di verifica; una scheda aggiornata senza controllo locale si marca `doc`, non `locale`.
+concordano o se la discordanza è spiegata nella scheda stessa. Il registro porta una data di
+verifica sola, in testa, valida per tutte le schede: quando aggiorni una scheda, aggiorna quella
+data e lo stato della scheda toccata. Una scheda aggiornata senza controllo locale si marca `doc`,
+non `locale`.
 
 Quando incontri un harness che le schede non conoscono affatto, non improvvisare la
 configurazione: crea la scheda con il modo `refresh`, marcala `da-verificare`, e installa solo
@@ -182,7 +206,8 @@ Cosa non fa questa skill, e a chi va:
 
 - Non scrivere in un file di configurazione senza aver mostrato il diff e ottenuto una conferma
   esplicita per quel file.
-- Non installare in tutti gli harness perché «tanto sono tutti installati»: chiedi la lista.
+- Non installare in tutti gli harness perché «tanto sono tutti installati»: vale
+  `{workflow.default_targets}`, e se è vuoto chiedi la lista.
 - Non toccare configurazioni di progetto (`.mcp.json`, `.cursor/mcp.json`, `.vscode/mcp.json`) se
   l'utente ha chiesto un'installazione personale, e viceversa. Lo scope è una scelta, e cambia
   chi si porta dietro quella configurazione — un file di progetto finisce in git.
@@ -190,6 +215,11 @@ Cosa non fa questa skill, e a chi va:
   `***` e indica da quale variabile d'ambiente proviene.
 - Non dichiarare un'installazione riuscita senza il passo di verifica. «Ho scritto il file» non è
   «funziona».
+- Non chiudere `install` né `sync` senza convocare le figure di `{workflow.finalize_reviewers}` sul
+  risultato scritto. Ognuna guarda la propria materia e il suo rilievo entra nel resoconto finale.
+  Se una figura non è disponibile, dichiaralo nel resoconto invece di darla per passata.
+- Non passare a `{workflow.external_handoffs}` niente in automatico: quelle figure si convocano
+  quando la materia è loro, e la consegna si dichiara all'utente.
 
 ## Memoria condivisa
 
@@ -202,6 +232,10 @@ Quando l'installazione lascia una conseguenza che le altre figure devono conosce
 - `accepted-risks.md` — `[data] [toolchain] rischio — motivo — ambito`, **solo dopo conferma
   esplicita**. Ci va un'installazione fatta contro un verdetto `NON_INSTALLARE` o senza applicare
   le condizioni di `INSTALLABILE_CON_CONDIZIONI`.
+
+## Chiusura
+
+Finito il lavoro, esegui `{workflow.on_complete}`.
 
 ## Revisione editoriale finale
 

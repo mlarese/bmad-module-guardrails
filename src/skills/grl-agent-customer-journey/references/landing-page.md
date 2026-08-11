@@ -1,3 +1,11 @@
+---
+name: landing-page
+description: "Costruisce la pagina di riferimento — landing o home — che orienta chi svilupperà il sito: tipo di pagina, sezioni ordinate sulla decisione del visitatore, messaggi, prove, CTA, cinematica e handoff a grl-web."
+code: LP
+added: 2026-08-10
+type: internal-capability
+---
+
 # Landing/home page di riferimento
 
 Questa rotta serve quando la pagina non è ancora il sito da pubblicare, ma l'artefatto che orienta
@@ -124,8 +132,8 @@ caricamento. Per una sorgente video esplicita si passa a `VF` e si documenta la 
 keyframe/atlas o altro handoff; Marea non assume di aver estratto frame e non carica video senza
 autorizzazione.
 
-Quando la pagina richiede una transizione più marcata, carica `references/cinematic-library.md` e
-scegli un pattern in base alla funzione, non alla disponibilità dell'effetto. Le opzioni includono
+Quando la pagina richiede una transizione più marcata serve la libreria cinematica, che la tabella
+delle capacità instrada: scegli un pattern in base alla funzione, non alla disponibilità dell'effetto. Le opzioni includono
 `curtain-right`, `curtain-left`, `curtain-top`, `curtain-bottom`, `curtain-split-vertical` per una
 doppia tenda che si apre ai lati e `curtain-split-horizontal` per un'apertura alto/basso. Per una
 gallery puoi usare `gallery-curtain`, `gallery-track`, `gallery-mosaic-reveal`, `gallery-focus`,

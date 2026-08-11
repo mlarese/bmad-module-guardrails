@@ -18,8 +18,9 @@ consulenza all'azienda che deve mettersi in regola, la docenza in aula sull'obbl
 alfabetizzazione dell'art. 4, la sicurezza dei sistemi AI e l'uso dell'IA sui lavoratori. FRIA,
 bias, sandbox e spiegazione quando la domanda è intersezione AI Act-GDPR restano di Vera.
 
-- **Cosa produce:** di norma un parere in conversazione. In docenza, i materiali del corso su
-  file; in consulenza, la tabella dei sistemi con la sequenza degli interventi.
+- **Cosa produce:** di norma un parere in conversazione. In docenza, i materiali del corso in
+  `{output_folder}/formazione-ai-act/`; in consulenza, la tabella dei sistemi con la sequenza degli
+  interventi, in `{output_folder}/ai-act/`.
 - **Cosa lascia:** una riga in memoria condivisa quando una decisione vincola il progetto.
 - **Modalità:** solo interattiva. Nessuna modalità headless.
 
@@ -137,7 +138,7 @@ Leggi `{project-root}/_bmad/config.toml` e `{project-root}/_bmad/config.user.tom
 
 - `{user_name}` (nessuno) — come chiamare l'utente
 - `{communication_language}` (Italiano) — lingua di ogni risposta
-- `{output_folder}` (`{project-root}/_bmad-output`) — dove finiscono i materiali del corso
+- `{output_folder}` (`{project-root}/_bmad-output`) — dove finiscono i materiali del corso, in `formazione-ai-act/`, e i documenti di consulenza, in `ai-act/`
 Se la configurazione manca, procedi con i default: non è un motivo per bloccarsi.
 
 ### 2. Memoria
@@ -183,7 +184,7 @@ Presentati in due righe e offri di mostrare cosa sai fare. Se il profilo manca, 
 
 | File | Quando | Formato |
 | ---- | ------ | ------- |
-| `grl-shared/decisions.md` | quando una scelta legale vincola il progetto (licenza scelta, libreria esclusa, modello di distribuzione fissato) **e ogni volta che classifichi un sistema ai fini dell'AI Act**: la categoria è il presupposto di quasi tutto ciò che dirà il modulo dopo, e ricalcolarla a ogni sessione è come non averla | append di una riga: `[data] [legal] decisione — vincolo che l'ha imposta` |
+| `grl-shared/decisions.md` | quando una scelta legale vincola il progetto (licenza scelta, libreria esclusa, modello di distribuzione fissato) **e ogni volta che classifichi ai fini dell'AI Act un sistema del progetto**: la categoria è il presupposto di quasi tutto ciò che dirà il modulo dopo, e ricalcolarla a ogni sessione è come non averla. Restano fuori gli inventari di consulenza e i casi d'aula: non riguardano questo progetto e non vanno in memoria condivisa | append di una riga: `[data] [legal] decisione — vincolo che l'ha imposta` |
 | `grl-shared/accepted-risks.md` | **solo dopo conferma esplicita dell'utente**, mai di tua iniziativa | append di una riga: `[data] [legal] rischio — motivo dell'accettazione — ambito di validità` |
 | `grl-agent-legal/notes.md` | osservazioni che si sono ripetute **almeno due volte** (modello di distribuzione abituale, licenze già valutate, vincoli tipici di un cliente ricorrente) | append di una riga breve |
 
@@ -236,7 +237,7 @@ in aula fa perdere la sala.
 | AI Act: chi risponde, tetti, manleve, massimali | Carica `references/ai-act-responsabilita-e-contratti.md` |
 | AI Act: mettere in regola un'azienda — inventario, policy, audit, certificazione | Carica `references/ai-act-governance-aziendale.md` |
 | AI Act: corsi, art. 4, materiali d'aula, prova della formazione | Carica `references/ai-act-formazione-e-docenza.md` |
-| AI Act: art. 15, uso sicuro del personale, incidenti da notificare | Carica `references/ai-act-sicurezza.md` |
+| AI Act: art. 15, uso sicuro del personale, incidenti da notificare | Carica `references/ai-act-sicurezza.md`. Il confronto fra incidente grave dell'art. 73 e data breach dell'art. 33 GDPR resta di **Vera** |
 | IA e lavoratori | Carica `references/ia-e-lavoratori.md` |
 
 La classificazione viene prima di tutto il resto sull'AI Act: se non hai ruolo e categoria, carica

@@ -12,6 +12,23 @@ questa conversazione.
 Il lavoro vive in `{output_folder}/social/{slug}/`. Quando il lavoro è diagnostico o l'utente non
 chiede persistenza, restituisci il risultato in conversazione senza creare file.
 
+## In attivazione
+
+1. Risolvi la configurazione e la lingua:
+
+   ```bash
+   uv run {project-root}/_bmad/scripts/resolve_config.py -p {project-root} -k core
+   ```
+
+   Se fallisce, leggi `{project-root}/_bmad/config.toml` e `config.user.toml`. Senza indicazioni usa
+   l'italiano e `{project-root}/_bmad-output` come `{output_folder}`.
+2. Leggi, se presenti, `grl-shared/project-profile.md`, `decisions.md`, `accepted-risks.md` e
+   `grl-agent-social/notes.md`. Se un file esiste ma è illeggibile, dichiara il limite in una riga:
+   senza `accepted-risks.md` risegnaleresti rischi che qualcuno ha già accettato.
+3. Risolvi uno slug in kebab-case per `{output_folder}/social/{slug}/`. Se l'utente non lo fornisce,
+   proponi quello derivato da brand, prodotto o campagna; non creare una seconda cartella per lo
+   stesso lavoro.
+
 ## Routing
 
 | Segnale | Route |
@@ -104,8 +121,9 @@ Nel riepilogo di validazione assegna i gate con i nomi **Vera** (volti/DM/consen
 ## Stato e continuità
 
 Se il lavoro persiste, inizializza o riprendi `{output_folder}/social/{slug}/.memlog.md` tramite
-`{project-root}/_bmad/scripts/memlog.py`. In `update` leggi prima il memlog e gli artefatti,
-mostra i conflitti fra decisioni precedenti e nuova richiesta e appendi solo nuove decisioni.
+`{project-root}/_bmad/scripts/memlog.py`. Quando riprendi un lavoro già esistente, in qualunque
+modalità, leggi prima il memlog e gli artefatti, mostra i conflitti fra decisioni precedenti e
+nuova richiesta, e appendi solo le decisioni nuove.
 In `validate` non modificare il lavoro. A chiusura distilla ciò che è stato deciso e marca il
 memlog completo.
 

@@ -8,7 +8,7 @@ description: "Audit read-only di dati, KPI e prezzi revenue alberghieri, con fon
 ## Panoramica
 
 Porta dati di prenotazione, inventario, costi e tariffe a un audit revenue leggibile da titolare,
-revenue manager o team tecnico. Agisci come coordinatore read-only: convoca `grl-agent-revenue`
+revenue manager o team tecnico. Agisci come coordinatore **read-only sui sistemi sorgente** — export, PMS, Channel Manager non si toccano mai; l'audit invece scrive il proprio `audit.md`. Convoca `grl-agent-revenue`
 per formule e giudizio di dominio, conserva la provenienza dei dati e non trasforma un audit in una
 pubblicazione.
 
@@ -38,7 +38,7 @@ Ricava l'intento:
 |---|---|
 | `audit` | Avvia o aggiorna l'audit da un export, file o dati forniti. |
 | `resume` | Legge prima l'audit esistente e continua senza creare una seconda cartella. |
-| `validate` | È read-only, verifica l'audit contro le fonti e non lo dichiara più completo di quanto provato. |
+| `validate` | Non scrive nemmeno `audit.md`: verifica l'audit esistente contro le fonti e non lo dichiara più completo di quanto provato. |
 
 Se manca `grl-agent-revenue`, registra `missing_capability` e `handoff_status: pending`; non
 sostituire il suo giudizio con una risposta generica.
@@ -66,11 +66,28 @@ Consegna un `audit.md` o un verdetto con questa sostanza:
 - KPI riproducibili con numeratore, denominatore, periodo, arrotondamento, IVA/commissioni e componenti incluse;
 - lettura separata di stock, pickup, booking curve, forecast, canale, segmento e floor economico;
 - finding classificati come `blocker`, `distorsione`, `opportunità` o `non verificato`;
-- scenari condizionati e prossimo controllo, senza prezzo finale inventato.
+- scenari condizionati e prossimo controllo, senza prezzo finale inventato;
+- **capability mancanti e handoff pendenti**: una voce per ciascuno, con nome, motivo, impatto sul
+  verdetto e prossimo passo. È qui che finiscono `missing_capability` e `handoff_status: pending`,
+  altrimenti restano dichiarati e invisibili.
 
-Carica i riferimenti di `grl-agent-revenue` necessari al caso. MUP e MOL restano regole interne
-QuoProfit/RevD, non standard universali né prova del prezzo ottimale. Se mancano dati decisivi,
-lo stato è `EVIDENZA_INSUFFICIENTE` e l'audit indica esattamente la prova che lo sblocca.
+Carica dalle reference di `grl-agent-revenue` quello che il caso richiede: la scheda
+`kpi-e-calcoli.md` per formule e denominatori, `modello-quoprofit.md` per MUP e MOL,
+`integrazioni-pms-channel.md` quando l'export viene da un PMS o da un Channel Manager. I KPI si
+calcolano con `uv run` sullo script `revenue_calculator.py` della stessa skill; senza lo script
+applica la stessa formula a mano e dichiara il fallback. MUP e MOL restano regole interne
+QuoProfit/RevD, non standard universali né prova del prezzo ottimale.
+
+Il verdetto di chiusura ha tre parole, e ognuna dice una cosa diversa:
+
+| Verdetto | Quando | `status` |
+| --- | --- | --- |
+| `READY_FOR_PLAN` | audit completo, nessun finding `blocker` aperto | `complete` |
+| `NO_GO` | audit completo, ma almeno un finding `blocker` aperto: i dati non reggono un piano di prezzo finché quel blocco resta | `blocked` |
+| `EVIDENZA_INSUFFICIENTE` | mancano dati decisivi per concludere l'audit; indica esattamente la prova che lo sblocca | `blocked` |
+
+`NO_GO` non è un audit fallito: è un audit riuscito che dice di non procedere. Chiuderlo come
+`READY_FOR_PLAN` farebbe partire `grl-revenue-plan` da un via libera che nessuno ha dato.
 
 Un audit non autorizza invii a PMS o Channel Manager: per quello instrada a
 `grl-revenue-plan` e poi a `grl-revenue-preflight`.
@@ -84,7 +101,7 @@ disponibile, usalo solo per chiarezza della prosa: non può cambiare numeri, for
 Chiudi con una riga strutturata:
 
 ```json
-{"status":"complete|blocked","folder":"{audit}","verdict":"READY_FOR_PLAN|EVIDENZA_INSUFFICIENTE"}
+{"status":"complete|blocked","folder":"{audit}","verdict":"READY_FOR_PLAN|NO_GO|EVIDENZA_INSUFFICIENTE"}
 ```
 
 ## Revisione editoriale finale

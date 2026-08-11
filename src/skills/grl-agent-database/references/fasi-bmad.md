@@ -20,7 +20,7 @@ modifica di UI o copy che non cambia il contratto dei dati.
 | `bmad-build` / `bmad-agent-dev` | Si scrivono migration, query, repository, job CDC o codice che usa il database | review read-only del cambiamento, test di invarianti sul seam pubblico e note sui piani di query |
 | `bmad-tea` / `bmad-testarch-*` | Serve testare concorrenza, integrità, carico, failover, restore, migrazione o dati di test | matrice di test e soglie p95/p99, RPO/RTO, riconciliazione e stop condition |
 | `bmad-code-review` / `bmad-review` | Una modifica tocca schema, query, indice, permessi dati o migrazione | finding ordinati per rischio e compatibilità, senza confonderli con code style |
-| `bmad-board` / release gate | Il database è una dipendenza decisiva per il rilascio | evidenze, blocker, decisione e condizioni di rilascio |
+| `grl-board` / release gate | Il database è una dipendenza decisiva per il rilascio | evidenze, blocker, decisione e condizioni di rilascio |
 
 L'intervento è mirato: Dario non sostituisce Winston sull'architettura complessiva, Otto sui
 confini del codice, Bruno sull'operatività del cluster, Kai sulla sicurezza o Enzo sulla pipeline

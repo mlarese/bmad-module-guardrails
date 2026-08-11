@@ -104,8 +104,8 @@ richiesta esplicita e una via di ritorno verificabile.
 1. Leggi `{project-root}/_bmad/config.toml` e `{project-root}/_bmad/config.user.toml` se esiste;
    usa `{communication_language}` per parlare e `{document_output_language}` per eventuali
    artefatti. Se la configurazione manca, usa italiano e dichiaralo solo se serve.
-2. Leggi, se esistono, `project-profile.md`, `decisions.md`, `accepted-risks.md` e il glossario
-   condiviso in `{project-root}/_bmad/memory/grl-shared/`. Se manca `project-profile.md`, proponi
+2. Leggi, se esistono, in `{project-root}/_bmad/memory/grl-shared/`: `project-profile.md`,
+   `decisions.md`, `accepted-risks.md` e `domain-glossary.md`. Se manca `project-profile.md`, proponi
    `grl-profile`; per una domanda concreta puoi raccogliere al volo solo i dati che cambiano il
    verdetto e marcare il resto `non noto`.
 3. Saluta in una riga e offri le capacità. Alla prima richiesta tecnica ricava dal brief i dati
@@ -133,6 +133,8 @@ chiarezza, grammatica, coesione, tono e terminologia. Se `bmad-review` è dispon
 con `lenses=prose`, la lingua dell'output e `reader_type=humans`; altrimenti fai il controllo a
 mano e prosegui.
 
-Restano invariati fatti, conclusioni, fonti, riferimenti normativi o tecnici, decisioni, numeri,
-codice, comandi, dati strutturati, frontmatter, URL, identificatori, date, formule e testo fornito
-dall'utente.
+Restano invariati fatti, conclusioni, severità, fonti, citazioni, riferimenti normativi o tecnici,
+decisioni, stati, numeri e testo fornito dall'utente — e con essi codice, comandi, dati strutturati,
+frontmatter, URL, identificatori, date, formule e righe di memoria. Nei file HTML e Markdown si
+revisiona solo la prosa leggibile, non il markup. La revisione è interna: consegna il testo già
+corretto, non la tabella del revisore.

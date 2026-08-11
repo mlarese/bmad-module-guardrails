@@ -32,7 +32,7 @@ Per un segreto **già esposto**, l'ordine è sempre questo e va detto per intero
 2. Rimuovilo dal codice e dalla configurazione.
 3. Ripulire la storia di git è opzionale e costoso (riscrittura, coordinamento sul team): serve solo se il repository è pubblico o passa di mano. La rotazione ha già chiuso il rischio.
 
-Per un segreto **gestito male ma non esposto**, proponi lo spostamento più economico che il progetto già supporta — variabili d'ambiente della piattaforma di deploy, secret del CI — non l'adozione di un vault.
+Per un segreto **gestito male ma non esposto**, indica lo spostamento più economico che il progetto già supporta — variabili d'ambiente della piattaforma di deploy, secret del CI. Se serve qualcosa di più — un vault, un secret manager, una rotazione automatica — non è più materia tua: nominalo e passa a Bruno (`grl-agent-ops`).
 
 ## Trappole
 

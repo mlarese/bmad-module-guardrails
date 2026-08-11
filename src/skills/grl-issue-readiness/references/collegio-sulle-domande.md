@@ -64,7 +64,7 @@ Ogni domanda esce dal collegio con uno di tre esiti:
 
 | Esito | Dove va |
 | --- | --- |
-| **chiusa con evidenza** | nel verdetto e nel brief, con la fonte accanto; non nel commento |
+| **chiusa con evidenza** | nel verdetto, con la fonte accanto; non nel commento |
 | **ricostruita, da confermare** | nel commento, ma come domanda chiusa: «risulta X, confermi?» |
 | **aperta** | nel commento come domanda vera, perché è una decisione |
 

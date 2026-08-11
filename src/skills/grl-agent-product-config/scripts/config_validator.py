@@ -155,6 +155,7 @@ def validate_catalog(catalog: dict[str, Any]) -> dict[str, Any]:
     rules = catalog.get("rules") or []
     pairs: dict[tuple[str, str], set[str]] = {}
     requires_edges: list[tuple[tuple[Any, Any], tuple[Any, Any]]] = []
+    excludes_rules: list[tuple[dict[str, Any], dict[str, Any], str]] = []
 
     for index, rule in enumerate(rules):
         where = f"rules[{index}]"
@@ -191,6 +192,10 @@ def validate_catalog(catalog: dict[str, Any]) -> dict[str, Any]:
             requires_edges.append(
                 ((when["option"], when.get("value")), (then["option"], then.get("value")))
             )
+        if kind == "excludes":
+            excludes_rules.append((when, then, where))
+
+    errors.extend(required_made_impossible(excludes_rules, options))
 
     for (left, right), kinds in pairs.items():
         if {"requires", "excludes"} <= kinds:
@@ -216,6 +221,40 @@ def validate_catalog(catalog: dict[str, Any]) -> dict[str, Any]:
         "errors": errors,
         "warnings": warnings,
     }
+
+
+def required_made_impossible(
+    excludes_rules: list[tuple[dict[str, Any], dict[str, Any], str]],
+    options: dict[str, dict[str, Any]],
+) -> list[dict[str, str]]:
+    """Un'opzione obbligatoria che un `excludes` rende inselezionabile.
+
+    Il caso: l'opzione è `required: true`, ha un solo valore ammesso, e una regola
+    `excludes` vieta proprio quel valore. Nessuna configurazione può essere valida,
+    e il catalogo lo dichiara soltanto quando qualcuno prova a configurare.
+    """
+    errori: list[dict[str, str]] = []
+    for when, then, where in excludes_rules:
+        for lato, altro in ((then, when), (when, then)):
+            codice = lato.get("option")
+            option = options.get(codice) if codice else None
+            if not option or not option.get("required"):
+                continue
+            ammessi = allowed_values(option)
+            vietato = lato.get("value")
+            if not ammessi or vietato is None:
+                continue
+            if ammessi == {vietato}:
+                errori.append(
+                    finding(
+                        "required-impossible",
+                        f"l'opzione obbligatoria {codice!r} ha come solo valore {vietato!r}, "
+                        f"che un excludes vieta insieme a {altro.get('option')!r}: "
+                        "nessuna configurazione può essere valida",
+                        where,
+                    )
+                )
+    return errori
 
 
 def check_rule_side(

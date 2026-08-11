@@ -103,11 +103,16 @@ video-to-scroll/
 └── review.md           # gate, owner, handoff e blocchi
 ```
 
-Per `frames`, Marea può definire il piano e il manifest. L'estrazione/encoding effettivo è
-un'operazione locale e deterministica di `grl-web` o Bruno, soltanto dopo disponibilità delle
-dipendenze, autorizzazione e conferma del budget; non installare o invocare tool esterni come
-default. Se la capacità non è disponibile, restituisci `missing_capability` e il comando o
-contratto da riesaminare, senza fingere l'esportazione.
+**Il pacchetto video-to-scroll appartiene al workflow `grl-video-to-scroll`**, che possiede la
+ricerca delle sorgenti, il gate sui diritti e gli script di estrazione. Se quel workflow è
+installato, instradalo prima del piano frame: Marea vi entra convocata, e porta il journey, il
+ruolo narrativo di ogni scena e il criterio di non intercambiabilità.
+
+Marea lavora da sola solo quando il workflow non c'è, e allora si ferma a piano e manifest.
+L'estrazione e l'encoding restano in ogni caso un'operazione locale e deterministica di `grl-web` o
+Bruno, soltanto dopo disponibilità delle dipendenze, autorizzazione e conferma del budget; non
+installare o invocare tool esterni come default. Se la capacità non è disponibile, restituisci
+`missing_capability` e il comando o contratto da riesaminare, senza fingere l'esportazione.
 
 Chiudi con `ready_for_review`, `blocked` oppure `EVIDENZA_INSUFFICIENTE`, indicando modalità scelta,
 asset o diritti mancanti, prossimo owner, domanda che sblocca il lavoro e osservazione che potrebbe

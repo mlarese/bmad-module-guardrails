@@ -67,7 +67,7 @@ In sanità l'interessato può chiedere che un dato non sia **visibile** a certi 
 
 **Va progettato prima.** Tocca il modello di autorizzazione e ogni flusso in uscita: viste, export, referti, integrazioni, ricerca full-text, report. Un'architettura che non lo prevede non lo aggiunge dopo con una patch.
 
-Il punto che quasi tutti saltano: **anche l'oscuramento va oscurato**. Non deve essere visibile che qualcosa è stato oscurato — un buco nella cronologia, un contatore che non torna, un ID mancante nella sequenza rivelano l'esistenza del dato nascosto.
+Il punto che quasi tutti saltano: **anche l'oscuramento va oscurato**. Non deve essere deducibile che qualcosa è stato oscurato — un buco nella cronologia, un contatore che non torna, un ID mancante nella sequenza rivelano l'esistenza del dato nascosto. Questo è il **requisito**, ed è di Vera; **come** lo si realizza nel modello di accesso è di Kai.
 
 ## Retention: in sanità il ragionamento si ribalta
 
@@ -81,9 +81,9 @@ Su ciò che **non** è documentazione sanitaria obbligatoria (log, analytics, da
 
 ## Minori e capacità
 
-Chi accede per conto di chi: genitori, tutori, amministratori di sostegno, caregiver delegati. E il **cambio di regime con l'età**: al compimento della maggiore età l'accesso dei genitori decade, e il sistema deve gestirlo da solo — con casi intermedi in cui il minore ha diritto a riservatezza verso i genitori.
+Chi accede per conto di chi — genitori, tutori, amministratori di sostegno, caregiver delegati — e con quale titolo: questa è la regola di Vera. Con essa il **cambio di regime con l'età**: al compimento della maggiore età l'accesso dei genitori decade, e ci sono casi intermedi in cui il minore ha diritto a riservatezza verso i genitori.
 
-Il meccanismo delle deleghe e le sue regole cliniche sono di **Livia** (`grl-agent-health`). La regola su chi può vedere cosa e con quale titolo è di Vera.
+Come il portale si comporta di conseguenza — cosa mostra, cosa nasconde, come gestisce il passaggio — è di **Livia** (`grl-agent-health`), insieme al meccanismo delle deleghe e alle sue regole cliniche.
 
 ## DPIA
 

@@ -120,6 +120,44 @@ class CatalogTests(unittest.TestCase):
         report = validate_catalog(catalog)
         self.assertIn("rule-contradiction", codes(report["errors"]))
 
+    def test_required_option_made_impossible_by_an_excludes(self):
+        """Un obbligo con un solo valore, vietato da un excludes: catalogo insolubile."""
+        catalog = copy.deepcopy(CATALOG)
+        catalog["options"].append(
+            {
+                "code": "vetro",
+                "type": "enum",
+                "required": True,
+                "impact": "blocking",
+                "values": [{"code": "triplo"}],
+            }
+        )
+        catalog["rules"].append(
+            {
+                "kind": "excludes",
+                "when": {"option": "serie", "value": "s70"},
+                "then": {"option": "vetro", "value": "triplo"},
+                "because": "la serie 70 non porta il triplo vetro",
+            }
+        )
+        report = validate_catalog(catalog)
+        self.assertIn("required-impossible", codes(report["errors"]))
+        self.assertEqual(report["status"], "invalid")
+
+    def test_required_option_with_alternatives_is_not_impossible(self):
+        """Se l'obbligo ha un'alternativa, l'excludes non lo rende insolubile."""
+        catalog = copy.deepcopy(CATALOG)
+        catalog["rules"].append(
+            {
+                "kind": "excludes",
+                "when": {"option": "rinforzo", "value": True},
+                "then": {"option": "serie", "value": "s70"},
+                "because": "il rinforzo non entra nella serie 70",
+            }
+        )
+        report = validate_catalog(catalog)
+        self.assertNotIn("required-impossible", codes(report["errors"]))
+
     def test_rule_pointing_at_an_unknown_option(self):
         catalog = copy.deepcopy(CATALOG)
         catalog["rules"][0]["then"] = {"option": "maniglia", "value": "cromo"}

@@ -52,7 +52,13 @@ Regimi diversi con finestre diverse. Il rischio è applicare la finestra sbaglia
 
 | Cosa è successo | Regime | Chi si avvisa |
 | --------------- | ------ | ------------- |
-| Un sistema di IA ad alto rischio ha causato un danno grave a salute, diritti fondamentali, beni o infrastrutture | AI Act art. 73 — obbligo del fornitore, con termini brevi e più stringenti in caso di decesso o violazione diffusa | autorità di vigilanza del mercato (in Italia ACN) |
+| Un sistema di IA ad alto rischio ha causato un danno grave a salute, diritti fondamentali, beni o infrastrutture | AI Act art. 73 — obbligo del **fornitore**: 15 giorni, che scendono a **2** per violazione diffusa o lesione di diritti fondamentali e a **10** in caso di decesso | autorità di vigilanza del mercato (in Italia ACN) |
+
+**Se il cliente è utilizzatore e non fornitore**, l'art. 73 non gli fa notificare niente
+all'autorità: gli fa **avvisare il fornitore**, ed è quell'avviso a far partire i termini di cui
+sopra. Non farlo espone il fornitore e lascia l'utilizzatore scoperto sul contratto. Il confronto
+fra incidente grave e data breach dell'art. 33 GDPR resta di **Vera**.
+
 | Sono stati esposti dati personali | GDPR, 72 ore | Garante, e gli interessati se il rischio è elevato → **Vera** |
 | Vulnerabilità sfruttata o incidente grave su un prodotto con elementi digitali | Cyber Resilience Act, dal 11 settembre 2026 | ENISA e CSIRT nazionale |
 | Incidente significativo in un soggetto NIS2 | NIS2 | CSIRT Italia via portale ACN |

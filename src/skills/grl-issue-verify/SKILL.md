@@ -69,7 +69,8 @@ skill sorella che possiede il registro e lo script che ci scrive.
 5. Raccogli i due lati del confronto:
 
    - **la richiesta**: numero della issue, e i criteri di accettazione dal registro o dalla issue;
-   - **il fatto**: diff, commit, branch o PR da esaminare, e come si eseguono i test.
+   - **il fatto**: diff, commit, branch o PR da esaminare, e come si eseguono i test. Il comando
+     dei test è `{workflow.test_command}`; chiedilo all'utente solo se quella chiave è vuota.
 
    ```bash
    gh issue view {N} --json number,title,state,labels,body,comments,url
@@ -111,7 +112,8 @@ ragionamento circolare che fa passare qualunque modifica.
 
 Un diff dice cosa è cambiato, non cosa fa il programma. Prima di mappare i criteri, guarda il
 codice attorno alle righe toccate — la funzione intera, chi la chiama, i test che la coprono —
-seguendo `grl-issue-readiness/references/ricognizione-codice.md`.
+seguendo `grl-issue-readiness/references/ricognizione-codice.md`, con il budget di
+`{workflow.code_survey_max_files}` file letti per issue.
 
 Serve a distinguere i due casi che il diff da solo confonde: la modifica che produce davvero il
 comportamento atteso, e la modifica che tocca il posto giusto senza cambiare l'esito — un valore
@@ -123,13 +125,14 @@ Una riga per criterio:
 
 | # | Criterio | Esito | Evidenza | Prova |
 | --- | --- | --- | --- | --- |
-| 1 | … | `COPERTO` / `PARZIALE` / `NON_COPERTO` | `file:riga` del diff | test, esecuzione o ispezione |
+| 1 | … | `COPERTO` / `PARZIALE` / `NON_COPERTO` | `file:riga` del diff | una prova fra `{workflow.accepted_evidence}` |
 
 Regole di assegnazione:
 
 - `COPERTO` richiede una modifica identificata **e** una prova che il comportamento atteso adesso
-  accade: un test che fallirebbe senza quella modifica, un'esecuzione osservata, o un'ispezione
-  che segue il percorso dall'ingresso all'effetto;
+  accade. Valgono solo le prove elencate in `{workflow.accepted_evidence}`: `test` è un test che
+  fallirebbe senza quella modifica, `esecuzione` è un'esecuzione osservata, `ispezione` è la
+  lettura del percorso dall'ingresso all'effetto. Una prova esclusa dalla lista non copre nulla;
 - una modifica plausibile senza prova è `PARZIALE`, non `COPERTO`. La somiglianza fra il nome di
   una funzione e il testo del criterio non è una prova;
 - `NON_COPERTO` vale anche quando il criterio è stato risolto altrove, in un'altra issue: in quel
@@ -187,13 +190,14 @@ funziona e non si può mantenere.
 
 | Verdetto | Condizione | Chiusura |
 | --- | --- | --- |
-| `RISOLTA` | tutti i criteri `COPERTO`, con prova, **e** le review di `{workflow.required_reviews}` fatte | autorizzata |
+| `RISOLTA` | tutti i criteri `COPERTO`, con prova | autorizzata solo se le review di `{workflow.required_reviews}` risultano fatte |
 | `PARZIALE` | almeno un criterio `PARZIALE` | no |
 | `NON_RISOLTA` | almeno un criterio `NON_COPERTO` | no |
 | `EVIDENZA_INSUFFICIENTE` | criteri assenti, diff non identificabile, prove non ottenibili | no |
 
-Non esiste un quinto verdetto e non esiste una percentuale: `RISOLTA` significa cento per cento
-dei criteri coperti con evidenza. Se qualcuno vuole chiudere lo stesso, quella è una decisione di
+Non esiste un quinto verdetto. La soglia di chiusura è `{workflow.close_threshold}`, cioè la quota
+di criteri coperti con evidenza che autorizza la chiusura: al valore di fabbrica `1.0` significa
+tutti i criteri, senza eccezioni. Se qualcuno vuole chiudere lo stesso, quella è una decisione di
 una persona e si registra come tale con `grl-issues` azione `decide`.
 
 ### 8. Consegna la chiusura, non eseguirla
@@ -218,10 +222,13 @@ Con verdetto `RISOLTA` **e review fatte**, prepara tre cose e fermati:
    Lo stato resta `IN_VERIFICA` finché la chiusura non avviene; il passaggio a `CHIUSA` lo scrive
    il primo `sync` che legge lo stato reale da GitHub.
 
-Non chiudere, non riaprire, non cancellare, non modificare label o milestone. Il commento lo
-pubblica `grl-issue-readiness`, dopo conferma, oppure la persona insieme alla chiusura.
+Non chiudere, non riaprire, non cancellare, non modificare label o milestone. Il commento di
+chiusura lo pubblica la persona insieme alla chiusura: `grl-issue-readiness` gestisce solo il
+proprio commento di chiarimento e non pubblica per conto di questa skill.
 
 ## Consegna
+
+Le figure e le skill di `{workflow.external_handoffs}` sono le sole destinazioni ammesse di un passaggio di consegne: nominane una quando la materia è sua, e dichiara il passaggio all'utente. Finito il lavoro, esegui `{workflow.on_complete}`.
 
 ```text
 issue: #42 — {titolo}

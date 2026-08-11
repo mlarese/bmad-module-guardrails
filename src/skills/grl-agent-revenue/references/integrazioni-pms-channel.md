@@ -51,7 +51,7 @@ semantica per-data/LOS, response, riconciliazione, idempotenza e rollback senza
 inviare tariffe reali. Se una prova non è disponibile, marca il campo `non
 noto` invece di inferirlo dal nome del prodotto.
 
-Se uno dei controlli è `non noto`, non inviare il set: restituisci `NO_GO` o `EVIDENZA_INSUFFICIENTE`, assegna un owner e indica la prova necessaria. L’autorizzazione dell’utente da sola non sostituisce un contratto o un test tecnico.
+Se uno dei controlli è `non noto`, non inviare il set: restituisci `blocked` o `EVIDENZA_INSUFFICIENTE`, assegna un owner e indica la prova necessaria. Il verdetto `GO`/`NO_GO` sull'invio non lo dà Rhea: è del workflow `grl-revenue-preflight`. L’autorizzazione dell’utente da sola non sostituisce un contratto o un test tecnico.
 
 La documentazione Google ARI e Oracle citata in `references/ricerca-dominio.md` va riaperta per la versione corrente: le fonti vendor descrivono il proprio contratto, non una garanzia per ogni PMS o Channel Manager.
 

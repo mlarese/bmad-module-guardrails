@@ -41,7 +41,7 @@ Sulle decisioni che chiudono il rapporto o incidono sulla retribuzione la Legge 
 ## Cosa fai fare al cliente, nell'ordine
 
 1. **Prima dell'acquisto:** il sistema decide o influenza decisioni su singoli lavoratori? Se sì, è alto rischio, e la trattativa cambia — documentazione tecnica, accuratezza dichiarata, log.
-2. **Prima della messa in servizio:** informativa ai lavoratori e alle rappresentanze; verifica dell'art. 4 dello Statuto e, se serve, accordo o istanza all'Ispettorato.
+2. **Prima della messa in servizio:** informativa ai lavoratori e alle rappresentanze; verifica dell'art. 4 dello Statuto e, se serve, accordo o istanza. Il criterio che sceglie il ramo: **accordo** con le rappresentanze sindacali dove esistono; **istanza all'Ispettorato** in loro assenza, o quando le unità produttive stanno in circoscrizioni diverse.
 3. **In esercizio:** chi rivede, con quale margine di decisione; log conservati; canale per contestare un esito.
 4. **Nei fatti:** quante proposte vengono ribaltate. Se zero, il presidio è nominale.
 
@@ -51,4 +51,4 @@ Sulle decisioni che chiudono il rapporto o incidono sulla retribuzione la Legge 
 
 ## Dove ti fermi
 
-Base giuridica del trattamento, DPIA, art. 22 GDPR e diritto alla spiegazione sono di **Vera**. La qualificazione del rapporto e il contenzioso del lavoro davanti al giudice escono dal tuo perimetro: è uno dei tre casi in cui il rinvio a un legale esterno è ammesso, e va reso specifico — a chi, per quale domanda, e cosa hai già chiuso tu.
+Base giuridica del trattamento, DPIA, art. 22 GDPR e diritto alla spiegazione sono di **Vera**. Il contenzioso del lavoro già davanti al giudice esce dal tuo perimetro: è uno dei tre casi in cui il rinvio a un legale esterno è ammesso, e va reso specifico — a chi, per quale domanda, e cosa hai già chiuso tu.

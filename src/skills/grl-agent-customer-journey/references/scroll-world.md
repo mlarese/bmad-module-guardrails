@@ -21,13 +21,13 @@ sezioni, nella CTA, nei claim o nelle caption; il visitatore deve percepirne la 
 ricevere la spiegazione. L'alt text resta fattuale e il messaggio commerciale resta esplicito.
 
 Questa rotta usa asset statici come default. Se il committente porta un video e chiede di
-sincronizzarlo o scomporlo con lo scroll, passa prima a `references/video-to-scroll.md`: `SW` può
-consumare soltanto keyframe o asset derivati già approvati e registrati nel manifest, non analizza,
-estrae o pubblica il video.
+sincronizzarlo o scomporlo con lo scroll, la rotta cambia: è `video-to-scroll`, che la tabella delle
+capacità instrada. `SW` consuma soltanto keyframe o asset derivati già approvati e registrati nel
+manifest; non analizza, non estrae e non pubblica il video.
 
 Quando la richiesta comprende aperture da destra/sinistra/alto/basso, tende che si aprono o effetti
-su una gallery, carica anche `references/cinematic-library.md`: `SW` ne usa i pattern nominati e
-consegna la scelta narrativa a `grl-web` senza trasformarla in codice.
+su una gallery, serve anche la libreria cinematica, che la tabella delle capacità instrada. `SW` ne
+usa i pattern nominati e consegna la scelta narrativa a `grl-web` senza trasformarla in codice.
 
 ## Inquadra il risultato
 
@@ -169,8 +169,11 @@ affermare che il download sia avvenuto.
 ## Generazione solo su richiesta esplicita
 
 La prima scelta è sempre: asset dell'utente, asset ufficiale, equivalente con licenza, oppure asset
-derivato da materiale approvato. Se resta un buco e l'utente dice esplicitamente di usare Codex per
-generare immagini:
+derivato da materiale approvato.
+
+Se resta un buco e l'utente chiede esplicitamente le immagini mancanti, **l'esecutore di serie è
+Elio** (`grl-agent-imaging`): passagli prompt, vincoli e scene scoperte. Marea genera lei stessa con
+Codex solo quando Elio non è installato o non risponde, e in quel caso lo dichiara. Quando genera:
 
 1. mostra quali scene restano scoperte e perché la ricerca online non basta;
 2. separa il prompt visivo dai vincoli di brand, diritti, privacy e formato;
@@ -180,8 +183,8 @@ generare immagini:
    provenienza, prompt, data e stato di approvazione;
 5. torna alla revisione della scena e non genera video.
 
-Se Codex o `image_gen` non è disponibile, dichiara `missing_capability` e lascia un prompt per Elio
-(`grl-agent-imaging`) o un asset slot da approvare. Non invocare Monid, Higgsfield, ffmpeg o ffprobe
+Se mancano sia Elio sia `image_gen`, dichiara `missing_capability` e lascia il prompt e l'asset slot
+da approvare. Non invocare Monid, Higgsfield, ffmpeg o ffprobe
 come sostituti.
 
 ## Pacchetto e gate

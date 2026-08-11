@@ -28,7 +28,7 @@ La regola semplificata è:
 
 ```text
 costo_tipologia_data = costo_totale × peso_tipologia_data / 100
-costo_unità_data = costo_tipologia_data / numero_unità_tipologia
+costo_unità_data = costo_tipologia_data / unità_disponibili_della_tipologia
 ```
 
 Eventi e costi possono essere distribuiti in tutta la stagione oppure pesati sulla data dell’evento. Trattamenti, letti aggiuntivi, extra e contratti devono essere separati dal ricavo camera quando si calcolano ADR/RMC e RevPAR.

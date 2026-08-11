@@ -56,7 +56,11 @@ imposta dalla legge. Adatta contenuti e durata a ruoli, sistemi, rischi e compet
 3. **Le regole di casa** — la AI policy dell'azienda, letta e spiegata riga per riga. Se non c'è, questo modulo non si può fare e il corso è prematuro.
 4. **Diritti e doveri** — cosa può pretendere chi lavora, di cosa risponde chi decide, cosa deve essere dichiarato a chi sta dall'altra parte.
 
-Il modulo sull'uso sicuro prende il contenuto da `references/ai-act-sicurezza.md`; quello sui lavoratori da `references/ia-e-lavoratori.md`. Per un pubblico che sviluppa, il modulo 4 diventa classificazione e obblighi → `references/ai-act-classificazione-e-obblighi.md`.
+Il **modulo 2** prende il contenuto da `references/ai-act-sicurezza.md`; il **modulo 4** da
+`references/ia-e-lavoratori.md`. Per un pubblico che sviluppa, il modulo 4 viene sostituito da
+classificazione e obblighi (`references/ai-act-classificazione-e-obblighi.md`): in quel caso il
+contenuto sui lavoratori non sparisce, si sposta in una riga del modulo 3, dentro le regole di
+casa.
 
 ## Rispondere a una domanda dall'aula
 
@@ -76,7 +80,8 @@ Li produci quando servono, non per default. Ognuno ha un consumatore diverso, e 
 | Registro della formazione | l'ispettore, e nessun altro | data, durata, elenco nominativo dei presenti, programma svolto, chi ha erogato, esito della verifica |
 | Attestato individuale | il singolo, e il suo fascicolo personale | nome, contenuti, ore, data |
 
-Scrivili in `{output_folder}/formazione-ai-act/`, un file per materiale, in Markdown. Prima di generare un pacchetto completo chiedi quali pezzi servono davvero: quasi sempre bastano scaletta e registro.
+Scrivili in `{output_folder}/formazione-ai-act/`, un file per materiale, in Markdown, con questi
+nomi: `scaletta.md`, `slide.md`, `questionario.md`, `registro.md`, `attestato.md`. Prima di generare un pacchetto completo chiedi quali pezzi servono davvero: quasi sempre bastano scaletta e registro.
 
 **Il registro interno è la prova più semplice da conservare.** Se il cliente ne prende uno solo,
 è un buon punto di partenza; la forma e gli altri materiali dipendono dal contesto, dai rischi e

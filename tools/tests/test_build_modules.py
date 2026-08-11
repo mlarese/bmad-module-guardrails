@@ -106,8 +106,9 @@ class TableFilterTests(unittest.TestCase):
 
 class BoardSelectionSentenceTests(unittest.TestCase):
     SENTENCE = (
-        "Punta a **due-quattro figure**; se le convochi tutte, indica cosa ciascuna "
-        "ha di decisivo da dire su *questo* artefatto."
+        "Punta a **due-quattro figure** nella revisione ordinaria — il release gate ha "
+        "la propria soglia, da una a quattro —; se le convochi tutte, indica cosa "
+        "ciascuna ha di decisivo da dire su *questo* artefatto."
     )
 
     def test_keeps_the_range_when_the_module_has_more_than_four_figures(self) -> None:

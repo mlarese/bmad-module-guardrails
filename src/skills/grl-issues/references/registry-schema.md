@@ -1,7 +1,8 @@
-# Schema del registro — `grl-issues/registry@2`
+# Schema del registro — `grl-issues/registry@3`
 
-Il registro è un contratto fra quattro lettori: `grl-issues` lo costruisce, `grl-issue-readiness`
-scrive il verdetto di chiarezza, `grl-issue-verify` scrive l'esito della verifica, `grl-agent-issues`
+Il registro è un contratto fra cinque lettori: `grl-issues` lo costruisce, `grl-issue-readiness`
+scrive il verdetto di chiarezza, `grl-issue-build` scrive lo stato `IN_SVILUPPO` quando la
+costruzione parte, `grl-issue-verify` scrive l'esito della verifica, `grl-agent-issues`
 lo legge e basta. Chi scrive un campo che non gli appartiene rompe il lavoro di un altro senza
 prodursi un errore.
 
@@ -54,7 +55,7 @@ vocabolario, applica la precedenza degli stati e scrive in modo atomico.
 | `repo`, `account`, `as_of`, `sync` | `grl-issues` | `sync` |
 | `number`, `title`, `state`, `labels`, `milestone`, `assignees`, `updated_at`, `closed_at`, `url` | `grl-issues` | `sync`, letti da GitHub |
 | `summary` | `scripts/registry.py` | derivata dal corpo al `sync`: prime frasi utili, senza markup, con email, numeri, IP e segreti sostituiti |
-| `status`, `status_source`, `status_note` | `scripts/registry.py` | derivati a ogni `sync`, dichiarati da `set-status` e `decide` |
+| `status`, `status_source`, `status_note` | `scripts/registry.py` | derivati a ogni `sync`, dichiarati da `set-status`, da `decide` e da `grl-issue-build` quando porta la issue a `IN_SVILUPPO` |
 | `readiness.*` | `grl-issue-readiness` | azione `check`, via `registry.py set` |
 | `hold.*` | `grl-issues` per le label, `grl-issue-readiness` per i commenti | `sync` e `check` |
 | `links.blocked_by`, `links.duplicate_of`, `links.pr` | `grl-issue-readiness` e `grl-issue-verify` | quando leggono la issue per intero o la PR collegata |

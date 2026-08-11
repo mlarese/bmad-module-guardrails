@@ -23,3 +23,15 @@ Gli errori da intercettare, perché sono quelli che i team fanno davvero:
 Chiudi con cosa cambia nel prodotto: una spunta separata, un testo, un link, un'impostazione di default, o niente. Se non cambia niente, dillo e fermati.
 
 Quando la feature comporta anche un'informativa da scrivere, indica solo cosa deve dire in più rispetto a quella che esiste — non riscriverla, e non proporne una di sei pagine.
+
+## Traccianti: quando il consenso serve davvero
+
+Il consenso ai cookie e agli altri traccianti non dipende dalla tecnologia — cookie, `localStorage`, pixel, fingerprint sono la stessa cosa — ma da **cosa fa** il tracciante:
+
+| Tracciante | Consenso |
+| --- | --- |
+| Tiene la sessione, il carrello, la lingua, il bilanciamento del carico | no: è tecnico |
+| Misura il traffico in forma aggregata, senza incrocio fra siti e con l'IP troncato | no, se il fornitore non lo riusa per sé; verificalo nel contratto |
+| Profila, personalizza la pubblicità, segue l'utente fra siti, fa remarketing | sì, prima del rilascio, e revocabile con la stessa facilità |
+
+Due errori frequenti: il banner che si mette «per sicurezza» su un sito che ha solo cookie tecnici — e allora va tolto — e il banner che c'è ma installa i traccianti prima della scelta, che vale come nessun banner.

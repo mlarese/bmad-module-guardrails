@@ -34,6 +34,14 @@ sia presente nel roster/modulo installato: se manca, registra `missing_capabilit
 `handoff_status: pending` e la domanda ancora aperta, mantenendo il lavoro `blocked` o
 `EVIDENZA_INSUFFICIENTE`. Non chiedere a una figura di sostituire il giudizio di un'altra.
 
+## Regole di risoluzione
+
+- I percorsi nudi (es. `references/…`) si risolvono dalla cartella di installazione di questa
+  skill; `{skill-root}` è quella cartella.
+- `{project-root}` è la cartella di lavoro del progetto.
+- Una skill sorella si risolve da `{skill-root}` con l'ultimo segmento sostituito dal suo nome:
+  `{skill-root}/../grl-agent-ads/references/fonti-live.md`.
+
 ## In attivazione
 
 1. Risolvi la configurazione e la lingua:
@@ -44,14 +52,14 @@ sia presente nel roster/modulo installato: se manca, registra `missing_capabilit
 
    Se fallisce, leggi `{project-root}/_bmad/config.toml` e `config.user.toml`, usando italiano come
    default.
-2. Leggi, se presenti, `grl-shared/project-profile.md`, `decisions.md`, `accepted-risks.md` e
-   `grl-agent-ads/notes.md`. Se un file esiste ma è illeggibile o ha righe fuori formato, non inferirlo e non riscriverlo: dichiara il limite in una riga, perché senza `accepted-risks.md` leggibile risegnaleresti rischi forse già accettati.
+2. Leggi, se presenti, `{project-root}/_bmad/memory/grl-shared/project-profile.md`,
+   `decisions.md`, `accepted-risks.md` e `{project-root}/_bmad/memory/grl-agent-ads/notes.md`. Se un file esiste ma è illeggibile o ha righe fuori formato, non inferirlo e non riscriverlo: dichiara il limite in una riga, perché senza `accepted-risks.md` leggibile risegnaleresti rischi forse già accettati.
 3. Risolvi uno slug in kebab-case. Se l'utente non lo fornisce, proponi quello derivato da azienda,
    prodotto o campagna; non creare una seconda cartella per lo stesso lavoro.
 4. Chiedi soltanto ciò che cambia il gate: obiettivo, conversione primaria, mercato, canale,
    periodo, account o export, budget-limite, autorizzazione e risultato desiderato.
 5. Se l'utente chiede un'azione corrente di piattaforma o policy, fai la verifica live sulle fonti
-   ufficiali in `grl-agent-ads/references/fonti-live.md` e riporta `as_of`.
+   ufficiali in `{skill-root}/../grl-agent-ads/references/fonti-live.md` e riporta `as_of`.
 
 ## Stato persistente
 
@@ -59,7 +67,7 @@ La cartella di lavoro è `{output_folder}/ads/{slug}/`. Mantieni questi file:
 
 | File | Scopo |
 | --- | --- |
-| `brief.md` | obiettivo, destinatario, offerta, mercato, conversione e vincoli |
+| `brief.md` | obiettivo, destinatario dell'annuncio, destinatario del report o dell'approvazione, offerta, mercato, conversione e vincoli |
 | `inventory.md` | account/campagne/asset/eventi osservati, fonti, periodo e lacune |
 | `tracking-plan.md` | mapping evento → conversione → fonte → consenso → verifica |
 | `campaign-plan.md` | struttura, audience, creatività, budget come scenario e piano di test |
@@ -87,6 +95,14 @@ Se uno dei due non è dichiarato, resta `non noto`: chiedi solo il dato minimo c
 messaggio o autorizzazione e non inventare audience, owner o mercato.
 
 ## Routing delle modalità
+
+La modalità si ricava dall'artefatto che l'utente chiede, non da una parola isolata: capire cosa
+c'è → `audit`; misurare → `tracking`; decidere cosa cambiare → `optimize`; scrivere gli annunci →
+`copy`; controllare prima di partire → `preflight`; toccare l'account → `apply`.
+
+Se la richiesta è ambigua, chiedi una sola domanda che separi le due modalità candidate. Una
+richiesta di spostare budget resta `optimize` finché **tutti** i gate di `apply` non sono
+soddisfatti: perimetro, approvatore, limite di spesa e owner del rollback.
 
 ### `audit`
 
@@ -126,18 +142,19 @@ valido o che l'attribuzione sia corretta.
 
 Confronta due periodi solo se definizioni, timezone, mercato, conversioni e fonti sono compatibili.
 Non trasformare CPA, ROAS o optimization score in una decisione automatica. Produci `change-set.md`
-con:
+con l'intestazione obbligatoria del «Contratto di approvazione» — le otto chiavi, sempre tutte,
+con `pending`, `none` o `non noto` dove il dato manca — e sotto il corpo agganciato a quelle
+chiavi:
 
-- `scope` esatto;
-- stato `before` osservato;
-- `after` proposto;
-- ragione e ipotesi;
-- delta di budget assoluto e relativo;
-- esclusioni e limite massimo;
-- validazione read-only o `validate_only`;
-- approvatore;
-- finestra di osservazione;
-- rollback e owner.
+| Voce del corpo | Chiave dell'intestazione a cui si aggancia |
+| --- | --- |
+| stato `before` osservato e `after` proposto | `campaign_scope` |
+| ragione e ipotesi | `status` |
+| delta di budget assoluto e relativo | `budget_limit` |
+| esclusioni e limite massimo | `budget_limit` |
+| validazione read-only o `validate_only` | `authorization_scope` |
+| finestra di osservazione | `status` |
+| rollback | `rollback_owner` |
 
 Se un campo decisivo è assente o non comparabile, interrompi prima del calcolo e dello spostamento:
 stato `blocked` o `EVIDENZA_INSUFFICIENTE`, elenco dei mismatch, richiesta del dataset minimo
@@ -193,8 +210,11 @@ approved_by: persona/ruolo o pending
 approved_at: data/ora o pending
 budget_limit: importo e periodo o none
 rollback_owner: nome/ruolo o pending
-status: draft | blocked | awaiting_approval | dry_run | applied | observing | rolled_back
+status: draft | blocked | blocked_for_launch | awaiting_approval | dry_run | applied | observing | rolled_back
 ```
+
+`blocked_for_launch` dice una cosa precisa: la preparazione del piano continua, ma il gate
+`preflight` non può dare `GO` finché manca un evento verificabile o una destinazione pronta.
 
 Un «vai», «ottimizza» o «pubblica» senza perimetro, approvatore e limite non è sufficiente per
 un'azione esterna. In quel caso chiedi il dato mancante e lascia il lavoro in preparazione.

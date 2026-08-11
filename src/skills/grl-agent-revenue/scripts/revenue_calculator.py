@@ -111,13 +111,14 @@ def compute_kpis(
     return result
 
 
-def allocate_cost(total_cost: float, weight_pct: float, units: float) -> dict[str, Any]:
+def allocate_cost(total_cost: float, weight_pct: float, available_units: float) -> dict[str, Any]:
+    """Il denominatore è sempre le unità *disponibili* della tipologia, mai le vendute."""
     total_cost = non_negative(total_cost, "total_cost")
-    units = non_negative(units, "units")
+    units = non_negative(available_units, "available_units")
     if weight_pct < 0 or weight_pct > 100:
         raise ValueError("weight_pct: atteso un peso normalizzato tra 0 e 100")
     if units == 0:
-        raise ValueError("units: numero di unità uguale a zero")
+        raise ValueError("available_units: numero di unità disponibili uguale a zero")
     allocated = total_cost * weight_pct / 100
     return {
         "allocated_cost_for_type_and_date": money(allocated),
@@ -125,9 +126,9 @@ def allocate_cost(total_cost: float, weight_pct: float, units: float) -> dict[st
         "basis": {
             "total_cost": money(total_cost),
             "weight_pct": money(weight_pct, 4),
-            "units": units,
+            "available_units": units,
         },
-        "formula": "total_cost * weight_pct / 100 / units",
+        "formula": "total_cost * weight_pct / 100 / available_units",
     }
 
 
@@ -272,7 +273,12 @@ def build_parser() -> argparse.ArgumentParser:
     cost = sub.add_parser("cost", help="alloca un costo per tipologia e data")
     cost.add_argument("--total-cost", type=float, required=True)
     cost.add_argument("--weight-pct", type=float, required=True)
-    cost.add_argument("--units", type=float, required=True)
+    cost.add_argument(
+        "--available-units",
+        type=float,
+        required=True,
+        help="unità disponibili della tipologia: è il denominatore, non le unità vendute",
+    )
 
     price = sub.add_parser("price", help="calcola MUP, prezzo revenue e prezzo finale")
     price.add_argument("--cost-per-unit", type=float, required=True)
@@ -303,7 +309,7 @@ def main(argv: list[str] | None = None) -> int:
                 args.operating_costs,
             )
         elif args.command == "cost":
-            payload = allocate_cost(args.total_cost, args.weight_pct, args.units)
+            payload = allocate_cost(args.total_cost, args.weight_pct, args.available_units)
         else:
             payload = compute_price(
                 args.cost_per_unit,

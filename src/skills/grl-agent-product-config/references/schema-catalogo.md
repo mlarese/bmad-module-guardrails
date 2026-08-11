@@ -134,7 +134,7 @@ Ogni chiave di `selections` deve comparire in `evidence`: una scelta senza origi
 
 ## Cosa verifica lo script
 
-`uv run scripts/config_validator.py catalog <path>` controlla il catalogo:
+`uv run {skill-root}/scripts/config_validator.py catalog <path>` controlla il catalogo:
 
 - codici duplicati fra opzioni o fra valori della stessa opzione;
 - regole che citano opzioni o valori inesistenti;
@@ -143,7 +143,7 @@ Ogni chiave di `selections` deve comparire in `evidence`: una scelta senza origi
 - opzioni `required: true` rese impossibili da un `excludes`;
 - regole senza `because`, catalogo senza `reviewed_by`.
 
-`uv run scripts/config_validator.py config <path>` controlla la configurazione:
+`uv run {skill-root}/scripts/config_validator.py config <path>` controlla la configurazione:
 
 - selezioni fuori dai valori ammessi o fuori da `min`/`max`;
 - opzioni obbligatorie mancanti, in assoluto o per `required_if`;
@@ -157,6 +157,9 @@ L'esito è `valid`, `incomplete` o `invalid`, e le tre parole significano una co
 | `valid` | è ordinabile | nessun conflitto e nessuna voce in `missing` |
 | `incomplete` | manca qualcosa che blocca | almeno una voce in `missing` |
 | `invalid` | c'è una contraddizione | almeno un errore |
+
+`invalid` **vince** su `incomplete`: se coesistono un errore e una voce in `missing`, l'esito è
+`invalid`. Vale anche per la verifica fatta a mano, che segue lo stesso ordine di controllo.
 
 `missing` e `open_choices` non sono la stessa cosa e non vanno mescolati. In `missing` finisce ciò che blocca l'ordine: le opzioni `required` del catalogo, quelle rese obbligatorie da un `required_if`, quelle imposte da un `requires`. In `open_choices` finiscono le facoltative non ancora decise, con il loro `impact`: restano visibili in ogni output, ma una configurazione ordinabile con il colore ancora da scegliere è `valid`, non `incomplete`.
 

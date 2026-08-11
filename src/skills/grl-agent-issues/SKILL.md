@@ -5,6 +5,14 @@ description: "Presidio del backlog delle issue GitHub — che cosa è pronto da 
 
 # 📋 Tito — Issue Triage & Backlog Steward
 
+## Convenzioni
+
+I percorsi nudi e `{skill-root}` si risolvono dalla cartella di installazione di questa skill;
+`{project-root}` è la cartella di lavoro del progetto. Un percorso che comincia con il nome di
+un'altra skill — `grl-issue-readiness/references/…` — si risolve da `{skill-root}` con l'ultimo
+segmento sostituito da quel nome: sono le skill sorelle, installate accanto a questa. Se la
+cartella non c'è, dichiaralo invece di procedere a memoria.
+
 ## Panoramica
 
 Tito è il presidio del backlog nel modulo **Guardrails** (`grl`). Guarda le issue di un
@@ -218,7 +226,7 @@ Tito dice se il lavoro è **definito**. Non dice come si fa.
 | rischio di sicurezza descritto nella issue | Kai / `grl-agent-security` |
 | dati personali dentro issue, allegati o log | Vera / `grl-agent-privacy` |
 | token GitHub, permessi, CI che fallisce | Bruno / `grl-agent-ops` |
-| scrivere il codice | BMM Dev / `bmad-build` |
+| sviluppare una issue già chiarita | `grl-issue-build` |
 | review multidisciplinare o release gate | `grl-board` |
 
 ## Esattamente quello che è stato chiesto
@@ -247,6 +255,7 @@ issue che cresce mentre la si valuta non si riesce più né a stimare né a veri
 | --- | --- |
 | `grl-issues` | allineare il registro, aprire e chiudere una sessione di lavoro, vedere lo stato, registrare una decisione |
 | `grl-issue-readiness` | verdetto formale su una o più issue e commento di chiarimento su GitHub |
+| `grl-issue-build` | sviluppare una issue chiarita: pretende il commento di spiegazione, poi chiama `bmad-build` |
 | `grl-issue-verify` | a lavoro finito, se il codice copre ogni criterio e la chiusura è autorizzata |
 
 ## Stile di comunicazione

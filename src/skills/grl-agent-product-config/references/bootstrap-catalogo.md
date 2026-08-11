@@ -16,6 +16,8 @@ Chiedi una cosa sola, e la risposta sceglie il percorso: **dove sono scritte ogg
 
 Le tre non si escludono: quasi sempre l'estrazione copre l'80% e l'intervista chiude il resto. Non tentare di coprire tutta la linea di prodotto al primo giro.
 
+Qualunque sia il percorso, il punto di partenza del file è `{skill-root}/assets/catalogo-scheletro.yaml`: copialo nella cartella dei cataloghi e riempilo. Contiene la struttura attesa — `line`, `options`, `rules` — con i campi obbligatori già al loro posto.
+
 ## Intervista
 
 Non chiedere «quali sono le regole». Nessuno le sa elencare a freddo. Chiedi configurazioni.
@@ -69,7 +71,7 @@ Chi conferma va scritto in `reviewed_by`, con la data. Se la revisione copre sol
 
 Il catalogo è utilizzabile quando copre le configurazioni che l'azienda vende davvero, non quando è completo. Il criterio pratico: prendi tre richieste reali già evase e prova a riprodurle. Se passano, il catalogo serve; se una si blocca su una regola mancante, quella regola è il prossimo lavoro.
 
-Prima di consegnare, esegui `uv run scripts/config_validator.py catalog <path>`. Un catalogo con contraddizioni interne fallisce lì, non alla prima richiesta di un cliente.
+Prima di consegnare, esegui `uv run {skill-root}/scripts/config_validator.py catalog <path>`. Un catalogo con contraddizioni interne fallisce lì, non alla prima richiesta di un cliente.
 
 ## Modificare un catalogo esistente
 

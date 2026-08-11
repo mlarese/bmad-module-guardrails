@@ -30,7 +30,7 @@ cartella di installazione di questa skill; `{project-root}` è la cartella di la
 
 `{grl-issues-root}` è `{skill-root}` con l'ultimo segmento sostituito da `grl-issues`: la skill
 sorella che possiede il registro e lo script che ci scrive. Se quella cartella non c'è — succede
-solo in un'installazione parziale — non scrivere il registro a mano: usa il ripiego del passo 4 di
+solo in un'installazione parziale — non scrivere il registro a mano: usa il ripiego del passo 6 di
 `check` e dichiaralo.
 
 ## Confini con le altre skill
@@ -191,7 +191,7 @@ uv run {grl-issues-root}/scripts/registry.py set \
   --criteria '[{"id":"problema_osservato","esito":"ok","citazione":"…"}]'
 ```
 
-Lo script scrive il verdetto, i criteri e l'attesa (`--hold-who`, `--hold-clears`) e deriva lo
+Lo script scrive il verdetto, i criteri e l'attesa (`--hold-source` fra `label`, `comment`, `dependency` e `milestone`, poi `--hold-who` e `--hold-clears`) e deriva lo
 stato con la precedenza di `grl-issues`: lo stato non lo scrivi tu, e una issue già `IN_SVILUPPO`,
 `IN_VERIFICA`, `NON_APPROVATA` o `CHIUSA` non torna indietro per effetto di un verdetto.
 
@@ -216,6 +216,8 @@ dichiarato in attivazione.
 Procedura, template del commento e ricerca del marcatore: `references/commento-di-chiarimento.md`.
 
 ## Consegna
+
+Le figure e le skill di `{workflow.external_handoffs}` sono le sole destinazioni ammesse di un passaggio di consegne: nominane una quando la materia è sua, e dichiara il passaggio all'utente. Finito il lavoro, esegui `{workflow.on_complete}`.
 
 Per ogni issue esaminata:
 

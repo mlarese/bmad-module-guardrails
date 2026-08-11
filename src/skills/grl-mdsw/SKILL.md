@@ -42,7 +42,7 @@ Esempi di routing:
 2. **Profilo assente** → proponi il workflow `grl-profile`. Se l'utente preferisce non fermarsi, raccogli al volo i quattro dati che servono qui — cosa fa il software, chi lo usa, se produce informazioni usate per decidere su un paziente, in quale mercato si vende — e dichiara in una riga che il verdetto è **provvisorio** finché il profilo non c'è.
 3. Risolvi la severità, una volta, dalla criticità del profilo — hobby/prototipo → `light`, interno → `normal`, produzione con clienti → `normal`, regolamentato → `strict`; se il profilo manca → `normal`.
 
-   Qui la severità regola **quanto insisti sui casi di confine**, non l'esito: la qualificazione è la stessa a qualsiasi severità. A `light` dai il verdetto e ti fermi; a `strict` segnali anche le funzioni che oggi non qualificano ma qualificherebbero con una piccola aggiunta.
+   Qui la severità regola **quanto insisti sulle funzioni che oggi non qualificano**, non l'esito: la qualificazione è la stessa a qualsiasi severità, e i casi di confine del passo 3 — classe alternativa e fatto che la decide — si trattano sempre, anche a `light`. A `light` dai il verdetto e ti fermi lì; a `strict` segnali anche le funzioni che qualificherebbero con una piccola aggiunta.
 4. Chiedi cosa fa il software, con parole del prodotto. Ti serve **la finalità dichiarata**, non l'architettura.
 
 **La materia si muove.** Documenti MDCG, guidance sulle app sanitarie e l'incrocio con l'AI Act cambiano. Se il caso è di confine, verifica sul web; se non puoi, dichiara che vai a memoria e a quale data risale il riferimento.
@@ -81,6 +81,8 @@ Riferimento: **MDCG 2019-11** (guida europea alla qualificazione e classificazio
 | | allertare su una soglia clinica |
 
 La differenza sta nel destinatario: se l'elaborazione produce un'informazione **su un singolo paziente**, qualifica. Statistiche di popolazione, indicatori di reparto e dashboard gestionali no.
+
+**Se il software non fa nulla oltre archiviare, trasmettere o mostrare, il percorso finisce qui.** Dillo, e passa direttamente al verdetto.
 
 Attenzione al modulo dentro il prodotto: quasi sempre non qualifica tutto il software, qualifica **una funzione**. Identificala per nome adesso — serve al passo 4 e al verdetto.
 

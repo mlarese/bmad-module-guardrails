@@ -43,10 +43,11 @@ installazione di questa skill; `{project-root}` è la cartella di lavoro del pro
 - `grl-agent-issues` (Tito) interpreta il registro e dice da dove partire; qui si costruisce il dato.
 - `grl-issue-readiness` produce il verdetto di chiarezza e l'unico commento pubblicato.
 - `grl-issue-verify` verifica, a lavoro finito, che il codice copra i criteri della issue.
+- `grl-issue-build` sviluppa una issue chiarita e ne scrive lo stato `IN_SVILUPPO`.
 - `grl-bug-finder` diagnostica il difetto descritto in una issue.
 
-Le tre skill delle issue scrivono nello stesso registro con lo stesso comando: `scripts/registry.py
-set`. Lo schema e il proprietario di ogni campo stanno in `references/registry-schema.md`.
+Le quattro skill delle issue scrivono nello stesso registro con lo stesso comando:
+`scripts/registry.py set`. Lo schema e il proprietario di ogni campo stanno in `references/registry-schema.md`.
 
 ## In attivazione
 
@@ -139,7 +140,8 @@ diverso.
 uv run {skill-root}/scripts/registry.py sync \
   --path {workflow.registry_path}/{slug}/registry.json \
   --repo {owner}/{name} --account {login} \
-  --limit {workflow.sync_page_limit} \
+  --limit {workflow.sync_page_limit} --state {workflow.sync_state} \
+  --max-age-days {workflow.registry_max_age_days} \
   --hold-labels {workflow.hold_labels} --rejected-labels {workflow.rejected_labels}
 ```
 
@@ -195,6 +197,8 @@ Prima di parlare leggi `decisions.md`: una issue già decisa non torna nell'elen
 possibile senza la sua decisione accanto.
 
 ## Consegna
+
+Le figure e le skill di `{workflow.external_handoffs}` sono le sole destinazioni ammesse di un passaggio di consegne: nominane una quando la materia è sua, e dichiara il passaggio all'utente. Finito il lavoro, esegui `{workflow.on_complete}`.
 
 Ogni azione chiude con una sola riga strutturata:
 

@@ -32,7 +32,7 @@ Leggi `plan.md` e `audit.md` se presenti prima di chiedere dati già raccolti. R
 | Intento | Comportamento |
 |---|---|
 | `preflight` | Costruisce o aggiorna il gate senza inviare tariffe reali. |
-| `resume` | Riprende il preflight esistente e non riapre un test già riconciliato senza motivo. |
+| `resume` | Riprende il preflight esistente. Un test già riconciliato si riapre solo per uno di questi motivi, che va scritto accanto alla riapertura: versione del connettore cambiata, mapping cambiato, scope temporale diverso, rate plan nuovo o modificato. |
 | `validate` | Ricontrolla evidenze e stato in sola lettura. |
 
 Se manca il piano, marca `plan_status: missing` e valuta soltanto i prerequisiti presenti. Se
@@ -41,7 +41,8 @@ Se manca il piano, marca `plan_status: missing` e valuta soltanto i prerequisiti
 ## Stato di lavoro
 
 La cartella persistente è `{preflight}`. Mantieni `preflight.md` con target, scope, versioni,
-mapping, perimetro temporale, stato di ogni controllo, evidenza, owner, approvazione e rollback.
+mapping, perimetro temporale, stato di ogni controllo, evidenza, owner, approvazione, rollback e le
+due marcature che l'attivazione impone: `plan_status` e `missing_capability`, con il motivo accanto.
 Non conservare credenziali, token o segreti.
 
 **La cartella è condivisa con `grl-revenue-audit` e `grl-revenue-plan`.** Scrivi soltanto
@@ -55,19 +56,28 @@ Il preflight deve rendere espliciti:
 
 - contratto/API, PMS e Channel Manager, connettore, versione, autenticazione, endpoint, schema,
   limiti e frequenza;
-- property ID, room type ID, rate plan ID e mapping osservati in sola lettura;
+- **property ID, room type ID, rate plan ID e mapping** osservati in sola lettura — voce decisiva;
 - inventario, occupazione, disponibilità, date, tasse, fee, trattamento, valuta e timezone;
-- modello per-data o length-of-stay (LOS), restrizioni e semantica `delta`/`overlay`/`remove`;
+- **modello per-data o length-of-stay (LOS)**, restrizioni e semantica `delta`/`overlay`/`remove` — voce decisiva;
 - request, response, warning/errori, latenza, logging, monitoraggio e riconciliazione;
-- test read-only, sandbox o `validate_only`, replay idempotente e rollback verso l'ultimo set valido.
+- test read-only, sandbox o `validate_only`, **replay idempotente** e **rollback** verso l'ultimo set valido — le ultime due sono voci decisive.
 
 Un campo non provato è `non noto`, non un'inferenza dal nome del prodotto. Il test di idempotenza
 deve dimostrare che ripetere lo stesso change set non duplica né sovrascrive effetti estranei; la
 riconciliazione deve confrontare atteso e ricevuto; il rollback deve indicare owner e set valido.
 
-Il verdetto è `GO`, `GO_CON_CONDIZIONI`, `NO_GO` o `EVIDENZA_INSUFFICIENTE`. `GO` richiede evidenza
-propria per ogni controllo, test concluso, scope delimitato e approvazione esplicita. Se una sola
-voce decisiva è `non noto`, il gate non autorizza l'invio. Il workflow non pubblica, non chiede
+Le **voci decisive** sono le quattro marcate qui sopra: mapping degli ID, semantica per-data/LOS,
+idempotenza e rollback. Se una sola di esse è `non noto`, il gate non autorizza l'invio.
+
+| Verdetto | Condizione | `status` |
+| --- | --- | --- |
+| `GO` | evidenza propria per ogni controllo, test concluso, scope delimitato, approvazione esplicita | `complete` |
+| `GO_CON_CONDIZIONI` | tutte le voci decisive provate, ma restano azioni non bloccanti: elencale con responsabile, verifica e scadenza futura | `complete` |
+| `NO_GO` | un controllo è stato eseguito ed è **fallito** — idempotenza che duplica, riconciliazione che diverge, rollback che non riporta indietro | `blocked` |
+| `EVIDENZA_INSUFFICIENTE` | nessun controllo fallito, ma una voce decisiva resta `non noto` perché la prova non è ottenibile | `blocked` |
+
+La differenza fra gli ultimi due è tutta qui: `NO_GO` è una prova negativa, `EVIDENZA_INSUFFICIENTE`
+è una prova che manca. Il workflow non pubblica, non chiede
 credenziali e non chiama API reali; può consegnare un payload o diff per un successivo dry-run
 autorizzato da `grl-automation`.
 
@@ -78,7 +88,7 @@ che nessun output dica “integrazione pronta” senza contratto e riconciliazio
 è disponibile, usalo solo per la prosa. Chiudi con:
 
 ```json
-{"status":"complete|blocked","folder":"{preflight}","verdict":"GO|GO_CON_CONDIZIONI|NO_GO|EVIDENZA_INSUFFICIENTE"}
+{"status":"complete|blocked","folder":"{preflight}","verdict":"GO|GO_CON_CONDIZIONI|NO_GO|EVIDENZA_INSUFFICIENTE","plan_status":"…","missing_capability":[]}
 ```
 
 ## Revisione editoriale finale

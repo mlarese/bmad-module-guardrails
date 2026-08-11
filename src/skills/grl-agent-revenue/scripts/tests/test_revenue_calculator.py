@@ -3,7 +3,11 @@ import unittest
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from revenue_calculator import allocate_cost, compute_kpis, compute_price
+import io
+import json
+from contextlib import redirect_stdout
+
+from revenue_calculator import allocate_cost, compute_kpis, compute_price, main
 
 
 class RevenueCalculatorTests(unittest.TestCase):
@@ -63,6 +67,57 @@ class RevenueCalculatorTests(unittest.TestCase):
     def test_non_finite_input_is_rejected(self):
         with self.assertRaises(ValueError):
             compute_kpis(float("nan"), 1, 100)
+
+    def test_net_kpis_divide_by_available_rooms(self):
+        """NRevPAR e GopPAR hanno lo stesso denominatore di RevPAR: le camere disponibili."""
+        result = compute_kpis(100, 70, 9000, total_revenue=10000, acquisition_cost=900, operating_costs=6000)
+        self.assertEqual(result["nrevpar"], 81.0)
+        self.assertEqual(result["goppar"], 40.0)
+
+    def test_minimum_guaranteed_lifts_the_final_price(self):
+        result = compute_price(100, 0, min_guaranteed=150)
+        self.assertEqual(result["final_price"], 150.0)
+
+    def test_percentage_changes_apply_in_sequence(self):
+        result = compute_price(100, 0, global_change_pct=10, unit_change_pct=-50)
+        self.assertEqual(result["after_percentage_changes"], 55.0)
+
+    def test_mup_base_is_cost_plus_margin(self):
+        result = compute_price(100, 20, base="mup")
+        self.assertEqual(result["selected_base"], 120.0)
+
+
+class CommandLineTests(unittest.TestCase):
+    """La SKILL.md prescrive la riga di comando: va esercitata, non solo le funzioni."""
+
+    def esegui(self, argv: list[str]) -> dict:
+        buffer = io.StringIO()
+        with redirect_stdout(buffer):
+            code = main(argv)
+        self.assertEqual(code, 0)
+        return json.loads(buffer.getvalue())
+
+    def test_kpi_subcommand_returns_json(self):
+        payload = self.esegui(
+            ["kpi", "--available", "100", "--sold", "70", "--room-revenue", "9000"]
+        )
+        self.assertEqual(payload["revpar"], 90.0)
+
+    def test_cost_subcommand_uses_available_units(self):
+        payload = self.esegui(
+            ["cost", "--total-cost", "1000", "--weight-pct", "50", "--available-units", "10"]
+        )
+        self.assertEqual(payload["cost_per_unit_and_date"], 50.0)
+
+    def test_price_subcommand_returns_json(self):
+        payload = self.esegui(["price", "--cost-per-unit", "100", "--mol-pct", "20"])
+        self.assertIn("final_price", payload)
+
+    def test_zero_denominator_exits_with_code_two(self):
+        buffer = io.StringIO()
+        with redirect_stdout(buffer):
+            code = main(["cost", "--total-cost", "1000", "--weight-pct", "50", "--available-units", "0"])
+        self.assertEqual(code, 2)
 
 
 if __name__ == "__main__":

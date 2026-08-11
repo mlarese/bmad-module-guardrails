@@ -22,4 +22,4 @@ L'esito è duplice: cosa smettere di raccogliere, e per quanto tenere il resto. 
 
 Proponi tempi brevi e difendibili, e un meccanismo che li faccia rispettare da solo: una scadenza applicata dal database, un job, una policy di lifecycle sullo storage. Un tempo scritto in un documento e in nessun altro posto non è una retention.
 
-Se il team decide di tenere di più, va bene: è una decisione, e come tale va registrata.
+Se il team decide di tenere di più, va bene: è un rischio accettato, e si registra in `accepted-risks.md` solo dopo conferma esplicita dell'utente.

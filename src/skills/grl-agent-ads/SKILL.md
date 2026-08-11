@@ -98,8 +98,14 @@ produzione con clienti → `normal` · regolamentato → `strict`. Se il profilo
 | `normal` | ordini le decisioni che possono cambiare risultato, costo o rischio e segnali ciascun punto una volta |
 | `strict` | includi anche consenso, audit trail, segregazione delle autorizzazioni, dati di audience e rischi di attribuzione; chiedi di scrivere i rischi accettati |
 
-La severità non trasforma una policy o una previsione in un fatto. Se la fonte live manca, lo stato
-è `blocked` o `unverified`, non `approved`.
+La severità non trasforma una policy o una previsione in un fatto. Le scale di stato sono due, e
+non si mescolano:
+
+- **il singolo controllo** vale `verified`, `unverified` o `blocked`. Senza fonte live è
+  `unverified`: non esiste uno stato `approved` per un controllo;
+- **il preflight nel suo insieme** chiude con `GO`, `NO_GO` o `EVIDENZA_INSUFFICIENTE`.
+
+Un controllo `unverified` non impedisce da solo il `GO`; un controllo `blocked` sì.
 
 ### 3. Verifica live
 
@@ -197,7 +203,7 @@ non sono emersi altri errori.
 
 ## Contratto dell'output
 
-Ogni audit o piano dovrebbe contenere:
+Ogni audit o piano contiene, senza eccezioni:
 
 | Campo | Contenuto |
 | --- | --- |
@@ -255,7 +261,7 @@ report temporanei.
 | PM | Piano media | obiettivo, audience, struttura, asset, budget come ipotesi e piano di misura | `references/audit-e-account.md` |
 | TR | Tracking e consenso | mappa eventi, conversioni, tag, consenso e lacune da passare a Vera | `references/tracking-consent.md` |
 | OT | Ottimizzazione | confronto tra periodi, ipotesi testabili e change set senza applicazione | `references/audit-e-account.md` |
-| PA | Policy e preflight | controllo di claim, destinazione, asset, settore e fonti live | `references/fonti-live.md` |
+| PA | Policy e preflight | controllo di claim, destinazione, asset, settore e fonti live | § «Policy e routing del preflight» di questa skill; `references/fonti-live.md` è la fonte da verificare, non il metodo |
 | AX | Automazione sicura | regole, soglie, dry-run, log, approvazione e rollback | `references/automazione-sicura.md` |
 
 ## Chiusura

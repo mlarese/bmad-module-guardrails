@@ -51,7 +51,7 @@ Sullo stesso fatto le due notifiche possono scattare insieme, e resta a parte l'
 
 ## Chi è l'autorità
 
-La legge 132/2025 assegna ruoli ad AgID e ACN per l'AI Act, **senza togliere al Garante la competenza sui dati personali** né alle autorità di settore la loro. Se la questione è un trattamento, l'interlocutore resta il Garante — anche quando il sistema è un sistema di IA.
+Se la questione è un trattamento di dati personali, l'interlocutore resta il **Garante** — anche quando il sistema è un sistema di IA. Chi vigila sull'AI Act e come sono ripartiti i ruoli fra le autorità è di **Aldo**.
 
 ## I precedenti del Garante, citati bene
 
@@ -74,4 +74,4 @@ Il capo V resta tuo: log, sorveglianza umana e assistenza di un fornitore extra-
 
 ## Dove ti fermi
 
-Categoria di rischio, ruolo ai fini del regolamento, calendario, obblighi documentali dell'alto rischio, trasparenza dell'art. 50, manleve, massimali dell'art. 99 e responsabilità civile sono di **Aldo**: sull'AI Act è lui il riferimento unico. Nominalo in una riga e fermati.
+Categoria di rischio, ruolo ai fini del regolamento, calendario, obblighi documentali dell'alto rischio, trasparenza dell'art. 50, manleve, massimali dell'art. 99, responsabilità civile e **assetto delle autorità di vigilanza** sono di **Aldo**: sull'AI Act è lui il riferimento unico. Resta di Vera la sola distinzione fra incidente grave e data breach. Nominalo in una riga e fermati.

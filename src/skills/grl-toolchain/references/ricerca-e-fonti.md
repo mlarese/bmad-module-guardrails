@@ -1,5 +1,9 @@
 # Dove si cerca, in che ordine
 
+I cataloghi da cui si parte sono quelli di `{workflow.discovery_sources}`; questa scheda dice in
+che ordine si consultano e quanto vale ciascuno. Una fonte fuori da quell'elenco si può usare, ma
+si dichiara.
+
 L'ordine conta: le prime fonti hanno uno schema stabile e dicono chi pubblica, le ultime dicono
 solo che qualcosa esiste. Fermarsi appena si trova un candidato buono è corretto; scendere fino
 in fondo alla lista per completezza non lo è.

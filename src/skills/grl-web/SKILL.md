@@ -34,7 +34,8 @@ Non c'è modalità headless: il brief si scrive con l'utente, le scritture in me
 | Un sito vero: parti condivise, contenuti che cambiano, forse un backend | `references/brief-di-conversione.md`, poi `references/sito-multipagina.md` per decidere le pagine, poi `references/configura.md`. Non costruisce: prepara la scheda che `bmad-spec` trasforma in fette per `bmad-build` |
 | Promuovere un mockup approvato a progetto vero | pagine indipendenti, nessuna parte condivisa → `references/progetto-reale.md`; header, footer o hero condivisi, contenuti che cambiano, o un backend → `references/configura.md` |
 | Capire perché una pagina che esiste non converte | `references/diagnosi-pagina.md` |
-| Riprendere un lavoro | trova la cartella (sotto), rileggi il suo brief, poi la rotta che serve; se il cambiamento contraddice qualcosa che è già in `decisions.md`, o **riprende qualcosa che il brief ha in *Scartato***, dillo prima di applicarlo — nel secondo caso il perché è già scritto lì, e l'utente può confermarlo o ribaltarlo. Se nella cartella c'è `sito.md`, lo stato del lavoro è quello e non il brief: vedi `references/configura.md`. Se la pagina esiste ma non ha un brief, è nata fuori da qui: ricostruiscilo all'indietro con `references/diagnosi-pagina.md`, fallo correggere dall'utente, salvalo nella cartella di lavoro, poi prosegui |
+| Un pacchetto video-to-scroll da implementare — `scroll-spec.md`, `frame-manifest.json` e `frames/` prodotti da `grl-video-to-scroll` | il pacchetto **è** il brief: non rifarlo. Leggi `scroll-spec.md` per comportamento, mobile, fallback e reduced motion, il manifest per i frame disponibili, poi `references/mockup-html.md` per la pagina. I frame non si rigenerano qui: se ne manca uno, torna al workflow |
+| Riprendere un lavoro | trova la cartella (sotto), rileggi il suo brief, poi la rotta che serve; se il cambiamento contraddice qualcosa che è già in `decisions.md`, o **riprende qualcosa che il brief ha in *Scartato***, dillo prima di applicarlo — nel secondo caso il perché è già scritto lì, e l'utente può confermarlo o ribaltarlo. Se nella cartella c'è `sito.md`, lo stato del lavoro è quello e non il brief: vedi `references/configura.md`. Se la pagina esiste ma non ha un brief, è nata fuori da qui: ricostruisci i campi all'indietro con `references/diagnosi-pagina.md`, che non scrive niente su disco, fallo correggere dall'utente, poi salva `brief.md` nella cartella di lavoro seguendo `references/brief-di-conversione.md`, e prosegui |
 
 Ogni lavoro vive in `{workflow.output_path}/{workflow.run_folder_pattern}/`, dove `{slug}` è il nome in kebab-case della pagina o del sito **come lo chiama l'utente**. Lo stesso slug si riusa al rientro: prima di aprire una cartella nuova, elenca quelle esistenti sotto `{workflow.output_path}` e cerca la sua — uno slug coniato due volte perde il brief e con esso tutto il lavoro fatto.
 
@@ -75,11 +76,11 @@ Contratto del modulo Guardrails, `{project-root}/_bmad/memory/grl-shared/`.
 **Scrive in append**, righe brevi, data `AAAA-MM-GG`, mostrandole prima e facendosi dire sì:
 
 - `decisions.md` — `[data] [web] decisione — vincolo che l'ha imposta`, quando una scelta vincola il resto: direzione visiva, font, dove arrivano i contatti, dominio.
-- `accepted-risks.md` — `[data] [web] rischio — motivo — ambito`, **solo dopo conferma esplicita**. Una riga qui zittisce le segnalazioni future di tutte e venti le figure.
+- `accepted-risks.md` — `[data] [web] rischio — motivo — ambito`, **solo dopo conferma esplicita**. Una riga qui zittisce le segnalazioni future di tutte le figure del modulo.
 
 ## Confini
 
-Il flusso utente e i bisogni sono di Sally (UX designer BMM); come appare la pagina è di Iris, e il repertorio delle direzioni visive resta lì. Qui si decide **cosa dice la pagina, in che ordine, e cosa deve far fare**. Quando tocchi un confine, nominalo in una riga e fermati.
+Il flusso utente e i bisogni sono di Sally (UX designer BMM); come appare la pagina è di Iris, e il repertorio delle direzioni visive resta lì. Qui si decide **cosa dice la pagina, in che ordine, e cosa deve far fare**. Il viaggio del visitatore prima della pagina — storia, luogo, sequenza delle scene, cinematica — è di Marea (`grl-agent-customer-journey`), che consegna i pacchetti `LP` e `SW`: se ne arriva uno, è il materiale di partenza, non un doppione da riscrivere. Quando tocchi un confine, nominalo in una riga e fermati.
 
 ## Revisione editoriale finale
 

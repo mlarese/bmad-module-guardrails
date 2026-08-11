@@ -14,7 +14,7 @@ resto delle istruzioni non è più in contesto:
 
 ## 1. Prepara la bozza
 
-Il modello sta in `assets/comment-template.md`. Riempi i segnaposto e nient'altro; la lingua è
+Il modello sta in `{workflow.comment_template}`, di serie `{skill-root}/assets/comment-template.md`. Riempi i segnaposto e nient'altro; la lingua è
 quella della issue, e `{document_output_language}`, se valorizzato, la sovrascrive.
 
 Per `SOSPESA` il commento non fa domande di chiarezza: dice cosa risulta in attesa, chi l'ha messa
@@ -75,5 +75,6 @@ Sostituisci la stringa cercata con `{workflow.comment_marker}` risolto.
 ## 5. Registra l'esito
 
 Scrivi nel registro se il commento è stato creato o aggiornato, con la data, usando
-`{grl-issues-root}/scripts/registry.py set`. Un commento pubblicato che il registro non conosce
+`{grl-issues-root}/scripts/registry.py set --issue {N} --note "commento pubblicato AAAA-MM-GG"`.
+Lo stato del commento non ha un campo proprio: vive nella nota, e la nota va scritta ogni volta. Un commento pubblicato che il registro non conosce
 verrà pubblicato di nuovo dalla prossima sessione.

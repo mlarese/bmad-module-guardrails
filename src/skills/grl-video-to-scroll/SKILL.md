@@ -5,7 +5,7 @@ description: "Prepara pacchetti video-to-scroll verificati. Use when l'utente di
 
 # grl-video-to-scroll
 
-## Overview
+## Panoramica
 
 Questo workflow trasforma la storia di un cliente e una sorgente video autorizzata in un pacchetto pronto per una pagina scroll-driven: intervista, customer journey, ricerca delle sorgenti, piano dei frame, manifest tecnico e specifica per `grl-web`. Agisci come facilitatore di regia e produzione: l'utente conosce cliente e business, tu fai emergere le decisioni, rendi verificabili i diritti e non confondi una ricerca con un'autorizzazione.
 
@@ -16,7 +16,7 @@ Questo workflow trasforma la storia di un cliente e una sorgente video autorizza
 - La resa predefinita è una sequenza di frame statici. Il video scrub-driven è un'alternativa esplicita, da scegliere solo se il budget di rete, il comportamento mobile e il fallback sono sostenibili.
 - Non scaricare, caricare, pubblicare o distribuire automaticamente un video. La ricerca produce candidati; l'estrazione richiede un file locale e un'autorizzazione esplicita.
 
-## On Activation
+## In attivazione
 
 1. Risolvi la configurazione con `uv run {project-root}/_bmad/scripts/resolve_config.py --project-root {project-root} --key core`; se non è disponibile, usa i default ragionevoli e dichiaralo.
 2. Risolvi la personalizzazione con `uv run {project-root}/_bmad/scripts/resolve_customization.py --skill {skill-root} --key workflow`. Applica `{workflow.activation_steps_prepend}`, carica `{workflow.persistent_facts}` e poi `{workflow.activation_steps_append}`. Se il resolver fallisce, fondi base, override di team e override personali in quell'ordine.
@@ -38,15 +38,15 @@ In `create` fai un'intervista compatta, non un questionario infinito. Chiedi e s
 - tono, brand, canali e viewport, durata/peso massimo, numero indicativo di frame, formato e fallback;
 - persone riconoscibili, musica, marchi, indirizzi, interni privati o altri dati/diritti presenti nel materiale.
 
-Poi convoca Marea (`grl-agent-customer-journey`) per legare ogni scena alla storia, al luogo e alla collocazione del business. Scrivi `journey.md` come sequenza di fasi: stato del visitatore, tensione, prova visiva, messaggio, transizione, CTA e criterio per cui la scena non è intercambiabile con una generica.
+Poi convoca Marea (`grl-agent-customer-journey`) per legare ogni scena alla storia, al luogo e alla collocazione del business. Il pacchetto — `frame-plan.md`, `asset-manifest.md`, `scroll-spec.md`, `review.md` — resta di questo workflow: Marea entra come consulente narrativa e non lo riscrive. Scrivi `journey.md` come sequenza di fasi: stato del visitatore, tensione, prova visiva, messaggio, transizione, CTA e criterio per cui la scena non è intercambiabile con una generica.
 
 In `update` rileggi prima memlog e artefatti, mostra ogni conflitto con una decisione già approvata e non cancellare candidati accettati o scartati: una nuova ricerca deve colmare un gap dichiarato. Appendi decisioni e override al memlog; non riscriverlo.
 
 ## Ricerca delle sorgenti
 
-Se manca un video, chiedi il perimetro di ricerca se non è già chiaro: archivio del cliente, fonte ufficiale, stock con licenza, dominio pubblico/open licence, territorio e motivo visuale. Cerca con fonti live e registra in `source-search.md` le query, la data `as_of`, i risultati consultati e i limiti della ricerca. La matrice `video-candidates.md` deve contenere per ogni candidato URL della pagina sorgente e dell'asset, autore/titolare, licenza e testo applicabile, attribuzione, territorio/canali/durata d'uso, persone e musica, risoluzione/durata, stato `verified`, `needs_rights`, `rejected` o `unknown` e motivo della scelta.
+Se manca un video, chiedi il perimetro di ricerca se non è già chiaro: archivio del cliente, fonte ufficiale, stock con licenza, dominio pubblico/open licence, territorio e motivo visuale. Cerca con le fonti dichiarate in `{workflow.external_sources}` e registra in `source-search.md` le query, la data `as_of`, i risultati consultati e i limiti della ricerca. La matrice `video-candidates.md` deve contenere per ogni candidato URL della pagina sorgente e dell'asset, autore/titolare, licenza e testo applicabile, attribuzione, territorio/canali/durata d'uso, persone e musica, risoluzione/durata, stato `verified`, `needs_rights`, `rejected` o `unknown` e motivo della scelta.
 
-Un risultato di ricerca, la parola «free» o un'anteprima non provano il diritto d'uso. Senza licenza verificabile non si scarica e non si estrae: passa il candidato ad Aldo (`grl-agent-legal`); volti, targhe, indirizzi o altri dati personali passano anche a Vera (`grl-agent-privacy`). Nora (`grl-agent-seo`) entra quando la ricerca deve diventare un sistema di domanda, intento e contenuto locale.
+Un risultato di ricerca, la parola «free» o un'anteprima non provano il diritto d'uso. Senza licenza verificabile non si scarica e non si estrae: passa il candidato alla figura competente fra quelle di `{workflow.external_handoffs}` — di serie Aldo (`grl-agent-legal`) per i diritti; volti, targhe, indirizzi o altri dati personali passano anche a Vera (`grl-agent-privacy`). Nora (`grl-agent-seo`) entra quando la ricerca deve diventare un sistema di domanda, intento e contenuto locale.
 
 ## Piano e produzione
 
@@ -79,6 +79,11 @@ Alla consegna distilla il memlog, verifica che ogni decisione rilevante sia nell
 | Definire frame, manifest e comportamento dello scroll | `references/scroll-package.md` |
 | Controllare gli strumenti prima di partire | `scripts/check_tools.py`, `references/tool-preflight.md` |
 | Estrarre e validare localmente | `scripts/extract_frames.py`, `scripts/validate_manifest.py` |
+
+## Chiusura
+
+I passaggi di consegne ammessi sono quelli di `{workflow.external_handoffs}`: nominane uno quando
+la materia è suo, e dichiara il passaggio all'utente.
 
 ## Revisione editoriale finale
 

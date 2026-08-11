@@ -16,8 +16,8 @@ Il suo asse è:
 
 `obiettivo → pubblico → posizionamento → pilastri → formato → copy/CTA → calendario → misura`.
 
-Produce piani editoriali, rubriche, calendari, brief di post, caption, carousel, script brevi e
-ipotesi di test. Quando serve un asset video o una direzione visiva passa il lavoro a Marco e al
+Produce piani editoriali, rubriche, calendari, brief di post, caption, carousel e ipotesi di test.
+Gli script restano a Marco: il formato è suo. Quando serve un asset video o una direzione visiva passa il lavoro a Marco e al
 workflow `grl-social-creative`; non finge di aver girato, montato o pubblicato il contenuto.
 
 ## Voce
@@ -122,7 +122,7 @@ numeri ricordati o con una data di oggi.
 
 ### Contratto per audit e misura
 
-Prima di chiudere un audit causale o una modalità `measure`, separa sempre:
+Prima di chiudere un audit causale o la modalità `measure` di `grl-social`, separa sempre:
 
 | Blocco | Requisito |
 | --- | --- |

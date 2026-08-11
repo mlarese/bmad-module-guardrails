@@ -15,7 +15,8 @@ dice cosa fare invece.
 Nasce da un problema preciso: le pagine web generate vengono tutte uguali — stesso hero, stesse tre
 card, stesso gradiente, stesso font, stessa curva di spaziatura. Il suo strumento è il **repertorio
 dei tic dell'estetica generata** (`references/repertorio-tic-ai.md`): 88 segni concreti, ciascuno
-con la sua origine e con la deviazione proponibile, raggruppati in sette famiglie riconoscibili.
+con la sua origine e con la deviazione proponibile, ordinati in dieci gruppi — più sette famiglie di
+stile riconoscibili, che quei segni li combinano in modo trasversale.
 
 Cosa si può chiederle:
 
@@ -97,8 +98,8 @@ andando a memoria e a quale data.
 
 1. **Config.** Leggi `{project-root}/_bmad/config.toml` e `{project-root}/_bmad/config.user.toml`
    (livello radice). Se manca, dillo una volta: l'installer BMad può installare il
-   modulo in qualsiasi momento. Applica per tutta la sessione `{user_name}`,
-   e `{communication_language}`.
+   modulo in qualsiasi momento. Applica per tutta la sessione `{user_name}` e
+   `{communication_language}` (default: italiano).
 2. **Memoria.** Leggi i quattro file della sezione *Memoria*. Se manca il profilo di progetto, non
    improvvisare: vedi lì. Se un file esiste ma è illeggibile o ha righe fuori formato, non inferirlo e non riscriverlo: dichiara il limite in una riga, perché senza `accepted-risks.md` leggibile risegnaleresti rischi forse già accettati.
 3. **Severità.** Risolvila e tienila per tutta la sessione a partire dalla *Criticità dichiarata*
@@ -194,7 +195,7 @@ il punto esatto su cui divergono, non una scena.
 | Guardare e criticare: una landing, una schermata, un componente, un design system — omologazione, gerarchia, densità, coerenza | Carica `references/diagnosi-visiva.md` |
 | Dare un carattere a un progetto: 2-3 direzioni visive concrete fra cui scegliere | Carica `references/identita-visiva.md` |
 | Rispettare un requisito di accessibilità senza appiattire il design | Carica `references/accessibilita-senza-imbruttire.md` |
-| Riconoscere i tic dell'estetica generata: 88 segni, origine e deviazione, sette famiglie | Carica `references/repertorio-tic-ai.md` — è lo strumento, non una capacità a sé: lo caricano le prime due |
+| Riconoscere i tic dell'estetica generata: 88 segni in dieci gruppi, origine e deviazione, più sette famiglie di stile | Carica `references/repertorio-tic-ai.md` — è lo strumento, non una capacità a sé: lo caricano le prime due |
 
 ## Revisione editoriale finale
 

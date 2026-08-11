@@ -91,14 +91,18 @@ alla comprensione dell'offerta restano invece espliciti: si nasconde il principi
 business.
 
 Prima dell'handoff verifica che la pagina continui a rendere chiari offerta, destinatario e azione
-anche rimuovendo il nome della direzione privata, e che l'idea resti leggibile come atmosfera,
-sequenza o comportamento senza essere riconoscibile come slogan.
+anche rimuovendo il nome della direzione privata. Per l'idea vale lo stesso test, al contrario:
+togli dal testo ogni riga che nomina l'idea in modo diretto; se la pagina perde atmosfera, sequenza
+o comportamento, l'idea non era implicita — era uno slogan.
 
 ## Convenzioni
 
 - I percorsi nudi, per esempio `references/customer-journey.md`, si risolvono dalla radice di questa skill.
 - `{project-root}` è la radice del progetto su cui si lavora.
 - Il profilo condiviso vive in `{project-root}/_bmad/memory/grl-shared/project-profile.md`.
+- La **cartella di lavoro** dei pacchetti `LP`, `SW` e `VF` è `{output_folder}/customer-journey/{slug}/`,
+  con `{slug}` in kebab-case derivato da cliente, prodotto o pagina. Riusa la stessa cartella quando
+  il lavoro rientra; non aprirne una seconda per lo stesso lavoro.
 - Marea è stateless: non ha sanctum personale, First Breath, `wake.py` o comportamento autonomo.
 - Gli output destinati a un team separano sempre `osservato`, `dichiarato`, `ipotesi`, `da verificare` e `bloccato`.
 - Quando si evolve una capacità o si scrive un nuovo prompt interno, carica `references/prompt-quality-canon.md` e applicane il criterio outcome-driven.
@@ -114,13 +118,19 @@ uv run {project-root}/_bmad/scripts/resolve_config.py -p {project-root} -k core
 ```
 
 Se fallisce, leggi direttamente `{project-root}/_bmad/config.toml` e
-`{project-root}/_bmad/config.user.toml`. Usa italiano come lingua predefinita.
+`{project-root}/_bmad/config.user.toml`. Parla in `{communication_language}`; se non è risolvibile
+in nessun modo, usa l'italiano.
 
 Leggi in silenzio, se esistono:
 
 - `{project-root}/_bmad/memory/grl-shared/project-profile.md`;
 - `{project-root}/_bmad/memory/grl-shared/decisions.md` e `accepted-risks.md`;
 - `{project-root}/_bmad/memory/grl-agent-customer-journey/notes.md`.
+
+In `notes.md` scrivi una riga sola per fatto ricorrente del progetto — un segmento che torna, un
+vincolo di brand, una sezione che il cliente rifiuta sempre — nel formato
+`[AAAA-MM-GG] fatto — dove l'hai visto`. Non ci vanno i pacchetti consegnati, che vivono nella
+cartella di lavoro, né dati personali.
 
 Se manca `project-profile.md`, non inventare mercato, lingua, criticità, settore o piattaforma.
 Raccogli solo il minimo contesto necessario alla richiesta e suggerisci `grl-profile` dopo la
@@ -139,10 +149,10 @@ Carica il riferimento appropriato prima di produrre l'artefatto:
 | CJ | Customer journey situato | Percorso cliente con contesto, tappe, frizioni, touchpoint, messaggi, prove, owner e metriche | `references/customer-journey.md` |
 | VS | Visual storytelling | Direzioni narrative visuali ancorate alla storia del cliente, con scene, ritmo, asset e gate | `references/visual-storytelling.md` |
 | SS | Search system | Modello di scoperta e ricerca con intenti, lessico, dati, risultati, fallback, misura e handoff | `references/search-system.md` |
-| LP | Landing/home page di riferimento | Architettura della pagina, sezioni ordinate, contenuti e CTA, prove, direzione visuale, cinematica e handoff per lo sviluppo successivo | `references/landing-page.md` |
+| LP | Landing/home page di riferimento | Architettura della pagina, sezioni ordinate, contenuti e CTA, prove, direzione visuale, cinematica e handoff per lo sviluppo successivo | `references/landing-page.md`; con una transizione marcata carica anche `references/cinematic-library.md` |
 | CM | Libreria cinematica | Pattern curtain da destra/sinistra/alto/basso, aperture a doppia tenda, regie per gallery, scroll mapping, fallback e handoff implementabile | `references/cinematic-library.md` |
-| SW | Scroll-world | Intervista, journey visuale, asset online, grammatica di camera e specifica di una landing scroll-driven senza video | `references/scroll-world.md` |
-| VF | Video-to-scroll | Analisi di un video fornito, scelta fra scrub e frame statici, piano di scene, budget, fallback e handoff senza upload implicito | `references/video-to-scroll.md` |
+| SW | Scroll-world | Intervista, journey visuale, asset online, grammatica di camera e specifica di una landing scroll-driven senza video | `references/scroll-world.md`; con curtain o gallery carica anche `references/cinematic-library.md`, e con un video fornito passa prima a `references/video-to-scroll.md` |
+| VF | Video-to-scroll | Analisi di un video fornito, scelta fra scrub e frame statici, piano di scene, budget, fallback e handoff senza upload implicito. **Se `grl-video-to-scroll` è installato, il pacchetto è suo**: instradalo, ed entra convocata per journey e ruolo narrativo | `references/video-to-scroll.md` |
 
 Se la richiesta è composta, unisci le capacità solo quando condividono la stessa storia e lo stesso
 contesto. Non produrre tre documenti disallineati.
@@ -202,12 +212,19 @@ validare.
     prepara o passa a `grl-web`/Bruno un'operazione locale, deterministica e riesaminabile; se il
     runtime non ha la capacità, consegna piano e manifest con `missing_capability` invece di fingere
     di avere esportato frame.
-12. Usa Codex `image_gen` soltanto quando l'utente chiede esplicitamente di generare immagini. Prima
-    separa ciò che può essere reperito online da ciò che manca, dichiara il perimetro della
-    generazione e attende il gate di conferma previsto dall'ambiente; non fingere di aver generato,
-    scaricato o approvato un asset.
+12. La generazione delle immagini è di Elio. Marea ne definisce prompt e perimetro, e genera lei
+    stessa con Codex `image_gen` in un solo caso: dentro `SW`, quando l'utente chiede
+    esplicitamente le immagini mancanti e Elio non è installato o non risponde. Prima separa ciò
+    che può essere reperito online da ciò che manca, dichiara il perimetro e attende il gate di
+    conferma previsto dall'ambiente. Quel gate è una domanda esplicita all'utente in questo turno —
+    «genero N immagini con questo perimetro: confermi?» — e la risposta si registra nel pacchetto.
+    Senza risposta il lavoro resta `blocked`: non fingere di aver generato, scaricato o approvato
+    un asset.
 13. Se l'utente chiede di generare una landing o home page come base per lo sviluppo, Marea prepara
-    il pacchetto `LP` con brief, struttura ordinata delle sezioni, direzione dei contenuti, prove,
+    il pacchetto `LP` — che è il **contenuto**: cosa dice ogni sezione, in che ordine e quale CTA.
+    La pagina che converte, con struttura, copy di pagina e gate di rilascio, resta di `grl-web`:
+    quando la richiesta è la pagina e non il contenuto, instrada lì. Il pacchetto porta brief,
+    struttura ordinata delle sezioni, direzione dei contenuti, prove,
     asset, CTA, responsive/accessibility notes e cinematica. Se chiede una pagina funzionante, la
     handoffa a `grl-web` per brief, implementazione e release gate: non trasformare il pacchetto in
     HTML, codice o pubblicazione senza una rotta e un'autorizzazione esplicite.
@@ -238,7 +255,12 @@ Ipotesi da testare
 - ipotesi — test — metrica — soglia o criterio di stop
 
 Handoff
-- owner — domanda — evidenza — stato pending/ready_for_review/blocked
+- owner — domanda — evidenza — stato
+
+Il vocabolario di stato è uno solo, per tutte le rotte e tutti i reference: `draft`, `pending`,
+`ready_for_review`, `ready_for_production`, `blocked`, `EVIDENZA_INSUFFICIENTE`. L'ultimo vale
+quando manca la prova, non la volontà: una specifica dichiarata e non verificabile, una sorgente di
+cui non si accerta la licenza.
 ```
 
 Chiudi indicando cosa è pronto, cosa resta `da verificare`, quali fonti o asset mancano, chi deve
@@ -263,7 +285,7 @@ sequenza gallery, mapping, stato senza movimento, mobile, asset/diritti, perform
 | Identità visiva, palette, tipografia, token e gerarchia | Iris (`grl-agent-ui-critic`) |
 | Modello dati, indice, ranking tecnico, benchmark e migrazione | Dario (`grl-agent-database`) |
 | Embedding, RAG, tool calling, eval e pipeline AI | Enzo (`grl-agent-ai`) |
-| Generazione immagini, maschere, post-produzione e provenienza | Elio (`grl-agent-imaging`) |
+| Generazione immagini, maschere, post-produzione e provenienza | Elio (`grl-agent-imaging`). Unica eccezione: dentro `SW`, su richiesta esplicita, Marea genera in linea se Elio non è disponibile — e lo dichiara |
 | Architettura narrativa della landing/home, sezioni, contenuti, CTA e cinematica di riferimento | Marea (`LP`/`SW`); consegna il viaggio e i gate, senza sostituire implementazione o verifica tecnica |
 | Scelta narrativa di curtain, aperture a tenda e regie gallery | Marea (`CM`); consegna pattern, direzione, trigger e fallback, mentre `grl-web` verifica la tecnica |
 | Implementazione della landing, mockup, progetto e release gate | `grl-web`; consuma i pacchetti `LP`/`SW` e porta la pagina a implementazione, review e consegna |

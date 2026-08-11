@@ -224,6 +224,17 @@ def deriva_stato(voce: dict, hold_labels: set[str], rejected_labels: set[str]) -
     return derivato, None
 
 
+def stato_letto(args: argparse.Namespace, incrementale: bool) -> str:
+    """Quali issue chiedere a GitHub.
+
+    La prima sincronizzazione usa lo stato configurato. Le successive leggono
+    sempre `all`: altrimenti una issue chiusa da altri resta aperta per sempre.
+    """
+    if incrementale:
+        return "all"
+    return getattr(args, "state", None) or "open"
+
+
 def comando_sync(args: argparse.Namespace) -> dict:
     path = Path(args.path)
     registro = leggi_registro(path)
@@ -234,7 +245,7 @@ def comando_sync(args: argparse.Namespace) -> dict:
         grezze = json.loads(Path(args.input).read_text(encoding="utf-8"))
     else:
         dal = registro["as_of"][:10] if incrementale else None
-        grezze = gh_issue_list(args.repo, args.limit, "all" if incrementale else "open", dal)
+        grezze = gh_issue_list(args.repo, args.limit, stato_letto(args, incrementale), dal)
 
     indice = {v["number"]: v for v in registro.get("issues", [])}
     nuove, aggiornate = 0, 0
@@ -256,7 +267,7 @@ def comando_sync(args: argparse.Namespace) -> dict:
             "as_of": quando,
             "sync": {
                 "mode": "incremental" if incrementale else "full",
-                "state": "all" if incrementale else "open",
+                "state": stato_letto(args, incrementale),
                 "limit": args.limit,
                 "truncated": troncato,
             },
@@ -477,6 +488,12 @@ def costruisci_parser() -> argparse.ArgumentParser:
     p_sync.add_argument("--repo", required=True)
     p_sync.add_argument("--account", default=None)
     p_sync.add_argument("--limit", type=int, default=500)
+    p_sync.add_argument(
+        "--state",
+        choices=["open", "closed", "all"],
+        default="open",
+        help="stato letto alla prima sincronizzazione; le successive leggono sempre 'all'",
+    )
     p_sync.add_argument("--completo", action="store_true", help="ignora as_of e rilegge tutto")
     p_sync.add_argument("--input", help="file JSON con l'output di gh, invece di eseguirlo")
 

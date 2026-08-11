@@ -144,8 +144,12 @@ La sequenza è sempre la stessa e non si accorcia:
 4. **Chiave.** Lo script legge `GEMINI_API_KEY`, `GOOGLE_API_KEY` o `OPENAI_API_KEY`
    dall'ambiente. Se manca, non chiederla in chat e non passarla come argomento: di' quale
    variabile impostare, e intanto consegna prompt e parametri, che restano utilizzabili.
-5. **Verifica.** Guarda il file prodotto prima di consegnarlo, applicando la revisione della §
-   *Output*. Un risultato che non regge si dichiara, non si nasconde dietro «rigeneriamo».
+5. **Verifica.** Guarda il file prodotto prima di consegnarlo e controlla, in quest'ordine: il
+   soggetto è quello chiesto; l'inquadratura e il rapporto corrispondono ai parametri; il testo
+   dentro l'immagine è leggibile e scritto giusto; non ci sono artefatti su mani, volti, riflessi e
+   bordi; il risultato aderisce al prompt anche dove il prompt escludeva qualcosa; formato,
+   risoluzione e peso sono quelli attesi. Un risultato che non regge si dichiara, non si nasconde
+   dietro «rigeneriamo».
 6. **Iterazione.** Un giro cambia una variabile sola e la scrive nella scheda.
 
 Ogni file scritto ha accanto un sidecar `.provenance.json` con provider, modello, prompt,
@@ -187,7 +191,7 @@ Photoshop resta manuale: consegni le istruzioni di post-produzione, non le esegu
 
 Ogni immagine consegnata porta una riga di provenienza: modello e versione dichiarata, prompt
 finale, riferimenti usati e loro origine, numero di iterazioni, post-produzione applicata, data.
-Un'immagine senza questa riga è `blocked` in `strict` e `da completare` altrove.
+Un'immagine senza questa riga è `blocked` in `strict` e `draft` altrove.
 
 Quando un'immagine generata compare in un contesto che la può far leggere come reale — sito,
 annuncio, materiale informativo, post — segnala che serve una disclosure e passa ad **Aldo** la
@@ -195,7 +199,7 @@ domanda su quale forma sia dovuta. Non decidere tu se l'obbligo si applica.
 
 ## Output
 
-Una scheda immagine dovrebbe contenere:
+Una scheda immagine deve contenere almeno:
 
 | Campo | Contenuto |
 | --- | --- |
@@ -209,6 +213,7 @@ Una scheda immagine dovrebbe contenere:
 | Export | file, spazio colore, compressione, varianti per canale |
 | Provenienza | modello, prompt, riferimenti, iterazioni, marcatori, data |
 | Gate | somiglianze, marchi, dati personali, disclosure, identità visiva, approvatore, stato |
+| Fonti | per modello, prezzi, limiti e formati: la fonte ufficiale consultata e la sua `as_of`. Senza questa riga le specifiche restano `da verificare` |
 
 Stati ammessi: `draft`, `blocked`, `ready_for_review`, `ready_for_production`,
 `EVIDENZA_INSUFFICIENTE`.

@@ -1,6 +1,6 @@
 # {nome del sito}
 
-**Cartella:** {slug} · **Gate collegio:** `non ancora`, oppure `passato il AAAA-MM-GG` · **Aggiornato:** AAAA-MM-GG
+**Cartella:** {slug} · **Gate collegio:** `non ancora`, oppure `passato il AAAA-MM-GG da <figure>` · **Aggiornato:** AAAA-MM-GG
 
 Compilato da `grl-web`, corretto dall'utente. `bmad-spec` lo adotta come companion e non lo riscrive.
 

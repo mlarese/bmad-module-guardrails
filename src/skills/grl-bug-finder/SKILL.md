@@ -1,6 +1,6 @@
 ---
 name: grl-bug-finder
-description: "Individua bug e regressioni in codice, configurazioni, pipeline o artefatti tecnici con scansione read-only, riproduzione minima, evidenze file/riga, ipotesi falsificabili, severità, confidenza e test di regressione. Usala quando l'utente dice \"trova il bug\", \"cerca bug\", \"debugga\", \"indaga una regressione\", \"qualcosa non funziona\", oppure chiede di controllare se un file, un endpoint o una query ha un difetto — anche quando il difetto sospetto è di sicurezza, di prestazioni o di dati: la diagnosi parte da qui e passa l'owner alla figura di dominio. Non modifica codice, non esegue side effect e non sostituisce le figure di dominio: la valutazione del rischio e la contromisura restano a loro."
+description: "Individua bug e regressioni in codice, configurazioni, pipeline o artefatti tecnici con scansione read-only, riproduzione minima, evidenze file/riga, ipotesi falsificabili, priorità, confidenza e test di regressione. Usala quando l'utente dice \"trova il bug\", \"cerca bug\", \"debugga\", \"indaga una regressione\", \"qualcosa non funziona\", oppure chiede di controllare se un file, un endpoint o una query ha un difetto — anche quando il difetto sospetto è di sicurezza, di prestazioni o di dati: la diagnosi parte da qui e passa l'owner alla figura di dominio. Non modifica codice, non esegue side effect e non sostituisce le figure di dominio: la valutazione del rischio e la contromisura restano a loro."
 ---
 
 # `grl-bug-finder` — diagnosi di bug e regressioni
@@ -123,7 +123,7 @@ che spiega il sintomo; chiamala così solo quando la prova esclude le alternativ
 
 Separa sempre:
 
-- **severità** — quanto danno produce il difetto se accade;
+- **priorità** (`priority`) — quanto danno produce il difetto se accade. È l'asse che il contratto del finding chiama così: «severità» e «priorità» non sono due cose, e il report ne usa una sola parola;
 - **confidenza** — quanto bene l'evidenza dimostra che il difetto esiste;
 - **reachability** — quali precondizioni servono per raggiungerlo;
 - **stato** — `reproduced`, `not_reproduced`, `unverified` o `ruled_out`.
@@ -137,7 +137,7 @@ Usa questa scala operativa, motivandola nel contesto:
 | `P2` | caso limite definito, integrazione circoscritta o degrado con workaround noto |
 | `P3` | difetto minore di diagnosi, errore non bloccante o rischio che non cambia la decisione corrente |
 
-Un `P0`/`P1` non è automaticamente `confirmed`: la severità non sostituisce la prova.
+Un `P0`/`P1` non è automaticamente `confirmed`: la priorità non sostituisce la prova.
 
 La reachability è un asse separato, e resta `open` finché non hai la prova che il percorso è
 percorribile con i permessi e le precondizioni dichiarate. Con reachability `open` non scrivere
@@ -160,7 +160,9 @@ Instrada solo se il segnale lo richiede:
 | prompt, RAG, modello, tool calling, eval, costi o latenza AI | Enzo; Kai per la minaccia, Vera per dati personali |
 | MCU/SoC, interrupt, DMA, RTOS, timing, memoria o OTA | Ada / `grl-agent-firmware` |
 | dato clinico, prescrizione, reparto o sicurezza del paziente | Livia / `grl-agent-health`; Nils o `grl-mdsw` se emerge il perimetro regolatorio |
-| WordPress, pagina, SEO o media | Milo, Iris o Nora secondo il segnale |
+| tema, template, campi custom, blocco o Media Library di WordPress | Milo / `grl-agent-wordpress` |
+| resa dell'interfaccia, layout, identità visiva | Iris / `grl-agent-ui-critic` |
+| indicizzazione, ricerca, dati strutturati, redirect | Nora / `grl-agent-seo` |
 | percorso obbligatorio, gate o stato senza ritorno | Vito / `grl-agent-blockers` |
 | più domini, release o conflitto fra finding | `grl-board` |
 | il finding deve diventare lavoro tracciato, non restare in un report | `grl-issues` per il registro, `grl-issue-readiness` perché la issue nasca già chiara, `grl-issue-build` per portarla a `bmad-build` |
@@ -168,7 +170,7 @@ Instrada solo se il segnale lo richiede:
 Un handoff contiene domanda, artefatto, snapshot, evidenza, decisione richiesta, capability
 disponibile/mancante e owner. Se una figura non è installata, registra `missing_capability` e
 `handoff_status: pending`; il finding indipendente può restare, il gate che dipende da quella
-figura resta `blocked` o `EVIDENZA_INSUFFICIENTE`.
+figura resta `status: blocked` con `verdict: EVIDENZA_INSUFFICIENTE`.
 
 ## Consegna
 
@@ -198,8 +200,8 @@ Il report, in conversazione o in `{output_folder}/bug-finder/{slug}/report.md`, 
 6. ciò che non è stato esaminato e la prossima azione sicura.
 
 Un finding `ruled_out` può restare nel report solo se evita di ripetere un falso positivo
-importante. `Nessun bug trovato` è valido soltanto quando lo scope è stato esaminato con evidenza
-sufficiente; altrimenti il verdetto è `EVIDENZA_INSUFFICIENTE`.
+importante. Il verdetto `NO_BUG_FOUND` è valido soltanto quando lo scope è stato esaminato con evidenza
+sufficiente; altrimenti è `EVIDENZA_INSUFFICIENTE`.
 
 Chiudi con una sola riga strutturata:
 

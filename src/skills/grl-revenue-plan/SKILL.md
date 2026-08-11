@@ -28,8 +28,10 @@ lo fa cambiare e quale controllo serve prima di passare al preflight.
 ## In attivazione
 
 Risolvi la configurazione con `uv run {project-root}/_bmad/scripts/resolve_config.py -p {project-root} -k core`.
-Leggi il profilo condiviso e le decisioni se presenti. Se esiste `{plan}/audit.md` o
-`{plan}/plan.md`, leggilo prima di chiedere o riscrivere dati.
+Leggi il profilo condiviso e le decisioni se presenti. Se esistono `{plan}/audit.md` o
+`{plan}/plan.md`, leggili entrambi prima di chiedere o riscrivere dati.
+
+Ricava l'intento dalla richiesta; se `{plan}/plan.md` esiste già, l'intento predefinito è `resume`.
 
 | Intento | Comportamento |
 |---|---|
@@ -44,7 +46,9 @@ non inventare una validazione precedente. Se `grl-agent-revenue` manca, registra
 ## Stato di lavoro
 
 La cartella persistente è `{plan}`. Mantieni `plan.md` con obiettivo, periodo, fonte dell'audit,
-scenari, assunzioni, trigger, metriche, approvazioni e stato. Un piano aggiornato non cancella
+scenari, assunzioni, trigger, metriche, approvazioni e stato. Nello stesso file vanno anche le tre
+marcature che l'attivazione impone: `audit_status`, `missing_capability` e `handoff_status`, con il
+motivo accanto. Un piano aggiornato non cancella
 le decisioni precedenti: registra il cambiamento e la sua ragione.
 
 **La cartella è condivisa con `grl-revenue-audit` e `grl-revenue-preflight`.** Scrivi soltanto
@@ -76,10 +80,20 @@ automazioni ripetibili può passare un piano a `grl-automation` con scope e roll
 ## Finalize
 
 Verifica formule, unità, periodo, valuta, arrotondamento, perimetro, fonti, ipotesi e condizioni
-di stop. Se `bmad-review` è disponibile, usalo solo per la prosa. Chiudi con:
+di stop. Se `bmad-review` è disponibile, usalo solo per la prosa.
+
+I tre verdetti si distinguono così:
+
+| Verdetto | Quando |
+| --- | --- |
+| `READY_FOR_PREFLIGHT` | le sette sezioni obbligatorie del piano sono complete e verificate |
+| `NO_GO` | una sezione obbligatoria contraddice l'audit o il floor economico: il piano esiste ma non va portato al gate tecnico |
+| `EVIDENZA_INSUFFICIENTE` | manca un dato o una fonte per completare una sezione obbligatoria |
+
+Chiudi con:
 
 ```json
-{"status":"complete|blocked","folder":"{plan}","verdict":"READY_FOR_PREFLIGHT|EVIDENZA_INSUFFICIENTE|NO_GO"}
+{"status":"complete|blocked","folder":"{plan}","verdict":"READY_FOR_PREFLIGHT|NO_GO|EVIDENZA_INSUFFICIENTE","audit_status":"…","missing_capability":[],"handoff_status":"…"}
 ```
 
 ## Revisione editoriale finale

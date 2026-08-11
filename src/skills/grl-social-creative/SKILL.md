@@ -1,6 +1,6 @@
 ---
 name: grl-social-creative
-description: "Attiva solo se il deliverable richiesto è un pacchetto creativo producibile: concept, hook, script, storyboard, shot list o specifiche short-form. Non attivare per calendario editoriale, budget/media, diritti/privacy, visual design system o upload/pubblicazione."
+description: "Attiva solo se il deliverable richiesto è un pacchetto creativo producibile da consegnare su file: concept, hook, script, storyboard, shot list o specifiche short-form. Per una discussione creativa senza pacchetto — un'idea da valutare, un hook da migliorare, una direzione da criticare — è Marco (`grl-agent-creative`). Non attivare per calendario editoriale, budget/media, diritti/privacy, visual design system o upload/pubblicazione."
 ---
 
 # `grl-social-creative` — pacchetto creativo social
@@ -15,12 +15,17 @@ Se l'utente chiede di approvare palette/tipografia/token ma non fornisce il pacc
 comunque con questo record, prima delle domande:
 
 ```text
-Handoff Iris — workflow: grl-agent-ui-critic
-Domanda: puoi verificare identità visiva, palette, tipografia e token rispetto al design system?
-Evidenza: pacchetto e guideline non forniti; non noto.
-Stato: pending
-Pacchetto: ready_for_review
+owner: Iris
+workflow: grl-agent-ui-critic
+domanda: verificare identità visiva, palette, tipografia e token rispetto al design system
+evidenza: pacchetto e guideline non forniti; non noto
+stato: pending
+pacchetto: non fornito
 ```
+
+Questo è il **record canonico dell'handoff a Iris**: dove il pacchetto esiste davvero, l'ultima
+riga diventa `pacchetto: ready_for_review`. Gli altri punti del documento citano questo blocco e
+non ne inventano uno diverso.
 
 Se il brief è approvato e l'utente chiede di montare, caricare o programmare, non usare `blocked`
 come stato del pacchetto: consegna istruzioni producibili, owner, file/asset e gate, con
@@ -46,8 +51,9 @@ ricavarlo, chiedilo.
 - `variant-matrix.md`: ipotesi che cambiano una sola leva per volta;
 - `review.md`: claim, diritti, privacy, visual review, approvatore e stato.
 
-Se l'utente chiede solo una caption o un'idea, consegna un pacchetto ridotto in conversazione e
-non creare file senza richiesta.
+Se l'utente chiede solo un'idea o un concept, consegna un pacchetto ridotto in conversazione e non
+creare file senza richiesta. La **caption** invece non è materia di questo workflow: è di Sofia
+(`grl-agent-social`, `grl-social`), e si instrada con l'handoff previsto dalla tabella delle rotte.
 
 Se il brief è citato ma non è presente, consegna comunque uno scaffold creativo con i soli dati
 noti, `non noto` per piattaforma/placement/durata/asset mancanti e placeholder `[CONTENUTO DAL
@@ -93,6 +99,7 @@ formato verificati. Lo stato può essere `ready_for_review`, `ready_for_producti
 | strategia organica, calendario, caption e metriche social | Sofia, `grl-agent-social` e `grl-social` |
 | account paid, budget, audience, tracking e test media | Dalia, `grl-agent-ads` e `grl-ads` |
 | identità visiva e coerenza con il sistema del brand | Iris, `grl-agent-ui-critic` |
+| generazione e post-produzione di immagini | Elio, `grl-agent-imaging` |
 | claim, licenze, musica, stock, UGC, influencer e diritti | Aldo, `grl-agent-legal` |
 | volti, messaggi, dati clienti, remarketing e consenso | Vera, `grl-agent-privacy` |
 | promessa o contenuto clinico | Livia, `grl-agent-health` |
@@ -159,7 +166,8 @@ la CTA fornita. Non aggiungere payoff come "pronto da usare", "senza procedure c
 
 ## Continuità e chiusura
 
-Per un pacchetto multi-turno leggi prima gli artefatti esistenti e il memlog del lavoro social,
+Per un pacchetto multi-turno leggi prima gli artefatti esistenti e il memlog del lavoro social —
+`{output_folder}/social/{slug}/.memlog.md`, tramite `{project-root}/_bmad/scripts/memlog.py` —,
 mostra ogni conflitto e conserva le decisioni senza sovrascriverle. Chiudi con stato, output,
 asset mancanti, gate, handoff, approvatore e prossima verifica. Se mancano dati decisivi, consegna
 un brief `blocked`, non una creatività riempita con supposizioni.
