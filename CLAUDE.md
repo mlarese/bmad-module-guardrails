@@ -53,7 +53,19 @@ workflow, con un derivato in più, restando a `1.34.1` per sette commit di fila.
 | il contratto di uno schema o di un percorso che rompe le installazioni esistenti | major |
 
 I due punti — `module_version` e `version` del marketplace — vanno cambiati insieme: da lì la build
-propaga il numero a tutti e dieci i derivati, che non si toccano a mano.
+propaga il numero a tutti e dieci i derivati, che non si toccano a mano. Non a mano, però:
+
+```bash
+python3 tools/bump_version.py --check    # cosa è cambiato rispetto alla versione dichiarata
+python3 tools/bump_version.py --minor    # alza le due sedi e riscrive il lucchetto
+```
+
+`src/module-version.lock` registra, accanto alla versione, il set di skill e di moduli derivati che
+quella versione descrive. `tools/tests/test_version_lock.py` confronta il lucchetto con la realtà e
+**fallisce se il pacchetto è cambiato senza bump**, dicendo quale skill è entrata o uscita.
+
+Il fallimento non si aggira riscrivendo il lucchetto: si chiude alzando la versione, che è la cosa
+che il lucchetto esisteva per ricordare.
 
 Una skill nuova va aggiunta anche all'elenco `skills` di `.claude-plugin/marketplace.json`,
 altrimenti non viene pubblicata.
