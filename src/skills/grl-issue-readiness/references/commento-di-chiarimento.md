@@ -34,9 +34,10 @@ Se l'utente ha chiesto «tutte le aperte», il piano del lotto **è** l'elenco c
 — `gh issue list --state open`, o il registro se è fresco — non un sottoinsieme scelto da te.
 Milestone e label sono alternative da offrire, non ripieghi da imporre.
 
-Con più issue, mostra prima il piano del lotto — numero, titolo, verdetto ed esito previsto (nessun
-commento, nuovo commento, aggiornamento del commento esistente) — e solo dopo chiedi le conferme,
-una issue alla volta. Nessuna pubblicazione in blocco su una lista non letta.
+Con più issue, mostra prima il piano del lotto — numero, titolo, **sintesi della descrizione**,
+verdetto ed esito previsto (nessun commento, nuovo commento, aggiornamento del commento esistente)
+— e solo dopo chiedi le conferme, una issue alla volta. Senza la sintesi chi conferma approva
+ventidue righe che non distingue. Nessuna pubblicazione in blocco su una lista non letta.
 
 Dopo ogni pubblicazione registra subito l'esito nella voce della issue, non a fine lotto: un lotto
 di nove interrotto alla quarta deve dire dove si è fermato, altrimenti al secondo giro si

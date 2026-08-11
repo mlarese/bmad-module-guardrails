@@ -134,6 +134,34 @@ def test_uno_stato_fuori_vocabolario_viene_rifiutato(tmp_path: Path) -> None:
         _costruisci_args(["set", "--path", str(tmp_path / "registry.json"), "--issue", "9", "--status", "QUASI_FATTA"])
 
 
+# --- sintesi della descrizione -----------------------------------------------
+
+
+def test_la_sintesi_toglie_markup_codice_e_dati_personali() -> None:
+    corpo = (
+        "# Problema\n\n"
+        "L'**export** mensile non include i resi. Scrivi a mario.rossi@acme.it o al 388 1234567.\n"
+        "```\ntraceback interno\n```\n"
+        "> nota a margine\n"
+    )
+    testo = registry.sintesi(corpo)
+    assert "export" in testo
+    assert "[email omessa]" in testo and "[numero omesso]" in testo
+    assert "traceback" not in testo and "**" not in testo and "nota a margine" not in testo
+
+
+def test_una_issue_senza_corpo_ha_sintesi_vuota() -> None:
+    assert registry.sintesi(None) == ""
+    assert registry.sintesi("   \n\n") == ""
+
+
+def test_il_sync_conserva_la_sintesi_quando_la_rilettura_non_porta_il_corpo(tmp_path: Path) -> None:
+    sincronizza(tmp_path, [issue(11, body="Il totale del carrello ignora lo sconto applicato a mano.")])
+    sincronizza(tmp_path, [issue(11, updatedAt="2026-08-11T09:00:00Z")])
+    voce = json.loads((tmp_path / "registry.json").read_text())["issues"][0]
+    assert "sconto" in voce["summary"]
+
+
 # --- robustezza --------------------------------------------------------------
 
 

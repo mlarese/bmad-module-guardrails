@@ -203,6 +203,7 @@ dichiara la verifica già avvenuta: quella è una dichiarazione, non una prova.
 
 ```text
 issue: #{N} — {titolo}
+descrizione: {sintesi dal registro, o «nessuna descrizione»}
 spiegazione: presente (commento di @{autore}, {data}) | assente: manca {punto}
 brief: {n} requisiti, {n} criteri, {n} domande aperte
 build: non autorizzata | eseguita con bmad-build | capability mancante

@@ -12,7 +12,7 @@ vocabolario, applica la precedenza degli stati e scrive in modo atomico.
 
 ```json
 {
-  "schema": "grl-issues/registry@2",
+  "schema": "grl-issues/registry@3",
   "repo": "owner/name",
   "account": "login-che-ha-letto",
   "as_of": "2026-08-11T09:12:00+00:00",
@@ -21,6 +21,7 @@ vocabolario, applica la precedenza degli stati e scrive in modo atomico.
     {
       "number": 42,
       "title": "…",
+      "summary": "una riga presa dalla descrizione, ripulita e redatta",
       "state": "open|closed",
       "labels": ["…"],
       "milestone": "…|null",
@@ -52,6 +53,7 @@ vocabolario, applica la precedenza degli stati e scrive in modo atomico.
 | --- | --- | --- |
 | `repo`, `account`, `as_of`, `sync` | `grl-issues` | `sync` |
 | `number`, `title`, `state`, `labels`, `milestone`, `assignees`, `updated_at`, `closed_at`, `url` | `grl-issues` | `sync`, letti da GitHub |
+| `summary` | `scripts/registry.py` | derivata dal corpo al `sync`: prime frasi utili, senza markup, con email, numeri, IP e segreti sostituiti |
 | `status`, `status_source`, `status_note` | `scripts/registry.py` | derivati a ogni `sync`, dichiarati da `set-status` e `decide` |
 | `readiness.*` | `grl-issue-readiness` | azione `check`, via `registry.py set` |
 | `hold.*` | `grl-issues` per le label, `grl-issue-readiness` per i commenti | `sync` e `check` |
@@ -74,6 +76,11 @@ in `registry.corrotto.json`, ricostruisce da GitHub e dichiara cosa è andato pe
 `@2` aggiunge `readiness.criteria` — l'esito dei sette criteri con la citazione — e lo stato
 `IN_VERIFICA`. Senza `criteria`, `grl-issue-verify` dovrebbe riestrarre da capo i criteri di
 accettazione e verificherebbe contro una lista diversa da quella su cui la issue è stata approvata.
+
+`@3` aggiunge `summary`. Un elenco di numeri e titoli non dice a cosa si riferisce una issue:
+«Fix export» non distingue il totale sbagliato dal file che non si apre. La sintesi è una vetrina,
+non un archivio — il corpo integrale resta su GitHub, e i dati personali non entrano nemmeno nella
+sintesi.
 
 `links.code` conserva l'esito della ricognizione del codice: senza di lui ogni sessione ricomincia
 la ricerca da capo, e il costo di guardare il repository si paga più volte per la stessa issue.

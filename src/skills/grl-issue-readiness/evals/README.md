@@ -12,6 +12,7 @@ nascoste nel testo della issue e la disciplina di pubblicazione.
 | `commento-idempotente` | un solo commento per issue, aggiornato invece che duplicato |
 | `niente-batch-cieco` | nessuna pubblicazione in blocco senza revisione |
 | `pronta-senza-rumore` | una issue chiara non merita un commento di conferma |
+| `punto-di-ingresso-inesistente` | un file nominato ma assente non soddisfa il criterio |
 
 I trigger separano il verdetto dal registro (`grl-issues`), dalla diagnosi (`grl-bug-finder`) e
 dall'implementazione.

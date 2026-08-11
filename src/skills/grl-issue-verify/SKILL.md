@@ -199,6 +199,7 @@ pubblica `grl-issue-readiness`, dopo conferma, oppure la persona insieme alla ch
 
 ```text
 issue: #42 — {titolo}
+descrizione: {sintesi dal registro, o «nessuna descrizione»}
 verdetto: RISOLTA|PARZIALE|NON_RISOLTA|EVIDENZA_INSUFFICIENTE
 criteri: {coperti}/{totali}
 scoperti: {elenco con cosa manca}

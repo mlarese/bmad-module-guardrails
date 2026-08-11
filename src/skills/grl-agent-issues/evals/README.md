@@ -16,6 +16,8 @@ non riempire con la propria idea il requisito che manca e ricordare cosa è già
 | `ordine-senza-criteri-inventati` | non introduce criteri che il registro non contiene |
 | `duplicati-dal-registro` | segnala le coppie, non le unisce |
 | `registro-parziale-dichiarato` | una lettura troncata si dichiara prima del numero |
+| `ricognizione-prima-del-verdetto` | il codice si guarda prima di giudicare, e l'ambiguità diventa una domanda |
+| `elenco-con-descrizione` | nessun elenco muto: ogni riga dice a cosa si riferisce |
 
 I trigger separano il backlog dalla diagnosi, dall'implementazione, dal registro (`grl-issues`),
 dal commento (`grl-issue-readiness`) e dalla verifica di chiusura (`grl-issue-verify`): Tito dice

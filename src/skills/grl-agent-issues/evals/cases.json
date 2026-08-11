@@ -113,6 +113,17 @@
         "non modifica né esegue nulla nel repository"
       ],
       "state_prefix": null
+    },
+    {
+      "id": "elenco-con-descrizione",
+      "input": "Run headless. Sei Tito. Il registro ha sei issue aperte, quattro con `summary` valorizzata e due senza. Mostrami cosa c'è da fare.",
+      "rubric": [
+        "ogni riga dell'elenco porta numero, titolo e la sintesi della descrizione",
+        "per le due issue senza sintesi scrive «nessuna descrizione» invece di lasciare la riga muta",
+        "non inventa una descrizione per le issue che non ce l'hanno",
+        "mantiene il raggruppamento per stato di lavorazione"
+      ],
+      "state_prefix": null
     }
   ]
 }

@@ -36,12 +36,13 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import subprocess
 import sys
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-SCHEMA = "grl-issues/registry@2"
+SCHEMA = "grl-issues/registry@3"
 
 STATI = [
     "DA_VALUTARE",
@@ -57,7 +58,7 @@ STATI = [
 # Uno stato dichiarato a mano cede solo a un fatto letto da GitHub.
 STATI_FORTI = {"IN_SVILUPPO", "IN_VERIFICA", "NON_APPROVATA", "CHIUSA"}
 
-CAMPI_GH = "number,title,state,labels,milestone,assignees,updatedAt,url"
+CAMPI_GH = "number,title,state,labels,milestone,assignees,updatedAt,url,body"
 CAMPI_GH_ALL = CAMPI_GH + ",closedAt"
 
 # Campi che vivono solo nel registro: nessuna rilettura di GitHub li ricostruisce.
@@ -74,7 +75,7 @@ def leggi_registro(path: Path) -> dict:
         return {"schema": SCHEMA, "repo": None, "account": None, "as_of": None, "sync": {}, "issues": []}
     try:
         dati = json.loads(path.read_text(encoding="utf-8"))
-        conosciuto = dati.get("schema") in (SCHEMA, "grl-issues/registry@1")
+        conosciuto = dati.get("schema") in (SCHEMA, "grl-issues/registry@2", "grl-issues/registry@1")
         if not conosciuto:
             raise SystemExit(
                 json.dumps(
@@ -116,10 +117,53 @@ def gh_issue_list(repo: str, limite: int, stato: str, dal: str | None) -> list[d
     return json.loads(esito.stdout or "[]")
 
 
+# Dati che non devono finire nel registro: la sintesi è una vetrina, non un archivio.
+REDAZIONI = [
+    (re.compile(r"[\w.+-]+@[\w-]+\.[\w.]+"), "[email omessa]"),
+    (re.compile(r"\b\d{1,3}(?:\.\d{1,3}){3}\b"), "[ip omesso]"),
+    (re.compile(r"\b(?:gh[pousr]_|sk-|xox[baprs]-)[A-Za-z0-9_-]{8,}"), "[segreto omesso]"),
+    (re.compile(r"\+?\d[\d ().-]{8,}\d"), "[numero omesso]"),
+]
+
+
+def sintesi(corpo: str | None, limite: int = 220) -> str:
+    """Una riga che dice di cosa parla la issue: il titolo da solo non basta.
+
+    Non è un riassunto e non è il corpo: sono le prime frasi utili, ripulite dal
+    markup e dai dati che non devono stare nel registro. Chi vuole il testo
+    intero lo legge su GitHub — qui serve solo a capire a cosa si riferisce una
+    riga dell'elenco.
+    """
+    if not corpo:
+        return ""
+    righe = []
+    dentro_codice = False
+    for riga in corpo.splitlines():
+        riga = riga.strip()
+        if riga.startswith("```"):
+            dentro_codice = not dentro_codice
+            continue
+        # via il codice, le intestazioni, le citazioni, le immagini e le tabelle
+        if dentro_codice or not riga or riga.startswith(("#", ">", "![", "|", "---")):
+            continue
+        riga = re.sub(r"[*_`]+", "", riga)
+        riga = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", riga)
+        righe.append(riga)
+        if sum(len(r) for r in righe) >= limite:
+            break
+    testo = " ".join(righe).strip()
+    for pattern, sostituto in REDAZIONI:
+        testo = pattern.sub(sostituto, testo)
+    if len(testo) > limite:
+        testo = testo[:limite].rsplit(" ", 1)[0] + "…"
+    return testo
+
+
 def normalizza(grezza: dict) -> dict:
     return {
         "number": grezza["number"],
         "title": grezza.get("title", ""),
+        "summary": sintesi(grezza.get("body")),
         "state": (grezza.get("state") or "OPEN").lower(),
         "labels": [l["name"] if isinstance(l, dict) else l for l in grezza.get("labels") or []],
         "milestone": (grezza.get("milestone") or {}).get("title") if isinstance(grezza.get("milestone"), dict) else grezza.get("milestone"),
@@ -133,6 +177,8 @@ def normalizza(grezza: dict) -> dict:
 def fondi(esistente: dict | None, nuova: dict, quando: str) -> dict:
     """I campi di GitHub si aggiornano, quelli locali si conservano."""
     voce = dict(esistente or {})
+    if not nuova.get("summary") and esistente and esistente.get("summary"):
+        nuova = {k: v for k, v in nuova.items() if k != "summary"}
     voce.update(nuova)
     voce["checked_at"] = quando
     for campo in CAMPI_LOCALI:
