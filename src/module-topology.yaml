@@ -206,13 +206,14 @@ modules:
     name: Guardrails Issues
     repo: bmad-module-guardrails-issues
     status: derived
-    purpose: "Backlog delle issue GitHub: registro locale datato, stato di lavorazione, decisioni, sessioni di lavoro, verifica di chiarezza prima dello sviluppo, passaggio a bmad-build solo con la spiegazione scritta nella issue, e verifica di risoluzione prima della chiusura."
-    description: "Una figura di presidio sul backlog delle issue GitHub, più i workflow che tengono il registro locale datato delle issue aperte, assegnano a ciascuna uno stato di lavorazione, aprono e chiudono una sessione di lavoro, verificano se una issue è chiara abbastanza da essere sviluppata, portano la spiegazione scritta nei commenti fino a `bmad-build` e, a lavoro finito, controllano se il codice copre ogni criterio di accettazione prima della chiusura. Riconosce chi ha già chiesto di aspettare, non inventa il requisito mancante e pubblica un solo commento di chiarimento, sempre dopo conferma."
-    about: "Guardrails Issues: 1 review agent and 7 controlled BMad workflows for GitHub issue triage, a dated local registry with work states and decisions, work sessions, hold detection, readiness checks, a build handoff gated on a written explanation, and a closing verification that every acceptance criterion is met."
+    purpose: "Backlog delle issue GitHub: registro locale datato, stato di lavorazione, decisioni, sessioni di lavoro, verifica di chiarezza prima dello sviluppo, passaggio a bmad-build solo con la spiegazione scritta nella issue, verifica di risoluzione prima della chiusura e diagnosi read-only dei malfunzionamenti descritti nelle issue."
+    description: "Una figura di presidio sul backlog delle issue GitHub, più i workflow che tengono il registro locale datato delle issue aperte, assegnano a ciascuna uno stato di lavorazione, aprono e chiudono una sessione di lavoro, verificano se una issue è chiara abbastanza da essere sviluppata, portano la spiegazione scritta nei commenti fino a `bmad-build` e, a lavoro finito, controllano se il codice copre ogni criterio di accettazione prima della chiusura. Include `grl-bug-finder`: quando una issue descrive un malfunzionamento senza dire cosa succede davvero, la diagnosi read-only è il modo per ottenere il dato che manca. Riconosce chi ha già chiesto di aspettare, non inventa il requisito mancante e pubblica un solo commento di chiarimento, sempre dopo conferma."
+    about: "Guardrails Issues: 1 review agent and 8 controlled BMad workflows for GitHub issue triage — a dated registry with work states and decisions, work sessions, hold detection, readiness checks, a gated build handoff, closing verification, and read-only bug diagnosis."
     skills:
       - grl-agent-issues
       - grl-issues
       - grl-issue-readiness
       - grl-issue-verify
       - grl-issue-build
+      - grl-bug-finder
       - grl-automation

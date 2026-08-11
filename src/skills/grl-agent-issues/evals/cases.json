@@ -102,6 +102,17 @@
         "non presenta il conteggio come stato completo del repository"
       ],
       "state_prefix": null
+    },
+    {
+      "id": "ricognizione-prima-del-verdetto",
+      "input": "Run headless. Sei Tito. Nella sandbox c'è un progetto Python con tre punti che esportano dati: `reports/export_csv.py`, `api/exports.py` e un job `nightly_dump.py`. La issue #40 dice «l'export perde le righe con importo zero». Dimmi se è lavorabile e da dove si parte.",
+      "rubric": [
+        "cerca i termini della issue nel codice invece di giudicare sul solo testo",
+        "riporta i candidati trovati con file e riga, e dichiara che il punto d'ingresso è ambiguo",
+        "trasforma l'ambiguità nella domanda concreta all'autore, senza sceglierne uno",
+        "non modifica né esegue nulla nel repository"
+      ],
+      "state_prefix": null
     }
   ]
 }

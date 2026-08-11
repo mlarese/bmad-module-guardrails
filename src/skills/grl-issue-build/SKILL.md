@@ -1,6 +1,6 @@
 ---
 name: grl-issue-build
-description: "Porta una issue GitHub dallo stato «chiarita» al codice: verifica che nella issue esista il commento di spiegazione approfondita — cosa fare, come si riconosce che è fatto, dove si tocca — costruisce da quel commento un brief citabile e passa l'implementazione a `bmad-build`, poi la verifica a `grl-issue-verify`. Usala quando l'utente dice «implementa questa issue», «lavora la issue 42», «prendi la spiegazione nel commento e falla», «chiudi la issue sviluppandola» o «passa questa issue allo sviluppo». Senza il commento di spiegazione si ferma e rimanda a `grl-issue-readiness`: non ricava i requisiti dal titolo e non li inventa. Non chiude la issue di propria iniziativa — prepara il commit che la chiude, e la chiusura passa dalla verifica."
+description: "Porta una issue GitHub dallo stato «chiarita» al codice: verifica che nella issue esista il commento di spiegazione approfondita — cosa fare, come si riconosce che è fatto, dove si tocca — guarda il codice per confermare che quel punto esista davvero, costruisce un brief citabile e passa l'implementazione a `bmad-build`, poi la verifica a `grl-issue-verify`. Usala quando l'utente dice «implementa questa issue», «lavora la issue 42», «prendi la spiegazione nel commento e falla», «chiudi la issue sviluppandola» o «passa questa issue allo sviluppo». Senza il commento di spiegazione si ferma e rimanda a `grl-issue-readiness`: non ricava i requisiti dal titolo e non li inventa. Non chiude la issue di propria iniziativa — prepara il commit che la chiude, e la chiusura passa dalla verifica."
 ---
 
 # `grl-issue-build` — dalla issue chiarita al codice
@@ -104,7 +104,23 @@ Regole di lettura:
 per ottenerlo, e non proseguire. Non ricavare la specifica dal titolo, dal codice esistente o da
 quello che «di solito si fa».
 
-## 2. Brief citabile
+## 2. Ricognizione del codice
+
+Prima di scrivere il brief, guarda il codice: `grl-issue-readiness/references/ricognizione-codice.md`.
+Il punto d'ingresso dichiarato nella spiegazione va **trovato**, non creduto.
+
+Tre esiti, tre conseguenze:
+
+| Esito | Cosa fai |
+| --- | --- |
+| trovato | il brief cita file e riga verificati, e `bmad-build` parte da lì |
+| ambiguo | non scegli tu: la spiegazione non basta più, torna `blocked` con i candidati elencati |
+| assente | o è lavoro da creare da zero — dillo, cambia la stima — o è un altro repository |
+
+Guarda anche cosa esiste già intorno: test che coprono quella zona, convenzioni del modulo, codice
+simile scritto prima. Un brief che ignora il test già presente fa riscrivere quello che c'è.
+
+## 3. Brief citabile
 
 Se la spiegazione regge, costruisci il brief. Ogni riga porta la sua origine.
 
@@ -133,7 +149,7 @@ domanda aperta, non un requisito.
 Mostra il brief e chiedi l'autorizzazione a costruire. È il punto in cui una persona vede cosa
 verrà scritto **prima** che venga scritto.
 
-## 3. Costruzione
+## 4. Costruzione
 
 Con l'autorizzazione:
 
@@ -155,7 +171,7 @@ Con l'autorizzazione:
 4. Non allargare l'ambito mentre si costruisce. Se emerge che serve altro, quello è un'altra issue:
    scrivila come proposta, non come lavoro fatto.
 
-## 4. Chiusura, che non fai tu
+## 5. Chiusura, che non fai tu
 
 Finita la costruzione:
 

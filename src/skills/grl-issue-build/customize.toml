@@ -46,6 +46,11 @@ builder_skill = "skill:bmad-build"
 # Chi verifica il lavoro finito prima che la chiusura sia autorizzata.
 verifier_skill = "skill:grl-issue-verify"
 
+# Quanti file la ricognizione del codice può leggere per issue prima di
+# dichiararsi parziale. Alzarlo non rende la ricognizione più giusta: la rende
+# più lenta, e la lentezza si paga su ogni issue del lotto.
+code_survey_max_files = 12
+
 # Account GitHub atteso. Vuoto significa: accetta quello autenticato e stampalo.
 expected_account = ""
 

@@ -140,7 +140,7 @@ def fondi(esistente: dict | None, nuova: dict, quando: str) -> dict:
             voce[campo] = esistente[campo]
     voce.setdefault("readiness", {"verdict": None, "checked_at": None, "missing": [], "criteria": []})
     voce.setdefault("hold", {"active": False, "source": None, "who": None, "since": None, "clears_when": None})
-    voce.setdefault("links", {"blocked_by": [], "duplicate_of": None, "pr": []})
+    voce.setdefault("links", {"blocked_by": [], "duplicate_of": None, "pr": [], "code": []})
     voce.setdefault("status", "DA_VALUTARE")
     voce.setdefault("status_source", "derivato")
     voce.setdefault("status_note", None)
@@ -314,6 +314,12 @@ def comando_set(args: argparse.Namespace) -> dict:
             "since": adesso(),
             "clears_when": args.hold_clears,
         }
+    if args.code:
+        voce.setdefault("links", {}).setdefault("code", [])
+        for percorso in [c.strip() for c in args.code.split(",") if c.strip()]:
+            if percorso not in voce["links"]["code"]:
+                voce["links"]["code"].append(percorso)
+
     if args.clear_hold:
         voce["hold"] = {"active": False, "source": None, "who": None, "since": None, "clears_when": None}
 
@@ -442,6 +448,7 @@ def costruisci_parser() -> argparse.ArgumentParser:
     p_set.add_argument("--hold-who")
     p_set.add_argument("--hold-clears")
     p_set.add_argument("--clear-hold", action="store_true")
+    p_set.add_argument("--code", help="file toccati dalla issue, separati da virgola: li trova la ricognizione")
 
     p_sess = sub.add_parser("session", parents=[genitore])
     p_sess.add_argument("--file", required=True)

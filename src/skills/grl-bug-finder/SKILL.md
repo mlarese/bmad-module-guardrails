@@ -163,6 +163,7 @@ Instrada solo se il segnale lo richiede:
 | WordPress, pagina, SEO o media | Milo, Iris o Nora secondo il segnale |
 | percorso obbligatorio, gate o stato senza ritorno | Vito / `grl-agent-blockers` |
 | più domini, release o conflitto fra finding | `grl-board` |
+| il finding deve diventare lavoro tracciato, non restare in un report | `grl-issues` per il registro, `grl-issue-readiness` perché la issue nasca già chiara, `grl-issue-build` per portarla a `bmad-build` |
 
 Un handoff contiene domanda, artefatto, snapshot, evidenza, decisione richiesta, capability
 disponibile/mancante e owner. Se una figura non è installata, registra `missing_capability` e

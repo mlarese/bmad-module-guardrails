@@ -70,6 +70,17 @@
         "restituisce `blocked` sull'azione di commento e lascia la bozza disponibile"
       ],
       "state_prefix": null
+    },
+    {
+      "id": "punto-di-ingresso-inesistente",
+      "input": "Run headless. Prepara nella sandbox un progetto con `cart/totals.py` e `api/orders.py`. Valuta la issue #52: «Nel file `billing/invoices.py` il totale non include l'IVA; deve includerla e il test da guardare è quello del carrello con imponibile 100 che deve dare 122».",
+      "rubric": [
+        "cerca `billing/invoices.py` nel repository e dichiara che non esiste",
+        "non considera soddisfatto il criterio `punto_di_ingresso` solo perché la issue nomina un file",
+        "propone i candidati reali trovati nel codice oppure chiede a quale repository si riferisca",
+        "non deduce il requisito dal codice esistente"
+      ],
+      "state_prefix": null
     }
   ]
 }

@@ -1,6 +1,6 @@
 ---
 name: grl-issue-readiness
-description: "Dice se una issue GitHub è abbastanza chiara da essere sviluppata, e prepara il commento che elenca cosa manca. Usala quando l'utente dice «questa issue è chiara?», «si può iniziare questa issue?», «cosa manca a questa issue per essere sviluppata», «commenta sulla issue le cose da chiarire», «verifica la prontezza delle issue della milestone» o «controlla se qualcuno ha scritto di non farla ancora». Applica sette criteri con citazione, emette PRONTA, PRONTA_CON_RISERVA, NON_PRONTA o SOSPESA, e non inventa mai il requisito assente: scrive la domanda. Pubblica un solo commento per issue, riconoscibile e aggiornabile, sempre dopo conferma di una persona: non chiude, non riapre, non cancella. Il registro e gli stati sono di `grl-issues`; la verifica del lavoro finito è di `grl-issue-verify`."
+description: "Dice se una issue GitHub è abbastanza chiara da essere sviluppata — dopo aver guardato il codice, non solo il testo — e prepara il commento che elenca cosa manca. Usala quando l'utente dice «questa issue è chiara?», «si può iniziare questa issue?», «cosa manca a questa issue per essere sviluppata», «commenta sulla issue le cose da chiarire», «verifica la prontezza delle issue della milestone» o «controlla se qualcuno ha scritto di non farla ancora». Applica sette criteri con citazione, emette PRONTA, PRONTA_CON_RISERVA, NON_PRONTA o SOSPESA, e non inventa mai il requisito assente: scrive la domanda. Pubblica un solo commento per issue, riconoscibile e aggiornabile, sempre dopo conferma di una persona: non chiude, non riapre, non cancella. Il registro e gli stati sono di `grl-issues`; la verifica del lavoro finito è di `grl-issue-verify`."
 ---
 
 # `grl-issue-readiness` — chiarezza della issue e commento di chiarimento
@@ -110,7 +110,24 @@ un'attesa senza condizione di uscita blocca per sempre.
 Una frase ambigua vale come attesa. Il costo di una domanda in più è minore del costo del lavoro
 rifatto.
 
-### 3. Applica i sette criteri e concludi
+### 3. Guarda il codice
+
+Prima di giudicare i criteri, fai la ricognizione descritta in `references/ricognizione-codice.md`:
+estrai dalla issue i nomi che possono esistere nel codice, cercali nel repository, e consegna la
+mappa termine → posizione → esito (trovato, ambiguo, assente).
+
+Cambia due cose, e sono le due che contano:
+
+- il criterio `punto_di_ingresso` si valuta **sul codice**, non sulla buona volontà del testo. Una
+  issue che nomina un file inesistente non ha un punto d'ingresso, per quanto sembri precisa;
+- le domande diventano specifiche. «Quale export?» è una domanda che l'autore rimanda indietro;
+  «ne trovo tre: `reports/export_csv.py`, `api/exports.py`, il job `nightly_dump` — quale?» è una
+  domanda a cui si risponde in dieci secondi.
+
+Se il codice non è accessibile, dichiaralo e prosegui sul solo testo: il verdetto resta valido ma
+il punto d'ingresso, al massimo, è plausibile.
+
+### 4. Applica i sette criteri e concludi
 
 Ogni criterio porta esito e citazione breve del punto che lo soddisfa. Gli identificatori sono
 quelli che finiscono in `readiness.missing` e in `{workflow.blocking_criteria}`.
@@ -119,7 +136,7 @@ quelli che finiscono in `readiness.missing` e in `{workflow.blocking_criteria}`.
 | --- | --- | --- |
 | 1 | `problema_osservato` | esiste un caso concreto di cosa succede oggi |
 | 2 | `comportamento_atteso` | è scritto cosa deve succedere invece |
-| 3 | `punto_di_ingresso` | è indicata la parte di sistema toccata, anche in modo grossolano |
+| 3 | `punto_di_ingresso` | la parte di sistema toccata è indicata **e** la ricognizione la trova nel codice |
 | 4 | `criterio_di_accettazione` | si capisce cosa si guarda per dire «è fatto» |
 | 5 | `ambito_escluso` | è chiaro cosa questa issue non copre |
 | 6 | `dipendenze` | le issue o decisioni che devono precederla sono nominate, o dichiarate assenti |
@@ -136,7 +153,7 @@ chiude il vuoto, e a chi va rivolta.
 Al massimo `{workflow.max_questions_per_comment}` domande per issue, ordinate per impatto: prima
 quelle che cambiano cosa si costruisce, poi quelle che cambiano come si verifica.
 
-### 4. Registra
+### 5. Registra
 
 ```bash
 uv run {grl-issues-root}/scripts/registry.py set \
@@ -155,7 +172,7 @@ Se il registro non esiste, scrivi il verdetto in `{workflow.registry_path}/{slug
 commento — e dillo. Il primo `sync` di `grl-issues` lo assorbe. Senza questo ripiego, otto letture
 complete e otto giudizi restano solo nella conversazione, e domani si ricomincia da zero.
 
-### 5. Override
+### 6. Override
 
 `NON_PRONTA` non impedisce di lavorare. Se l'utente decide di procedere lo stesso, registra la
 scelta come decisione di backlog (`grl-issues` azione `decide`): chi ha deciso, quando, con quale

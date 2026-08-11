@@ -53,6 +53,11 @@ max_questions_per_comment = 5
 # lingua, formula di attribuzione.
 comment_template = "{skill-root}/assets/comment-template.md"
 
+# Quanti file la ricognizione del codice può leggere per issue prima di
+# dichiararsi parziale. Alzarlo non rende la ricognizione più giusta: la rende
+# più lenta, e la lentezza si paga su ogni issue del lotto.
+code_survey_max_files = 12
+
 # Account GitHub atteso. Vuoto significa: accetta quello autenticato e stampalo.
 # Compilato significa: fermati se `gh api user` risponde un login diverso, in
 # attivazione e di nuovo prima di pubblicare.

@@ -46,6 +46,11 @@ test_command = ""
 # skill verifica la corrispondenza issue/codice, non la qualità del codice.
 required_reviews = ["skill:bmad-review"]
 
+# Quanti file la ricognizione del codice può leggere per issue prima di
+# dichiararsi parziale. Alzarlo non rende la ricognizione più giusta: la rende
+# più lenta, e la lentezza si paga su ogni issue del lotto.
+code_survey_max_files = 12
+
 # Account GitHub atteso. Vuoto significa: accetta quello autenticato e stampalo.
 expected_account = ""
 

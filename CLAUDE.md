@@ -72,7 +72,7 @@ Dieci repository derivano da questo e li produce `tools/build_modules.py` leggen
 | `grv` | `mlarese/bmad-module-guardrails-revenue` | Rhea, `grl-revenue-audit`, `grl-revenue-plan`, `grl-revenue-preflight`, `grl-automation` |
 | `gau` | `mlarese/bmad-module-guardrails-automation` | tutte le ventitré figure, workflow di dominio incluso `grl-video-to-scroll`, `grl-bug-finder` e `grl-automation` |
 | `gwp` | `mlarese/bmad-module-guardrails-wordpress` | Milo, `grl-wordpress-delivery`, `grl-automation` |
-| `gri` | `mlarese/bmad-module-guardrails-issues` | Tito, `grl-issues`, `grl-issue-readiness`, `grl-issue-verify`, `grl-issue-build`, `grl-automation` |
+| `gri` | `mlarese/bmad-module-guardrails-issues` | Tito, `grl-issues`, `grl-issue-readiness`, `grl-issue-verify`, `grl-issue-build`, `grl-bug-finder`, `grl-automation` |
 
 **Regola: ogni modifica che tocca `src/` va propagata ai derivati nello stesso turno, senza
 aspettare che l'utente lo chieda.** Vale per una skill cambiata, una skill nuova, un cambio di

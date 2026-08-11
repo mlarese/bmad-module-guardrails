@@ -107,7 +107,17 @@ Se la issue non ha criteri espliciti, dillo e fermati: verdetto `EVIDENZA_INSUFF
 rimando a `grl-issue-readiness`. Non dedurre il criterio dal codice che è stato scritto — è il
 ragionamento circolare che fa passare qualunque modifica.
 
-### 2. Mappa ogni criterio sul cambiamento
+### 2. Leggi il codice, non solo il diff
+
+Un diff dice cosa è cambiato, non cosa fa il programma. Prima di mappare i criteri, guarda il
+codice attorno alle righe toccate — la funzione intera, chi la chiama, i test che la coprono —
+seguendo `grl-issue-readiness/references/ricognizione-codice.md`.
+
+Serve a distinguere i due casi che il diff da solo confonde: la modifica che produce davvero il
+comportamento atteso, e la modifica che tocca il posto giusto senza cambiare l'esito — un valore
+calcolato e poi ignorato, un ramo mai raggiunto, un parametro che nessuno passa.
+
+### 3. Mappa ogni criterio sul cambiamento
 
 Una riga per criterio:
 
@@ -125,7 +135,7 @@ Regole di assegnazione:
 - `NON_COPERTO` vale anche quando il criterio è stato risolto altrove, in un'altra issue: in quel
   caso citalo, perché cambia chi deve chiudere cosa.
 
-### 3. Guarda anche il contrario: cosa è stato fatto e nessuno ha chiesto
+### 4. Guarda anche il contrario: cosa è stato fatto e nessuno ha chiesto
 
 Elenca le modifiche del diff che nessun criterio spiega. Non è un'accusa: è informazione che
 altrimenti si perde.
@@ -136,7 +146,7 @@ altrimenti si perde.
 Il lavoro fuori perimetro non impedisce il verdetto `RISOLTA` sulla issue, ma va dichiarato e, se
 tocca comportamenti di altri, instradato a `bmad-review` o alla figura di dominio.
 
-### 4. Regressioni e prove
+### 5. Regressioni e prove
 
 Verifica — o dichiara non verificato — che il cambiamento non rompa quello che funzionava:
 
@@ -147,7 +157,7 @@ Verifica — o dichiara non verificato — che il cambiamento non rompa quello c
 Un test non eseguito si scrive `non eseguito`, non `verde`. Il verdetto regge sulle prove, e una
 prova dichiarata falsa è peggio di una prova mancante.
 
-### 5. Verdetto
+### 6. Verdetto
 
 | Verdetto | Condizione | Chiusura |
 | --- | --- | --- |
@@ -160,7 +170,7 @@ Non esiste un quinto verdetto e non esiste una percentuale: `RISOLTA` significa 
 dei criteri coperti con evidenza. Se qualcuno vuole chiudere lo stesso, quella è una decisione di
 una persona e si registra come tale con `grl-issues` azione `decide`.
 
-### 6. Consegna la chiusura, non eseguirla
+### 7. Consegna la chiusura, non eseguirla
 
 Con verdetto `RISOLTA`, prepara tre cose e fermati:
 

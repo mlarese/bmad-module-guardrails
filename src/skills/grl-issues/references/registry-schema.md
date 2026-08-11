@@ -39,7 +39,7 @@ vocabolario, applica la precedenza degli stati e scrive in modo atomico.
         "criteria": [{"id": "problema_osservato", "esito": "ok|manca", "citazione": "…"}]
       },
       "hold": {"active": false, "source": "label|comment|dependency|milestone", "who": "…", "since": "…", "clears_when": "…"},
-      "links": {"blocked_by": [7], "duplicate_of": null, "pr": [123]},
+      "links": {"blocked_by": [7], "duplicate_of": null, "pr": [123], "code": ["reports/export_csv.py"]},
       "closed_in_session": null
     }
   ]
@@ -55,7 +55,8 @@ vocabolario, applica la precedenza degli stati e scrive in modo atomico.
 | `status`, `status_source`, `status_note` | `scripts/registry.py` | derivati a ogni `sync`, dichiarati da `set-status` e `decide` |
 | `readiness.*` | `grl-issue-readiness` | azione `check`, via `registry.py set` |
 | `hold.*` | `grl-issues` per le label, `grl-issue-readiness` per i commenti | `sync` e `check` |
-| `links.*` | `grl-issue-readiness` e `grl-issue-verify` | quando leggono la issue per intero o la PR collegata |
+| `links.blocked_by`, `links.duplicate_of`, `links.pr` | `grl-issue-readiness` e `grl-issue-verify` | quando leggono la issue per intero o la PR collegata |
+| `links.code` | chi fa la ricognizione: Tito, readiness, build, verify | i file che la issue tocca davvero, trovati nel codice |
 | `closed_in_session` | `grl-issues` | `session-close` |
 
 ## Perché i campi locali sopravvivono al `sync`
@@ -73,6 +74,9 @@ in `registry.corrotto.json`, ricostruisce da GitHub e dichiara cosa è andato pe
 `@2` aggiunge `readiness.criteria` — l'esito dei sette criteri con la citazione — e lo stato
 `IN_VERIFICA`. Senza `criteria`, `grl-issue-verify` dovrebbe riestrarre da capo i criteri di
 accettazione e verificherebbe contro una lista diversa da quella su cui la issue è stata approvata.
+
+`links.code` conserva l'esito della ricognizione del codice: senza di lui ogni sessione ricomincia
+la ricerca da capo, e il costo di guardare il repository si paga più volte per la stessa issue.
 
 Chi cambia la forma alza la versione e aggiorna questa tabella nello stesso passaggio. Lo script
 rifiuta un registro con un `schema` che non riconosce, invece di leggerlo a metà.
