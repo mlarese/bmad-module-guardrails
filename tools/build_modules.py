@@ -342,7 +342,20 @@ def render_greeting(module: dict, agents: list[dict], renames: dict[str, str]) -
     )
 
 
-def render_module_yaml(module: dict, agents: list[dict], renames: dict[str, str], version: str) -> str:
+def render_module_yaml(
+    module: dict,
+    agents: list[dict],
+    renames: dict[str, str],
+    version: str,
+    workflows: list[str] | None = None,
+) -> str:
+    """Il manifesto del modulo derivato.
+
+    `workflows` serve alle note post-installazione: un elenco di figure senza i
+    workflow fa credere che il modulo non ne abbia, ed è successo — `grl-bug-finder`
+    risultava «mancante» a chi leggeva soltanto il saluto.
+    """
+    workflow_lines = "\n".join(f"  - `{w}`" for w in (workflows or [])) or "  (nessuno)"
     code = module["code"]
     profile_skill = renames["grl-profile"]
     board_skill = renames["grl-board"]
@@ -383,6 +396,9 @@ post-install-notes: >
 
   Poi puoi chiamare una figura per nome, oppure usare `{board_skill}` per farle
   guardare tutte insieme lo stesso artefatto.
+
+  Oltre alle figure, il modulo installa questi workflow, che si invocano per nome:
+{workflow_lines}
 
   Se ti servono anche le figure delle altre aree, il bundle completo `grl` le
   contiene tutte: https://github.com/mlarese/bmad-module-guardrails
@@ -857,7 +873,7 @@ def build_module(source_root: Path, out_root: Path, topology: dict, module: dict
         copied += copy_skill(source_root, module_out, skill, skill, renames, code, context)
 
     # Manifesto: in src/ per l'installer.
-    manifest = render_module_yaml(module, module_agents, renames, version)
+    manifest = render_module_yaml(module, module_agents, renames, version, module_workflows)
     (module_out / "src" / "module.yaml").write_text(manifest, encoding="utf-8")
 
     # Catalogo di help.
