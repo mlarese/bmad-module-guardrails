@@ -125,7 +125,30 @@ riallinea l'About di GitHub alla `description` della topologia e **marca ogni de
 ma da lì non si trova senza aprire il pacchetto: chi installa da un derivato non vede la fonte, e
 un repository senza tag non dice a quale release corrisponde il codice che ha davanti.
 
-Il tag della fonte resta a mano, come gli altri gesti che riguardano solo questo repository. Con `--module grw` lavora su uno
+### Il tag di release si chiude su undici repository, non su uno
+
+Il tag della fonte lo si crea a mano, con un messaggio che racconta la release; quello dei dieci
+derivati lo crea `publish_modules.py`. Sono due gesti, e il secondo si dimentica: quando un giro
+cambia solo file che vivono nella fonte — il registro degli eval, `CLAUDE.md`, i test — i derivati
+non hanno niente da pubblicare, e senza un'esecuzione esplicita restano al tag precedente.
+
+**Regola: dopo aver taggato la fonte, esegui comunque `publish_modules.py`.** Sui moduli senza
+modifiche stampa `nessuna modifica` e crea lo stesso il tag mancante; su quelli già marcati non fa
+nulla. Un derivato indietro di un tag dice a chi lo installa una versione che non è quella che ha.
+
+```bash
+git tag -a v{versione} -m "…" && git push origin v{versione}   # la fonte, a mano
+python3 tools/publish_modules.py -m "chore: allineamento tag"  # i dieci derivati
+```
+
+Si verifica in una riga, e va verificato prima di considerare chiusa la release:
+
+```bash
+for d in dist/bmad-module-guardrails-*; do (cd $d && git tag -l | sort -V | tail -1); done | sort -u
+```
+
+Una sola versione in uscita significa allineati; due righe significano che qualcosa è rimasto
+indietro. Con `--module grw` lavora su uno
 solo, con `--dry-run` mostra cosa farebbe.
 
 **I derivati non si modificano a mano.** Una modifica fatta lì viene persa alla rigenerazione —
