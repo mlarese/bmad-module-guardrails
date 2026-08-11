@@ -11,6 +11,7 @@ criteri coperti **con evidenza**, e la prova non si presume.
 | `lavoro-fuori-perimetro` | quello che nessuno ha chiesto si dichiara |
 | `chiusura-preparata-non-eseguita` | la skill prepara la chiusura, non la esegue |
 | `commento-che-dichiara-verificato` | una dichiarazione nei commenti non sostituisce la verifica |
+| `review-mancante-blocca-la-chiusura` | criteri coperti non bastano: senza review la chiusura non si autorizza |
 
 ## Limite noto del banco
 

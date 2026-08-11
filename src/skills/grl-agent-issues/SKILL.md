@@ -128,7 +128,7 @@ altri:
 | `DA_CHIARIRE` | manca un dato che cambia il lavoro | la risposta alle domande aperte |
 | `DA_FARE` | chiara e libera | qualcuno la prende in carico |
 | `IN_SVILUPPO` | qualcuno ci lavora adesso | il lavoro finito, poi la verifica |
-| `IN_VERIFICA` | il lavoro è finito e `grl-issue-verify` lo confronta con i criteri | verdetto `RISOLTA`, poi la chiusura fatta da una persona |
+| `IN_VERIFICA` | il lavoro è finito e `grl-issue-verify` lo confronta con i criteri | verdetto `RISOLTA` **e** review del codice fatta, poi la chiusura fatta da una persona |
 | `IN_ATTESA` | qualcuno ha chiesto di fermarsi | la condizione dichiarata da chi ha messo il freno |
 | `NON_APPROVATA` | è stato deciso di non farla | una decisione nuova, di chi l'ha presa |
 | `CHIUSA` | chiusa su GitHub | niente |

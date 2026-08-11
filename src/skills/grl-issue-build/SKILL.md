@@ -206,7 +206,22 @@ Con l'autorizzazione:
 4. Non allargare l'ambito mentre si costruisce. Se emerge che serve altro, quello è un'altra issue:
    scrivila come proposta, non come lavoro fatto.
 
-## 5. Chiusura, che non fai tu
+## 5. La review, subito dopo la costruzione
+
+Finito `bmad-build`, **invoca la review** su quello che è stato scritto: `{workflow.review_skill}`,
+di serie `bmad-review`. Non darla per fatta perché la costruzione è andata a buon fine — non è
+dichiarato che `bmad-build` la esegua, e `grl-issue-verify` non autorizzerà la chiusura senza la
+prova che sia avvenuta.
+
+Registra l'esito dove chi verifica lo trova: nel rapporto di questa esecuzione e, se il registro
+esiste, nella nota di stato della issue. «Review fatta» senza dire quando e con quale esito non è
+una prova.
+
+Se la review trova qualcosa, non allargare il lavoro per sistemarlo: vale il perimetro della
+richiesta. I rilievi che riguardano il codice appena scritto si correggono — fanno parte di questa
+issue — quelli che riguardano il codice attorno diventano proposte.
+
+## 6. Chiusura, che non fai tu
 
 Finita la costruzione:
 
@@ -222,7 +237,8 @@ Finita la costruzione:
    una chiamata API dell'agente.
 
 2. Porta la issue a `IN_VERIFICA` e passa a `grl-issue-verify`, che confronta i criteri con il
-   codice scritto. Solo `RISOLTA` autorizza la chiusura.
+   codice scritto e controlla che le review risultino fatte. Solo `RISOLTA` con review autorizza
+   la chiusura.
 
 3. Se l'utente chiede la chiusura diretta, richiede due condizioni insieme: verdetto `RISOLTA` e
    conferma esplicita in questo turno. Il comando lo prepari, non lo esegui:

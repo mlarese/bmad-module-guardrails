@@ -163,11 +163,31 @@ Verifica — o dichiara non verificato — che il cambiamento non rompa quello c
 Un test non eseguito si scrive `non eseguito`, non `verde`. Il verdetto regge sulle prove, e una
 prova dichiarata falsa è peggio di una prova mancante.
 
-### 6. Verdetto
+### 6. La review del codice è una condizione, non un contorno
+
+I criteri coperti dicono che il codice **fa** quello che la issue chiedeva. Non dicono che il
+codice sia buono: quello lo dice la review, ed è un'altra domanda.
+
+`{workflow.required_reviews}` elenca le review che devono risultare **fatte** prima di autorizzare
+la chiusura — di serie `bmad-review`. Non darle per scontate perché è passato `bmad-build`: non è
+dichiarato che le esegua, e una review che nessuno ha eseguito non esiste.
+
+Per ciascuna, accerta l'esito e da dove risulta: l'invocazione in questa sessione, un commento
+sulla PR, un file di report, la riga di `grl-issue-build` che la registra. Se non risulta:
+
+- **invocala adesso**, se il diff è disponibile e la sessione lo consente;
+- altrimenti la chiusura **non è autorizzata**, anche con tutti i criteri coperti. Il verdetto sui
+  criteri resta quello che è — `RISOLTA` non diventa falso — ma `close_authorized` è `false`, con
+  il motivo scritto: «review mancante: `bmad-review`».
+
+Un criterio coperto e una review saltata è la combinazione che fa entrare in produzione codice che
+funziona e non si può mantenere.
+
+### 7. Verdetto
 
 | Verdetto | Condizione | Chiusura |
 | --- | --- | --- |
-| `RISOLTA` | tutti i criteri `COPERTO`, con prova | autorizzata |
+| `RISOLTA` | tutti i criteri `COPERTO`, con prova, **e** le review di `{workflow.required_reviews}` fatte | autorizzata |
 | `PARZIALE` | almeno un criterio `PARZIALE` | no |
 | `NON_RISOLTA` | almeno un criterio `NON_COPERTO` | no |
 | `EVIDENZA_INSUFFICIENTE` | criteri assenti, diff non identificabile, prove non ottenibili | no |
@@ -176,9 +196,9 @@ Non esiste un quinto verdetto e non esiste una percentuale: `RISOLTA` significa 
 dei criteri coperti con evidenza. Se qualcuno vuole chiudere lo stesso, quella è una decisione di
 una persona e si registra come tale con `grl-issues` azione `decide`.
 
-### 7. Consegna la chiusura, non eseguirla
+### 8. Consegna la chiusura, non eseguirla
 
-Con verdetto `RISOLTA`, prepara tre cose e fermati:
+Con verdetto `RISOLTA` **e review fatte**, prepara tre cose e fermati:
 
 1. il commento di chiusura, con criteri, evidenza e prove eseguite;
 2. il comando, da eseguire a una persona:
@@ -208,6 +228,7 @@ issue: #42 — {titolo}
 descrizione: {sintesi dal registro, o «nessuna descrizione»}
 verdetto: RISOLTA|PARZIALE|NON_RISOLTA|EVIDENZA_INSUFFICIENTE
 criteri: {coperti}/{totali}
+review: {quali risultano fatte, e da dove} | mancante: {quale}
 scoperti: {elenco con cosa manca}
 fuori perimetro: {elenco o «niente»}
 prove: {test eseguiti, non eseguiti, ispezioni}
@@ -217,7 +238,7 @@ chiusura: autorizzata | non autorizzata, perché {motivo}
 Poi una sola riga strutturata:
 
 ```json
-{"status":"complete|blocked","issue":0,"verdict":"RISOLTA|PARZIALE|NON_RISOLTA|EVIDENZA_INSUFFICIENTE","criteria_total":0,"criteria_covered":0,"out_of_scope":0,"tests_run":false,"close_authorized":false,"registry_updated":false}
+{"status":"complete|blocked","issue":0,"verdict":"RISOLTA|PARZIALE|NON_RISOLTA|EVIDENZA_INSUFFICIENTE","criteria_total":0,"criteria_covered":0,"out_of_scope":0,"tests_run":false,"reviews_done":[],"reviews_missing":[],"close_authorized":false,"registry_updated":false}
 ```
 
 `blocked` vale quando manca `gh`, il diff non è identificabile, la issue non esiste o l'account non
