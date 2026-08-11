@@ -25,7 +25,7 @@ Vincoli:
 
 ## Le altre vetrine da tenere allineate nello stesso passaggio
 
-Cambiano insieme, e tutte e quattro devono dire lo stesso numero di figure e le stesse skill:
+Cambiano insieme, e tutte devono dire lo stesso numero di figure e le stesse skill:
 
 | Punto | File |
 | ----- | ---- |
@@ -33,6 +33,27 @@ Cambiano insieme, e tutte e quattro devono dire lo stesso numero di figure e le 
 | Manifesto e catalogo del modulo | `src/module.yaml` e `src/module-help.csv` (`description`, `module_greeting`, `post-install-notes`, `agents`) |
 | Marketplace BMad | `.claude-plugin/marketplace.json` (`description` del marketplace, `description` e `skills` del plugin `grl`) |
 | About GitHub | descrizione del repository fonte e dei dieci derivati, via `gh repo edit`, nella stessa lingua del README corrispondente |
+| **Versione del modulo** | `module_version` in `src/module.yaml` **e** `version` in `.claude-plugin/marketplace.json` |
+
+### La versione si alza nello stesso turno in cui cambia il pacchetto
+
+`module_version` è l'unico dato che dice a chi ha già installato che c'è qualcosa di nuovo.
+Nessun test lo controlla e nessuna build lo calcola: resta fermo finché qualcuno non lo tocca, e
+il pacchetto cambia sotto lo stesso numero.
+
+È già successo: il modulo è cresciuto da ventidue a ventitré figure e da diciassette a ventuno
+workflow, con un derivato in più, restando a `1.34.1` per sette commit di fila.
+
+**Regola: se cambia cosa viene installato, la versione si alza prima della build.**
+
+| Cosa è cambiato | Salto |
+| --- | --- |
+| una figura o una skill in più o in meno, un modulo derivato nuovo | minor — `1.34.1` → `1.35.0` |
+| istruzioni riscritte dentro una skill esistente, correzioni, testi delle vetrine | patch — `1.35.0` → `1.35.1` |
+| il contratto di uno schema o di un percorso che rompe le installazioni esistenti | major |
+
+I due punti — `module_version` e `version` del marketplace — vanno cambiati insieme: da lì la build
+propaga il numero a tutti e dieci i derivati, che non si toccano a mano.
 
 Una skill nuova va aggiunta anche all'elenco `skills` di `.claude-plugin/marketplace.json`,
 altrimenti non viene pubblicata.
