@@ -12,6 +12,12 @@ L'output deve permettere a chi produce o approva un contenuto di capire perché 
 visuale esiste. Il consumatore non deve avere bisogno della conversazione per ricostruire storia,
 contesto, scena, prova e vincoli.
 
+Quando il cliente porta un'idea-madre, usala come sottotesto della direzione: annotala nel brief
+interno, poi rendila percepibile con punto di vista, ordine, gesto, ritmo e scelta degli asset. Non
+trasferirla in slogan, titolo, caption o spiegazione del contenuto; il visitatore deve comprendere
+la storia e la proposta senza ricevere il nome della regola creativa. Le descrizioni accessibili
+restano fattuali.
+
 ## Parti dalla scena reale
 
 Prima di parlare di stile, identifica:

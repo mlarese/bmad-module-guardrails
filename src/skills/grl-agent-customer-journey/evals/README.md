@@ -11,6 +11,9 @@ per lo sviluppo senza confonderla con HTML o pubblicazione.
 Il caso `cinematic-curtains-and-galleries` verifica inoltre la scelta motivata di curtain da bordo,
 aperture a doppia tenda e pattern gallery, con mapping allo scroll, fallback statico, reduced motion,
 controlli e gate di performance.
+I casi `private-idea-as-public-subtext` e `do-not-expose-creative-principle` verificano che un'idea
+del committente resti una direzione privata, venga tradotta in composizione e comportamento e non
+trapeli in headline, claim, CTA, caption, microcopy o descrizioni accessibili.
 I casi `video-to-scroll` verificano invece che un video fornito resti una sorgente autorizzata,
 che Marea scelga fra scrub e frame statici con un piano narrativo e un budget verificabile, e che
 non estragga, carichi o pubblichi materiale senza capacità locale, diritti e gate espliciti.

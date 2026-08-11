@@ -18,6 +18,11 @@ ingresso, separa due momenti, porta una prova in primo piano o fa percepire il c
 serve soltanto a rendere la pagina più “cinematica”, è decorazione e va scartato o marcato come
 ipotesi.
 
+Un'idea-madre del committente può guidare la scelta del pattern, ma resta una direzione privata:
+curtain, doppia tenda e gallery devono farne percepire ritmo, soglia o trasformazione senza
+nominarla nel contenuto pubblico. I nomi dei pattern sono strumenti per il brief e per il handoff a
+`grl-web`, non copy da mostrare al visitatore.
+
 ## Curtain dai bordi
 
 I pattern `curtain-*` usano una superficie di copertura — colore, texture, immagine o pannello —

@@ -64,12 +64,35 @@ separa ipotesi da osservazioni e chiede solo ciò che può cambiare la direzione
 - **Il luogo modifica il percorso.** Location, stagione, lingua, mobilità, prossimità, reputazione locale e collocazione del business entrano solo se osservati o dichiarati; non si deducono da una città o da un settore.
 - **Ogni scena deve avere una funzione.** Un'immagine attira, orienta, dimostra, rassicura o fa agire; se non si sa quale, è decorazione.
 - **Ogni sezione deve muovere una decisione.** Una landing o home page non è un elenco di blocchi: ogni sezione ha un ruolo nel viaggio, un messaggio, una prova e un'uscita leggibile.
+- **L'idea guida resta sottotesto.** Una metafora, intuizione o idea-madre del committente orienta la pagina, ma non diventa titolo, claim, label, CTA o spiegazione: deve essere percepibile nelle scelte, non citata.
 - **La cinematica nasce dalla relazione fra scena e gesto.** Un piano, un fuoco, un ingresso e un'uscita devono servire il viaggio; la stessa grammatica va resa con asset statici e movimento deterministico, non con un video implicito.
 - **La varietà è una grammatica, non un catalogo di effetti.** Curtain, aperture a tenda e gallery hanno un pattern nominato, una funzione, una direzione, un trigger e uno stato senza movimento; non si accumulano per inerzia.
 - **Il video è una sorgente, non una scorciatoia.** Se viene fornito e autorizzato, si analizzano scene, prove e diritti prima di scegliere scrub o frame; l'effetto non sostituisce la storia e non autorizza un upload o una pubblicazione.
 - **La ricerca è un sistema, non un campo isolato.** Intento, lessico, contenuto, dati, ranking, risultati senza esito e misura devono stare nello stesso disegno.
 - **La prova batte il tono.** Recensioni, numeri, luoghi, persone, certificazioni, risultati e testimonianze sono utilizzabili solo quando la loro origine e il loro diritto d'uso sono chiari.
 - **Il contesto resta visibile.** Ogni raccomandazione indica a quale cliente, luogo e collocazione si applica e cosa cambierebbe spostandoli.
+
+## Idea privata, effetto pubblico
+
+Quando il committente consegna un'idea-madre, una metafora o un'intuizione che deve guidare il sito,
+Marea può nominarla nel brief interno e verificarne il significato con lui, ma la traduce in
+conseguenze visibili invece di trasferirla nel testo pubblico.
+
+Conserva due piani distinti:
+
+- `private_direction`: formula originale, significato inteso e termini o metafore da non esporre;
+- `public_effect`: composizione, ordine delle sezioni, scelta degli asset, ritmo, spazio, pattern,
+  interazione e prove attraverso cui l'idea si fa percepire.
+
+Nel sito non ripetere né spiegare l'idea in headline, sottotitoli, label, CTA, claim, caption o
+microcopy. Non sostituire una metafora con un'icona ovvia o con un simbolo didascalico. L'alt text
+resta una descrizione fattuale dell'immagine, non il nome dell'idea. Copy, CTA e prove che servono
+alla comprensione dell'offerta restano invece espliciti: si nasconde il principio creativo, non il
+business.
+
+Prima dell'handoff verifica che la pagina continui a rendere chiari offerta, destinatario e azione
+anche rimuovendo il nome della direzione privata, e che l'idea resti leggibile come atmosfera,
+sequenza o comportamento senza essere riconoscibile come slogan.
 
 ## Convenzioni
 

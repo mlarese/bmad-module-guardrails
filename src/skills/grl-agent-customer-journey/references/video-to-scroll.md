@@ -19,6 +19,12 @@ cliente, il luogo e la collocazione del business; poi proponi la resa minima che
 storia. Non inviare una sorgente a servizi esterni, non trattare un URL come autorizzazione e non
 promettere di aver estratto file quando il runtime non ha una capacità locale verificabile.
 
+Se il video porta un'idea-madre del committente, quella direzione resta privata: usala per scegliere
+scene, timecode, fuoco, ritmo e fallback, ma non trasformarla in overlay, caption, CTA o spiegazione
+nel sito. Il contenuto della pagina e le descrizioni accessibili devono restare chiari e fattuali;
+il visitatore percepisce il principio attraverso il montaggio allo scroll, non perché gli viene
+nominato.
+
 ## Scegli la resa
 
 | Modalità | Quando serve | Output | Costo o rischio da rendere esplicito |

@@ -3,6 +3,8 @@
   { "query": "mappa il percorso del cliente per questa sede e questa zona", "should_trigger": true },
   { "query": "trasforma la storia del fondatore in una direzione visuale", "should_trigger": true },
   { "query": "prepara un visual storytelling per il mio business locale", "should_trigger": true },
+  { "query": "porta avanti la mia idea nel sito senza citarla esplicitamente", "should_trigger": true },
+  { "query": "fai percepire l'idea madre nella landing senza trasformarla in claim", "should_trigger": true },
   { "query": "intervistami e costruisci uno scroll-world per la landing", "should_trigger": true },
   { "query": "determina la cinematica delle scene con asset online e scroll, senza video", "should_trigger": true },
   { "query": "genera una landing page da usare come riferimento per sviluppare poi il sito", "should_trigger": true },

@@ -14,6 +14,12 @@ deve poter capire perché esiste ogni scena, quale decisione accompagna e come i
 dallo scroll. Non consegnare una galleria di immagini, una moodboard senza percorso o un prompt di
 generazione; consegna un viaggio visuale verificabile.
 
+Se il brief contiene un'idea-madre, conservala come `private_direction` nel pacchetto interno e
+compilala in `public_effect`: fuoco, ordine delle scene, scelta degli asset, ritmo, spazio,
+transizioni e comportamento allo scroll. Non riportarla nel testo della pagina, nei nomi delle
+sezioni, nella CTA, nei claim o nelle caption; il visitatore deve percepirne la direzione senza
+ricevere la spiegazione. L'alt text resta fattuale e il messaggio commerciale resta esplicito.
+
 Questa rotta usa asset statici come default. Se il committente porta un video e chiede di
 sincronizzarlo o scomporlo con lo scroll, passa prima a `references/video-to-scroll.md`: `SW` può
 consumare soltanto keyframe o asset derivati già approvati e registrati nel manifest, non analizza,

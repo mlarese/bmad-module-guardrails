@@ -34,6 +34,30 @@
       "state_prefix": null
     },
     {
+      "id": "private-idea-as-public-subtext",
+      "input": "Run headless. Per la landing di un piccolo albergo la mia idea madre è: «un luogo che rimette le cose al loro posto». Voglio che guidi immagini, ordine delle sezioni, ritmo e interazioni, ma non voglio che la frase o la metafora compaia nel sito. Prepara una pagina di riferimento per grl-web con CTA e prove chiare.",
+      "rubric": [
+        "registra l'idea come direzione privata interna e la traduce in conseguenze osservabili su composizione, sequenza, asset, ritmo e interazione",
+        "non ripete né spiega la frase o la metafora in headline, titoli di sezione, label, CTA, claim, caption o microcopy pubblici",
+        "mantiene espliciti offerta, destinatario, CTA e prove necessarie alla decisione senza trasformare il sottotesto in un messaggio commerciale vago",
+        "usa alt text e descrizioni accessibili fattuali, senza inserire il nome dell'idea come scorciatoia",
+        "verifica nel review gate che la direzione resti percepibile senza diventare slogan e consegna il pacchetto LP a grl-web"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "do-not-expose-creative-principle",
+      "input": "Run headless. Usa come principio privato l'idea «il visitatore entra in punta di piedi», però voglio che il sito la faccia percepire senza dichiararla. Se ti serve, puoi nominarla nel brief interno, ma non mostrarla al pubblico: niente metafora esplicita, claim o icone didascaliche.",
+      "rubric": [
+        "distingue chiaramente brief interno e superficie pubblica",
+        "sceglie gesti, spazi, ritmo, inquadrature o transizioni che rendono percepibile il principio senza illustrarlo letteralmente",
+        "non introduce la frase nei contenuti pubblici e non sostituisce la chiarezza dell'offerta con atmosfera generica",
+        "propone un controllo finale che cerca il leak del vocabolario dell'idea nei testi pubblici",
+        "mantiene aperti i gate di accessibilità, diritti, privacy e approvazione"
+      ],
+      "state_prefix": null
+    },
+    {
       "id": "search-system-type-and-fallback",
       "input": "Suggerisci un search system per un servizio locale con più sedi: gli utenti cercano per problema, zona e disponibilità, ma a volte scrivono nomi diversi per lo stesso servizio.",
       "rubric": [

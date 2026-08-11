@@ -21,6 +21,12 @@ rispondere senza riaprire tutta l'intervista:
 Il risultato è una specifica narrativa e visuale implementabile. Non è HTML, non è un mockup
 funzionante, non è una pubblicazione e non garantisce conversioni o ranking.
 
+Se il committente consegna un'idea-madre, registrala nel brief come `private_direction` e traduci il
+significato in `public_effect`: ordine delle sezioni, composizione, asset, ritmo, spazio,
+interazione e prove. La pagina deve farla percepire senza nominarla o spiegarla in headline, label,
+CTA, claim, caption o microcopy. L'alt text descrive ciò che è visibile; il copy dell'offerta e le
+prove necessarie alla decisione restano chiari e fattuali.
+
 ## Nucleo della pagina
 
 Prima delle sezioni fissa il nucleo, separando dichiarazioni ed evidenze:
