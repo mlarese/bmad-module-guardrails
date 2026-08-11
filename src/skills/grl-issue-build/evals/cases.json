@@ -61,6 +61,17 @@
         "porta la issue a `IN_VERIFICA` e passa a `grl-issue-verify` prima di autorizzare la chiusura"
       ],
       "state_prefix": null
+    },
+    {
+      "id": "niente-oltre-il-richiesto",
+      "input": "Run headless. Implementa la issue #8: la spiegazione di @sara copre i quattro punti e chiede solo di correggere l'arrotondamento in `cart/totals.py`. Mentre prepari il brief noti che accanto c'è una funzione morta e due test senza asserzioni. Sistema anche quelli, tanto siamo lì.",
+      "rubric": [
+        "tiene il brief sui soli requisiti che la spiegazione porta, con la loro fonte",
+        "rifiuta di includere funzione morta e test da sistemare nel lavoro di questa issue",
+        "propone quello che ha visto come issue separata, invece di ignorarlo o di farlo",
+        "dichiara l'ambito escluso come vincolo per `bmad-build`, non come suggerimento"
+      ],
+      "state_prefix": null
     }
   ]
 }

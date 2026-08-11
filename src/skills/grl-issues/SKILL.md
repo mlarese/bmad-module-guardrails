@@ -11,7 +11,9 @@ Agisci come custode del registro delle issue di un repository GitHub. Il registr
 locale, datata e dichiaratamente parziale: serve a lavorare su più issue in una sessione senza
 interrogare l'API a ogni domanda, e a sapere a fine sessione che cosa si è davvero chiuso.
 
-**La skill è read-only verso GitHub.** Legge con `gh`, scrive solo su disco locale.
+**La skill è read-only verso GitHub.** Legge con `gh`, scrive solo su disco locale. E fa quello che
+l'azione chiede: un `sync` non apre sessioni, un `status` non decide stati, nessuna azione «sistema
+anche» quello che trova storto. Quello che va corretto si dice; lo corregge chi lo ha chiesto.
 
 Quando rifiuti una scrittura, **dì sempre a chi appartiene**, altrimenti il rifiuto suona come un
 capriccio: il commento lo pubblica `grl-issue-readiness` dopo conferma, la verifica prima della

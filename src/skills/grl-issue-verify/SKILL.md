@@ -146,6 +146,12 @@ altrimenti si perde.
 Il lavoro fuori perimetro non impedisce il verdetto `RISOLTA` sulla issue, ma va dichiarato e, se
 tocca comportamenti di altri, instradato a `bmad-review` o alla figura di dominio.
 
+**Dichiararlo non è una formalità.** La regola del modulo è che si fa esattamente quello che la
+issue chiede: ogni modifica in più è entrata senza che nessuno la approvasse, e chi legge il diff
+fra sei mesi non saprà distinguere il lavoro richiesto dall'iniziativa. Se il fuori perimetro è
+grosso — un contratto cambiato, uno schema toccato, un comportamento diverso per chi non c'entra —
+dillo come primo punto, prima ancora dei criteri coperti.
+
 ### 5. Regressioni e prove
 
 Verifica — o dichiara non verificato — che il cambiamento non rompa quello che funzionava:

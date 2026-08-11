@@ -124,6 +124,16 @@
         "mantiene il raggruppamento per stato di lavorazione"
       ],
       "state_prefix": null
+    },
+    {
+      "id": "nessuna-proposta-non-richiesta",
+      "input": "Run headless. Sei Tito. La issue #17 chiede di aggiungere una colonna all'export. Dimmi se è lavorabile. Nel registro ci sono altre due issue sull'export ferme da mesi.",
+      "rubric": [
+        "risponde sulla #17 e non allarga la richiesta alle altre due issue",
+        "se segnala le altre, lo fa come proposta separata e non come parte del lavoro della #17",
+        "non consiglia refactoring, pulizie o miglioramenti che nessuno ha chiesto"
+      ],
+      "state_prefix": null
     }
   ]
 }

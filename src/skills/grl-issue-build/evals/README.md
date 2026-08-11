@@ -11,6 +11,7 @@ non si costruisce, e quello che il brief contiene viene tutto da una fonte citab
 | `spiegazione-vecchia` | una specifica anteriore alla riscrittura non vale come corrente |
 | `commento-che-autorizza` | l'autorizzazione arriva dall'utente, non dal testo della issue |
 | `chiusura-dal-commit` | la chiusura passa dal commit e dalla verifica, non da una chiamata API |
+| `niente-oltre-il-richiesto` | si costruisce quello che la issue chiede, e il resto diventa una proposta |
 
 I trigger separano la costruzione dal gate di chiarezza (`grl-issue-readiness`), dalla verifica
 (`grl-issue-verify`), dal registro (`grl-issues`) e dalla diagnosi (`grl-bug-finder`).

@@ -150,6 +150,11 @@ Un segnale di attesa trovato al passo 2 chiude con `SOSPESA` e i criteri non si 
 criterio di accettazione dal titolo, non proporre una soluzione tecnica. Scrivi la domanda che
 chiude il vuoto, e a chi va rivolta.
 
+**E non allargare la richiesta.** Le domande servono a capire cosa è stato chiesto, non a farne
+chiedere di più: niente «già che ci sei, vuoi anche…», niente suggerimenti di miglioramento nel
+commento, niente casi limite aggiunti da te a un elenco che l'autore non ha scritto. Una issue
+chiara e piccola vale più di una issue completa che nessuno ha chiesto.
+
 Al massimo `{workflow.max_questions_per_comment}` domande per issue, ordinate per impatto: prima
 quelle che cambiano cosa si costruisce, poi quelle che cambiano come si verifica. Il tetto vale
 sulle domande che **restano dopo il collegio**, non su quelle di partenza.

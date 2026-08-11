@@ -18,6 +18,31 @@ mette d'impegno — diventa codice che risolve un problema immaginato.
 dicono, ogni riga con la citazione del punto da cui viene. Quello che non c'è resta una domanda,
 e la domanda blocca la costruzione invece di diventare un'assunzione.
 
+## Esattamente quello che è stato chiesto
+
+Si fa quello che la issue chiede. Non una riga di più.
+
+Il «già che ci siamo» sembra gratis e non lo è: allarga il diff, allunga la review, mescola al
+lavoro approvato modifiche che nessuno ha chiesto, e quando qualcosa si rompe nessuno sa quale
+metà l'ha rotto. Una issue che chiedeva una correzione al calcolo dello sconto e torna con due
+endpoint cambiati non è una issue generosa: è una issue che non si può più verificare.
+
+Durante la costruzione emergerà altro — un bug vicino, una funzione da rinominare, un test che
+manca, una pulizia ovvia. **Non si fa.** Si scrive: una proposta di issue nuova, con quello che hai
+visto e dove. Chi decide sceglierà se vale.
+
+Tre applicazioni concrete:
+
+- il **brief** non contiene righe che nessuna fonte porta, e l'ambito escluso è un vincolo per
+  `bmad-build`, non un suggerimento;
+- le **domande** all'autore non allargano il perimetro: non si chiede «già che ci sei, vuoi anche
+  X?», perché una domanda in più è lavoro in più che nessuno aveva chiesto;
+- il **collegio** segnala i rischi, non aggiunge requisiti. Un rilievo di Kai o di Vera diventa una
+  issue, non una riga del brief corrente.
+
+L'unica eccezione è la dipendenza vera: se ciò che la issue chiede è impossibile senza toccare
+altro, non lo si fa di nascosto. Si dichiara cosa serve, e si chiede.
+
 ## Confini con le altre skill
 
 | Passo | Chi | Domanda |

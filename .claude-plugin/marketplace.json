@@ -7,7 +7,7 @@
       "name": "grl",
       "source": "./src",
       "description": "Guardrails — ventitré figure per privacy, sicurezza, legale, compliance, fisco, UI, customer journey, visual storytelling, pagine landing/home di riferimento, curtain/gallery cinematics, search system, landing scroll-driven statiche, video-to-scroll da sorgenti autorizzate, pacchetti di frame, architettura del codice e dei database, punti di blocco, firmware embedded, ops, sanità, AI, WordPress, SEO, paid media, social/content, creative video, generazione di immagini, revenue management, configurazione di prodotto e presidio del backlog delle issue GitHub. Include ventuno workflow, tra cui preflight degli strumenti e pacchettizzazione video-to-scroll, diagnosi read-only di bug e regressioni, ricerca live, siti, social, pacchetti creativi, Google Ads, automazione con dry-run, consegna WordPress fino al release gate, registro locale delle issue con stato di lavorazione, verifica di chiarezza prima dello sviluppo e passaggio controllato a bmad-build e verifica di risoluzione prima della chiusura, e installazione controllata di skill e server MCP su ogni harness.",
-      "version": "1.35.5",
+      "version": "1.35.6",
       "author": "mlarese",
       "homepage": "https://github.com/mlarese/bmad-module-guardrails",
       "repository": "https://github.com/mlarese/bmad-module-guardrails",
