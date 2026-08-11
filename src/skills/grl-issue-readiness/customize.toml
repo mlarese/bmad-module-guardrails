@@ -1,0 +1,67 @@
+# DO NOT EDIT -- overwritten on every update.
+#
+# Workflow customization surface for grl-issue-readiness.
+# Team overrides:     {project-root}/_bmad/custom/grl-issue-readiness.toml
+# Personal overrides: {project-root}/_bmad/custom/grl-issue-readiness.user.toml
+#
+# Merge: gli scalari vengono sovrascritti (vince l'ultimo strato applicato),
+# gli array vengono accodati. Non esiste un meccanismo di rimozione: una voce
+# di base non si può togliere da un override, si toglie forkando la skill.
+
+[workflow]
+
+# --- Default universali ---
+activation_steps_prepend = []
+activation_steps_append = []
+persistent_facts = [
+  "file:{project-root}/_bmad/memory/grl-shared/project-profile.md",
+  "file:{project-root}/_bmad/memory/grl-shared/domain-glossary.md",
+  "file:{project-root}/_bmad/memory/grl-shared/decisions.md",
+  "file:{project-root}/_bmad/memory/grl-shared/accepted-risks.md",
+  "file:{project-root}/**/project-context.md",
+]
+on_complete = ""
+
+# --- Punti specifici di questa skill ---
+
+# Deve coincidere con `registry_path` di grl-issues: le due skill scrivono nello
+# stesso file. Due valori diversi producono due registri, e il guasto si
+# presenta come «registro mancante» invece che come errore.
+registry_path = "{project-root}/_bmad/memory/grl-issues"
+
+# Criteri la cui assenza porta il verdetto a NON_PRONTA. Gli identificatori sono
+# quelli della tabella dei sette criteri in SKILL.md e finiscono in
+# `readiness.missing`. Aggiungerne uno rende il gate più severo; per toglierne
+# uno serve un fork.
+blocking_criteria = ["problema_osservato", "comportamento_atteso", "criterio_di_accettazione"]
+
+# Label che valgono come segnale di attesa. Ricalcano quelle di grl-issues:
+# `wontfix` non è qui, perché è un rifiuto e non un'attesa.
+hold_labels = ["blocked", "on-hold", "needs-decision", "waiting-for-customer"]
+
+# Marcatore che identifica il commento della skill. Cambiarlo dopo la prima
+# pubblicazione fa perdere i commenti già scritti: la skill non li riconosce
+# più e ne aggiunge di nuovi accanto.
+comment_marker = "<!-- grl-issues:clarify:v1 -->"
+
+# Numero massimo di domande per commento. Oltre questa soglia il commento
+# smette di essere letto.
+max_questions_per_comment = 5
+
+# Modello del commento pubblicato: è l'unico artefatto che esce verso persone
+# fuori dal progetto, ed è la prima cosa che un'organizzazione riscrive — tono,
+# lingua, formula di attribuzione.
+comment_template = "{skill-root}/assets/comment-template.md"
+
+# Account GitHub atteso. Vuoto significa: accetta quello autenticato e stampalo.
+# Compilato significa: fermati se `gh api user` risponde un login diverso, in
+# attivazione e di nuovo prima di pubblicare.
+expected_account = ""
+
+# Dove instradare quello che esce dal perimetro di questa skill.
+external_handoffs = [
+  "skill:grl-issues",
+  "skill:grl-issue-verify",
+  "skill:grl-bug-finder",
+  "skill:grl-board",
+]

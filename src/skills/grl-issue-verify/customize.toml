@@ -1,0 +1,53 @@
+# DO NOT EDIT -- overwritten on every update.
+#
+# Workflow customization surface for grl-issue-verify.
+# Team overrides:     {project-root}/_bmad/custom/grl-issue-verify.toml
+# Personal overrides: {project-root}/_bmad/custom/grl-issue-verify.user.toml
+#
+# Merge: gli scalari vengono sovrascritti (vince l'ultimo strato applicato),
+# gli array vengono accodati. Non esiste un meccanismo di rimozione: una voce
+# di base non si può togliere da un override, si toglie forkando la skill.
+
+[workflow]
+
+# --- Default universali ---
+activation_steps_prepend = []
+activation_steps_append = []
+persistent_facts = [
+  "file:{project-root}/_bmad/memory/grl-shared/project-profile.md",
+  "file:{project-root}/_bmad/memory/grl-shared/domain-glossary.md",
+  "file:{project-root}/_bmad/memory/grl-shared/decisions.md",
+  "file:{project-root}/_bmad/memory/grl-shared/accepted-risks.md",
+  "file:{project-root}/**/project-context.md",
+]
+on_complete = ""
+
+# --- Punti specifici di questa skill ---
+
+# Deve coincidere con `registry_path` di grl-issues: qui si leggono i criteri su
+# cui la issue è stata approvata e si scrive lo stato IN_VERIFICA.
+registry_path = "{project-root}/_bmad/memory/grl-issues"
+
+# Quota di criteri coperti che autorizza la chiusura. È 1.0 di proposito:
+# «quasi risolta» non chiude una issue. Abbassarla significa accettare che una
+# issue si chiuda con un criterio scoperto, e chi la abbassa se ne assume la
+# conseguenza al primo cliente che riapre il ticket.
+close_threshold = 1.0
+
+# Prove che valgono come dimostrazione di un criterio coperto. Togliere
+# "ispezione" rende il gate più severo: passa solo ciò che è stato eseguito.
+accepted_evidence = ["test", "esecuzione", "ispezione"]
+
+# Comando dei test del progetto. Vuoto significa: chiedi come si eseguono.
+# La skill non esegue niente senza autorizzazione esplicita.
+test_command = ""
+
+# Review che devono risultare fatte prima di autorizzare la chiusura. Questa
+# skill verifica la corrispondenza issue/codice, non la qualità del codice.
+required_reviews = ["skill:bmad-review"]
+
+# Account GitHub atteso. Vuoto significa: accetta quello autenticato e stampalo.
+expected_account = ""
+
+# Dove instradare quello che esce dal perimetro di questa skill.
+external_handoffs = ["skill:grl-issues", "skill:grl-bug-finder", "skill:grl-board"]

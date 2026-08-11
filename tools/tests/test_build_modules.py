@@ -464,6 +464,9 @@ class DedicatedGroupModuleTopologyTests(unittest.TestCase):
                 "grl-revenue-preflight",
                 "grl-wordpress-delivery",
                 "grl-bug-finder",
+                "grl-issues",
+                "grl-issue-readiness",
+                "grl-issue-verify",
                 "grl-automation",
                 "grl-toolchain",
             ],
@@ -488,12 +491,12 @@ class DedicatedGroupModuleTopologyTests(unittest.TestCase):
             ["grl-revenue-audit", "grl-revenue-plan", "grl-revenue-preflight", "grl-automation"],
         )
 
-    def test_topology_has_nine_unique_derived_repositories(self) -> None:
+    def test_topology_has_ten_unique_derived_repositories(self) -> None:
         modules = self.topology["modules"]
         self.assertEqual(self.topology["core"]["skills"], ["grl-profile", "grl-board"])
-        self.assertEqual(len(modules), 9)
-        self.assertEqual(len({module["code"] for module in modules}), 9)
-        self.assertEqual(len({module["repo"] for module in modules}), 9)
+        self.assertEqual(len(modules), 10)
+        self.assertEqual(len({module["code"] for module in modules}), 10)
+        self.assertEqual(len({module["repo"] for module in modules}), 10)
 
     def test_every_derived_module_has_an_english_about_copy(self) -> None:
         for module in self.topology["modules"]:

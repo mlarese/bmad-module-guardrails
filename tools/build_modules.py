@@ -501,6 +501,7 @@ README_MODULE_COPY = {
     "gpm": "A focused BMad module for paid media, Google Ads, tracking, consent, social content, creative production, and AI image generation. It keeps campaigns and assets behind evidence, approval, and rollback gates.",
     "grv": "A focused BMad module for hotel revenue management, pricing, forecasting, profit, and PMS/Channel Manager integrations. It keeps external publication behind explicit gates, dry-runs, approval, and rollback.",
     "gau": "A focused BMad module for routing repeatable processes across software, databases, legal, tax, design, customer journeys, landing/home page references, curtain/gallery cinematics, static and video-source scroll-driven visual storytelling from verified assets, licensed video sourcing and frame packages, search, architecture, healthcare, web, paid media, social content, creative video, AI image generation, revenue management, and product configuration.",
+    "gri": "A focused BMad module for GitHub issue triage: a dated local registry of open issues with work states and recorded backlog decisions, work sessions, readiness checks before development, and a closing verification that the code covers every acceptance criterion.",
     "gwp": "A focused BMad module for component-based WordPress architecture and controlled delivery through the release gate. It covers Gutenberg, Elementor, ACF, templates, the Media Library, and migration work.",
 }
 
@@ -531,6 +532,7 @@ README_AGENT_FOCUS = {
     "grl-agent-imaging": "Nano Banana, Imagen, GPT Image, Photoshop, prompts, masks, subject consistency, provenance, and export.",
     "grl-agent-revenue": "Occupancy, ADR, RevPAR, TRevPAR, NRevPAR, GOPPAR, MUP, MOL, pickup, forecasting, pricing, PMS, and Channel Manager.",
     "grl-agent-product-config": "RFQs, tender specs, customer documents, product options and variants, compatibility rules, product catalogs, and CPQ.",
+    "grl-agent-issues": "GitHub issues, backlog and triage, work states, readiness before development, hold signals, recorded decisions, duplicates, and dependencies.",
 }
 
 README_WORKFLOW_COPY = {
@@ -589,6 +591,18 @@ README_WORKFLOW_COPY = {
     "grl-toolchain": (
         "Skills and MCP servers across harnesses",
         "Finds and assesses skills and MCP servers, then installs them in each harness's own syntax behind a dry-run, a backup, and a verification step.",
+    ),
+    "grl-issues": (
+        "GitHub issue registry",
+        "Keeps a dated local registry of open issues with one work state each and the decisions taken on the backlog, syncs incrementally, and opens and closes work sessions. It reads GitHub only.",
+    ),
+    "grl-issue-readiness": (
+        "Issue readiness check",
+        "Applies seven criteria with citations, detects who already asked to wait, and publishes a single recognizable clarification comment after explicit confirmation.",
+    ),
+    "grl-issue-verify": (
+        "Issue closing verification",
+        "Maps every acceptance criterion onto the diff with file-and-line evidence, flags work no criterion asked for, and authorizes closing only when every criterion is covered.",
     ),
     "grl-bug-finder": (
         "Bug and regression diagnosis",

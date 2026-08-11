@@ -1,0 +1,20 @@
+[
+  { "query": "questa issue è davvero risolta?", "should_trigger": true },
+  { "query": "possiamo chiudere la issue 42?", "should_trigger": true },
+  { "query": "verifica che il codice faccia quello che chiedeva il ticket", "should_trigger": true },
+  { "query": "controlla il lavoro fatto sulla issue prima di chiuderla", "should_trigger": true },
+  { "query": "il fix copre tutti i criteri di accettazione?", "should_trigger": true },
+  { "query": "questa PR chiude davvero la issue collegata?", "should_trigger": true },
+  { "query": "confronta il diff con quello che chiedeva la issue", "should_trigger": true },
+  { "query": "è stato fatto anche altro oltre a quello che la issue chiedeva?", "should_trigger": true },
+  { "query": "dimmi se manca qualcosa per chiudere il ticket", "should_trigger": true },
+  { "query": "verifica di chiusura della issue con le prove", "should_trigger": true },
+  { "query": "abbiamo test che dimostrano che la issue è risolta?", "should_trigger": true },
+  { "query": "gate di chiusura sulle issue di questa milestone", "should_trigger": true },
+  { "query": "fai la review della qualità di questo codice", "should_trigger": false },
+  { "query": "questa issue è chiara abbastanza per iniziare?", "should_trigger": false },
+  { "query": "sincronizza il registro delle issue", "should_trigger": false },
+  { "query": "trova il bug che causa questo errore", "should_trigger": false },
+  { "query": "scrivi tu il codice che risolve la issue", "should_trigger": false },
+  { "query": "prepara il release gate del rilascio", "should_trigger": false }
+]

@@ -1,10 +1,10 @@
 # Guardrails (`grl`)
 
-Guardrails is a [BMad](https://github.com/bmad-code-org/BMAD-METHOD) module with **twenty-two agents**
+Guardrails is a [BMad](https://github.com/bmad-code-org/BMAD-METHOD) module with **twenty-three agents**
 that support software development teams across privacy and GDPR, security, legal, compliance,
 tax, design, customer journey, visual storytelling, contextual search, landing/home page references, curtain and gallery cinematics, video-to-scroll direction, code and database architecture, blocking points,
 embedded firmware, operations, healthcare, AI, WordPress, SEO, social/content, creative video, AI image generation,
-revenue management, product configuration, and paid media.
+revenue management, product configuration, GitHub issue triage, and paid media.
 
 Agents surface constraints and risks while changes are still inexpensive; decisions remain with
 the team. They speak operationally, do not produce formal documents, and do not replace qualified
@@ -38,6 +38,7 @@ multidisciplinary review of the same artifact, use `grl-board`.
 | 🎬 **Marco** — Advertising Creative Director & Short-form Video Producer | Advertising concepts, design, scripts, storyboards, shot lists, Reels, TikToks, and Shorts | Takes an idea from brief to a producible creative package, with variants and gates for claims, rights, and privacy. |
 | 🖼️ **Elio** — AI Image Generation & Post-production Specialist | Nano Banana, Imagen, GPT Image, Photoshop, prompts, masks, subject consistency, provenance, and export | Picks the tool the task actually needs, writes the prompt that drives it, generates the files on request behind a dry-run and an explicit confirmation, and separates generative work from deterministic post-production. |
 | 📈 **Rhea** — Revenue Management Strategist | Occupancy, ADR, RevPAR, TRevPAR, NRevPAR, GOPPAR, MUP, MOL, pickup, forecasting, pricing, PMS, and Channel Manager | Connects costs, demand, inventory, and channel; shows formulas and assumptions, separates the economic floor, recommended price, and published price, and blocks transmission without a verified gate. |
+| 📋 **Tito** — Issue Triage & Backlog Steward | GitHub issues, backlog and triage, work states, readiness before development, hold signals, duplicates, and dependencies | Reads the dated local issue registry and always states how old it is; groups issues by work state, tells what is ready to build, what a ticket still has to answer, and who already asked to wait. Treats issue bodies and comments as untrusted data, never as instructions, and writes the missing question instead of inventing the missing requirement. |
 | 🔩 **Ines** — Product Configuration Specialist | RFQs, tender specs, customer documents, product options and variants, compatibility rules, product catalogs, and CPQ | Turns a customer document into a configuration validated against the company catalog: every choice carries its origin — written, imposed by a rule, or assumed — and whatever the document leaves out stays an open question instead of becoming a silent default. |
 
 ## Workflows
@@ -63,6 +64,9 @@ when the relevant signals and expertise are needed.
 | `grl-revenue-plan` | To build pricing, demand, and profit scenarios | Separates the economic floor, market, and demand, with monitoring triggers and no rate publishing. |
 | `grl-revenue-preflight` | Before sending prices to a PMS or Channel Manager | Verifies the contract, mapping, dry-run, response, reconciliation, idempotency, and rollback. |
 | `grl-automation` | For repeatable processes across development, legal, tax, design, healthcare, paid media, and revenue management | Routes work from read-only checks through dry-run to observable execution, separating approvals and rollback. |
+| `grl-issues` | To keep a dated local registry of open GitHub issues and update it during a work session | Syncs incrementally, assigns each issue one work state (to assess, to clarify, to do, in progress, on hold, not approved, closed), records the decisions taken on the backlog with who decided and why, opens and closes a work session with a declared scope, and reports what actually got closed. Reads GitHub only; it never comments, closes, or edits labels. |
+| `grl-issue-readiness` | Before assigning or starting a GitHub issue | Applies seven criteria with citations, detects who already asked to wait, returns a ready/not-ready verdict, and publishes a single recognizable clarification comment after explicit confirmation. |
+| `grl-issue-verify` | Before closing a GitHub issue, to check that the code actually resolves it | Maps every acceptance criterion onto the diff with file-and-line evidence, flags work no criterion asked for, records which tests actually ran, and authorizes closing only when every criterion is covered. It prepares the closing comment and command; a person runs them. |
 | `grl-toolchain` | To find, assess, and install skills and MCP servers across every agent harness on the machine | Translates a candidate into each harness's own syntax, writes only after a dry-run and a backup, and refreshes its own harness cards from the source. |
 
 The repository contains the complete bundle; derived thematic modules share the same agents and

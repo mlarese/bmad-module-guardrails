@@ -1,0 +1,20 @@
+[
+  { "query": "questa issue è abbastanza chiara per essere sviluppata?", "should_trigger": true },
+  { "query": "cosa manca a questa issue per poterla assegnare", "should_trigger": true },
+  { "query": "commenta sulla issue le cose da chiarire", "should_trigger": true },
+  { "query": "controlla se qualcuno ha scritto di non farla ancora", "should_trigger": true },
+  { "query": "verifica la prontezza delle issue della milestone 2.0", "should_trigger": true },
+  { "query": "scrivi nella issue le domande che mancano", "should_trigger": true },
+  { "query": "si può iniziare questa issue o manca qualcosa?", "should_trigger": true },
+  { "query": "aggiorna il commento di chiarimento sulla issue 45", "should_trigger": true },
+  { "query": "fammi il gate di chiarezza prima di prendere il ticket", "should_trigger": true },
+  { "query": "questa issue ha un criterio di accettazione?", "should_trigger": true },
+  { "query": "chiedi all'autore cosa intende, con un commento", "should_trigger": true },
+  { "query": "controlla se la issue è bloccata da un'altra", "should_trigger": true },
+  { "query": "sincronizza il registro delle issue aperte", "should_trigger": false },
+  { "query": "chiudi la issue e scrivi che è risolta", "should_trigger": false },
+  { "query": "trova il bug descritto nella issue", "should_trigger": false },
+  { "query": "implementa quello che la issue chiede", "should_trigger": false },
+  { "query": "apri una issue nuova per questo problema", "should_trigger": false },
+  { "query": "rivedi l'architettura proposta nel ticket", "should_trigger": false }
+]

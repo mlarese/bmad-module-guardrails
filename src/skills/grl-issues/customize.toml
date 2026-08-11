@@ -1,0 +1,65 @@
+# DO NOT EDIT -- overwritten on every update.
+#
+# Workflow customization surface for grl-issues.
+# Team overrides:     {project-root}/_bmad/custom/grl-issues.toml
+# Personal overrides: {project-root}/_bmad/custom/grl-issues.user.toml
+#
+# Merge: gli scalari vengono sovrascritti (vince l'ultimo strato applicato),
+# gli array vengono accodati. Non esiste un meccanismo di rimozione: una voce
+# di base non si può togliere da un override, si toglie forkando la skill.
+
+[workflow]
+
+# --- Default universali ---
+activation_steps_prepend = []
+activation_steps_append = []
+persistent_facts = [
+  "file:{project-root}/_bmad/memory/grl-shared/project-profile.md",
+  "file:{project-root}/_bmad/memory/grl-shared/domain-glossary.md",
+  "file:{project-root}/_bmad/memory/grl-shared/decisions.md",
+  "file:{project-root}/_bmad/memory/grl-shared/accepted-risks.md",
+  "file:{project-root}/**/project-context.md",
+]
+on_complete = ""
+
+# --- Punti specifici di questa skill ---
+
+# Dove vive il registro. Una cartella per repository, dentro la memoria del
+# progetto. Il percorso deve restare escluso da git: il registro copia testo
+# scritto da terzi dentro il progetto.
+#
+# Chi lo sposta deve spostarlo anche in grl-issue-readiness e grl-issue-verify,
+# che scrivono nello stesso file: due valori diversi producono due registri e
+# nessun errore.
+registry_path = "{project-root}/_bmad/memory/grl-issues"
+
+# Giorni dopo i quali il registro è dichiarato obsoleto. Alzarlo non rende il
+# dato più fresco: rende più tardi la scoperta che non lo è.
+registry_max_age_days = 30
+
+# Tetto di risultati per lettura. Raggiunto il tetto la skill marca il registro
+# come parziale e lo dichiara. Un registro parziale dichiarato resta utile.
+sync_page_limit = 500
+
+# Stato letto nella prima sincronizzazione. "open" tiene il registro piccolo;
+# "all" conserva anche le chiusure recenti, utile per il rapporto di fine
+# sessione. Le sincronizzazioni successive leggono comunque "all", altrimenti
+# una issue chiusa da altri resterebbe aperta nel registro per sempre.
+sync_state = "open"
+
+# Account GitHub atteso. Vuoto significa: accetta quello autenticato e stampalo.
+# Compilato significa: fermati se `gh api user` risponde un login diverso.
+expected_account = ""
+
+# Label che portano una issue a NON_APPROVATA. Aggiungerne una rende il
+# riconoscimento più ampio; per toglierne una serve un fork.
+rejected_labels = ["wontfix", "invalid", "rejected"]
+
+# Label che portano una issue a IN_ATTESA. La condizione che toglie il freno non
+# sta nella label: resta una domanda da porre. `wontfix` non è qui di proposito
+# — è un rifiuto, non un'attesa, e uno stesso valore nelle due liste darebbe
+# alla stessa issue due stati diversi a seconda di chi l'ha guardata per ultima.
+hold_labels = ["blocked", "on-hold", "needs-decision", "waiting-for-customer"]
+
+# Dove instradare quello che esce dal perimetro di questa skill.
+external_handoffs = ["skill:grl-agent-issues", "skill:grl-issue-readiness", "skill:grl-issue-verify"]

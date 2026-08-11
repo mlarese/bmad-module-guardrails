@@ -10,7 +10,7 @@ skill o un workflow nuovo, un cambio di posizionamento nell'intestazione del `RE
 aggiorna l'About nello stesso turno, senza aspettare che l'utente lo chieda. L'About deve restare
 aggiornato e scritto nella stessa lingua del `README.md` corrispondente; se cambia la lingua del
 README, traduci anche l'About nello stesso turno. La regola vale per il repository fonte e per
-tutti i nove sottomoduli: quando un sottomodulo cambia, il suo `README.md` generato e il suo About
+tutti i dieci sottomoduli: quando un sottomodulo cambia, il suo `README.md` generato e il suo About
 GitHub devono essere aggiornati e pubblicati nello stesso passaggio, mai uno senza l'altro.
 
 ```
@@ -32,7 +32,7 @@ Cambiano insieme, e tutte e quattro devono dire lo stesso numero di figure e le 
 | README | `README.md` (intestazione, tabella delle figure, tabella dei workflow) |
 | Manifesto e catalogo del modulo | `src/module.yaml` e `src/module-help.csv` (`description`, `module_greeting`, `post-install-notes`, `agents`) |
 | Marketplace BMad | `.claude-plugin/marketplace.json` (`description` del marketplace, `description` e `skills` del plugin `grl`) |
-| About GitHub | descrizione del repository fonte e dei nove derivati, via `gh repo edit`, nella stessa lingua del README corrispondente |
+| About GitHub | descrizione del repository fonte e dei dieci derivati, via `gh repo edit`, nella stessa lingua del README corrispondente |
 
 Una skill nuova va aggiunta anche all'elenco `skills` di `.claude-plugin/marketplace.json`,
 altrimenti non viene pubblicata.
@@ -56,9 +56,9 @@ Non aggiungere al README dettagli estesi su installazione, severità, configuraz
 moduli, build/publish o razionale architetturale. Questi contenuti appartengono a `CLAUDE.md`,
 `docs/module-plan.md` e ai manifesti in `src/`.
 
-## I nove moduli derivati si rigenerano e si ripubblicano nello stesso turno
+## I dieci moduli derivati si rigenerano e si ripubblicano nello stesso turno
 
-Nove repository derivano da questo e li produce `tools/build_modules.py` leggendo
+Dieci repository derivano da questo e li produce `tools/build_modules.py` leggendo
 `src/module-topology.yaml`. Questo repository è la fonte unica delle skill.
 
 | Codice | Repository | Contiene |
@@ -70,8 +70,9 @@ Nove repository derivano da questo e li produce `tools/build_modules.py` leggend
 | `grw` | `mlarese/bmad-module-guardrails-web` | Iris, Marea (journey, page references, curtain/gallery cinematics, static scroll-world e video-to-scroll), Nora, Dalia, Sofia, Marco, Elio, `grl-web`, `grl-video-to-scroll`, `grl-ads`, `grl-social`, `grl-social-creative`, `grl-automation` |
 | `gpm` | `mlarese/bmad-module-guardrails-paid-media` | Vera, Aldo, Iris, Nora, Dalia, Sofia, Marco, Elio, `grl-ads`, `grl-social`, `grl-social-creative`, `grl-automation` |
 | `grv` | `mlarese/bmad-module-guardrails-revenue` | Rhea, `grl-revenue-audit`, `grl-revenue-plan`, `grl-revenue-preflight`, `grl-automation` |
-| `gau` | `mlarese/bmad-module-guardrails-automation` | tutte le ventidue figure, workflow di dominio incluso `grl-video-to-scroll`, `grl-bug-finder` e `grl-automation` |
+| `gau` | `mlarese/bmad-module-guardrails-automation` | tutte le ventitré figure, workflow di dominio incluso `grl-video-to-scroll`, `grl-bug-finder` e `grl-automation` |
 | `gwp` | `mlarese/bmad-module-guardrails-wordpress` | Milo, `grl-wordpress-delivery`, `grl-automation` |
+| `gri` | `mlarese/bmad-module-guardrails-issues` | Tito, `grl-issues`, `grl-issue-readiness`, `grl-issue-verify`, `grl-automation` |
 
 **Regola: ogni modifica che tocca `src/` va propagata ai derivati nello stesso turno, senza
 aspettare che l'utente lo chieda.** Vale per una skill cambiata, una skill nuova, un cambio di
@@ -82,7 +83,7 @@ derivato deve includere sempre sia il `README.md` sia l'About GitHub aggiornato.
 ```bash
 python3 -m pytest tools/tests/                              # test della build
 python3 tools/build_modules.py                              # rigenera dist/
-python3 tools/publish_modules.py -m "<messaggio di commit>"  # commit e push sui nove repo
+python3 tools/publish_modules.py -m "<messaggio di commit>"  # commit e push sui dieci repo
 ```
 
 `publish_modules.py` è idempotente: salta i moduli senza modifiche, crea il repository se manca e

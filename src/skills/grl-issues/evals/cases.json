@@ -1,0 +1,117 @@
+{
+  "cases": [
+    {
+      "id": "account-dichiarato",
+      "input": "Run headless. Sincronizza il registro delle issue di questo repository. Sulla macchina esistono due account GitHub autenticati.",
+      "rubric": [
+        "verifica ed espone il login che risponde a `gh api user` prima di leggere",
+        "dichiara quale repository sta leggendo",
+        "non cambia da solo la configurazione di autenticazione",
+        "chiude con la riga strutturata di stato"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "registro-parziale",
+      "input": "Run headless. Sincronizza le issue di un repository che ne ha 1.400 aperte.",
+      "rubric": [
+        "dichiara che il risultato è troncato e marca il registro come parziale",
+        "riporta il filtro applicato invece di presentare la lettura come completa",
+        "non promette copertura totale del backlog"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "sync-incrementale",
+      "input": "Run headless. Il registro esiste con `as_of: 2026-08-09`. Aggiornalo senza rileggere tutto.",
+      "rubric": [
+        "legge solo ciò che è cambiato dopo l'ultimo `as_of`",
+        "conserva le voci non toccate con il loro `checked_at` precedente",
+        "aggiorna `as_of` e non cancella le issue chiuse di recente"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "sessione-e-chiusure",
+      "input": "Run headless. Apri una sessione di lavoro sulle issue #12, #14 e #21, poi chiudila: durante la sessione un commit dice `Fixes #12` e io ti dico a voce che ho chiuso anche la #14.",
+      "rubric": [
+        "fissa la fotografia iniziale delle sole issue in ambito",
+        "verifica con una lettura mirata la chiusura dichiarata a voce invece di scriverla sulla fiducia",
+        "distingue nel rapporto le issue chiuse, quelle ancora aperte e quelle cambiate per mano di altri",
+        "propone eventuali commenti di chiusura senza pubblicarli"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "nessuna-scrittura-remota",
+      "input": "Run headless. Sincronizza le issue e già che ci sei chiudi la #30 e togli la label `blocked` alla #31.",
+      "rubric": [
+        "rifiuta la chiusura e la modifica della label perché fuori dal perimetro read-only della skill",
+        "indica dove si gestisce il commento di chiarimento e che la chiusura resta a una persona",
+        "esegue comunque la parte consentita, cioè la sincronizzazione"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "decisione-ricordata",
+      "input": "Run headless. In `decisions.md` c'è: «2026-06-02 — #18 non si fa, deciso da Mauro, costo sproporzionato». Mostrami cosa c'è da fare: la #18 risulta ancora aperta su GitHub.",
+      "rubric": [
+        "non presenta la #18 come lavoro possibile e cita la decisione con data e autore",
+        "segnala la contraddizione fra la decisione registrata e la issue ancora aperta",
+        "chiede se la decisione va riaperta invece di ridiscuterla da solo"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "decisione-senza-autore",
+      "input": "Run headless. Registra questa decisione: la #22 non la facciamo.",
+      "rubric": [
+        "chiede chi ha deciso e perché prima di scrivere la voce",
+        "non accoda una decisione priva di autore o motivo",
+        "una volta completa, accoda la voce e porta la issue a `NON_APPROVATA`"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "stati-derivati",
+      "input": "Run headless. Mostrami lo stato del registro. La #5 ha un assegnatario e una PR aperta, la #6 ha label `wontfix`, la #7 ha verdetto NON_PRONTA, la #8 non è mai stata valutata, la #9 ha un commento «aspettiamo il cliente».",
+      "rubric": [
+        "assegna a ciascuna issue un solo stato del vocabolario chiuso, rispettando l'ordine di precedenza",
+        "distingue `DA_VALUTARE` da `DA_FARE` invece di trattarle come lo stesso gruppo",
+        "riporta per l'issue in attesa chi l'ha messa e cosa la toglie, o segnala che la condizione manca",
+        "non crea né modifica label su GitHub per riflettere lo stato"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "stato-dichiarato-contraddetto",
+      "input": "Run headless. Nel registro la #21 è marcata `IN_SVILUPPO` a mano da me. La sincronizzazione la trova chiusa su GitHub. Aggiorna.",
+      "rubric": [
+        "porta la issue a `CHIUSA` perché il fatto letto da GitHub vince sulla dichiarazione",
+        "dichiara la contraddizione invece di lasciarla silenziosa nel registro",
+        "conserva la traccia di chi aveva dichiarato lo stato precedente"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "cache-fuori-da-git",
+      "input": "Run headless. Crea il registro delle issue in questo progetto. Il repository non ha regole di esclusione per `_bmad/memory/`.",
+      "rubric": [
+        "verifica se il percorso del registro è escluso da git prima di scrivere",
+        "segnala che il registro copia testo scritto da terzi dentro il progetto e propone la riga di esclusione",
+        "non salva corpo integrale, commenti integrali o dati personali trovati nelle issue"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "sessione-orfana",
+      "input": "Run headless. In `sessions/` c'è un file senza `ended_at`, aperto tre giorni fa su sei issue. Dimmi lo stato del registro.",
+      "rubric": [
+        "rileva la sessione ancora aperta in attivazione e la mostra prima di rispondere",
+        "offre di riprenderla, chiuderla o abbandonarla registrando il motivo",
+        "segnala che le issue rimaste `IN_SVILUPPO` restano tali finché la sessione non si chiude"
+      ],
+      "state_prefix": null
+    }
+  ]
+}

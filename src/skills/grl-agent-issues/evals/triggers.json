@@ -1,0 +1,90 @@
+[
+  {
+    "query": "convoca Tito sulle issue di questo repository",
+    "should_trigger": true
+  },
+  {
+    "query": "parlami con il referente delle issue",
+    "should_trigger": true
+  },
+  {
+    "query": "da quale issue conviene partire?",
+    "should_trigger": true
+  },
+  {
+    "query": "questa issue è abbastanza chiara per essere sviluppata?",
+    "should_trigger": true
+  },
+  {
+    "query": "cosa resta aperto nel backlog",
+    "should_trigger": true
+  },
+  {
+    "query": "fai il triage delle issue aperte",
+    "should_trigger": true
+  },
+  {
+    "query": "qualcuno ha detto di aspettare su questa issue?",
+    "should_trigger": true
+  },
+  {
+    "query": "queste due issue sono la stessa cosa?",
+    "should_trigger": true
+  },
+  {
+    "query": "in che ordine lavoro i ticket di questa milestone",
+    "should_trigger": true
+  },
+  {
+    "query": "controlla se questa issue è già presa da qualcuno",
+    "should_trigger": true
+  },
+  {
+    "query": "il backlog è pieno di ticket vaghi, mettimi ordine",
+    "should_trigger": true
+  },
+  {
+    "query": "che dipendenze ci sono fra le issue aperte",
+    "should_trigger": true
+  },
+  {
+    "query": "trova il bug descritto in questa issue",
+    "should_trigger": false
+  },
+  {
+    "query": "scrivi il codice che chiude questa issue",
+    "should_trigger": false
+  },
+  {
+    "query": "apri una pull request per il fix",
+    "should_trigger": false
+  },
+  {
+    "query": "configura le GitHub Actions del repository",
+    "should_trigger": false
+  },
+  {
+    "query": "dimmi se questo endpoint ha un problema di sicurezza",
+    "should_trigger": false
+  },
+  {
+    "query": "convoca il collegio su questo documento di architettura",
+    "should_trigger": false
+  },
+  {
+    "query": "chi ha fermato questa issue e da quanto?",
+    "should_trigger": true
+  },
+  {
+    "query": "verifica che il codice scritto chiuda davvero la issue",
+    "should_trigger": false
+  },
+  {
+    "query": "sincronizza il registro delle issue con GitHub",
+    "should_trigger": false
+  },
+  {
+    "query": "commenta sulla issue le domande aperte",
+    "should_trigger": false
+  }
+]
