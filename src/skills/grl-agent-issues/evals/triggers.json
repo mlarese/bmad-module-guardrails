@@ -13,7 +13,7 @@
   },
   {
     "query": "questa issue è abbastanza chiara per essere sviluppata?",
-    "should_trigger": true
+    "should_trigger": false
   },
   {
     "query": "cosa resta aperto nel backlog",
