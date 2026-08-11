@@ -1,0 +1,20 @@
+[
+  { "query": "implementa questa issue", "should_trigger": true },
+  { "query": "lavora la issue 42", "should_trigger": true },
+  { "query": "prendi la spiegazione nel commento e falla", "should_trigger": true },
+  { "query": "passa questa issue allo sviluppo", "should_trigger": true },
+  { "query": "chiudi la issue sviluppandola", "should_trigger": true },
+  { "query": "c'è abbastanza scritto nei commenti per implementarla?", "should_trigger": true },
+  { "query": "costruisci il brief per lo sviluppo da questa issue", "should_trigger": true },
+  { "query": "sviluppa quello che il ticket chiede, seguendo il commento di specifica", "should_trigger": true },
+  { "query": "porta la issue 12 dallo stato pronto al codice", "should_trigger": true },
+  { "query": "usa bmad-build su questa issue", "should_trigger": true },
+  { "query": "questa issue è chiara abbastanza per essere sviluppata?", "should_trigger": false },
+  { "query": "commenta sulla issue cosa manca", "should_trigger": false },
+  { "query": "verifica che il codice risolva la issue", "should_trigger": false },
+  { "query": "sincronizza il registro delle issue", "should_trigger": false },
+  { "query": "trova il bug descritto nella issue", "should_trigger": false },
+  { "query": "da quale issue conviene partire?", "should_trigger": false },
+  { "query": "fai la review della qualità del codice", "should_trigger": false },
+  { "query": "apri una issue nuova per questo problema", "should_trigger": false }
+]

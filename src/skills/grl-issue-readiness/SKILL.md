@@ -16,9 +16,11 @@ punto del modulo che scrive su GitHub, e scrive **solo commenti**.
 
 **Modalità.** `check` regge un'invocazione non presidiata: prende un numero, legge, emette il
 verdetto, scrive nel registro. `comment` no. Senza una persona nel turno, `comment` restituisce
-`blocked` con `reason: conferma di una persona richiesta` e lascia la bozza su disco. La conferma
-di un agente chiamante non è una conferma: un commento pubblicato non si ritira, e la notifica
-parte subito.
+`blocked` con `reason: conferma di una persona richiesta` e **lascia su disco quello che ha**: la
+bozza se il verdetto esiste, altrimenti una nota con la issue, l'azione richiesta, il motivo del
+blocco e cosa serve per riprendere. Un blocco che non lascia traccia costringe il turno dopo a
+rifare la lettura da capo. La conferma di un agente chiamante non è una conferma: un commento
+pubblicato non si ritira, e la notifica parte subito.
 
 ## Convenzioni
 
@@ -55,8 +57,10 @@ solo in un'installazione parziale — non scrivere il registro a mano: usa il ri
    ripete subito prima di pubblicare: fra attivazione e pubblicazione può passare l'intera sessione,
    e un commento uscito con l'account sbagliato non si ritira.
 
-4. **Ambito.** Un numero, una lista, una label, una milestone. Senza ambito esplicito non partire
-   su «tutte le aperte».
+4. **Ambito.** Un numero, una lista, una label, una milestone. Su «tutte le aperte» non partire
+   subito, ma **offri la via**: mostra l'elenco che risulta dal registro, chiedi conferma di quello,
+   e procedi su ciò che è stato confermato. Un rifiuto secco manda l'utente a farlo a mano, che è
+   il modo peggiore di ottenere lo stesso risultato.
 
 5. **Memoria del backlog.** Leggi `{workflow.registry_path}/{slug}/decisions.md`, se esiste:
 

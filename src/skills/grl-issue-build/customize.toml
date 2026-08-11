@@ -1,0 +1,53 @@
+# DO NOT EDIT -- overwritten on every update.
+#
+# Workflow customization surface for grl-issue-build.
+# Team overrides:     {project-root}/_bmad/custom/grl-issue-build.toml
+# Personal overrides: {project-root}/_bmad/custom/grl-issue-build.user.toml
+#
+# Merge: gli scalari vengono sovrascritti (vince l'ultimo strato applicato),
+# gli array vengono accodati. Non esiste un meccanismo di rimozione: una voce
+# di base non si può togliere da un override, si toglie forkando la skill.
+
+[workflow]
+
+# --- Default universali ---
+activation_steps_prepend = []
+activation_steps_append = []
+persistent_facts = [
+  "file:{project-root}/_bmad/memory/grl-shared/project-profile.md",
+  "file:{project-root}/_bmad/memory/grl-shared/domain-glossary.md",
+  "file:{project-root}/_bmad/memory/grl-shared/decisions.md",
+  "file:{project-root}/_bmad/memory/grl-shared/accepted-risks.md",
+  "file:{project-root}/**/project-context.md",
+]
+on_complete = ""
+
+# --- Punti specifici di questa skill ---
+
+# Deve coincidere con `registry_path` di grl-issues.
+registry_path = "{project-root}/_bmad/memory/grl-issues"
+
+# I punti che un commento deve coprire per valere come spiegazione approfondita.
+# Aggiungerne uno rende il gate più severo; per toglierne uno serve un fork.
+required_explanation_points = [
+  "comportamento_atteso",
+  "criterio_di_accettazione",
+  "punto_di_ingresso",
+  "ambito_escluso",
+]
+
+# Marcatore del commento di grl-issue-readiness. Serve a riconoscerlo e a NON
+# scambiarlo per la spiegazione: contiene le domande, non le risposte.
+readiness_marker = "<!-- grl-issues:clarify:v1 -->"
+
+# Chi implementa. Vuoto significa: consegna il brief e fermati.
+builder_skill = "skill:bmad-build"
+
+# Chi verifica il lavoro finito prima che la chiusura sia autorizzata.
+verifier_skill = "skill:grl-issue-verify"
+
+# Account GitHub atteso. Vuoto significa: accetta quello autenticato e stampalo.
+expected_account = ""
+
+# Dove instradare quello che esce dal perimetro di questa skill.
+external_handoffs = ["skill:grl-issue-readiness", "skill:grl-issues", "skill:grl-board"]

@@ -86,5 +86,13 @@
   {
     "query": "commenta sulla issue le domande aperte",
     "should_trigger": false
+  },
+  {
+    "query": "quali issue sono in sviluppo adesso?",
+    "should_trigger": true
+  },
+  {
+    "query": "cosa avevamo deciso sul backlog?",
+    "should_trigger": true
   }
 ]

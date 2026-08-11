@@ -23,7 +23,16 @@ e cosa la toglierebbe, e chiede conferma a chi l'ha messa.
 Per `PRONTA` normalmente **non si commenta**: un commento che dice «va bene» aggiunge rumore.
 Commenta solo se l'utente lo chiede.
 
-## 2. Mostra il piano, poi chiedi una conferma per volta
+## 2. Mostra il testo, poi chiedi una conferma per volta
+
+**Mostra la bozza integrale in conversazione**, parola per parola. Il percorso del file non è la
+bozza, e una parafrasi non è quello che verrà pubblicato: chi conferma deve leggere esattamente il
+testo che uscirà. Vale anche quando la pubblicazione è già bloccata per altri motivi — la bozza
+serve comunque a chi la riprenderà.
+
+Se l'utente ha chiesto «tutte le aperte», il piano del lotto **è** l'elenco completo delle aperte
+— `gh issue list --state open`, o il registro se è fresco — non un sottoinsieme scelto da te.
+Milestone e label sono alternative da offrire, non ripieghi da imporre.
 
 Con più issue, mostra prima il piano del lotto — numero, titolo, verdetto ed esito previsto (nessun
 commento, nuovo commento, aggiornamento del commento esistente) — e solo dopo chiedi le conferme,

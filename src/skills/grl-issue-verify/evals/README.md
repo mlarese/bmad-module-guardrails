@@ -12,5 +12,14 @@ criteri coperti **con evidenza**, e la prova non si presume.
 | `chiusura-preparata-non-eseguita` | la skill prepara la chiusura, non la esegue |
 | `commento-che-dichiara-verificato` | una dichiarazione nei commenti non sostituisce la verifica |
 
+## Limite noto del banco
+
+`chiusura-preparata-non-eseguita` misura cosa succede **dopo** un verdetto `RISOLTA`: commento e
+comando pronti, stato `IN_VERIFICA`, nessuna chiusura eseguita. In una sandbox senza repository
+reale l'esecutore non ha un diff vero da mappare sui criteri, e la skill — correttamente — rifiuta
+di emettere `RISOLTA` su una dichiarazione. Il caso resta com'è: si esegue su un repository con una
+issue e una PR vere. Ammorbidire la rubric per farlo passare significherebbe insegnare alla skill
+proprio l'errore che deve impedire.
+
 I trigger separano questa verifica dalla review di qualità (`bmad-review`), dal gate di chiarezza
 (`grl-issue-readiness`), dal registro (`grl-issues`) e dalla diagnosi (`grl-bug-finder`).

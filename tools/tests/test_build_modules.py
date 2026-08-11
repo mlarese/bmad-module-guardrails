@@ -467,6 +467,7 @@ class DedicatedGroupModuleTopologyTests(unittest.TestCase):
                 "grl-issues",
                 "grl-issue-readiness",
                 "grl-issue-verify",
+                "grl-issue-build",
                 "grl-automation",
                 "grl-toolchain",
             ],

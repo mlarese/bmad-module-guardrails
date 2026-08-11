@@ -5,7 +5,7 @@
 # repository resta la fonte unica: i repository derivati non si modificano a mano,
 # si rigenerano.
 #
-# Il bundle `grl` resta la superficie completa — ventitré figure e venti workflow in
+# Il bundle `grl` resta la superficie completa — ventitré figure e ventuno workflow in
 # un'unica installazione. I moduli tematici sono alternative al bundle, non
 # aggiunte: installano le stesse skill con lo stesso nome, quindi bundle e moduli
 # tematici non convivono nello stesso progetto.
@@ -146,8 +146,8 @@ modules:
     repo: bmad-module-guardrails-automation
     status: derived
     purpose: "Orchestrazione di processi ripetitivi fra sviluppo software, diagnosi di bug, backlog di issue, database, legale, fisco, design, customer journey, visual storytelling, pagine landing/home di riferimento, curtain/gallery, scroll-world, video-to-scroll, search system, architettura, medicina, paid media, revenue management e configurazione di prodotto."
-    description: "Ventitré figure Guardrails e venti workflow necessari a instradare processi software, database, punti di blocco, firmware embedded, diagnosi di bug e regressioni, legali, fiscali, di design, customer journey, visual storytelling, pagine landing/home di riferimento, landing scroll-driven statiche, ricerca di sorgenti video e pacchetti di frame, piani video-to-scroll da sorgenti autorizzate, search system, architettura, medicina, web, WordPress, paid media, social/content, creative video, revenue management e configurazione di prodotto. I workflow social coprono strategia, calendario, contenuti e pacchetti creativi; i tre workflow revenue coprono audit, scenari di pricing e preflight PMS/Channel Manager; `grl-bug-finder` costruisce riproduzioni, evidenze e test di regressione senza correggere; `grl-wordpress-delivery` porta un sito dal modello dei contenuti al release gate; `grl-video-to-scroll` raccoglie contesto, verifica sorgenti ed estrae frame solo da file locali autorizzati; `grl-automation` porta ogni richiesta da intake e read-only a piano, dry-run, approvazioni, esecuzione osservabile e rollback, senza trasformare un agente in un esecutore autonomo; `grl-toolchain` trova, valuta e installa skill e server MCP su ogni harness con la sintassi di quell'harness."
-    about: "Guardrails Automation: 23 review agents and 20 controlled BMad workflows for software, issue backlogs, legal, tax, design, customer journeys, landing/home references, curtain/gallery cinematics, scroll storytelling, video frame packages, search, healthcare, web, WordPress, paid/social/video, AI imaging, revenue, product config, and agent tooling."
+    description: "Ventitré figure Guardrails e ventuno workflow necessari a instradare processi software, database, punti di blocco, firmware embedded, diagnosi di bug e regressioni, legali, fiscali, di design, customer journey, visual storytelling, pagine landing/home di riferimento, landing scroll-driven statiche, ricerca di sorgenti video e pacchetti di frame, piani video-to-scroll da sorgenti autorizzate, search system, architettura, medicina, web, WordPress, paid media, social/content, creative video, revenue management e configurazione di prodotto. I workflow social coprono strategia, calendario, contenuti e pacchetti creativi; i tre workflow revenue coprono audit, scenari di pricing e preflight PMS/Channel Manager; `grl-bug-finder` costruisce riproduzioni, evidenze e test di regressione senza correggere; `grl-wordpress-delivery` porta un sito dal modello dei contenuti al release gate; `grl-video-to-scroll` raccoglie contesto, verifica sorgenti ed estrae frame solo da file locali autorizzati; `grl-automation` porta ogni richiesta da intake e read-only a piano, dry-run, approvazioni, esecuzione osservabile e rollback, senza trasformare un agente in un esecutore autonomo; `grl-toolchain` trova, valuta e installa skill e server MCP su ogni harness con la sintassi di quell'harness."
+    about: "Guardrails Automation: 23 review agents and 21 controlled BMad workflows for software, issue backlogs, legal, tax, design, customer journeys, landing/home references, curtain/gallery cinematics, scroll storytelling, video frame packages, search, healthcare, web, WordPress, paid/social/video, AI imaging, revenue, product config, and agent tooling."
     skills:
       - grl-agent-privacy
       - grl-agent-security
@@ -188,6 +188,7 @@ modules:
       - grl-issues
       - grl-issue-readiness
       - grl-issue-verify
+      - grl-issue-build
       - grl-automation
       - grl-toolchain
   - code: gwp
@@ -205,12 +206,13 @@ modules:
     name: Guardrails Issues
     repo: bmad-module-guardrails-issues
     status: derived
-    purpose: "Backlog delle issue GitHub: registro locale datato, stato di lavorazione, decisioni, sessioni di lavoro, verifica di chiarezza prima dello sviluppo e verifica di risoluzione prima della chiusura."
-    description: "Una figura di presidio sul backlog delle issue GitHub, più i workflow che tengono il registro locale datato delle issue aperte, assegnano a ciascuna uno stato di lavorazione, aprono e chiudono una sessione di lavoro, verificano se una issue è chiara abbastanza da essere sviluppata e, a lavoro finito, se il codice scritto copre ogni criterio di accettazione prima della chiusura. Riconosce chi ha già chiesto di aspettare, non inventa il requisito mancante e pubblica un solo commento di chiarimento, sempre dopo conferma."
-    about: "Guardrails Issues: 1 review agent and 6 controlled BMad workflows for GitHub issue triage, a dated local registry with work states and decisions, work sessions, hold detection, readiness checks, and a closing verification that every acceptance criterion is met."
+    purpose: "Backlog delle issue GitHub: registro locale datato, stato di lavorazione, decisioni, sessioni di lavoro, verifica di chiarezza prima dello sviluppo, passaggio a bmad-build solo con la spiegazione scritta nella issue, e verifica di risoluzione prima della chiusura."
+    description: "Una figura di presidio sul backlog delle issue GitHub, più i workflow che tengono il registro locale datato delle issue aperte, assegnano a ciascuna uno stato di lavorazione, aprono e chiudono una sessione di lavoro, verificano se una issue è chiara abbastanza da essere sviluppata, portano la spiegazione scritta nei commenti fino a `bmad-build` e, a lavoro finito, controllano se il codice copre ogni criterio di accettazione prima della chiusura. Riconosce chi ha già chiesto di aspettare, non inventa il requisito mancante e pubblica un solo commento di chiarimento, sempre dopo conferma."
+    about: "Guardrails Issues: 1 review agent and 7 controlled BMad workflows for GitHub issue triage, a dated local registry with work states and decisions, work sessions, hold detection, readiness checks, a build handoff gated on a written explanation, and a closing verification that every acceptance criterion is met."
     skills:
       - grl-agent-issues
       - grl-issues
       - grl-issue-readiness
       - grl-issue-verify
+      - grl-issue-build
       - grl-automation

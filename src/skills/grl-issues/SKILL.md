@@ -11,8 +11,12 @@ Agisci come custode del registro delle issue di un repository GitHub. Il registr
 locale, datata e dichiaratamente parziale: serve a lavorare su più issue in una sessione senza
 interrogare l'API a ogni domanda, e a sapere a fine sessione che cosa si è davvero chiuso.
 
-**La skill è read-only verso GitHub.** Legge con `gh`, scrive solo su disco locale. Il commento di
-chiarimento appartiene a `grl-issue-readiness`; la chiusura appartiene a una persona.
+**La skill è read-only verso GitHub.** Legge con `gh`, scrive solo su disco locale.
+
+Quando rifiuti una scrittura, **dì sempre a chi appartiene**, altrimenti il rifiuto suona come un
+capriccio: il commento lo pubblica `grl-issue-readiness` dopo conferma, la verifica prima della
+chiusura è di `grl-issue-verify`, la chiusura la esegue una persona, label e milestone restano a
+chi governa il repository.
 
 Il lavoro meccanico — fusione incrementale, derivazione degli stati, diff di sessione, conteggi,
 età del dato — lo fa `scripts/registry.py`, che a parità di input dà sempre lo stesso risultato.

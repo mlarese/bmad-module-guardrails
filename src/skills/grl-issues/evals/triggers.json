@@ -1,25 +1,94 @@
 [
-  { "query": "sincronizza il registro delle issue", "should_trigger": true },
-  { "query": "quali issue sono aperte in questo repo?", "should_trigger": true },
-  { "query": "apriamo una sessione di lavoro sulle issue", "should_trigger": true },
-  { "query": "cosa ho chiuso in questa sessione?", "should_trigger": true },
-  { "query": "aggiorna la cache delle issue GitHub", "should_trigger": true },
-  { "query": "fammi la fotografia del backlog prima di iniziare", "should_trigger": true },
-  { "query": "chiudi la sessione e dimmi cosa resta aperto", "should_trigger": true },
-  { "query": "quanto è vecchio il registro delle issue?", "should_trigger": true },
-  { "query": "elenca le issue in attesa e da quanto", "should_trigger": true },
-  { "query": "rigenera la vista markdown del registro issue", "should_trigger": true },
-  { "query": "lavoriamo su cinque issue oggi, tienile allineate", "should_trigger": true },
-  { "query": "quante issue aperte ha il repository secondo la copia locale", "should_trigger": true },
-  { "query": "quali issue sono in sviluppo adesso?", "should_trigger": true },
-  { "query": "segna questa issue come da fare", "should_trigger": true },
-  { "query": "marca la issue come non approvata", "should_trigger": true },
-  { "query": "registra la decisione che abbiamo preso su questa issue", "should_trigger": true },
-  { "query": "cosa avevamo deciso sul backlog?", "should_trigger": true },
-  { "query": "commenta sulla issue cosa manca per svilupparla", "should_trigger": false },
-  { "query": "questa issue è chiara?", "should_trigger": false },
-  { "query": "chiudi la issue numero 30", "should_trigger": false },
-  { "query": "trova il bug che la issue descrive", "should_trigger": false },
-  { "query": "installa la GitHub CLI sul server", "should_trigger": false },
-  { "query": "apri una nuova issue per questo difetto", "should_trigger": false }
+  {
+    "query": "sincronizza il registro delle issue",
+    "should_trigger": true
+  },
+  {
+    "query": "mostrami il registro raggruppato per stato di lavorazione",
+    "should_trigger": true
+  },
+  {
+    "query": "apriamo una sessione di lavoro sulle issue",
+    "should_trigger": true
+  },
+  {
+    "query": "cosa ho chiuso in questa sessione?",
+    "should_trigger": true
+  },
+  {
+    "query": "aggiorna la cache delle issue GitHub",
+    "should_trigger": true
+  },
+  {
+    "query": "fammi la fotografia del backlog prima di iniziare",
+    "should_trigger": true
+  },
+  {
+    "query": "chiudi la sessione e dimmi cosa resta aperto",
+    "should_trigger": true
+  },
+  {
+    "query": "quanto è vecchio il registro delle issue?",
+    "should_trigger": true
+  },
+  {
+    "query": "dimmi con quale account e a che data è stato letto il registro",
+    "should_trigger": true
+  },
+  {
+    "query": "marca questa issue come in verifica",
+    "should_trigger": true
+  },
+  {
+    "query": "lavoriamo su cinque issue oggi, tienile allineate",
+    "should_trigger": true
+  },
+  {
+    "query": "quante issue aperte ha il repository secondo la copia locale",
+    "should_trigger": true
+  },
+  {
+    "query": "quali issue sono in sviluppo adesso?",
+    "should_trigger": false
+  },
+  {
+    "query": "segna questa issue come da fare",
+    "should_trigger": true
+  },
+  {
+    "query": "marca la issue come non approvata",
+    "should_trigger": true
+  },
+  {
+    "query": "registra la decisione che abbiamo preso su questa issue",
+    "should_trigger": true
+  },
+  {
+    "query": "cosa avevamo deciso sul backlog?",
+    "should_trigger": false
+  },
+  {
+    "query": "commenta sulla issue cosa manca per svilupparla",
+    "should_trigger": false
+  },
+  {
+    "query": "questa issue è chiara?",
+    "should_trigger": false
+  },
+  {
+    "query": "chiudi la issue numero 30",
+    "should_trigger": false
+  },
+  {
+    "query": "trova il bug che la issue descrive",
+    "should_trigger": false
+  },
+  {
+    "query": "installa la GitHub CLI sul server",
+    "should_trigger": false
+  },
+  {
+    "query": "apri una nuova issue per questo difetto",
+    "should_trigger": false
+  }
 ]

@@ -72,7 +72,7 @@ Dieci repository derivano da questo e li produce `tools/build_modules.py` leggen
 | `grv` | `mlarese/bmad-module-guardrails-revenue` | Rhea, `grl-revenue-audit`, `grl-revenue-plan`, `grl-revenue-preflight`, `grl-automation` |
 | `gau` | `mlarese/bmad-module-guardrails-automation` | tutte le ventitré figure, workflow di dominio incluso `grl-video-to-scroll`, `grl-bug-finder` e `grl-automation` |
 | `gwp` | `mlarese/bmad-module-guardrails-wordpress` | Milo, `grl-wordpress-delivery`, `grl-automation` |
-| `gri` | `mlarese/bmad-module-guardrails-issues` | Tito, `grl-issues`, `grl-issue-readiness`, `grl-issue-verify`, `grl-automation` |
+| `gri` | `mlarese/bmad-module-guardrails-issues` | Tito, `grl-issues`, `grl-issue-readiness`, `grl-issue-verify`, `grl-issue-build`, `grl-automation` |
 
 **Regola: ogni modifica che tocca `src/` va propagata ai derivati nello stesso turno, senza
 aspettare che l'utente lo chieda.** Vale per una skill cambiata, una skill nuova, un cambio di
@@ -119,6 +119,29 @@ repository del modulo. Il giudice ispeziona la sandbox per verificare cosa è st
 
 Nella prima run di `grl-profile` questo errore ha prodotto due fallimenti su cinque. Entrambi sono
 diventati `pass` a parità di skill, appena l'esecutore ha avuto dove scrivere.
+
+### La rubric non sta nel file che legge l'esecutore
+
+Un caso di eval contiene sia l'`input` sia la `rubric`. Se l'esecutore riceve quel file per
+recuperare l'input, legge anche i criteri con cui verrà giudicato, e la misura perde valore: non
+sai più se la risposta segue la skill o insegue la rubric.
+
+Nella prima tornata delle skill delle issue due esecutori su ventisei hanno dichiarato la lettura;
+gli altri non l'hanno detto, il che è peggio, perché non si sa.
+
+**Regola: passa l'input dell'utente nel prompt dell'esecutore, e tieni la rubric in una cartella
+che solo il giudice apre.** Vietare la lettura non basta: se il file è raggiungibile, prima o poi
+qualcuno lo apre in buona fede.
+
+### Il banco senza rete non è un difetto della skill
+
+Un esecutore in sandbox non ha GitHub, non ha `_bmad/scripts/` e spesso non ha i dati che il caso
+descrive a parole. Un giudice che non lo sa scrive `fail` su criteri che la skill non poteva
+soddisfare — nella tornata delle issue è successo su due casi, entrambi ribaltati al rigiudizio.
+
+**Regola: dichiara i vincoli del banco nelle istruzioni del giudice.** Una lettura non eseguita per
+un limite dell'ambiente vale `pass` se la risposta dichiara il limite e scrive il comando che
+eseguirebbe; resta `fail` inventare il dato o fingere la lettura.
 
 ### Le skill che convocano altre figure non stanno in un subagent
 
