@@ -88,6 +88,37 @@ def module_about(module: dict) -> str:
     return about
 
 
+def tag_release(path: Path, repo: str, version: str, dry_run: bool) -> str | None:
+    """Marca la versione anche sul derivato, se non è già marcata.
+
+    Il numero sta già dentro `marketplace.json`, ma da lì non si trova senza
+    aprire il pacchetto: chi installa da un derivato non vede la fonte, e un
+    repository senza tag non dice a quale release corrisponde il codice che ha
+    davanti. Il tag è la versione detta dove si guarda per prima.
+    """
+    nome = f"v{version}"
+    esistente = run(["git", "tag", "-l", nome], cwd=path, check=False).stdout.strip()
+    if esistente:
+        return None
+    if dry_run:
+        return f"[dry-run] marcherei {nome}"
+    run(["git", "tag", "-a", nome, "-m", f"{repo} {version}"], cwd=path)
+    run(
+        [
+            "git",
+            "-c",
+            "credential.helper=",
+            "-c",
+            "credential.helper=!gh auth git-credential",
+            "push",
+            "origin",
+            nome,
+        ],
+        cwd=path,
+    )
+    return nome
+
+
 def publish(path: Path, repo: str, message: str, dry_run: bool) -> str:
     """Committa e pusha il contenuto generato. Ritorna cosa è successo."""
     if not (path / ".git").exists():
@@ -150,6 +181,7 @@ def main(argv: list[str] | None = None) -> int:
         out_root = source_root / out_root
 
     topology = yaml.safe_load((source_root / "src" / "module-topology.yaml").read_text(encoding="utf-8"))
+    version = yaml.safe_load((source_root / "src" / "module.yaml").read_text(encoding="utf-8"))["module_version"]
     wanted = set(args.module) if args.module else None
     modules = [m for m in topology["modules"] if wanted is None or m["code"] in wanted]
 
@@ -168,6 +200,9 @@ def main(argv: list[str] | None = None) -> int:
                 print("      repository creato")
             sync_description(module["repo"], about, args.dry_run)
             print(f"      {publish(path, module['repo'], args.message, args.dry_run)}")
+            marcato = tag_release(path, module["repo"], str(version), args.dry_run)
+            if marcato:
+                print(f"      {marcato}")
         except RuntimeError as error:
             print(f"      errore: {error}")
             failures += 1

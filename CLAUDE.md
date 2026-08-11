@@ -119,8 +119,13 @@ python3 tools/build_modules.py                              # rigenera dist/
 python3 tools/publish_modules.py -m "<messaggio di commit>"  # commit e push sui dieci repo
 ```
 
-`publish_modules.py` è idempotente: salta i moduli senza modifiche, crea il repository se manca e
-riallinea l'About di GitHub alla `description` della topologia. Con `--module grw` lavora su uno
+`publish_modules.py` è idempotente: salta i moduli senza modifiche, crea il repository se manca,
+riallinea l'About di GitHub alla `description` della topologia e **marca ogni derivato con il tag
+`v{module_version}`**, saltando quelli già marcati. Il numero sta anche dentro `marketplace.json`,
+ma da lì non si trova senza aprire il pacchetto: chi installa da un derivato non vede la fonte, e
+un repository senza tag non dice a quale release corrisponde il codice che ha davanti.
+
+Il tag della fonte resta a mano, come gli altri gesti che riguardano solo questo repository. Con `--module grw` lavora su uno
 solo, con `--dry-run` mostra cosa farebbe.
 
 **I derivati non si modificano a mano.** Una modifica fatta lì viene persa alla rigenerazione —
